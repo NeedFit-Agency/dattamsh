@@ -1,0 +1,180 @@
+/* ./src/app/component/learn/learpathitem/LessonPathItem.module.css */ /* <-- Corrected Path Example */
+
+/* --- Base Item Styles --- */
+.pathItem {
+    position: relative; /* For potential absolute elements like START */
+    width: 70px; /* Base width for circular items */
+    height: 70px; /* Base height for circular items */
+    border-radius: 50%; /* Default to circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Assume most items are clickable via parent Link */
+    transition: transform 0.1s ease-in-out, filter 0.2s ease;
+  }
+  
+  /* Hover effect */
+  .pathItem:hover {
+    filter: brightness(1.1); /* Slightly brighten on hover */
+  }
+  /* Active/click effect */
+  .pathItem:active {
+      transform: translateY(1px); /* Slight press down effect */
+      filter: brightness(1.05);
+  }
+  
+  
+  /* --- 3D Effect --- */
+  /* Apply to items that need the bottom border shadow */
+  .checkmark,
+  .star,
+  .practice,
+  .chest {
+    border-bottom: 4px solid; /* Base for 3D effect, color set per type */
+  }
+  .checkmark:active,
+  .star:active,
+  .practice:active,
+  .chest:active {
+      border-bottom-width: 3px; /* Reduce border on press */
+      /* transform: translateY(2px); /* Slightly more press down */ /* Alternative */
+  }
+  
+  
+  /* --- Specific Item Type Styles --- */
+  
+  /* Completed Lesson */
+  .checkmark {
+    background-color: #58cc02; /* Duolingo Green */
+    border-color: #46a002; /* Darker Green for 3D effect */
+    color: white;
+  }
+  .checkmark .icon {
+    font-size: 28px; /* Adjust icon size */
+  }
+  
+  /* Current Lesson */
+  .star {
+    background-color: #58cc02; /* Duolingo Green */
+    border-color: #46a002; /* Darker Green for 3D effect */
+    color: white;
+  }
+  .star .icon {
+    font-size: 30px; /* Adjust icon size */
+  }
+  
+  /* Practice Lesson */
+  .practice {
+    background-color: #e5e5e5; /* Gray background */
+    border-color: #cecece; /* Darker Gray for 3D effect */
+    color: #afafaf; /* Medium Gray icon color */
+  }
+  .practice .icon {
+    font-size: 30px; /* Adjust icon size */
+    transform: rotate(-15deg); /* Slight tilt like image */
+  }
+  
+  /* Treasure Chest */
+  .chest {
+    background-color: #e5e5e5; /* Gray background */
+    border-color: #cecece; /* Darker Gray for 3D effect */
+    border-radius: 12px; /* Less rounded than circles */
+    width: 75px; /* Slightly wider */
+    height: 65px; /* Slightly shorter */
+    padding-top: 5px; /* Adjust content placement */
+    /* Add chest details using pseudo-elements or nested divs if needed */
+  }
+  .chest .chestContent {
+    width: 50%;
+    height: 60%;
+    background-color: #bbbbbb; /* Darker part */
+    border-radius: 4px;
+    position: relative;
+    border: 2px solid #cecece;
+    /* Simple keyhole approximation */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chest .chestContent::before {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 10px;
+    background-color: #888888; /* Darkest part */
+    border-radius: 2px 2px 50% 50%;
+  }
+  .chest .chestContent::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 6px;
+      background-color: #888888; /* Darkest part */
+      border-radius: 50%;
+  }
+  
+  
+  /* Duo with Globe */
+  .duo-globe {
+    background-color: transparent; /* No background needed if using image */
+    width: auto; /* Let image define size */
+    height: auto;
+    border: none; /* No border needed */
+    border-radius: 0;
+  }
+  .duo-globe:active {
+      transform: none; /* Prevent press down if image handles it */
+  }
+  .duoImage {
+    /* Add styles if needed, e.g., drop-shadow */
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+  }
+  
+  
+  /* Level Badge (Keep if used) */
+  .level-badge {
+    /* Add specific styles for level badge if needed */
+    background-color: purple;
+    color: white;
+    font-weight: bold;
+    /* Add laurel styles using ::before/::after */
+  }
+  
+  
+  /* --- START Bubble --- */
+  .startBubble {
+    position: absolute;
+    bottom: 50%; /* Position vertically relative to the star center */
+    left: calc(100% + 15px); /* Position to the right of the star */
+    transform: translateY(50%); /* Center vertically */
+    background-color: #58cc02; /* Green background */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+  }
+  
+  /* Triangle Pointer for START Bubble */
+  .startBubble::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%; /* Point left towards the star */
+    transform: translateY(-50%);
+    border: 8px solid transparent;
+    border-right-color: #58cc02; /* Match bubble background */
+  }
+  
+  /* Optional: Style for completed items if different visual needed */
+  /* .completed { ... } */

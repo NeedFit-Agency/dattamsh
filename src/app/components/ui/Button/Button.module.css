@@ -1,0 +1,94 @@
+.button {
+    padding: 14px 25px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    line-height: 1.2;
+    border-bottom-width: 4px; /* Default shadow */
+    border-bottom-style: solid;
+    border-bottom-color: transparent; /* Set per variant */
+  }
+  
+  .button:active {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+  }
+  
+  /* Variants */
+  .primaryBlue {
+    background-color: var(--duo-blue-primary);
+    color: white;
+    border-bottom-color: var(--duo-blue-dark);
+  }
+  .primaryBlue:hover {
+     background-color: #1aa3e6;
+  }
+  
+  .secondaryGray {
+    background-color: white;
+    color: var(--duo-gray-medium);
+    border: 2px solid var(--duo-border);
+    border-bottom-width: 4px; /* Ensure consistent sizing */
+  }
+  .secondaryGray:hover {
+    background-color: #f7f7f7;
+    color: var(--duo-gray-dark);
+  }
+  .secondaryGray:active {
+      transform: translateY(1px); /* Less travel for bordered */
+      border-bottom-width: 3px;
+  }
+  
+  
+  .yellow {
+    background: linear-gradient(to bottom, #ffdd40, var(--duo-yellow));
+    color: var(--duo-yellow-dark);
+    border-bottom-color: var(--duo-yellow-dark);
+  }
+  .yellow:hover {
+    background: linear-gradient(to bottom, #ffe460, #ffcf20);
+  }
+  
+  .white {
+    background-color: var(--text-light);
+    color: var(--dark-bg); /* Assuming dark text on white */
+    border: 2px solid var(--text-light); /* For consistent height in dark theme */
+    box-shadow: 0 2px 0 #c0c0c0;
+    border-bottom-style: none; /* Use box-shadow instead */
+  }
+  .white:hover {
+     background-color: #f0f0f0;
+     border-color: #f0f0f0;
+  }
+  .white:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 0 #c0c0c0;
+  }
+  
+  .darkOutline {
+    background-color: transparent;
+    color: var(--dark-button-outline);
+    border: 2px solid var(--dark-button-outline);
+    border-bottom-style: none; /* No 3D effect */
+  }
+  .darkOutline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    border-color: var(--text-light);
+  }
+  .darkOutline:active {
+      transform: none; /* No press effect */
+  }
+  
+  
+  .fullWidth {
+      width: 100%;
+  }

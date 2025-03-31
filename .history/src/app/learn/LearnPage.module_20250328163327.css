@@ -1,0 +1,226 @@
+/* LearnPage.module.css */
+
+/* Base variables (adjust colors to be pixel-perfect match) */
+:root {
+  --duo-green: #58cc02;
+  --duo-green-darker: #58a700; /* For guidebook text */
+  --duo-white: #ffffff;
+  --duo-border: #e5e5e5;
+  --duo-gray-light: #e5e5e5; /* For button border */
+  --duo-text-gray: #777777; /* For path title */
+  /* Add disabled gray color if needed by LessonPathItem */
+  --duo-gray-disabled: #afafaf;
+}
+
+
+.appContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--duo-white);
+}
+
+.mainAreaWrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.topBar {
+  /* Reduced top padding, adjust left/right to align */
+  padding: 10px 20px 0 20px;
+  border-bottom: 2px solid var(--duo-border);
+  /* Make sure StatsBar aligns correctly, might need width constraints */
+  width: 100%;
+  max-width: 960px; /* Example max-width, adjust as needed */
+  margin: 0 auto; /* Center the bar */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.scrollableContent {
+  display: flex;
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Reduced padding slightly */
+  padding: 20px 10px 40px 10px;
+  justify-content: center; /* Center content horizontally */
+}
+
+.contentArea {
+  /* Removed flex-grow: 1, let it size by content */
+  padding: 0 10px; /* Reduced horizontal padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Take available width */
+  max-width: 600px; /* Max width for the lesson content area */
+  /* margin: 0 auto; Removed, handled by scrollableContent justify-content */
+}
+
+/* --- Lesson Header --- */
+.lessonHeader {
+  background-color: var(--duo-green);
+  color: var(--duo-white);
+  padding: 12px 20px; /* Slightly adjusted padding */
+  border-radius: 13px; /* More rounded corners */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px; /* Space below header */
+  box-sizing: border-box;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between icon and title block */
+}
+
+.backIcon { /* Style FontAwesome icon */
+  font-size: 16px; /* Slightly smaller icon */
+  cursor: pointer;
+  color: var(--duo-white); /* Ensure icon is white */
+  opacity: 0.8; /* Slight transparency */
+  transition: opacity 0.2s ease;
+}
+.backIcon:hover {
+  opacity: 1;
+}
+
+.headerTitle {
+  font-size: 14px; /* Font size for "SECTION 1, UNIT 4" */
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.3; /* Adjusted line height */
+  color: var(--duo-white); /* Ensure text is white */
+}
+
+.headerTitle h2 {
+  font-size: 20px; /* Adjusted font size for "Talk about your house" */
+  font-weight: 700; /* Bold */
+  margin: 0; /* Reset margin */
+  text-transform: none; /* Normal case */
+  color: var(--duo-white); /* Ensure text is white */
+}
+
+.guidebookButton {
+  background-color: var(--duo-white);
+  color: var(--duo-green-darker); /* Darker green text */
+  border: none;
+  padding: 8px 16px; /* Adjusted padding */
+  border-radius: 12px; /* Match header rounding */
+  font-weight: 700;
+  font-size: 14px; /* Adjusted font size */
+  cursor: pointer;
+  border-bottom: 3px solid var(--duo-gray-light); /* Bottom border for depth */
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap; /* Prevent wrapping */
+}
+.guidebookButton:hover {
+  background-color: #f7f7f7; /* Slight hover effect */
+}
+.guidebookButton:active {
+  transform: translateY(1px); /* Press effect */
+  border-bottom-width: 2px;
+}
+
+.guidebookIcon {
+  font-size: 15px; /* Adjust icon size */
+}
+
+
+/* --- Lesson Path Title --- */
+.lessonPathTitle {
+  font-size: 22px; /* Larger font size */
+  font-weight: 700; /* Bold */
+  color: var(--duo-text-gray); /* Use the gray text color */
+  margin-bottom: 35px; /* Space below title, above path */
+  text-align: center;
+}
+
+
+/* --- Lesson Path --- */
+.lessonPath {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%; /* Ensure path takes width */
+  padding-bottom: 20px; /* Space at the bottom */
+}
+
+/* Style links/divs wrapping path items */
+.lessonLink {
+  display: block; /* Ensure wrapper takes space of the item */
+  margin-bottom: 25px; /* Spacing between items */
+  text-decoration: none;
+  /* Ensure the LessonPathItem fills the link/div if needed */
+  display: flex; /* Use flex to center item if LessonPathItem doesn't fill width */
+  justify-content: center; /* Center the item horizontally */
+  position: relative; /* Needed for absolute positioning of START bubble if done here */
+}
+
+/* Remove margin from the item itself if link/div handles it */
+.lessonLink > div { /* Target the direct child (assuming it's the LessonPathItem root) */
+  margin-bottom: 0 !important; /* Override potential internal margin */
+}
+
+/* --- Scroll Down Button --- */
+/* .scrollDownButton styles removed */
+
+
+/* --- Right Rail Positioning --- */
+/* RightRail component itself should handle internal sticky positioning */
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1024px) {
+  .topBar {
+      max-width: none; /* Allow full width */
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+   .scrollableContent {
+      padding-left: 5px;
+      padding-right: 5px;
+   }
+  .contentArea {
+      padding: 0 5px;
+      max-width: 500px; /* Slightly smaller max-width */
+  }
+  /* Consider hiding RightRail on smaller tablets if needed */
+}
+
+@media (max-width: 768px) {
+  /* Mobile styles - current layout might mostly work, adjust as needed */
+  .lessonHeader {
+      padding: 10px 15px;
+      margin-bottom: 20px;
+  }
+  .headerTitle h2 {
+      font-size: 18px;
+  }
+  .guidebookButton {
+      padding: 6px 12px;
+      font-size: 13px;
+  }
+  .lessonPathTitle {
+      font-size: 20px;
+      margin-bottom: 30px;
+  }
+  .lessonLink {
+      margin-bottom: 20px;
+  }
+   /* Stack sidebar and content - this requires significant layout changes
+      If using a standard mobile layout (e.g., bottom nav bar instead of sidebar),
+      the structure might change completely. Assuming current structure remains for now. */
+   /* .appContainer { flex-direction: column; } */
+   /* Adjustments if stacking */
+   /* .mainAreaWrapper { height: auto; } */
+   /* .scrollableContent { flex-direction: column; overflow-y: visible; } */
+}

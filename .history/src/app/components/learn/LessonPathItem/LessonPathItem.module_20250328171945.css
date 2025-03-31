@@ -1,0 +1,198 @@
+/* ./src/app/components/learn/LessonPathItem/LessonPathItem.module.css */
+
+/* --- Base Item Styles --- */
+.pathItem {
+    position: relative;
+    width: 70px; /* Base width */
+    height: 70px; /* Base height */
+    border-radius: 50%; /* Default to circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Default cursor, override if needed */
+    transition: transform 0.1s ease-in-out, filter 0.2s ease, border-bottom-width 0.1s ease-in-out;
+    box-sizing: border-box;
+    border: none; /* Remove default border */
+  }
+  
+  /* Hover effect - apply generally */
+  .pathItem:hover {
+    filter: brightness(1.1);
+  }
+  
+  /* Active/click effect - base */
+  .pathItem:active {
+      transform: translateY(1px); /* Press down */
+      filter: brightness(1.05);
+  }
+  
+  
+  /* --- 3D Effect Base --- */
+  /* Apply bottom border for 3D look */
+  .checkmark,
+  .chest,
+  .level-badge,
+  .duo {
+    border-bottom: 4px solid;
+  }
+  /* Adjust border on active press */
+  .checkmark:active,
+  .chest:active,
+  .level-badge:active,
+  .duo:active {
+      border-bottom-width: 3px;
+  }
+  
+  
+  /* --- Specific Item Type Styles --- */
+  
+  /* Checkmark (Completed Lesson) */
+  .checkmark {
+    background-color: #dddddd; /* Default gray for incomplete? */
+    border-color: #c3c3c3; /* Darker gray */
+    color: #bbbbbb; /* Gray icon */
+    cursor: default; /* Completed checkmarks usually aren't clickable */
+  }
+  .checkmark .icon {
+    font-size: 28px;
+  }
+  /* Style for COMPLETED checkmarks */
+  .checkmark.completed {
+      background-color: #84d840; /* Light green for completed */
+      border-color: #71bc31; /* Darker green */
+      color: white; /* White icon */
+  }
+  
+  /* Override active state for non-clickable checkmarks */
+  .checkmark:active {
+      transform: none;
+      filter: none;
+      border-bottom-width: 4px; /* Keep original border */
+  }
+  
+  
+  /* Treasure Chest */
+  .chest {
+    background-color: #e5e5e5; /* Gray background */
+    border-color: #cecece; /* Darker Gray for 3D effect */
+    border-radius: 12px; /* Boxy shape */
+    width: 75px;
+    height: 65px;
+    padding-top: 5px; /* Adjust content position */
+  }
+  /* Chest Content Details (Inner Box, Keyhole) */
+  .chestContent {
+    width: 50%;
+    height: 60%;
+    background-color: #bbbbbb; /* Darker inner part */
+    border-radius: 4px;
+    position: relative;
+    border: 2px solid #cecece;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chestContent::before { /* Keyhole bottom */
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 10px;
+    background-color: #888888; /* Darkest gray */
+    border-radius: 2px 2px 50% 50%;
+  }
+  .chestContent::after { /* Keyhole top circle */
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 6px;
+      background-color: #888888;
+      border-radius: 50%;
+  }
+  
+  /* Duo Owl (CSS Approximation) */
+  .duo {
+    background-color: #79c802; /* Duo's main green color */
+    border-color: #63a302; /* Darker green for base */
+    width: 75px; /* Adjust size as needed */
+    height: 75px;
+    position: relative; /* For positioning eyes/beak */
+    border-radius: 50% 50% 40% 40%; /* Approximate owl head shape */
+  }
+  .owlBody {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .owlEye {
+    position: absolute;
+    top: 30%;
+    width: 18px; /* Eye size */
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    border: 2px solid #63a302; /* Eye outline */
+  }
+  .owlEye::after { /* Pupil */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: #333; /* Black pupil */
+    border-radius: 50%;
+  }
+  .owlEye.left { left: 20%; } /* Position left eye */
+  .owlEye.right { right: 20%; } /* Position right eye */
+  .owlBeak {
+    position: absolute;
+    bottom: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #ffb000; /* Orange beak */
+    border-radius: 2px; /* Slightly rounded beak */
+  }
+  
+  /* Level Badge */
+  .level-badge {
+    background: linear-gradient(135deg, #c84eff, #a02ef8); /* Purple gradient */
+    border-color: #831fd3; /* Darker purple for base */
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative; /* Needed for pseudo-elements */
+  }
+  /* Laurel Leaves using pseudo-elements and SVG */
+  .level-badge::before,
+  .level-badge::after {
+    content: '';
+    position: absolute;
+    top: 8px; /* Adjust vertical position */
+    bottom: 8px; /* Adjust vertical position */
+    width: 18px; /* Adjust width of the leaf area */
+    /* Simple inline SVG for laurel leaf branch */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 20"><path d="M5 0 Q 10 5, 5 10 Q 0 15, 5 20 M5 2.5 Q 9 6, 6.5 9.5 M5 12.5 Q 1 16, 3.5 19.5" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .level-badge::before { /* Left leaf */
+    left: 8px; /* Adjust horizontal position */
+    background-position: left center;
+    transform: scaleX(-1) rotate(-5deg); /* Flip horizontally and slightly rotate */
+  }
+  .level-badge::after { /* Right leaf */
+    right: 8px; /* Adjust horizontal position */
+    background-position: right center;
+     transform: rotate(5deg); /* Slightly rotate */
+  }

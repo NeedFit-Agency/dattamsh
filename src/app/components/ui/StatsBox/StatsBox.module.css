@@ -1,0 +1,114 @@
+.statBox {
+    flex: 1;
+    background-color: white;
+    border: 2px solid var(--duo-border);
+    border-radius: 16px;
+    text-align: center;
+    overflow: hidden;
+    min-width: 150px;
+  }
+  
+  .label {
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  
+  .content {
+    padding: 20px 15px;
+    font-size: 28px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .content .icon {
+    font-size: 24px;
+    transform: translateY(-2px);
+  }
+  .content span {
+      line-height: 1; /* Prevent extra space */
+  }
+  .subtext { /* For smaller text like 'Day streak' */
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--duo-gray-dark);
+      display: block;
+      margin-top: 2px;
+  }
+  
+  
+  /* --- Variants --- */
+  
+  /* XP Box (Yellow/Gold) */
+  .xp {
+    border-color: var(--duo-yellow-dark);
+  }
+  .xp .label {
+    background-color: var(--duo-yellow);
+    color: var(--duo-yellow-dark);
+  }
+  .xp .content {
+    color: var(--duo-yellow);
+  }
+  
+  /* Accuracy Box (Blue) */
+  .accuracy {
+    border-color: var(--duo-blue-dark); /* Use Blue */
+  }
+  .accuracy .label {
+    background-color: var(--duo-blue-primary); /* Use Blue */
+    color: var(--duo-blue-dark); /* Use Blue */
+  }
+  .accuracy .content {
+    color: var(--duo-blue-primary); /* Use Blue */
+  }
+  
+  /* Streak Box (Orange) - From Profile */
+  .streak {
+    border-color: var(--duo-orange-dark);
+  }
+  .streak .label {
+     background-color: transparent; /* No colored label bg */
+     color: var(--duo-gray-dark); /* Standard label text */
+     padding-bottom: 0;
+  }
+  .streak .content {
+    color: var(--duo-orange);
+    padding-top: 10px; /* Adjust spacing if label is different */
+    flex-direction: column; /* Stack icon/number and text */
+    gap: 0;
+  }
+  
+  /* League Box (Gray) - From Profile */
+  .league {
+   border-color: var(--duo-border); /* Standard border */
+  }
+  .league .label {
+     background-color: transparent;
+     color: var(--duo-gray-dark);
+     padding-bottom: 0;
+  }
+  .league .content {
+    color: var(--duo-gray-medium); /* Muted color */
+    padding-top: 10px;
+     flex-direction: column;
+     gap: 0;
+  }
+  .league .icon { /* Specific icon style for league */
+      background-color: var(--duo-gray-light);
+      color: var(--duo-gray-medium);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+  }
+  .league .value {
+      font-size: 20px; /* Smaller font for 'None' */
+  }

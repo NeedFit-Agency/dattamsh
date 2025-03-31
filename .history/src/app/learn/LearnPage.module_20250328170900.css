@@ -1,0 +1,174 @@
+/* ./learn/learnPage.module.css */
+
+/* Keep existing styles for .appContainer, .mainAreaWrapper, .topBar, .scrollableContent etc. */
+/* ... */
+
+/* --- Ensure Content Area Centers Items --- */
+.contentArea {
+  flex-grow: 1; /* Changed from flex: 1 */
+  padding: 0 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  max-width: 600px; /* Adjust max-width as needed */
+  margin: 0 auto; /* Center the content area */
+}
+
+
+/* --- Header Styles (Minor Adjustments if needed) --- */
+.lessonHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px; /* Increased padding slightly */
+  background-color: #58cc02; /* Duolingo green */
+  color: white;
+  border-radius: 16px;
+  margin: 20px 0 40px 0; /* Increased bottom margin */
+  width: 100%; /* Ensure header takes full width */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+/* Ensure header icons/text match image */
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.headerLeft .icon {
+  font-size: 20px; /* Adjust size */
+  cursor: pointer; /* If it's clickable */
+}
+.headerTitle {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.headerTitle h2 {
+  margin: 2px 0 0 0; /* Adjust margin */
+  font-size: 24px; /* Adjust size */
+  font-weight: 800; /* Bolder */
+  text-transform: none; /* Keep case as is */
+}
+.guidebookButton {
+  background-color: white;
+  color: #58cc02; /* Green text */
+  border: 2px solid #e5e5e5; /* Add border like image */
+  border-bottom: 4px solid #e5e5e5; /* Add bottom border for 3D */
+  border-radius: 12px; /* Adjust radius */
+  padding: 10px 16px; /* Adjust padding */
+  font-weight: 700;
+  font-size: 15px; /* Adjust size */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.guidebookButton:hover {
+  background-color: #f7f7f7;
+}
+.guidebookButton .icon {
+  margin-right: 0; /* Remove default margin if using gap */
+  font-size: 18px; /* Adjust icon size */
+}
+
+
+/* --- NEW: Lesson Title Divider Styles --- */
+.lessonTitleDivider {
+  position: relative;
+  text-align: center;
+  margin: 0 0 30px 0; /* Adjust margin */
+  width: 100%;
+  max-width: 300px; /* Control width of the line/text area */
+}
+
+.lessonTitleDivider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px; /* Slightly thicker line */
+  background-color: #e5e5e5; /* Match border color */
+  z-index: 1;
+}
+
+.lessonTitleDivider span {
+  position: relative;
+  background-color: #ffffff; /* Match page background */
+  padding: 0 15px;
+  z-index: 2;
+  color: #afafaf; /* Lighter gray color */
+  font-size: 16px; /* Adjust size */
+  font-weight: bold;
+}
+/* --- END NEW --- */
+
+
+/* --- Lesson Path Container --- */
+.lessonPath {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  position: relative;
+  width: 100%; /* Takes width of contentArea */
+  padding-bottom: 20px;
+  /* Remove the ::before line style if not needed or replace with SVG later */
+}
+
+/* Style links wrapping path items */
+.lessonLink {
+    display: block;
+    margin-bottom: 35px; /* Increased spacing between items */
+    text-decoration: none;
+    position: relative; /* Needed for absolute positioning of START bubble */
+    width: fit-content; /* Fit the content size */
+    /* For Curve Effect (Approximate): Apply horizontal shifts */
+    /* Use nth-child or dynamic styles based on index for better control */
+    transition: transform 0.3s ease-out;
+}
+
+/* Example simple curve effect using index classes */
+/* Adjust translateX values for desired curve */
+.itemPosition0 { transform: translateX(0px); }
+.itemPosition1 { transform: translateX(-20px); } /* Shift left */
+.itemPosition2 { transform: translateX(10px); }  /* Shift right */
+.itemPosition3 { transform: translateX(-10px); } /* Shift left */
+.itemPosition4 { transform: translateX(5px); }   /* Shift right */
+/* ... add more as needed ... */
+
+/* Target the LessonPathItem div inside the link/div */
+.lessonLink > div {
+    margin-bottom: 0 !important; /* Reset margin if link handles it */
+}
+
+/* --- Scroll Down Button Styles (Keep as is or adjust) --- */
+.scrollDownButton {
+  align-self: center;
+  background-color: #f7f7f7;
+  border: 2px solid #e5e5e5;
+  border-radius: 50%;
+  width: 45px; /* Slightly larger */
+  height: 45px; /* Slightly larger */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 30px; /* More space */
+  color: #afafaf; /* Gray icon */
+  font-size: 20px;
+}
+
+.scrollDownButton:hover {
+  background-color: #efefef;
+}
+.scrollDownButton .icon {
+  margin: 0;
+}
+
+/* --- Responsive Styles (Keep or adjust) --- */
+/* ... */

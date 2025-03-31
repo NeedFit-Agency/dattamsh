@@ -1,0 +1,35 @@
+.statsBar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+  }
+  .statItem {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer; /* Indicate clickable */
+  }
+  .statItem .icon {
+    margin-right: 5px;
+    font-size: 20px;
+    display: inline-block; /* Helps with alignment */
+    vertical-align: middle;
+  }
+  .streakFreeze {
+    color: var(--duo-gray-medium);
+  }
+  .streakFreeze .icon {
+    font-size: 24px;
+  }
+  .streakCount {
+    color: var(--duo-orange);
+  }
+  .gems {
+    color: var(--duo-blue-primary); /* Use blue */
+  }
+  .hearts {
+    color: var(--duo-red);
+  }

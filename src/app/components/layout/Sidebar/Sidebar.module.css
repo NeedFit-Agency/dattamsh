@@ -1,0 +1,158 @@
+/* src/app/components/layout/Sidebar/Sidebar.module.css */
+
+/* REMOVE THIS BLOCK:
+:root {
+  --sidebar-logo-green: #78c800;
+  --sidebar-active-bg: #ddf4ff;
+  --sidebar-active-border: #beeafd;
+  --sidebar-active-text-icon: #1cb0f6;
+  --sidebar-inactive-text: #777777;
+  --sidebar-inactive-icon: #afafaf;
+  --sidebar-hover-bg: #f7f7f7;
+  --sidebar-border-color: #e5e5e5;
+  --sidebar-profile-border: #dcdcdc;
+}
+*/
+
+.sidebar {
+  /* Use the globally defined --sidebar-width */
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  padding: 25px 15px 25px 20px;
+  border-right: 2px solid var(--duo-border); /* Use global --duo-border */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 50;
+  box-sizing: border-box;
+  align-self: flex-start;
+}
+
+.logo {
+font-size: 32px;
+font-weight: 800;
+/* Use a specific color variable or direct value */
+color: #78c800; /* Direct green for logo */
+text-align: left;
+margin-bottom: 40px;
+padding-left: 10px;
+}
+
+.navList {
+list-style: none;
+padding: 0;
+margin: 0;
+width: 100%;
+}
+
+.navItem {
+margin-bottom: 8px;
+}
+
+.navLink {
+display: flex;
+align-items: center;
+padding: 10px 15px;
+border-radius: 12px;
+cursor: pointer;
+font-weight: 700;
+color: var(--duo-gray-dark); /* Use global var */
+transition: background-color 0.15s ease-out, color 0.15s ease-out, border-color 0.15s ease-out;
+font-size: 15px;
+text-transform: uppercase;
+text-decoration: none;
+border: 2px solid transparent;
+box-sizing: border-box;
+width: 100%;
+}
+
+.navLink:hover {
+background-color: var(--duo-gray-lightest); /* Use global var */
+color: var(--duo-gray-dark);
+}
+
+/* Active State Styling */
+.navLink.active {
+background-color: var(--duo-blue-light); /* Use global var */
+color: var(--duo-blue-primary); /* Use global var */
+border: 2px solid var(--duo-blue-border); /* Use global var */
+}
+
+/* Icon Wrapper */
+.iconWrapper {
+font-size: 22px;
+width: 35px;
+min-width: 35px;
+height: 30px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+margin-right: 15px;
+color: var(--duo-gray-medium); /* Use global var */
+position: relative;
+line-height: 1;
+}
+
+/* Icon styles */
+.iconWrapper .icon {
+  font-size: 20px;
+  vertical-align: middle;
+}
+.iconWrapper .iconImage {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Active state for icons */
+.navLink.active .iconWrapper {
+ color: var(--duo-blue-primary); /* Use global var */
+}
+.navLink.active .iconWrapper .icon {
+ color: var(--duo-blue-primary); /* Use global var */
+}
+.navLink.active .iconWrapper .iconImage {
+ /* Optional active filter */
+}
+
+/* Placeholder Icons */
+.iconPlaceholder {
+font-weight: 700;
+font-size: 18px;
+}
+
+.lettersIcon {
+ font-size: 24px;
+ font-weight: normal;
+}
+
+.profileIcon {
+  border: 2px dashed var(--duo-gray-medium); /* Use global var */
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--duo-gray-medium); /* Use global var */
+  padding: 0;
+  margin-top: 1px;
+}
+
+/* Active state for Profile Icon */
+.navLink.active .profileIcon {
+ border-style: solid;
+ border-color: var(--duo-blue-primary); /* Use global var */
+ color: var(--duo-blue-primary); /* Use global var */
+}
+
+/* Nav Text */
+.navText {
+  line-height: 1.2;
+}

@@ -1,0 +1,66 @@
+/* Copy all styles from streak_style.css for calendar */
+.calendarBox {
+    border: 2px solid var(--duo-border);
+    border-radius: 16px;
+    padding: 20px 25px;
+    background-color: white;
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .calendarDays,
+  .calendarCircles {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .calendarDays .day {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--duo-gray-medium);
+    width: 30px;
+    text-align: center;
+  }
+  
+  .calendarDays .day.active {
+    color: var(--duo-orange); /* Keep Orange */
+  }
+  
+  .calendarCircles .circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--duo-gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .calendarCircles .circle.checked {
+    background-color: var(--duo-orange); /* Keep Orange */
+    color: white;
+    font-size: 16px;
+  }
+  
+  .calendarInfo {
+    font-size: 15px;
+    color: var(--duo-gray-dark);
+    line-height: 1.4;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  /* Add FontAwesome check icon style if needed */
+  .calendarCircles .circle.checked svg {
+      /* Styles for check icon inside circle */
+  }
+  
+  /* Responsive styles from original */
+  @media (max-width: 480px) {
+      .calendarBox { max-width: 90%; padding: 15px; }
+       .calendarDays .day, .calendarCircles .circle { width: 25px; height: 25px; }
+      .calendarCircles .circle.checked { font-size: 14px; }
+       .calendarInfo { font-size: 14px; }
+  }

@@ -1,0 +1,167 @@
+/* src/app/components/layout/Sidebar/Sidebar.module.css */
+
+/* --- Colors (Approximated from Image) --- */
+:root {
+  /* Define sidebar width variable if not defined globally */
+  --sidebar-width: 260px;
+
+  --sidebar-logo-green: #78c800;
+  --sidebar-active-bg: #ddf4ff;
+  --sidebar-active-border: #beeafd; /* Slightly darker than bg */
+  --sidebar-active-text-icon: #1cb0f6;
+  --sidebar-inactive-text: #777777; /* Slightly darker gray */
+  --sidebar-inactive-icon: #afafaf; /* Medium gray for icons */
+  --sidebar-hover-bg: #f7f7f7; /* Lighter gray for hover */
+  --sidebar-border-color: #e5e5e5;
+  --sidebar-profile-border: #dcdcdc; /* Slightly darker gray for dashed border */
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    padding: 25px 15px 25px 20px; /* Adjusted padding: T R B L */
+    border-right: 2px solid var(--sidebar-border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    position: sticky; /* Make sidebar sticky */
+    top: 0;          /* Stick to the top */
+    background-color: #ffffff; /* Ensure white background */
+    z-index: 50;     /* Keep above scrolling content */
+    box-sizing: border-box;
+    /* Prevent content below from overlapping if needed */
+    align-self: flex-start;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--sidebar-logo-green);
+  text-align: left;
+  margin-bottom: 40px;
+  padding-left: 10px; /* Align with nav items */
+  /* Consider adding specific Duolingo font if you have it */
+  /* font-family: 'Feather Bold', sans-serif; */
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.navItem {
+  margin-bottom: 8px; /* Space between items */
+}
+
+/* Style the Link directly */
+.navLink {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px; /* T/B L/R padding */
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700; /* Bold text */
+  color: var(--sidebar-inactive-text);
+  transition: background-color 0.15s ease-out, color 0.15s ease-out, border-color 0.15s ease-out;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid transparent; /* Reserve space for active border */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.navLink:hover {
+  background-color: var(--sidebar-hover-bg);
+  color: var(--sidebar-inactive-text); /* Keep text color on hover */
+}
+
+/* Active State Styling */
+.navLink.active {
+  background-color: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text-icon);
+  border: 2px solid var(--sidebar-active-border);
+}
+
+/* Icon Wrapper for consistent spacing/alignment */
+.iconWrapper {
+  font-size: 22px; /* Base icon size */
+  width: 35px; /* Width for spacing */
+  min-width: 35px;
+  height: 30px; /* Explicit height */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px; /* Space between icon and text */
+  color: var(--sidebar-inactive-icon); /* Default icon color */
+  position: relative;
+  line-height: 1; /* Prevent extra space */
+}
+
+/* Specific icon styling inside wrapper */
+.iconWrapper .icon {
+    font-size: 20px; /* Adjust FA icon size if needed */
+    vertical-align: middle; /* Helps alignment sometimes */
+}
+.iconWrapper .iconImage {
+    display: block;
+    height: 100%; /* Fill wrapper height */
+    width: auto;   /* Maintain aspect ratio */
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Active state for icons */
+.navLink.active .iconWrapper {
+   color: var(--sidebar-active-text-icon);
+}
+/* Active state specifically for FA icons */
+.navLink.active .iconWrapper .icon {
+   color: var(--sidebar-active-text-icon);
+}
+/* Active state for Image icon - adjust if needed */
+.navLink.active .iconWrapper .iconImage {
+    /* Example: filter: saturate(1.2); */
+}
+
+/* Placeholder Icons */
+.iconPlaceholder {
+  font-weight: 700; /* Bold like text */
+  font-size: 18px;
+}
+
+/* Specific letters icon placeholder */
+.lettersIcon {
+   font-size: 24px;
+   font-weight: normal;
+   /* font-family: 'Arial', sans-serif; */ /* Specify font if default is wrong */
+}
+
+/* Profile Placeholder Icon */
+.profileIcon {
+    border: 2px dashed var(--sidebar-profile-border); /* Dashed border */
+    border-radius: 50%;
+    width: 28px; /* Match wrapper height */
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /* Size of letter 'A' */
+    color: var(--sidebar-inactive-icon); /* Color of letter */
+    padding: 0;
+    margin-top: 1px; /* Fine-tune vertical alignment */
+}
+
+/* Active state for Profile Icon */
+.navLink.active .profileIcon {
+   border-style: solid; /* Change to solid on active */
+   border-color: var(--sidebar-active-text-icon);
+   color: var(--sidebar-active-text-icon);
+}
+
+/* Nav Text */
+.navText {
+    line-height: 1.2; /* Adjust for vertical centering with icon */
+}
