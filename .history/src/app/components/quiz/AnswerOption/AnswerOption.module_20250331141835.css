@@ -1,0 +1,160 @@
+.option {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 2px solid var(--duo-border);
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    text-align: left;
+    width: 100%;
+    color: var(--duo-text-dark);
+    border-bottom-width: 4px;
+  }
+  .option:hover:not(.selected):not(.correct):not(.incorrect) { /* Only hover if not already selected/graded */
+    background-color: #f7f7f7;
+  }
+  
+  .optionNumber {
+    border: 2px solid var(--duo-gray-medium); /* Changed from border */
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 14px;
+    color: var(--duo-gray-dark);
+    transition: border-color 0.2s ease, color 0.2s ease;
+    flex-shrink: 0; /* Prevent shrinking */
+  }
+  
+  .optionText {
+    flex-grow: 1;
+  }
+  
+  /* Selected State */
+  .selected {
+    /* Use blue theme */
+    background-color: var(--duo-blue-light);
+    border-color: var(--duo-blue-primary);
+    color: var(--duo-blue-primary); /* Text color changes too */
+  }
+  .selected .optionNumber {
+    border-color: var(--duo-blue-primary);
+    color: var(--duo-blue-primary);
+  }
+  
+  /* Feedback States (Optional but good) */
+  .correct {
+    background-color: var(--duo-green-light); /* Use green for correct */
+    border-color: var(--duo-green);
+    color: var(--duo-green-dark);
+    cursor: default; /* Not clickable after grading */
+  }
+  .correct .optionNumber {
+     border-color: var(--duo-green);
+     color: var(--duo-green-dark);
+  }
+  
+  .incorrect {
+    background-color: #ffebee; /* Light red */
+    border-color: var(--duo-red);
+    color: var(--duo-red);
+    cursor: default;
+    opacity: 0.7; /* Dim incorrect options slightly */
+  }
+  .incorrect .optionNumber {
+     border-color: var(--duo-red);
+     color: var(--duo-red);
+  }
+
+.answerOption {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.answerOption:hover:not(.disabled) {
+  border-color: #1cb0f6;
+  background-color: #f7f7f7;
+}
+
+.selected {
+  border-color: #1cb0f6;
+  background-color: #edf8ff;
+}
+
+.correct {
+  border-color: #58cc02;
+  background-color: #e6ffda;
+}
+
+.incorrect {
+  border-color: #ff4b4b;
+  background-color: #ffeded;
+}
+
+.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.optionNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+  color: #777;
+  margin-right: 16px;
+  font-weight: bold;
+}
+
+.selected .optionNumber {
+  background-color: #1cb0f6;
+  color: white;
+}
+
+.correct .optionNumber {
+  background-color: #58cc02;
+  color: white;
+}
+
+.incorrect .optionNumber {
+  background-color: #ff4b4b;
+  color: white;
+}
+
+.optionText {
+  font-size: 18px;
+  flex-grow: 1;
+}
+
+.feedbackIcon {
+  position: absolute;
+  right: 20px;
+  font-size: 20px;
+}
+
+.correct .feedbackIcon {
+  color: #58cc02;
+}
+
+.incorrect .feedbackIcon {
+  color: #ff4b4b;
+}

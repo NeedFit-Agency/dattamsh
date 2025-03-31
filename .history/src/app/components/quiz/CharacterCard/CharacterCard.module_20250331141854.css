@@ -5,18 +5,18 @@
     background-color: white;
     border-radius: 16px;
     padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     position: relative;
-    width: 180px;
-    height: 180px;
-    gap: 15px;
+    flex-basis: 40%;
+    max-width: 250px;
+    border: 2px solid var(--duo-border);
+    min-height: 150px;
 }
 
 .character {
     font-size: 80px;
     font-weight: 500;
     margin-bottom: 10px;
-    color: #1cb0f6;
 }
 
 .characterDisplay { /* Renamed from arabic-char */
@@ -29,10 +29,10 @@
 
 .speakerButton {
     position: absolute;
-    right: 15px;
-    bottom: 15px;
-    background-color: #e5e5e5;
-    color: #3c3c3c;
+    right: 20px;
+    top: 20px;
+    background-color: #f7f7f7;
+    color: #1cb0f6;
     border: none;
     border-radius: 50%;
     width: 40px;
@@ -41,15 +41,9 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 }
 
 .speakerButton:hover {
-    background-color: #1cb0f6;
-    color: white;
-    transform: scale(1.1);
-}
-
-.speakerButton:active {
-    transform: scale(0.95);
+    background-color: #e5e5e5;
 }

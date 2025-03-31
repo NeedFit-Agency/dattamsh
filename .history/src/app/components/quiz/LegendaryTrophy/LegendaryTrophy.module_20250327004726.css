@@ -1,0 +1,66 @@
+/* Copy all trophy, sparkle, glow, and animation styles from legendary_style.css */
+.trophyContainer {
+    position: relative;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: float-subtle 4s infinite ease-in-out;
+  }
+  
+  .trophyImage {
+    max-width: 150px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .trophyGlow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(ellipse at center, var(--gold-glow) 0%, transparent 70%);
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: glow-pulse 4s infinite ease-in-out;
+  }
+  
+  .sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkle-effect 2s infinite ease-in-out;
+    z-index: 3;
+    filter: blur(1px);
+  }
+  .sparkle::before, .sparkle::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: inherit;
+      border-radius: inherit;
+      top: 0;
+      left: 0;
+  }
+  .sparkle::before { transform: rotate(45deg); }
+  .sparkle::after { transform: rotate(-45deg); }
+  
+  /* Add sparkle-1, sparkle-2, sparkle-3 positioning styles */
+  .sparkle1 { top: 10%; left: 15%; animation-delay: 0s; }
+  .sparkle2 { top: 60%; right: 10%; animation-delay: 0.5s; }
+  .sparkle3 { bottom: 5%; left: 30%; animation-delay: 1s; width: 8px; height: 8px; }
+  
+  /* Add keyframes float-subtle, glow-pulse, sparkle-effect */
+  @keyframes float-subtle { /* ... */ }
+  @keyframes glow-pulse { /* ... */ }
+  @keyframes sparkle-effect { /* ... */ }
+  
+  /* Add responsive styles from original */
+  @media (max-width: 480px) { /* ... */ }
+  @media (max-width: 360px) { /* ... */ }

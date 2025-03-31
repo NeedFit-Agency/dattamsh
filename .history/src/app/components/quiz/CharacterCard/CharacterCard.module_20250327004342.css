@@ -1,0 +1,45 @@
+.characterCard {
+    flex-basis: 40%;
+    max-width: 250px;
+    border: 2px solid var(--duo-border);
+    background-color: white;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 150px;
+    padding: 20px; /* Add some padding */
+  }
+  
+  .characterDisplay { /* Renamed from arabic-char */
+    font-size: 70px; /* Adjust as needed */
+    font-weight: bold;
+    color: var(--duo-text-dark);
+    line-height: 1;
+    text-align: center;
+  }
+  
+  .speakerButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    /* Use blue theme color */
+    background-color: var(--duo-blue-primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+  }
+  .speakerButton:hover {
+    /* Use darker blue */
+    background-color: var(--duo-blue-dark);
+  }

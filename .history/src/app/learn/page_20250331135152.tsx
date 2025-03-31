@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faBookOpen, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import React from 'react'; // Import React for style typing
-import  {Quiz}  from '@/app/components/quiz/Quiz/Quiz';
+import 
 // Adjust these import paths based on your actual project structure
 import Sidebar from '@/app/components/layout/Sidebar/Sidebar';
 import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
