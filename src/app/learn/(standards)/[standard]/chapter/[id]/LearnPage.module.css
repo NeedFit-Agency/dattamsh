@@ -2,7 +2,23 @@
 .appContainer {
   display: flex;
   min-height: 100vh;
-  background-color: #ffffff; /* Ensure white background */
+  background-color: #f0f7ff;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(88, 204, 2, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(28, 176, 246, 0.05) 0%, transparent 20%),
+    linear-gradient(45deg, rgba(88, 204, 2, 0.02) 0%, rgba(28, 176, 246, 0.02) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.appContainer::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M15 15h30v30H15z' stroke='rgba(88, 204, 2, 0.1)' stroke-width='2'/%3E%3Cpath d='M30 15l15 30H15z' stroke='rgba(28, 176, 246, 0.1)' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: 0;
 }
 
 .mainAreaWrapper {
@@ -143,11 +159,83 @@
 .lessonPath {
   display: flex;
   flex-direction: column;
-  /* Align section containers along the center axis before they are shifted */
   align-items: center;
   position: relative;
-  width: 100%; /* Takes width of contentArea */
+  width: 100%;
   padding-bottom: 30px;
+  min-height: 700px;
+}
+
+/* Add floating decorative elements */
+.lessonPath::before,
+.lessonPath::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.lessonPath::before {
+  left: -100px;
+  top: 20%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 5L20 80h60L50 5z' fill='%2358cc02'/%3E%3C/svg%3E");
+  animation: float 6s ease-in-out infinite;
+}
+
+.lessonPath::after {
+  right: -100px;
+  bottom: 20%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='45' fill='%231cb0f6'/%3E%3C/svg%3E");
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* Make lesson items more playful */
+.lessonLink {
+  position: absolute;
+  display: block;
+  text-decoration: none;
+  width: fit-content;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease, box-shadow 0.15s ease-in-out;
+}
+
+.lessonLink:hover {
+  transform: scale(1.1) rotate(2deg);
+  filter: brightness(1.1);
+  z-index: 1;
+}
+
+/* Add tech-themed connecting lines */
+.lessonPath::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 4px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #e5e5e5 0%,
+    #e5e5e5 50%,
+    transparent 50%,
+    transparent 100%
+  );
+  background-size: 4px 20px;
+  z-index: -1;
+  animation: circuit 2s linear infinite;
+}
+
+@keyframes circuit {
+  from { background-position: 0 0; }
+  to { background-position: 0 20px; }
 }
 
 /* --- NEW: Section Container Styling --- */
@@ -164,7 +252,6 @@
 .sectionContainer:not(:last-child) {
     /* margin-bottom: 50px; */ /* Example: More space between sections */
 }
-
 
 /* Style Links/Divs wrapping path items (LessonLink) */
 .lessonLink {
@@ -306,4 +393,53 @@
   width: 55px;
   height: 55px;
   font-size: 26px;
+}
+
+/* Add decorative icon styles */
+.decorativeIcon {
+  position: absolute;
+  font-size: 2.5rem;
+  color: rgba(88, 204, 2, 0.15);
+  animation: floatAndGlow 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(28, 176, 246, 0.2));
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+.decorativeIcon:hover {
+  color: rgba(88, 204, 2, 0.3);
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 15px rgba(28, 176, 246, 0.4));
+}
+
+@keyframes floatAndGlow {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    filter: drop-shadow(0 0 10px rgba(28, 176, 246, 0.2));
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+    filter: drop-shadow(0 0 20px rgba(28, 176, 246, 0.4));
+  }
+}
+
+/* Add tech-themed connecting lines */
+.lessonPath::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(45deg, transparent 45%, rgba(88, 204, 2, 0.1) 45%, rgba(88, 204, 2, 0.1) 55%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, rgba(28, 176, 246, 0.1) 45%, rgba(28, 176, 246, 0.1) 55%, transparent 55%);
+  background-size: 30px 30px;
+  z-index: -1;
+  animation: moveBg 20s linear infinite;
+}
+
+@keyframes moveBg {
+  from { background-position: 0 0; }
+  to { background-position: 60px 60px; }
 }

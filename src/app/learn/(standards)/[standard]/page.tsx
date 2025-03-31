@@ -18,7 +18,7 @@ const getStandardData = (standardId: string) => {
   return {
     title: titles[standardId as keyof typeof titles] || "Unknown Standard",
     chapters: [
-      { id: 1, title: "Introduction", completed: false },
+      { id: 1, title: "Introduction to machines", completed: false },
       { id: 2, title: "Fundamentals", completed: false },
       { id: 3, title: "Advanced Concepts", completed: false },
       { id: 4, title: "Mastery", completed: false },

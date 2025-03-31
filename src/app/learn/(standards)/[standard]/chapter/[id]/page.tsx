@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faBookOpen, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faBookOpen, faArrowDown, faLaptopCode, faRobot, faMicrochip, faCode } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
 import LessonPathItem from '@/app/components/learn/LessonPathItem/LessonPathItem';
@@ -93,6 +93,14 @@ export default function ChapterPage({
     },
   };
 
+  // Add tech-themed decorative elements
+  const decorativeIcons = [
+    { icon: faLaptopCode, style: { top: '10%', left: '10%' } },
+    { icon: faRobot, style: { top: '30%', right: '15%' } },
+    { icon: faMicrochip, style: { bottom: '25%', left: '15%' } },
+    { icon: faCode, style: { bottom: '15%', right: '10%' } },
+  ];
+
   return (
     <main className={styles.contentArea}>
       <div className={styles.lessonHeader}>
@@ -101,8 +109,8 @@ export default function ChapterPage({
             <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />
           </Link>
           <div className={styles.headerTitle}>
-                STANDARD {params.standard}, CHAPTER {params.id}
-                <h2>{chapterData.chapterTitle}</h2>
+            STANDARD {params.standard}, CHAPTER {params.id}
+            <h2>{chapterData.chapterTitle}</h2>
           </div>
         </div>
         <button className={styles.guidebookButton}>
@@ -111,13 +119,23 @@ export default function ChapterPage({
         </button>
       </div>
 
-      {/* Divider */}
       <div className={styles.lessonTitleDivider}>
         <span>{chapterData.standardTitle} - {chapterData.chapterTitle}</span>
       </div>
 
-      {/* Lesson Path */}
-      <div className={styles.lessonPath} style={{ height: `${standardHeight}px` }}>
+      <div className={styles.lessonPath}>
+        {/* Add decorative tech icons */}
+        {decorativeIcons.map((item, index) => (
+          <div 
+            key={index}
+            className={styles.decorativeIcon}
+            style={item.style as React.CSSProperties}
+          >
+            <FontAwesomeIcon icon={item.icon} />
+          </div>
+        ))}
+
+        {/* Existing lesson path items */}
         {chapterData.content.map((item) => {
           const isClickable = !(item.type === 'checkmark' && item.completed);
           const PathComponent = isClickable ? Link : 'div';
@@ -140,10 +158,13 @@ export default function ChapterPage({
             </PathComponent>
           );
         })}
-
       </div>
 
-      <button className={styles.scrollDownButton} onClick={handleScrollDown} aria-label="Scroll down">
+      <button 
+        className={styles.scrollDownButton} 
+        onClick={handleScrollDown}
+        aria-label="Scroll down"
+      >
         <FontAwesomeIcon icon={faArrowDown} className={styles.icon} />
       </button>
     </main>
