@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faX } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { Quiz } from '@/app/components/quiz/Quiz/Quiz';
-import Sidebar from '@/app/components/layout/Sidebar/Sidebar';
 import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
 import styles from './QuizPage.module.css';
 
@@ -17,7 +16,6 @@ export default function QuizPage() {
 
   return (
     <div className={styles.appContainer}>
-      <Sidebar />
       <div className={styles.mainAreaWrapper}>
         <div className={styles.topBar}>
           <div className={styles.navigationControls}>
@@ -35,7 +33,7 @@ export default function QuizPage() {
           <StatsBar streak={1} gems={234} hearts={2} />
         </div>
 
-        <div className={styles.quizContent}>
+        <div className={styles.contentArea}>
           <Quiz lessonId={lessonId} />
         </div>
 
@@ -51,7 +49,7 @@ export default function QuizPage() {
                 >
                   CONTINUE LESSON
                 </button>
-                <Link href="/learn" className={styles.quitConfirmButton}>
+                <Link href={`/learn/${lessonId}`} className={styles.quitConfirmButton}>
                   QUIT
                 </Link>
               </div>

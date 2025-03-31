@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google"; // Import Nunito
+import { Nunito } from "next/font/google"; 
 import "./globals.css";
-
-// Font Awesome configuration (optional, can be done per-component)
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-config.autoAddCss = false // Prevent Font Awesome from adding CSS automatically
+config.autoAddCss = false 
 
-const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800", "900"] }); // Load weights used
+const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800", "900"] }); 
 
 export const metadata: Metadata = {
-  title: "Duolingo Clone",
+  title: "Dattamsh",
   description: "Learning languages is fun!",
 };
 

@@ -1,0 +1,115 @@
+.container {
+  min-height: 100vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.topBar {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.StandardList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.StandardCard {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.StandardLink {
+  display: block;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: #1cb0f6;
+  transition: background-color 0.2s;
+}
+
+.StandardLink:hover {
+  background-color: #f7f7f7;
+}
+
+.StandardLink.locked {
+  color: #afafaf;
+  cursor: not-allowed;
+}
+
+.StandardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.StandardInfo {
+  flex: 1;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #afafaf;
+  margin-bottom: 0.25rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.lockIcon {
+  color: #afafaf;
+  font-size: 1.25rem;
+}
+
+.StandardDetails {
+  margin-bottom: 1rem;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progressBar {
+  flex: 1;
+  height: 12px;
+  background-color: #e5e5e5;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #58cc02;
+  transition: width 0.3s ease;
+}
+
+.units {
+  color: #afafaf;
+  font-size: 0.875rem;
+}
+
+.message {
+  font-size: 1rem;
+  color: #4b4b4b;
+  padding: 0.75rem;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  margin-top: 1rem;
+} 

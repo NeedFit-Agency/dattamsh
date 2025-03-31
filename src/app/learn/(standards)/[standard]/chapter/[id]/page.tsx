@@ -1,0 +1,151 @@
+'use client';
+
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faBookOpen, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
+import LessonPathItem from '@/app/components/learn/LessonPathItem/LessonPathItem';
+import styles from './LearnPage.module.css';
+
+type ContentItemType = {
+  type: 'checkmark' | 'chest' | 'level-badge' | 'duo';
+  id: number;
+  completed: boolean;
+  level?: number;
+};
+
+const getChapterData = (standardId: string, chapterId: string) => {
+  const standardTitles = {
+    "1": "Basic Concepts",
+    "2": "Intermediate Learning",
+    "3": "Advanced Topics",
+    "4": "Expert Level"
+  };
+
+  const chapterTitles = {
+    "1": "Introduction",
+    "2": "Fundamentals",
+    "3": "Advanced Concepts",
+    "4": "Mastery"
+  };
+
+  return {
+    standardTitle: standardTitles[standardId as keyof typeof standardTitles] || "Unknown Standard",
+    chapterTitle: chapterTitles[chapterId as keyof typeof chapterTitles] || "Unknown Chapter",
+    content: [
+      { type: 'level-badge' as const, id: 1, level: 1, completed: false },
+      { type: 'level-badge' as const, id: 2, level: 2, completed: false },
+      { type: 'level-badge' as const, id: 3, level: 3, completed: true },
+      { type: 'level-badge' as const, id: 4, level: 4, completed: true },
+      { type: 'chest' as const, id: 5, completed: false },
+      { type: 'duo' as const, id: 6, completed: false }
+    ] as ContentItemType[]
+  };
+};
+
+export default function ChapterPage({ 
+  params 
+}: { 
+  params: { standard: string; id: string } 
+}) {
+  const chapterData = getChapterData(params.standard, params.id);
+
+  const handleScrollDown = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
+
+  // Positioning Configuration
+  const itemSize = 80;
+  const verticalSpacing = 60;
+  const standardHeight = 700;
+
+  const positions: { [key: number]: React.CSSProperties } = {
+    1: {
+      top: '50px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+    },
+    2: {
+      top: '180px',
+      left: '30%',
+      transform: 'translateX(-50%)',
+    },
+    3: {
+      top: '310px',
+      left: '20%',
+      transform: 'translateX(-50%)',
+    },
+    4: {
+      top: '440px',
+      left: '40%',
+      transform: 'translateX(-50%)',
+    },
+    5: {
+      top: '570px',
+      left: '60%',
+      transform: 'translateX(-50%)',
+    },
+    6: {
+      top: '280px',
+      left: '65%',
+      transform: 'translateX(-50%)',
+    },
+  };
+
+  return (
+    <main className={styles.contentArea}>
+      <div className={styles.lessonHeader}>
+        <div className={styles.headerLeft}>
+          <Link href={`/learn/${params.standard}`} className={styles.backButton}>
+            <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />
+          </Link>
+          <div className={styles.headerTitle}>
+                STANDARD {params.standard}, CHAPTER {params.id}
+                <h2>{chapterData.chapterTitle}</h2>
+          </div>
+        </div>
+        <button className={styles.guidebookButton}>
+          <FontAwesomeIcon icon={faBookOpen} className={styles.icon} />
+          GUIDEBOOK
+        </button>
+      </div>
+
+      {/* Divider */}
+      <div className={styles.lessonTitleDivider}>
+        <span>{chapterData.standardTitle} - {chapterData.chapterTitle}</span>
+      </div>
+
+      {/* Lesson Path */}
+      <div className={styles.lessonPath} style={{ height: `${standardHeight}px` }}>
+        {chapterData.content.map((item) => {
+          const isClickable = !(item.type === 'checkmark' && item.completed);
+          const PathComponent = isClickable ? Link : 'div';
+          const itemStyle = positions[item.id] || {};
+
+          return (
+            <PathComponent
+              key={item.id}
+              href={isClickable ? `/quiz?lesson=${item.id}` : '#'}
+              passHref={isClickable}
+              className={styles.lessonLink}
+              style={itemStyle}
+              aria-label={isClickable ? `Start or practice lesson ${item.id}` : `Lesson ${item.id} completed`}
+            >
+              <LessonPathItem
+                type={item.type}
+                level={item.type === 'level-badge' ? item.level : undefined}
+                completed={item.completed}
+              />
+            </PathComponent>
+          );
+        })}
+
+      </div>
+
+      <button className={styles.scrollDownButton} onClick={handleScrollDown} aria-label="Scroll down">
+        <FontAwesomeIcon icon={faArrowDown} className={styles.icon} />
+      </button>
+    </main>
+  );
+} 

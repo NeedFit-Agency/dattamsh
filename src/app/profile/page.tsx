@@ -4,9 +4,6 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy, faFire, faGem, faHeart, faStar, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 
-// Import layout components
-import Sidebar from '@/app/components/layout/Sidebar/Sidebar';
-import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
 import RightRail from '@/app/components/layout/RightRail/RightRail';
 
 // Import UI components
@@ -49,12 +46,8 @@ export default function ProfilePage() {
 
   return (
     <div className={styles.appContainer}>
-      <Sidebar />
       
       <div className={styles.mainAreaWrapper}>
-        <div className={styles.topBar}>
-          <StatsBar streak={userData.streak} gems={userData.gems} hearts={userData.hearts} />
-        </div>
         
         <div className={styles.scrollableContent}>
           <main className={styles.contentArea}>
@@ -79,7 +72,7 @@ export default function ProfilePage() {
               </div>
             </div>
             
-            <h2 className={styles.sectionTitle}>Achievements</h2>
+            <h2 className={styles.StandardTitle}>Achievements</h2>
             <div className={styles.achievementsGrid}>
               {userData.achievements.map(achievement => (
                 <div key={achievement.id} className={`${styles.achievementCard} ${!achievement.completed ? 'opacity-50' : ''}`}>
@@ -94,7 +87,7 @@ export default function ProfilePage() {
               ))}
             </div>
             
-            <div className={styles.streakSection}>
+            <div className={styles.streakStandard}>
               <div className={styles.streakHeader}>
                 <FontAwesomeIcon icon={faCalendarDay} className={styles.streakIcon} />
                 <h2 className={styles.streakTitle}>Your Learning Streak</h2>

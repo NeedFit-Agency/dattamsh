@@ -89,7 +89,7 @@
   margin-bottom: 8px;
 }
 
-.sectionTitle {
+.StandardTitle {
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 16px;
@@ -138,7 +138,7 @@
   color: #666;
 }
 
-.streakSection {
+.streakStandard {
   background-color: white;
   padding: 16px;
   border-radius: 12px;

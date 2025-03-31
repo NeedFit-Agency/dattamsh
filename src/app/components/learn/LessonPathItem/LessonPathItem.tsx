@@ -39,7 +39,6 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
           </div>
         );
       case 'level-badge':
-        // Level badge shows number; laurels are added via CSS ::before/::after
         return (
           <>{level}</>
         );
@@ -48,7 +47,6 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
     }
   };
 
-  // Render the item container with its content
   return (
     <div className={itemClass} onClick={onClick}>
       {renderContent()}
