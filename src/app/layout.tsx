@@ -3,6 +3,7 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import Header from '@/app/components/layout/Header/Header'
 config.autoAddCss = false 
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800", "900"] }); 
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}> {/* Apply font */}
+        <Header />
         {children}
       </body>
     </html>

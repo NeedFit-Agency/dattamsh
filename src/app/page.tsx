@@ -13,7 +13,6 @@ import {
   faGraduationCap,
   faAward
 } from '@fortawesome/free-solid-svg-icons';
-import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
 import styles from './page.module.css';
 
 export default function HomePage() {
@@ -27,34 +26,37 @@ export default function HomePage() {
       units: "4 Chapters",
       message: "Start your journey into the world of computers!",
       icon: faLaptopCode,
-      description: "Learn the basics of computers, coding, and digital thinking."
+      description: "Learn all about computers"
     },
     {
       id: "2",
-      subtitle: "Intermediate Computing",
+      subtitle: "Basic Computer Education",
       title: "2nd Standard",
       status: "locked",
       units: "4 Chapters",
+      progress: "0/4 completed",
       icon: faCode,
-      description: "Dive deeper into programming concepts and problem-solving."
+      description: "More about computers, smart phones, and Introduction to Notepad"
     },
     {
       id: "3",
-      subtitle: "Advanced Technology",
+      subtitle: "Intermediate Computer Education",
       title: "3rd Standard",
       status: "locked",
+      progress: "0/4 completed",
       units: "4 Chapters",
       icon: faMicrochip,
-      description: "Explore advanced computing concepts and artificial intelligence."
+      description: "Surfing the internet, understanding the email, google maps, Microsoft Word"
     },
     {
       id: "4",
       subtitle: "Expert Level",
       title: "4th Standard",
       status: "locked",
+      progress: "0/4 completed",
       units: "4 Chapters",
       icon: faRobot,
-      description: "Master complex algorithms and machine learning basics."
+      description: "Operating Systems, Introduction to Windows, Diﬀerent File Types, Introduction to Microsoft Excel"
     }
   ];
 
@@ -68,15 +70,6 @@ export default function HomePage() {
 
   return (
     <div className={styles.pageWrapper}>
-      <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <h1 className={styles.logo}>Binary Brains</h1>
-          <nav className={styles.nav}>
-            <StatsBar streak={1} gems={234} hearts={2} />
-          </nav>
-        </div>
-      </header>
-
       <main className={styles.main}>
         {/* Add decorative icons */}
         {decorativeIcons.map((item, index) => (
@@ -126,21 +119,20 @@ export default function HomePage() {
                     <p className={styles.standardDescription}>{Standard.description}</p>
                     
                     <div className={styles.standardDetails}>
-                      {Standard.status === 'active' ? (
-                        <div className={styles.progress}>
-                          <div className={styles.progressBar}>
-                            <div className={styles.progressFill} style={{ width: '0%' }}></div>
-                          </div>
-                          <span className={styles.progressText}>{Standard.progress}</span>
+                      <div className={styles.progress}>
+                        <div className={styles.progressBar}>
+                          <div 
+                            className={styles.progressFill} 
+                            style={{ width: Standard.status === 'active' ? '0%' : '0%' }}
+                          />
                         </div>
-                      ) : (
-                        <div className={styles.units}>{Standard.units}</div>
+                        <span className={styles.progressText}>{Standard.progress}</span>
+                      </div>
+                      <span className={styles.units}>{Standard.units}</span>
+                      {Standard.message && (
+                        <p className={styles.message}>{Standard.message}</p>
                       )}
                     </div>
-
-                    {Standard.message && (
-                      <p className={styles.message}>{Standard.message}</p>
-                    )}
                   </div>
                 </Link>
               </div>

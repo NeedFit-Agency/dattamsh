@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faBookOpen, faArrowDown, faLaptopCode, faRobot, faMicrochip, faCode } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
 import LessonPathItem from '@/app/components/learn/LessonPathItem/LessonPathItem';
 import styles from './LearnPage.module.css';
 
@@ -24,10 +23,10 @@ const getChapterData = (standardId: string, chapterId: string) => {
   };
 
   const chapterTitles = {
-    "1": "Introduction",
-    "2": "Fundamentals",
-    "3": "Advanced Concepts",
-    "4": "Mastery"
+    "1": "Introduction to Machines",
+    "2": "All About Computers",
+    "3": "Computer Care and Safety",
+    "4": "Keyboard and Mouse Fun"
   };
 
   return {

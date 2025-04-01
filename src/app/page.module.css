@@ -2,7 +2,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7ff 0%, #e8fff0 100%);
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 /* Add animated tech pattern background */
