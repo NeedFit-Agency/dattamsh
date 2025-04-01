@@ -150,7 +150,7 @@ export default function ChapterPage({
           </div>
         ))}
 
-        {/* Existing lesson path items */}
+        {/* Existing lesson path items - UPDATED to redirect to learning page */}
         {chapterData.content.map((item) => {
           const isClickable = !(item.type === 'checkmark' && item.completed);
           const PathComponent = isClickable ? Link : 'div';
@@ -159,8 +159,7 @@ export default function ChapterPage({
           return (
             <PathComponent
               key={item.id}
-              href={isClickable ? `/quiz?lesson=${item.id}` : '#'}
-              passHref={isClickable}
+              href={isClickable ? `/learning?standard=${params.standard}&chapter=${params.id}&lesson=${item.id}` : '#'}
               className={styles.lessonLink}
               style={itemStyle}
               aria-label={isClickable ? `Start or practice lesson ${item.id}` : `Lesson ${item.id} completed`}
@@ -184,4 +183,4 @@ export default function ChapterPage({
       </button>
     </main>
   );
-} 
+}
