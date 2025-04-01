@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -23,6 +23,8 @@ import {
   DropResult,
   // ResponderProvided, // Not always needed
 } from '@hello-pangea/dnd';
+import { motion } from 'framer-motion';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 import styles from './learning.module.css';
 
@@ -173,6 +175,32 @@ const move = (
   return result;
 };
 
+// Add this helper function at the top level
+const getStyle = (style: any, snapshot: any) => {
+  if (!snapshot.isDropAnimating) {
+    return style;
+  }
+  return {
+    ...style,
+    transitionDuration: `0.001s`,
+  }
+}
+
+// Add this after the other imports
+const createConfetti = () => {
+  const confetti = document.createElement('div');
+  confetti.className = styles.confetti;
+  
+  // Random properties for more natural animation
+  const colors = ['#4CAF50', '#8BC34A', '#CDDC39', '#FFC107', '#2196F3'];
+  confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+  confetti.style.left = Math.random() * 100 + 'vw';
+  confetti.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Between 2-5s
+  confetti.style.opacity = '1';
+  confetti.style.animation = `${styles.confettiFall} ${Math.random() * 3 + 2}s linear forwards`;
+  
+  return confetti;
+};
 
 export default function LearningPage() {
   // --- State ---
@@ -195,6 +223,9 @@ export default function LearningPage() {
   const totalSlides = lessonContent.length;
   const currentContent = lessonContent[currentSlideIndex];
 
+  // Inside your component, add this new state
+  const [showConfetti, setShowConfetti] = useState(false);
+
   // --- Effects ---
   // Reset state when slide changes
   useEffect(() => {
@@ -208,8 +239,11 @@ export default function LearningPage() {
 
     // Initialize DND state if it's a DND slide
     if (currentContent.type === 'drag-drop') {
-      const initialItems = currentContent.items.map(item => ({...item}));
-      setDndState({ sourceItems: initialItems, naturalTarget: [], manMadeTarget: [] });
+      setDndState({
+        sourceItems: currentContent.items,
+        naturalTarget: [],
+        manMadeTarget: []
+      });
       setDndChecked(false);
       setDndFeedback(null);
       setItemCorrectness({});
@@ -318,42 +352,103 @@ export default function LearningPage() {
   // Drag and Drop Handler
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
+    
+    // Return if dropped outside or if already checked
     if (!destination || dndChecked) return;
+
     const sourceId = source.droppableId as keyof typeof dndState;
     const destId = destination.droppableId as keyof typeof dndState;
+    
+    // Return if dropping in same spot
     if (sourceId === destId && source.index === destination.index) return;
 
     if (sourceId === destId) {
-      if (sourceId === 'sourceItems') {
-        const items = reorder(dndState[sourceId], source.index, destination.index);
-        setDndState(prevState => ({ ...prevState, [sourceId]: items }));
-      }
+      // Reordering within same list
+      const items = Array.from(dndState[sourceId]);
+      const [removed] = items.splice(source.index, 1);
+      items.splice(destination.index, 0, removed);
+
+      setDndState(prev => ({
+        ...prev,
+        [sourceId]: items
+      }));
     } else {
-      const movedResult = move(dndState[sourceId], dndState[destId], source, destination);
-      setDndState(prevState => ({ ...prevState, ...movedResult }));
+      // Moving between lists
+      const sourceItems = Array.from(dndState[sourceId]);
+      const destItems = Array.from(dndState[destId]);
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+
+      setDndState(prev => ({
+        ...prev,
+        [sourceId]: sourceItems,
+        [destId]: destItems
+      }));
     }
   };
 
-  // Check Drag and Drop Answers
+  // Modify the checkDragDrop function
   const checkDragDrop = () => {
-        if (currentContent.type !== 'drag-drop') return;
-        let correctCount = 0; let incorrectCount = 0;
-        const totalPlacedInTargets = dndState.naturalTarget.length + dndState.manMadeTarget.length;
-        const newCorrectnessMap: { [itemId: string]: boolean } = {};
-        let allItemsPlaced = dndState.sourceItems.length === 0;
+    if (currentContent.type !== 'drag-drop') return;
+    let correctCount = 0;
+    let incorrectCount = 0;
+    const totalPlacedInTargets = dndState.naturalTarget.length + dndState.manMadeTarget.length;
+    const newCorrectnessMap: { [itemId: string]: boolean } = {};
+    let allItemsPlaced = dndState.sourceItems.length === 0;
 
-        dndState.naturalTarget.forEach(item => { const isCorrect = item.type === 'natural'; newCorrectnessMap[item.id] = isCorrect; if(isCorrect) correctCount++; else incorrectCount++; });
-        dndState.manMadeTarget.forEach(item => { const isCorrect = item.type === 'man-made'; newCorrectnessMap[item.id] = isCorrect; if(isCorrect) correctCount++; else incorrectCount++; });
+    dndState.naturalTarget.forEach(item => {
+      const isCorrect = item.type === 'natural';
+      newCorrectnessMap[item.id] = isCorrect;
+      if(isCorrect) correctCount++;
+      else incorrectCount++;
+    });
+    
+    dndState.manMadeTarget.forEach(item => {
+      const isCorrect = item.type === 'man-made';
+      newCorrectnessMap[item.id] = isCorrect;
+      if(isCorrect) correctCount++;
+      else incorrectCount++;
+    });
 
-        setItemCorrectness(newCorrectnessMap); setDndChecked(true);
+    setItemCorrectness(newCorrectnessMap);
+    setDndChecked(true);
 
-        if (totalPlacedInTargets === 0) { setDndFeedback("Drag the items into the boxes first!"); }
-        else if (!allItemsPlaced) { setDndFeedback(`Keep going! Drag all the items. ${correctCount} placed correctly so far.`); }
-        else {
-            if (incorrectCount === 0) { setDndFeedback("Great job! All items are in the correct boxes!"); }
-            else { setDndFeedback(`Nice try! ${correctCount} correct, ${incorrectCount} incorrect. Look closely!`); setHearts(prev => Math.max(0, prev - 1)); }
+    if (totalPlacedInTargets === 0) {
+      setDndFeedback("Drag the items into the boxes first!");
+    } else if (!allItemsPlaced) {
+      setDndFeedback(`Keep going! Drag all the items. ${correctCount} placed correctly so far.`);
+    } else {
+      if (incorrectCount === 0) {
+        setDndFeedback("Great job! All items are in the correct boxes!");
+        // Trigger confetti animation
+        setShowConfetti(true);
+        // Create confetti effect
+        const confettiContainer = document.createElement('div');
+        confettiContainer.className = styles.confettiContainer;
+        document.body.appendChild(confettiContainer);
+        
+        // Add multiple confetti pieces
+        for (let i = 0; i < 50; i++) {
+          const piece = createConfetti();
+          confettiContainer.appendChild(piece);
+          
+          // Remove piece after animation
+          piece.addEventListener('animationend', () => {
+            piece.remove();
+          });
         }
-    };
+        
+        // Remove container after all animations
+        setTimeout(() => {
+          confettiContainer.remove();
+          setShowConfetti(false);
+        }, 5000);
+      } else {
+        setDndFeedback(`Nice try! ${correctCount} correct, ${incorrectCount} incorrect. Look closely!`);
+        setHearts(prev => Math.max(0, prev - 1));
+      }
+    }
+  };
 
   // Main Continue Button Logic
   const handleContinue = () => {
@@ -435,10 +530,41 @@ export default function LearningPage() {
                     {/* Visual Column */}
                     {(currentContent.imageUrl || currentContent.exampleImages) && (
                         <div className={styles.learningVisualColumn}>
-                            {currentContent.imageUrl && ( <img src={currentContent.imageUrl} alt={currentContent.title} /> )}
-                             {currentContent.exampleImages && !currentContent.imageUrl && (
-                                <div className={styles.exampleImageContainer}> {currentContent.exampleImages.map((img, i) => <img key={i} src={img.src} alt={img.alt} className={styles.exampleImage} title={img.alt} />)} </div>
-                             )}
+                            {currentContent.imageUrl && (
+                                <motion.img 
+                                    src={currentContent.imageUrl} 
+                                    alt={currentContent.title}
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                />
+                            )}
+                            {currentContent.exampleImages && !currentContent.imageUrl && (
+                                <div className={styles.exampleImageContainer}>
+                                    {currentContent.exampleImages.map((img, i) => (
+                                        <div
+                                            key={i}
+                                            className={styles.tooltipWrapper}
+                                            data-tooltip={img.alt}
+                                            style={{ '--image-index': i } as any}
+                                        >
+                                            <motion.img 
+                                                src={img.src} 
+                                                alt={img.alt} 
+                                                className={styles.exampleImage}
+                                                whileHover={{ 
+                                                    scale: 1.05,
+                                                    rotate: 2,
+                                                    transition: {
+                                                        type: "spring",
+                                                        stiffness: 300,
+                                                        damping: 10
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     )}
 
@@ -454,7 +580,38 @@ export default function LearningPage() {
                                 )}
                             </div>
                             <div className={styles.mascotImageContainer}>
-                                <img src="/images/mascot.png" alt="Owlbert Mascot" className={styles.mascotImage} />
+                                <motion.img 
+                                    src="/images/mascot.png" 
+                                    alt="Owlbert Mascot" 
+                                    className={styles.mascotImage}
+                                    initial={{ y: 0 }}
+                                    animate={{ 
+                                        y: [-10, 0],
+                                        scale: [1, 1.05, 1]
+                                    }}
+                                    transition={{ 
+                                        y: {
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            repeatType: "reverse",
+                                            ease: "easeInOut"
+                                        },
+                                        scale: {
+                                            duration: 0.3
+                                        }
+                                    }}
+                                    whileHover={{ 
+                                        scale: 1.1,
+                                        rotate: [-5, 5, -5, 5, 0],
+                                        transition: {
+                                            rotate: {
+                                                duration: 0.5,
+                                                ease: "easeInOut"
+                                            }
+                                        }
+                                    }}
+                                    whileTap={{ scale: 0.95 }}
+                                />
                             </div>
                         </div>
                         {currentContent.imageUrl && currentContent.exampleImages && ( // Show examples below text if main image exists
@@ -468,26 +625,49 @@ export default function LearningPage() {
             {currentContent.type === 'drag-drop' && (
               <DragDropContext onDragEnd={onDragEnd}>
                 <div className={styles.dragDropArea}>
-                   <div style={{textAlign: 'center'}}> {/* Center instruction and button */}
-                        <p className={styles.dragDropInstruction}>{currentContent.instruction}</p>
-                        {(currentContent.audioSrc || currentContent.speakText) && (
-                             <button className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`} onClick={playSlideAudio} title={isAudioPlaying ? "Stop" : "Listen"} style={{marginTop: '-10px', marginBottom: '20px'}}>
-                                <FontAwesomeIcon icon={faHeadphones} /> Listen
-                             </button>
-                        )}
-                   </div>
+                  <div style={{textAlign: 'center'}}>
+                    <p className={styles.dragDropInstruction}>{currentContent.instruction}</p>
+                    {(currentContent.audioSrc || currentContent.speakText) && (
+                      <button 
+                        className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`} 
+                        onClick={playSlideAudio} 
+                        title={isAudioPlaying ? "Stop" : "Listen"} 
+                        style={{marginTop: '-10px', marginBottom: '20px'}}
+                      >
+                        <FontAwesomeIcon icon={faHeadphones} /> Listen
+                      </button>
+                    )}
+                  </div>
 
                   {/* Source List */}
                   <Droppable droppableId="sourceItems" direction="horizontal">
                     {(provided, snapshot) => (
-                      <div ref={provided.innerRef} {...provided.droppableProps} className={styles.draggableSourceList} style={{borderColor: snapshot.isDraggingOver ? 'var(--primary-blue)' : 'var(--border-light)'}}>
+                      <div 
+                        ref={provided.innerRef} 
+                        {...provided.droppableProps} 
+                        className={styles.draggableSourceList}
+                        style={{
+                          borderColor: snapshot.isDraggingOver ? 'var(--primary-blue)' : 'var(--border-light)',
+                          background: snapshot.isDraggingOver ? 'var(--bg-hover)' : 'var(--bg-light)'
+                        }}
+                      >
                         {dndState.sourceItems?.map((item, index) => (
                           <Draggable key={item.id} draggableId={item.id} index={index} isDragDisabled={dndChecked}>
-                            {(provDraggable, snapDraggable) => (
-                              <div ref={provDraggable.innerRef} {...provDraggable.draggableProps} {...provDraggable.dragHandleProps}
-                                className={`${styles.draggableItem} ${snapDraggable.isDragging ? styles.draggableItemDragging : ''}`}
-                                style={{ ...provDraggable.draggableProps.style, cursor: dndChecked ? 'default' : 'grab' }}>
-                                {item.imageUrl ? <img src={item.imageUrl} alt={item.text} style={{height: '30px', marginRight: '8px', pointerEvents: 'none'}}/> : null}
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                className={`${styles.draggableItem} ${snapshot.isDragging ? styles.draggableItemDragging : ''}`}
+                                style={provided.draggableProps.style}
+                              >
+                                {item.imageUrl && (
+                                  <img 
+                                    src={item.imageUrl} 
+                                    alt={item.text} 
+                                    style={{height: '30px', marginRight: '8px', pointerEvents: 'none'}}
+                                  />
+                                )}
                                 {item.text}
                               </div>
                             )}
@@ -500,21 +680,44 @@ export default function LearningPage() {
 
                   {/* Target Lists */}
                   <div className={styles.dropTargetsContainer}>
-                    {currentContent.targets.map(target => (
-                      <Droppable key={target.id} droppableId={target.id} isDropDisabled={dndChecked}>
-                        {(provDroppable, snapDroppable) => (
-                          <div ref={provDroppable.innerRef} {...provDroppable.droppableProps} className={`${styles.dropTargetColumn} ${snapDroppable.isDraggingOver ? styles.dropTargetColumnDraggingOver : ''}`}>
+                    {currentContent.targets.map((target) => (
+                      <Droppable key={target.id} droppableId={target.id}>
+                        {(provided, snapshot) => (
+                          <div 
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                            className={`${styles.dropTargetColumn} 
+                              ${snapshot.isDraggingOver ? styles.dropTargetColumnDraggingOver : ''} 
+                              ${dndChecked && !Object.values(itemCorrectness).some(correct => !correct) ? styles.allCorrect : ''}`}
+                          >
                             <h3 className={`${styles.dropTargetTitle} ${target.type === 'natural' ? styles.dropTargetTitleNatural : styles.dropTargetTitleManMade}`}>
-                               <FontAwesomeIcon icon={target.type === 'natural' ? faLeaf : faWrench} style={{ marginRight: '8px'}}/> {target.title}
+                              <FontAwesomeIcon icon={target.type === 'natural' ? faLeaf : faWrench} style={{ marginRight: '8px'}}/>
+                              {target.title}
                             </h3>
                             <div className={styles.dropTargetList}>
-                                {dndState[target.id]?.map((item, index) => (
-                                  <div key={item.id} className={`${styles.draggableItem} ${dndChecked ? (itemCorrectness[item.id] ? styles.itemCorrect : styles.itemIncorrect) : ''}`} style={{ cursor: 'default', justifyContent: 'flex-start' }}>
-                                      {item.imageUrl ? <img src={item.imageUrl} alt={item.text} style={{height: '30px', marginRight: '8px', pointerEvents: 'none'}}/> : null}
+                              {dndState[target.id]?.map((item, index) => (
+                                <Draggable key={item.id} draggableId={item.id} index={index} isDragDisabled={dndChecked}>
+                                  {(provided, snapshot) => (
+                                    <div
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      className={`${styles.draggableItem} ${dndChecked ? (itemCorrectness[item.id] ? styles.itemCorrect : styles.itemIncorrect) : ''}`}
+                                      style={provided.draggableProps.style}
+                                    >
+                                      {item.imageUrl && (
+                                        <img 
+                                          src={item.imageUrl} 
+                                          alt={item.text} 
+                                          style={{height: '30px', marginRight: '8px', pointerEvents: 'none'}}
+                                        />
+                                      )}
                                       {item.text}
-                                  </div>
-                                ))}
-                                {provDroppable.placeholder}
+                                    </div>
+                                  )}
+                                </Draggable>
+                              ))}
+                              {provided.placeholder}
                             </div>
                           </div>
                         )}
@@ -522,8 +725,12 @@ export default function LearningPage() {
                     ))}
                   </div>
 
-                   {/* Feedback Message */}
-                   {dndFeedback && ( <div className={`${styles.dragDropFeedback} ${dndChecked && !Object.values(itemCorrectness).some(c => !c) && dndState.sourceItems?.length === 0 ? styles.dragDropFeedbackCorrect : styles.dragDropFeedbackIncorrect}`}> {dndFeedback} </div> )}
+                  {/* Feedback Message */}
+                  {dndFeedback && (
+                    <div className={`${styles.dragDropFeedback} ${dndChecked && !Object.values(itemCorrectness).some(c => !c) && dndState.sourceItems?.length === 0 ? styles.dragDropFeedbackCorrect : styles.dragDropFeedbackIncorrect}`}>
+                      {dndFeedback}
+                    </div>
+                  )}
                 </div>
               </DragDropContext>
             )}
@@ -549,6 +756,6 @@ export default function LearningPage() {
                </div>
            </div>
        )}
-    </div> // End learningContainer
+    </div> 
   );
 }

@@ -58,12 +58,12 @@ export default function Header() {
         </button>
 
         <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
-          <div className={styles.mobileNavLinks}>
+          {/* <div className={styles.mobileNavLinks}>
             <Link href="/learn" className={styles.mobileNavLink}>
               <FontAwesomeIcon icon={faGraduationCap} className={styles.mobileNavIcon} />
               Learn
             </Link>
-          </div>
+          </div> */}
           <div className={styles.mobileStatsWrapper}>
             <StatsBar streak={1} gems={234} hearts={2} />
           </div>
