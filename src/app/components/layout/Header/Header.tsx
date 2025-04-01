@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes, faCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
 import styles from './Header.module.css';
 
@@ -24,23 +24,50 @@ export default function Header() {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.headerContent}>
         <Link href="/" className={styles.logoLink}>
-          <h1 className={styles.logo}>Binary Brains</h1>
+          <div className={styles.logo}>
+            <div className={styles.logoIconWrapper}>
+              <span className={styles.codeBracket}>{"<"}</span>
+              <span className={styles.codeSlash}>/</span>
+              <span className={styles.codeBracket}>{">"}</span>
+            </div>
+            <div className={styles.logoText}>
+              <span className={styles.logoMain}>Binary</span>
+              <span className={styles.logoAccent}>Brains</span>
+            </div>
+          </div>
         </Link>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className={styles.mobileMenuButton}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} />
-        </button>
-
-        <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
+        <nav className={styles.nav}>
+          {/* <div className={styles.navLinks}>
+            <Link href="/learn" className={styles.navLink}>
+              <FontAwesomeIcon icon={faGraduationCap} className={styles.navIcon} />
+              <span>Learn</span>
+            </Link>
+          </div> */}
           <div className={styles.statsWrapper}>
             <StatsBar streak={1} gems={234} hearts={2} />
           </div>
         </nav>
+
+        <button 
+          className={`${styles.mobileMenuButton} ${isMobileMenuOpen ? styles.active : ''}`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className={styles.hamburgerIcon}></span>
+        </button>
+
+        <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
+          <div className={styles.mobileNavLinks}>
+            <Link href="/learn" className={styles.mobileNavLink}>
+              <FontAwesomeIcon icon={faGraduationCap} className={styles.mobileNavIcon} />
+              Learn
+            </Link>
+          </div>
+          <div className={styles.mobileStatsWrapper}>
+            <StatsBar streak={1} gems={234} hearts={2} />
+          </div>
+        </div>
       </div>
     </header>
   );

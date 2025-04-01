@@ -29,9 +29,25 @@ const getChapterData = (standardId: string, chapterId: string) => {
     "4": "Keyboard and Mouse Fun"
   };
 
+  const headerThemes = {
+    "1": styles.themeGreen,
+    "2": styles.themePurple,
+    "3": styles.themeOrange,
+    "4": styles.themeBlue,
+    "5": styles.themeGreen,
+    "6": styles.themePurple,
+    "7": styles.themeOrange,
+    "8": styles.themeBlue,
+    "9": styles.themeGreen,
+    "10": styles.themePurple,
+    "11": styles.themeOrange,
+    "12": styles.themeBlue,
+  };
+
   return {
     standardTitle: standardTitles[standardId as keyof typeof standardTitles] || "Unknown Standard",
     chapterTitle: chapterTitles[chapterId as keyof typeof chapterTitles] || "Unknown Chapter",
+    headerTheme: headerThemes[chapterId as keyof typeof headerThemes] || styles.themeGreen,
     content: [
       { type: 'level-badge' as const, id: 1, level: 1, completed: false },
       { type: 'level-badge' as const, id: 2, level: 2, completed: false },
@@ -102,7 +118,7 @@ export default function ChapterPage({
 
   return (
     <main className={styles.contentArea}>
-      <div className={styles.lessonHeader}>
+      <div className={`${styles.lessonHeader} ${chapterData.headerTheme}`}>
         <div className={styles.headerLeft}>
           <Link href={`/learn/${params.standard}`} className={styles.backButton}>
             <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />

@@ -61,13 +61,47 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 25px;
-  background-color: #58cc02; /* Duolingo green */
   color: white;
   border-radius: 16px;
-  margin: 20px 0 40px 0; /* Space below header */
+  margin: 20px 0 40px 0;
   width: 800px;
   height: 100px;
   box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+/* Theme colors for different chapters */
+.themeGreen {
+  background-color: #04CD9C;
+}
+
+.themeOrange {
+  background-color: #FF9601;
+}
+
+.themeBlue {
+  background-color: #1DB0F6;
+}
+
+.themePurple {
+  background-color: #CE82FF;
+}
+
+/* Update guidebook button colors based on parent theme */
+.themeGreen .guidebookButton {
+  color: #04CD9C;
+}
+
+.themeOrange .guidebookButton {
+  color: #FF9601;
+}
+
+.themeBlue .guidebookButton {
+  color: #1DB0F6;
+}
+
+.themePurple .guidebookButton {
+  color: #CE82FF;
 }
 
 .headerLeft {

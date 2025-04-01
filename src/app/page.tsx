@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faChevronRight, 
@@ -73,31 +74,50 @@ export default function HomePage() {
       <main className={styles.main}>
         {/* Add decorative icons */}
         {decorativeIcons.map((item, index) => (
-          <div 
+          <motion.div 
             key={index}
             className={styles.decorativeIcon}
             style={item.style as React.CSSProperties}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
           >
             <FontAwesomeIcon icon={item.icon} />
-          </div>
+          </motion.div>
         ))}
 
-        <div className={styles.heroSection}>
+        <motion.div 
+          className={styles.heroSection}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className={styles.heroTitle}>Begin Your Learning Journey</h2>
           <p className={styles.heroSubtitle}>
             Welcome to Binary Brains - Where Learning Computers Becomes an Adventure!
           </p>
-        </div>
+        </motion.div>
         
         <div className={styles.standardsContainer}>
-          <div className={styles.sectionHeader}>
+          <motion.div 
+            className={styles.sectionHeader}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <h3>Choose Your Learning Path</h3>
             <p>Select your grade level and start exploring the world of technology!</p>
-          </div>
+          </motion.div>
           
           <div className={styles.standardList}>
-            {Standards.map((Standard) => (
-              <div key={Standard.id} className={styles.standardCard}>
+            {Standards.map((Standard, index) => (
+              <motion.div 
+                key={Standard.id} 
+                className={styles.standardCard}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+              >
                 <Link 
                   href={Standard.status === 'active' ? `/learn/${Standard.id}/chapter/1` : '#'} 
                   className={`${styles.standardLink} ${Standard.status === 'locked' ? styles.locked : ''}`}
@@ -135,7 +155,7 @@ export default function HomePage() {
                     </div>
                   </div>
                 </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
