@@ -6,18 +6,23 @@
   .learningContainer {
     display: flex;
     min-height: 100vh;
-    background-color: var(--background-medium); /* Base background */
+    background-color: var(--background-medium);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
   }
   
   .learningContent {
     flex: 1;
     display: flex;
     flex-direction: column;
-    max-width: 1200px; /* Max content width */
+    max-width: 900px; /* Reduced from 1200px for better readability */
     margin: 0 auto;
-    background-color: var(--background-light);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    overflow: hidden; /* Ensures child elements don't break layout */
+    background-color: var(--white);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: calc(100vh - 40px);
   }
   
   .learningLayout { /* Applied in layout.tsx */
@@ -27,20 +32,18 @@
   
   /* ----- Header ----- */
   .learningHeader {
-    padding: 15px 20px;
+    padding: 16px 24px;
     border-bottom: 1px solid var(--border-light);
     background: var(--white);
-    position: sticky; /* Make header sticky if desired */
+    position: sticky;
     top: 0;
     z-index: 10;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
   }
   
   .headerNavigation {
     display: flex;
     align-items: center;
-    gap: 15px;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 20px;
     max-width: 100%;
   }
   
@@ -71,20 +74,19 @@
   }
   
   .progressBar {
-    flex: 1; /* Takes available space */
-    min-width: 100px; /* Ensure it doesn't get too small */
-    height: 12px;
+    flex: 1;
+    height: 8px;
     background-color: var(--background-medium);
-    border-radius: 6px;
+    border-radius: 20px;
     overflow: hidden;
-    border: 1px solid var(--border-light);
+    border: none;
   }
   
   .progressFill {
     height: 100%;
-    background: linear-gradient(90deg, var(--accent-light), var(--accent-color));
-    border-radius: 6px;
-    transition: width 0.5s cubic-bezier(0.65, 0, 0.35, 1); /* Smoother transition */
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    border-radius: 20px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .headerActions {
@@ -127,17 +129,19 @@
   /* ----- Main Content Area ----- */
   .learningMain {
     flex: 1;
-    padding: clamp(15px, 4vw, 40px); /* Responsive padding */
+    padding: 32px 24px;
     display: flex;
     flex-direction: column;
-    animation: fadeIn 0.5s ease-out;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
   }
   
   .lessonTitle {
-    font-size: var(--font-size-2xl);
+    font-size: 28px;
     font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: clamp(20px, 5vh, 30px); /* Reduced bottom margin slightly */
+    margin-bottom: 24px;
     text-align: center;
   }
   
@@ -150,24 +154,15 @@
   
   /* ----- Learning Slide Specific ----- */
   .learningSlideLayout {
-    display: flex;
-    flex-direction: column; /* Stack vertically by default */
-    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
   }
   
-  /* Layout for wider screens */
   @media (min-width: 768px) {
     .learningSlideLayout {
-      flex-direction: row; /* Side-by-side layout */
-      align-items: flex-start; /* Align items at the top */
-      gap: 30px; /* Increase gap */
-    }
-    .learningVisualColumn {
-       flex: 0 0 40%; /* Assign width for image/visual column */
-       max-width: 40%;
-    }
-    .learningTextColumn {
-       flex: 1; /* Text column takes remaining space */
+      grid-template-columns: 1fr 1.5fr;
     }
   }
   
@@ -206,9 +201,9 @@
   /* ----- Mascot ----- */
   .mascotContainer {
     display: flex;
-    margin-bottom: 20px; /* Space below mascot section */
-    position: relative;
-    align-items: flex-start; /* Align bubble and mascot top by default */
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 24px;
   }
   
   .mascotImageContainer {
@@ -221,20 +216,20 @@
   }
   
   .mascotImage {
-    width: 100%;
-    height: auto;
-    object-fit: contain; /* Ensure mascot scales nicely */
-    animation: mascotBounce 3s infinite ease-in-out;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: -20px; /* Pull up slightly to overlap with speech bubble */
   }
   
   .mascotSpeechBubble {
-    flex: 1; /* Bubble takes available space */
-    background-color: #e7f8ff; /* Light blue bubble */
+    flex: 1;
+    background-color: #f8f9fa;
     border-radius: 16px;
-    padding: 18px;
+    padding: 20px;
     position: relative;
-    border: 1px solid #bdeaff; /* Subtle border */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
   
   /* Speech bubble tail */
@@ -298,42 +293,36 @@
     font-weight: 500;
   }
   .dragDropArea {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    max-width: 700px;
+    margin: 0 auto;
     width: 100%;
-    max-width: 800px; /* Limit width */
-    margin: 0 auto; /* Center area */
   }
   .draggableSourceList {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
-    padding: 15px;
-    background-color: var(--background-medium);
-    border-radius: 12px;
-    min-height: 80px; /* Ensure space for dropping back */
-    border: 2px dashed var(--border-light);
-    transition: border-color 0.2s ease;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 16px;
+    min-height: 80px;
+    border: 2px dashed #dee2e6;
+    margin-bottom: 24px;
   }
   .dropTargetsContainer {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
+    margin-top: 24px;
   }
   .dropTargetColumn {
-    flex: 1; /* Each column tries to take equal space */
-    min-width: 200px; /* Prevent columns from becoming too narrow */
     background-color: var(--white);
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--border-light);
-    min-height: 150px; /* Ensure space for dropped items */
-    transition: background-color 0.2s ease;
-    display: flex; /* Use flexbox for internal alignment */
+    min-height: 200px;
+    display: flex;
     flex-direction: column;
   }
   /* Highlight when dragging over a drop target */
@@ -418,28 +407,24 @@
   
   /* ----- Footer Buttons ----- */
   .learningFooter {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+    padding: 16px 24px;
     border-top: 1px solid var(--border-light);
     background-color: var(--white);
-    position: sticky; /* Make footer sticky */
-    bottom: 0;
-    z-index: 5; /* Ensure it's above content but below modals */
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
   }
   .previousButton, .continueButton {
     padding: 12px 24px;
     border-radius: 12px;
-    font-size: var(--font-size-base);
-    font-weight: 700;
-    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
     transition: all 0.2s ease;
-    border: none;
-    min-width: 120px; /* Ensure buttons have minimum width */
+    min-width: 140px;
+    justify-content: center;
   }
   .previousButton {
     background-color: var(--white);
@@ -456,36 +441,14 @@
     cursor: not-allowed;
   }
   .continueButton {
-    color: var(--white);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    background-color: var(--primary-blue); /* Default blue */
-    border-bottom: 3px solid var(--primary-blue-dark);
-    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
   }
-  /* Style overrides for correct/incorrect state */
-  .continueButtonCorrect {
-    background-color: var(--correct-green);
-    border-bottom: 3px solid var(--accent-dark);
-    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
-  }
-  .continueButtonCorrect:hover:not(:disabled) { background-color: var(--accent-light); }
-  .continueButtonIncorrect {
-    background-color: var(--incorrect-red);
-    border-bottom: 3px solid #b91c1c; /* Darker red */
-    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
-  }
-  .continueButtonIncorrect:hover:not(:disabled) { background-color: #f87171; /* Lighter red */ }
-  /* General hover/active states */
   .continueButton:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Generic shadow increase */
-  }
-  .continueButton:active:not(:disabled) {
-    transform: translateY(1px);
-    border-bottom-width: 1px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 16px rgba(76, 175, 80, 0.3);
   }
   .continueButton:disabled {
     background-color: var(--text-light);
@@ -524,18 +487,67 @@
   @media (min-width: 1024px) {
      /* Optional: Adjustments for very large screens */
   }
-  @media (max-width: 767px) { /* Stack mascot vertically on smaller screens */
-      .mascotContainer { flex-direction: column-reverse; align-items: center; }
-      .mascotImageContainer { margin-left: 0; margin-top: 10px; }
-      .mascotSpeechBubble::after { display: none; /* Hide tail on vertical layout */ }
+  @media (max-width: 768px) {
+    .learningContainer {
+      padding: 0;
+    }
+    
+    .learningContent {
+      border-radius: 0;
+      min-height: 100vh;
+    }
+    
+    .learningMain {
+      padding: 24px 16px;
+    }
+    
+    .mascotContainer {
+      flex-direction: column;
+    }
+    
+    .dropTargetsContainer {
+      grid-template-columns: 1fr;
+    }
   }
-  @media (max-width: 480px) {
-    .headerActions { gap: 8px; }
-    .heartsContainer, .settingsButton { font-size: var(--font-size-base); }
-    /* .slideCounter { display: none; } */ /* Optional: hide counter */
-    /* .quizOption { padding: 12px 15px; font-size: var(--font-size-base); } */ /* If using quiz options */
-     .feedbackContent { flex-direction: column; align-items: flex-start; gap: 5px; }
-     .feedbackIcon { display: none; }
-     .feedbackButtonContainer { margin-top: 10px; justify-content: center; }
-     .dropTargetsContainer { flex-direction: column; } /* Stack drop targets */
-  }
+
+/* Image Styling */
+.exampleImage {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 10px;
+    transition: transform 0.2s ease;
+}
+
+.exampleImage:hover {
+    transform: scale(1.1);
+}
+
+.exampleImageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.draggableItem img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+/* Ensure images in the source list are properly sized */
+.draggableSourceList img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+/* Add some hover effects to the images */
+.draggableItem:hover img {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
