@@ -1,0 +1,569 @@
+/* learning.module.css */
+/* 
+/* ----- Base Variables (Ensure these are defined in globals.css or here) ----- */
+:root {
+    --background-light: #f8fafc;
+    --background-medium: #eef2f7;
+    --white: #ffffff;
+    --border-light: #e5e7eb;
+    --text-dark: #1f2937;
+    --text-medium: #6b7280;
+    --text-light: #9ca3af;
+    --accent-color: #10b981; /* Teal/Green */
+    --accent-light: #34d399;
+    --accent-dark: #059669;
+    --primary-blue: #3b82f6; /* Blue */
+    --primary-blue-dark: #2563eb;
+    --error-red: #ef4444;
+    --warning-yellow: #f59e0b;
+    --correct-green: #10b981; /* Same as accent for consistency */
+    --incorrect-red: #ef4444; /* Same as error */
+  
+    /* Font Sizes */
+    --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
+    --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
+    --font-size-lg: clamp(1.13rem, 0.61vw + 0.99rem, 1.5rem);
+    --font-size-xl: clamp(1.27rem, 1vw + 1.02rem, 1.88rem);
+    --font-size-2xl: clamp(1.42rem, 1.56vw + 1.04rem, 2.34rem);
+    --font-size-3xl: clamp(1.6rem, 2.38vw + 1.03rem, 2.93rem);
+    --font-size-4xl: clamp(1.8rem, 3.54vw + 0.95rem, 3.66rem);
+    --font-size-display: clamp(4rem, 8vw + 1rem, 8rem); /* For large characters/display */
+  }
+   
+  /* ----- Main Container & Layout ----- */
+  .learningContainer {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--background-medium); /* Base background */
+  }
+  
+  .learningContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px; /* Max content width */
+    margin: 0 auto;
+    background-color: var(--background-light);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Ensures child elements don't break layout */
+  }
+  
+  .learningLayout { /* Applied in layout.tsx */
+    width: 100%;
+    min-height: 100vh;
+  }
+  
+  /* ----- Header ----- */
+  .learningHeader {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--white);
+    position: sticky; /* Make header sticky if desired */
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  }
+  
+  .headerNavigation {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    max-width: 100%;
+  }
+  
+  .backButton {
+    background: none;
+    border: none;
+    color: var(--text-medium);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-size-lg); /* Icon size */
+  }
+  
+  .backText {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin-left: 2px;
+    display: none; /* Hide text on mobile */
+  }
+  
+  .backButton:hover {
+    background-color: var(--background-medium);
+    color: var(--text-dark);
+  }
+  
+  .progressBar {
+    flex: 1; /* Takes available space */
+    min-width: 100px; /* Ensure it doesn't get too small */
+    height: 12px;
+    background-color: var(--background-medium);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+  }
+  
+  .progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-light), var(--accent-color));
+    border-radius: 6px;
+    transition: width 0.5s cubic-bezier(0.65, 0, 0.35, 1); /* Smoother transition */
+  }
+  
+  .headerActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto; /* Pushes actions to the right */
+  }
+  
+  .heartsContainer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--error-red);
+    font-size: var(--font-size-lg); /* Heart icon size */
+  }
+  .heartsContainer span { /* Optional: Add heart count */
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    color: var(--error-red);
+    margin-left: 2px;
+  }
+  
+  .settingsButton {
+    background: none;
+    border: none;
+    color: var(--text-medium);
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+  .settingsButton:hover {
+    background-color: var(--background-medium);
+    color: var(--text-dark);
+  }
+  
+  
+  /* ----- Main Content Area ----- */
+  .learningMain {
+    flex: 1;
+    padding: clamp(15px, 4vw, 40px); /* Responsive padding */
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .lessonTitle {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: clamp(20px, 5vh, 30px); /* Reduced bottom margin slightly */
+    text-align: center;
+  }
+  
+  .learningArea {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 4vw, 30px);
+  }
+  
+  /* ----- Learning Slide Specific ----- */
+  .learningSlideLayout {
+    display: flex;
+    flex-direction: column; /* Stack vertically by default */
+    gap: 20px;
+  }
+  
+  /* Layout for wider screens */
+  @media (min-width: 768px) {
+    .learningSlideLayout {
+      flex-direction: row; /* Side-by-side layout */
+      align-items: flex-start; /* Align items at the top */
+      gap: 30px; /* Increase gap */
+    }
+    .learningVisualColumn {
+       flex: 0 0 40%; /* Assign width for image/visual column */
+       max-width: 40%;
+    }
+    .learningTextColumn {
+       flex: 1; /* Text column takes remaining space */
+    }
+  }
+  
+  .learningVisualColumn img {
+      width: 100%;
+      max-width: 400px; /* Limit main image size */
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      margin: 0 auto; /* Center image if column is wider */
+      display: block;
+      border: 1px solid var(--border-light);
+  }
+  
+  .exampleImageContainer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--background-medium);
+    border-radius: 12px;
+  }
+  .exampleImage {
+    width: clamp(80px, 15vw, 120px); /* Responsive size for example images */
+    height: auto;
+    object-fit: contain;
+    background-color: var(--white);
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-light);
+  }
+  
+  /* ----- Mascot ----- */
+  .mascotContainer {
+    display: flex;
+    margin-bottom: 20px; /* Space below mascot section */
+    position: relative;
+    align-items: flex-start; /* Align bubble and mascot top by default */
+  }
+  
+  .mascotImageContainer {
+    width: 80px; /* Adjust size as needed */
+    height: 100px;
+    flex-shrink: 0; /* Prevent mascot from shrinking */
+    display: flex;
+    align-items: flex-end; /* Mascot sits at bottom of its container */
+    margin-left: 15px; /* Space between bubble and mascot */
+  }
+  
+  .mascotImage {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Ensure mascot scales nicely */
+    animation: mascotBounce 3s infinite ease-in-out;
+  }
+  
+  .mascotSpeechBubble {
+    flex: 1; /* Bubble takes available space */
+    background-color: #e7f8ff; /* Light blue bubble */
+    border-radius: 16px;
+    padding: 18px;
+    position: relative;
+    border: 1px solid #bdeaff; /* Subtle border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Speech bubble tail */
+  .mascotSpeechBubble::after {
+    content: '';
+    position: absolute;
+    left: 100%; /* Position tail to the right of the bubble */
+    top: 30px; /* Adjust vertical position */
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid #e7f8ff; /* Pointing left from bubble */
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.03));
+  }
+  
+  .mascotSpeechBubble p {
+    margin: 0 0 10px 0; /* Space between paragraphs */
+    font-size: var(--font-size-base); /* Responsive base font size */
+    line-height: 1.6;
+    color: var(--text-dark);
+  }
+  .mascotSpeechBubble p:last-child {
+    margin-bottom: 0; /* Remove margin from last paragraph */
+  }
+  
+  .audioButton {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: var(--font-size-sm); /* Slightly smaller font */
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex; /* Align icon and text nicely */
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px; /* Space above the button */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    border-bottom: 2px solid var(--primary-blue-dark);
+  }
+  
+  .audioButton:hover {
+    background-color: var(--primary-blue-dark);
+  }
+  .audioButton:active {
+      transform: translateY(1px); /* Subtle press effect */
+      border-bottom-width: 1px;
+  }
+  /* Animation for when audio is playing */
+  .audioButtonPlaying {
+      animation: pulse 1.5s infinite;
+  }
+  
+  
+  /* ----- Drag and Drop Specific ----- */
+  .dragDropInstruction {
+    font-size: var(--font-size-base);
+    color: var(--text-medium);
+    text-align: center;
+    margin-bottom: 15px; /* Reduced margin */
+    font-weight: 500;
+  }
+  .dragDropArea {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px; /* Limit width */
+    margin: 0 auto; /* Center area */
+  }
+  .draggableSourceList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px;
+    background-color: var(--background-medium);
+    border-radius: 12px;
+    min-height: 80px; /* Ensure space for dropping back */
+    border: 2px dashed var(--border-light);
+    transition: border-color 0.2s ease;
+  }
+  .dropTargetsContainer {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+  }
+  .dropTargetColumn {
+    flex: 1; /* Each column tries to take equal space */
+    min-width: 200px; /* Prevent columns from becoming too narrow */
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-light);
+    min-height: 150px; /* Ensure space for dropped items */
+    transition: background-color 0.2s ease;
+    display: flex; /* Use flexbox for internal alignment */
+    flex-direction: column;
+  }
+  /* Highlight when dragging over a drop target */
+  .dropTargetColumnDraggingOver {
+     background-color: #e0f2fe; /* Light blue highlight */
+  }
+  .dropTargetTitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-light);
+    flex-shrink: 0; /* Prevent title from shrinking */
+  }
+  .dropTargetTitleNatural { color: var(--correct-green); border-bottom-color: var(--correct-green); }
+  .dropTargetTitleManMade { color: var(--primary-blue); border-bottom-color: var(--primary-blue); }
+  .dropTargetList {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px;
+    min-height: 100px; /* Minimum area for dropping */
+    flex-grow: 1; /* Allow list to grow to fill column */
+  }
+  .draggableItem {
+    background-color: var(--white);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    /* justify-content: center; /* Center text/image */
+    justify-content: flex-start; /* Align left for consistency */
+    gap: 8px;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--text-dark);
+    cursor: grab; /* Indicate draggable */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .draggableItem:hover {
+     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Slight lift on hover */
+  }
+  /* Style applied by @hello-pangea/dnd while dragging */
+  .draggableItemDragging {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: scale(1.03); /* Slightly enlarge */
+    background-color: #f0f9ff; /* Light blue background while dragging */
+  }
+  /* Style for the placeholder space left behind by @hello-pangea/dnd */
+  .placeholder {
+    background-color: #e2e8f0; /* Light gray placeholder */
+    border-radius: 8px;
+    /* Height/width are handled by the library based on dragged item */
+  }
+  .dragDropFeedback {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .dragDropFeedbackCorrect {
+     background-color: var(--accent-light);
+     color: var(--white);
+  }
+  .dragDropFeedbackIncorrect {
+     background-color: #fee2e2; /* Light red */
+     color: #b91c1c; /* Dark red text */
+  }
+  /* Styling for Correct/Incorrect Items AFTER checking */
+  .itemCorrect {
+    border-left: 4px solid var(--correct-green);
+    background-color: #f0fdf4; /* Light green BG for correct items */
+  }
+  .itemIncorrect {
+    border-left: 4px solid var(--incorrect-red);
+    background-color: #fff1f2; /* Light red BG for incorrect items */
+  }
+  
+  
+  /* ----- Footer Buttons ----- */
+  .learningFooter {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-top: 1px solid var(--border-light);
+    background-color: var(--white);
+    position: sticky; /* Make footer sticky */
+    bottom: 0;
+    z-index: 5; /* Ensure it's above content but below modals */
+  }
+  .previousButton, .continueButton {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    border: none;
+    min-width: 120px; /* Ensure buttons have minimum width */
+  }
+  .previousButton {
+    background-color: var(--white);
+    border: 2px solid var(--border-light);
+    color: var(--text-medium);
+  }
+  .previousButton:hover:not(:disabled) {
+    background-color: var(--background-medium);
+    border-color: var(--text-light);
+    color: var(--text-dark);
+  }
+  .previousButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .continueButton {
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: var(--primary-blue); /* Default blue */
+    border-bottom: 3px solid var(--primary-blue-dark);
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+  }
+  /* Style overrides for correct/incorrect state */
+  .continueButtonCorrect {
+    background-color: var(--correct-green);
+    border-bottom: 3px solid var(--accent-dark);
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+  }
+  .continueButtonCorrect:hover:not(:disabled) { background-color: var(--accent-light); }
+  .continueButtonIncorrect {
+    background-color: var(--incorrect-red);
+    border-bottom: 3px solid #b91c1c; /* Darker red */
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+  }
+  .continueButtonIncorrect:hover:not(:disabled) { background-color: #f87171; /* Lighter red */ }
+  /* General hover/active states */
+  .continueButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Generic shadow increase */
+  }
+  .continueButton:active:not(:disabled) {
+    transform: translateY(1px);
+    border-bottom-width: 1px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .continueButton:disabled {
+    background-color: var(--text-light);
+    border-bottom-color: var(--text-medium);
+    opacity: 0.7;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  /* ----- Modals ----- */
+  .modalOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.2s ease-out; }
+  .modalContent { background-color: var(--white); border-radius: 16px; padding: 24px; max-width: 400px; width: 90%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); animation: slideInModal 0.3s ease-out; }
+  .modalButtons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
+  .modalCancel, .modalConfirm { padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: var(--font-size-sm); }
+  .modalCancel { background-color: var(--white); border: 1px solid var(--border-light); color: var(--text-dark); }
+  .modalCancel:hover { background-color: var(--background-medium); }
+  .modalConfirm { background-color: var(--error-red); color: var(--white); }
+  .modalConfirm:hover { background-color: #dc2626; }
+  
+  
+  /* ----- Animations ----- */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideInModal { from { transform: translateY(-20px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+  @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes mascotBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+  
+  /* ----- Responsive Styles ----- */
+  @media (min-width: 640px) {
+    .backText { display: inline; }
+    .headerNavigation { flex-wrap: nowrap; }
+  }
+  @media (min-width: 768px) { /* Adjust mascot bubble tail */
+      .mascotSpeechBubble::after { top: 20px; } /* Better vertical alignment on larger screens */
+  }
+  @media (min-width: 1024px) {
+     /* Optional: Adjustments for very large screens */
+  }
+  @media (max-width: 767px) { /* Stack mascot vertically on smaller screens */
+      .mascotContainer { flex-direction: column-reverse; align-items: center; }
+      .mascotImageContainer { margin-left: 0; margin-top: 10px; }
+      .mascotSpeechBubble::after { display: none; /* Hide tail on vertical layout */ }
+  }
+  @media (max-width: 480px) {
+    .headerActions { gap: 8px; }
+    .heartsContainer, .settingsButton { font-size: var(--font-size-base); }
+    /* .slideCounter { display: none; } */ /* Optional: hide counter */
+    /* .quizOption { padding: 12px 15px; font-size: var(--font-size-base); } */ /* If using quiz options */
+     .feedbackContent { flex-direction: column; align-items: flex-start; gap: 5px; }
+     .feedbackIcon { display: none; }
+     .feedbackButtonContainer { margin-top: 10px; justify-content: center; }
+     .dropTargetsContainer { flex-direction: column; } /* Stack drop targets */
+  }

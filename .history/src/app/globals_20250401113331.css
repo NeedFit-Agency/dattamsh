@@ -6,32 +6,6 @@
 }
 
 :root {
-  --background-light: #f8fafc;
-  --background-medium: #eef2f7;
-  --white: #ffffff;
-  --border-light: #e5e7eb;
-  --text-dark: #1f2937;
-  --text-medium: #6b7280;
-  --text-light: #9ca3af;
-  --accent-color: #10b981; /* Teal/Green */
-  --accent-light: #34d399;
-  --accent-dark: #059669;
-  --primary-blue: #3b82f6; /* Blue */
-  --primary-blue-dark: #2563eb;
-  --error-red: #ef4444;
-  --warning-yellow: #f59e0b;
-  --correct-green: #10b981; /* Same as accent for consistency */
-  --incorrect-red: #ef4444; /* Same as error */
-
-  /* Font Sizes */
-  --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
-  --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
-  --font-size-lg: clamp(1.13rem, 0.61vw + 0.99rem, 1.5rem);
-  --font-size-xl: clamp(1.27rem, 1vw + 1.02rem, 1.88rem);
-  --font-size-2xl: clamp(1.42rem, 1.56vw + 1.04rem, 2.34rem);
-  --font-size-3xl: clamp(1.6rem, 2.38vw + 1.03rem, 2.93rem);
-  --font-size-4xl: clamp(1.8rem, 3.54vw + 0.95rem, 3.66rem);
-  --font-size-display: clamp(2.5rem, 6vw + 1rem, 6rem); /* For large characters */
 
   --background-light: #f8fafc;
   --background-medium: #eef2f7;

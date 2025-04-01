@@ -1,0 +1,103 @@
+/* Reset basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+
+   /* --- Core Colors (Blue Accent) --- */
+   --duo-blue-primary: #1cb0f6;
+   --duo-blue-dark: #1899d6;
+   --duo-blue-light: #ddf4ff;   /* Needed for sidebar active bg */
+   --duo-blue-border: #bbe6ff; /* Needed for sidebar active border */
+ 
+   /* --- Secondary & Status Colors --- */
+   --duo-yellow: #ffc800;
+   --duo-yellow-dark: #e5a000;
+   --duo-orange: #ff9600;
+   --duo-orange-dark: #e58300;
+   --duo-red: #ff4b4b;
+   --duo-purple: #8e4dff;
+   --duo-gold: #ffc800;
+   --duo-gold-dark: #e5a000;
+   --duo-gold-glow: rgba(255, 200, 0, 0.4);
+ 
+   /* --- Grays & Text --- */
+   --duo-gray-lightest: #f7f7f7; /* Needed for sidebar hover bg */
+   --duo-gray-light: #e5e5e5;
+   --duo-gray-medium: #afafaf;  /* Needed for inactive icons/profile border */
+   --duo-gray-dark: #777777;    /* Needed for inactive text */
+   --duo-text-dark: #4b4b4b;
+   --duo-text-light: #ffffff;
+   --duo-border: #e5e5e5;       /* Needed for sidebar right border */
+  /* --- Core Colors (Blue Accent) --- */
+  --duo-blue-primary: #1cb0f6; /* Main accent color */
+  --duo-blue-dark: #1899d6;
+  --duo-blue-light: #ddf4ff;   /* Light background for active items */
+  --duo-blue-border: #bbe6ff; /* Border for active items */
+
+  /* --- Secondary & Status Colors --- */
+  --duo-yellow: #ffc800;
+  --duo-yellow-dark: #e5a000;
+  --duo-orange: #ff9600;
+  --duo-orange-dark: #e58300;
+  --duo-red: #ff4b4b;
+  --duo-purple: #8e4dff;     /* Super badge */
+  --duo-gold: #ffc800;       /* Legendary gold */
+  --duo-gold-dark: #e5a000;
+  --duo-gold-glow: rgba(255, 200, 0, 0.4);
+
+  /* --- Grays & Text --- */
+  --duo-gray-lightest: #f7f7f7;
+  --duo-gray-light: #e5e5e5;
+  --duo-gray-medium: #afafaf;
+  --duo-gray-dark: #777777;
+  --duo-text-dark: #4b4b4b;
+  --duo-text-light: #ffffff;
+  --duo-border: #e5e5e5;
+
+  /* --- Dark Theme (Legendary) --- */
+  --dark-bg: #1a1a1a;
+  --dark-text-medium: #b0b0b0;
+  --dark-footer-border: #333333;
+  --dark-button-outline: #cccccc;
+
+  /* --- Fonts --- */
+  --font-family: 'Nunito', sans-serif; /* Ensure you import Nunito in layout.tsx */
+
+  /* --- Layout --- */
+  --sidebar-width: 300px;
+  --right-rail-width: 400px;
+}
+
+
+body {
+  font-family: var(--font-family);
+  color: var(--duo-text-dark);
+  background-color: #fefefe;
+  /* Prevent scrolling issues with sticky elements */
+  overflow-x: hidden;
+}
+
+/* Basic Button Resets */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Link Resets */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Font Awesome basic sizing */
+.svg-inline--fa {
+  vertical-align: middle; /* Better alignment */
+}
