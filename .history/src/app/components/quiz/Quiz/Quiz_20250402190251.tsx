@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faCheck, faTimes, faVolumeUp, faFire, faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCheck, faTimes, faVolumeUp, faFire } from '@fortawesome/free-solid-svg-icons';
 import styles from './Quiz.module.css';
 import AnswerOption from '../AnswerOption/AnswerOption';
 import CharacterCard from '../CharacterCard/CharacterCard';
@@ -16,15 +16,16 @@ interface QuizProps {
 
 interface Question {
   id: number;
-  imageUrl?: string;
+  character?: string;
+  imageUrl?: string;  // Added this to support machine images
   prompt: string;
   options: string[];
   correctAnswer: number;
   explanation?: string;
 }
 
-// Machine-themed questions based on the learning module
-const machineQuestions: Question[] = [
+// Update the sampleQuestions array with these machine-related questions
+const sampleQuestions: Question[] = [
   {
     id: 1,
     prompt: 'Which of these is a NATURAL thing?',
@@ -85,49 +86,17 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [streak, setStreak] = useState(0);
   const [showStars, setShowStars] = useState(false);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [isListening, setIsListening] = useState(false);
-  
+
   // Load questions based on lessonId
   useEffect(() => {
+    // In a real app, fetch questions from API based on lessonId
+    // For now, use sample questions with a delay to simulate loading
     setTimeout(() => {
-      setQuestions(machineQuestions);
+      setQuestions(sampleQuestions);
     }, 500);
   }, [lessonId]);
 
-  // Calculate percentage score
-  const scorePercentage = questions.length > 0 
-    ? Math.round((correctAnswers / questions.length) * 100) 
-    : 0;
-
   const currentQuestion = questions[currentQuestionIndex];
-
-  // Listen to question function
-  const handleListen = () => {
-    if (isListening || !currentQuestion) return;
-    
-    setIsListening(true);
-    
-    const speech = new SpeechSynthesisUtterance();
-    speech.text = currentQuestion.prompt;
-    speech.volume = 1;
-    speech.rate = 0.9;
-    speech.pitch = 1;
-    
-    speech.onend = () => {
-      setIsListening(false);
-    };
-    
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(speech);
-  };
-
-  // Clean up speech synthesis when component unmounts
-  useEffect(() => {
-    return () => {
-      window.speechSynthesis?.cancel();
-    };
-  }, []);
 
   const handleAnswerSelect = (index: number) => {
     if (isGraded) return;
@@ -142,8 +111,6 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
     setIsGraded(true);
     
     if (isAnswerCorrect) {
-      setCorrectAnswers(prev => prev + 1); // Track correct answers
-      
       // Play success sound
       const audio = new Audio('/sounds/correct.mp3');
       audio.play().catch(e => console.log('Audio play failed:', e));
@@ -183,8 +150,16 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
 
   const handleSpeaker = () => {
     // In a real app, this would play audio for the character
-    console.log("Playing audio for prompt");
-    handleListen();
+    console.log("Playing audio for character:", currentQuestion?.character);
+    
+    // Simulate audio playing with visual feedback
+    const speakerElement = document.getElementById('speaker-icon');
+    if (speakerElement) {
+      speakerElement.classList.add(styles.playing);
+      setTimeout(() => {
+        speakerElement.classList.remove(styles.playing);
+      }, 1000);
+    }
   };
 
   if (!currentQuestion && !completed) {
@@ -196,7 +171,7 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
     );
   }
 
-  // Show completion screen with score percentage
+  // Show completion screen
   if (completed) {
     return (
       <motion.div 
@@ -215,18 +190,10 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
             transition={{ delay: 0.5 }}
           />
         </div>
-        
         <p className={styles.completionText}>You've completed this lesson.</p>
-        
-        {/* Score percentage display */}
-        <div className={styles.scorePercentage}>
-          <span className={styles.scoreValue}>{scorePercentage}%</span>
-          <span className={styles.scoreLabel}>Accuracy</span>
-        </div>
-        
         <div className={styles.statsContainer}>
           <div className={styles.statItem}>
-            <span className={styles.statValue}>{correctAnswers}/{questions.length}</span>
+            <span className={styles.statValue}>{questions.length}</span>
             <span className={styles.statLabel}>Questions</span>
           </div>
           <div className={styles.statItem}>
@@ -238,12 +205,11 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
             <span className={styles.statLabel}>Gems</span>
           </div>
         </div>
-        
         <motion.button 
           className={styles.continueButton}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => window.location.href = `/learn/${lessonId}`}
+          onClick={() => window.location.href = '/learn'}
         >
           CONTINUE
         </motion.button>
@@ -275,28 +241,22 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
           transition={{ duration: 0.3 }}
           className={styles.questionArea}
         >
+          {currentQuestion.character && (
+            <CharacterCard 
+              character={currentQuestion.character}
+              onSpeakerClick={handleSpeaker}
+            />
+          )}
           {currentQuestion.imageUrl && (
             <div className={styles.questionImage}>
               <img 
                 src={currentQuestion.imageUrl} 
-                alt="Question visual" 
-                className={styles.machineImage}
+                alt="Question visual aid"
+                className={styles.machineImage} 
               />
             </div>
           )}
-          
-          <div className={styles.questionWithAudio}>
-            <h2 className={styles.prompt}>{currentQuestion.prompt}</h2>
-            <button 
-              onClick={handleListen}
-              className={`${styles.listenButton} ${isListening ? styles.listening : ''}`}
-              disabled={isListening}
-              aria-label="Listen to question"
-            >
-              <FontAwesomeIcon icon={faHeadphones} />
-              <span>{isListening ? "Listening..." : "Listen"}</span>
-            </button>
-          </div>
+          <h2 className={styles.prompt}>{currentQuestion.prompt}</h2>
         </motion.div>
       </AnimatePresence>
       

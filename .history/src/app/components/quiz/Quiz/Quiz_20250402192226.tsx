@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck, faTimes, faVolumeUp, faFire, faHeadphones } from '@fortawesome/free-solid-svg-icons';
@@ -16,15 +16,16 @@ interface QuizProps {
 
 interface Question {
   id: number;
-  imageUrl?: string;
+  character?: string;
+  imageUrl?: string;  // Added this to support machine images
   prompt: string;
   options: string[];
   correctAnswer: number;
   explanation?: string;
 }
 
-// Machine-themed questions based on the learning module
-const machineQuestions: Question[] = [
+// Update the sampleQuestions array with these machine-related questions
+const sampleQuestions: Question[] = [
   {
     id: 1,
     prompt: 'Which of these is a NATURAL thing?',
@@ -85,23 +86,27 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [streak, setStreak] = useState(0);
   const [showStars, setShowStars] = useState(false);
+  
+  // Track correct answers for percentage calculation
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [isListening, setIsListening] = useState(false);
-  
+
   // Load questions based on lessonId
   useEffect(() => {
+    // In a real app, fetch questions from API based on lessonId
+    // For now, use sample questions with a delay to simulate loading
     setTimeout(() => {
-      setQuestions(machineQuestions);
+      setQuestions(sampleQuestions);
     }, 500);
   }, [lessonId]);
 
-  // Calculate percentage score
+  const currentQuestion = questions[currentQuestionIndex];
+  
+  // Calculate score percentage
   const scorePercentage = questions.length > 0 
     ? Math.round((correctAnswers / questions.length) * 100) 
     : 0;
-
-  const currentQuestion = questions[currentQuestionIndex];
-
+  
   // Listen to question function
   const handleListen = () => {
     if (isListening || !currentQuestion) return;
@@ -122,13 +127,6 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
     window.speechSynthesis.speak(speech);
   };
 
-  // Clean up speech synthesis when component unmounts
-  useEffect(() => {
-    return () => {
-      window.speechSynthesis?.cancel();
-    };
-  }, []);
-
   const handleAnswerSelect = (index: number) => {
     if (isGraded) return;
     setSelectedAnswerIndex(index);
@@ -143,7 +141,6 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
     
     if (isAnswerCorrect) {
       setCorrectAnswers(prev => prev + 1); // Track correct answers
-      
       // Play success sound
       const audio = new Audio('/sounds/correct.mp3');
       audio.play().catch(e => console.log('Audio play failed:', e));
@@ -183,8 +180,16 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
 
   const handleSpeaker = () => {
     // In a real app, this would play audio for the character
-    console.log("Playing audio for prompt");
-    handleListen();
+    console.log("Playing audio for character:", currentQuestion?.character);
+    
+    // Simulate audio playing with visual feedback
+    const speakerElement = document.getElementById('speaker-icon');
+    if (speakerElement) {
+      speakerElement.classList.add(styles.playing);
+      setTimeout(() => {
+        speakerElement.classList.remove(styles.playing);
+      }, 1000);
+    }
   };
 
   if (!currentQuestion && !completed) {
@@ -196,7 +201,7 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
     );
   }
 
-  // Show completion screen with score percentage
+  // Show completion screen with percentage score
   if (completed) {
     return (
       <motion.div 
@@ -218,7 +223,7 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
         
         <p className={styles.completionText}>You've completed this lesson.</p>
         
-        {/* Score percentage display */}
+        {/* Add percentage score display */}
         <div className={styles.scorePercentage}>
           <span className={styles.scoreValue}>{scorePercentage}%</span>
           <span className={styles.scoreLabel}>Accuracy</span>
@@ -251,6 +256,7 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
     );
   }
 
+  // Add Listen button to question area
   return (
     <div className={styles.quizContainer}>
       {/* Progress bar */}
@@ -275,12 +281,19 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
           transition={{ duration: 0.3 }}
           className={styles.questionArea}
         >
+          {currentQuestion.character && (
+            <CharacterCard 
+              character={currentQuestion.character}
+              onSpeakerClick={handleSpeaker}
+            />
+          )}
+          
           {currentQuestion.imageUrl && (
             <div className={styles.questionImage}>
               <img 
                 src={currentQuestion.imageUrl} 
-                alt="Question visual" 
-                className={styles.machineImage}
+                alt="Question visual aid"
+                className={styles.machineImage} 
               />
             </div>
           )}

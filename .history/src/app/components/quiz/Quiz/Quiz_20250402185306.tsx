@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faCheck, faTimes, faVolumeUp, faFire, faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCheck, faTimes, faVolumeUp, faFire } from '@fortawesome/free-solid-svg-icons';
 import styles from './Quiz.module.css';
 import AnswerOption from '../AnswerOption/AnswerOption';
 import CharacterCard from '../CharacterCard/CharacterCard';
@@ -16,21 +16,22 @@ interface QuizProps {
 
 interface Question {
   id: number;
-  imageUrl?: string;
+  character?: string;
   prompt: string;
   options: string[];
   correctAnswer: number;
   explanation?: string;
+  imageUrl?: string;
 }
 
-// Machine-themed questions based on the learning module
-const machineQuestions: Question[] = [
+// Sample questions based on the machines learning module
+const sampleQuestions: Question[] = [
   {
     id: 1,
     prompt: 'Which of these is a NATURAL thing?',
-    options: ['Chair', 'Sun', 'Scissors', 'Washing Machine'],
+    options: ['Chair', 'Tree', 'Scissors', 'Washing Machine'],
     correctAnswer: 1,
-    explanation: 'The Sun is a natural object - it exists in nature and was not made by humans.'
+    explanation: 'A tree is a natural thing - it grows in nature and is not made by humans.'
   },
   {
     id: 2,
@@ -46,18 +47,18 @@ const machineQuestions: Question[] = [
   },
   {
     id: 3,
-    imageUrl: '/images/washing-machine.png',
+    imageUrl: '/images/refrigerator.png',
     prompt: 'What does this machine help us do?',
     options: ['Wash clothes', 'Keep food cold', 'Cut paper', 'Sharpen pencils'],
-    correctAnswer: 0,
-    explanation: 'A washing machine helps us wash clothes quickly with less manual effort.'
+    correctAnswer: 1,
+    explanation: 'A refrigerator keeps food cold and fresh for longer periods.'
   },
   {
     id: 4,
     prompt: 'Which of these is a MAN-MADE thing?',
-    options: ['Sun', 'Bird', 'Water', 'Scissors'],
+    options: ['Sun', 'Bird', 'Water', 'Blackboard'],
     correctAnswer: 3,
-    explanation: 'Scissors are man-made tools designed to cut things like paper and cloth.'
+    explanation: 'A blackboard is man-made - people create it for writing with chalk.'
   },
   {
     id: 5,
@@ -65,14 +66,14 @@ const machineQuestions: Question[] = [
     prompt: 'What is this machine used for?',
     options: ['Washing clothes', 'Keeping food cold', 'Cutting things', 'Making air move'],
     correctAnswer: 2,
-    explanation: 'Scissors are used for cutting things like paper, cloth, and other materials.'
+    explanation: 'Scissors are used for cutting things like paper.'
   },
   {
     id: 6,
     prompt: 'Which of these is NOT a machine?',
-    options: ['Fan', 'Washing Machine', 'Sun', 'Sharpener'],
+    options: ['Fan', 'Washing Machine', 'Tree', 'Sharpener'],
     correctAnswer: 2,
-    explanation: 'The Sun is a natural object, not a machine. All other options are machines made by people.'
+    explanation: 'A tree is a natural thing, not a machine. All other options are machines made by people.'
   }
 ];
 
@@ -85,49 +86,17 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [streak, setStreak] = useState(0);
   const [showStars, setShowStars] = useState(false);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [isListening, setIsListening] = useState(false);
-  
+
   // Load questions based on lessonId
   useEffect(() => {
+    // In a real app, fetch questions from API based on lessonId
+    // For now, use sample questions with a delay to simulate loading
     setTimeout(() => {
-      setQuestions(machineQuestions);
+      setQuestions(sampleQuestions);
     }, 500);
   }, [lessonId]);
 
-  // Calculate percentage score
-  const scorePercentage = questions.length > 0 
-    ? Math.round((correctAnswers / questions.length) * 100) 
-    : 0;
-
   const currentQuestion = questions[currentQuestionIndex];
-
-  // Listen to question function
-  const handleListen = () => {
-    if (isListening || !currentQuestion) return;
-    
-    setIsListening(true);
-    
-    const speech = new SpeechSynthesisUtterance();
-    speech.text = currentQuestion.prompt;
-    speech.volume = 1;
-    speech.rate = 0.9;
-    speech.pitch = 1;
-    
-    speech.onend = () => {
-      setIsListening(false);
-    };
-    
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(speech);
-  };
-
-  // Clean up speech synthesis when component unmounts
-  useEffect(() => {
-    return () => {
-      window.speechSynthesis?.cancel();
-    };
-  }, []);
 
   const handleAnswerSelect = (index: number) => {
     if (isGraded) return;
@@ -142,8 +111,6 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
     setIsGraded(true);
     
     if (isAnswerCorrect) {
-      setCorrectAnswers(prev => prev + 1); // Track correct answers
-      
       // Play success sound
       const audio = new Audio('/sounds/correct.mp3');
       audio.play().catch(e => console.log('Audio play failed:', e));
@@ -183,8 +150,16 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
 
   const handleSpeaker = () => {
     // In a real app, this would play audio for the character
-    console.log("Playing audio for prompt");
-    handleListen();
+    console.log("Playing audio for character:", currentQuestion?.character);
+    
+    // Simulate audio playing with visual feedback
+    const speakerElement = document.getElementById('speaker-icon');
+    if (speakerElement) {
+      speakerElement.classList.add(styles.playing);
+      setTimeout(() => {
+        speakerElement.classList.remove(styles.playing);
+      }, 1000);
+    }
   };
 
   if (!currentQuestion && !completed) {
@@ -196,7 +171,7 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
     );
   }
 
-  // Show completion screen with score percentage
+  // Show completion screen
   if (completed) {
     return (
       <motion.div 
@@ -215,18 +190,10 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
             transition={{ delay: 0.5 }}
           />
         </div>
-        
         <p className={styles.completionText}>You've completed this lesson.</p>
-        
-        {/* Score percentage display */}
-        <div className={styles.scorePercentage}>
-          <span className={styles.scoreValue}>{scorePercentage}%</span>
-          <span className={styles.scoreLabel}>Accuracy</span>
-        </div>
-        
         <div className={styles.statsContainer}>
           <div className={styles.statItem}>
-            <span className={styles.statValue}>{correctAnswers}/{questions.length}</span>
+            <span className={styles.statValue}>{questions.length}</span>
             <span className={styles.statLabel}>Questions</span>
           </div>
           <div className={styles.statItem}>
@@ -238,12 +205,11 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
             <span className={styles.statLabel}>Gems</span>
           </div>
         </div>
-        
         <motion.button 
           className={styles.continueButton}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => window.location.href = `/learn/${lessonId}`}
+          onClick={() => window.location.href = '/learn'}
         >
           CONTINUE
         </motion.button>
@@ -275,28 +241,13 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
           transition={{ duration: 0.3 }}
           className={styles.questionArea}
         >
-          {currentQuestion.imageUrl && (
-            <div className={styles.questionImage}>
-              <img 
-                src={currentQuestion.imageUrl} 
-                alt="Question visual" 
-                className={styles.machineImage}
-              />
-            </div>
+          {currentQuestion.character && (
+            <CharacterCard 
+              character={currentQuestion.character}
+              onSpeakerClick={handleSpeaker}
+            />
           )}
-          
-          <div className={styles.questionWithAudio}>
-            <h2 className={styles.prompt}>{currentQuestion.prompt}</h2>
-            <button 
-              onClick={handleListen}
-              className={`${styles.listenButton} ${isListening ? styles.listening : ''}`}
-              disabled={isListening}
-              aria-label="Listen to question"
-            >
-              <FontAwesomeIcon icon={faHeadphones} />
-              <span>{isListening ? "Listening..." : "Listen"}</span>
-            </button>
-          </div>
+          <h2 className={styles.prompt}>{currentQuestion.prompt}</h2>
         </motion.div>
       </AnimatePresence>
       

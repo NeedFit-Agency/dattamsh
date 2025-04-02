@@ -31,7 +31,7 @@
 
 .progressBarInner {
   height: 100%;
-  background-color: #3b82f6;
+  background-color: #58cc02;
   border-radius: 4px;
   transition: width 0.5s ease;
 }
@@ -65,7 +65,7 @@
 }
 
 .checkButton {
-  background-color: #3b82f6;
+  background-color: #58cc02;
   color: white;
   border: none;
   border-radius: 12px;
@@ -74,19 +74,19 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 4px 0 #2563eb;
+  box-shadow: 0 4px 0 #58a700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
 }
 
 .checkButton:hover:not(:disabled) {
-  background-color: #60a5fa;
+  background-color: #6ae002;
   transform: translateY(-2px);
 }
 
 .checkButton:active:not(:disabled) {
   transform: translateY(2px);
-  box-shadow: 0 2px 0 #2563eb;
+  box-shadow: 0 2px 0 #58a700;
 }
 
 .disabled, .checkButton:disabled {
@@ -106,8 +106,8 @@
 }
 
 .correct {
-  background-color: rgba(59, 130, 246, 0.1);
-  border: 2px solid #3b82f6;
+  background-color: rgba(88, 204, 2, 0.1);
+  border: 2px solid #58cc02;
 }
 
 .incorrect {
@@ -132,7 +132,7 @@
 }
 
 .correct .feedbackIcon {
-  background-color: #3b82f6;
+  background-color: #58cc02;
   color: white;
 }
 
@@ -160,7 +160,7 @@
 }
 
 .correct .feedbackText h3 {
-  color: #3b82f6;
+  color: #58cc02;
 }
 
 .incorrect .feedbackText h3 {
@@ -175,7 +175,7 @@
 
 .correctAnswer {
   font-weight: 700;
-  color: #3b82f6;
+  color: #58cc02;
 }
 
 .explanation {
@@ -186,7 +186,7 @@
 }
 
 .continueButton {
-  background-color: #3b82f6;
+  background-color: #1cb0f6;
   color: white;
   border: none;
   border-radius: 12px;
@@ -195,7 +195,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 4px 0 #2563eb;
+  box-shadow: 0 4px 0 #0099e0;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   margin-top: 15px;
@@ -203,13 +203,13 @@
 }
 
 .continueButton:hover {
-  background-color: #60a5fa;
+  background-color: #2bbfff;
   transform: translateY(-2px);
 }
 
 .continueButton:active {
   transform: translateY(2px);
-  box-shadow: 0 2px 0 #2563eb;
+  box-shadow: 0 2px 0 #0099e0;
 }
 
 .loadingContainer {
@@ -355,9 +355,28 @@
   to { opacity: 1; }
 }
 
-/* Add these styles for percentage completion and audio features */
+/* Add these styles for the machine images */
 
-/* Score percentage display */
+.questionImage {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.machineImage {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.machineImage:hover {
+  transform: scale(1.05);
+}
+
+/* Score percentage */
 .scorePercentage {
   display: flex;
   flex-direction: column;
@@ -365,12 +384,13 @@
   margin: 20px 0;
   animation: fadeInUp 0.6s ease-out 0.3s forwards;
   opacity: 0;
+  transform: translateY(20px);
 }
 
 .scoreValue {
   font-size: 48px;
   font-weight: 800;
-  color: #3b82f6;
+  color: #3b82f6; /* Blue theme */
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -384,33 +404,12 @@
   margin-top: 5px;
 }
 
-/* Machine image display */
-.questionImage {
-  margin-bottom: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.machineImage {
-  max-width: 180px;
-  max-height: 180px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
-  transition: transform 0.3s ease;
-  animation: fadeInDown 0.5s ease-out;
-}
-
-.machineImage:hover {
-  transform: scale(1.05);
-}
-
 /* Listen button styling */
 .questionWithAudio {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
   width: 100%;
   position: relative;
 }
@@ -432,16 +431,11 @@
 .listenButton:hover:not(:disabled) {
   background-color: #d1e0ff;
   transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
 }
 
 .listenButton:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-}
-
-.listenButton svg {
-  font-size: 16px;
 }
 
 .listening {
@@ -465,13 +459,8 @@
   }
 }
 
-@keyframes fadeInDown {
-  from { 
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1; 
-    transform: translateY(0);
-  }
-}
+useEffect(() => {
+  return () => {
+    window.speechSynthesis?.cancel();
+  };
+}, []);
