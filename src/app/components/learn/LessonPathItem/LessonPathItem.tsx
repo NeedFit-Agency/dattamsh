@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons'; // Only import check icon
-// Removed Image import if not used for Duo anymore
+import Image from 'next/image';
 import styles from './LessonPathItem.module.css'; // Ensure this path is correct
 
 interface LessonPathItemProps {
@@ -30,12 +30,15 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
         // Chest visuals are done purely in CSS via .chest and .chestContent
         return <div className={styles.chestContent}></div>;
       case 'duo':
-        // Basic Duo Owl using CSS shapes
         return (
-          <div className={styles.owlBody}>
-             <div className={`${styles.owlEye} ${styles.left}`}></div>
-             <div className={`${styles.owlEye} ${styles.right}`}></div>
-             <div className={styles.owlBeak}></div>
+          <div className={styles.mascotContainer}>
+            <Image 
+              src="/mascot.png"
+              alt="Mascot"
+              fill
+              style={{ objectFit: 'contain' }}
+              priority
+            />
           </div>
         );
       case 'level-badge':

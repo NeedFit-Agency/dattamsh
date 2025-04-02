@@ -14,6 +14,11 @@ type ContentItemType = {
   level?: number;
 };
 
+type PageParams = {
+  standard: string;
+  id: string;
+};
+
 const getChapterData = (standardId: string, chapterId: string) => {
   const standardTitles = {
     "1": "Basic Concepts",
@@ -62,9 +67,12 @@ const getChapterData = (standardId: string, chapterId: string) => {
 export default function ChapterPage({ 
   params 
 }: { 
-  params: { standard: string; id: string } 
+  params: Promise<PageParams>
 }) {
-  const chapterData = getChapterData(params.standard, params.id);
+  // Unwrap params using React.use()
+  const { standard, id } = React.use(params);
+  
+  const chapterData = getChapterData(standard, id);
 
   const handleScrollDown = () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
@@ -120,11 +128,11 @@ export default function ChapterPage({
     <main className={styles.contentArea}>
       <div className={`${styles.lessonHeader} ${chapterData.headerTheme}`}>
         <div className={styles.headerLeft}>
-          <Link href={`/learn/${params.standard}`} className={styles.backButton}>
+          <Link href={`/learn/${standard}`} className={styles.backButton}>
             <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />
           </Link>
           <div className={styles.headerTitle}>
-            STANDARD {params.standard}, CHAPTER {params.id}
+            STANDARD {standard}, CHAPTER {id}
             <h2>{chapterData.chapterTitle}</h2>
           </div>
         </div>
@@ -159,7 +167,7 @@ export default function ChapterPage({
           return (
             <PathComponent
               key={item.id}
-              href={isClickable ? `/learning?standard=${params.standard}&chapter=${params.id}&lesson=${item.id}` : '#'}
+              href={isClickable ? `/learning?standard=${standard}&chapter=${id}&lesson=${item.id}` : '#'}
               className={styles.lessonLink}
               style={itemStyle}
               aria-label={isClickable ? `Start or practice lesson ${item.id}` : `Lesson ${item.id} completed`}
