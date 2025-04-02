@@ -11,6 +11,10 @@ config.autoAddCss = false
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800", "900"] }); 
 
+export const metadata: Metadata = {
+  title: "Dattamsh",
+  description: "Learning languages is fun!",
+};
 
 export default function RootLayout({
   children,
