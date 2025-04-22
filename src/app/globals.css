@@ -13,14 +13,14 @@
   --text-dark: #1f2937;
   --text-medium: #6b7280;
   --text-light: #9ca3af;
-  --accent-color: #10b981; /* Teal/Green */
-  --accent-light: #34d399;
-  --accent-dark: #059669;
+  --accent-color: #1AA2FF; /* Blue */
+  --accent-light: #4DB8FF; /* Lighter blue */
+  --accent-dark: #0080E6; /* Darker blue */
   --primary-blue: #3b82f6; /* Blue */
   --primary-blue-dark: #2563eb;
   --error-red: #ef4444;
   --warning-yellow: #f59e0b;
-  --correct-green: #10b981; /* Same as accent for consistency */
+  --correct-green: #1AA2FF; /* Same as accent for consistency */
   --incorrect-red: #ef4444; /* Same as error */
 
   /* Font Sizes */
@@ -40,14 +40,14 @@
   --text-dark: #1f2937;
   --text-medium: #6b7280;
   --text-light: #9ca3af;
-  --accent-color: #10b981; /* Teal/Green */
-  --accent-light: #34d399;
-  --accent-dark: #059669;
+  --accent-color: #1AA2FF; /* Blue */
+  --accent-light: #4DB8FF; /* Lighter blue */
+  --accent-dark: #0080E6; /* Darker blue */
   --primary-blue: #3b82f6; /* Blue */
   --primary-blue-dark: #2563eb;
   --error-red: #ef4444;
   --warning-yellow: #f59e0b;
-  --correct-green: #10b981; /* Same as accent for consistency */
+  --correct-green: #1AA2FF; /* Same as accent for consistency */
   --incorrect-red: #ef4444; /* Same as error */
 
   /* Font Sizes */
@@ -66,14 +66,14 @@
     --text-dark: #1f2937;
     --text-medium: #6b7280;
     --text-light: #9ca3af;
-    --accent-color: #10b981; /* Teal/Green */
-    --accent-light: #34d399;
-    --accent-dark: #059669;
+    --accent-color: #1AA2FF; /* Blue */
+    --accent-light: #4DB8FF; /* Lighter blue */
+    --accent-dark: #0080E6; /* Darker blue */
     --primary-blue: #3b82f6; /* Blue */
     --primary-blue-dark: #2563eb;
     --error-red: #ef4444;
     --warning-yellow: #f59e0b;
-    --correct-green: #10b981; /* Same as accent for consistency */
+    --correct-green: #1AA2FF; /* Same as accent for consistency */
     --incorrect-red: #ef4444; /* Same as error */
   
     /* Font Sizes */
@@ -86,10 +86,10 @@
     --font-size-4xl: clamp(1.8rem, 3.54vw + 0.95rem, 3.66rem);
     --font-size-display: clamp(2.5rem, 6vw + 1rem, 6rem); /* For large characters */
    /* --- Core Colors (Blue Accent) --- */
-   --duo-blue-primary: #1cb0f6;
-   --duo-blue-dark: #1899d6;
-   --duo-blue-light: #ddf4ff;   /* Needed for sidebar active bg */
-   --duo-blue-border: #bbe6ff; /* Needed for sidebar active border */
+   --duo-blue-primary: #1AA2FF;
+   --duo-blue-dark: #0080E6;
+   --duo-blue-light: #D6EEFF;   /* Needed for sidebar active bg */
+   --duo-blue-border: #99D6FF; /* Needed for sidebar active border */
  
    /* --- Secondary & Status Colors --- */
    --duo-yellow: #ffc800;
@@ -111,10 +111,10 @@
    --duo-text-light: #ffffff;
    --duo-border: #e5e5e5;       /* Needed for sidebar right border */
   /* --- Core Colors (Blue Accent) --- */
-  --duo-blue-primary: #1cb0f6; /* Main accent color */
-  --duo-blue-dark: #1899d6;
-  --duo-blue-light: #ddf4ff;   /* Light background for active items */
-  --duo-blue-border: #bbe6ff; /* Border for active items */
+  --duo-blue-primary: #1AA2FF; /* Main accent color */
+  --duo-blue-dark: #0080E6;
+  --duo-blue-light: #D6EEFF;   /* Light background for active items */
+  --duo-blue-border: #99D6FF; /* Border for active items */
 
   /* --- Secondary & Status Colors --- */
   --duo-yellow: #ffc800;

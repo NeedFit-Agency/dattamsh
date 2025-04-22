@@ -23,8 +23,8 @@
 }
 
 .correct {
-  border-color: #58cc02;
-  background-color: rgba(88, 204, 2, 0.1);
+  border-color: #1AA2FF;
+  background-color: rgba(26, 162, 255, 0.1);
 }
 
 .incorrect {
@@ -56,7 +56,7 @@
 }
 
 .correct .optionNumber {
-  background-color: #58cc02;
+  background-color: #1AA2FF;
   color: white;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .correct .feedbackIcon {
-  color: #58cc02;
+  color: #1AA2FF;
 }
 
 .incorrect .feedbackIcon {

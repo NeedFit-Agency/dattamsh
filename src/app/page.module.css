@@ -47,7 +47,7 @@
 .logo {
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #58cc02, #3f9c00);
+  background: linear-gradient(135deg, #1AA2FF, #0076CC);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
@@ -63,7 +63,7 @@
   transform: translateY(-50%);
   font-size: 1rem;
   opacity: 0.5;
-  background: linear-gradient(135deg, #58cc02, #3f9c00);
+  background: linear-gradient(135deg, #1AA2FF, #0076CC);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -85,7 +85,7 @@
 .heroTitle {
   font-size: 3.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #58cc02, #3f9c00);
+  background: linear-gradient(135deg, #1AA2FF, #0076CC);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1.5rem;
@@ -102,7 +102,7 @@
   transform: translateX(-50%);
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, #58cc02, #3f9c00);
+  background: linear-gradient(90deg, #1AA2FF, #0076CC);
   border-radius: 2px;
 }
 
@@ -158,7 +158,7 @@
   left: 0;
   right: 0;
   height: 6px;
-  background: linear-gradient(90deg, #58cc02, #3f9c00);
+  background: linear-gradient(90deg, #1AA2FF, #0076CC);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -166,7 +166,7 @@
 .standardCard:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-  border-color: #58cc02;
+  border-color: #1AA2FF;
 }
 
 .standardCard:hover::before {
@@ -214,7 +214,7 @@
 
 .subtitle {
   display: block;
-  color: #58cc02;
+  color: #1AA2FF;
   font-weight: 600;
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
@@ -239,7 +239,7 @@
 
 .standardCard:hover .arrowIcon {
   transform: translate(5px, -50%);
-  color: #58cc02;
+  color: #1AA2FF;
 }
 
 .standardCard:hover .lockIcon {
@@ -267,7 +267,7 @@
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, #58cc02, #3f9c00);
+  background: linear-gradient(90deg, #1AA2FF, #0076CC);
   border-radius: 4px;
   transition: width 0.3s ease;
 }
@@ -289,7 +289,7 @@
 }
 
 .standardCard.active {
-  border-color: #58cc02;
+  border-color: #1AA2FF;
 }
 
 .standardCard.active:hover {
@@ -315,7 +315,7 @@
 
 .standardIcon {
   font-size: 2rem;
-  color: #58cc02;
+  color: #1AA2FF;
   margin-right: 1rem;
   transition: transform 0.3s ease;
 }
@@ -368,4 +368,4 @@
   .decorativeIcon {
     font-size: 3rem;
   }
-} 
+}

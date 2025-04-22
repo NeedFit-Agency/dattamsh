@@ -4,9 +4,9 @@
   min-height: 100vh;
   background-color: #f0f7ff;
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(88, 204, 2, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 10% 20%, rgba(26, 162, 255, 0.05) 0%, transparent 20%),
     radial-gradient(circle at 90% 80%, rgba(28, 176, 246, 0.05) 0%, transparent 20%),
-    linear-gradient(45deg, rgba(88, 204, 2, 0.02) 0%, rgba(28, 176, 246, 0.02) 100%);
+    linear-gradient(45deg, rgba(26, 162, 255, 0.02) 0%, rgba(28, 176, 246, 0.02) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -16,7 +16,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M15 15h30v30H15z' stroke='rgba(88, 204, 2, 0.1)' stroke-width='2'/%3E%3Cpath d='M30 15l15 30H15z' stroke='rgba(28, 176, 246, 0.1)' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M15 15h30v30H15z' stroke='rgba(26, 162, 255, 0.1)' stroke-width='2'/%3E%3Cpath d='M30 15l15 30H15z' stroke='rgba(28, 176, 246, 0.1)' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E");
   opacity: 0.5;
   z-index: 0;
 }
@@ -133,7 +133,7 @@
 
 .guidebookButton {
   background-color: white;
-  color: #58cc02; /* Green text */
+  color: #1AA2FF; /* Blue text */
   border: 2px solid #e5e5e5; /* Border */
   border-bottom: 4px solid #e5e5e5; /* 3D effect */
   border-radius: 12px;
@@ -433,7 +433,7 @@
 .decorativeIcon {
   position: absolute;
   font-size: 2.5rem;
-  color: rgba(88, 204, 2, 0.15);
+  color: rgba(26, 162, 255, 0.15);
   animation: floatAndGlow 4s ease-in-out infinite;
   filter: drop-shadow(0 0 10px rgba(28, 176, 246, 0.2));
   z-index: 0;
@@ -441,7 +441,7 @@
 }
 
 .decorativeIcon:hover {
-  color: rgba(88, 204, 2, 0.3);
+  color: rgba(26, 162, 255, 0.3);
   transform: scale(1.1) rotate(5deg);
   filter: drop-shadow(0 0 15px rgba(28, 176, 246, 0.4));
 }
@@ -466,7 +466,7 @@
   right: 0;
   bottom: 0;
   background-image: 
-    linear-gradient(45deg, transparent 45%, rgba(88, 204, 2, 0.1) 45%, rgba(88, 204, 2, 0.1) 55%, transparent 55%),
+    linear-gradient(45deg, transparent 45%, rgba(26, 162, 255, 0.1) 45%, rgba(26, 162, 255, 0.1) 55%, transparent 55%),
     linear-gradient(-45deg, transparent 45%, rgba(28, 176, 246, 0.1) 45%, rgba(28, 176, 246, 0.1) 55%, transparent 55%);
   background-size: 30px 30px;
   z-index: -1;

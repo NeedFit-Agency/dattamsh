@@ -39,7 +39,7 @@
 
 /* Level Badge */
 .level-badge {
-    background: linear-gradient(135deg, #84c400, #58cc02);
+    background: linear-gradient(135deg, #4DB9FF, #1AA2FF);
     color: white;
     font-size: 32px;
     font-weight: 800;
@@ -62,7 +62,7 @@
 
 /* Duo Character */
 .duo {
-    background: linear-gradient(135deg, #84c400, #58cc02);
+    background: linear-gradient(135deg, #4DB9FF, #1AA2FF);
     border-radius: 50% 50% 45% 45%;
     transform-origin: bottom;
     animation: bounce 2s ease-in-out infinite;

@@ -128,7 +128,7 @@ export default function ChapterPage({
     <main className={styles.contentArea}>
       <div className={`${styles.lessonHeader} ${chapterData.headerTheme}`}>
         <div className={styles.headerLeft}>
-          <Link href={`/learn/${standard}`} className={styles.backButton}>
+          <Link href="/" className={styles.backButton}>
             <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />
           </Link>
           <div className={styles.headerTitle}>
@@ -167,7 +167,7 @@ export default function ChapterPage({
           return (
             <PathComponent
               key={item.id}
-              href={isClickable ? `/learning?standard=${standard}&chapter=${id}&lesson=${item.id}` : '#'}
+              href={isClickable ? `/learning?standard=${standard}&chapter=${item.id}&lesson=${item.id}` : '#'}
               className={styles.lessonLink}
               style={itemStyle}
               aria-label={isClickable ? `Start or practice lesson ${item.id}` : `Lesson ${item.id} completed`}
