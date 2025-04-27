@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import LessonPathItem from '@/app/components/learn/LessonPathItem/LessonPathItem';
+import LessonPathItem from '@/components/learn/LessonPathItem/LessonPathItem';
 import styles from './page.module.css';
 import { chapters } from '@/data/chaptersData';
 

@@ -1,6 +1,5 @@
 .pageWrapper {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7ff 0%, #e8fff0 100%);
   position: relative;
   overflow-x: hidden;
 }
@@ -33,6 +32,7 @@
   font-size: 2rem;
   font-weight: 800;
   background: linear-gradient(135deg, #1AA2FF, #0076CC);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
@@ -49,6 +49,7 @@
   font-size: 1rem;
   opacity: 0.5;
   background: linear-gradient(135deg, #1AA2FF, #0076CC);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -71,6 +72,7 @@
   font-size: 3.5rem;
   font-weight: 800;
   background: linear-gradient(135deg, #1AA2FF, #0076CC);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1.5rem;
@@ -173,19 +175,16 @@
     rgba(255, 255, 255, 0.1),
     rgba(0, 0, 0, 0.05)
   );
+
+  &hover{
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.2),
+      rgba(0, 0, 0, 0.08)
+    );
+  }
 }
 
-.standardLink.locked:hover {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.2),
-    rgba(0, 0, 0, 0.08)
-  );
-}
-
-.standardLink:not(.locked):hover {
-  background-color: rgba(88, 204, 2, 0.05);
-}
 
 .standardContent {
   position: relative;
@@ -281,7 +280,6 @@
   border-color: #3f9c00;
 }
 
-/* Add decorative elements */
 .decorativeIcon {
   position: absolute;
   font-size: 4rem;

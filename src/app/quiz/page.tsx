@@ -5,8 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import { Quiz } from '@/app/components/quiz/Quiz/Quiz';
-import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
+import { Quiz } from '@/components/quiz/Quiz/Quiz';
+import StatsBar from '@/components/layout/StatsBar/StatsBar';
 import styles from './QuizPage.module.css';
 
 export default function QuizPage() {

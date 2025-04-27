@@ -21,6 +21,16 @@ import {
 import { motion } from 'framer-motion';
 
 import styles from './learning.module.css';
+import {
+  standards,
+  Standard,
+  Chapter,
+  LessonContent,
+  LearningSlide,
+  DragDropSlide,
+  DraggableItemData,
+  DropTargetData,
+} from '@/data/standardsData';
 
 const formatContentWithEmojis = (text: string): React.ReactNode => {
   const hasEmojis = /[\p{Emoji}]/u.test(text);
@@ -55,111 +65,6 @@ const formatContentWithEmojis = (text: string): React.ReactNode => {
   return text;
 };
 
-interface LearningSlide {
-  type: 'learn';
-  title: string;
-  description: string | string[];
-  imageUrl?: string;
-  exampleImages?: { src: string; alt: string }[];
-  audioSrc?: string;
-  speakText?: string;
-}
-
-interface DraggableItemData {
-  id: string;
-  text: string;
-  type: 'natural' | 'man-made';
-  imageUrl?: string;
-}
-
-interface DropTargetData {
-  id: 'naturalTarget' | 'manMadeTarget';
-  title: string;
-  type: 'natural' | 'man-made';
-}
-
-interface DragDropSlide {
-  type: 'drag-drop';
-  title: string;
-  instruction: string;
-  items: DraggableItemData[];
-  targets: DropTargetData[];
-  audioSrc?: string;
-  speakText?: string;
-}
-
-type LessonContent = LearningSlide | DragDropSlide;
-
-const lessonContent: LessonContent[] = [
-  {
-    type: 'learn',
-    title: 'Introduction',
-    description: [
-      "Hi there! I'm Owlbert! We see so many things around us every day.",
-      'Some things, like trees and birds, are found in nature.',
-      'Other things, like chairs and cars, are made by people.',
-      "Let's learn the difference together!",
-    ],
-    imageUrl: '/images/intro-scene.png',
-    audioSrc: '/audio/01_intro.mp3',
-    speakText:
-      "Hi there! I'm Owlbert! We see so many things around us every day. Some things, like trees and birds, are found in nature. Other things, like chairs and cars, are made by people. Let's learn the difference together!",
-  },
-  {
-    type: 'learn',
-    title: 'Natural Things',
-    description: [
-      "Natural things are things we find in nature. People didn't make them. Look at these examples!",
-    ],
-    exampleImages: [
-      { src: '/images/sun.png', alt: 'The bright Sun' },
-      { src: '/images/water.png', alt: 'Flowing Water' },
-      { src: '/images/tree.png', alt: 'A tall Tree' },
-      { src: '/images/bird.png', alt: 'A flying Bird' },
-    ],
-    audioSrc: '/audio/02_natural.mp3',
-    speakText:
-      "Natural things are things we find in nature. People didn't make them. Look at these examples! The bright Sun, flowing Water, a tall Tree, and a flying Bird.",
-  },
-  {
-    type: 'learn',
-    title: 'Man-made Things',
-    description: [
-      'Man-made things are things that people build or create. Can you spot some things people made here?',
-    ],
-    exampleImages: [
-      { src: '/images/school-bus.png', alt: 'A yellow School Bus' },
-      { src: '/images/cycle.png', alt: 'A shiny Cycle' },
-      { src: '/images/chair.png', alt: 'A comfy Chair' },
-      { src: '/images/blackboard.png', alt: 'A classroom Blackboard' },
-    ],
-    audioSrc: '/audio/03_manmade.mp3',
-    speakText:
-      'Man-made things are things that people build or create. Can you spot some things people made here? A yellow School Bus, a shiny Cycle, a comfy Chair, and a classroom Blackboard.',
-  },
-  {
-    type: 'drag-drop',
-    title: 'Activity: Sort Them Out!',
-    instruction:
-      'Hoot hoot! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
-    items: [
-      { id: 'dnd-item-1', text: 'Tree', type: 'natural', imageUrl: '/images/tree-small.png' },
-      { id: 'dnd-item-2', text: 'Chair', type: 'man-made', imageUrl: '/images/chair-small.png' },
-      { id: 'dnd-item-3', text: 'Bird', type: 'natural', imageUrl: '/images/bird-small.png' },
-      { id: 'dnd-item-4', text: 'Cycle', type: 'man-made', imageUrl: '/images/cycle-small.png' },
-      { id: 'dnd-item-5', text: 'Sun', type: 'natural', imageUrl: '/images/sun-small.png' },
-      { id: 'dnd-item-6', text: 'Blackboard', type: 'man-made', imageUrl: '/images/blackboard-small.png' },
-    ],
-    targets: [
-      { id: 'naturalTarget', title: 'Natural Things', type: 'natural' },
-      { id: 'manMadeTarget', title: 'Man-made Things', type: 'man-made' },
-    ],
-    audioSrc: '/audio/04_dnd_instruction.mp3',
-    speakText:
-      'Hoot hoot! Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
-  },
-];
-
 const createConfetti = () => {
   const confetti = document.createElement('div');
   confetti.className = styles.confetti;
@@ -181,7 +86,8 @@ export default function LearningPage() {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const router = useRouter();
 
-  const [chapterContent, setChapterContent] = useState<LessonContent[]>(lessonContent);
+  const initialLessonContent = standards["1"][0].lessonContent;
+  const [chapterContent, setChapterContent] = useState<LessonContent[]>(initialLessonContent);
   const [standard, setStandard] = useState<string>('1');
   const [chapter, setChapter] = useState<string>('1');
 
@@ -214,21 +120,7 @@ export default function LearningPage() {
     setStandard(standardParam);
     setChapter(chapterParam);
 
-    let selectedContent: LessonContent[] = lessonContent;
-
-    if (standardParam === '1') {
-      switch (chapterParam) {
-        case '1':
-          selectedContent = lessonContent;
-          break;
-        default:
-          console.warn("Using default content for Standard 1, Chapter:", chapterParam);
-          selectedContent = lessonContent;
-      }
-    } else {
-        console.warn(`Unsupported standard: ${standardParam}. Defaulting to Standard 1 content.`);
-        selectedContent = lessonContent;
-    }
+    let selectedContent: LessonContent[] = standards[standardParam]?.[parseInt(chapterParam, 10) - 1]?.lessonContent || standards["1"][0].lessonContent;
 
     console.log(`Selected content for Standard ${standardParam}, Chapter ${chapterParam} with ${selectedContent.length} slides.`);
     setChapterContent(selectedContent);
@@ -292,7 +184,7 @@ export default function LearningPage() {
 
   const handleConfirmExit = () => {
       setShowExitConfirm(false);
-      router.push(`/learn/${standard}`);
+      router.push(`/standard/${standard}`);
     };
   const handleCancelExit = () => setShowExitConfirm(false);
 

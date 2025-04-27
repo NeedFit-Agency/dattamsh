@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
-import StatsBar from '@/app/components/layout/StatsBar/StatsBar';
+import StatsBar from '@/components/layout/StatsBar/StatsBar';
 import styles from './Header.module.css';
 
 export default function Header() {

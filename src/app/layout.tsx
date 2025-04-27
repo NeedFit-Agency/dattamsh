@@ -5,7 +5,7 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import Header from '@/app/components/layout/Header/Header'
+import Header from '@/components/layout/Header/Header'
 import { usePathname } from 'next/navigation';
 config.autoAddCss = false 
 
