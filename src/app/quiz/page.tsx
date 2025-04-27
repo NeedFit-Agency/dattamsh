@@ -49,7 +49,7 @@ export default function QuizPage() {
                 >
                   CONTINUE LESSON
                 </button>
-                <Link href={`/learn/${lessonId}`} className={styles.quitConfirmButton}>
+                <Link href={`/standard/${lessonId}`} className={styles.quitConfirmButton}>
                   QUIT
                 </Link>
               </div>

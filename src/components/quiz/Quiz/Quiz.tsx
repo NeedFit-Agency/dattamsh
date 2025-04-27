@@ -243,7 +243,7 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
           className={styles.continueButton}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => window.location.href = `/learn/${lessonId}`}
+          onClick={() => window.location.href = `/standard/${lessonId}`}
         >
           CONTINUE
         </motion.button>
