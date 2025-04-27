@@ -1,0 +1,423 @@
+/* Video.module.css */
+
+/* Main Container & Card */
+.mainContainer { 
+  max-width: 850px; 
+  margin: 30px auto; 
+  background-color: var(--white, #ffffff); 
+  border-radius: 15px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+  padding: 0; 
+  overflow: hidden;
+}
+
+/* Header Area */
+.appHeader { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 10px 25px; 
+  border-bottom: 1px solid var(--border-light, #e9ecef);
+}
+
+.appName { 
+  color: var(--primary, #007bff); 
+  font-weight: bold; 
+  font-size: 1.2em;
+}
+
+.userStats { 
+  display: flex; 
+  align-items: center; 
+  gap: 15px;
+}
+
+.statItem { 
+  display: flex; 
+  align-items: center; 
+  font-weight: bold;
+}
+
+.iconPlaceholder { 
+  display: inline-block; 
+  width: 20px; 
+  height: 20px; 
+  background-color: var(--border-medium, #ced4da); 
+  border-radius: 3px; 
+  margin-right: 5px; 
+  text-align: center; 
+  line-height: 20px; 
+  font-size: 10px; 
+  color: var(--white, #fff);
+}
+
+.hearts { 
+  color: var(--error-red, #dc3545);
+}
+
+.settingsIcon { 
+  cursor: pointer; 
+  width: 24px; 
+  height: 24px; 
+  background-color: var(--text-light, #adb5bd); 
+  border-radius: 50%;
+}
+
+/* Content Area Wrapper */
+.contentWrapper { 
+  padding: 25px;
+}
+
+.navigationHeader { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 20px;
+}
+
+.backArrow { 
+  font-size: 1.5em; 
+  color: var(--text-medium, #6c757d); 
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.progressBarContainer { 
+  flex-grow: 1; 
+  margin: 0 20px; 
+  background-color: var(--background-medium, #e9ecef); 
+  border-radius: 10px; 
+  height: 10px; 
+  overflow: hidden;
+}
+
+.progressBar { 
+  height: 100%; 
+  background-color: var(--success-green, #28a745); 
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+.contentTitle { 
+  font-size: 1.6em; 
+  font-weight: bold; 
+  color: var(--text-dark, #343a40); 
+  margin-bottom: 25px; 
+  text-align: center;
+}
+
+/* Split Layout Container */
+.videoSplitLayout { 
+  display: flex; 
+  gap: 25px; 
+  align-items: flex-start;
+}
+
+/* Video Player Side */
+.videoArea { 
+  flex: 3;
+}
+
+.videoPlayerContainer { 
+  width: 100%; 
+  background-color: #000000; 
+  border-radius: 10px; 
+  aspect-ratio: 16 / 9; 
+  overflow: hidden; 
+  position: relative; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.videoPlaceholderText { 
+  color: #ffffff; 
+  font-size: 1.5em; 
+  text-align: center; 
+  padding: 20px;
+}
+
+.videoPlayerContainer iframe,
+.videoPlayerContainer video { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  border: none;
+}
+
+/* Text/Mascot Side */
+.infoArea { 
+  flex: 2;
+}
+
+.mascotInteraction { 
+  display: flex; 
+  align-items: flex-start; 
+  gap: 15px; 
+  background-color: var(--background-light-blue, #eef7ff); 
+  padding: 15px; 
+  border-radius: 10px;
+}
+
+.mascotImage { 
+  width: 60px; 
+  height: 60px; 
+  background-color: var(--warning-yellow, #ffc107); 
+  border-radius: 50%; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  font-size: 1.5em; 
+  flex-shrink: 0;
+}
+
+.mascotSpeech { 
+  background-color: var(--white, #ffffff); 
+  padding: 15px; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+  position: relative; 
+  font-size: 1em; 
+  line-height: 1.6; 
+  flex-grow: 1;
+}
+
+.mascotSpeech::before { 
+  content: ''; 
+  position: absolute; 
+  left: -10px; 
+  top: 15px; 
+  width: 0; 
+  height: 0; 
+  border-top: 10px solid transparent; 
+  border-bottom: 10px solid transparent; 
+  border-right: 10px solid var(--white, #ffffff);
+}
+
+.speechTitle { 
+  font-weight: bold; 
+  color: var(--primary, #007bff); 
+  margin-bottom: 8px; 
+  font-size: 1.1em;
+}
+
+.speechPoints ul { 
+  padding-left: 20px; 
+  margin: 0; 
+  color: var(--text-dark, #495057); 
+  font-size: 0.95em;
+}
+
+.listenButton { 
+  background-color: var(--primary, #007bff); 
+  color: white; 
+  border: none; 
+  padding: 6px 12px; 
+  border-radius: 20px; 
+  cursor: pointer; 
+  font-size: 0.85em; 
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.listenButton:hover { 
+  background-color: var(--primary-dark, #0056b3);
+}
+
+.listenButtonPlaying {
+  background-color: var(--primary-dark, #0056b3);
+}
+
+/* Footer Navigation */
+.footerNav { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 20px 25px; 
+  border-top: 1px solid var(--border-light, #e9ecef); 
+  background-color: var(--background-light, #f8f9fa); 
+  border-bottom-left-radius: 15px; 
+  border-bottom-right-radius: 15px; 
+  margin-top: 30px;
+}
+
+.navButton { 
+  background-color: var(--text-medium, #6c757d); 
+  color: white; 
+  border: none; 
+  padding: 10px 25px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  font-size: 1em; 
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navButtonPrevious { 
+  background-color: var(--background-light, #f8f9fa); 
+  border: 1px solid var(--border-light, #dee2e6); 
+  color: var(--text-dark, #495057);
+}
+
+.navButtonPrevious:hover { 
+  background-color: var(--background-medium, #e9ecef);
+}
+
+.navButtonContinue { 
+  background-color: var(--success-green, #28a745);
+}
+
+.navButtonContinue:hover { 
+  background-color: #218838;
+}
+
+.navButtonDisabled { 
+  background-color: var(--background-medium, #e9ecef); 
+  color: var(--text-light, #adb5bd); 
+  cursor: not-allowed; 
+  border: 1px solid var(--background-medium, #e9ecef);
+}
+
+/* Custom Video Controls */
+.videoControls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 8px 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.videoPlayerContainer:hover .videoControls {
+  opacity: 1;
+}
+
+.controlButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.controlsLeft, .controlsRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progressTrack {
+  flex-grow: 1;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 0 10px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.progressFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #007bff;
+  border-radius: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mainContainer {
+    margin: 10px;
+    border-radius: 10px;
+  }
+  
+  .contentWrapper {
+    padding: 15px;
+  }
+  
+  .videoSplitLayout {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .videoArea, .infoArea {
+    width: 100%;
+    flex: none;
+  }
+  
+  .contentTitle {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+  }
+  
+  .videoControls {
+    opacity: 1;
+  }
+  
+  .navButton {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+  
+  .userStats {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .appHeader {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .userStats {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .footerNav {
+    padding: 15px;
+  }
+  
+  .navigationHeader {
+    flex-wrap: wrap;
+  }
+  
+  .mascotInteraction {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .mascotSpeech::before {
+    display: none;
+  }
+  
+  .mascotImage {
+    margin-bottom: 10px;
+  }
+  
+  .contentTitle {
+    font-size: 1.2em;
+  }
+  
+  .videoControls {
+    padding: 6px;
+  }
+}
