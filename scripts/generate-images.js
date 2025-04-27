@@ -10,15 +10,13 @@ async function generatePNGs() {
         const baseName = path.basename(svgFile, '.svg');
         const svgPath = path.join(sourceDir, svgFile);
         const normalPngPath = path.join(sourceDir, `${baseName}.png`);
-        const smallPngPath = path.join(sourceDir, `${baseName}-small.png`);
+        const smallPngPath = path.join(sourceDir, `${baseName}.png`);
 
-        // Generate normal size PNG (200x200)
         await sharp(svgPath)
             .resize(200, 200)
             .png()
             .toFile(normalPngPath);
 
-        // Generate small size PNG (100x100)
         await sharp(svgPath)
             .resize(100, 100)
             .png()

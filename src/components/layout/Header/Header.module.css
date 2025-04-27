@@ -46,7 +46,7 @@
   align-items: center;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #58cc02;
+  color: #1cb0f6;
   letter-spacing: -1px;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -91,7 +91,7 @@
 }
 
 .logoAccent {
-  background: linear-gradient(135deg, #58cc02, #3f9c00);
+  background: linear-gradient(135deg, #1cb0f6, #1cb0f6);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -132,7 +132,7 @@
 
 .navIcon {
   font-size: 1.1rem;
-  color: #58cc02;
+  color: #1cb0f6;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -163,7 +163,7 @@
   display: block;
   width: 24px;
   height: 2px;
-  background: #58cc02;
+  background: #1cb0f6;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -252,7 +252,7 @@
 }
 
 .mobileNavIcon {
-  color: #58cc02;
+  color: #1cb0f6;
   font-size: 1.25rem;
 }
 
