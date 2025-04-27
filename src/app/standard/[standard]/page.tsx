@@ -6,26 +6,12 @@ import { faArrowLeft, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import LessonPathItem from '@/app/components/learn/LessonPathItem/LessonPathItem';
 import styles from './page.module.css';
+import { chapters } from '@/data/chaptersData';
 
 const getStandardData = (standardId: string) => {
   const titles = {
     "1": "Basic Concepts",
     "2": "Computer & Mobile Devices"
-  };
-  
-  const chapters = {
-    "1": [
-      { id: 1, title: "Introduction to Machines", completed: false },
-      { id: 2, title: "All About Computers", completed: false },
-      { id: 3, title: "Computer Care and Safety", completed: false },
-      { id: 4, title: "Keyboard and Mouse Fun", completed: false },
-    ],
-    "2": [
-      { id: 1, title: "More About Computers", completed: false },
-      { id: 2, title: "All About Smartphones", completed: false },
-      { id: 3, title: "Using Notepad", completed: false },
-      { id: 4, title: "Learning with Computers", completed: false },
-    ]
   };
   
   return {
@@ -61,7 +47,7 @@ export default function StandardPage({ params }: { params: { standard: string } 
         {standardData.chapters.map((chapter, index) => (
           <Link
             key={chapter.id}
-            href={`/learn/${params.standard}/chapter/${chapter.id}`}
+            href={`/standard/${params.standard}/chapter/${chapter.id}`}
             className={styles.chapterLink}
           >
             <LessonPathItem

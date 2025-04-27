@@ -6,6 +6,7 @@ import { faArrowLeft, faBookOpen, faArrowDown, faLaptopCode, faRobot, faMicrochi
 import React from 'react';
 import LessonPathItem from '@/app/components/learn/LessonPathItem/LessonPathItem';
 import styles from './LearnPage.module.css';
+import { chapters } from '@/data/chaptersData';
 
 type ContentItemType = {
   type: 'checkmark' | 'chest' | 'level-badge' | 'duo';
@@ -27,13 +28,6 @@ const getChapterData = (standardId: string, chapterId: string) => {
     "4": "Expert Level"
   };
 
-  const chapterTitles = {
-    "1": "Introduction to Machines",
-    "2": "All About Computers",
-    "3": "Computer Care and Safety",
-    "4": "Keyboard and Mouse Fun"
-  };
-
   const headerThemes = {
     "1": styles.themeGreen,
     "2": styles.themePurple,
@@ -49,9 +43,16 @@ const getChapterData = (standardId: string, chapterId: string) => {
     "12": styles.themeBlue,
   };
 
+  const chapterTitle =
+    chapters[standardId as keyof typeof chapters]
+      ?.find(
+        (chapter: { id: number; title: string; completed: boolean }) =>
+          chapter.id.toString() === chapterId
+      )?.title || "Unknown Chapter";
+
   return {
     standardTitle: standardTitles[standardId as keyof typeof standardTitles] || "Unknown Standard",
-    chapterTitle: chapterTitles[chapterId as keyof typeof chapterTitles] || "Unknown Chapter",
+    chapterTitle,
     headerTheme: headerThemes[chapterId as keyof typeof headerThemes] || styles.themeGreen,
     content: [
       { type: 'level-badge' as const, id: 1, level: 1, completed: false },

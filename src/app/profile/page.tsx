@@ -6,16 +6,13 @@ import { faTrophy, faFire, faGem, faHeart, faStar, faCalendarDay } from '@fortaw
 
 import RightRail from '@/app/components/layout/RightRail/RightRail';
 
-// Import UI components
 import ProgressBar from '@/app/components/ui/ProgressBar/ProgressBar';
 import StatsBox from '@/app/components/ui/StatsBox/StatsBox';
 import CalendarBox from '@/app/components/ui/CalendarBox/CalendarBox';
 
-// Import CSS module for consistent styling
 import styles from './ProfilePage.module.css';
 
 export default function ProfilePage() {
-  // Mock user data (in a real app, this would come from an API or database)
   const userData = {
     name: 'User',
     streak: 7,
@@ -32,7 +29,6 @@ export default function ProfilePage() {
       { id: 6, title: '30-Day Streak', description: 'Practiced for 30 days in a row', icon: faFire, completed: false }
     ],
     streakCalendar: [
-      // Last 28 days activity (true = practiced, false = didn't practice)
       false, false, true, true, false, true, true, // Week 1
       true, true, true, false, true, true, true,   // Week 2
       false, false, true, true, true, false, true, // Week 3
@@ -40,7 +36,6 @@ export default function ProfilePage() {
     ]
   };
 
-  // Calculate XP needed for next level (simple formula)
   const xpForNextLevel = 1000 + (userData.level * 500);
   const xpProgress = (userData.xp / xpForNextLevel) * 100;
 

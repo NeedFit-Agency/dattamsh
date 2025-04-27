@@ -160,7 +160,7 @@ export default function HomePage() {
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
               >
                 <Link 
-                  href={Standard.status === 'active' ? `/learn/${Standard.id}/chapter/1` : '#'} 
+                  href={Standard.status === 'active' ? `/standard/${Standard.id}/chapter/1` : '#'} 
                   className={`${styles.standardLink} ${Standard.status === 'locked' ? styles.locked : ''}`}
                 >
                   <div className={styles.standardContent}>
