@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
-import StatsBar from '@/components/layout/StatsBar/StatsBar';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -44,9 +43,6 @@ export default function Header() {
               <span>Learn</span>
             </Link>
           </div> */}
-          <div className={styles.statsWrapper}>
-            <StatsBar streak={1} gems={234} hearts={2} />
-          </div>
         </nav>
 
         <button 
@@ -64,9 +60,6 @@ export default function Header() {
               Learn
             </Link>
           </div> */}
-          <div className={styles.mobileStatsWrapper}>
-            <StatsBar streak={1} gems={234} hearts={2} />
-          </div>
         </div>
       </div>
     </header>

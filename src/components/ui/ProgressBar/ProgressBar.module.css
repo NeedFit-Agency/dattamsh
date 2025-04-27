@@ -8,7 +8,6 @@
   
   .progressFill {
     height: 100%;
-    /* Use blue theme color */
     background-color: var(--duo-blue-primary);
     border-radius: 8px;
     transition: width 0.3s ease;

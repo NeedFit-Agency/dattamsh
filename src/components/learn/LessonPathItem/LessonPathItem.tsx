@@ -27,7 +27,6 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
       case 'checkmark':
         return <FontAwesomeIcon icon={faCheck} className={styles.icon} />;
       case 'chest':
-        // Chest visuals are done purely in CSS via .chest and .chestContent
         return <div className={styles.chestContent}></div>;
       case 'duo':
         return (

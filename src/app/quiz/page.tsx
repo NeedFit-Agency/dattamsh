@@ -6,13 +6,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { Quiz } from '@/components/quiz/Quiz/Quiz';
-import StatsBar from '@/components/layout/StatsBar/StatsBar';
 import styles from './QuizPage.module.css';
 
 export default function QuizPage() {
   const searchParams = useSearchParams();
+  const standardId = searchParams.get('standard') || '1';
   const lessonId = searchParams.get('lesson') || '1';
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
+
+  // Handler to mark chapter as completed in localStorage
+  const handleQuizComplete = () => {
+    if (typeof window !== 'undefined') {
+      const completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '{}');
+      completedChapters[`${standardId}-${lessonId}`] = true;
+      localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+    }
+  };
 
   return (
     <div className={styles.appContainer}>
@@ -30,11 +39,10 @@ export default function QuizPage() {
               Lesson {lessonId}
             </div>
           </div>
-          <StatsBar streak={1} gems={234} hearts={2} />
         </div>
 
         <div className={styles.contentArea}>
-          <Quiz lessonId={lessonId} />
+          <Quiz lessonId={lessonId} onComplete={handleQuizComplete} />
         </div>
 
         {showQuitConfirm && (

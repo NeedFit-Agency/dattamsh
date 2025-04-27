@@ -6,12 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck, faTimes, faVolumeUp, faFire, faHeadphones } from '@fortawesome/free-solid-svg-icons';
 import styles from './Quiz.module.css';
 import AnswerOption from '../AnswerOption/AnswerOption';
-import CharacterCard from '../CharacterCard/CharacterCard';
 import LegendaryTrophy from '../LegendaryTrophy/LegendaryTrophy';
 
 interface QuizProps {
   lessonId?: string;
-  onComplete?: () => void;
+  onComplete?: (score: number) => void;
 }
 
 interface Question {
@@ -177,7 +176,7 @@ export function Quiz({ lessonId, onComplete }: QuizProps) {
     } else {
       // Quiz completed
       setCompleted(true);
-      if (onComplete) onComplete();
+      if (onComplete) onComplete(scorePercentage);
     }
   };
 

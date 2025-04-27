@@ -21,18 +21,10 @@ import {
 import { motion } from 'framer-motion';
 
 import styles from './learning.module.css';
-import {
-  standards,
-  Standard,
-  Chapter,
-  LessonContent,
-  LearningSlide,
-  DragDropSlide,
-  DraggableItemData,
-  DropTargetData,
-} from '@/data/standardsData';
+import { standards } from '../../data/standardsData';
 
-const formatContentWithEmojis = (text: string): React.ReactNode => {
+
+export const formatContentWithEmojis = (text: string): React.ReactNode => {
   const hasEmojis = /[\p{Emoji}]/u.test(text);
 
   if (hasEmojis) {
@@ -64,6 +56,57 @@ const formatContentWithEmojis = (text: string): React.ReactNode => {
 
   return text;
 };
+
+
+export interface ExampleImage {
+  src: string;
+  alt: string;
+}
+
+interface LearningSlide {
+  type: 'learn';
+  title: string;
+  description: string | string[];
+  imageUrl?: string;
+  exampleImages?: { src: string; alt: string }[];
+  audioSrc?: string;
+  speakText?: string;
+}
+
+interface DraggableItemData {
+  id: string;
+  text: string;
+  type: 'natural' | 'man-made';
+  imageUrl?: string;
+}
+
+interface DropTargetData {
+  id: 'naturalTarget' | 'manMadeTarget';
+  title: string;
+  type: 'natural' | 'man-made';
+}
+
+interface DragDropSlide {
+  type: 'drag-drop';
+  title: string;
+  instruction: string;
+  items: DraggableItemData[];
+  targets: DropTargetData[];
+  audioSrc?: string;
+  speakText?: string;
+}
+
+type LessonContent = LearningSlide | DragDropSlide;
+
+interface Chapter {
+  id: number;
+  title: string;
+  lessonContent: LessonContent[];
+}
+
+interface Standard {
+  [key: string]: Chapter[];
+}
 
 const createConfetti = () => {
   const confetti = document.createElement('div');
@@ -120,7 +163,16 @@ export default function LearningPage() {
     setStandard(standardParam);
     setChapter(chapterParam);
 
-    let selectedContent: LessonContent[] = standards[standardParam]?.[parseInt(chapterParam, 10) - 1]?.lessonContent || standards["1"][0].lessonContent;
+    let selectedContent: LessonContent[] = initialLessonContent;
+    const standardChapters = standards[standardParam];
+    const chapterIndex = parseInt(chapterParam, 10) - 1;
+
+    if (standardChapters && standardChapters[chapterIndex]) {
+      selectedContent = standardChapters[chapterIndex].lessonContent;
+    } else {
+      console.warn(`Chapter ${chapterParam} not found for Standard ${standardParam}. Defaulting to first chapter.`);
+      selectedContent = standardChapters ? standardChapters[0].lessonContent : initialLessonContent;
+    }
 
     console.log(`Selected content for Standard ${standardParam}, Chapter ${chapterParam} with ${selectedContent.length} slides.`);
     setChapterContent(selectedContent);
@@ -184,7 +236,7 @@ export default function LearningPage() {
 
   const handleConfirmExit = () => {
       setShowExitConfirm(false);
-      router.push(`/standard/${standard}`);
+      router.push(`/standard/${standard}/chapter/${chapter}`);
     };
   const handleCancelExit = () => setShowExitConfirm(false);
 
@@ -373,20 +425,6 @@ export default function LearningPage() {
     }
   };
 
-  const renderHearts = () => {
-      const heartsArray = [];
-      const maxHearts = 3;
-      for (let i = 0; i < maxHearts; i++) {
-          heartsArray.push(
-            <FontAwesomeIcon
-                key={i}
-                icon={faHeart}
-                className={`${styles.heartIcon} ${i < hearts ? styles.heartIconFull : styles.heartIconEmpty}`}
-            />
-          );
-      }
-      return heartsArray;
-  };
 
   let continueButtonText = "Continue";
   let continueButtonDisabled = false;
@@ -443,12 +481,6 @@ export default function LearningPage() {
                 </button>
                 <div className={styles.progressBarContainer} title={`Progress: ${Math.round(progress)}%`}>
                     <div className={styles.progressFill} style={{width: `${progress}%`}}></div>
-                </div>
-                <div className={styles.headerActions}>
-                    <div className={styles.heartsContainer} aria-label={`Hearts remaining: ${hearts}`}>{renderHearts()}</div>
-                    <button className={styles.settingsButton} title="Settings (Not Implemented)" aria-label="Settings" disabled>
-                        <FontAwesomeIcon icon={faGear} />
-                    </button>
                 </div>
             </div>
         </header>

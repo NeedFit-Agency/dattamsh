@@ -1,4 +1,3 @@
-
 export interface LearningSlide {
   type: 'learn';
   title: string;
@@ -102,12 +101,12 @@ export const standards: Standard = {
           instruction:
             'Hoot hoot! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
           items: [
-            { id: 'dnd-item-1', text: 'Tree', type: 'natural', imageUrl: '/images/tree-small.png' },
-            { id: 'dnd-item-2', text: 'Chair', type: 'man-made', imageUrl: '/images/chair-small.png' },
-            { id: 'dnd-item-3', text: 'Bird', type: 'natural', imageUrl: '/images/bird-small.png' },
-            { id: 'dnd-item-4', text: 'Cycle', type: 'man-made', imageUrl: '/images/cycle-small.png' },
-            { id: 'dnd-item-5', text: 'Sun', type: 'natural', imageUrl: '/images/sun-small.png' },
-            { id: 'dnd-item-6', text: 'Blackboard', type: 'man-made', imageUrl: '/images/blackboard-small.png' },
+            { id: 'dnd-item-1', text: 'Tree', type: 'natural', imageUrl: '/images/tree.png' },
+            { id: 'dnd-item-2', text: 'Chair', type: 'man-made', imageUrl: '/images/chair.png' },
+            { id: 'dnd-item-3', text: 'Bird', type: 'natural', imageUrl: '/images/bird.png' },
+            { id: 'dnd-item-4', text: 'Cycle', type: 'man-made', imageUrl: '/images/cycle.png' },
+            { id: 'dnd-item-5', text: 'Sun', type: 'natural', imageUrl: '/images/sun.png' },
+            { id: 'dnd-item-6', text: 'Blackboard', type: 'man-made', imageUrl: '/images/blackboard.png' },
           ],
           targets: [
             { id: 'naturalTarget', title: 'Natural Things', type: 'natural' },
@@ -134,7 +133,57 @@ export const standards: Standard = {
           ],
         }
       ]
+    },
+    {
+      id: 3,
+      title: "All About Computers",
+      lessonContent: [
+        {
+          type: 'learn',
+          title: 'Introduction',
+          description: [
+            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            'Some things, like trees and birds, are found in nature.',
+            'Other things, like chairs and cars, are made by people.',
+            "Let's learn the difference together!",
+          ],
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "All About Computers",
+      lessonContent: [
+        {
+          type: 'learn',
+          title: 'Introduction',
+          description: [
+            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            'Some things, like trees and birds, are found in nature.',
+            'Other things, like chairs and cars, are made by people.',
+            "Let's learn the difference together!",
+          ],
+        }
+      ]
     }
   ],
 
+  "2": [
+    {
+      id: 1,
+      title: "All About Computers",
+      lessonContent: [
+        { 
+          type: 'learn',
+          title: 'Introduction',
+          description: [
+            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            'Some things, like trees and birds, are found in nature.',
+            'Other things, like chairs and cars, are made by people.',
+            "Let's learn the difference together!",
+          ],
+        }
+      ]
+    }
+  ]
 }; 

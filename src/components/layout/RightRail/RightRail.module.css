@@ -1,18 +1,16 @@
 .rightRail {
     width: var(--right-rail-width);
     min-width: var(--right-rail-width);
-    padding: 0 0 20px 20px; /* No top padding needed if StatsBar is separate */
+    padding: 0 0 20px 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* Make it sticky relative to its container */
     position: sticky;
-    top: 20px; /* Adjust based on desired spacing from top */
-    height: calc(100vh - 40px); /* Adjust based on top offset */
-    overflow-y: auto; /* Allow scrolling if content overflows */
+    top: 20px; 
+    height: calc(100vh - 40px);
+    overflow-y: auto;
   }
   
-  /* Card styles from previous examples */
   .card {
       border: 2px solid var(--duo-border);
       border-radius: 16px;
@@ -20,9 +18,8 @@
       background-color: white;
   }
   
-  /* Super Card */
   .superCard {
-      border-color: var(--duo-purple); /* Match badge color */
+      border-color: var(--duo-purple);
       position: relative;
       text-align: center;
   }

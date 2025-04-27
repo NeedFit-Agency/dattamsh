@@ -55,7 +55,7 @@ const getChapterData = (standardId: string, chapterId: string) => {
     chapterTitle,
     headerTheme: headerThemes[chapterId as keyof typeof headerThemes] || styles.themeGreen,
     content: [
-      { type: 'level-badge' as const, id: 1, level: 1, completed: false },
+      { type: 'level-badge' as const, id: 1, level: 1, completed: true },
       { type: 'level-badge' as const, id: 2, level: 2, completed: false },
       { type: 'level-badge' as const, id: 3, level: 3, completed: true },
       { type: 'level-badge' as const, id: 4, level: 4, completed: true },
@@ -70,7 +70,6 @@ export default function ChapterPage({
 }: { 
   params: Promise<PageParams>
 }) {
-  // Unwrap params using React.use()
   const { standard, id } = React.use(params);
   
   const chapterData = getChapterData(standard, id);
@@ -161,24 +160,38 @@ export default function ChapterPage({
 
         {/* Existing lesson path items - UPDATED to redirect to learning page */}
         {chapterData.content.map((item) => {
-          const isClickable = !(item.type === 'checkmark' && item.completed);
-          const PathComponent = isClickable ? Link : 'div';
+          // Only 'duo' should never be clickable
+          const isDuo = item.type === 'duo';
+          const isClickable = !isDuo && !(item.type === 'checkmark' && item.completed);
           const itemStyle = positions[item.id] || {};
 
-          return (
-            <PathComponent
+          return isClickable ? (
+            <Link
               key={item.id}
-              href={isClickable ? `/learning?standard=${standard}&chapter=${item.id}&lesson=${item.id}` : '#'}
+              href={`/learning?standard=${standard}&chapter=${item.id}&lesson=${item.id}`}
               className={styles.lessonLink}
               style={itemStyle}
-              aria-label={isClickable ? `Start or practice lesson ${item.id}` : `Lesson ${item.id} completed`}
+              aria-label={`Start or practice lesson ${item.id}`}
             >
               <LessonPathItem
                 type={item.type}
                 level={item.type === 'level-badge' ? item.level : undefined}
                 completed={item.completed}
               />
-            </PathComponent>
+            </Link>
+          ) : (
+            <div
+              key={item.id}
+              className={styles.lessonLink}
+              style={itemStyle}
+              aria-label={`Lesson ${item.id} completed`}
+            >
+              <LessonPathItem
+                type={item.type}
+                level={item.type === 'level-badge' ? item.level : undefined}
+                completed={item.completed}
+              />
+            </div>
           );
         })}
       </div>

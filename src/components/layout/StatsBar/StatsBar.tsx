@@ -6,7 +6,7 @@ interface StatsBarProps {
   streak: number;
   gems: number;
   hearts: number;
-  streakFreezeActive?: boolean; // Optional prop
+  streakFreezeActive?: boolean; 
 }
 
 export default function StatsBar({ streak, gems, hearts, streakFreezeActive = true }: StatsBarProps) {
