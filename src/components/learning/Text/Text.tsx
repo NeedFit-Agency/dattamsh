@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphones, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faHeadphones, faShield, faGem, faHeart, faCog } from '@fortawesome/free-solid-svg-icons';
 import { TextProps } from './types';
 import styles from './text.module.css';
 
@@ -42,9 +42,7 @@ const Text: React.FC<TextProps> = ({
   exampleImages,
   audioSrc,
   speakText,
-  progress = 0,
-  onBack,
-  onComplete
+  progress = 0
 }) => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
@@ -79,35 +77,42 @@ const Text: React.FC<TextProps> = ({
   };
 
   return (
-    <div className={styles.container}>
-      {/* Progress indicator */}
-      {typeof progress === 'number' && (
-        <div className={styles.progressContainer}>
-          <div className={styles.progressBar}>
-            <div className={styles.progressFill} style={{ width: `${progress}%` }}></div>
-          </div>
-          <span className={styles.progressText}>{Math.round(progress)}% complete</span>
+    <div className={styles.mainContainer}>
+      {/* Header */}
+      <div className={styles.appHeader}>
+        <div className={styles.appName}>&lt;/&gt; Learning Text</div>
+        <div className={styles.userStats}>
+          <FontAwesomeIcon icon={faCog} className={styles.settingsIcon} />
         </div>
-      )}
+      </div>
 
-      {/* Title */}
-      <h2 className={styles.title}>{title}</h2>
+      {/* Content */}
+      <div className={styles.contentWrapper}>
+        <div className={styles.navigationHeader}>
+          <div className={styles.progressBarContainer}>
+            <div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
+          </div>
+        </div>
 
-      {/* Main content layout */}
-      <div className={styles.contentLayout}>
-        {/* Visual column */}
-        {(imageUrl || exampleImages) && (
-          <div className={styles.visualColumn}>
+        <h1 className={styles.contentTitle}>{title}</h1>
+
+        <div className={styles.contentLayout}>
+          {/* Main content area */}
+          <div className={styles.mainContent}>
+            {/* Image section */}
             {imageUrl && (
-              <motion.img
-                src={imageUrl}
-                alt={title}
-                className={styles.mainImage}
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              />
+              <div className={styles.imageContainer}>
+                <motion.img
+                  src={imageUrl}
+                  alt={title}
+                  className={styles.mainImage}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                />
+              </div>
             )}
             
+            {/* Example images grid */}
             {exampleImages && exampleImages.length > 0 && (
               <div className={styles.exampleImagesGrid}>
                 {exampleImages.map((img, index) => (
@@ -134,64 +139,41 @@ const Text: React.FC<TextProps> = ({
                 ))}
               </div>
             )}
-          </div>
-        )}
 
-        {/* Text column */}
-        <div className={styles.textColumn}>
-          <div className={styles.descriptionContainer}>
-            {Array.isArray(description) ? (
-              description.map((paragraph, index) => (
-                <motion.p
-                  key={index}
-                  className={styles.paragraph}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
+            {/* Text description */}
+            <div className={styles.textSection}>
+              {Array.isArray(description) ? (
+                description.map((paragraph, index) => (
+                  <motion.p
+                    key={index}
+                    className={styles.paragraph}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    {formatContentWithEmojis(paragraph)}
+                  </motion.p>
+                ))
+              ) : (
+                <p className={styles.paragraph}>
+                  {formatContentWithEmojis(description)}
+                </p>
+              )}
+              
+              {/* Audio button */}
+              {(audioSrc || speakText) && (
+                <button
+                  className={`${styles.listenButton} ${isAudioPlaying ? styles.listenButtonPlaying : ''}`}
+                  onClick={playAudio}
+                  aria-label={isAudioPlaying ? "Stop Audio" : "Listen to Text"}
                 >
-                  {formatContentWithEmojis(paragraph)}
-                </motion.p>
-              ))
-            ) : (
-              <p className={styles.paragraph}>
-                {formatContentWithEmojis(description)}
-              </p>
-            )}
-            
-            {/* Audio button */}
-            {(audioSrc || speakText) && (
-              <button
-                className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-                onClick={playAudio}
-                aria-label={isAudioPlaying ? "Stop Audio" : "Listen to Text"}
-              >
-                <FontAwesomeIcon icon={faHeadphones} />
-                <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-              </button>
-            )}
+                  <FontAwesomeIcon icon={faHeadphones} />
+                  <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Navigation footer */}
-      <div className={styles.navigationFooter}>
-        {onBack && (
-          <button 
-            className={`${styles.navigationButton} ${styles.backButton}`}
-            onClick={onBack}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} /> Back
-          </button>
-        )}
-        
-        {onComplete && (
-          <button 
-            className={`${styles.navigationButton} ${styles.continueButton}`}
-            onClick={onComplete}
-          >
-            Continue <FontAwesomeIcon icon={faArrowRight} />
-          </button>
-        )}
       </div>
     </div>
   );
