@@ -4,29 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones, faArrowLeft, faArrowRight, faShield, faGem, faHeart, faCog } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Step, StepByStepProps } from './types';
 import styles from './stepbystep.module.css';
-
-export interface Step {
-  id: string;
-  number: number;
-  title: string;
-  instruction: string;
-  visualContent: string | React.ReactNode;
-  audioContent?: string;
-}
-
-export interface StepByStepProps {
-  title: string;
-  steps: Step[];
-  initialStepIndex?: number;
-  progress?: number;
-  hearts?: number;
-  gems?: number;
-  shields?: number;
-  onComplete?: () => void;
-  onStepChange?: (stepIndex: number) => void;
-  onBack?: () => void;
-}
 
 const StepByStep: React.FC<StepByStepProps> = ({
   title,

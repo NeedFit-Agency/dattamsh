@@ -1,4 +1,2 @@
-import StepByStep, { type Step, type StepByStepProps } from './page';
-
-export { StepByStep, type Step, type StepByStepProps };
-export default StepByStep;
+export { default } from './page';
+export * from './types';
