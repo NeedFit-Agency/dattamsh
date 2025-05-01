@@ -157,6 +157,36 @@ export const standards: Standard = {
     },
     {
       id: 3,
+      title: "Introduction to Notepad",
+      lessonContent: [
+        {
+          type: 'learn',
+          title: 'Getting Started with Notepad',
+          description: [
+            "Notepad is a simple text editor that helps us write and save notes.",
+            "We can use it to practice typing and save our work."
+          ],
+          imageUrl: '/images/notepad-intro.png',
+          audioSrc: '/audio/std2_ch3_01_intro.mp3',
+          speakText: "Notepad is a simple text editor that helps us write and save notes. We can use it to practice typing and save our work."
+        },
+        {
+          type: 'learn',
+          title: 'Typing Practice',
+          description: [
+            "Let's practice typing by writing a short story or a letter.",
+            "Remember to save your work often!"
+          ],
+          exampleImages: [
+            { src: '/images/typing.png', alt: 'Typing on Notepad' }
+          ],
+          audioSrc: '/audio/std2_ch3_02_typing.mp3',
+          speakText: "Let's practice typing by writing a short story or a letter. Remember to save your work often!"
+        }
+      ]
+    },
+    {
+      id: 4,
       title: "All About Computers",
       lessonContent: [
         {
@@ -173,7 +203,7 @@ export const standards: Standard = {
       ]
     },
     {
-      id: 4,
+      id: 5,
       title: "All About Computers",
       lessonContent: [
         {
@@ -196,7 +226,7 @@ export const standards: Standard = {
       id: 1,
       title: "All About Computers",
       lessonContent: [
-        { 
+        {
           type: 'learn',
           format: 'text',
           title: 'Introduction',
@@ -210,4 +240,5 @@ export const standards: Standard = {
       ]
     }
   ]
+};
 };
