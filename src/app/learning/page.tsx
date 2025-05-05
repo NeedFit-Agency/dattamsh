@@ -6,22 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowLeft,
   faArrowRight,
-  faGear,
-  faHeart,
-  faLeaf,
-  faWrench,
-  faHeadphones,
 } from '@fortawesome/free-solid-svg-icons';
 import {
-  DragDropContext,
-  Droppable,
-  Draggable,
   DropResult,
 } from '@hello-pangea/dnd';
-import { motion } from 'framer-motion';
 
 import styles from './learning.module.css';
 import { standards } from '../../data/standardsData';
+import ContentRenderer from '../../components/learning/ContentRenderer';
 
 
 export const formatContentWithEmojis = (text: string): React.ReactNode => {
@@ -467,331 +459,55 @@ export default function LearningPage() {
    }
 
   return (
-    <div className={styles.learningContainer}>
+    <div>
       <div className={styles.learningContent}>
         <header className={styles.learningHeader}>
-             <div className={styles.headerNavigation}>
-                <button
-                    className={styles.backButton}
-                    onClick={handleBackClick}
-                    title={currentSlideIndex === 0 ? "Exit Lesson" : "Previous Slide"}
-                    aria-label={currentSlideIndex === 0 ? "Exit Lesson" : "Previous Slide"}
-                >
-                     <FontAwesomeIcon icon={faArrowLeft} />
-                </button>
-                <div className={styles.progressBarContainer} title={`Progress: ${Math.round(progress)}%`}>
-                    <div className={styles.progressFill} style={{width: `${progress}%`}}></div>
-                </div>
-            </div>
+
         </header>
 
         <main className={styles.learningMain}>
-          <motion.h1
-            key={currentSlideIndex}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className={styles.lessonTitle}
-          >
-              {currentContent.title}
-          </motion.h1>
-
-          <div className={styles.learningArea}>
-            {currentContent.type === 'learn' && (
-                <motion.div
-                    key={`learn-${currentSlideIndex}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className={styles.learningSlideLayout}
-                 >
-                    {(currentContent.imageUrl || currentContent.exampleImages) && (
-                        <div className={styles.learningVisualColumn}>
-                            {currentContent.imageUrl && (
-                                <motion.img
-                                    src={currentContent.imageUrl}
-                                    alt={currentContent.title || 'Lesson image'}
-                                    whileHover={{ scale: 1.03 }}
-                                    transition={{ type: "spring", stiffness: 300 }}
-                                    className={styles.mainImage}
-                                />
-                            )}
-                            {currentContent.exampleImages && !currentContent.imageUrl && (
-                                <div className={`${styles.exampleImageContainer} ${styles.exampleImageGrid}`}>
-                                    {currentContent.exampleImages.map((img, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className={styles.tooltipWrapper}
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            transition={{ delay: i * 0.1 }}
-                                        >
-                                            <motion.img
-                                                src={img.src}
-                                                alt={img.alt}
-                                                title={img.alt}
-                                                className={styles.exampleImage}
-                                                whileHover={{
-                                                    scale: 1.05,
-                                                    rotate: Math.random() * 4 - 2,
-                                                    boxShadow: '0px 5px 15px rgba(0,0,0,0.1)',
-                                                    transition: { type: "spring", stiffness: 300, damping: 10 }
-                                                }}
-                                            />
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    )}
-
-                    <div className={styles.learningTextColumn}>
-                        <div className={styles.mascotContainer}>
-                            <div className={styles.mascotSpeechBubble}>
-                                {Array.isArray(currentContent.description) ?
-                                    currentContent.description.map((p, i) => (
-                                        <motion.p
-                                            key={i}
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: i * 0.05 }}
-                                        >
-                                            {formatContentWithEmojis(p)}
-                                        </motion.p>
-                                    ))
-                                    :
-                                    <p>{formatContentWithEmojis(currentContent.description)}</p>
-                                }
-                                {(currentContent.audioSrc || currentContent.speakText) && (
-                                    <button
-                                        className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-                                        onClick={playSlideAudio}
-                                        title={isAudioPlaying ? "Stop Audio" : "Listen to Text"}
-                                        aria-label={isAudioPlaying ? "Stop Audio" : "Listen to Text"}
-                                    >
-                                        <FontAwesomeIcon icon={faHeadphones} />
-                                        <span className={styles.audioButtonText}>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-                                    </button>
-                                )}
-                            </div>
-                            <div className={styles.mascotImageContainer}>
-                                <motion.img
-                                    src="/images/mascot.png"
-                                    alt="Owlbert Mascot"
-                                    className={styles.mascotImage}
-                                    initial={{ y: 5 }}
-                                    animate={{ y: [0, -8, 0] }}
-                                    transition={{
-                                        duration: 2.5,
-                                        repeat: Infinity,
-                                        repeatType: "reverse",
-                                        ease: "easeInOut"
-                                    }}
-                                    whileHover={{ scale: 1.05, rotate: 3 }}
-                                    whileTap={{ scale: 0.95 }}
-                                />
-                            </div>
-                        </div>
-                        {currentContent.imageUrl && currentContent.exampleImages && (
-                            <div className={styles.exampleImageContainer}>
-                                {currentContent.exampleImages.map((img, i) => (
-                                     <motion.div
-                                        key={i}
-                                        className={styles.tooltipWrapper}
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: i * 0.1 }}
-                                    >
-                                        <motion.img
-                                            src={img.src}
-                                            alt={img.alt}
-                                            title={img.alt}
-                                            className={styles.exampleImage}
-                                            whileHover={{
-                                                scale: 1.05,
-                                                rotate: Math.random() * 4 - 2,
-                                                boxShadow: '0px 5px 15px rgba(0,0,0,0.1)',
-                                                transition: { type: "spring", stiffness: 300, damping: 10 }
-                                            }}
-                                        />
-                                     </motion.div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </motion.div>
-            )}
-
-            {currentContent.type === 'drag-drop' && (
-              <DragDropContext onDragEnd={onDragEnd}>
-                 <motion.div
-                    key={`dnd-${currentSlideIndex}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className={styles.dragDropArea}
-                 >
-                  <div style={{textAlign: 'center'}}>
-                    <p className={styles.dragDropInstruction}>{currentContent.instruction}</p>
-                    {(currentContent.audioSrc || currentContent.speakText) && (
-                      <button
-                        className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-                        onClick={playSlideAudio}
-                        title={isAudioPlaying ? "Stop Audio" : "Listen to Instruction"}
-                        aria-label={isAudioPlaying ? "Stop Audio" : "Listen to Instruction"}
-                        style={{marginTop: '-10px', marginBottom: '20px'}}
-                      >
-                        <FontAwesomeIcon icon={faHeadphones} /> <span className={styles.audioButtonText}>Listen</span>
-                      </button>
-                    )}
-                  </div>
-
-                  <Droppable droppableId="sourceItems" direction="horizontal">
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                        className={`${styles.draggableSourceList} ${snapshot.isDraggingOver ? styles.draggingOver : ''}`}
-                      >
-                        {dndState.sourceItems?.map((item, index) => (
-                          <Draggable key={item.id} draggableId={item.id} index={index} isDragDisabled={dndChecked}>
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                className={`${styles.draggableItem} ${snapshot.isDragging ? styles.draggableItemDragging : ''} ${dndChecked ? styles.disabled : ''}`}
-                                style={provided.draggableProps.style}
-                                aria-roledescription="Draggable item"
-                              >
-                                {item.imageUrl && (
-                                  <img
-                                    src={item.imageUrl}
-                                    alt=""
-                                    className={styles.draggableItemImage}
-                                    aria-hidden="true"
-                                  />
-                                )}
-                                {item.text}
-                              </div>
-                            )}
-                          </Draggable>
-                        ))}
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
-
-                  <div className={styles.dropTargetsContainer}>
-                    {currentContent.targets?.map((target) => (
-                      <Droppable key={target.id} droppableId={target.id}>
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                            className={`${styles.dropTargetColumn}
-                              ${snapshot.isDraggingOver ? styles.dropTargetColumnDraggingOver : ''}
-                              ${dndChecked && !Object.values(itemCorrectness).some(correct => !correct) && areAllItemsPlaced() ? styles.allCorrect : ''}`}
-                            aria-label={`Drop area for ${target.title}`}
-                          >
-                            <h3 className={`${styles.dropTargetTitle} ${target.type === 'natural' ? styles.dropTargetTitleNatural : styles.dropTargetTitleManMade}`}>
-                              <FontAwesomeIcon icon={target.type === 'natural' ? faLeaf : faWrench} style={{ marginRight: '8px'}} aria-hidden="true"/>
-                              {target.title}
-                            </h3>
-                            <div className={styles.dropTargetList}>
-                              {dndState[target.id]?.map((item, index) => {
-                                const allItemsInThisContext = areAllItemsPlaced();
-                                const itemStyle = dndChecked && allItemsInThisContext
-                                    ? (itemCorrectness[item.id] ? styles.itemCorrect : styles.itemIncorrect)
-                                    : '';
-
-                                return (
-                                    <Draggable key={item.id} draggableId={item.id} index={index} isDragDisabled={dndChecked}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        className={`${styles.draggableItem} ${itemStyle} ${dndChecked ? styles.disabled : ''}`}
-                                        style={provided.draggableProps.style}
-                                        aria-roledescription="Item dropped in target"
-                                        >
-                                        {item.imageUrl && (
-                                            <img
-                                            src={item.imageUrl}
-                                            alt=""
-                                            className={styles.draggableItemImage}
-                                            aria-hidden="true"
-                                            />
-                                        )}
-                                        {item.text}
-                                        </div>
-                                    )}
-                                    </Draggable>
-                                );
-                               })}
-                              {provided.placeholder}
-                            </div>
-                          </div>
-                        )}
-                      </Droppable>
-                    ))}
-                  </div>
-
-                  {dndFeedback && (
-                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className={`${styles.dragDropFeedback} ${
-                             dndChecked &&
-                             areAllItemsPlaced() &&
-                             !Object.values(itemCorrectness).some(c => !c)
-                             ? styles.dragDropFeedbackCorrect
-                             : (dndChecked ? styles.dragDropFeedbackIncorrect : '') 
-                         }`}
-                         role="alert"
-                      >
-                      {dndFeedback}
-                     </motion.div>
-                  )}
-                </motion.div>
-              </DragDropContext>
-            )}
-          </div>
+          <ContentRenderer 
+            content={currentContent}
+            onBack={handleBackClick}
+            onComplete={handleContinue}
+            progress={progress}
+          />
         </main>
 
-        <footer className={styles.learningFooter}>
-              <button
-                className={styles.previousButton}
-                onClick={handlePrevious}
-                disabled={currentSlideIndex === 0}
-                aria-disabled={currentSlideIndex === 0}
-              >
-                 <FontAwesomeIcon icon={faArrowLeft} /> Previous
-              </button>
-              <button
-                className={continueButtonClass}
-                onClick={handleContinue}
-                disabled={continueButtonDisabled}
-                aria-disabled={continueButtonDisabled}
-              >
-                 {continueButtonText} <FontAwesomeIcon icon={faArrowRight} />
-               </button>
-        </footer>
+        {currentContent.type !== 'drag-drop' && (
+          <footer className={styles.learningFooter}>
+            <button
+              className={styles.previousButton}
+              onClick={handlePrevious}
+              disabled={currentSlideIndex === 0}
+              aria-disabled={currentSlideIndex === 0}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} /> Previous
+            </button>
+            <button
+              className={continueButtonClass}
+              onClick={handleContinue}
+              disabled={continueButtonDisabled}
+              aria-disabled={continueButtonDisabled}
+            >
+              {continueButtonText} <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </footer>
+        )}
       </div>
 
-       {showExitConfirm && (
-           <div className={styles.modalOverlay} onClick={handleCancelExit} role="dialog" aria-modal="true" aria-labelledby="exit-modal-title">
-               <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                   <h2 id="exit-modal-title">Exit Lesson?</h2>
-                   <p>Your progress on this lesson might not be saved if you exit now.</p>
-                   <div className={styles.modalButtons}>
-                       <button className={styles.modalCancel} onClick={handleCancelExit}>Cancel</button>
-                       <button className={styles.modalConfirm} onClick={handleConfirmExit}>Exit Anyway</button>
-                   </div>
-               </div>
-           </div>
-       )}
+      {showExitConfirm && (
+        <div className={styles.modalOverlay} onClick={handleCancelExit} role="dialog" aria-modal="true" aria-labelledby="exit-modal-title">
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <h2 id="exit-modal-title">Exit Lesson?</h2>
+            <p>Your progress on this lesson might not be saved if you exit now.</p>
+            <div className={styles.modalButtons}>
+              <button className={styles.modalCancel} onClick={handleCancelExit}>Cancel</button>
+              <button className={styles.modalConfirm} onClick={handleConfirmExit}>Exit Anyway</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

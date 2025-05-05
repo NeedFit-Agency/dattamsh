@@ -1,11 +1,29 @@
-export interface LearningSlide {
-  type: 'learn';
+export type FormatType = 
+  | 'application'
+  | 'type' 
+  | 'code'
+  | 'component'
+  | 'drag-drop'
+  | 'history'
+  | 'quiz'
+  | 'step-by-step'
+  | 'video'
+  | 'text';
+
+export interface BaseContentProps {
+  type: string;
   title: string;
+  format: FormatType;
+  audioSrc?: string;
+  speakText?: string;
+}
+
+export interface LearningSlide extends BaseContentProps {
+  type: 'learn';
   description: string | string[];
   imageUrl?: string;
   exampleImages?: { src: string; alt: string }[];
-  audioSrc?: string;
-  speakText?: string;
+  // Format will typically be 'text', 'video', etc.
 }
 
 export interface DraggableItemData {
@@ -21,14 +39,12 @@ export interface DropTargetData {
   type: 'natural' | 'man-made';
 }
 
-export interface DragDropSlide {
+export interface DragDropSlide extends BaseContentProps {
   type: 'drag-drop';
-  title: string;
   instruction: string;
   items: DraggableItemData[];
   targets: DropTargetData[];
-  audioSrc?: string;
-  speakText?: string;
+  // Format will typically be 'drag-drop'
 }
 
 export type LessonContent = LearningSlide | DragDropSlide;
@@ -51,9 +67,10 @@ export const standards: Standard = {
       lessonContent: [
         {
           type: 'learn',
+          format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",
@@ -61,10 +78,11 @@ export const standards: Standard = {
           imageUrl: '/images/intro-scene.png',
           audioSrc: '/audio/01_intro.mp3',
           speakText:
-            "Hi there! I'm Owlbert! We see so many things around us every day. Some things, like trees and birds, are found in nature. Other things, like chairs and cars, are made by people. Let's learn the difference together!",
+            "Hi there! I'm Zippy! We see so many things around us every day. Some things, like trees and birds, are found in nature. Other things, like chairs and cars, are made by people. Let's learn the difference together!",
         },
         {
           type: 'learn',
+          format: 'text',
           title: 'Natural Things',
           description: [
             "Natural things are things we find in nature. People didn't make them. Look at these examples!",
@@ -81,6 +99,7 @@ export const standards: Standard = {
         },
         {
           type: 'learn',
+          format: 'text',
           title: 'Man-made Things',
           description: [
             'Man-made things are things that people build or create. Can you spot some things people made here?',
@@ -97,6 +116,7 @@ export const standards: Standard = {
         },
         {
           type: 'drag-drop',
+          format: 'drag-drop',
           title: 'Activity: Sort Them Out!',
           instruction:
             'Hoot hoot! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
@@ -124,9 +144,10 @@ export const standards: Standard = {
       lessonContent: [
         {
           type: 'learn',
+          format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "2nd chapter! Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",
@@ -140,9 +161,10 @@ export const standards: Standard = {
       lessonContent: [
         {
           type: 'learn',
+          format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "3rd chapter! Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",
@@ -156,9 +178,10 @@ export const standards: Standard = {
       lessonContent: [
         {
           type: 'learn',
+          format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "4th chapter! Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",
@@ -175,9 +198,10 @@ export const standards: Standard = {
       lessonContent: [
         { 
           type: 'learn',
+          format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "1st chapter 2nd standard! Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",
@@ -186,4 +210,4 @@ export const standards: Standard = {
       ]
     }
   ]
-}; 
+};

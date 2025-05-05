@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphones, faCheckCircle, faTimesCircle, faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faHeadphones, faCheckCircle, faTimesCircle, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { DragDropProps } from './types';
-import styles from '../../../learning/learning.module.css';
+import styles from './dragdrop.module.css';
 
 interface DragItem {
   id: string;
@@ -28,11 +28,14 @@ export const DragDrop: React.FC<DragDropProps> = ({
   items,
   targets,
   audioSrc,
-  speakText
+  speakText,
+  progress = 0,
+  onBack,
+  onComplete
 }) => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [dragItems, setDragItems] = useState<DragItem[]>(
-    items.map(item => ({ 
+    items.map((item) => ({ 
       ...item, 
       placed: false, 
       targetId: '',
@@ -42,10 +45,11 @@ export const DragDrop: React.FC<DragDropProps> = ({
   const [droppedItems, setDroppedItems] = useState<Record<string, DragItem[]>>({});
   const [feedback, setFeedback] = useState({ show: false, correct: false, message: '' });
   const [isCheckingAnswers, setIsCheckingAnswers] = useState(false);
+  const [allCompleted, setAllCompleted] = useState(false);
 
   useEffect(() => {
     const initialDropped: Record<string, DragItem[]> = {};
-    targets.forEach(target => {
+    targets.forEach((target) => {
       initialDropped[target.id] = [];
     });
     setDroppedItems(initialDropped);
@@ -92,14 +96,12 @@ export const DragDrop: React.FC<DragDropProps> = ({
   const handleDrop = (e: React.DragEvent, targetId: string) => {
     e.preventDefault();
     const itemId = e.dataTransfer.getData('itemId');
-    const draggedItem = dragItems.find(item => item.id === itemId);
+    const draggedItem = dragItems.find((item) => item.id === itemId);
     
     if (!draggedItem || draggedItem.placed) return;
-
-    const target = targets.find(t => t.id === targetId);
     
     setDragItems(prev => 
-      prev.map(item => 
+      prev.map((item) => 
         item.id === itemId 
           ? { ...item, placed: true, targetId: targetId } 
           : item
@@ -117,11 +119,11 @@ export const DragDrop: React.FC<DragDropProps> = ({
   const handleRemoveItem = (targetId: string, itemId: string) => {
     setDroppedItems(prev => ({
       ...prev,
-      [targetId]: prev[targetId].filter(item => item.id !== itemId)
+      [targetId]: prev[targetId].filter((item) => item.id !== itemId)
     }));
 
     setDragItems(prev => 
-      prev.map(item => 
+      prev.map((item) => 
         item.id === itemId 
           ? { ...item, placed: false, targetId: '' } 
           : item
@@ -129,6 +131,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
     );
 
     setFeedback({ show: false, correct: false, message: '' });
+    setAllCompleted(false);
   };
 
   const checkAnswers = () => {
@@ -136,8 +139,11 @@ export const DragDrop: React.FC<DragDropProps> = ({
     let allCorrect = true;
     let message = '';
 
-    for (const item of dragItems.filter(i => i.placed)) {
-      const target = targets.find(t => t.id === item.targetId);
+    const placedItems = dragItems.filter((i) => i.placed);
+    const allItemsPlaced = placedItems.length === dragItems.length;
+
+    for (const item of placedItems) {
+      const target = targets.find((t) => t.id === item.targetId);
       if (target && item.type !== target.type) {
         allCorrect = false;
         break;
@@ -145,12 +151,13 @@ export const DragDrop: React.FC<DragDropProps> = ({
     }
 
     if (allCorrect) {
-      if (dragItems.some(item => !item.placed)) {
+      if (!allItemsPlaced) {
         message = 'Some items are correct, but you need to place all items!';
         setFeedback({ show: true, correct: false, message });
       } else {
         message = 'Great job! All items are correctly sorted!';
         setFeedback({ show: true, correct: true, message });
+        setAllCompleted(true);
       }
     } else {
       message = 'Some items are in the wrong category. Try again!';
@@ -163,7 +170,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
   };
 
   const resetActivity = () => {
-    setDragItems(items.map(item => ({ 
+    setDragItems(items.map((item) => ({ 
       ...item, 
       placed: false, 
       targetId: '',
@@ -171,18 +178,36 @@ export const DragDrop: React.FC<DragDropProps> = ({
     })));
     
     const resetDropped: Record<string, DragItem[]> = {};
-    targets.forEach(target => {
+    targets.forEach((target) => {
       resetDropped[target.id] = [];
     });
     setDroppedItems(resetDropped);
 
     setFeedback({ show: false, correct: false, message: '' });
+    setAllCompleted(false);
+  };
+
+  const handleContinue = () => {
+    if (onComplete && allCompleted) {
+      onComplete();
+    }
   };
 
   return (
-    <div className={styles.dragDropContainer}>
+    <div className={styles.container}>
+      {/* Progress indicator */}
+      {typeof progress === 'number' && (
+        <div className={styles.progressContainer}>
+          <div className={styles.progressBar}>
+            <div className={styles.progressFill} style={{ width: `${progress}%` }}></div>
+          </div>
+          <span className={styles.progressText}>{Math.round(progress)}% complete</span>
+        </div>
+      )}
+
+      <h2 className={styles.title}>{title}</h2>
+      
       <div className={styles.instructionBox}>
-        {title && <h3 className={styles.activityTitle}>{title}</h3>}
         <p className={styles.instruction}>{instruction}</p>
         
         {(audioSrc || speakText) && (
@@ -191,7 +216,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
             onClick={playAudio}
           >
             <FontAwesomeIcon icon={faHeadphones} />
-            {isAudioPlaying ? "Listening..." : "Listen"}
+            <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
           </button>
         )}
       </div>
@@ -201,7 +226,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
           <h4 className={styles.itemsTitle}>Items</h4>
           <div className={styles.dragItems}>
             <AnimatePresence mode="wait">
-              {dragItems.filter(item => !item.placed).map(item => (
+              {dragItems.filter((item) => !item.placed).map((item) => (
                 <motion.div
                   key={item.id}
                   className={styles.dragItem}
@@ -225,7 +250,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
         </div>
 
         <div className={styles.targetsGrid} style={{ gridTemplateColumns: `repeat(${Math.min(targets.length, 3)}, 1fr)` }}>
-          {targets.map(target => (
+          {targets.map((target) => (
             <div key={target.id} className={styles.targetContainer}>
               <h4 className={styles.targetTitle}>{target.title}</h4>
               <div
@@ -233,7 +258,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
                 onDragOver={handleDragOver}
                 onDrop={(e) => handleDrop(e, target.id)}
               >
-                {droppedItems[target.id]?.map(item => (
+                {droppedItems[target.id]?.map((item) => (
                   <div 
                     key={item.id} 
                     className={`${styles.droppedItem} ${
@@ -270,7 +295,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
         <button 
           className={styles.checkButton} 
           onClick={checkAnswers}
-          disabled={!dragItems.some(item => item.placed) || isCheckingAnswers}
+          disabled={!dragItems.some((item) => item.placed) || isCheckingAnswers}
         >
           Check Answers
         </button>
@@ -284,6 +309,26 @@ export const DragDrop: React.FC<DragDropProps> = ({
           <p>{feedback.message}</p>
         </div>
       )}
+
+      <div className={styles.navigationFooter}>
+        {onBack && (
+          <button 
+            className={styles.navigationButton} 
+            onClick={onBack}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} /> Back
+          </button>
+        )}
+        {onComplete && (
+          <button 
+            className={`${styles.navigationButton} ${styles.continueButton} ${allCompleted ? styles.enabledButton : styles.disabledButton}`} 
+            onClick={handleContinue}
+            disabled={!allCompleted}
+          >
+            Continue <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+        )}
+      </div>
     </div>
   );
 };
