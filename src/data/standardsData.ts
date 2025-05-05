@@ -68,7 +68,7 @@ export const standards: Standard = {
         {
           type: 'learn',
           format: 'text',
-          title: 'Introduction',
+          title: 'Introduction to Nature and Man-made',
           description: [
             "Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
