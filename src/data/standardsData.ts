@@ -70,7 +70,7 @@ export const standards: Standard = {
           format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",
@@ -78,7 +78,7 @@ export const standards: Standard = {
           imageUrl: '/images/intro-scene.png',
           audioSrc: '/audio/01_intro.mp3',
           speakText:
-            "Hi there! I'm Owlbert! We see so many things around us every day. Some things, like trees and birds, are found in nature. Other things, like chairs and cars, are made by people. Let's learn the difference together!",
+            "Hi there! I'm Zippy! We see so many things around us every day. Some things, like trees and birds, are found in nature. Other things, like chairs and cars, are made by people. Let's learn the difference together!",
         },
         {
           type: 'learn',
@@ -147,7 +147,7 @@ export const standards: Standard = {
           format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "2nd chapter! Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",
@@ -164,7 +164,7 @@ export const standards: Standard = {
           format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "3rd chapter! Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",
@@ -181,7 +181,7 @@ export const standards: Standard = {
           format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "4th chapter! Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",
@@ -201,7 +201,7 @@ export const standards: Standard = {
           format: 'text',
           title: 'Introduction',
           description: [
-            "Hi there! I'm Owlbert! We see so many things around us every day.",
+            "1st chapter 2nd standard! Hi there! I'm Zippy! We see so many things around us every day.",
             'Some things, like trees and birds, are found in nature.',
             'Other things, like chairs and cars, are made by people.',
             "Let's learn the difference together!",

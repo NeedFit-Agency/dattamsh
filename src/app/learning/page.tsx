@@ -6,19 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowLeft,
   faArrowRight,
-  faGear,
-  faHeart,
-  faLeaf,
-  faWrench,
-  faHeadphones,
 } from '@fortawesome/free-solid-svg-icons';
 import {
-  DragDropContext,
-  Droppable,
-  Draggable,
   DropResult,
 } from '@hello-pangea/dnd';
-import { motion } from 'framer-motion';
 
 import styles from './learning.module.css';
 import { standards } from '../../data/standardsData';
@@ -468,52 +459,41 @@ export default function LearningPage() {
    }
 
   return (
-    <div className={styles.learningContainer}>
+    <div>
       <div className={styles.learningContent}>
         <header className={styles.learningHeader}>
-          <div className={styles.headerNavigation}>
-            <button
-              className={styles.backButton}
-              onClick={handleBackClick}
-              title={currentSlideIndex === 0 ? "Exit Lesson" : "Previous Slide"}
-              aria-label={currentSlideIndex === 0 ? "Exit Lesson" : "Previous Slide"}
-            >
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </button>
-            <div className={styles.progressBarContainer} title={`Progress: ${Math.round(progress)}%`}>
-              <div className={styles.progressFill} style={{width: `${progress}%`}}></div>
-            </div>
-          </div>
+
         </header>
 
         <main className={styles.learningMain}>
-          {/* Using the new ContentRenderer component */}
           <ContentRenderer 
             content={currentContent}
-            onBack={handlePrevious}
+            onBack={handleBackClick}
             onComplete={handleContinue}
             progress={progress}
           />
         </main>
 
-        <footer className={styles.learningFooter}>
-          <button
-            className={styles.previousButton}
-            onClick={handlePrevious}
-            disabled={currentSlideIndex === 0}
-            aria-disabled={currentSlideIndex === 0}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} /> Previous
-          </button>
-          <button
-            className={continueButtonClass}
-            onClick={handleContinue}
-            disabled={continueButtonDisabled}
-            aria-disabled={continueButtonDisabled}
-          >
-            {continueButtonText} <FontAwesomeIcon icon={faArrowRight} />
-          </button>
-        </footer>
+        {currentContent.type !== 'drag-drop' && (
+          <footer className={styles.learningFooter}>
+            <button
+              className={styles.previousButton}
+              onClick={handlePrevious}
+              disabled={currentSlideIndex === 0}
+              aria-disabled={currentSlideIndex === 0}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} /> Previous
+            </button>
+            <button
+              className={continueButtonClass}
+              onClick={handleContinue}
+              disabled={continueButtonDisabled}
+              aria-disabled={continueButtonDisabled}
+            >
+              {continueButtonText} <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </footer>
+        )}
       </div>
 
       {showExitConfirm && (
