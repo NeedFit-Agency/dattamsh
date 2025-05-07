@@ -22,7 +22,10 @@ export default function RootLayout({
   
   return (
     <html lang="en">
-      <body className={nunito.className}>
+      <head>
+        <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
+      </head>
+      <body className={nunito.className} suppressHydrationWarning>
         {!isQuizPage && <Header />}
         {children}
       </body>

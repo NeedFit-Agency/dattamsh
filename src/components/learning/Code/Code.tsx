@@ -56,7 +56,12 @@ const Code: React.FC<CodeProps> = ({
   // Simple syntax highlighting for code
   const highlightCode = (code: string, language: string) => {
     // Basic implementation that can be extended for different languages
-    let highlighted = code;
+    // Ensure code is a string to prevent 'replace' of undefined errors
+    if (code === undefined || code === null) {
+      return '';
+    }
+    
+    let highlighted = code.toString();
     const keywords = ['REPEAT', 'TIMES', 'FORWARD', 'RIGHT', 'LEFT', 'IF', 'ELSE', 'THEN', 'WHILE', 'FOR', 'TO', 'STEP', 'FUNCTION', 'RETURN'];
     
     if (language) {
@@ -104,100 +109,67 @@ const Code: React.FC<CodeProps> = ({
   };
 
   const playAudio = () => {
-    // Stop current playback if any
-    window.speechSynthesis?.cancel();
-
-    if (isAudioPlaying) {
-      setIsAudioPlaying(false);
-      return;
-    }
-
-    const textToSpeak = audioContent || description || title;
-
-    // Use speech synthesis
-    if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
-      try {
-        const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.onstart = () => setIsAudioPlaying(true);
-        utterance.onend = () => setIsAudioPlaying(false);
-
-        utterance.onerror = (e) => {
-          console.error("SpeechSynthesis Error:", e);
-          setIsAudioPlaying(false);
-        };
-        window.speechSynthesis.speak(utterance);
-      } catch (e) {
-        console.error("SpeechSynthesis failed:", e);
-        setIsAudioPlaying(false);
-      }
-    } else {
-      setIsAudioPlaying(false);
-    }
-  };
-
-  const renderOutput = () => {
-    if (!outputContent) return null;
-
-    switch (outputContent.type) {
-      case 'image':
-        return (
-          <img 
-            src={outputContent.content} 
-            alt={outputContent.alt || 'Code output'} 
-          />
-        );
-      case 'html':
-        return (
-          <div dangerouslySetInnerHTML={{ __html: outputContent.content }} />
-        );
-      case 'text':
-      default:
-        return outputContent.content;
+    if (audioContent) {
+      setIsAudioPlaying(true);
+      const utterance = new SpeechSynthesisUtterance(audioContent);
+      utterance.onend = () => setIsAudioPlaying(false);
+      window.speechSynthesis.speak(utterance);
     }
   };
 
   return (
-    <div className={styles.mainContainer}>
-      {/* Header */}
-      <div className={styles.appHeader}>
-        <div className={styles.appName}>&lt;/&gt; Learning Code</div>
-        <div className={styles.userStats}>
+    <div className={styles.codeContainer}>
+      <div className={styles.header}>
+        <div className={styles.stats}>
           <div className={styles.statItem}>
-            <FontAwesomeIcon icon={faShield} className={styles.iconPlaceholder} /> {shields}
+            <FontAwesomeIcon icon={faHeart} className={styles.statIcon} />
+            <span>{hearts}</span>
           </div>
           <div className={styles.statItem}>
-            <FontAwesomeIcon icon={faGem} className={styles.iconPlaceholder} /> {gems}
+            <FontAwesomeIcon icon={faGem} className={styles.statIcon} />
+            <span>{gems}</span>
           </div>
-          <div className={`${styles.statItem} ${styles.hearts}`}>
-            <FontAwesomeIcon icon={faHeart} /> {hearts}
+          <div className={styles.statItem}>
+            <FontAwesomeIcon icon={faShield} className={styles.statIcon} />
+            <span>{shields}</span>
           </div>
+        </div>
+        <div className={styles.progressContainer}>
+          <div 
+            className={styles.progressBar} 
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
+        <div className={styles.settings}>
           <FontAwesomeIcon icon={faCog} className={styles.settingsIcon} />
         </div>
       </div>
 
-      {/* Content */}
-      <div className={styles.contentWrapper}>
-        <div className={styles.navigationHeader}>
-          <a className={styles.backArrow} onClick={handlePrevious}>←</a>
-          <div className={styles.progressBarContainer}>
-            <div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
-          </div>
-        </div>
-
-        <motion.h1 
-          className={styles.contentTitle}
+      <div className={styles.content}>
+        <motion.h2 
+          className={styles.title}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           {title}
-        </motion.h1>
-        
+        </motion.h2>
+
         {description && (
-          <p className={styles.contentDescription}>
+          <motion.p 
+            className={styles.description}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             {description}
+          </motion.p>
+        )}
+
+        {audioContent && (
+          <p className={styles.audioContainer}>
             <button 
-              className={`${styles.listenButton} ${isAudioPlaying ? styles.listenButtonPlaying : ''}`}
+              className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
               onClick={playAudio}
             >
               <FontAwesomeIcon icon={faHeadphones} /> {isAudioPlaying ? "Listening..." : "Listen"}
@@ -238,26 +210,37 @@ const Code: React.FC<CodeProps> = ({
           >
             <h4>{outputTitle}</h4>
             <div className={styles.outputContent}>
-              {renderOutput()}
+              {outputContent.type === 'text' && (
+                <p>{outputContent.content}</p>
+              )}
+              {outputContent.type === 'image' && (
+                <img 
+                  src={outputContent.content} 
+                  alt={outputContent.alt || 'Output image'} 
+                  className={styles.outputImage} 
+                />
+              )}
+              {outputContent.type === 'html' && (
+                <div dangerouslySetInnerHTML={{ __html: outputContent.content }} />
+              )}
             </div>
           </motion.div>
         )}
-      </div>
 
-      {/* Footer Navigation */}
-      <div className={styles.footerNav}>
-        <button 
-          className={`${styles.navButton} ${styles.navButtonPrevious}`} 
-          onClick={handlePrevious}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} /> Previous
-        </button>
-        <button 
-          className={`${styles.navButton} ${styles.navButtonContinue}`} 
-          onClick={handleContinue}
-        >
-          Continue <FontAwesomeIcon icon={faArrowRight} />
-        </button>
+        <div className={styles.navigationButtons}>
+          <button 
+            className={`${styles.navButton} ${styles.backButton}`}
+            onClick={handlePrevious}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} /> Back
+          </button>
+          <button 
+            className={`${styles.navButton} ${styles.continueButton}`}
+            onClick={handleContinue}
+          >
+            Continue <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+        </div>
       </div>
     </div>
   );
