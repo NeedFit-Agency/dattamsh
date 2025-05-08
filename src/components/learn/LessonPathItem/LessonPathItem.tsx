@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons'; // Only import check icon
 import Image from 'next/image';
 import styles from './LessonPathItem.module.css'; // Ensure this path is correct
+import React, { useState, useEffect } from 'react';
 
 interface LessonPathItemProps {
   type: 'checkmark' | 'chest' | 'duo' | 'level-badge';
@@ -13,6 +14,16 @@ interface LessonPathItemProps {
 }
 
 export default function LessonPathItem({ type, level, completed, onClick }: LessonPathItemProps) {
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
+
+  // Spin on mount for 'duo'
+  useEffect(() => {
+    if (type === 'duo') {
+      setIsSpinning(true);
+      setTimeout(() => setIsSpinning(false), 700); // match spin duration
+    }
+  }, [type]);
 
   // Determine the main class based on type
   let itemClass = `${styles.pathItem} ${styles[type]}`; // e.g., "pathItem checkmark"
@@ -22,6 +33,40 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
      itemClass += ` ${styles.completed}`; // Add .completed class for styling completed checkmarks
   }
 
+  const handleMascotClick = (e: React.MouseEvent) => {
+    if (type === 'duo') {
+      setIsAnimating(true);
+      setIsSpinning(true);
+      setTimeout(() => setIsSpinning(false), 700); // match spin duration
+    }
+    if (onClick) onClick();
+  };
+
+  const handleAnimationEnd = () => {
+    setIsAnimating(false);
+  };
+
+  const renderSparkles = () => {
+    if (!isAnimating) return null;
+    const positions = [
+      { top: '-10px', left: '50%', transform: 'translate(-50%, -100%)' },
+      { top: '50%', left: '-10px', transform: 'translate(-100%, -50%)' },
+      { bottom: '-10px', left: '50%', transform: 'translate(-50%, 100%)' },
+      { top: '50%', right: '-10px', transform: 'translate(100%, -50%)' },
+    ];
+    return positions.map((style, i) => (
+      <span
+        key={i}
+        className={styles.sparkle}
+        style={{ ...style }}
+      >
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M9 0L10.5 6H17L11.5 9.5L13 16L9 12.5L5 16L6.5 9.5L1 6H7.5L9 0Z" fill="#FFD700"/>
+        </svg>
+      </span>
+    ));
+  };
+
   const renderContent = () => {
     switch (type) {
       case 'checkmark':
@@ -30,7 +75,15 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
         return <div className={styles.chestContent}></div>;
       case 'duo':
         return (
-          <div className={styles.mascotContainer}>
+          <div
+            className={
+              styles.mascotContainer +
+              (isAnimating ? ' ' + styles.animate : '') +
+              (isSpinning ? ' ' + styles.spin : '')
+            }
+            onAnimationEnd={handleAnimationEnd}
+          >
+            {renderSparkles()}
             <Image 
               src="/mascot.png"
               alt="Mascot"
@@ -50,7 +103,7 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
   };
 
   return (
-    <div className={itemClass} onClick={onClick}>
+    <div className={itemClass} onClick={handleMascotClick}>
       {renderContent()}
     </div>
   );
