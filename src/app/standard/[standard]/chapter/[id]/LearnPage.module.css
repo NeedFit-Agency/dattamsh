@@ -359,7 +359,6 @@
 }
 
 
-/* --- Responsive Adjustments (Example) --- */
 @media (max-width: 1024px) {
     .topBar {
         padding: 10px 20px 0 20px;
@@ -377,7 +376,6 @@
     .appContainer {
         flex-direction: column; /* Stack sidebar and content */
     }
-    /* Adjust Sidebar styling if needed for mobile */
     .mainAreaWrapper {
         height: auto;
     }
@@ -390,7 +388,6 @@
         max-width: 100%;
         padding: 0 10px 40px 10px;
     }
-    /* Adjust RightRail styles for stacking if it remains visible */
 }
 
 /* --- Main Content Area --- */

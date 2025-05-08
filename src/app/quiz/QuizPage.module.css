@@ -1,126 +1,353 @@
-/* Update with blue theme */
-.appContainer {
-  display: flex;
-  min-height: 100vh;
-  background-color: #f8fafc;
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(28, 176, 246, 0.05) 0%, transparent 20%),
-    linear-gradient(45deg, rgba(59, 130, 246, 0.02) 0%, rgba(28, 176, 246, 0.02) 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.mainAreaWrapper {
-  flex: 1;
+.quizContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  height: 100%;
+  gap: 30px;
+  position: relative;
+}
+
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.progressText {
+  font-size: 14px;
+  color: #777;
+  text-align: right;
+}
+
+.progressBarOuter {
+  height: 8px;
+  background-color: #e5e5e5;
+  border-radius: 4px;
   overflow: hidden;
 }
 
-/* Make sure your top bar has proper styling to replace the header */
-.topBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  border-bottom: 2px solid #e5e7eb;
-  width: 100%;
+.progressBarInner {
+  height: 100%;
+  background-color: #3b82f6;
+  border-radius: 4px;
+  transition: width 0.5s ease;
 }
 
-.navigationControls {
+.questionArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.prompt {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px 0;
+  color: #3c3c3c;
+}
+
+.answersArea {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkAnswerContainer {
+  margin-top: auto;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.checkButton {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 35px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.checkButton:hover:not(:disabled) {
+  background-color: #60a5fa;
+  transform: translateY(-2px);
+}
+
+.checkButton:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2563eb;
+}
+
+.disabled, .checkButton:disabled {
+  background-color: #e5e5e5;
+  color: #aaaaaa;
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 #c5c5c5;
+}
+
+.feedbackFooter {
+  margin-top: auto;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.correct {
+  background-color: rgba(59, 130, 246, 0.1);
+  border: 2px solid #3b82f6;
+}
+
+.incorrect {
+  background-color: rgba(255, 75, 75, 0.1);
+  border: 2px solid #ff4b4b;
+}
+
+.feedbackContent {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.feedbackIcon {
+  font-size: 24px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.correct .feedbackIcon {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.incorrect .feedbackIcon {
+  background-color: #ff4b4b;
+  color: white;
+}
+
+.checkIcon {
+  font-size: 20px;
+}
+
+.timesIcon {
+  font-size: 20px;
+}
+
+.feedbackText {
+  flex: 1;
+}
+
+.feedbackText h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.correct .feedbackText h3 {
+  color: #3b82f6;
+}
+
+.incorrect .feedbackText h3 {
+  color: #ff4b4b;
+}
+
+.feedbackText p {
+  margin: 5px 0 0;
+  font-size: 16px;
+  color: #3c3c3c;
+}
+
+.correctAnswer {
+  font-weight: 700;
+  color: #3b82f6;
+}
+
+.explanation {
+  display: block;
+  margin-top: 8px;
+  font-style: italic;
+  color: #777;
+}
+
+.continueButton {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 35px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 15px;
+  align-self: center;
+}
+
+.continueButton:hover {
+  background-color: #60a5fa;
+  transform: translateY(-2px);
+}
+
+.continueButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2563eb;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
   gap: 20px;
 }
 
-.quitButton {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #777;
-  transition: color 0.2s;
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(28, 176, 246, 0.2);
+  border-top-color: #1cb0f6;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
 }
 
-.quitButton:hover {
-  color: #3b82f6;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.lessonIndicator {
-  font-weight: bold;
-  color: #3b82f6;
+.completionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  height: 100%;
+  padding: 40px;
+  text-align: center;
+  position: relative;
 }
 
-.contentArea {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
+.completionTitle {
+  font-size: 32px;
+  color: #1cb0f6;
+  margin: 0;
 }
 
-/* Modal styles */
-.quitConfirmModal {
-  position: fixed;
+.trophyContainer {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confetti {
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-image: url('/images/confetti.gif');
+  background-size: cover;
+  opacity: 0.7;
+  z-index: -1;
+  border-radius: 50%;
+  transform: scale(2);
+}
+
+.completionText {
+  font-size: 18px;
+  color: #3c3c3c;
+  margin: 0;
+}
+
+.statsContainer {
   display: flex;
-  justify-content: center;
+  gap: 30px;
+  margin: 10px 0;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  z-index: 1000;
-  animation: fadeIn 0.2s ease-out;
 }
 
-.modalContent {
-  background-color: white;
-  border-radius: 12px;
-  padding: 30px;
-  width: 400px;
-  max-width: 90%;
-  text-align: center;
-  animation: slideIn 0.3s ease-out;
-}
-
-.modalButtons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.cancelButton {
-  background-color: #e5e5e5;
-  color: #333;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 20px;
+.statValue {
+  font-size: 24px;
   font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s;
+  color: #1cb0f6;
 }
 
-.cancelButton:hover {
-  background-color: #d1d1d1;
+.statLabel {
+  font-size: 14px;
+  color: #777;
 }
 
-.quitConfirmButton {
-  background-color: #ff4b4b;
+.streakIndicator {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #ff9600;
   color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 20px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 14px;
   font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.quitConfirmButton:hover {
-  background-color: #e04141;
+.starsContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #ffde00;
+  font-size: 24px;
+  filter: drop-shadow(0 0 10px rgba(255, 222, 0, 0.7));
+}
+
+/* Animation for speaker icon */
+.playing {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes fadeIn {
@@ -128,27 +355,250 @@
   to { opacity: 1; }
 }
 
-@keyframes slideIn {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+/* Add these styles for percentage completion and audio features */
+
+/* Score percentage display */
+.scorePercentage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  animation: fadeInUp 0.6s ease-out 0.3s forwards;
+  opacity: 0;
 }
 
-/* Responsive design */
-@media (max-width: 576px) {
-  .topBar {
-    padding: 8px 12px;
+.scoreValue {
+  font-size: 48px;
+  font-weight: 800;
+  color: #3b82f6;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.scoreLabel {
+  font-size: 16px;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+/* Machine image display */
+.questionImage {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.machineImage {
+  max-width: 180px;
+  max-height: 180px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
+  transition: transform 0.3s ease;
+  animation: fadeInDown 0.5s ease-out;
+}
+
+.machineImage:hover {
+  transform: scale(1.05);
+}
+
+/* Listen button styling */
+.questionWithAudio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  position: relative;
+}
+
+.listenButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #e5eeff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #3b82f6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.listenButton:hover:not(:disabled) {
+  background-color: #d1e0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+.listenButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.listenButton svg {
+  font-size: 16px;
+}
+
+.listening {
+  animation: pulsate 1.5s infinite;
+}
+
+@keyframes pulsate {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .contentArea {
-    padding: 15px 10px;
+  to {
+    opacity: 1; 
+    transform: translateY(0);
   }
-  
-  .modalContent {
-    padding: 20px 15px;
+}
+
+@keyframes fadeInDown {
+  from { 
+    opacity: 0;
+    transform: translateY(-15px);
   }
-  
-  .modalButtons {
-    flex-direction: column;
-    gap: 10px;
+  to {
+    opacity: 1; 
+    transform: translateY(0);
   }
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0 16px 0;
+  position: relative;
+  background: transparent;
+  min-height: 60px;
+}
+
+.headerTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #222;
+  letter-spacing: 0.5px;
+  text-align: center;
+  flex: 1;
+}
+
+.quitButton {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 16px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+  color: #3b82f6;
+  font-size: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.quitButton:hover:not(:disabled) {
+  background: #e5eeff;
+  color: #2563eb;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+}
+
+.quitButton:active:not(:disabled) {
+  background: #d1e0ff;
+  color: #1cb0f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.10);
+}
+
+.quitConfirmModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(44, 62, 80, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modalContent {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+  padding: 36px 32px 28px 32px;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modalContent h3 {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #222;
+}
+
+.modalContent p {
+  margin: 0 0 24px 0;
+  color: #444;
+  font-size: 16px;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+}
+
+.cancelButton, .quitConfirmButton {
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cancelButton {
+  background: #e5eeff;
+  color: #3b82f6;
+}
+
+.cancelButton:hover {
+  background: #d1e0ff;
+}
+
+.quitConfirmButton {
+  background: #ff4b4b;
+  color: #fff;
+}
+
+.quitConfirmButton:hover {
+  background: #ff7b7b;
 }

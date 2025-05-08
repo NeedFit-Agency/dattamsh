@@ -1,8 +1,6 @@
 'use client'; // Needs onClick
 
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 import styles from './AnswerOption.module.css';
 
