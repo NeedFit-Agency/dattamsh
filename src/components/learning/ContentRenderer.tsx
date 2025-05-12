@@ -41,6 +41,10 @@ const Text = dynamic(() => import('./Text'), {
   loading: () => <LoadingSpinner message="Loading text content..." /> 
 });
 
+const Quiz = dynamic(() => import('./Quiz'), { 
+  loading: () => <LoadingSpinner message="Loading quiz content..." /> 
+});
+
 // Fallback component when a format doesn't have a corresponding component
 const UnsupportedFormat: React.FC<{format: string}> = ({ format }) => (
   <div style={{ padding: '20px', border: '1px solid #ff6b6b', borderRadius: '8px', color: '#ff6b6b' }}>
@@ -193,6 +197,19 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
           exampleImages={content.exampleImages}
           audioSrc={content.audioSrc}
           speakText={content.speakText}
+          progress={progress}
+          onBack={onBack}
+          onComplete={onComplete}
+        />
+      );
+      
+    case 'quiz':
+      return (
+        <Quiz
+          title={content.title}
+          subtitle={content.subtitle}
+          questions={content.questions}
+          audioContent={content.audioContent}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
