@@ -46,7 +46,7 @@
   align-items: center;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #1cb0f6;
+  color: #303030;
   letter-spacing: -1px;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -61,7 +61,7 @@
 }
 
 .codeSlash {
-  color: #3f9c00;
+  color: #2e2e2d;
   margin: 0 -1px;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -87,11 +87,11 @@
 }
 
 .logoMain {
-  color: #1cb0f6;
+  color: #323232;
 }
 
 .logoAccent {
-  background: linear-gradient(135deg, #1cb0f6, #1cb0f6);
+  background: linear-gradient(135deg, #3b3b3b, #535353);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

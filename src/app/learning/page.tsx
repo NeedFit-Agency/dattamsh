@@ -6,19 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowLeft,
   faArrowRight,
-  faGear,
-  faHeart,
-  faLeaf,
-  faWrench,
-  faHeadphones,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from '@hello-pangea/dnd';
-import { motion } from 'framer-motion';
 
 import styles from './learning.module.css';
 import { standards } from '../../data/standardsData';
@@ -247,99 +235,6 @@ export default function LearningPage() {
     }
   };
 
-  const playSlideAudio = useCallback(() => {
-      if (!currentContent) return;
-
-      window.speechSynthesis?.cancel();
-
-      if (isAudioPlaying) {
-          setIsAudioPlaying(false);
-          return;
-      }
-
-      let textToSpeak = currentContent.speakText;
-      if (!textToSpeak && currentContent.type === 'learn') {
-          textToSpeak = Array.isArray(currentContent.description)
-              ? currentContent.description.join(' ')
-              : currentContent.description;
-      }
-       if (!textToSpeak && currentContent.type === 'drag-drop') {
-          textToSpeak = currentContent.instruction;
-       }
-
-      if (currentContent.audioSrc) {
-          console.warn("Audio file playback (.mp3) not fully implemented. Using SpeechSynthesis fallback.");
-           if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
-               speakText(textToSpeak);
-           } else {
-               setIsAudioPlaying(false);
-           }
-      } else if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
-         speakText(textToSpeak);
-      } else {
-          console.log("No audio source or text to speak for this slide.");
-          setIsAudioPlaying(false);
-      }
-  }, [currentContent, isAudioPlaying]);
-
-   const speakText = (text: string) => {
-      if (typeof window === 'undefined' || !window.speechSynthesis) {
-          console.error("SpeechSynthesis API not available.");
-          setIsAudioPlaying(false);
-          return;
-      }
-      try {
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.onstart = () => setIsAudioPlaying(true);
-          utterance.onend = () => setIsAudioPlaying(false);
-          utterance.onerror = (e) => {
-              console.error("SpeechSynthesis Error:", e);
-              setIsAudioPlaying(false);
-          };
-          window.speechSynthesis.speak(utterance);
-      } catch (e) {
-          console.error("SpeechSynthesis failed:", e);
-          setIsAudioPlaying(false);
-      }
-   };
-
-  const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
-
-    if (!destination || dndChecked) return;
-
-    const sourceId = source.droppableId as keyof typeof dndState;
-    const destId = destination.droppableId as keyof typeof dndState;
-
-    if (sourceId === destId && source.index === destination.index) return;
-
-    const sourceItems = dndState[sourceId] ? [...dndState[sourceId]] : [];
-    const destItems = dndState[destId] ? [...dndState[destId]] : [];
-
-    if (sourceId === destId) {
-      const [removed] = sourceItems.splice(source.index, 1);
-      sourceItems.splice(destination.index, 0, removed);
-
-      setDndState(prev => ({
-        ...prev,
-        [sourceId]: sourceItems
-      }));
-    } else {
-      if (sourceItems.length > source.index) {
-          const [removed] = sourceItems.splice(source.index, 1);
-          destItems.splice(destination.index, 0, removed);
-
-          setDndState(prev => ({
-            ...prev,
-            [sourceId]: sourceItems,
-            [destId]: destItems
-          }));
-      } else {
-          console.error("Drag source index out of bounds.");
-      }
-    }
-  };
-
   const checkDragDrop = () => {
     if (!currentContent || currentContent.type !== 'drag-drop') return;
 
@@ -463,57 +358,42 @@ export default function LearningPage() {
     }
   }
 
-   if (!currentContent) {
-        return <div className={styles.loadingMessage}>Loading Lesson...</div>;
-   }
-
   return (
-    <div className={styles.learningContainer}>
+    <div>
       <div className={styles.learningContent}>
         <header className={styles.learningHeader}>
-          <div className={styles.headerNavigation}>
-            <button
-              className={styles.backButton}
-              onClick={handleBackClick}
-              title={currentSlideIndex === 0 ? "Exit Lesson" : "Previous Slide"}
-              aria-label={currentSlideIndex === 0 ? "Exit Lesson" : "Previous Slide"}
-            >
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </button>
-            <div className={styles.progressBarContainer} title={`Progress: ${Math.round(progress)}%`}>
-              <div className={styles.progressFill} style={{width: `${progress}%`}}></div>
-            </div>
-          </div>
+
         </header>
 
         <main className={styles.learningMain}>
-          {/* Using the new ContentRenderer component */}
           <ContentRenderer 
             content={currentContent}
-            onBack={handlePrevious}
+            onBack={handleBackClick}
             onComplete={handleContinue}
             progress={progress}
           />
         </main>
 
-        <footer className={styles.learningFooter}>
-          <button
-            className={styles.previousButton}
-            onClick={handlePrevious}
-            disabled={currentSlideIndex === 0}
-            aria-disabled={currentSlideIndex === 0}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} /> Previous
-          </button>
-          <button
-            className={continueButtonClass}
-            onClick={handleContinue}
-            disabled={continueButtonDisabled}
-            aria-disabled={continueButtonDisabled}
-          >
-            {continueButtonText} <FontAwesomeIcon icon={faArrowRight} />
-          </button>
-        </footer>
+        {currentContent.type !== 'drag-drop' && (
+          <footer className={styles.learningFooter}>
+            <button
+              className={styles.previousButton}
+              onClick={handlePrevious}
+              disabled={currentSlideIndex === 0}
+              aria-disabled={currentSlideIndex === 0}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} /> Previous
+            </button>
+            <button
+              className={continueButtonClass}
+              onClick={handleContinue}
+              disabled={continueButtonDisabled}
+              aria-disabled={continueButtonDisabled}
+            >
+              {continueButtonText} <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </footer>
+        )}
       </div>
 
       {showExitConfirm && (

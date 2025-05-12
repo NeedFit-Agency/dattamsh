@@ -11,26 +11,6 @@
   overflow: hidden;
 }
 
-/* Header Area */
-.appHeader { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 10px 25px; 
-  border-bottom: 1px solid var(--border-light, #e9ecef);
-}
-
-.appName { 
-  color: var(--primary, #007bff); 
-  font-weight: bold; 
-  font-size: 1.2em;
-}
-
-.userStats { 
-  display: flex; 
-  align-items: center; 
-  gap: 15px;
-}
 
 .statItem { 
   display: flex; 
@@ -159,7 +139,7 @@
   max-width: 650px;
   margin: 0 auto;
   padding: 20px;
-  background-color: var(--background-light, #f8f9fa);
+  background-color: #ffffff;
   border-radius: 12px;
   border: 1px solid var(--border-light, #dee2e6);
 }
@@ -264,4 +244,24 @@
   .contentTitle {
     font-size: 1.2em;
   }
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: var(--text-medium, #6c757d);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.25em;
+  margin-right: 12px;
+}
+
+.backButton:hover {
+  background-color: var(--background-medium, #e9ecef);
+  color: var(--text-dark, #343a40);
 }

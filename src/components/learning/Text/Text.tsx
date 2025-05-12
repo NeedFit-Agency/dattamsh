@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphones, faShield, faGem, faHeart, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faHeadphones, faShield, faGem, faHeart, faCog, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TextProps } from './types';
 import styles from './text.module.css';
 
@@ -42,7 +42,8 @@ const Text: React.FC<TextProps> = ({
   exampleImages,
   audioSrc,
   speakText,
-  progress = 0
+  progress = 0,
+  onBack
 }) => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
@@ -79,16 +80,21 @@ const Text: React.FC<TextProps> = ({
   return (
     <div className={styles.mainContainer}>
       {/* Header */}
-      <div className={styles.appHeader}>
-        <div className={styles.appName}>&lt;/&gt; Learning Text</div>
-        <div className={styles.userStats}>
-          <FontAwesomeIcon icon={faCog} className={styles.settingsIcon} />
-        </div>
-      </div>
 
       {/* Content */}
       <div className={styles.contentWrapper}>
         <div className={styles.navigationHeader}>
+          {onBack && (
+            <button
+              className={styles.backButton}
+              onClick={onBack}
+              title="Back"
+              aria-label="Back"
+              type="button"
+            >
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+          )}
           <div className={styles.progressBarContainer}>
             <div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
           </div>
