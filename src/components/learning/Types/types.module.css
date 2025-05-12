@@ -192,7 +192,7 @@
 
 /* Footer Navigation */
 .footerNav { 
-  display: flex; 
+  display: none; /* Hide navigation buttons */
   justify-content: space-between; 
   align-items: center; 
   padding: 20px 25px; 

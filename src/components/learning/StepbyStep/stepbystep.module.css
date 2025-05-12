@@ -2,7 +2,8 @@
 
 /* Main Container & Card */
 .mainContainer { 
-  max-width: 850px;
+  width: 800px;
+  max-width: 100%;
   margin: 30px auto; 
   background-color: var(--white, #ffffff); 
   border-radius: 15px; 

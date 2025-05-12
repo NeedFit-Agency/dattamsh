@@ -6,62 +6,35 @@ import { faArrowLeft, faBookOpen, faArrowDown, faLaptopCode, faRobot, faMicrochi
 import React from 'react';
 import LessonPathItem from '@/components/learn/LessonPathItem/LessonPathItem';
 import styles from './LearnPage.module.css';
-import { chapters } from '@/data/chaptersData';
+import standardsService from '@/services/standardsService';
+import { ContentItemType } from '@/types/standards';
 
-type ContentItemType = {
-  type: 'checkmark' | 'chest' | 'level-badge' | 'duo';
-  id: number;
-  completed: boolean;
-  level?: number;
-};
+// Using imported type from standards.ts
 
 type PageParams = {
   standard: string;
   id: string;
 };
 
+/**
+ * Get chapter data using the standardsService
+ * This function maps the service data to the component's expected format
+ */
 const getChapterData = (standardId: string, chapterId: string) => {
-  const standardTitles = {
-    "1": "Basic Concepts",
-    "2": "Intermediate Learning",
-    "3": "Advanced Topics",
-    "4": "Expert Level"
+  // Get chapter data from the service
+  const chapterData = standardsService.getChapterData(standardId, chapterId);
+  
+  // Map the theme string to the actual CSS class
+  const themeMap: {[key: string]: string} = {
+    "themeGreen": styles.themeGreen,
+    "themePurple": styles.themePurple,
+    "themeOrange": styles.themeOrange,
+    "themeBlue": styles.themeBlue
   };
-
-  const headerThemes = {
-    "1": styles.themeGreen,
-    "2": styles.themePurple,
-    "3": styles.themeOrange,
-    "4": styles.themeBlue,
-    "5": styles.themeGreen,
-    "6": styles.themePurple,
-    "7": styles.themeOrange,
-    "8": styles.themeBlue,
-    "9": styles.themeGreen,
-    "10": styles.themePurple,
-    "11": styles.themeOrange,
-    "12": styles.themeBlue,
-  };
-
-  const chapterTitle =
-    chapters[standardId as keyof typeof chapters]
-      ?.find(
-        (chapter: { id: number; title: string; completed: boolean }) =>
-          chapter.id.toString() === chapterId
-      )?.title || "Unknown Chapter";
-
+  
   return {
-    standardTitle: standardTitles[standardId as keyof typeof standardTitles] || "Unknown Standard",
-    chapterTitle,
-    headerTheme: headerThemes[chapterId as keyof typeof headerThemes] || styles.themeGreen,
-    content: [
-      { type: 'level-badge' as const, id: 1, level: 1, completed: true },
-      { type: 'level-badge' as const, id: 2, level: 2, completed: false },
-      { type: 'level-badge' as const, id: 3, level: 3, completed: true },
-      { type: 'level-badge' as const, id: 4, level: 4, completed: true },
-      { type: 'chest' as const, id: 5, completed: false },
-      { type: 'duo' as const, id: 6, completed: false }
-    ] as ContentItemType[]
+    ...chapterData,
+    headerTheme: themeMap[chapterData.headerTheme] || styles.themeGreen
   };
 };
 

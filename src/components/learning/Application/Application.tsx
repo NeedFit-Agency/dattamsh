@@ -11,6 +11,11 @@ export interface ExampleItem {
   scenario: string;
   explanation: string;
   visualIcon: string;  // Emoji or icon character to display
+  category?: string;   // Optional category for grouping examples
+  difficulty?: 'beginner' | 'intermediate' | 'advanced'; // Optional difficulty level
+  isInteractive?: boolean; // Whether this example has interactive elements
+  tags?: string[];    // Optional tags for filtering
+  color?: string;     // Optional custom color for the example card
 }
 
 export interface ApplicationProps {
@@ -29,7 +34,7 @@ export interface ApplicationProps {
 const Application: React.FC<ApplicationProps> = ({
   title,
   subtitle,
-  examples,
+  examples = [], // Default to empty array to prevent null/undefined errors
   progress = 80,
   hearts = 3,
   gems = 234,
@@ -39,6 +44,7 @@ const Application: React.FC<ApplicationProps> = ({
   onBack
 }) => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [activeExampleId, setActiveExampleId] = useState<string | null>(null);
 
   useEffect(() => {
     // Cleanup audio when component unmounts
@@ -56,6 +62,13 @@ const Application: React.FC<ApplicationProps> = ({
   const handleContinue = () => {
     if (onComplete) {
       onComplete();
+    }
+  };
+
+  const handleExampleClick = (example: ExampleItem) => {
+    if (example.isInteractive) {
+      setActiveExampleId(activeExampleId === example.id ? null : example.id);
+      // You can add additional interaction logic here
     }
   };
 
@@ -133,25 +146,46 @@ const Application: React.FC<ApplicationProps> = ({
         )}
 
         <div className={styles.examplesGrid}>
-          {examples.map((example, index) => (
-            <motion.div
-              key={example.id}
-              className={styles.exampleCard}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.4 }}
-            >
-              <div className={styles.exampleVisual}>
-                {example.visualIcon}
-              </div>
-              <div className={styles.exampleScenario}>
-                {example.scenario}
-              </div>
-              <div className={styles.exampleExplanation}>
-                {example.explanation}
-              </div>
-            </motion.div>
-          ))}
+          {examples && examples.length > 0 ? (
+            examples.map((example, index) => (
+              <motion.div
+                key={example.id}
+                className={`${styles.exampleCard} ${example.isInteractive ? styles.interactive : ''} ${activeExampleId === example.id ? styles.active : ''}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
+                style={example.color ? { borderColor: example.color } : {}}
+                onClick={() => example.isInteractive && handleExampleClick(example)}
+              >
+                {example.difficulty && (
+                  <div className={`${styles.difficultyBadge} ${styles[example.difficulty]}`}>
+                    {example.difficulty}
+                  </div>
+                )}
+                <div className={styles.exampleVisual}>
+                  {example.visualIcon}
+                </div>
+                <div className={styles.exampleScenario}>
+                  {example.scenario}
+                </div>
+                <div className={styles.exampleExplanation}>
+                  {example.explanation}
+                </div>
+                {example.category && (
+                  <div className={styles.exampleCategory}>{example.category}</div>
+                )}
+                {example.tags && example.tags.length > 0 && (
+                  <div className={styles.tagContainer}>
+                    {example.tags.map((tag, tagIndex) => (
+                      <span key={tagIndex} className={styles.tag}>{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            ))
+          ) : (
+            <div className={styles.noExamples}>No examples available</div>
+          )}
         </div>
       </div>
 

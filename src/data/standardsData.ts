@@ -23,7 +23,9 @@ export interface LearningSlide extends BaseContentProps {
   description: string | string[];
   imageUrl?: string;
   exampleImages?: { src: string; alt: string }[];
-  // Format will typically be 'text', 'video', etc.
+  steps?: { title: string; description: string; imageUrl?: string }[];
+  questions?: { question: string; options: string[]; answer: number }[];
+  // Format will typically be 'text', 'video', 'step-by-step', 'quiz', etc.
 }
 
 export interface QuizSlide extends BaseContentProps {
@@ -161,7 +163,7 @@ export const standards: Standard = {
     },
     {
       id: 2,
-      title: "All About Computers",
+      title: "Weather and Seasons",
       lessonContent: [
         {
           type: 'learn',
@@ -248,6 +250,7 @@ export const standards: Standard = {
         }
       ]
     },
+  
     {
       id: 3,
       title: "Computer Care and Safety",
@@ -255,6 +258,7 @@ export const standards: Standard = {
         {
           type: 'learn',
           format: 'text',
+
           title: 'Taking Care of Yourself',
           description: [
             "Hello friends! I'm Zippy! Today we're going to learn how to take care of ourselves while using a computer.",
@@ -302,6 +306,7 @@ export const standards: Standard = {
         {
           type: 'drag-drop',
           format: 'drag-drop',
+
           title: 'Activity: Computer Care',
           instruction: 'Help me identify good computer habits. Drag each habit to the correct category.',
           items: [
@@ -344,6 +349,7 @@ export const standards: Standard = {
         {
           type: 'learn',
           format: 'text',
+
           title: 'Introduction to Keyboard',
           description: [
             "Hello friends! I'm Zippy! Today we're going to learn about the keyboard and mouse.",
@@ -428,11 +434,13 @@ export const standards: Standard = {
   "4": [
     {
       id: 1,
+
       title: "Microsoft Word (Part 2)",
       lessonContent: [
         {
           type: 'learn',
           format: 'text',
+
           title: 'Insert Tab Features',
           description: [
             "Hello friends! I'm Zippy! Today we're going to learn about Microsoft Word's Insert Tab.",
@@ -475,6 +483,7 @@ export const standards: Standard = {
         {
           type: 'learn',
           format: 'text',
+
           title: 'Adding Images and SmartArt',
           description: [
             "You can make your document more interesting by adding pictures and SmartArt.",
@@ -533,6 +542,7 @@ export const standards: Standard = {
         {
           type: 'learn',
           format: 'text',
+
           title: 'What is Windows?',
           description: [
             "Hello friends! I'm Zippy! Today we're going to learn about Windows.",

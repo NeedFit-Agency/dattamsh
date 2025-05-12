@@ -1,0 +1,1473 @@
+Binary Brains
+The Language of Computers
+Windows 11
+
+& MS Office 2021
+
+NCF & NEP 2020 Aligned
+
+Unleash the Power of Technology: Learn, Explore, and Create
+Computer
+Literacy
+
+Digital Skills
+
+Computational
+Thinking
+
+CHETANA SARANG
+
+Artificial
+Intelligence
+
+Sustainable
+Development
+Goals
+
+Name:
+Class:
+
+Section:
+
+School:
+
+Knowledge Partners
+
+m
+
+Periwinkle
+
+Dattamsh
+
+Welcome to the Binary Brains Series - a thoughtfully crafted collection of textbooks designed for
+students in Grades 1 through 8. Aligned with both the National Curriculum Framework (NCF) and the
+National Education Policy (NEP) 2020, the series combines AI, activity-based learning, and hands-on
+mini-projects to make technology exciting and practical. While QR codes unlock a world of extra
+resources, making learning even more interactive. Students beneﬁt from dynamic workstations that
+mix both traditional and modern setups. With books based on Windows 11 and MS Ofﬁce 2021,
+students gain proﬁciency in latest computer technology, ensuring an engaging, future-ready
+experience. This series inspires students to contribute to a sustainable future by exploring the
+intersection of technology and the Sustainable Development Goals (SDGs)
+
+Computer Literacy : Develops a strong theoretical base in computer science, combined with
+essential practical skills.
+Digital Skills: Develops strong digital skills, enabling students to conﬁdently adapt to emerging
+technologies and use them to their full potential.
+Computational Thinking: Cultivates a mindset of critical inquiry and analytical thinking, enabling
+students to leverage technology to innovate and create solutions.
+Artiﬁcial Intelligence (AI): Instills a foundation in AI, equipping students with the knowledge and
+skills to conﬁdently navigate an AI-powered world.
+Sustainable Development Goals (SDGs): Cultivates a generation of responsible technologists who
+can harness technology to solve real-world problems and contribute to a better future.
+
+CONTENTS
+Computer Literacy
+1. More about Computers
+● Where do we use Computers?
+● What is a Computer made of?
+● Input and Output Devices
+● Concept of Input, Process, and Output
+
+2. Smartphones: Pocket Computers
+● What can Smartphones do?
+● How are Smartphones like Computers?
+● YouTube and other Smartphone Apps
+● Some more fun and Useful Apps
+
+Digital Skills
+3. Introduction to Notepad
+● Keyboard Practice with Notepad App
+● Type and Save the File
+
+4. Drawing with MS Paint (Part 2)
+● Exploring Lines, Curves, and Brushes
+● Add Words to Pictures
+● Fixing Mistakes in MS Paint
+
+Computational Thinking
+5. Blockly: Coding with Blocks
+● What is Blockly?
+● Uses of Blockly
+● How to use Blockly?
+● Solve Puzzles with Blockly
+● Guiding the Turtle to Draw Shapes in
+Blockly
+
+6. Scratch: Making Stories Come to Life (Part 1)
+● What is Scratch?
+● How to open Scratch?
+● Elements of Scratch
+● Coding Blocks
+● Sprite Information Panel
+● Exploring Sounds Tab
+● Creating a Simple Scratch Program: Moving a
+Cat with Sound
+● What are Operators?
+● How to Save your Work?
+
+Artiﬁcial Intelligence
+7. Meet AI: Your Smart Helper
+● What is AI?
+● How AI Works
+● Examples of AI
+● Where can we find AI in our Daily Life?
+● Staying Safe around AI
+
+Sustainable Development Goals
+8. SDG 2 - Zero Hunger
+
+Sr. No.
+
+Title
+
+Page No.
+
+1.
+
+More about Computers
+
+7
+
+2.
+
+Smartphones: Pocket Computers
+
+19
+
+3.
+
+Introduction to Notepad
+
+27
+
+4.
+
+Drawing with MS Paint (Part 2)
+
+35
+
+5.
+
+Blockly: Coding with Blocks
+
+46
+
+6.
+
+Scratch: Making Stories Come to
+Life (Part 1)
+
+59
+
+7.
+
+Meet AI: Your Smart Helper
+
+77
+
+8.
+
+SDG 2 - Zero Hunger
+
+85
+
+1
+
+More about Computers
+
+Questions to ponder
+Ÿ In which places have you seen a computer being used?
+Ÿ How does a computer listen and talk?
+Ÿ How does a computer turn your ideas into results?
+
+Where do we use Computers?
+1. Schools: Teachers use computers in school to teach children more about
+topics by showing videos. Children learn computer skills in school using
+computers. Computers are also used in school offices for accounting and to
+keep records of teachers, staff, and students.
+
+2. Shops: In shops, computers help in money transactions, check prices, and
+keep track of what is sold.
+
+3. Offices: In offices, people use computers to write letters, send emails, and
+complete important tasks efficiently. Computers are also used in offices to
+maintain records and to store information.
+
+More about Computers
+
+7
+
+4. Hospitals: Doctors use computers to store patient information. Some
+advanced computers also help operate machines used in medical procedures.
+
+5. Home: We use computers at home to watch our favourite cartoons, play
+games, type letters, draw and colour, to learn, watch videos, listen to music, etc.
+
+6. Bank: Banks use computers to keep track of customer’s accounts and money.
+They also help with withdrawing cash from ATMs.
+
+Activity: List four more places where we use computers. Ask your teacher
+or parents to help you!
+
+8
+
+Place 1:
+
+Place 3:
+
+Place 2:
+
+Place 4:
+
+PW Binary Brains - 2
+
+What is a Computer made of?
+Hardware and Software are the two main components of a computer system.
+
+Hardware is the parts of the computer you can touch.
+Example:
+CPU cabinet
+
+Keyboard
+
+Monitor
+
+Mouse
+
+Activity: Can you name two other parts of computers that can be termed
+as ‘Hardware’?
+Hint: We have learnt about these parts in grade 1 as “Extra parts of the
+Computer”.
+Software is what makes the computer work. Software is a set of instructions that
+tells a computer what to do. You can’t touch software. Without software, the
+computer hardware is of no use.
+Example:
+
+More about Computers
+
+MS Paint
+
+Scratch
+
+Notepad
+
+Periwinkle App
+
+9
+
+Activity: Identify the pictures. Write ‘H’ for hardware and ‘S’ for software.
+
+Input and Output Devices
+Input is the instruction we give to a computer. We give instructions by typing
+or clicking. These instructions tell the computer what to do.
+Output is the result the computer provides, showing what it has done with our
+input. The computer provides output on the screen or on printed documents.
+Computers can "listen", that is, receive instructions from users using input
+devices. Computers can "talk", that is, give results to users using output devices.
+
+10
+
+PW Binary Brains - 2
+
+Input Devices: Listening
+We have already learnt about these input devices and used them.
+
+Keyboard
+
+Mouse
+
+More input devices are the scanner and the microphone.
+Ÿ
+
+Scanner: A scanner is a machine that helps
+turn pictures and papers into digital files so you
+can see them on the computer.
+Example: If you put your drawing on the scanner, it will
+take a picture of it and show it on the computer screen.
+
+Ÿ
+
+Microphone: A microphone is a device that helps
+record sounds and voice on to a computer. Microphones
+are used for talking, giving voice instructions, singing,
+and recording music.
+
+Output Devices: Talking
+We have already learnt about output devices and used them.
+
+Speakers
+
+Monitor
+
+Another output device is the printer.
+Printer: It puts your drawing or words from the
+computer onto paper.
+Example: If you draw a picture, or type a
+document on the computer, the printer prints
+what you see on the monitor on to paper.
+More about Computers
+
+11
+
+Activity: Identifying input and output devices.
+Write "I" for input and "O" for output next to each device.
+1. Keyboard: _______
+
+2. Monitor: _______
+
+3. Microphone: _______
+
+4. Mouse: _______
+
+5. Printer: _______
+
+6. Scanner: _______
+
+Concept of Input, Process, and Output
+
+Ÿ
+
+Input: Input is when we tell a computer to do something. For example, when
+you type on a keyboard or click a mouse, you are giving instructions to the
+computer. That's input.
+Process: This is when the computer takes the instructions and works on
+them. For instance, when you click "Print" on your computer, you give an
+input or instruction to the computer. The computer then
+processes that command and sends the document to the
+printer. That’s the process. The ‘process’ is done by the
+CPU (Central Processing Unit).
+
+Ÿ
+
+Ÿ
+
+Output: This is when the computer shows the result after
+processing the instructions. For example, the printer
+gives you a paper copy of what you want. That’s the output.
+12
+
+PW Binary Brains - 2
+
+Activity: Using a calculator guess whether each step is Input, Process,
+or Output.
+Use the calculator and follow the steps below. For each step,
+tick the correct option: input, process, or output.
+1. Type the numbers 5, +, and 3 on the calculator.
+input
+
+process
+
+output
+
+2. The calculator adds the numbers together.
+input
+
+process
+
+output
+
+3. The calculator shows the result, 8, on the screen.
+input
+
+process
+
+output
+
+Think about this:
+
+Hint
+It could
+be both.
+
+Is a calculator an input device or an output device? Why?
+Ans:______________________________________________________
+__________________________________________________________
+__________________________________________________________
+__________________________________________________________
+__________________________________________________________
+__________________________________________________________
+
+More about Computers
+
+13
+
+Caselet
+Tina’s Big Day with the Computer
+Tina was excited because today her teacher, Miss Lily, was teaching the
+class about computers! Miss Lily asked, “Where do we use computers?”
+Tina raised her hand and said, “We use computers at home, in schools,
+and even at shops!”
+
+Miss Lily showed them different parts of the computer. She pointed to the
+monitor, where they could see pictures and words. Then she held up the
+keyboard with lots of buttons for typing and the mouse that helps us
+click. She also showed the speakers for sound and a printer that prints
+on paper.
+These parts are called input and output devices, explained Miss Lily.
+“When you type or click, you’re giving input. And when you see things on
+the monitor or hear sounds, that’s the output!”
+Finally, Miss Lily explained how computers work: input, process, and
+output. She said, “If you want to draw, you use the mouse to give input,
+the computer processes it, and your picture appears on the screen as
+output!”
+Tina had a lot of fun learning and couldn’t wait to share what she learnt
+with her family.
+Questions for discussion:
+1. Where have you seen people using computers?
+2. What parts of the computer did Tina learn about?
+3. What’s the difference between input and output?
+
+14
+
+PW Binary Brains - 2
+
+Did you know?
+Ÿ The oldest working computer,
+called the "Harvard Mark I", was
+made in 1944 and still works
+today.
+
+Points to Remember
+Ÿ Computers are used in schools, homes, shops, hospitals, banks,
+and many more places.
+Ÿ Hardware is the part of a computer you can touch, like the monitor,
+keyboard, and mouse.
+Ÿ Software is the program that tells the computer what to do, like
+applications and programs like Notepad, MS Paint, etc.
+Ÿ Input devices help the computer "listen", that is, instructions are
+given to a computer using input devices like a keyboard and
+mouse.
+Ÿ Output devices help the computer "talk", that is, the computer
+gives results to the user using output devices like monitor, printer,
+and speakers.
+Ÿ You tell the computer what to do (input), it does the work
+(process), and then shows a result (output).
+Ÿ The CPU processes the instructions.
+
+More about Computers
+
+15
+
+WORKSTATION
+A. Who am I? Choose the correct answer from the list given below.
+keyboard, monitor, speakers, mouse, software
+1. I let you see what the computer is doing, but I don’t make a sound.
+Who am I?____________________
+2. I help you tell the computer what to do by clicking and moving.
+Who am I?____________________
+3. I help you hear music from the computer. Who am I?____________________
+4. I help you type letters and words into the computer. Who am I?
+__________________________
+5. I am inside the computer, you can't touch me, but without me, the computer
+won't be useful. Who am I?____________________
+B. Circle the odd one out.
+1. Places where computers are used
+a. school
+
+b. hospital
+
+c. tree
+
+d. library
+
+b. mouse
+
+c. MS Word
+
+d. printer
+
+c. keyboard
+
+d. printer
+
+b. speaker
+
+c. pencil
+
+d. scanner
+
+b. keyboard
+
+c. MS Paint
+
+d. notepad
+
+2. Not a hardware
+a. keyboard
+
+3. Not an output device
+a. monitor
+
+b. speaker
+
+4. Non-computer item
+a. printer
+5. Not a software
+a. whatsapp
+16
+
+PW Binary Brains - 2
+
+C. Find and circle the hidden computer words in the word grid.
+
+B
+
+KEYBOARD
+
+MONITOR
+
+HARDWARE
+
+SPEAKER
+
+SOFTWARE
+
+MOUSE
+
+S
+
+S
+
+K
+
+H
+
+F
+
+W M B
+
+M F
+
+V
+
+G P
+
+O
+
+E
+
+A
+
+E
+
+X
+
+O H
+
+O R
+
+K
+
+X
+
+E
+
+F
+
+Y
+
+R
+
+E
+
+V
+
+N
+
+M U
+
+T
+
+X
+
+P
+
+A
+
+T
+
+B
+
+D
+
+Z
+
+S
+
+I
+
+V
+
+S
+
+T
+
+M
+
+E
+
+K
+
+W O W H
+
+U
+
+T
+
+N
+
+E
+
+V
+
+V
+
+Z
+
+E
+
+A
+
+A
+
+A
+
+J
+
+H
+
+O Q L
+
+C
+
+I
+
+Z
+
+R
+
+R
+
+R
+
+R
+
+Q S
+
+R
+
+C
+
+Q K
+
+U
+
+L
+
+E
+
+D
+
+E
+
+Z
+
+U
+
+Q V
+
+More about Computers
+
+D
+
+H
+
+H
+
+K
+
+17
+
+D. Match each term in Column A with the correct description in Column B.
+
+Column A
+
+Column B
+
+1. input
+
+a. a paper copy of the
+document comes out
+from the printer
+
+2. process
+
+b. clicking on the print
+button to print a
+document
+
+3. output
+
+c. the computer
+processes the
+command and
+sends the
+document
+to the printer
+
+Mini Project - Form groups of 5-6 students each. Create a chart with pictures or
+drawings of hardware devices learnt in this lesson. Group the hardware devices
+as input devices and output devices.
+
+18
+
+PW Binary Brains - 2
+
+2
+
+Smartphones: Pocket Computers
+
+Questions to ponder
+Ÿ What are some things you can do with a smartphone that
+you couldn’t do with a regular phone?
+Ÿ Are computers and smartphones similar? Why do
+you think so?
+Earlier, mobile phones were only used to make calls and send messages. Over the
+years, mobile phones have developed into smartphones which can do a lot more
+than just making calls and sending messages.
+
+What can Smartphones do?
+Smartphones are like small computers that fit in your pocket. They can do many
+things.
+For example:
+
+make phone calls
+
+send messages and
+emails
+
+listen to music
+Smartphones: Pocket Computers
+
+take pictures
+
+help people find their
+way with maps
+
+play games
+
+search for information
+on the internet
+19
+
+Activity: Can you think of any other things you can do on a smartphone?
+Discuss them in class.
+
+How are Smartphones like Computers?
+Computer: Hey, smartphone! Guess what?
+People say we are like twins. What do you think?
+Smartphone: Hi computer, I agree with you.
+We can do so many similar things.
+Computer: But you can go on adventures
+because you’re small and fit in people’s pockets.
+Smartphone: Yes, I am like a mini-computer! I
+can send messages and emails, play games, show
+videos, listen to music, help people search for
+information on the internet, and even make calls.
+Computer: So, we both help people in their
+day-to-day tasks, just in different ways.
+Smartphone: We make quite the team!
+
+Computer: High five, smartphone!
+
+Smartphone: High five, computer!
+
+YouTube and other Smartphone Apps
+
+YouTube is an application (app) where you can watch and share videos. It's like
+watching TV but on a computer, tablet, or phone.
+20
+
+PW Binary Brains - 2
+
+1. You can watch your favourite cartoon.
+
+2. You can listen to rhymes.
+
+3. You can watch educational videos and learn about animals, birds, flowers and
+so much more.
+
+4. You can watch and learn how to draw and learn new things.
+
+YouTube is a really fun app!
+As the YouTube app can be used to watch videos on a smartphone, similarly we
+can watch videos on a desktop and laptop computer by visiting the YouTube
+website: www.youtube.com
+Smartphones: Pocket Computers
+
+21
+
+Some more fun and Useful Apps
+There are many more apps for our smartphones like educational apps, gaming
+apps, shopping apps, messaging apps, and so on. Let's look at a few of them.
+1. Educational app: Periwinkle eLearning app - consists of learning videos
+and stories for various subjects across all grades.
+
+2. Gaming app: Endless Alphabet - teaches alphabets and words with fun
+games.
+
+3. Shopping apps: Amazon and Flipkart - help you with shopping.
+
+4. Creativity apps: Art For Kids Hub - teaches drawing and crafts.
+Colorfy - colouring book on mobile.
+
+5. Some more apps: WhatsApp - WhatsApp is an app that lets people
+communicate with one another. People can send messages, photos, videos,
+documents and make calls to one another.
+Google Maps - It shows you where places are and helps you find the best way
+to get there.
+
+These are just a few examples. There are many more fun and useful apps.
+22
+
+PW Binary Brains - 2
+
+Caselet
+Reducing Screen Time and the Benefits of Playing
+Outdoor Games
+In the city of Mumbai, lived a boy named Ravi. He loved playing
+games on his parent’s phone. He spent three to four hours each day
+on the screen.
+On Saturday, Ravi’s family decided to take him to the local park. Ravi
+was unhappy but still went along. At the park, he saw children playing
+hide and seek, flying kites, and playing football. Ravi was not sure at
+first but soon joined in the fun.
+As Ravi played with his friends, he felt the fresh air, heard joyful laughter,
+and discovered how exciting outdoor games could be. By the
+end of the day, Ravi was full of energy and could not stop smiling. His
+mom said, “Ravi, see how much fun you had? Outdoor play keeps you
+healthy and happy, and it's a great way to spend time with friends.”
+
+Did you know?
+Ÿ The first smartphone was invented in 1992.
+Ÿ YouTube was created in 2005.
+Ÿ The first video ever uploaded to YouTube is titled "Me at the
+Zoo". It was uploaded by Jawed Karim, on April 23, 2005.
+
+Smartphones: Pocket Computers
+
+23
+
+Points to Remember
+Ÿ Smartphones are like small computers that fit in your pocket.
+Ÿ Smartphones and computers are very similar.
+Ÿ YouTube is a fun learning app.
+Ÿ There are many more apps like educational apps, gaming apps,
+messaging apps, shopping apps, and so on.
+
+WORKSTATION
+A. Tick
+
+the correct sentence and cross
+
+the incorrect sentence.
+
+1. Smartphones can be used to play games and watch videos.
+2. YouTube is an app used for sending text messages.
+3. Playing outside can help improve physical fitness and mood.
+4. Smartphones can help people find their way using maps.
+5. Computers and smartphones are completely different and cannot
+perform similar tasks.
+B. Select the tasks a smartphone can perform by ticking the correct
+options from the list below.
+
+24
+
+Make phone calls
+
+Take pictures
+
+Cook food
+
+Drive a car
+
+Send messages and emails
+
+Play games
+PW Binary Brains - 2
+
+C. Match column ‘A’ to column ‘B’.
+Column A
+
+Column B
+
+1. Smartphones
+a. shopping
+
+2. YouTube
+b. help people find
+their way
+
+3. Flipkart
+c. make calls and
+send messages to
+family and friends
+
+4. Apple maps
+d. watch your
+favourite cartoon
+
+5. WhatsApp
+e. small computer
+that fits in your
+pocket
+
+Smartphones: Pocket Computers
+
+25
+
+D. Fill in the crossword with the help of the clues given.
+PERIWINKLE, AMAZON, SMARTPHONE, MAP, YOUTUBE
+
+2
+
+5
+
+1
+
+A
+
+M
+
+3
+
+Y
+
+S
+
+4
+
+P
+E
+
+P
+
+N
+Clues
+
+E
+
+Down
+1. This app helps people find their way.
+2. This is a shopping app.
+3. This app is used to watch videos and
+movies.
+4. This is an educational app that teaches you
+subjects with fun videos.
+
+E
+
+Across
+5. A device that is like a small computer.
+
+26
+
+PW Binary Brains - 2
+
+3
+
+Introduction to Notepad
+
+Questions to ponder
+Ÿ If you wanted to practice writing words, how would you do
+that on a computer?
+Ÿ Have you ever copied something from a book to a computer,
+and if so, how did you do it?
+Ÿ How do you keep your work safe so it doesn’t get lost from
+the computer?
+Notepad is like a notebook that you can use on a computer. It helps you write
+down things like stories, ideas, letters, or any notes you want to keep.
+
+Keyboard Practice with Notepad App
+Notepad is a book on your computer where you can write stories and make
+notes. But instead of using pencils or pens, you use the keyboard to type your
+words.
+Let us learn how to use Notepad and let's practice typing skills with the help of a
+keyboard.
+a. Open Notepad
+Step 1: Go to the search bar in the Start icon on your computer.
+
+Step 2: Search for Notepad. The icon looks like a small white paper Notepad.
+Click on it to Open.
+
+Introduction to Notepad
+
+27
+
+b. Components of Notepad
+
+1. Title Bar: This is the top part of Notepad where you see the name of your file.
+When you first open Notepad, it will say Untitled. This means you haven’t saved your
+file yet. Once you save it, the name will change to name you choose while saving it.
+2. Menu Bar: It has different menu options like File, Edit, and View. These help
+you do different things in Notepad.
+File: This menu
+has options to
+save your work,
+open a file, or
+print your notes.
+
+28
+
+Edit: This menu has
+options to help you
+change your text. You
+can copy, cut, or paste
+words using this option.
+
+View: This menu
+has options to let
+you show or hide the
+Status Bar at the
+bottom.
+
+PW Binary Brains - 2
+
+3. Text Area: This is the big blank space where you type your words, sentences,
+etc.
+4. Settings: This lets you change how the app looks, like switching between dark
+and light themes. You can also adjust how the text looks and works. You can also
+turn on features like spell check and autocorrect to fix typing mistakes.
+c. Practice Typing
+Step 1: Use the keyboard to type your name. Press the Enter key to start
+typing on a new line.
+Step 2: Type the names of 4 to 5 of your classmates.
+
+Type and Save the File
+a. Type a story
+Ÿ Think of a short story.
+Ÿ Start typing your story in Notepad.
+For example, you can write, “Once upon a time, there was a cat.” If you make a
+mistake while typing, use the backspace key to erase it and try again.
+
+Introduction to Notepad
+
+29
+
+b. Save your work
+Step 1: After you type your story on the computer, you need to save it on the
+computer so you can see it later.
+Step 2: Click on the “File” menu at the top.
+Step 3: Choose “Save As”.
+
+Step 4: Give your file a name, like “MyStory”.
+Step 5: Click “Save”.
+
+30
+
+PW Binary Brains - 2
+
+Activity: Copy a story from book to notepad and save the file with a
+unique name.
+1. Find a Story
+○ Take a story from a storybook or write your own story in a notebook.
+2. Type the Story
+○ Open Notepad.
+○ Type the story in Notepad.
+3. Save the Story
+○ Click on “File” and then “Save As”.
+○ Give your file a unique name, like “My First Story”.
+○ Click “Save”.
+
+Caselet
+Exploring How to Write on a Computer
+Saketh is a little boy who loves to write stories. He has a notebook
+where he writes about his fun trips to the park, his favourite toys, and
+his playful pet dog, Ruby.
+One day at school, Saketh’s teacher introduces him to Notepad on the
+computer.
+“Saketh”, she says, smiling, “You can type your stories on the computer
+using Notepad! It’s just like your notebook, but it’s on the screen!”
+Saketh's eyes light up with excitement. He opens Notepad and sees a
+blank white page waiting for him. He starts typing his favourite story
+about Ruby. As he types, the letters pop up on the screen.
+When he finishes his story, Saketh wants to keep it safe. His teacher
+shows him how to do it. Saketh gives a special name to his story:
+“RubyAdventure.” He clicks ‘Save’ and feels proud.
+Saketh loves using Notepad because he can keep his stories neat. He
+can always come back to his story whenever he wants to read it or
+make it even better.
+Questions for discussion:
+1. Why does Saketh like using Notepad?
+2. Why is it important for Saketh to save his story?
+
+Introduction to Notepad
+
+31
+
+Did you know?
+Ÿ Notepad was developed in 1983 as a
+mouse-based text editor. It's been part
+of Microsoft Windows since 1985.
+Ÿ Notepad is a simple text editor and
+often a good choice for basic coding.
+Ÿ Notepad can be used to create web
+pages.
+
+Points to Remember
+Ÿ Notepad helps you type and save simple text easily.
+Ÿ You can open Notepad by clicking the little paper notepad icon on
+your computer.
+Ÿ Use the keyboard to write stories or lists in Notepad.
+Ÿ Save your work by clicking "File" and then "Save As".
+
+32
+
+PW Binary Brains - 2
+
+WORKSTATION
+A. State whether the following statements are True or False.
+1. Notepad helps us write and save our stories.
+
+____________________
+
+2. The monitor displays what we type in Notepad.
+
+____________________
+
+3. We use a pencil to write in Notepad.
+
+____________________
+
+4. The keyboard helps us type words on the computer. ____________________
+5. We save our work by closing Notepad.
+
+____________________
+
+Mini Project - Type a short paragraph in Notepad with about 5-6 sentences on
+one of the following topics.
+Ÿ My Favourite Sport
+Ÿ My School
+Ÿ My Family
+Remember: After you finish writing, save your story on the computer. Give your
+story a special name.
+C. Decode the Secret Message.
+Decoding is converting symbols, codes, or letters into meaningful words or
+messages. It helps us understand hidden information. Imagine if you had a secret
+language or code that only you and your friends knew. Decoding would be like
+breaking that code to find out what it really says.
+Use your decoding skills to uncover an important message about working on the
+Notepad.
+Each symbol represents a letter from A to Z. Write the provided letter to match
+each symbol to its corresponding letter.
+Key:
+
+Decode this message and write the letters below.
+
+Introduction to Notepad
+
+33
+
+B. Match the following components of Notepad given in column A to its
+correct description given in column B.
+
+34
+
+Column A
+
+Column B
+
+1. Notepad
+
+a. the area where
+you type your
+story or notes
+
+2. Title Bar
+
+b. a simple app
+on your computer
+used for typing
+
+3. Menu Bar
+
+c. the top part
+that displays the
+name of your file
+
+4. Text Area
+
+d. contains options
+like File, Edit, View
+
+PW Binary Brains - 2
+
+4
+
+Drawing with MS Paint (Part 2)
+
+Questions to ponder
+Ÿ If you could paint a big rainbow, how would you do that on
+a computer?
+Ÿ How would you add a name to a picture on the computer?
+We all like to paint with different things like brushes, crayons, or wax colours,
+right? In this lesson, we will explore more features of MS Paint!
+You know how to draw and fill a shape with colour. Now it’s time to discover new
+tools. We will learn to use lines, curves, and brushes, add words to our pictures,
+and undo or redo actions if we want to make changes.
+
+Exploring Lines, Curves, and Brushes
+When you open MS Paint, you’ll see a section at the top called the Ribbon.
+The Ribbon holds all the tools you need to create your drawings.
+You'll find the following tools on the Ribbon.
+Ÿ Selection tools: To choose parts of your drawing.
+Ÿ Image editing tools: To change or adjust your drawing or elements in your
+drawing.
+Ÿ Drawing tools: Such as Pencil to draw and Brushes of different strokes to
+draw and colour. There’s also a Text Tool for writing, and an Eraser tool for
+erasing parts of drawings.
+Ÿ Shape tools: To draw shapes like squares, circles, stars and many more.
+Ÿ Colours tool: A colour palette full of bright colours to choose from.
+Ribbon
+
+Ÿ Line Tool: In MS Paint, using a Line tool you can
+draw straight lines. Just click on the “Line” tool. Click on
+the drawing area where you want the line to start, and
+drag it to where you want it to end, and release the
+mouse button.
+Drawing with MS Paint (Part 2)
+
+35
+
+You can draw lines like these using a Line tool:
+Horizontal line
+
+Vertical line
+
+Slant line
+
+Ÿ Curve Tool: In MS Paint, using a curve tool you can draw curved and wavy lines.
+To make a curve, click on the “Curve” tool. Draw a straight line first, then click and
+drag the line to make it curve. If you want to draw a mountain on the computer you
+can use the curve tool.
+
+You can draw these using the curve tool:
+
+Ÿ Brushes: The Brushes tool in Microsoft Paint is a drawing tool that lets you
+apply colour to an image using various strokes and styles.
+
+36
+
+PW Binary Brains - 2
+
+When you click on the Brushes tool in MS Paint, you
+see different kinds of Brushes.
+Each makes different strokes:
+Ÿ Some Brushes create big strokes, which are great
+for drawing large shapes.
+Ÿ Others make small strokes, perfect for adding tiny
+details.
+Ÿ There are also Brushes that create smooth, soft
+lines, useful for mixing colours.
+Steps
+Step 1: Click on the Brushes tool to see the different options. Select the type of
+stroke you want to use.
+Step 2: Use the selected stroke to draw on the drawing area by dragging the
+mouse pointer.
+Step 3: Now create simple or complex drawings based on your imagination.
+Step 4: Try the different Brushes from the options and see what strokes they
+make.
+
+For example, here we have a fish drawn with the help of Calligraphy pen.
+Drawing with MS Paint (Part 2)
+
+37
+
+Activity: Use MS Paint on your computer to draw a flower like the one in
+the picture. Have fun with the tools and colours to make your flower
+look beautiful.
+Instructions:
+1. Look at the picture of the flower.
+2. Select the Circle Tool to draw the centre circle of the flower.
+3. Select the Line Tool to draw the outline of the flower petals.
+4. Use the Curve Tool to shape the petals smoothly.
+5. Choose the Brush Tool to add details and colours to the flower.
+
+Add Words to Pictures
+Have you ever added a title or your name to your drawing?
+Now, let's learn how to do it on the computer!
+You can add words to your pictures in MS Paint using the Text tool. This is
+like writing on your picture with a pencil or pen.
+Step 1: Open MS Paint.
+Step 2: Draw any picture you like. For now, let us take the flower we drew in the
+activity before.
+
+38
+
+PW Binary Brains - 2
+
+Step 3: Look for the letter 'A' in the Tools section of the Ribbon. This is the Text
+Tool. When you click on the Text Tool, a box pops up. This box has different text
+options to change the font of the text, the font size, font style, alignment, and
+colour.
+
+Step 4: Click on the place where you want to add words. A box will pop up.
+
+Step 5: Type the words you want to add in the box. Once you are happy with
+how your words look, click outside the text box on the picture to fix the text.
+
+Drawing with MS Paint (Part 2)
+
+39
+
+Remember, once the text is fixed, you cannot change it! So make sure you
+are sure of the text you have typed before clicking outside the box.
+Step 6: Click on "File". Select "Save As”.
+Step 7: Choose a name for your picture and click "Save". Your picture with
+words is now ready.
+Activity: Try drawing a tree using the Line, Curve, and other tools. Add a
+name to your drawing using the Text tool.
+
+Fixing mistakes in MS Paint
+Just like you fix mistakes with an eraser on paper, you can fix mistakes in MS
+Paint. Let us see how.
+1. Use the Eraser: If you want to fix a part of your picture, you can use the
+Eraser. Click on the Eraser Tool (it looks like a pink block). You can adjust the
+size of the eraser.
+A scroll appears when you select the Erase tool. By moving the scroll up or
+down, you can choose the size of the eraser. Use a small size for tiny mistakes
+and a big size for bigger areas.
+To erase, click the mouse button and move it over the part of your drawing that
+you want to erase. When you're done, let go of the mouse button, and you can
+draw or paint on it again.
+
+40
+
+PW Binary Brains - 2
+
+2. Undo a mistake: If you make a mistake and want to undo that particular step,
+click the Undo arrow - the arrow that goes backwards. It is on top of the screen.
+It looks like a curved arrow pointing to the left. This will make the last step you
+did go away.
+
+3. Redo your work: If you undo something by mistake and want it back, click the
+Redo arrow - the arrow that goes forward. It is on top of the screen. It looks like
+a curved arrow pointing to the right. This will bring back what you took away.
+
+Activity: Drawing what you see with MS Paint.
+1. Find a Picture: Look around your room or outside for a picture or a thing.
+It could be a cup, a pencil, fruit, or a favourite book.
+2. Open MS Paint: Click on the Paint icon on your computer to open
+MS Paint.
+3. Draw what you see: Use the tools in MS Paint to draw the thing you
+found. Try to make your drawing look like the picture or thing you chose.
+4. Add Details: Add colours and small details to make your drawing look
+even more like what you see. You can use colour tools and different tools to
+make your picture look great.
+5. Share your Drawing: Save your drawing. Ask a family member to look at
+your drawing. Tell them what you drew and how you used the tools to make
+it.
+
+Drawing with MS Paint (Part 2)
+
+41
+
+Caselet
+Correcting Mistakes and Improving in MS Paint
+Nidhi wanted to create a picture of tall mountain ranges with curved
+peak using MS Paint. She felt excited as she imagined how she would
+draw the peak reaching into the sky.
+She started by choosing a brown colour for the mountain and began
+drawing its shape. However, while drawing one side of the mountain,
+she accidentally made it too small, which didn’t look right. Feeling a bit
+sad, she remembered the undo button. With a quick click, the mistake
+disappeared. She smiled and tried again, drawing a mountain as she
+wanted.
+After finishing the mountains, Nidhi added a blue sky above it. Finally,
+she wrote, “I love mountains!” in colourful letters. When she showed
+her drawing to her friends, they loved it!
+
+Through this experience, Nidhi learned that making mistakes is okay.
+The undo button helped her fix her work easily, showing her that
+mistakes are a part of learning. She also realised that everyone makes
+mistakes in life, and one should always keep trying.
+Questions for discussion:
+1. Which tool do you think Nidhi used to draw her mountain?
+2. What button did Nidhi think of that helped her correct her mistake?
+
+42
+
+PW Binary Brains - 2
+
+Did you know?
+Ÿ MS Paint has been a part of Windows since 1985.
+Ÿ MS Paint was one of the first programs where people
+could draw on their computers.
+Ÿ Old versions of MS Paint didn’t have an undo button, so if
+you made a mistake, you had to start over.
+Ÿ MS Paint has always had a basic set of colours, but you
+can mix them to create new colours. You can even create
+your colour by choosing from a colour palette!
+
+Points to Remember
+Ÿ Line tool helps you draw straight lines.
+Ÿ The Curve tool makes smooth, wavy lines.
+Ÿ The Brushes tool adds colour and details to your drawings with
+different strokes.
+Ÿ Undo and Redo help you fix and change your work.
+Ÿ The Eraser tool lets you erase parts of your drawing.
+Ÿ The Save option keeps your drawing safe on your
+computer.
+
+Drawing with MS Paint (Part 2)
+
+43
+
+WORKSTATION
+A. Answer the following questions by choosing the correct options.
+1. Which tool would you use to draw a straight line in MS Paint?
+a. Brush tool
+b. Line tool
+c. Curve tool
+2. What does the "Undo" button do in MS Paint?
+a. It adds colours to your drawing.
+b. It fixes a mistake by removing the last action.
+c. It makes your drawing bigger.
+3. What tool would you use in MS Paint to draw a curved line?
+a. Line tool
+b. Curve tool
+c. Eraser tool
+4. What happens when you click the "Redo" button in MS Paint?
+a. It erases part of your drawing.
+b. It brings back the last action you undid.
+c. It adds text to your picture.
+5. Which tool would you choose to write your name on your drawing in
+MS Paint?
+a. Eraser tool
+b. Line tool
+c. Text tool
+B. State whether the following statements are True or False.
+1. You can use the Text tool to add colours to your picture.
+
+____________
+
+2. The Brushes tool can make different strokes.
+
+____________
+
+3. The Curve tool is used for adding text to your pictures.
+
+____________
+
+4. To undo a mistake in MS Paint, you use the Redo button.
+
+____________
+
+5. The Eraser tool in MS Paint can only remove entire drawings, not just parts
+of them.
+44
+
+____________
+PW Binary Brains - 2
+
+

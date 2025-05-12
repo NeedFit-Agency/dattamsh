@@ -144,6 +144,12 @@
   gap: 20px;
 }
 
+@media (max-width: 600px) {
+  .examplesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Individual Example Card */
 .exampleCard { 
   background-color: var(--background-light, #f8f9fa); 
@@ -156,11 +162,64 @@
   text-align: center; 
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
 .exampleCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.interactive {
+  border: 2px solid var(--primary, #007bff);
+  cursor: pointer;
+}
+
+.interactive:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.active {
+  background-color: rgba(0, 123, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.difficultyBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.7em;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+}
+
+.beginner {
+  background-color: var(--success-green, #28a745);
+}
+
+.intermediate {
+  background-color: var(--warning-yellow, #ffc107);
+  color: #212529;
+}
+
+.advanced {
+  background-color: var(--error-red, #dc3545);
+}
+
+.noExamples {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
+  color: var(--text-medium, #6c757d);
+  font-style: italic;
+  background-color: var(--background-light, #f8f9fa);
+  border-radius: 10px;
+  border: 1px dashed var(--border-medium, #ced4da);
 }
 
 .exampleVisual { 
@@ -188,11 +247,40 @@
   font-size: 0.95em; 
   line-height: 1.5; 
   color: var(--text-dark, #495057);
+  margin-bottom: 10px;
+}
+
+.exampleCategory {
+  font-size: 0.8em;
+  background-color: var(--primary-light, #cfe2ff);
+  color: var(--primary-dark, #0056b3);
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.tag {
+  font-size: 0.75em;
+  background-color: var(--background-medium, #e9ecef);
+  color: var(--text-medium, #6c757d);
+  padding: 2px 8px;
+  border-radius: 10px;
+  display: inline-block;
 }
 
 /* Footer Navigation */
 .footerNav { 
-  display: flex; 
+  display: flex; /* Show navigation buttons */
   justify-content: space-between; 
   align-items: center; 
   padding: 20px 25px; 
