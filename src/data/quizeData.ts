@@ -82,7 +82,7 @@ export const quizzes: QuizStandard = {
           id: 1,
           prompt: 'test test?',
           options: ['A device for playing games', 'A device for listening to music', 'A device for writing', 'A device for reading'],
-          correctAnswer: 0,
+          correctAnswer: 1,
           explanation: 'A computer is a device for playing games.'
         }
       ]
@@ -95,7 +95,7 @@ export const quizzes: QuizStandard = {
           id: 1,
           prompt: 'test test?',
           options: ['A device for playing games', 'A device for listening to music', 'A device for writing', 'A device for reading'],
-          correctAnswer: 0,
+          correctAnswer: 2,
           explanation: 'A computer is a device for playing games.'
         }
       ]

@@ -39,7 +39,7 @@ export default function QuizPage() {
     setTimeout(() => {
       const chapters = quizzes[standardId];
       if (chapters && chapters.length > 0) {
-        setQuestions(chapters[0].questions);
+        setQuestions(chapters[chapterIndex].questions);
       } else {
         setQuestions([]);
       }
@@ -178,7 +178,7 @@ export default function QuizPage() {
   return (
     <div className={styles.appContainer}>
       <div className={styles.mainAreaWrapper}>
-        <div className={styles.header}>
+        <div className={`${styles.header} ${styles.highFidelityHeader}`}>
           <button 
             className={styles.quitButton} 
             onClick={() => setShowQuitConfirm(true)}
@@ -186,7 +186,7 @@ export default function QuizPage() {
           >
             <FontAwesomeIcon icon={faX} />
           </button>
-          <div className={styles.headerTitle}>
+          <div className={styles.highFidelityTitle}>
             {chapterTitle}
           </div>
         </div>
