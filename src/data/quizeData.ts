@@ -80,7 +80,7 @@ export const quizzes: QuizStandard = {
       questions: [
         {
           id: 1,
-          prompt: 'test test?',
+          prompt: 'test 2nd chapter?',
           options: ['A device for playing games', 'A device for listening to music', 'A device for writing', 'A device for reading'],
           correctAnswer: 1,
           explanation: 'A computer is a device for playing games.'
@@ -93,9 +93,22 @@ export const quizzes: QuizStandard = {
       questions: [
         {
           id: 1,
-          prompt: 'test test?',
+          prompt: 'test 3rd chapter?',
           options: ['A device for playing games', 'A device for listening to music', 'A device for writing', 'A device for reading'],
           correctAnswer: 2,
+          explanation: 'A computer is a device for playing games.'
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "4th chapter quize",
+      questions: [
+        {
+          id: 1,
+          prompt: 'test 4th chapter?',
+          options: ['A device for playing games', 'A device for listening to music', 'A device for writing', 'A device for reading'],
+          correctAnswer: 3,
           explanation: 'A computer is a device for playing games.'
         }
       ]
@@ -127,6 +140,21 @@ export const quizzes: QuizStandard = {
           correctAnswer: 0,
           explanation: 'explanation 3'
         }
+      ]
+    }
+  ],
+  "3": [
+    {
+      id: 1,
+      title: "3rd Quiz",
+      questions: [
+        {
+          id: 1,
+          prompt: 'What is the capital of France?',
+          options: ['Paris', 'London', 'Berlin', 'Madrid'],
+          correctAnswer: 0,
+          explanation: 'Paris is the capital of France.'
+        } 
       ]
     }
   ]
