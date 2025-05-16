@@ -117,28 +117,68 @@ export const quizzes: QuizStandard = {
   "2": [
     {
       id: 1,
-      title: "2nd Quiz",
+      title: "More about Computers",
       questions: [
         {
           id: 1,
-          prompt: 'What is the capital of France?',
-          options: ['Paris', 'London', 'Berlin', 'Madrid'],
-          correctAnswer: 0,
-          explanation: 'Paris is the capital of France.'
+          prompt: 'Which of these is a hardware part of a computer?',
+          options: ['MS Paint', 'Monitor', 'Notepad', 'Scratch'],
+          correctAnswer: 1,
+          explanation: 'Monitor is a hardware part you can touch. The others are software.'
         },
         {
           id: 2,
-          prompt: 'question 2',
-          options: ['option 1', 'option 2', 'option 3', 'option 4'],
-          correctAnswer: 0,
-          explanation: 'explanation 2'
+          prompt: 'What is software?',
+          options: [
+            'A part of the computer you can touch',
+            'A set of instructions that tells the computer what to do',
+            'A type of input device',
+            'A type of output device'
+          ],
+          correctAnswer: 1,
+          explanation: 'Software is a set of instructions that tells the computer what to do.'
         },
         {
           id: 3,
-          prompt: 'question 3',
-          options: ['option 1', 'option 2', 'option 3', 'option 4'],
-          correctAnswer: 0,
-          explanation: 'explanation 3'
+          prompt: 'Which of these is an input device?',
+          options: ['Printer', 'Monitor', 'Keyboard', 'Speaker'],
+          correctAnswer: 2,
+          explanation: 'Keyboard is an input device. Printer, monitor, and speaker are output devices.'
+        },
+        {
+          id: 4,
+          prompt: 'Where can you find computers being used?',
+          options: ['Schools', 'Hospitals', 'Banks', 'All of the above'],
+          correctAnswer: 3,
+          explanation: 'Computers are used in all these places and more!'
+        },
+        {
+          id: 5,
+          prompt: 'What is the correct order for how a computer works?',
+          options: ['Output → Input → Process', 'Input → Process → Output', 'Process → Output → Input', 'Input → Output → Process'],
+          correctAnswer: 1,
+          explanation: 'The correct order is Input → Process → Output.'
+        },
+        {
+          id: 6,
+          prompt: 'Which of these is NOT a hardware part?',
+          options: ['Mouse', 'CPU cabinet', 'MS Paint', 'Monitor'],
+          correctAnswer: 2,
+          explanation: 'MS Paint is software, not hardware.'
+        },
+        {
+          id: 7,
+          prompt: 'What does a printer do?',
+          options: ['Shows pictures on screen', 'Prints on paper', 'Records sound', 'Stores information'],
+          correctAnswer: 1,
+          explanation: 'A printer puts your drawing or words from the computer onto paper.'
+        },
+        {
+          id: 8,
+          prompt: 'Which of these is an example of software?',
+          options: ['Keyboard', 'Monitor', 'Scratch', 'Mouse'],
+          correctAnswer: 2,
+          explanation: 'Scratch is a software application. The others are hardware.'
         }
       ]
     }
