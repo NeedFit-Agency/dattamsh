@@ -1,4 +1,3 @@
-
 .pathItem {
     position: relative;
     width: 85px;
@@ -59,8 +58,8 @@
 
 /* Duo Character */
 .duo {
-    background: linear-gradient(135deg, #4DB9FF, #1AA2FF);
-    border-radius: 50% 50% 45% 45%;
+    /* background: linear-gradient(135deg, #4DB9FF, #1AA2FF); */
+    /* border-radius: 50% 50% 45% 45%; */
     transform-origin: bottom;
     animation: bounce 2s ease-in-out infinite;
 }
@@ -183,4 +182,58 @@
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
+}
+
+.mascotContainer.animate {
+  animation: mascotPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.mascotShadow {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 50%;
+  height: 14px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.18) 60%, rgba(0,0,0,0) 100%);
+  border-radius: 50%;
+  transform: translateX(-50%) scale(1);
+  pointer-events: none;
+  z-index: 1;
+  transition: filter 0.2s;
+}
+
+@keyframes mascotPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  60% { transform: scale(0.92); }
+  80% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.sparkle {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+  animation: sparklePop 0.6s ease-out;
+}
+
+@keyframes sparklePop {
+  0% { opacity: 0; transform: scale(0.2) rotate(0deg); }
+  20% { opacity: 1; transform: scale(1.1) rotate(20deg); }
+  60% { opacity: 1; transform: scale(1) rotate(40deg); }
+  100% { opacity: 0; transform: scale(0.2) rotate(60deg); }
+}
+
+.spin {
+  animation: mascotSpin 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes mascotSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  60% { transform: rotate(360deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
 }

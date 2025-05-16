@@ -3,42 +3,42 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { FormatType } from '../../data/standardsData';
+import LoadingSpinner from './LoadingSpinner';
 
-// Dynamic imports for each content format component
 const Application = dynamic(() => import('./Application'), { 
-  loading: () => <div>Loading application content...</div> 
+  loading: () => <LoadingSpinner message="Loading application content..." /> 
 });
 
 const Types = dynamic(() => import('./Types'), { 
-  loading: () => <div>Loading types content...</div> 
+  loading: () => <LoadingSpinner message="Loading types content..." /> 
 });
 
 const Code = dynamic(() => import('./Code'), { 
-  loading: () => <div>Loading code content...</div> 
+  loading: () => <LoadingSpinner message="Loading code content..." /> 
 });
 
 const Component = dynamic(() => import('./Component'), { 
-  loading: () => <div>Loading component content...</div> 
+  loading: () => <LoadingSpinner message="Loading component content..." /> 
 });
 
 const DragDrop = dynamic(() => import('./DragDrop'), { 
-  loading: () => <div>Loading drag-drop content...</div> 
+  loading: () => <LoadingSpinner message="Loading drag-drop content..." /> 
 });
 
 const History = dynamic(() => import('./History'), { 
-  loading: () => <div>Loading history content...</div> 
+  loading: () => <LoadingSpinner message="Loading history content..." /> 
 });
 
 const StepByStep = dynamic(() => import('./StepbyStep'), { 
-  loading: () => <div>Loading step-by-step content...</div> 
+  loading: () => <LoadingSpinner message="Loading step-by-step content..." /> 
 });
 
 const Video = dynamic(() => import('./Video'), { 
-  loading: () => <div>Loading video content...</div> 
+  loading: () => <LoadingSpinner message="Loading video content..." /> 
 });
 
 const Text = dynamic(() => import('./Text'), { 
-  loading: () => <div>Loading text content...</div> 
+  loading: () => <LoadingSpinner message="Loading text content..." /> 
 });
 
 // Fallback component when a format doesn't have a corresponding component
