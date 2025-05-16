@@ -103,7 +103,6 @@ const Text: React.FC<TextProps> = ({
         <h1 className={styles.contentTitle}>{title}</h1>
 
         <div className={styles.contentLayout}>
-          {/* Main content area */}
           <div className={styles.mainContent}>
             {/* Image section */}
             {imageUrl && (
@@ -117,7 +116,6 @@ const Text: React.FC<TextProps> = ({
                 />
               </div>
             )}
-            
             {/* Example images grid */}
             {exampleImages && exampleImages.length > 0 && (
               <div className={styles.exampleImagesGrid}>
@@ -146,38 +144,55 @@ const Text: React.FC<TextProps> = ({
               </div>
             )}
 
-            {/* Text description */}
-            <div className={styles.textSection}>
-              {Array.isArray(description) ? (
-                description.map((paragraph, index) => (
-                  <motion.p
-                    key={index}
-                    className={styles.paragraph}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
+            {/* Custom layout for Questions to Ponder */}
+            {title === 'Questions to Ponder' ? (
+              <div className={styles.questionsToPonderBox}>
+                <ul className={styles.questionsList}>
+                  {Array.isArray(description) ? description.map((q, i) => (
+                    <li key={i} className={styles.questionItem}>
+                      <span className={styles.questionIcon}>❓</span>
+                      <span>{q}</span>
+                    </li>
+                  )) : (
+                    <li className={styles.questionItem}>
+                      <span className={styles.questionIcon}>❓</span>
+                      <span>{description}</span>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            ) : (
+              <div className={styles.textSection}>
+                {Array.isArray(description) ? (
+                  description.map((paragraph, index) => (
+                    <motion.p
+                      key={index}
+                      className={styles.paragraph}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      {formatContentWithEmojis(paragraph)}
+                    </motion.p>
+                  ))
+                ) : (
+                  <p className={styles.paragraph}>
+                    {formatContentWithEmojis(description)}
+                  </p>
+                )}
+                {/* Audio button */}
+                {(audioSrc || speakText) && (
+                  <button
+                    className={`${styles.listenButton} ${isAudioPlaying ? styles.listenButtonPlaying : ''}`}
+                    onClick={playAudio}
+                    aria-label={isAudioPlaying ? "Stop Audio" : "Listen to Text"}
                   >
-                    {formatContentWithEmojis(paragraph)}
-                  </motion.p>
-                ))
-              ) : (
-                <p className={styles.paragraph}>
-                  {formatContentWithEmojis(description)}
-                </p>
-              )}
-              
-              {/* Audio button */}
-              {(audioSrc || speakText) && (
-                <button
-                  className={`${styles.listenButton} ${isAudioPlaying ? styles.listenButtonPlaying : ''}`}
-                  onClick={playAudio}
-                  aria-label={isAudioPlaying ? "Stop Audio" : "Listen to Text"}
-                >
-                  <FontAwesomeIcon icon={faHeadphones} />
-                  <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-                </button>
-              )}
-            </div>
+                    <FontAwesomeIcon icon={faHeadphones} />
+                    <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
