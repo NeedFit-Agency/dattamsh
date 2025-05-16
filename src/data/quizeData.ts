@@ -73,7 +73,33 @@ export const quizzes: QuizStandard = {
           explanation: 'The Sun is a natural object, not a machine. All other options are machines made by people.'
         }
       ]
-    },    
+    }, 
+    {
+      id: 2,
+      title: "2nd chapter quize",
+      questions: [
+        {
+          id: 1,
+          prompt: 'test test?',
+          options: ['A device for playing games', 'A device for listening to music', 'A device for writing', 'A device for reading'],
+          correctAnswer: 0,
+          explanation: 'A computer is a device for playing games.'
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "3rd chapter quize",
+      questions: [
+        {
+          id: 1,
+          prompt: 'test test?',
+          options: ['A device for playing games', 'A device for listening to music', 'A device for writing', 'A device for reading'],
+          correctAnswer: 0,
+          explanation: 'A computer is a device for playing games.'
+        }
+      ]
+    }
   ],
   "2": [
     {

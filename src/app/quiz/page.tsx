@@ -14,7 +14,7 @@ import styles from './QuizPage.module.css';
 export default function QuizPage() {
   const searchParams = useSearchParams();
   const standardId = searchParams.get('standard') || '1';
-  const lessonId = searchParams.get('lesson') || '1';
+  const lessonId = searchParams.get('chapter') || '1';
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
 
   // Quiz state
@@ -28,6 +28,11 @@ export default function QuizPage() {
   const [showStars, setShowStars] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [isListening, setIsListening] = useState(false);
+
+  // Get the chapter title from quizzes data
+  const chapterIndex = Number(lessonId) - 1;
+  const chapter = quizzes[standardId]?.[chapterIndex];
+  const chapterTitle = chapter?.title || `Chapter ${lessonId}`;
 
   // Load questions based on lessonId
   useEffect(() => {
@@ -182,7 +187,7 @@ export default function QuizPage() {
             <FontAwesomeIcon icon={faX} />
           </button>
           <div className={styles.headerTitle}>
-            Chapter {lessonId}
+            {chapterTitle}
           </div>
         </div>
         <div className={styles.contentArea}>
