@@ -19,7 +19,7 @@ interface InteractionTrackingContextType {
   userCount: number;
 }
 
-const InteractionTrackingContext = createContext<InteractionTrackingContextType | undefined>(undefined);
+export const InteractionTrackingContext = createContext<InteractionTrackingContextType | undefined>(undefined);
 
 export function InteractionTrackingProvider({ children }: { children: ReactNode }) {
   const { user, loading } = useSupabaseAuth();

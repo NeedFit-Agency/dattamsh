@@ -15,8 +15,11 @@ import {
   faAward
 } from '@fortawesome/free-solid-svg-icons';
 import styles from './page.module.css';
+import { useInteractionTracking } from '../contexts/InteractionTrackingContext';
 
 export default function HomePage() {
+  const { trackGradeSelection } = useInteractionTracking();
+  
   const Standards = [
     {
       id: "1",
@@ -162,7 +165,7 @@ export default function HomePage() {
                 <Link 
                 href={Standard.status === 'active' ? `/standard/${Standard.id}/chapter/1` : '#'} 
                 className={`${styles.standardLink} ${Standard.status === 'locked' ? styles.locked : ''}`}
-                onClick={() => trackGradeLevel(Standard.title)}
+                onClick={() => trackGradeSelection(Standard.title)}
               >
                   <div className={styles.standardContent}>
                     <div className={styles.standardHeader}>

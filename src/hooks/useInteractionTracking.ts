@@ -1,5 +1,4 @@
-import { useEffect, useRef } from 'react';
-import { useContext } from 'react';
+import { useEffect, useRef, useContext } from 'react';
 import { InteractionTrackingContext } from '../contexts/InteractionTrackingContext';
 
 type ContentType = 'video' | 'quiz' | 'text' | 'interactive' | 'chapter' | 'game_module';
@@ -110,5 +109,4 @@ export function useInteractionTracking({
     isAuthenticated,
     isLoading
   };
-}
 }
