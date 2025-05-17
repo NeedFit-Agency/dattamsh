@@ -7,7 +7,6 @@ import { faHeadphones, faShield, faGem, faHeart, faCog, faArrowLeft } from '@for
 import { TextProps } from './types';
 import styles from './text.module.css';
 
-// Helper function to format content with emojis
 const formatContentWithEmojis = (text: string): React.ReactNode => {
   const hasEmojis = /[\p{Emoji}]/u.test(text);
 
@@ -46,6 +45,25 @@ const Text: React.FC<TextProps> = ({
   onBack
 }) => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const isInteractiveList = title === "Where do we use Computers?";
+
+  // Parse the description into icon, label, and fact
+  const interactiveListData = Array.isArray(description) && isInteractiveList
+    ? description.map((item) => {
+        // Example: "🏫 School: Learn new things, watch videos, and keep records."
+        const match = item.match(/^(\p{Emoji_Presentation}|\p{Emoji}\uFE0F?)\s*(.+?):\s*(.+)$/u);
+        if (match) {
+          return {
+            icon: match[1],
+            label: match[2],
+            fact: match[3]
+          };
+        }
+        return null;
+      }).filter((item): item is { icon: string; label: string; fact: string } => !!item)
+    : [];
 
   const playAudio = () => {
     window.speechSynthesis?.cancel();
@@ -162,36 +180,85 @@ const Text: React.FC<TextProps> = ({
                 </ul>
               </div>
             ) : (
-              <div className={styles.textSection}>
-                {Array.isArray(description) ? (
-                  description.map((paragraph, index) => (
-                    <motion.p
-                      key={index}
-                      className={styles.paragraph}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
+              isInteractiveList ? (
+                <>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: 18,
+                    marginLeft: 0,
+                    justifyContent: 'flex-start',
+                    maxWidth: 600
+                  }}>
+                    <img
+                      src="/images/mascot.png"
+                      alt="Mascot"
+                      style={{ width: 56, height: 56, marginRight: 14, flexShrink: 0 }}
+                    />
+                    <div style={{
+                      background: '#fffbe6',
+                      borderRadius: 12,
+                      padding: '10px 18px',
+                      fontWeight: 500,
+                      color: '#7c5700',
+                      fontSize: '1.1em',
+                      boxShadow: '0 2px 8px rgba(255, 215, 0, 0.08)',
+                      minHeight: '44px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      maxWidth: 400,
+                      wordBreak: 'break-word'
+                    }}>
+                      {openIndex === null
+                        ? "Tap a card to learn more!"
+                        : interactiveListData[openIndex]?.fact}
+                    </div>
+                  </div>
+                  <ul className={styles.interactiveList}>
+                    {interactiveListData.map((item, idx) => (
+                      <li
+                        key={item.label}
+                        className={styles.interactiveItem}
+                        onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                      >
+                        <span className={styles.emoji}>{item.icon}</span>
+                        {item.label}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <div className={styles.textSection}>
+                  {Array.isArray(description) ? (
+                    description.map((paragraph, index) => (
+                      <motion.p
+                        key={index}
+                        className={styles.paragraph}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                      >
+                        {formatContentWithEmojis(paragraph)}
+                      </motion.p>
+                    ))
+                  ) : (
+                    <p className={styles.paragraph}>
+                      {formatContentWithEmojis(description)}
+                    </p>
+                  )}
+                  {/* Audio button */}
+                  {(audioSrc || speakText) && (
+                    <button
+                      className={`${styles.listenButton} ${isAudioPlaying ? styles.listenButtonPlaying : ''}`}
+                      onClick={playAudio}
+                      aria-label={isAudioPlaying ? "Stop Audio" : "Listen to Text"}
                     >
-                      {formatContentWithEmojis(paragraph)}
-                    </motion.p>
-                  ))
-                ) : (
-                  <p className={styles.paragraph}>
-                    {formatContentWithEmojis(description)}
-                  </p>
-                )}
-                {/* Audio button */}
-                {(audioSrc || speakText) && (
-                  <button
-                    className={`${styles.listenButton} ${isAudioPlaying ? styles.listenButtonPlaying : ''}`}
-                    onClick={playAudio}
-                    aria-label={isAudioPlaying ? "Stop Audio" : "Listen to Text"}
-                  >
-                    <FontAwesomeIcon icon={faHeadphones} />
-                    <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-                  </button>
-                )}
-              </div>
+                      <FontAwesomeIcon icon={faHeadphones} />
+                      <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+                    </button>
+                  )}
+                </div>
+              )
             )}
           </div>
         </div>
