@@ -220,6 +220,27 @@ export const standards: Standard = {
           ],
         },
         {
+          type: 'drag-drop',
+          format: 'drag-drop',
+          title: 'Activity: Sort the Places',
+          instruction: 'Drag each place into the correct box: "Places where computers are used" or "Places where computers are not used".',
+          items: [
+            { id: 'dnd-place-1', text: 'School', type: 'man-made', imageUrl: '/images/school.png' },
+            { id: 'dnd-place-3', text: 'Library', type: 'man-made', imageUrl: '/images/library.png' },
+            { id: 'dnd-place-4', text: 'Bank', type: 'man-made', imageUrl: '/images/bank.png' },
+            { id: 'dnd-place-5', text: 'Park', type: 'natural', imageUrl: '/images/park.png' },
+            { id: 'dnd-place-6', text: 'Playground', type: 'natural', imageUrl: '/images/playground.png' },
+            { id: 'dnd-place-7', text: 'Forest', type: 'natural', imageUrl: '/images/forest.png' },
+            { id: 'dnd-place-8', text: 'Beach', type: 'natural', imageUrl: '/images/beach.png' }
+          ],
+          targets: [
+            { id: 'manMadeTarget', title: 'Places where computers are used', type: 'man-made' },
+            { id: 'naturalTarget', title: 'Places where computers are not used', type: 'natural' }
+          ],
+          audioSrc: '/audio/dragdrop_places.mp3',
+          speakText: 'Drag each place into the correct box: Places where computers are used or Places where computers are not used.'
+        },
+        {
           type: 'learn',
           format: 'text',
           title: 'Activity: List four more places where we use computers',
