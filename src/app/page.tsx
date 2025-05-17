@@ -160,9 +160,10 @@ export default function HomePage() {
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
               >
                 <Link 
-                  href={Standard.status === 'active' ? `/standard/${Standard.id}/chapter/1` : '#'} 
-                  className={`${styles.standardLink} ${Standard.status === 'locked' ? styles.locked : ''}`}
-                >
+                href={Standard.status === 'active' ? `/standard/${Standard.id}/chapter/1` : '#'} 
+                className={`${styles.standardLink} ${Standard.status === 'locked' ? styles.locked : ''}`}
+                onClick={() => trackGradeLevel(Standard.title)}
+              >
                   <div className={styles.standardContent}>
                     <div className={styles.standardHeader}>
                       <FontAwesomeIcon icon={Standard.icon} className={styles.standardIcon} />

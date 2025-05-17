@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { InteractionTrackingProvider } from '../../contexts/InteractionTrackingContext';
+import { useInteractionTracking } from '../../hooks/useInteractionTracking';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -110,7 +112,13 @@ const createConfetti = () => {
   return confetti;
 };
 
-export default function LearningPage() {
+// Component to handle interaction tracking
+function LearningPageContent() {
+  const { trackInteraction } = useInteractionTracking({
+    contentId: 'learning-page',
+    contentType: 'chapter',
+    autoTrackView: true
+  });
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
@@ -358,6 +366,24 @@ export default function LearningPage() {
     }
   }
 
+  // Track interactions for button clicks
+  const handleTrackedContinue = () => {
+    trackInteraction('button_click', {
+      button: 'continue',
+      slideIndex: currentSlideIndex,
+      slideType: currentContent?.type || 'unknown'
+    });
+    handleContinue();
+  };
+
+  const handleTrackedPrevious = () => {
+    trackInteraction('button_click', {
+      button: 'previous',
+      slideIndex: currentSlideIndex
+    });
+    handlePrevious();
+  };
+
   return (
     <div>
       <div className={styles.learningContent}>
@@ -369,7 +395,7 @@ export default function LearningPage() {
           <ContentRenderer 
             content={currentContent}
             onBack={handleBackClick}
-            onComplete={handleContinue}
+            onComplete={handleTrackedContinue}
             progress={progress}
           />
         </main>
@@ -378,7 +404,7 @@ export default function LearningPage() {
           <footer className={styles.learningFooter}>
             <button
               className={styles.previousButton}
-              onClick={handlePrevious}
+              onClick={handleTrackedPrevious}
               disabled={currentSlideIndex === 0}
               aria-disabled={currentSlideIndex === 0}
             >
@@ -386,7 +412,7 @@ export default function LearningPage() {
             </button>
             <button
               className={continueButtonClass}
-              onClick={handleContinue}
+              onClick={handleTrackedContinue}
               disabled={continueButtonDisabled}
               aria-disabled={continueButtonDisabled}
             >
@@ -409,5 +435,14 @@ export default function LearningPage() {
         </div>
       )}
     </div>
+  );
+}
+
+// Wrap the learning page with the InteractionTrackingProvider
+export default function LearningPage() {
+  return (
+    <InteractionTrackingProvider>
+      <LearningPageContent />
+    </InteractionTrackingProvider>
   );
 }

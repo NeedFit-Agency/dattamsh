@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useInteractionTracking } from '../../../hooks/useInteractionTracking';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones, faPlay, faPause, faExpand } from '@fortawesome/free-solid-svg-icons';
 import { VideoProps } from './types';
@@ -20,6 +21,22 @@ export const Video: React.FC<VideoProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Enhanced tracking with time spent tracking enabled
+  const { 
+    trackStart, 
+    trackPause, 
+    trackResume, 
+    trackComplete, 
+    trackError,
+    startTimeTracking,
+    stopTimeTracking
+  } = useInteractionTracking({
+    contentId: videoSrc || title,
+    contentType: 'video',
+    autoTrackView: true,
+    trackTimeSpent: true
+  });
 
   const playAudio = () => {
     // Stop current playback if any
@@ -36,17 +53,25 @@ export const Video: React.FC<VideoProps> = ({
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
       try {
         const utterance = new SpeechSynthesisUtterance(textToSpeak[0]);
-        utterance.onstart = () => setIsAudioPlaying(true);
-        utterance.onend = () => setIsAudioPlaying(false);
+        utterance.onstart = () => {
+          setIsAudioPlaying(true);
+          trackStart({ audioEnabled: true });
+        };
+        utterance.onend = () => {
+          setIsAudioPlaying(false);
+          trackComplete({ audioCompleted: true });
+        };
 
         utterance.onerror = (e) => {
           console.error("SpeechSynthesis Error:", e);
           setIsAudioPlaying(false);
+          trackError('audio_synthesis_error', { errorMessage: e.error });
         };
         window.speechSynthesis.speak(utterance);
       } catch (e) {
         console.error("SpeechSynthesis failed:", e);
         setIsAudioPlaying(false);
+        trackError('audio_synthesis_exception', { errorMessage: String(e) });
       }
     } else {
       setIsAudioPlaying(false);
@@ -78,25 +103,56 @@ export const Video: React.FC<VideoProps> = ({
     setShowTranscript(!showTranscript);
   };
 
-  // Listen for video play/pause events
+  // Import the interaction tracking hook
+  const { trackInteraction } = useInteractionTracking({
+    contentId: videoSrc,
+    contentType: 'video',
+    autoTrackView: true
+  });
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-    const handleEnd = () => setIsPlaying(false);
+    const handlePlay = () => {
+      setIsPlaying(true);
+      trackStart({ currentTime: video.currentTime });
+      startTimeTracking();
+    };
+    
+    const handlePause = () => {
+      setIsPlaying(false);
+      trackPause({ currentTime: video.currentTime, duration: video.duration });
+      stopTimeTracking();
+    };
+    
+    const handleEnded = () => {
+      setIsPlaying(false);
+      trackComplete({ completed: true, duration: video.duration });
+    };
+    
+    const handleError = () => {
+      trackError('video_playback_error', { 
+        videoSrc, 
+        errorCode: video.error?.code,
+        errorMessage: video.error?.message
+      });
+    };
 
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
-    video.addEventListener('ended', handleEnd);
+    video.addEventListener('ended', handleEnded);
+    video.addEventListener('error', handleError);
 
     return () => {
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
-      video.removeEventListener('ended', handleEnd);
+      video.removeEventListener('ended', handleEnded);
+      video.removeEventListener('error', handleError);
+      // Track final time spent when component unmounts
+      stopTimeTracking();
     };
-  }, []);
+  }, [trackStart, trackPause, trackComplete, trackError, startTimeTracking, stopTimeTracking, videoSrc]);
 
   // Handle YouTube embed URLs
   const isYouTubeVideo = videoSrc && videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be');

@@ -1,0 +1,1337 @@
+Operating Systems
+What is an Operating System?
+Questions to ponder
+Android and iOS are operating system used in smartphones.
+Imagine your computer as a busy office, and the operating system (OS) is the
+boss of this office. Just like a boss helps organise work, so that everyone knows
+what to do, the OS tells the computer parts what to do, so they work together
+efficiently. Devices like smartphones and tablets also need an operating system
+to run.
+Without an OS, a device is not useful. It will not be able to perform basic
+functions like logging in, opening apps, moving files, watching videos, or visiting
+websites.
+Microsoft Windows, mac OS, Linux are some of the most popular operating
+systems used in computers.
+An operating system (OS) is a special program that acts like the “boss” of a
+computer. It helps organise everything inside the computer, making sure all parts
+execute the work together smoothly.
+An operating system (OS) is the most important software on a device. An OS
+manages tasks, executes applications, and provides a platform for the user to
+interact with the device. It also manages the device's memory, processes,
+software, and hardware.
+Operating Systems 7
+Operating System: the Computer’s Boss
+An operating system is like the computer’s boss because it handle three main
+responsibilities.
+1. Resource allocation (deciding who gets what)
+Ÿ The operating system decides which programs, like
+games or apps, get to use the CPU (the computer’s
+brain), memory (where short-term information is
+stored), and storage (where files are saved).
+Ÿ For example, if you’re playing a game and listening to music, the OS makes
+sure each program gets enough resources to run smoothly and doesn’t slow
+down.
+2. Process management (organising
+tasks in order)
+Ÿ The OS manages the order of tasks on
+the computer. It decides which tasks
+are more important and should be
+completed first.
+Ÿ This way, the computer won’t get
+overwhelmed by trying to do too many
+things at once, and apps won’t get in
+each other’s way. The OS ensures
+everything runs smoothly and in the
+right sequence.
+3. User interface (making it easy to use)
+Ÿ The OS provides a friendly interface with
+icons, folders, and menus, making it easy for
+the user to interact with the computer.
+Ÿ Instead of typing out complex instructions,
+you can click on icons and navigate menus
+to open programs and find files. The OS
+takes care of all the commands needed to
+operate a computer.
+8 PW Binary Brains - 4
+How does an Operating System Work?
+Imagine your computer is like a school, and the operating system (OS) is the
+school's timetable. Just like the timetable organises the school day, the OS
+organises the computer’s tasks.
+On the computer
+Ÿ The OS tells programs when they can use resources like the CPU,
+memory, and storage.
+Ÿ If a game needs more processing power, the OS makes sure other
+applications, like the music player or browser, still get a fair share of the
+resources.
+Just as a timetable keeps the school schedule in order, an operating system
+keeps the computer running smoothly.
+Different Types of Operating Systems
+Ÿ The timetable tells each class when they
+will have subjects like maths, science, or
+craft. It also makes sure each class gets its
+turn to use the school’s resources like the
+library, playground, or computer lab.
+In school
+Ÿ A timetable ensures all subjects get their
+sufficient time in a day.
+Android
+What it is: Android is an operating
+system that runs on many mobile
+devices, like smartphones and tablets. It
+is made by Google.
+Why it’s popular: It’s one of the most
+widely used operating systems in the
+world. It has millions of apps that you
+can download from the Google Play
+Store.
+How it looks: Android has a friendly
+touch-screen interface with icons for
+apps, and you can customise it with
+different wallpapers, themes, and
+widgets.
+Operating Systems 9
+What it is: iOS is the operating system
+that runs on Apple’s mobile devices, like
+iPhones and iPads. It is made by Apple.
+Why it’s popular: It’s known for being
+simple, secure, and smooth. It has a
+special store called the App Store, from
+where you can download lots of apps
+and games.
+How it looks: iOS has a clean and
+colourful look with rounded icons. It’s
+known for its simple and easy-to-use
+touch-screen interface.
+Linux
+What it is: Linux is a powerful and free
+operating system that is mostly used by
+computer experts, programmers, and
+big companies for servers (computers
+that store and share information).
+How it looks: It can look very different
+depending on how you set it up. It has
+different "flavours" called distributions,
+like Ubuntu, Fedora, and Mint.
+Why it’s popular: It’s known for being
+very secure and stable, which means it
+doesn’t crash or get viruses easily.
+Linux
+mac OS
+Why it’s popular: It’s known for being
+stylish, easy to use, and great for
+creative tasks like graphic design, video
+editing, and music production.
+How it looks: mac OS has a polished
+and elegant design with a menu bar at
+the top, a dock at the bottom for apps,
+and beautiful backgrounds.
+What it is: mac OS is the operating
+system that runs on Apple’s desktop
+and laptop computers, like the MacBook
+and iMac.
+iOS
+10 PW Binary Brains - 4
+How it looks: Windows has a start
+menu, taskbar, icons, and windows that
+you can move around. Windows 11,
+has a new, modern look with rounded
+corners and a centred start menu.
+What it is: Windows is an operating
+system made by Microsoft that runs on
+many desktop and laptop computers.
+It’s one of the most popular operating
+systems in the world.
+Why it’s popular: It is user-friendly,
+supports lots of software, and is great
+for both school and home use.
+Windows
+• Operating systems provide security features like
+passwords and firewalls to keep data safe. Without an
+operating system, the computer would have no way to
+protect information, making it easier for unwanted access
+or viruses to harm the computer.
+4. Hardware compatibility
+1. Complexity for users
+• An operating system allows multiple programs to
+run at the same time, like having a web browser
+open while listening to music.
+2. No multitasking
+3. Security issues
+What if there was no Operating System?
+• Without it, the computer could only run one
+program at a time. Users would have to stop one
+program completely before starting another.
+• The operating system manages the connection between
+programs and hardware devices (like printers or keyboards). Without an OS,
+every program would need specific instructions for each device, making it hard
+to use new hardware or software.
+• Without an operating system, users would have to give
+direct commands to the computer's hardware. This means
+they would need to type out complex instructions instead of
+just clicking on simple icons or using menus.
+Operating Systems 11
+Components of an Operating System
+1. Kernel
+Ÿ Example: If you're playing a game and listening to music at the same time,
+the Kernel makes sure both work without any hiccups.
+Ÿ Think of the kernel as the “brain” of the computer's operating system. It
+controls everything that happens inside the computer.
+Ÿ It talks directly to the computer’s hardware, like the CPU (Central Processing
+Unit), to make sure everything runs smoothly. It decides which tasks should
+happen first and how to share the computer's resources.
+2. User interface
+Ÿ This is the part of the operating system
+you can see and interact with. It’s like
+the “face” of the OS.
+Ÿ It lets you control the computer using
+features like icons, windows, and
+menus.
+Ÿ Example: When you click on a folder
+to open it, or when you use the Start
+menu to find an app, you’re using the
+user interface.
+12 PW Binary Brains - 4
+3. File management system
+Ÿ The file management system is like
+an organised librarian for your
+computer. It keeps all your files and
+folders organised and easy to find.
+Ÿ It saves your documents, pictures,
+and games in the right place. It helps
+you open, move, or delete them
+whenever you want.
+Ÿ Example: When you save a school
+project, it’s the file management
+system that remembers where it is, so
+you can find it later.
+4. Device drivers
+Ÿ Every device has its own language, and the driver helps the computer and the
+device understand each other.
+Ÿ Device drivers are like “translators” that help the computer talk to hardware
+devices like a printer, mouse, or keyboard.
+Ÿ Example: When you plug in a new printer, the computer uses a device driver
+to print your documents correctly.
+5. System utilities
+Ÿ Example: Programs like antivirus software protect your computer from
+harmful files, and tools like "Disk Cleanup" help free up space by deleting
+unnecessary files.
+Ÿ These are special tools in the operating system that help keep your computer in
+good shape, like a toolbox for fixing problems.
+Ÿ They can clean up your computer, protect it from viruses, and help make it run
+faster.
+Operating Systems 13
+Her dad smiled and said, “That’s an old phone with buttons. We
+used it just for calling and sending text messages. It didn’t have a
+touch screen or different apps.”
+Preeti was surprised. “No games or internet? Just calls and texts?”
+Her dad nodded. “Yes, it was very basic. Then, smartphones came
+along with different apps. Then came along touch screens that you
+could tap and swipe. Now we can play games, take pictures, listen
+to music, read books, search for information, shop, watch videos, all
+on our phones!”
+Her dad continued explaining to her, “There are software engineers
+and coders who continuously work towards developing and updating
+technology so more and more new features can be added to our
+gadgets.”
+One day, while cleaning the storeroom, Preeti found an old phone
+with buttons. She picked it up and asked, “Daddy, what is this?”
+Preeti thought for a moment and said, “So, that means, phones 10
+years from now may have more new features than what they have
+today?” Her dad nodded. “Exactly! Who knows what phones will be
+like in the future!” Preeti smiled and said, “Maybe I’ll come up with
+something more advanced and cool one day!”
+Caselet
+Preeti’s Old Phone Discovery
+14 PW Binary Brains - 4
+Did you know?
+Ÿ Android versions are named after sweet treats (Cupcake,
+Donut).
+through many versions.
+interaction.
+Ÿ iOS features the Siri voice assistant for hands-free
+locations(Yosemite, Big Sur).
+Ÿ Windows has been a leading OS since 1985, evolving
+Ÿ mac OS versions are named after California
+Points to Remember
+resources it needs.
+○ It provides a user-friendly interface for easy navigation.
+○ The OS manages tasks, ensuring each program gets the
+Ÿ The OS is like the "boss" of the computer, helping organise and
+manage its resources. It connects users with hardware, enabling
+smooth operation of applications.
+Ÿ How Operating Systems Work
+○ It organises processes, determining which tasks are completed
+first.
+Ÿ Different Types of Operating Systems
+○ Android: Used on mobile devices, known for its customisable
+interface and vast app availability.
+○ iOS: Runs on Apple mobile devices; known for its simplicity and
+security.
+Operating Systems 15
+and extensive software support.
+Ÿ Components of an Operating System
+distributions.
+Ÿ What if there was no Operating System?
+ease of use for creative tasks.
+○ Multitasking would not be possible. Only one program could run
+○ Linux: A free, secure OS popular with experts; it comes in various
+○ Difficulties with hardware compatibility and communication.
+○ mac OS: Used on Apple computers; recognised for its design and
+○ Windows: A widely used OS known for its user-friendliness
+○ Users would struggle to give complex commands directly to
+hardware.
+at a time.
+○ Increased security risks without protections like passwords and
+firewalls.
+○ Kernel: The core part of the OS that directly interacts with
+hardware and manages resources.
+○ User interface: The visible part of the OS that allows users to
+interact with the computer.
+○ File management system: Organises and retrieves files,
+helping users find their documents easily.
+○ Device drivers: Programs that enable communication between
+theOS and hardware devices.
+○ System utilities: Tools for maintenance and optimisation, like
+antivirus software and disk cleanup tools.
+16 PW Binary Brains - 4
+WORKSTATION
+A. Answer the following questions by choosing the correct option.
+a. to create hardware
+c. to make games
+a. Windows
+1. What is the main function of an operating system (OS)?
+b. to manage computer resources
+d. to connect to the internet
+2. Which operating system is known for being used on smartphones and
+tablets?
+b. Linux
+c. iOS
+d. mac OS
+3. Which operating system is commonly known for its user-friendly
+interface and is widely used on desktops?
+a. Android
+c. iOS
+a. Windows
+d. Windows
+b. Android
+b. iOS
+4. What type of operating system does the App Store belong to?
+d. Linux
+c. Linux
+B. Fill in the blanks with correct answers.
+1. The operating systems that run on many mobile devices are ______________
+ and ______________.
+2. ______________ is the operating system that runs on Apple computers like
+ MacBook and iMac.
+3. The __________________ helps manage the computer’s tasks and resources.
+Operating Systems 17
+D. Answer the following questions.
+1. What are the main responsibilities of an operating system?
+Ans.
+2. How does the user interface of an operating system help users?
+Ans.
+4. Windows is an operating system made by ___________________.
+5. The _________________ is the part of the OS that users see and interact with.
+C. State whether the following statements are True or False.
+1. Android is only available on Apple devices.
+2. The Kernel is the brain of the operating system.
+3. mac OS is known for its colourful and clean interface.
+4. Linux is commonly used on smartphones.
+5. Operating systems allow multiple programs to run at the same time.
+__________
+__________
+__________
+__________
+__________
+3. What would happen if there were no operating system on a computer?
+Ans.
+18 PW Binary Brains - 4
+Mini Project: Exploring Different Operating Systems
+Objective: Learn about popular operating systems and present your findings to
+the class.
+Ÿ Pick an operating system (OS) for your group.
+Ÿ Prepare a short presentation to share your findings with the class.
+Ÿ Year it was developed: When was the OS first created?
+Ÿ Current version: What’s the latest version of this OS?
+Presenting to the class
+Ÿ Share any interesting facts, pictures, or examples you found.
+Group formation
+○ Android
+○ Windows
+Ÿ Form 4 groups with almost equal numbers of students.
+Ÿ Each group will pick one operating system from the following list:
+○ Linux
+○ iOS
+Instructions
+Ÿ Research and find information about the OS you’ve chosen. You can use
+books, computer labs, or the internet (with permission from your teacher and
+parents).
+What to include in your presentation
+Ÿ Creator(s): Who developed it? Was it a company or an individual?
+Ÿ Devices it runs on: What types of devices use this OS (e.g., phones,
+computers, tablets)?
+Ÿ Key features: List some unique features that make this OS special.
+Ÿ Each group will take 5 minutes to present.
+Operating Systems 19
+Linux
+Ÿ Can you name 2-3 tasks that we can do on a computer at
+the same time?
+one we use on our mobile phones to keep it safe?
+Ÿ Can we set up a security PIN on our computer, just like the
+What is Windows?
+Questions to ponder
+2 Introduction to Windows
+We have learnt in the previous lesson that Windows is an operating system
+(OS). An OS manages everything on your computer. It helps organise and run all
+the parts of a computer. Without an operating system, you wouldn’t be able to
+interact with your computer easily.
+Windows provides a user-friendly interface that allows you to do many things
+on your computer, like open programs, play games, browse the internet, watch
+videos, and complete homework assignments. It acts as a bridge between you
+and the computer’s hardware (like the keyboard, mouse, and screen), making it
+easy to perform tasks without needing to know complicated commands.
+20 PW Binary Brains - 4
+Ÿ Windows was first made by a company called Microsoft in 1985. Back then,
+computers looked very different and were harder to use.
+Ÿ Early versions of Windows didn’t have all the icons, pictures, and colourful
+menus we see today. They were mostly text and simple graphics.
+Brief History: When windows started and how it has changed over time
+Ÿ Over time, Microsoft has made many new versions of Windows. Each version
+added new features to make it easier and more fun to use. For example, there
+was Windows XP(2001), then Windows 7(2009), Windows 10(2015), and
+now Windows 11(2021).
+Ÿ With each new version, Windows became faster, safer, and had more
+features.
+Ÿ Supports multiple devices: Windows works on computers, laptops, and
+tablets, so you can find it on many types of devices.
+Why is Windows Popular?
+Ÿ User-friendly interface: Windows uses icons and menus that are easy to
+click on. You don’t need to know how to code or type long commands to use it.
+Ÿ Widely used in schools and offices: Many schools and businesses use
+Windows because it is simple and has the tools they need, like word
+processors for writing, spreadsheet apps for calculations, presentations apps
+for making presentations and much more.
+Ÿ Lots of programs and games: Windows supports a large variety of
+applications, programs, and games. Whether you want to do homework,
+create art, or play a game, Windows has options for all of these activities.
+Introduction to Windows 21
+What can Windows do?
+1. Organise your files: Windows helps you sort your files into neat folders, just
+like organising your books into shelves.
+2. Run multiple programs: You can play games, while listening to music, or
+watch videos and do homework all at once. It is like having different toys to
+play with at the same time.
+3. Search tab: Windows helps you find applications and files quickly using the
+search tab.
+Ÿ Settings: The settings app in Windows lets you
+adjust system features like sound, screen
+brightness, and Wi-Fi connections.
+Ÿ Airplane mode: Disconnects all wireless
+Ÿ Bluetooth: Connects to devices like headphones,
+speakers. Using bluetooth, users can transfer data
+between devices.
+connections, stopping internet access and other
+communication features.
+4. Wi-Fi, Bluetooth, Airplane mode, and Settings:
+Ÿ Wi-Fi: Connects you to the internet wirelessly,
+allowing you to browse the web and access online
+services.
+Understanding the Basics
+Have you ever visited your parents’ office?
+Similarly a desktop on the monitor is like an
+typically see on it?
+books which the person may need every
+day, maybe a small calendar and clock on it.
+Have you seen an office desk? What do you
+An office desk usually has files, folders,
+office desk. It has folders and files that you
+may need to use more often. It has icons
+(small pictures) that are shortcuts to open
+the apps that you may use often. You can
+add your own icons and files and folders to
+the desktop that you need. It also shows the
+time and the date.
+Desktop
+Windows
+22 PW Binary Brains - 4
+Basic Icons
+The Settings app in Windows lets you
+adjust system features like sound,
+screen brightness, and Wi-Fi
+connections.
+A location where files downloaded from
+the internet are stored.
+Imagine you have a lot of files of different subjects on the computer and you want
+to organise them.
+Let’s Create a Folder
+In Windows, right-click on your Desktop or in any folder. Choose "New," then
+"Folder." Give it a relevant name, like "English files" or "Maths files" and save the
+folder. You can save your files in the folder.
+This PC is a place where you can see all
+your folders, files, and storage devices. It
+helps you find and open anything you
+have saved on your computer.
+This PC
+This is where deleted files are
+temporarily stored on the computer. If we
+accidentally delete a file, we can restore
+it within a certain period, usually until the
+Recycle Bin is emptied or the file is
+automatically removed after 30 days.
+Recycle Bin
+Settings
+Downloads Folder
+Introduction to Windows 23
+Step 1: Right-click on the desktop, select New and choose the Folder option.
+Step 2: Type a name for the new folder and press Enter.
+Step 3: Done! We just created our first folder.
+24 PW Binary Brains - 4
+My First
+Folder
+Step 4: Now in this folder you can add your documents and other files.
+Double-click on the folder to open it.
+Step 5: Inside the folder, you can add new files. To add new files, right-click on
+an empty area inside the folder. From the menu that appears, select New and
+then click on Microsoft Word Document.
+Step 6: Type a name for the new document, for example, “Lesson 1 Homework”
+and press enter to save the name. Similarly, you can create multiple word files in
+your folder. To open the document, double-click on the file.
+Introduction to Windows 25
+Press “alt + tab” on your keyboard to see all your open tabs or running
+applications and to switch between or move from one tab to another.
+Switching between programs: Windows lets you do lots of tasks at once. You
+can open several programs and switch between them easily.
+Multitasking Features
+CPU - Processors and their Speed
+Ÿ Processor speed: The speed of the CPU can be considered similar to how
+quickly you can solve a puzzle. A faster CPU can do more tasks quickly,
+making everything run smoother. This speed is measured in gigahertz (Ghz),
+which tells you how many billions of instructions the CPU can handle in a
+second.
+Ÿ CPU (Central Processing Unit): The CPU is the brain of the computer. Just
+like your brain helps you think and solve problems, the CPU helps the
+computer run applications and programs. It’s the one doing all the hard work
+behind the scenes!
+Earlier CPUs ran at 1-2 GHz, while modern CPUs typically range from 3-5
+GHz, with some reaching over 5 GHz. This increase means faster and
+smoother performance.
+26 PW Binary Brains - 4
+alt-tab
+Caselet
+ Nameet and the Cooling Fans
+One day, Nameet asked his father if he could use the laptop to play a
+game. His father agreed, and Nameet quickly installed the game. But as
+soon as he started playing, the laptop got hot, and the fans started making
+noise.
+Questions for discussion:
+2. How does the laptop manage to cool itself down when it starts to
+overheat during heavy processing tasks?
+1. Have you ever experienced a time when you were using a desktop or
+laptop and it heated up? What happened?
+“Ah, that makes sense!” Nameet said, happy to know the fans were doing
+their job.
+Worried, Nameet asked, “Why is the laptop heating up?”
+His father explained, “The laptop has an Intel i5 processor, and when you
+play games with lots of graphics, it works harder. The Windows OS notices
+this and turns on the cooling fans to stop it from overheating. It’s like giving
+the laptop a break so it stays cool.”
+Introduction to Windows 27
+Points to Remember
+Ÿ Windows is an operating system (OS) by Microsoft that manages and
+organises everything on your computer. It provides a user-friendly
+interface that lets you perform tasks like opening programs, playing
+games, and browsing the internet.
+○ Settings: Access to system adjustments.
+Ÿ Desktop: Similar to an office desk; it displays frequently used folders,
+files, and icons.
+○ This PC: Shows all files, folders, and storage devices.
+○ Recycle Bin: Stores deleted files temporarily, allowing
+Ÿ Why is Windows Popular: User-friendly interface, widely used in
+schools and offices, supports various programs and games, works on
+multiple devices.
+recovery if needed.
+○ Downloads Folder: Stores files downloaded from the internet.
+Ÿ Basic Icons:
+Ÿ CPU (Central Processing Unit): The "brain" of the computer
+ that handles tasks and runs programs.
+Ÿ What can Windows do: File organisation, multitasking, search tab,
+connectivity options, settings app.
+Ÿ To organise files, you can create folders.
+billions of instructions the CPU can process per second.
+Higher GHz means faster performance.
+Ÿ alt + tab: Quickly switch between open applications.
+Ÿ Processor speed: Measured in GHz, indicating how many
+Ÿ Windows supports over 100
+languages.
+Ÿ The Windows logo has changed
+11 times since 1985.
+Did you know?
+28 PW Binary Brains - 4
+WORKSTATION
+A. Answer the following questions by choosing the correct options.
+B. Fill in the blanks with the correct answers.
+1. The _______________________ acts as a bridge between the computer’s
+hardware and the user, making it easy to perform tasks.
+2. The speed of the CPU is measured in _______________________, indicating
+the number of billions of instructions it can process in a second.
+3. The _______________________ feature allows you to wirelessly connect your
+computer to headphones and speakers.
+Introduction to Windows 29
+1. What is the primary purpose of an operating system like Windows?
+a. to increase the speed of the internet
+b. to help manage all parts of a computer and make it user-friendly
+c. to prevent the computer from turning off
+d. to store all programs
+2. What is "This PC" used for in Windows?
+a. to delete files permanently
+b. to play music and videos
+c. to access and manage folders, files, and storage devices
+d. to install new applications
+3. Which keyboard keys allows you to quickly switch between multiple open
+programs in Windows?
+a. ctrl + Z
+b. alt + tab
+c. ctrl + S
+d. alt + F4
+4. What feature disconnects all wireless connections on Windows?
+a. Wi-Fi
+b. Bluetooth
+c. Aeroplane mode
+d. Recycle Bin
+C. Answer the following questions.
+1. What is Windows, and why is it important for computers?
+Ans.
+2. How does the CPU help the computer run, and why is processor speed
+ important?
+Ans.
+3. What are some features of Windows that make it user-friendly?
+Ans.
+4. Describe the purpose of creating folders on the Windows desktop.
+Ans.
+4. The ______________________________ is a place where deleted files are
+ temporarily stored until permanently removed.
+30 PW Binary Brains - 4
+D. Match the icons with their names.
+Mini Project
+Objective: Learn hands-on about Windows' features, organising files, multitasking,
+and understanding CPU speed. By the end, students will know how to create folders,
+organise files, explore system settings, and understand how the CPU’s speed affects
+computer performance.
+2. Steps:
+(Example: “Math,” “English,” “Science”).
+Ÿ Inside “School Work,” create subfolders for different subjects
+1. Goal: Create a digital folder system for organising school assignments.
+Part 1: Create and Organise Folders
+Ÿ Save one document or image in each folder that represents each subject
+(Example: an image or document of a math worksheet).
+Ÿ On the Desktop, create a folder named “School Work.”
+Introduction to Windows 31
+d. Folder
+b. Downloads
+c. Settings
+Names
+a. Recycle Bin
+Icons
+1.
+2.
+3.
+4.
+3. A short note on CPU speed in Microsoft Word.
+Ÿ Open Settings by finding it in the Start Menu.
+Ÿ Change your desktop background in Personalisation.
+Ÿ Research what GHz means and how your CPU’s speed compares to older
+CPUs.
+Ÿ Add shortcuts for frequently used apps on the desktop (Example: Word,
+browser, music player).
+2. Steps:
+1. Their folder structure and customised desktop.
+Deliverables:
+Part 3: Discover Settings in Windows
+1. Goal: Explore Windows Settings and learn about personalisation, Wi-Fi, and
+sound settings.
+Ÿ Right-click on This PC and choose Properties.
+Part 2: Customise your Desktop
+At the end, students will present:
+Ÿ Rearrange the icons to suit your preference.
+Part 4: CPU Speed Exploration
+Ÿ Rename any folder or icon by right-clicking on it and choosing Rename.
+1. Goal: Personalise the desktop and learn about icons.
+3. Result: Write a few sentences in Microsoft Word on what you learnt about
+CPU speed and why a faster CPU might be beneficial.
+2. Steps:
+Ÿ Connect to Wi-Fi or Bluetooth, if available.
+1. Goal: Learn about CPU speed and why it matters.
+Ÿ In the properties window, find information about your CPU and its speed
+2. Steps:
+(measured in Ghz).
+2. A list of interesting settings they explored.
+Ÿ Adjust your sound and screen brightness settings.
+Reflection: Students will speak about one feature of Windows they found most
+helpful and why they think it's valuable for managing daily tasks.
+32 PW Binary Brains - 4
+reading a document or book?
+Ÿ Is a song file and a picture file the same type?
+save it in Paint?
+Ÿ Why are there different apps for listening to music and
+Ÿ In what type of file is our image stored when we draw and
+Introduction to File and its Types
+Questions to ponder
+3 Different File Types
+Just like we use different boxes for different things at home (like a box for toys, a
+box for clothes), computers use different types of files to store information. Some
+files hold pictures, some store music, others store text, while others store videos.
+The "file type" tells the computer and user what kind of information is inside that
+file.
+A file can be defined as a collection of data that give a complete set of
+information about a certain item.
+But why do we need different file types?
+We need different file types because each type of information is unique. A picture
+needs to be saved differently from a song, and a text document is different from a
+video. If all the information was stored the same way, the computer would get
+confused! Different file types help the computer know how to open and use the
+Ÿ A text file (.txt) is used for writing and reading words.
+Ÿ An image file (.jpg) is used for storing pictures.
+information correctly.
+For example:
+Ÿ A music file (.mp3) is used to save and play music.
+ Different File Types 33
+Common File Types
+Here are some of the most common types of files you’ll find on a computer.
+documents.
+Ÿ .txt (simple text)
+Ÿ .pdf (documents you can read but not
+edit easily).
+These files hold words, sentences, and
+Examples:
+Ÿ .docx (Microsoft Word document)
+Text files
+drawings.
+These files are used for pictures and
+Examples:
+Ÿ .jpg (photos)
+Ÿ .gif (moving pictures)
+Ÿ .png (pictures with clear backgrounds)
+Image files
+Ÿ .mp4 (most common video format),
+These files hold videos and movies.
+Ÿ .avi,
+Examples:
+Ÿ .mkv.
+Video files
+Ÿ .mp3 (music),
+Ÿ .wav (better quality sound).
+These files store sounds, music, or
+recordings.
+Examples:
+Audio files
+Ÿ .zip
+These files are like a zipped suitcase
+that holds a lot of files inside but takes
+up less space. You "unzip" them to use
+the files inside.
+Examples:
+Compressed files
+34 PW Binary Brains - 4
+Understanding File Extensions
+A file extension is like a label or a tag that tells us what kind of file we are working
+with. It’s a small set of letters that comes after the filename and a dot. Think of it
+like this: if you have a box, the label on it tells you what's inside. Similarly, a file
+extension helps the computer and user know what’s inside the file and what
+program can open it.
+Where do we find it?
+Look at any file name on your computer. After the name, there’s usually a dot
+followed by a few letters. That’s the file extension! For example, if you see
+"Periwinkle.png", "png" is the file extension.
+Examples of file extensions
+.txt .jpg .mp4
+.pdf .zip
+ Different File Types 35
+1. Right-click on a file. From the
+menu that appears, select Show
+more options.
+2. Click on Properties.
+Activity: Check a File Type on your Desktop or Laptop.
+Objective: To help students learn how to identify the file type by checking
+the file extension.
+Here’s the step-by-step guide:
+3. In the Properties window, you will see the File type mentioned.
+36 PW Binary Brains - 4
+Why are file extensions important?
+File extensions help the computer know how to open a file. If your computer sees
+.jpg, it knows to open it with a photo viewer. If it sees .txt, it opens it with a text
+editor. So, file extensions are helpful in making sure everything works smoothly.
+Details of Common File Types
+ or homework.
+1. Text files: Text files are used to store written information, like stories, notes,
+ Examples:
+Ÿ .pdf files are used when you want to share a document without anyone being
+able to change it. It looks the same no matter what device you open it on.
+Ÿ .docx files are what you use in Microsoft Word. They can have fancy fonts,
+bold letters, and pictures.
+Ÿ .txt is the simplest form of a text file, containing just plain text without any
+fancy formatting. For example, if you open a .txt file, it will look like a plain
+notepad documet.
+Ÿ .jpg (JPEG) is used for photos. It makes the picture smaller in size but still
+looks clear.
+ Examples:
+Ÿ .png files keep the picture quality high and allow you to have clear
+backgrounds (transparent).
+2. Image files: Image files store pictures or drawings.
+Ÿ .gif files can be used for animations. You may have seen funny or short
+moving images.
+Ÿ .svg files are used for logos or drawings that can be resized without losing
+quality.
+ Different File Types 37
+5. Compressed files: Compressed files make big files smaller so they take up
+less space or are easier to send to someone.
+ Examples:
+Ÿ .zip when you have several files or folders that you want to keep together or
+share all at once, you put them into a ZIP file. This makes it easier to send or
+store them in one single file.
+38 PW Binary Brains - 4
+Ÿ .avi is an older format that has a bigger file size and is not used as much
+Ÿ .mkv is often used for high-quality videos like movies because it can hold
+multiple audio tracks and subtitles.
+ Examples:
+now-a-days.
+Ÿ .mp4 is the most common video format because it makes the video smaller
+without losing too much quality, which is why it’s widely used.
+3. Video files: Video files store your videos and movies.
+Ÿ .aac files are commonly used in apps like Apple Music because they sound
+better than .mp3 with a smaller file size.
+Ÿ .wav files keep all the details of the sound but take up more space, which is
+why they are used for high-quality recordings.
+Ÿ .mp3 is the most popular audio file format because it compresses the sound to
+a smaller size while still sounding good.
+ Examples:
+4. Audio files: Audio files store sound, like music or voice recordings.
+Converting Files Online
+Ÿ Easy sharing: Certain file formats are easier to share because they’re
+smaller or more commonly used. By converting a file, you make it easier for
+others to view or use without needing special software. For instance, it’s
+common to convert PDF files to Word so that people can edit them easily.
+Ÿ Space-saving: Sometimes, one file type takes up more space than another.
+For example, a PNG image file can be large, but converting it to JPEG often
+reduces its size, which means it uses less memory on your device. This can
+be helpful when you have limited space or want to share the file quickly.
+Why would you want to convert files?
+Ÿ Compatibility: Different devices and apps support different file types.
+Converting files makes sure you can open them on the device or app you’re
+using. For example, some apps work better with JPEG images than PNG
+images, so converting your file makes it easier to use.
+Step 1: Choose an online converter.
+Converting PNG to JPG Online
+Ÿ Some popular options include: PNG2JPG or FreeConvert.
+Ÿ Select a trustworthy website to convert your PNG file to JPEG.
+Let’s learn how to convert files to different formats on the internet.
+Ÿ .rar and .7z are also compressed formats that do the same job but in
+ slightly different ways.
+Let us go to the website PNG2JPG.
+ Different File Types 39
+Ÿ Once on the website, select the type of conversion, for example – PNG to JPG.
+Step 2: Upload your PNG file
+Ÿ Then upload your file by clicking the "Upload Files" button and selecting the
+file from your computer.
+Ÿ Check that the output format is set to as required. Most converters will
+automatically select the format for you.
+Step 3: Select the output format.
+Step 4: Start the conversion.
+Ÿ Click the "Download All" button to convert and download. The conversion
+should only take a few seconds.
+Step 5: Download your file.
+Ÿ After the conversion is complete, download your new file.
+Activity: Creating and extracting ZIP Files on Windows 11.
+Step 1: Open the folder that has different types of files.
+40 PW Binary Brains - 4
+Step 2: Select all the files. Press ctrl+A or click on each file while pressing
+the ctrl / shift key. These are the files you want to include in your ZIP file.
+Step 3: Right-click on one of the selected files and select “Compress to…”.
+There is an option “ZIP file”, click it.
+Step 4: The zip file is created.
+Step 5: Finalise the ZIP File.
+Name the ZIP file as required. Press Enter to finalise.
+Now you can share this ZIP file with anyone or to any system.
+ Different File Types 41
+Now that we have learnt how to compress files into a ZIP file, let's learn
+how to unzip the file and use the files inside.
+Step 1: Open the Zip file.
+Step 2: Click on “Extract all” on the top.
+Step 3: For now, do not change the destination file address. Click on
+Extract. You are done extracting your Zip file. That means you will see all
+the contents of the zip file.
+42 PW Binary Brains - 4
+Caselet
+File Types and Teamwork in the Digital World
+They saved all their files in one folder. Now they wanted to send these files
+to each other’s email addresses, but they faced a challenge. The files were
+in different formats, and they were taking a lot of time to send one file at a
+time. The group was confused and did not know how to proceed.
+Their teacher, Ms. Sharma stepped in to help. She suggested creating a
+ZIP folder to store all their files together, and also making it easier to
+transfer and send their work to one another.
+In a busy school computer lab, Class 4 students were tasked with creating
+a group project on "The Wonders of Nature." Each student was responsible
+for different types of content. Anaya collected beautiful nature photographs
+in .jpg format, Rohan wrote a detailed report and saved it as a .pdf, Kiran
+recorded a narration about the environment in .mp3, and Meera captured a
+short video in .mp4.
+Through this experience, the students learnt not just about managing files
+but also about teamwork. They realised that understanding file formats and
+working together effectively were key to making their project a success.
+Questions for discussion:
+2. Can you think of a time when you worked with friends on a project? How
+did you handle differences in ideas or tasks?
+1. How did the team handle their problem? What lesson can we learn from
+their experience?
+ Different File Types 43
+Did you know?
+Ÿ MP4 players can play both MP4 videos and MP3 audio
+files. However, MP3 players can only play MP3 audio files
+and do not support MP4 video files.
+Ÿ JPEG and JPG are two names for the same type of image
+file format.
+○ JPEG stands for "Joint Photographic Experts Group,"
+which is the name of the organisation that created the
+format.
+Ÿ Most school and university notes are sent in PDF format.
+This is because PDFs preserve the layout, formatting, and
+content of documents, ensuring they look the same on any
+device.
+○ JPG is just a shortened version of the name.
+Points to Remember
+Ÿ Each file has a unique purpose, such as storing text, images,
+music, or videos.
+Ÿ Using the right file type helps the computer know how to open
+and use each file correctly.
+Ÿ Common file types and examples:
+○ Text files: Store written information.
+○ Image files: Store pictures and graphics.
+Ÿ A file is designed to store specific information, just like how we
+have specific boxes for toys, clothes, or books.
+○ Video files: Store movies and video content.
+○ Audio files: Store music and sound.
+○ Compressed files: Store multiple files in one smaller,
+compressed format.
+44 PW Binary Brains - 4
+Ÿ A file extension is a small set of letters after the filename and dot
+that indicates the file type. Example: jpg, mp4, pdf, zip, txt, etc.
+○ Space-saving: Some file types take up less space than others.
+easier to share.
+○ Compatibility: Converting files makes them compatible with
+different devices and programs.
+Ÿ Why Convert Files?
+○ Easy sharing: Smaller, more common file types are
+Ÿ Extensions help the computer recognise the type of file and
+which program to use to open it.
+WORKSTATION
+A. State whether the following statements are True or False.
+1. A .txt file is used for storing pictures.
+2. Compressed files make big files smaller so they take up
+ less space.
+3. The file extension is found before the file name.
+4. The .mp4 file format is commonly used for videos.
+5. All file types can be opened by any program without any issues.
+B. Answer the following questions by choosing the correct option.
+1. What file type is used for written documents?
+a. .jpg
+b. .mp3
+c. .txt
+d. .avi
+_____________
+_____________
+_____________
+_____________
+_____________
+ Different File Types 45
+2. Which of the following file types is used for storing moving images?
+a. an audio file
+5. What is the purpose of converting a file from PNG to JPEG?
+c. a
+3. What does the file extension .zip indicate?
+4. Which of the following is a audio file format?
+b. .wav
+d. .html
+a. .gif
+b. .mp3
+c. .txt
+d. .avi
+b. a video file
+a. .docx
+c. .mkv
+a. to make it larger
+c. to save space
+d. to change the colour
+d. a text file
+b. to improve quality
+C. Who am I?
+device. What am I?" ________________________
+4. "I’m a handy box where you can pack multiple files together. What
+file type am I?" _________________________
+1. "I can hold sound, and I make your favourite tunes small and easy
+to store. What file type am I?" ________________________
+2. "I am perfect for your high-quality photos, and I even support
+transparency. What file type am I?" ________________________
+3. "You can’t edit me easily, but I always look the same on every
+46 PW Binary Brains - 4
+compressed file
+1. What is a file type?
+Ans.
+D. Answer the following questions.
+2. Provide three examples of file extension.
+Ans.
+3. Describe the purpose of compressed files.
+Ans.
+Mini Project: Exploring File Types and Conversions with a Mini Essay
+Ÿ Save your essay in Microsoft Word as a .docx file.
+1. Write an essay on any one of the following topics in Microsoft Word
+○ The Importance of Teamwork in Sports and Games.
+4. Submit both files
+Project Steps
+○ What I Want to Be When I Grow Up and Why?
+2. Save the document
+Ÿ Submit both the .docx (Word) and .pdf (PDF) versions of your essay.
+5. Reflect
+Ÿ Use a free online converter to convert your .docx file into a .pdf format.
+3. Convert the Word Document to PDF
+Ÿ Topics:
+Ÿ In what situations might a PDF be better than a Word document?
+○ Why Is It Important to Help Others?
+Objective: To understand the use of different file types, practice file conversion,
+and apply knowledge of file extensions and formats.
+ Different File Types 47
+Ÿ Which information is mostly given in table format?
+Ÿ Why do you think giving some information in table format
+is better than giving it in paragraphs?
+in a Word document?
+Ÿ Can we type the school timetable with rows and columns
+About Microsoft Word
+Questions to ponder
+4 Microsoft Word (Part 2)
+Microsoft Word is a word-processing program that helps create and edit text
+documents, such as essays, letters, reports, and stories. You can write, change the
+look of your text, add pictures, and even check for spelling mistakes. It makes writing
+and organising your work easier, whether for school projects or for fun.
+We have already learnt about the basics of Word in the previous grade, such as how
+to type, save, and open documents. Now, we will explore more exciting features that
+help us create better documents.
+Insert Tab
+The Insert tab on the Ribbon in MS Word has functions that enable you to add
+various elements to your document to make it more engaging and informative. You
+can insert pictures to add visuals, tables to organise data, and shapes to create
+diagrams or highlight information. Additionally, you can add charts to display
+numerical data in a visually appealing way, making it easier to understand. There’s
+also an option to insert links that connect to websites or other documents, which is
+great for providing more information or resources related to your content.
+The Insert tab in MS Word provides tools to add various elements to your
+document. Below is a brief overview of its main sections:
+1. Pages
+Ÿ Cover Page: Insert a pre-designed cover page at the
+beginning of your document.
+48 PW Binary Brains - 4
+Ÿ Insert tables to organise data into rows and
+columns. Customise the size and design of the table.
+Ÿ Page Break: Start a new page from the current position.
+3. Illustrations
+2. Tables
+Ÿ Blank Page: Add a new blank page anywhere in the document.
+Ÿ Pictures: Add images from your computer.
+Ÿ Online Pictures: Insert images directly from online sources.
+Ÿ Shapes: Insert shapes like arrows, rectangles, or circles.
+Ÿ Charts: Insert bar, line, pie, and other charts to visualize data.
+Ÿ Online Video: Embed videos from online platforms.
+5. Links
+Ÿ Cross-reference: Refer to another part of the
+Ÿ Quick Parts: Add reusable pieces of content, such as fields or document
+properties.
+7. Header & Footer
+Ÿ WordArt: Create stylized text effects.
+6. Comments
+Ÿ Bookmark: Mark a specific location in the document
+Ÿ Add comments to provide feedback or
+include page numbers, dates, or titles.
+Ÿ Drop Cap: Make the first letter of a paragraph larger and decorative.
+Ÿ Add or edit the header or footer to
+Ÿ SmartArt: Add diagrams for processes, hierarchies, or relationships.
+4. Media
+Ÿ Text Box: Insert text boxes for additional text formatting options.
+Ÿ Screenshots: Capture and insert screenshots of open windows.
+for quick access.
+Ÿ Icons: Insert built-in icons to visually enhance content.
+document, such as a figure or table.
+8. Text
+Ÿ Hyperlink: Link to web pages, email addresses, or other parts of the
+document.
+notes in the document.
+
+Microsoft Word (Part 2) 49
+Ÿ Signature Line: Add a digital signature field.
+Ÿ Date & Time: Insert the current date and time.
+Ÿ Object: Embed files or objects like Excel sheets or PDF files.
+not on the keyboard.
+Step 2: Click on the Insert Tab.
+Ÿ Equation: Add mathematical equations.
+Ÿ Symbol: Insert special characters or symbols
+9. Symbols:
+Each of these sections allows you to enhance the
+presentation and structure of your Word document.
+Insert an Image in Word
+Step 1: Start Microsoft Word and open the document where you want to add an
+image.
+Step 3: In the Insert tab, find and click the Pictures button.
+Step 4: A window will pop up. Find the picture you want to add on your computer,
+and click on it.
+50 PW Binary Brains - 4
+Step 5: After inserting the picture, you can click and drag the corners to resize it
+or move it around in your document.
+Create a Table
+Step 2. Drag your mouse over the grid to select the number of rows and columns
+you want for your table. Click to insert it.
+Step 1. In the Insert tab, click on the Table button. A grid will appear.
+Microsoft Word (Part 2) 51
+Step 3. To insert a table, click on Insert Table. A window will appear, prompting
+you to specify the number of rows and columns you want.
+The table with the selected number of rows and columns has been added to the
+document.
+Another way to add a table with more rows and columns:
+Step 4. Enter your desired values, and Click on OK. Your table will be created
+with the specified number of rows and columns!
+Note: A rectangular box formed when a row and column intersect is called
+a cell.
+Quick Tables
+Step 3: Click on the Table button.
+Steps to insert a table from Quick Tables:
+Step 2: Click on the Insert tab.
+Quick Tables are pre-designed table formats available in Microsoft Word that
+allow you to insert commonly used tables quickly. These tables come with built-in
+styles and layouts, such as calendars, matrixes, and tabular lists, which are
+ready to use. They save time and increase productivity.
+Step 1: Place the cursor where you wish to insert a table in your document.
+Step 4: Select the Quick Tables option and choose a table.
+52 PW Binary Brains - 4
+These are the following tables that you can create using Quick Tables:
+● Calendars
+● Tables
+
+How to type information inside a table?
+After you create a table click inside the cell and start typing to enter information.
+You can use text formatting tools like Bold, Italics, Underline, different Font
+Styles, Font colours etc to change the appearance of your table.
+You can use the tab key or the right arrow key to move to the next cell in the
+next column.
+Microsoft Word (Part 2) 53
+Table Design and Table Layout tabs
+When we insert a table in Microsoft Word, two special tabs appear to help us make
+the table look nice and neat. These abs are Table Design and Table Layout.
+
+Table Design tab
+The Table Design tab is where we can make the table look beautiful. Think of it
+like painting and decorating your table.
+1. Table Styles: You can choose colourful styles for your table. These are readymade designs that make your table look neat and pretty.
+You can choose any style from the options given.
+54 PW Binary Brains - 4
+2. Shading: You can fill the cells with different colours to highlight important parts.
+3. Borders: Borders are the lines around the table. You can make them thicker,
+and dotted, or even decide where you want the borders to appear in your
+table.
+Border pattern Border size Border Menu
+Table Layout tab
+The Table Layout Tab helps you organise and arrange your table. Think of it as
+the toolbox for fixing and adjusting your table.
+Microsoft Word (Part 2) 55
+1. Insert Rows and Columns: If you need more space, you can add new rows
+(horizontal boxes) or columns (vertical boxes).
+2. Delete: If you don’t need a row or column or a table you can easily remove it.
+3. Merge Cells: Combine two or more cells into one large cell. This is useful for
+creating a heading that spans across multiple columns.
+a. Select the cells you want to merge by pressing the shift and right arrow
+ keys together.
+b. Select the Merge Cells icon in the Table Layout tab.
+56 PW Binary Brains - 4
+4. Split Cells: Break one cell into smaller parts if you need more boxes in the
+same space.
+a. Place the cursor in the cell you want to split.
+b. Select the Split Cells icon in the Table Layout tab.
+c. Enter the number of columns that is the number of cells you want in the cell
+you selected. Write it in the dialog box in front of Number of columns. Here we
+have written 3.
+d. Write 1 in front of the Number of rows as you are going to split only 1 cell.
+e. Click OK.
+Microsoft Word (Part 2) 57
+Let us create an exam timetable with the help of tools we have learnt till now.
+Step 1: Insert a table with 3 columns and 8 rows.
+Step 2: Apply the table style from the Table Design tab.
+Step 3: Merge the cells in the first row and type Exam Timetable. Change its
+alignment to Center alignment.
+Step 4: Type the column names as “Date”, “Subject”, and “Timing”. Change its
+alignment to Center alignment.
+Step 5: Merge the first two cells in the Date column using the Merge Cells
+option in the Table Layout tab. Enter date “19 Nov 2024”. Repeat the same
+process for the next cells in the Date column to enter the next two dates.
+58 PW Binary Brains - 4
+Step 6: Enter the subjects given below in the same sequence in the Subject
+column. Subjects: English, Maths, Science, History, Hindi, Geography. Select
+the entire Subject column and change its alignment to Center alignment.
+Step 7: Place the cursor in the last cell of the Subject column and click on the
+Split Cells icon in the Table Layout tab. Split the last cell into two cells and enter
+the “Computer” subject.
+Step 8: Enter the timings for each subject in the Timing column. Split the last cell
+in the Timing column into two cells and enter the timings as given.
+Microsoft Word (Part 2) 59
+Note: You can adjust the width of the table as needed. When you hover
+the cursor over the border of the table an icon will appear. You can click
+on the mouse and drag it to adjust the width and height of the cells.
+Adding Header and Footer
+Header: A header is the space at the top of each page in a document. You can
+use it to add things like your name, or the title of the document. It appears on
+every page automatically.
+Footer: A footer is the space at the bottom of each page. You can use it to add
+things like page numbers, or any special notes. Like the header, the footer too
+shows up on every page.
+Adding a Header
+Step 2: Pick a style you like. You can type things like your name or the document
+title at the top of the page.
+Step 1: Go to the Insert tab at the top of Word and click on Header.
+60 PW Binary Brains - 4
+Step 3: Now, you can type in your header. For example - My Document.
+Step 4: Click on Close Header footer after inserting your Header.
+Adding a Footer
+Step 1: Go to the Insert tab and click on Footer.
+Step 2: Pick a style. You can type things like date, name of the document, or
+author’s name at the bottom of the page.
+Step 3: Now, you can type the name of your document in your Footer. For
+example- My Document.
+Microsoft Word (Part 2) 61
+Step 4: Click on Close Header and Footer after inserting your Footer.
+Adding Page Number
+Step 2: Select where you want to display the page number in your document
+either on top, bottom, left and right.
+Step 3: Click on the style and position you have selected.
+Step 1: Go to the Insert tab and click on Page Number.
+Step 4: Click on the Close Header and Footer after inserting your Page number.
+62 PW Binary Brains - 4
+Adding Watermark
+A Watermark in Microsoft Word is a light image or text that appears behind the
+main text in a document. It is used to show something important, like "DRAFT"
+or "CONFIDENTIAL" The watermark is light, so you can still see the words you
+type on top of it.
+Step 1: Go to the Design tab on the Ribbon and click on Watermark.
+Step 2: Pick a premade watermark or click Custom Watermark to add your own
+text or image. A watermark is like a faint image or text that appears behind your
+main content.
+Microsoft Word (Part 2) 63
+Step 3: Select a Watermark. Click Apply or OK to add the watermark. It will show
+up on every page behind your text.
+Activity: Try adding a picture as a watermark. Do the same process. Go to
+the Design tab and click on Watermark. Now click on Custom Watermark.
+There you will find Picture watermark, select it. Upload the image that you
+want as a watermark and click on apply.
+Using SmartArt in Microsoft Word
+SmartArt in Microsoft Word is a tool that lets you create visual diagrams like lists,
+processes, and life cycles. It helps turn complex information into simple, easy-tounderstand pictures. SmartArt is useful because it saves time, makes your
+content more engaging, and improves communication by visually representing
+ideas.
+64 PW Binary Brains - 4
+At the top of your screen, click on the Insert tab.
+Ÿ Find the SmartArt button in the menu and click on it.
+Ÿ A new window will appear with lots of SmartArt graphics and styles, like lists,
+cycles, and diagrams. Pick a graphic you like by clicking on it, then press "OK".
+Ÿ Once the SmartArt appears in your document, click inside the shapes to type
+your own words or ideas. Add text in the text boxes, and your SmartArt is
+ready.
+Microsoft Word (Part 2) 65
+Creating a Butterfly Life Cycle using SmartArt
+1. Insert SmartArt
+Ÿ Open your document and go to the
+Insert tab.
+Ÿ Click on SmartArt to open the
+SmartArt Graphic dialog box.
+shapes, such as Process or Cycle.
+Ÿ Click OK to insert the
+2. Choose a SmartArt style
+Ÿ Select a style that has circular
+SmartArt into your document.
+3. Remove extra circles
+Ÿ If your SmartArt has more than four circles, click on the extra circles to select
+them.
+○ Second Circle: “Caterpillar”
+Ÿ Double-click on the first circle and type “Eggs.”
+Ÿ Repeat this step for the remaining circles, labelling them as follows:
+○ Third Circle: “Chrysalis”
+Ÿ Press the Delete key on your keyboard to remove the unwanted circles.
+○ Fourth Circle: “Butterfly”
+4. Label each circle
+Ÿ Click on one of the circles to select it.
+5. Change colours and textures
+Ÿ Go to the SmartArt Design tab in the ribbon.
+Ÿ Explore the options for changing the colours and textures of your SmartArt.
+Choose different colours and textures for each circle and arrow to make your
+life cycle visually appealing.
+66 PW Binary Brains - 4
+Ÿ Adjust the size and position of your SmartArt as needed within your document.
+Ÿ Review your work to ensure everything is clear and visually attractive.
+6. Finalise your SmartArt
+Activity: Using the reference image given below make a SmartArt for Plant
+Life Cycle in a Word Document and save it.
+Microsoft Word (Part 2) 67
+Caselet
+Panda Report with Word
+Next, she created a table using the Insert Tab to list interesting facts about
+pandas, like how they eat bamboo and sleep a lot. To make the table look
+nicer, she used Table Design to add colour and borders.
+Finally, she used SmartArt to show the panda life cycle, so that others
+reading the document would understand the panda life cycle. Jessica was
+proud of her colourful, well-organised report.
+1. Which tools do you find the most engaging in Microsoft Word?
+Jessica decided to create a project about her favourite animal, the panda,
+using Microsoft Word. She started by adding a title, “All About Pandas,”
+and inserted a picture of a panda from her computer.
+Jessica added her name in the Header and the date in the Footer, then
+included Page Numbers to keep everything organised. To make her project
+even more creative, she added a Watermark that said "Panda Project."
+Questions for discussion:
+2. Why do you think Jessica used SmartArt to show the panda life cycle?
+Did you know?
+Ÿ The first version of Microsoft Word was
+developed by Charles Simonyi and Richard
+Brodie.
+Ÿ The first Word version, Word 1.0, was
+released in October 1983 for Xenix and
+MS-DOS. The first Windows version was
+released in 1989, with a slightly improved
+interface.
+Ÿ The longest Word document ever created
+had over 100,000 pages.
+68 PW Binary Brains - 4
+Points to Remember
+Ÿ Insert Tab Features:
+○ Comments: Insert comments for feedback or notes.
+○ If more rows or columns are needed, use "Insert Table" to
+specify the exact numbers.
+○ Pages: Add cover pages, blank pages, or page breaks.
+○ Media: Embed online videos for interactive content.
+○ Tables: Insert and customise tables for organising data.
+○ Symbols: Insert mathematical equations and special symbols.
+Ÿ Microsoft Word is a word-processing program for creating and
+editing text documents like essays, letters, reports, and stories. It
+allows you to format text, add pictures, and check for spelling
+mistakes.
+○ Go to the Insert Tab, select "Pictures," locate the image on your
+computer, and click to insert it.
+○ Header & Footer: Add headers and footers to include page
+numbers, dates, or document titles.
+Ÿ Inserting an Image:
+○ You can resize or move the image within the document as
+needed.
+○ Illustrations: Add images (from your device or online), shapes,
+icons, SmartArt, charts, or screenshots.
+○ Links: Add hyperlinks, bookmarks, and cross-references to
+connect different parts of the document or external sources.
+Ÿ Creating a Table:
+○ Text: Use text boxes, Quick Parts, WordArt, Drop Caps,
+signature lines, and date/time fields. Embed objects like Excel
+sheets or PDFs.
+○ Use the Table button in the Insert Tab to choose a grid for
+adding rows and columns.
+Microsoft Word (Part 2) 69
+organisational charts.
+○ Choose a style, type inside the 

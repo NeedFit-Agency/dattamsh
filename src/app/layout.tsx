@@ -7,6 +7,7 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import Header from '@/components/layout/Header/Header'
 import { usePathname } from 'next/navigation';
+import { Providers } from './providers';
 config.autoAddCss = false 
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800", "900"] }); 
@@ -23,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        {!isQuizPage && <Header />}
-        {children}
+        <Providers>
+          {!isQuizPage && <Header />}
+          {children}
+        </Providers>
       </body>
     </html>
   );
