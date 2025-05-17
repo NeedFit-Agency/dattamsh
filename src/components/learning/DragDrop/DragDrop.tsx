@@ -158,6 +158,15 @@ export const DragDrop: React.FC<DragDropProps> = ({
         message = 'Great job! All items are correctly sorted!';
         setFeedback({ show: true, correct: true, message });
         setAllCompleted(true);
+        // Store drag and drop completion data in localStorage with a unique key
+        const completionData = {
+          timestamp: Date.now(),
+          title,
+          instruction,
+          items: dragItems,
+          targets,
+        };
+        localStorage.setItem(`dragDropCompletion_${title.replace(/\s+/g, '_')}` , JSON.stringify(completionData));
       }
     } else {
       message = 'Some items are in the wrong category. Try again!';

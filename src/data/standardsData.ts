@@ -29,14 +29,14 @@ export interface LearningSlide extends BaseContentProps {
 export interface DraggableItemData {
   id: string;
   text: string;
-  type: 'natural' | 'man-made';
+  type: string;
   imageUrl?: string;
 }
 
 export interface DropTargetData {
-  id: 'naturalTarget' | 'manMadeTarget';
-  title: string;
-  type: 'natural' | 'man-made';
+  id: string;      // Unique identifier for the drop target
+  title: string;   // Display title for the drop target
+  type: string;    // Type/category for matching logic
 }
 
 export interface DragDropSlide extends BaseContentProps {
@@ -211,13 +211,13 @@ export const standards: Standard = {
           format: 'text',
           title: 'Where do we use Computers?',
           description: [
-            '1. Schools: Teachers use computers in school to teach children more about topics by showing videos. Children learn computer skills in school using computers. Computers are also used in school offices for accounting and to keep records of teachers, staff, and students.',
-            '2. Shops: In shops, computers help in money transactions, check prices, and keep track of what is sold.',
-            '3. Offices: In offices, people use computers to write letters, send emails, and complete important tasks efficiently. Computers are also used in offices to maintain records and to store information.',
-            '4. Hospitals: Doctors use computers to store patient information. Some advanced computers also help operate machines used in medical procedures.',
-            '5. Home: We use computers at home to watch our favourite cartoons, play games, type letters, draw and colour, to learn, watch videos, listen to music, etc.',
-            '6. Bank: Banks use computers to keep track of customers accounts and money. They also help with withdrawing cash from ATMs.'
-          ],
+            '🏫 School: Learn new things, watch videos, and keep records.',
+            '🛒 Shop: Help with billing and checking prices.',
+            '🏢 Office: Write letters, send emails, and store information.',
+            '🏥 Hospital: Store patient info and help doctors.',
+            '🏠 Home: Watch cartoons, play games, and learn.',
+            '🏦 Bank: Keep track of money and help with ATMs.'
+          ]
         },
         {
           type: 'drag-drop',
@@ -225,13 +225,12 @@ export const standards: Standard = {
           title: 'Activity: Sort the Places',
           instruction: 'Drag each place into the correct box: "Places where computers are used" or "Places where computers are not used".',
           items: [
-            { id: 'dnd-place-1', text: 'School', type: 'man-made', imageUrl: '/images/school.png' },
-            { id: 'dnd-place-3', text: 'Library', type: 'man-made', imageUrl: '/images/library.png' },
-            { id: 'dnd-place-4', text: 'Bank', type: 'man-made', imageUrl: '/images/bank.png' },
-            { id: 'dnd-place-5', text: 'Park', type: 'natural', imageUrl: '/images/park.png' },
-            { id: 'dnd-place-6', text: 'Playground', type: 'natural', imageUrl: '/images/playground.png' },
-            { id: 'dnd-place-7', text: 'Forest', type: 'natural', imageUrl: '/images/forest.png' },
-            { id: 'dnd-place-8', text: 'Beach', type: 'natural', imageUrl: '/images/beach.png' }
+            { id: 'dnd-place-1', text: 'School', type: 'man-made'},
+            { id: 'dnd-place-3', text: 'Library', type: 'man-made'},
+            { id: 'dnd-place-4', text: 'Bank', type: 'man-made'},
+            { id: 'dnd-place-6', text: 'Playground', type: 'natural'},
+            { id: 'dnd-place-7', text: 'Forest', type: 'natural'},
+            { id: 'dnd-place-8', text: 'Beach', type: 'natural'}
           ],
           targets: [
             { id: 'manMadeTarget', title: 'Places where computers are used', type: 'man-made' },
@@ -239,18 +238,6 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/dragdrop_places.mp3',
           speakText: 'Drag each place into the correct box: Places where computers are used or Places where computers are not used.'
-        },
-        {
-          type: 'learn',
-          format: 'text',
-          title: 'Activity: List four more places where we use computers',
-          description: [
-            'Ask your teacher or parents to help you!',
-            'Place 1: _______',
-            'Place 2: _______',
-            'Place 3: _______',
-            'Place 4: _______'
-          ]
         },
         {
           type: 'learn',
@@ -263,7 +250,7 @@ export const standards: Standard = {
           ],
           imageUrl: '/images/skeleton-hardware.png',
           exampleImages: [
-            { src: '/images/skeleton-hardware.png', alt: 'Skeleton illustration of computer hardware' },
+            { src: '/images/hardware.png', alt: 'Computer hardware' },
             { src: '/images/skeleton-software.png', alt: 'Skeleton illustration of computer software' }
           ]
         },
