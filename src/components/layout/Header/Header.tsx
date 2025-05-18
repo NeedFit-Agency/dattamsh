@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import styles from './Header.module.css';
 
 export default function Header() {

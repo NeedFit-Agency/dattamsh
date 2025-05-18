@@ -3,9 +3,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphones, faShield, faGem, faHeart, faCog, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faHeadphones, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TextProps } from './types';
 import styles from './text.module.css';
+import Image from 'next/image';
 
 const formatContentWithEmojis = (text: string): React.ReactNode => {
   const hasEmojis = /[\p{Emoji}]/u.test(text);
@@ -74,7 +75,7 @@ const Text: React.FC<TextProps> = ({
       return;
     }
 
-    let textToSpeak = speakText || (Array.isArray(description) ? description.join(' ') : description);
+    const textToSpeak = speakText || (Array.isArray(description) ? description.join(' ') : description);
 
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
       try {
@@ -147,10 +148,12 @@ const Text: React.FC<TextProps> = ({
                     justifyContent: 'center',
                     gap: 16
                   }}>
-                    <img
+                    <Image
                       src="/images/mascot.png"
                       alt="Mascot giving instruction"
-                      style={{ width: 56, height: 56, flexShrink: 0 }}
+                      width={56}
+                      height={56}
+                      style={{ flexShrink: 0 }}
                     />
                     <div style={{
                       background: '#fffbe6',
@@ -233,10 +236,12 @@ const Text: React.FC<TextProps> = ({
                     justifyContent: 'flex-start',
                     maxWidth: 600
                   }}>
-                    <img
+                    <Image
                       src="/images/mascot.png"
                       alt="Mascot"
-                      style={{ width: 56, height: 56, marginRight: 14, flexShrink: 0 }}
+                      width={56}
+                      height={56}
+                      style={{ marginRight: 14, flexShrink: 0 }}
                     />
                     <div style={{
                       background: '#fffbe6',

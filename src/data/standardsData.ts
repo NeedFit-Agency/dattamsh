@@ -174,23 +174,6 @@ export const standards: Standard = {
           speakText:
             'Hoot hoot! Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Chapter Quiz: Nature and Man-made',
-          description: ["Let's check what you've learned about natural and man-made things!"],
-          question: "Which of these is a natural thing?",
-          options: [
-            { id: "q1-opt1", text: "Pencil", isCorrect: false, explanation: "A pencil is made by people, so it's a man-made thing." },
-            { id: "q1-opt2", text: "Mountain", isCorrect: true, explanation: "Correct! Mountains are found in nature and weren't made by people." },
-            { id: "q1-opt3", text: "Book", isCorrect: false, explanation: "Books are made by people, so they are man-made things." },
-            { id: "q1-opt4", text: "Desk", isCorrect: false, explanation: "Desks are made by people, so they are man-made things." }
-          ],
-          explanation: "Natural things are found in nature and not made by humans. Man-made things are created by people.",
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/quiz1.mp3',
-          speakText: "Let's check what you've learned about natural and man-made things! Which of these is a natural thing?"
-        },
       ],
     },{
       id: 2,
@@ -309,24 +292,6 @@ export const standards: Standard = {
           audioSrc: '/audio/computer_summary.mp3',
           speakText: "Points to remember: A computer is a machine that makes our work easy. A computer is called a supermachine. Computers help us write, draw, play games, talk to people, and listen to music. The main parts of a computer are the monitor, keyboard, mouse, CPU, and speakers."
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Chapter Quiz: All About Computers',
-          description: [
-            "Let's see what we've learned about computers!"
-          ],
-          audioSrc: '/audio/computer_quiz.mp3',
-          speakText: "Let's see what we've learned about computers! Answer these fun questions!",
-          question: "Which part of the computer is called its 'brain'?",
-          options: [
-            { id: "q1-opt1", text: "Monitor", isCorrect: false, explanation: "The monitor shows what the computer is doing, but it's not the brain." },
-            { id: "q1-opt2", text: "Keyboard", isCorrect: false, explanation: "The keyboard helps us type, but it's not the brain." },
-            { id: "q1-opt3", text: "CPU", isCorrect: true, explanation: "Correct! The CPU (Central Processing Unit) is the brain of the computer." },
-            { id: "q1-opt4", text: "Mouse", isCorrect: false, explanation: "The mouse helps us point and click, but it's not the brain." }
-          ],
-          explanation: "The CPU (Central Processing Unit) is like the brain of the computer. It does all the thinking and processing of information!"
-        }
       ]
     },    {
       id: 3,
@@ -465,23 +430,6 @@ export const standards: Standard = {
           audioSrc: '/audio/care_summary.mp3',
           speakText: "Points to remember: Sit up straight when using a computer. Take breaks every 30 minutes. Keep food and drinks away from computers. Clean the screen and keyboard with a soft cloth. Always shut down your computer properly. Use gentle hands when typing and using the mouse. Keep computers in cool, dust-free places."
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Chapter Quiz: Computer Care and Safety',
-          description: ["Let's check what you've learned about taking care of computers!"],
-          question: "Which of these is a good computer care habit?",
-          options: [
-            { id: "q3-opt1", text: "Eating snacks while using the computer", isCorrect: false, explanation: "Food and drinks should be kept away from computers to avoid damage." },
-            { id: "q3-opt2", text: "Pressing the keys very hard when typing", isCorrect: false, explanation: "You should press keys gently to avoid damaging the keyboard." },
-            { id: "q3-opt3", text: "Shutting down the computer properly", isCorrect: true, explanation: "Correct! Always shut down your computer properly to keep it working well." },
-            { id: "q3-opt4", text: "Using the computer without taking breaks", isCorrect: false, explanation: "Taking breaks is important for your eyes and body when using a computer." }
-          ],
-          explanation: "Taking care of computers helps them last longer, and taking care of ourselves while using computers keeps us healthy!",
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/quiz3.mp3',
-          speakText: "Let's check what you've learned about taking care of computers! Which of these is a good computer care habit?"
-        }
       ]
     },    {
       id: 4,
@@ -654,23 +602,6 @@ export const standards: Standard = {
           audioSrc: '/audio/keyboard_mouse_summary.mp3',
           speakText: "Points to remember: The keyboard and mouse help us communicate with the computer. The keyboard has alphabet keys, number keys, and special keys like Space Bar and Enter. We use the keyboard to type letters, words, numbers, and symbols. The mouse helps us point to and select things on the screen. A mouse has left and right buttons and usually a scroll wheel in the middle. When we move the mouse on the table, the pointer moves on the screen. We should hold the mouse gently and press keyboard keys softly."
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Chapter Quiz: Keyboard and Mouse Fun',
-          description: ["Let's see what you've learned about keyboards and mice!"],
-          question: "Which is the longest key on the keyboard?",
-          options: [
-            { id: "q4-opt1", text: "Enter key", isCorrect: false, explanation: "The Enter key is important but it's not the longest key." },
-            { id: "q4-opt2", text: "Space bar", isCorrect: true, explanation: "Correct! The Space bar is the longest key on the keyboard and puts spaces between words." },
-            { id: "q4-opt3", text: "Shift key", isCorrect: false, explanation: "The Shift key helps make capital letters, but it's not the longest key." },
-            { id: "q4-opt4", text: "Backspace key", isCorrect: false, explanation: "The Backspace key helps delete mistakes, but it's not the longest key." }
-          ],
-          explanation: "The Space bar is the longest key on the keyboard. It helps us put spaces between words when we type.",
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/quiz4.mp3',
-          speakText: "Let's see what you've learned about keyboards and mice! Which is the longest key on the keyboard?"
-        }
       ]
     }
   ],

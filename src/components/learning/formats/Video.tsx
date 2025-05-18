@@ -30,7 +30,7 @@ export const Video: React.FC<VideoProps> = ({
       return;
     }
 
-    let textToSpeak = speakText || description;
+    const textToSpeak = speakText || description;
 
     // Use speech synthesis
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {

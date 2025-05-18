@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones, faCheckCircle, faTimesCircle, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { QuizProps } from './types';
 import styles from '../../../learning/learning.module.css';
+import Image from 'next/image';
 
 export const Quiz: React.FC<QuizProps> = ({
   title,
@@ -30,7 +31,7 @@ export const Quiz: React.FC<QuizProps> = ({
       return;
     }
 
-    let textToSpeak = speakText || question;
+    const textToSpeak = speakText || question;
 
     // Use speech synthesis
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
@@ -89,7 +90,7 @@ export const Quiz: React.FC<QuizProps> = ({
         {/* Quiz Image (if provided) */}
         {imageUrl && (
           <div className={styles.quizImageContainer}>
-            <img src={imageUrl} alt="Quiz" className={styles.quizImage} />
+            <Image src={imageUrl} alt="Quiz" className={styles.quizImage} width={500} height={300} />
           </div>
         )}
         

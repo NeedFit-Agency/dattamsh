@@ -33,7 +33,7 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
      itemClass += ` ${styles.completed}`; // Add .completed class for styling completed checkmarks
   }
 
-  const handleMascotClick = (e: React.MouseEvent) => {
+  const handleMascotClick = () => {
     if (type === 'duo') {
       setIsAnimating(true);
       setIsSpinning(true);

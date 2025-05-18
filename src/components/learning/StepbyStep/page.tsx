@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones, faArrowLeft, faArrowRight, faShield, faGem, faHeart, faCog } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Step, StepByStepProps } from './types';
+import { StepByStepProps } from './types';
 import styles from './stepbystep.module.css';
 
 const StepByStep: React.FC<StepByStepProps> = ({
@@ -39,7 +39,7 @@ const StepByStep: React.FC<StepByStepProps> = ({
     if (initialStepIndex !== currentStepIndex) {
       setCurrentStepIndex(initialStepIndex);
     }
-  }, [initialStepIndex]);
+  }, [initialStepIndex, currentStepIndex]);
 
   useEffect(() => {
     // Cleanup audio when component unmounts

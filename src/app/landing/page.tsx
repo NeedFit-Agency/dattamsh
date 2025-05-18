@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faLaptopCode, 
   faRobot, 
-  faMicrochip, 
   faCode,
   faBrain,
   faGraduationCap,
