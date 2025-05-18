@@ -1,18 +1,15 @@
 // src/hooks/useLearningState.ts
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { standards, LessonContent } from '@/data/standardsData';
 
 export function useLearningState() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [hearts, setHearts] = useState(3);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const router = useRouter();
 
   const initialLessonContent = standards["1"][0].lessonContent;
-  const [chapterContent, setChapterContent] = useState<LessonContent[]>(initialLessonContent);
-  const currentContent = chapterContent[currentSlideIndex] || null;
+  const currentContent = initialLessonContent[currentSlideIndex] || null;
 
   useEffect(() => {
     // Logic to fetch and set chapter content
@@ -40,7 +37,7 @@ export function useLearningState() {
   };
 
   const handleContinue = () => {
-    if (currentSlideIndex < chapterContent.length - 1) {
+    if (currentSlideIndex < initialLessonContent.length - 1) {
       setCurrentSlideIndex(currentSlideIndex + 1);
     } else {
       router.push(`/quiz?standard=1&chapter=1`);
@@ -49,8 +46,6 @@ export function useLearningState() {
 
   return {
     currentSlideIndex,
-    progress,
-    hearts,
     currentContent,
     handleBackClick,
     handleContinue,

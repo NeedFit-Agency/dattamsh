@@ -1,6 +1,6 @@
-export type FormatType = 
+export type FormatType =
   | 'application'
-  | 'type' 
+  | 'type'
   | 'code'
   | 'component'
   | 'drag-drop'
@@ -62,7 +62,23 @@ export interface QuizSlide extends BaseContentProps {
   // Format will be 'quiz'
 }
 
-export type LessonContent = LearningSlide | DragDropSlide | QuizSlide;
+export interface HistorySlide extends BaseContentProps {
+  type: 'learn';
+  format: 'history';
+  title: string;
+  items: {
+    id: string;
+    title: string;
+    description: string;
+    visualIcon: string;
+    position: 'left' | 'right';
+  }[];
+  imageUrl?: string;
+  audioSrc?: string;
+  speakText?: string;
+}
+
+export type LessonContent = LearningSlide | DragDropSlide | QuizSlide | HistorySlide;
 
 export interface Chapter {
   id: number;
@@ -128,7 +144,7 @@ export const standards: Standard = {
           audioSrc: '/audio/03_manmade.mp3',
           speakText:
             'Man-made things are things that people build or create. Can you spot some things people made here? A yellow School Bus, a shiny Cycle, a comfy Chair, and a classroom Blackboard.',
-        },        {
+        }, {
           type: 'drag-drop',
           format: 'drag-drop',
           title: 'Activity: Sort Them Out!',
@@ -168,7 +184,7 @@ export const standards: Standard = {
           speakText: "Let's check what you've learned about natural and man-made things! Which of these is a natural thing?"
         },
       ],
-    },{
+    }, {
       id: 2,
       title: "All About Computers",
       lessonContent: [
@@ -205,7 +221,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/computer_uses.mp3',
           speakText: "Computers help us do many things: Type or write letters, stories, and poems. Draw colorful and beautiful paintings. Play fun games. Talk to family and friends who are far away. Listen to music and watch videos."
-        },        {
+        }, {
           type: 'learn',
           format: 'type',
           title: 'Parts of a Computer',
@@ -242,7 +258,7 @@ export const standards: Standard = {
           audioSrc: '/audio/computer_activity.mp3',
           speakText:
             'Drag each computer part to the correct description box! Is it an input device or an output device?',
-        },        {
+        }, {
           type: 'learn',
           format: 'history',
           title: 'Story: The Magic of Computers',
@@ -268,7 +284,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/computer_facts.mp3',
           speakText: "Did you know? The first electronic computer, ENIAC, weighed more than 27 tons and took up the size of a small house! Modern computers can be as small as your pocket! Computers can do millions of calculations in just one second!"
-        },        {
+        }, {
           type: 'learn',
           format: 'text',
           title: 'Points to Remember',
@@ -304,7 +320,7 @@ export const standards: Standard = {
           explanation: "The CPU (Central Processing Unit) is like the brain of the computer. It does all the thinking and processing of information!"
         }
       ]
-    },    {
+    }, {
       id: 3,
       title: "Computer Care and Safety",
       lessonContent: [
@@ -378,7 +394,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/computer_habits.mp3',
           speakText: "Let's sort these habits into good habits and bad habits for computer care! Drag each item to the correct box."
-        },        {
+        }, {
           type: 'learn',
           format: 'step-by-step',
           title: 'How to Shut Down a Computer Properly',
@@ -397,7 +413,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/shutdown_computer.mp3',
           speakText: "One of the most important ways to take care of your computer is to shut it down properly. Here's how: Save your work first. Close all open programs. Click on the Start button at the bottom left of the screen. Click on Shut Down. Wait for the computer to turn off completely before switching off the power."
-        },        {
+        }, {
           type: 'learn',
           format: 'history',
           title: "Story: Leo's Computer Lesson",
@@ -425,7 +441,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/computer_care_facts.mp3',
           speakText: "Did you know? If you try to shut down your computer without closing your programs, the computer will ask if you still want to shut down. Shutting down your computer properly can make it last longer! Taking short breaks when using the computer is good for your eyes and body!"
-        },        {
+        }, {
           type: 'learn',
           format: 'text',
           title: 'Points to Remember',
@@ -459,7 +475,7 @@ export const standards: Standard = {
           speakText: "Let's check what you've learned about taking care of computers! Which of these is a good computer care habit?"
         }
       ]
-    },    {
+    }, {
       id: 4,
       title: "Keyboard and Mouse Fun",
       lessonContent: [
@@ -543,7 +559,7 @@ export const standards: Standard = {
           imageUrl: '/images/mascot.png',
           audioSrc: '/audio/mouse_parts.mp3',
           speakText: "A mouse has different parts: Left Button is the main button used for clicking on things. Right Button is used for special menus and options. Scroll Wheel is the wheel in the middle that helps scroll up and down on pages. Mouse Body is the part you hold in your hand. Mouse Pointer is the arrow on the screen that moves when you move the mouse."
-        },        {
+        }, {
           type: 'learn',
           format: 'step-by-step',
           title: 'How to Hold a Mouse',
@@ -584,7 +600,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/match_parts.mp3',
           speakText: 'Drag each item to the correct category! Is it a part of the keyboard or a part of the mouse?'
-        },        {
+        }, {
           type: 'learn',
           format: 'history',
           title: 'Story: The Friendly Keyboard and Mouse',
@@ -614,7 +630,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/keyboard_mouse_facts.mp3',
           speakText: "Did you know? A standard keyboard has 104 keys! The arrangement of keys on a keyboard is called QWERTY, named after the first six letters on the top row. The computer mouse was invented by Douglas Engelbart in 1964. The mouse got its name because the cord coming out looked like a mouse's tail! On laptops, instead of a mouse, there's often a touchpad that works the same way."
-        },        {
+        }, {
           type: 'learn',
           format: 'text',
           title: 'Points to Remember',
@@ -650,7 +666,7 @@ export const standards: Standard = {
       ]
     }
   ],
-
+  
   "2": [
     {
       id: 1,
@@ -676,7 +692,7 @@ export const standards: Standard = {
             '🏢 Office: In offices, people use computers to write letters, send emails, and complete important tasks efficiently. Computers are also used in offices to maintain records and to store information.',
             '🏥 Hospital: Doctors use computers to store patient information. Some advanced computers also help operate machines used in medical procedures.',
             '🏠 Home:  We use computers at home to watch our favourite cartoons, play games, type letters, draw and colour, to learn, watch videos, listen to music, etc.',
-            '🏦 Bank:  Banks use computers to keep track of customer’s accounts and money. They also help with withdrawing cash from ATMs.'
+            '🏦 Bank:  Banks use computers to keep track of customer\'s accounts and money. They also help with withdrawing cash from ATMs.'
           ]
         },
         {
@@ -685,12 +701,12 @@ export const standards: Standard = {
           title: 'Activity: Sort the Places',
           instruction: 'Drag each place into the correct box: "Places where computers are used" or "Places where computers are not used".',
           items: [
-            { id: 'dnd-place-1', text: 'School', type: 'man-made'},
-            { id: 'dnd-place-3', text: 'Library', type: 'man-made'},
-            { id: 'dnd-place-4', text: 'Bank', type: 'man-made'},
-            { id: 'dnd-place-6', text: 'Playground', type: 'natural'},
-            { id: 'dnd-place-7', text: 'Forest', type: 'natural'},
-            { id: 'dnd-place-8', text: 'Beach', type: 'natural'}
+            { id: 'dnd-place-1', text: 'School', type: 'man-made' },
+            { id: 'dnd-place-3', text: 'Library', type: 'man-made' },
+            { id: 'dnd-place-4', text: 'Bank', type: 'man-made' },
+            { id: 'dnd-place-6', text: 'Playground', type: 'natural' },
+            { id: 'dnd-place-7', text: 'Forest', type: 'natural' },
+            { id: 'dnd-place-8', text: 'Beach', type: 'natural' }
           ],
           targets: [
             { id: 'manMadeTarget', title: 'Places where computers are used', type: 'man-made' },
@@ -727,6 +743,661 @@ export const standards: Standard = {
             { src: '/images/mouse.png', alt: 'Mouse' },
           ]
         },
+      ]
+    },
+    {
+      id: 2,
+      title: "Smartphones: Pocket Computers",
+      lessonContent: [
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Questions to Ponder",
+          "description": [
+            "What are some things you can do with a smartphone that you couldn't do with a regular phone?",
+            "Are computers and smartphones similar? Why do you think so?"
+          ],
+          "audioSrc": "/audio/ch2_questions.mp3",
+          "speakText": "What are some things you can do with a smartphone that you couldn't do with a regular phone? Are computers and smartphones similar? Why do you think so?"
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "What can Smartphones do?",
+          "description": [
+            "Earlier, mobile phones were only used to make calls and send messages. Over the years, mobile phones have developed into smartphones which can do a lot more than just making calls and sending messages.",
+            "Smartphones are like small computers that fit in your pocket. They can do many things. For example: make phone calls, send messages and emails, take pictures, play games, listen to music, help people find their way with maps, search for information on the internet."
+          ],
+          "exampleImages": [
+            { "src": "/images/smartphone_calls.png", "alt": "Making phone calls" },
+            { "src": "/images/smartphone_messages.png", "alt": "Sending messages" },
+            { "src": "/images/smartphone_camera.png", "alt": "Taking pictures" },
+            { "src": "/images/smartphone_games.png", "alt": "Playing games" },
+            { "src": "/images/smartphone_music.png", "alt": "Listening to music" },
+            { "src": "/images/smartphone_maps.png", "alt": "Using maps" },
+            { "src": "/images/smartphone_internet.png", "alt": "Searching the internet" }
+          ],
+          "audioSrc": "/audio/ch2_what_smartphones_do.mp3",
+          "speakText": "Smartphones can make phone calls, send messages and emails, take pictures, play games, listen to music, use maps, and search the internet."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Activity: Think and Discuss",
+          "description": [
+            "Can you think of any other things you can do on a smartphone? Discuss them in class."
+          ],
+          "audioSrc": "/audio/ch2_activity.mp3",
+          "speakText": "Think of other things you can do with a smartphone and talk about them with your classmates."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "How are Smartphones like Computers?",
+          "description": [
+            "Computer: Hey, smartphone! Guess what? People say we are like twins. What do you think?",
+            "Smartphone: Hi computer, I agree with you. We can do so many similar things.",
+            "Computer: But you can go on adventures because you're small and fit in people's pockets.",
+            "Smartphone: Yes, I am like a mini-computer! I can send messages and emails, play games, show videos, listen to music, help people search for information on the internet, and even make calls.",
+            "Computer: So, we both help people in their day-to-day tasks, just in different ways.",
+            "Smartphone: We make quite the team!",
+            "Computer: High five, smartphone!",
+            "Smartphone: High five, computer!"
+          ],
+          "audioSrc": "/audio/ch2_dialogue.mp3",
+          "speakText": "Smartphones and computers are similar because they can do many of the same things, but smartphones are small and portable."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "YouTube and other Smartphone Apps",
+          "description": [
+            "YouTube is an application (app) where you can watch and share videos. It's like watching TV but on a computer, tablet, or phone.",
+            "1. You can watch your favourite cartoon.",
+            "2. You can listen to rhymes.",
+            "3. You can watch educational videos and learn about animals, birds, flowers and so much more.",
+            "4. You can watch and learn how to draw and learn new things.",
+            "YouTube is a really fun app! As the YouTube app can be used to watch videos on a smartphone, similarly we can watch videos on a desktop and laptop computer by visiting the YouTube website: www.youtube.com"
+          ],
+          "exampleImages": [
+            { "src": "/images/youtube_app.png", "alt": "YouTube app" },
+            { "src": "/images/youtube_website.png", "alt": "YouTube website" }
+          ],
+          "audioSrc": "/audio/ch2_youtube.mp3",
+          "speakText": "YouTube lets you watch cartoons, rhymes, and educational videos on your smartphone or computer."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Some more fun and Useful Apps",
+          "description": [
+            "There are many more apps for our smartphones like educational apps, gaming apps, shopping apps, messaging apps, and so on. Let's look at a few of them.",
+            "1. Educational app: Periwinkle eLearning app - consists of learning videos and stories for various subjects across all grades.",
+            "2. Gaming app: Endless Alphabet - teaches alphabets and words with fun games.",
+            "3. Shopping apps: Amazon and Flipkart - help you with shopping.",
+            "4. Creativity apps: Art For Kids Hub - teaches drawing and crafts. Colorfy - colouring book on mobile.",
+            "5. Some more apps: WhatsApp - WhatsApp is an app that lets people communicate with one another. People can send messages, photos, videos, documents and make calls to one another. Google Maps - It shows you where places are and helps you find the best way to get there."
+          ],
+          "exampleImages": [
+            { "src": "/images/periwinkle_app.png", "alt": "Periwinkle eLearning app" },
+            { "src": "/images/endless_alphabet.png", "alt": "Endless Alphabet app" },
+            { "src": "/images/amazon_app.png", "alt": "Amazon shopping app" },
+            { "src": "/images/art_for_kids_hub.png", "alt": "Art For Kids Hub app" },
+            { "src": "/images/whatsapp.png", "alt": "WhatsApp app" },
+            { "src": "/images/google_maps.png", "alt": "Google Maps app" }
+          ],
+          "audioSrc": "/audio/ch2_other_apps.mp3",
+          "speakText": "There are many apps like Periwinkle for learning, Endless Alphabet for games, Amazon for shopping, and WhatsApp for messaging."
+        },
+        {
+          "type": "learn",
+          "format": "history",
+          "title": "Caselet: Reducing Screen Time",
+          "description": [
+            "In the city of Mumbai, lived a boy named Ravi. He loved playing games on his parent's phone. He spent three to four hours each day on the screen. On Saturday, Ravi's family decided to take him to the local park. Ravi was unhappy but still went along. At the park, he saw children playing hide and seek, flying kites, and playing football. Ravi was not sure at first but soon joined in the fun. As Ravi played with his friends, he felt the fresh air, heard joyful laughter, and discovered how exciting outdoor games could be. By the end of the day, Ravi was full of energy and could not stop smiling. His mom said, \"Ravi, see how much fun you had? Outdoor play keeps you healthy and happy, and it's a great way to spend time with friends.\""
+          ],
+          "items": [
+            {
+              "id": "1",
+              "title": "Ravi loves games",
+              "description": "Ravi spent hours playing games on his parent's phone.",
+              "visualIcon": "/story/scenerio-img1.png",
+              "position": "left"
+            },
+            {
+              "id": "2",
+              "title": "Trip to the park",
+              "description": "His family took him to the park, where he saw children playing.",
+              "visualIcon": "/story/scenerio-img2.png",
+              "position": "right"
+            },
+            {
+              "id": "3",
+              "title": "New fun",
+              "description": "Ravi joined the games and discovered the joy of outdoor play.",
+              "visualIcon": "/story/scenerio-img3.png",
+              "position": "left"
+            },
+            {
+              "id": "4",
+              "title": "Lesson learned",
+              "description": "Ravi realized outdoor play is fun and healthy.",
+              "visualIcon": "/story/scenerio-img4.png",
+              "position": "right"
+            }
+          ],
+          "imageUrl": "/images/ravi_park.png",
+          "audioSrc": "/audio/ch2_caselet.mp3",
+          "speakText": "Ravi learned that playing outside is fun and keeps you healthy."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Did you know?",
+          "description": [
+            "The first smartphone was invented in 1992.",
+            "YouTube was created in 2005.",
+            "The first video ever uploaded to YouTube is titled 'Me at the Zoo'. It was uploaded by Jawed Karim, on April 23, 2005."
+          ],
+          "audioSrc": "/audio/ch2_facts.mp3",
+          "speakText": "The first smartphone was made in 1992, and YouTube started in 2005 with its first video called 'Me at the Zoo'."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Points to Remember",
+          "description": [
+            "Smartphones are like small computers that fit in your pocket.",
+            "Smartphones and computers are very similar.",
+            "YouTube is a fun learning app.",
+            "There are many more apps like educational apps, gaming apps, messaging apps, shopping apps, and so on."
+          ],
+          "audioSrc": "/audio/ch2_summary.mp3",
+          "speakText": "Smartphones are like tiny computers, similar to big ones, and apps like YouTube help us learn and have fun."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation A: Tick the Correct Sentence",
+          "description": ["Tick the correct sentence and cross the incorrect sentence."],
+          "question": "Which of these statements are true? (Tick all that apply)",
+          "options": [
+            { "id": "q1-opt1", "text": "Smartphones can be used to play games and watch videos.", "isCorrect": true },
+            { "id": "q1-opt2", "text": "YouTube is an app used for sending text messages.", "isCorrect": false },
+            { "id": "q1-opt3", "text": "Playing outside can help improve physical fitness and mood.", "isCorrect": true },
+            { "id": "q1-opt4", "text": "Smartphones can help people find their way using maps.", "isCorrect": true },
+            { "id": "q1-opt5", "text": "Computers and smartphones are completely different and cannot perform similar tasks.", "isCorrect": false }
+          ],
+          "explanation": "Smartphones can play games, watch videos, and use maps. YouTube is for videos, not messages. Playing outside is good for you.",
+          "audioSrc": "/audio/ch2_quiz_a.mp3",
+          "speakText": "Tick the sentences that are true."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation B: Select Smartphone Tasks",
+          "description": ["Select the tasks a smartphone can perform by ticking the correct options from the list below."],
+          "question": "Which of these can a smartphone do? (Tick all that apply)",
+          "options": [
+            { "id": "q2-opt1", "text": "Make phone calls", "isCorrect": true },
+            { "id": "q2-opt2", "text": "Cook food", "isCorrect": false },
+            { "id": "q2-opt3", "text": "Send messages and emails", "isCorrect": true },
+            { "id": "q2-opt4", "text": "Take pictures", "isCorrect": true },
+            { "id": "q2-opt5", "text": "Drive a car", "isCorrect": false },
+            { "id": "q2-opt6", "text": "Play games", "isCorrect": true }
+          ],
+          "explanation": "Smartphones can call, message, take pictures, and play games, but not cook or drive.",
+          "audioSrc": "/audio/ch2_quiz_b.mp3",
+          "speakText": "Tick what smartphones can do."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation C: Match Columns",
+          "description": ["Match column 'A' to column 'B'."],
+          "question": "Match the items in column A with their descriptions in column B.",
+          "options": [
+            { "id": "q3-opt1", "text": "1. Smartphones - e. small computer that fits in your pocket", "isCorrect": true },
+            { "id": "q3-opt2", "text": "2. YouTube - d. watch your favourite cartoon", "isCorrect": true },
+            { "id": "q3-opt3", "text": "3. Flipkart - a. shopping", "isCorrect": true },
+            { "id": "q3-opt4", "text": "4. Apple maps - b. help people find their way", "isCorrect": true },
+            { "id": "q3-opt5", "text": "5. WhatsApp - c. make calls and send messages to family and friends", "isCorrect": true }
+          ],
+          "explanation": "Smartphones are pocket computers, YouTube is for cartoons, Flipkart is for shopping, Apple Maps helps with directions, and WhatsApp is for communication.",
+          "audioSrc": "/audio/ch2_quiz_c.mp3",
+          "speakText": "Match the items to their descriptions."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Workstation D: Fill in the Crossword",
+          "description": [
+            "Fill in the crossword with the help of the clues given.",
+            "Clues Down: 1. This app helps people find their way (MAP). 2. This is a shopping app (AMAZON). 3. This app is used to watch videos and movies (YOUTUBE). 4. This is an educational app that teaches you subjects with fun videos (PERIWINKLE).",
+            "Across: 5. A device that is like a small computer (SMARTPHONE)."
+          ],
+          "imageUrl": "/images/crossword.png",
+          "audioSrc": "/audio/ch2_crossword.mp3",
+          "speakText": "Use the clues to fill in the crossword."
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Introduction to Notepad",
+      lessonContent: [
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Questions to Ponder",
+          "description": [
+            "If you wanted to practice writing words, how would you do that on a computer?",
+            "Have you ever copied something from a book to a computer, and if so, how did you do it?",
+            "How do you keep your work safe so it doesn't get lost from the computer?"
+          ],
+          "audioSrc": "/audio/ch3_questions.mp3",
+          "speakText": "How would you write words on a computer? How do you copy from a book? How do you save your work?"
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "What is Notepad?",
+          "description": [
+            "Notepad is like a notebook that you can use on a computer. It helps you write down things like stories, ideas, letters, or any notes you want to keep."
+          ],
+          "imageUrl": "/images/notepad_icon.png",
+          "audioSrc": "/audio/ch3_notepad_intro.mp3",
+          "speakText": "Notepad is a digital notebook on your computer for writing stories and notes."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Open Notepad",
+          "description": [
+            "Step 1: Go to the search bar in the Start icon on your computer.",
+            "Step 2: Search for Notepad. The icon looks like a small white paper Notepad. Click on it to Open."
+          ],
+          "exampleImages": [
+            { "src": "/images/search_notepad.png", "alt": "Searching for Notepad" },
+            { "src": "/images/notepad_icon.png", "alt": "Notepad icon" }
+          ],
+          "audioSrc": "/audio/ch3_open_notepad.mp3",
+          "speakText": "Search for Notepad in the Start menu and click the icon to open it."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Components of Notepad",
+          "description": [
+            "1. Title Bar: This is the top part of Notepad where you see the name of your file. When you first open Notepad, it will say Untitled. This means you haven't saved your file yet.",
+            "2. Menu Bar: It has different menu options like File, Edit, and View. File helps you save or open files, Edit lets you copy or paste, and View can show or hide the Status Bar.",
+            "3. Text Area: This is the big blank space where you type your words, sentences, etc.",
+            "4. Settings: This lets you change how the app looks, like switching between dark and light themes or turning on spell check."
+          ],
+          "imageUrl": "/images/notepad_components.png",
+          "audioSrc": "/audio/ch3_components.mp3",
+          "speakText": "Notepad has a Title Bar, Menu Bar, Text Area, and Settings to help you write and customize."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Practice Typing",
+          "description": [
+            "Step 1: Use the keyboard to type your name. Press the Enter key to start typing on a new line.",
+            "Step 2: Type the names of 4 to 5 of your classmates."
+          ],
+          "audioSrc": "/audio/ch3_typing_practice.mp3",
+          "speakText": "Type your name and your friends' names in Notepad using the keyboard."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Type and Save a Story",
+          "description": [
+            "Step 1: Think of a short story.",
+            "Step 2: Start typing your story in Notepad. For example, 'Once upon a time, there was a cat.' Use the backspace key to fix mistakes.",
+            "Step 3: Click on the 'File' menu at the top.",
+            "Step 4: Choose 'Save As'.",
+            "Step 5: Give your file a name, like 'MyStory'.",
+            "Step 6: Click 'Save'."
+          ],
+          "exampleImages": [
+            { "src": "/images/typing_story.png", "alt": "Typing a story" },
+            { "src": "/images/save_as.png", "alt": "Saving the file" }
+          ],
+          "audioSrc": "/audio/ch3_save_story.mp3",
+          "speakText": "Write a story in Notepad and save it with a name like 'MyStory'."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Activity: Copy a Story",
+          "description": [
+            "1. Find a Story: Take a story from a storybook or write your own in a notebook.",
+            "2. Type the Story: Open Notepad and type the story.",
+            "3. Save the Story: Click on 'File' and then 'Save As'. Name it something unique like 'My First Story' and click 'Save'."
+          ],
+          "audioSrc": "/audio/ch3_activity.mp3",
+          "speakText": "Copy a story into Notepad and save it with a special name."
+        },
+        {
+          "type": "learn",
+          "format": "history",
+          "title": "Caselet: Saketh's Story",
+          "description": [
+            "Saketh is a little boy who loves to write stories. One day, his teacher showed him Notepad on the computer. 'You can type your stories here!' she said. Saketh typed a story about his dog Ruby. When he finished, he saved it as 'RubyAdventure' and felt proud. He loves Notepad because it keeps his stories neat and safe."
+          ],
+          "imageUrl": "/images/saketh_notepad.png",
+          "audioSrc": "/audio/ch3_caselet.mp3",
+          "speakText": "Saketh used Notepad to write and save a story about his dog Ruby."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Did you know?",
+          "description": [
+            "Notepad was developed in 1983 and has been part of Windows since 1985.",
+            "Notepad is a simple text editor and often a good choice for basic coding.",
+            "Notepad can be used to create web pages."
+          ],
+          "audioSrc": "/audio/ch3_facts.mp3",
+          "speakText": "Notepad started in 1983 and can even be used for coding."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Points to Remember",
+          "description": [
+            "Notepad helps you type and save simple text easily.",
+            "You can open Notepad by clicking the little paper notepad icon on your computer.",
+            "Use the keyboard to write stories or lists in Notepad.",
+            "Save your work by clicking 'File' and then 'Save As'."
+          ],
+          "audioSrc": "/audio/ch3_summary.mp3",
+          "speakText": "Notepad is easy to use for typing and saving stories with your keyboard."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation A: True or False",
+          "description": ["State whether the following statements are True or False."],
+          "question": "Are these statements true or false?",
+          "options": [
+            { "id": "q1-opt1", "text": "Notepad helps us write and save our stories.", "isCorrect": true },
+            { "id": "q1-opt2", "text": "The monitor displays what we type in Notepad.", "isCorrect": true },
+            { "id": "q1-opt3", "text": "We use a pencil to write in Notepad.", "isCorrect": false },
+            { "id": "q1-opt4", "text": "The keyboard helps us type words on the computer.", "isCorrect": true },
+            { "id": "q1-opt5", "text": "We save our work by closing Notepad.", "isCorrect": false }
+          ],
+          "explanation": "Notepad is for writing and saving, the monitor shows it, and we use the keyboard, not a pencil. Saving isn't done by closing.",
+          "audioSrc": "/audio/ch3_quiz_a.mp3",
+          "speakText": "Decide if these are true or false."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation B: Match Components",
+          "description": ["Match the following components of Notepad in column A to their descriptions in column B."],
+          "question": "Match each component to its description.",
+          "options": [
+            { "id": "q2-opt1", "text": "1. Notepad - b. a simple app on your computer used for typing", "isCorrect": true },
+            { "id": "q2-opt2", "text": "2. Title Bar - c. the top part that displays the name of your file", "isCorrect": true },
+            { "id": "q2-opt3", "text": "3. Menu Bar - d. contains options like File, Edit, View", "isCorrect": true },
+            { "id": "q2-opt4", "text": "4. Text Area - a. the area where you type your story or notes", "isCorrect": true }
+          ],
+          "explanation": "Notepad is the app, Title Bar shows the file name, Menu Bar has options, and Text Area is for typing.",
+          "audioSrc": "/audio/ch3_quiz_b.mp3",
+          "speakText": "Match each part of Notepad to what it does."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Workstation C: Decode the Secret Message",
+          "description": [
+            "Decoding is converting symbols, codes, or letters into meaningful words or messages. Use the key provided to decode an important message about working on Notepad. (Note: Key and message to be provided in class.)"
+          ],
+          "audioSrc": "/audio/ch3_decode.mp3",
+          "speakText": "Use the key to figure out the secret message about Notepad."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Drawing with MS Paint (Part 2)",
+      "lessonContent": [
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Questions to Ponder",
+          "description": [
+            "If you could paint a big rainbow, how would you do that on a computer?",
+            "How would you add a name to a picture on the computer?"
+          ],
+          "audioSrc": "/audio/ch4_questions.mp3",
+          "speakText": "How would you draw a rainbow on a computer? How would you add your name to a picture?"
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Exploring Lines, Curves, and Brushes",
+          "description": [
+            "We all like to paint with different things like brushes, crayons, or wax colours, right? In this lesson, we will explore more features of MS Paint! You know how to draw and fill a shape with colour. Now it's time to discover new tools like lines, curves, and brushes."
+          ],
+          "audioSrc": "/audio/ch4_intro.mp3",
+          "speakText": "Let's learn more about MS Paint tools like lines, curves, and brushes."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "The Ribbon",
+          "description": [
+            "When you open MS Paint, you'll see a section at the top called the Ribbon. The Ribbon holds all the tools you need to create your drawings: Selection tools to choose parts, Image editing tools like Pencil and Brushes, Shape tools for squares and circles, and a Colours tool with a colour palette."
+          ],
+          "imageUrl": "/images/paint_ribbon.png",
+          "audioSrc": "/audio/ch4_ribbon.mp3",
+          "speakText": "The Ribbon in MS Paint has all the tools you need to draw."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Line Tool",
+          "description": [
+            "In MS Paint, using a Line tool you can draw straight lines.",
+            "Step 1: Click on the 'Line' tool.",
+            "Step 2: Click on the drawing area where you want the line to start, drag it to where you want it to end, and release the mouse button."
+          ],
+          "exampleImages": [
+            { "src": "/images/horizontal_line.png", "alt": "Horizontal line" },
+            { "src": "/images/vertical_line.png", "alt": "Vertical line" },
+            { "src": "/images/slant_line.png", "alt": "Slant line" }
+          ],
+          "audioSrc": "/audio/ch4_line_tool.mp3",
+          "speakText": "Use the Line tool to draw straight lines by clicking and dragging."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Curve Tool",
+          "description": [
+            "In MS Paint, using a Curve tool you can draw curved and wavy lines.",
+            "Step 1: Click on the 'Curve' tool.",
+            "Step 2: Draw a straight line first, then click and drag the line to make it curve."
+          ],
+          "exampleImages": [
+            { "src": "/images/curve_example.png", "alt": "Curved line" }
+          ],
+          "audioSrc": "/audio/ch4_curve_tool.mp3",
+          "speakText": "Use the Curve tool to make wavy lines by dragging a straight line."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Brushes Tool",
+          "description": [
+            "The Brushes tool in MS Paint lets you apply colour with various strokes and styles.",
+            "Step 1: Click on the Brushes tool to see the different options. Select the type of stroke you want.",
+            "Step 2: Drag the mouse pointer on the drawing area to draw.",
+            "Step 3: Try different Brushes to see what strokes they make."
+          ],
+          "exampleImages": [
+            { "src": "/images/brush_fish.png", "alt": "Fish drawn with Calligraphy pen" }
+          ],
+          "audioSrc": "/audio/ch4_brushes.mp3",
+          "speakText": "The Brushes tool lets you draw with different styles and colours."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Activity: Draw a Flower",
+          "description": [
+            "Use MS Paint on your computer to draw a flower.",
+            "Instructions: 1. Use the Circle Tool for the centre. 2. Use the Line Tool for petal outlines. 3. Use the Curve Tool to shape petals. 4. Use the Brush Tool to add details and colours."
+          ],
+          "imageUrl": "/images/flower_example.png",
+          "audioSrc": "/audio/ch4_activity_flower.mp3",
+          "speakText": "Draw a flower in MS Paint using the Circle, Line, Curve, and Brush tools."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Add Words to Pictures",
+          "description": [
+            "Step 1: Open MS Paint and draw a picture (like the flower from the activity).",
+            "Step 2: Click the Text Tool (letter 'A') in the Ribbon.",
+            "Step 3: Click where you want to add words; a box will pop up.",
+            "Step 4: Type your words in the box.",
+            "Step 5: Click outside the box to fix the text.",
+            "Step 6: Save your picture by clicking 'File', then 'Save As', name it, and click 'Save'."
+          ],
+          "audioSrc": "/audio/ch4_text_tool.mp3",
+          "speakText": "Add words to your picture with the Text tool and save it."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Activity: Draw a Tree",
+          "description": [
+            "Try drawing a tree using the Line, Curve, and other tools. Add a name to your drawing using the Text tool."
+          ],
+          "audioSrc": "/audio/ch4_activity_tree.mp3",
+          "speakText": "Draw a tree and add your name with the Text tool."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Fixing Mistakes in MS Paint",
+          "description": [
+            "1. Use the Eraser: Click the Eraser Tool (pink block), adjust its size, and drag over the mistake.",
+            "2. Undo a Mistake: Click the Undo arrow (curved left arrow) to remove the last action.",
+            "3. Redo your Work: Click the Redo arrow (curved right arrow) to bring back what you undid."
+          ],
+          "audioSrc": "/audio/ch4_fixing_mistakes.mp3",
+          "speakText": "Fix mistakes with the Eraser, Undo, or Redo in MS Paint."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Activity: Drawing What You See",
+          "description": [
+            "1. Find a Picture: Look around for something like a cup or book.",
+            "2. Open MS Paint: Click the Paint icon.",
+            "3. Draw What You See: Use tools to draw it.",
+            "4. Add Details: Use colours and tools to make it look real.",
+            "5. Share Your Drawing: Save it and show it to someone."
+          ],
+          "audioSrc": "/audio/ch4_activity_see.mp3",
+          "speakText": "Draw something you see around you in MS Paint."
+        },
+        {
+          "type": "learn",
+          "format": "history",
+          "title": "Caselet: Nidhi's Mountains",
+          "description": [
+            "Nidhi wanted to draw mountains in MS Paint. She made a mistake making one side too small but used the Undo button to fix it. She finished her mountains, added a blue sky, and wrote 'I love mountains!' in colourful letters. Her friends loved it!"
+          ],
+          "imageUrl": "/images/nidhi_mountains.png",
+          "audioSrc": "/audio/ch4_caselet.mp3",
+          "speakText": "Nidhi fixed a mistake in her mountain drawing with Undo and added text."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Did you know?",
+          "description": [
+            "MS Paint has been part of Windows since 1985.",
+            "It was one of the first programs for drawing on computers.",
+            "Old versions didn't have an undo button.",
+            "You can mix colours to create new ones."
+          ],
+          "audioSrc": "/audio/ch4_facts.mp3",
+          "speakText": "MS Paint started in 1985 and didn't always have an undo button."
+        },
+        {
+          "type": "learn",
+          "format": "text",
+          "title": "Points to Remember",
+          "description": [
+            "Line tool helps you draw straight lines.",
+            "The Curve tool makes smooth, wavy lines.",
+            "The Brushes tool adds colour and details with different strokes.",
+            "Undo and Redo help you fix and change your work.",
+            "The Eraser tool lets you erase parts of your drawing.",
+            "The Save option keeps your drawing safe on your computer."
+          ],
+          "audioSrc": "/audio/ch4_summary.mp3",
+          "speakText": "Remember the tools like Line, Curve, Brushes, Undo, Redo, Eraser, and Save in MS Paint."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation A: Multiple Choice",
+          "description": ["Answer the following questions by choosing the correct options."],
+          "question": "Choose the correct answer for each question.",
+          "options": [
+            { "id": "q1-opt1", "text": "1. Which tool would you use to draw a straight line in MS Paint? a. Brush tool b. Line tool c. Curve tool", "isCorrect": true },
+            { "id": "q1-opt2", "text": "2. What does the 'Undo' button do in MS Paint? a. It adds colours b. It fixes a mistake c. It makes your drawing bigger", "isCorrect": true },
+            { "id": "q1-opt3", "text": "3. What tool would you use to draw a curved line? a. Line tool b. Curve tool c. Eraser tool", "isCorrect": true },
+            { "id": "q1-opt4", "text": "4. What happens when you click the 'Redo' button? a. It erases b. It brings back the last action c. It adds text", "isCorrect": true },
+            { "id": "q1-opt5", "text": "5. Which tool would you choose to write your name? a. Eraser tool b. Line tool c. Text tool", "isCorrect": true }
+          ],
+          "explanation": "Line tool draws straight lines, Undo fixes mistakes, Curve tool makes curves, Redo brings back actions, and Text tool adds words.",
+          "audioSrc": "/audio/ch4_quiz_a.mp3",
+          "speakText": "Pick the right answers about MS Paint tools."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation B: True or False",
+          "description": ["State whether the following statements are True or False."],
+          "question": "Are these statements true or false?",
+          "options": [
+            { "id": "q2-opt1", "text": "1. You can use the Text tool to add colours to your picture.", "isCorrect": false },
+            { "id": "q2-opt2", "text": "2. The Brushes tool can make different strokes.", "isCorrect": true },
+            { "id": "q2-opt3", "text": "3. The Curve tool is used for adding text to your pictures.", "isCorrect": false },
+            { "id": "q2-opt4", "text": "4. To undo a mistake in MS Paint, you use the Redo button.", "isCorrect": false },
+            { "id": "q2-opt5", "text": "5. The Eraser tool in MS Paint can only remove entire drawings, not just parts.", "isCorrect": false }
+          ],
+          "explanation": "Text tool adds words, not colours; Brushes make strokes; Curve is for lines, not text; Undo fixes mistakes, not Redo; Eraser can remove parts.",
+          "audioSrc": "/audio/ch4_quiz_b.mp3",
+          "speakText": "Decide if these are true or false about MS Paint."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation C: Match Tools",
+          "description": ["Match the tools in column 'A' with their functions in column 'B'."],
+          "question": "Match each tool to its function.",
+          "options": [
+            { "id": "q3-opt1", "text": "1. Brushes - a. adds colours and different stroke styles", "isCorrect": true },
+            { "id": "q3-opt2", "text": "2. Line - b. draws straight lines", "isCorrect": true },
+            { "id": "q3-opt3", "text": "3. Eraser - c. fixes mistakes by erasing part of the drawing", "isCorrect": true },
+            { "id": "q3-opt4", "text": "4. Curve - d. draws curved and wavy lines", "isCorrect": true },
+            { "id": "q3-opt5", "text": "5. Text - e. adds text to the picture", "isCorrect": true }
+          ],
+          "explanation": "Brushes add styles, Line draws straight, Eraser fixes, Curve makes waves, Text adds words.",
+          "audioSrc": "/audio/ch4_quiz_c.mp3",
+          "speakText": "Match the MS Paint tools to what they do."
+        }
       ]
     }
   ]
