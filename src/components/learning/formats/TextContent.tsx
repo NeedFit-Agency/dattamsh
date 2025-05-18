@@ -6,6 +6,15 @@ import styles from '../../../learning/learning.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 
+export interface Step {
+  id: string;
+  number: number;
+  title: string;
+  instruction: string;
+  visualContent: string | React.ReactNode;
+  audioContent?: string;
+}
+
 export const TextContent: React.FC<TextContentProps> = ({
   title,
   description,

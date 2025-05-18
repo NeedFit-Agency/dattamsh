@@ -19,6 +19,14 @@ const StepByStep: React.FC<StepByStepProps> = ({
   onStepChange,
   onBack
 }) => {
+  if (!steps || steps.length === 0) {
+    return (
+      <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>
+        No steps available for this lesson.
+      </div>
+    );
+  }
+
   const [currentStepIndex, setCurrentStepIndex] = useState(initialStepIndex);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   
@@ -105,22 +113,6 @@ const StepByStep: React.FC<StepByStepProps> = ({
 
   return (
     <div className={styles.mainContainer}>
-      {/* Header */}
-      <div className={styles.appHeader}>
-        <div className={styles.appName}>&lt;/&gt; Learning Steps</div>
-        <div className={styles.userStats}>
-          <div className={styles.statItem}>
-            <FontAwesomeIcon icon={faShield} className={styles.iconPlaceholder} /> {shields}
-          </div>
-          <div className={styles.statItem}>
-            <FontAwesomeIcon icon={faGem} className={styles.iconPlaceholder} /> {gems}
-          </div>
-          <div className={`${styles.statItem} ${styles.hearts}`}>
-            <FontAwesomeIcon icon={faHeart} /> {hearts}
-          </div>
-          <FontAwesomeIcon icon={faCog} className={styles.settingsIcon} />
-        </div>
-      </div>
 
       {/* Content */}
       <div className={styles.contentWrapper}>
@@ -163,11 +155,19 @@ const StepByStep: React.FC<StepByStepProps> = ({
               transition={{ duration: 0.3 }}
             >
               <div className={styles.stepVisual}>
-                {typeof currentStep.visualContent === 'string' ? (
-                  currentStep.visualContent
-                ) : (
-                  currentStep.visualContent
-                )}
+                {typeof currentStep.visualContent === 'string'
+                  ? currentStep.visualContent
+                  : currentStep.visualContent &&
+                    typeof currentStep.visualContent === 'object' &&
+                    'src' in currentStep.visualContent
+                    ? (
+                      <img
+                        src={(currentStep.visualContent as { src: string }).src}
+                        alt={('alt' in currentStep.visualContent ? (currentStep.visualContent as { alt?: string }).alt : '') || ''}
+                        style={{ maxWidth: '100%', maxHeight: '200px' }}
+                      />
+                    )
+                    : null}
               </div>
               <div className={styles.stepInstructions}>
                 {currentStep.instruction}
@@ -181,23 +181,6 @@ const StepByStep: React.FC<StepByStepProps> = ({
             </motion.main>
           </AnimatePresence>
         </div>
-      </div>
-
-      {/* Footer Navigation */}
-      <div className={styles.footerNav}>
-        <button 
-          className={`${styles.navButton} ${styles.navButtonPrevious} ${isFirstStep ? styles.navButtonDisabled : ''}`} 
-          onClick={handlePrevious}
-          disabled={isFirstStep && !onBack}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} /> Previous
-        </button>
-        <button 
-          className={`${styles.navButton} ${styles.navButtonContinue}`} 
-          onClick={handleContinue}
-        >
-          Continue <FontAwesomeIcon icon={faArrowRight} />
-        </button>
       </div>
     </div>
   );
