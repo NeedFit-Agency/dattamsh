@@ -46,6 +46,7 @@ const Text: React.FC<TextProps> = ({
 }) => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
   const isInteractiveList = title === "Where do we use Computers?";
 
@@ -136,30 +137,72 @@ const Text: React.FC<TextProps> = ({
             )}
             {/* Example images grid */}
             {exampleImages && exampleImages.length > 0 && (
-              <div className={styles.exampleImagesGrid}>
-                {exampleImages.map((img, index) => (
-                  <motion.div
-                    key={index}
-                    className={styles.imageWrapper}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <motion.img
-                      src={img.src}
-                      alt={img.alt}
-                      title={img.alt}
-                      className={styles.exampleImage}
-                      whileHover={{
-                        scale: 1.05,
-                        rotate: Math.random() * 4 - 2,
-                        boxShadow: '0px 5px 15px rgba(0,0,0,0.1)',
-                      }}
+              <>
+                {title === 'Activity: Name Hardware Parts' && (
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: 16,
+                    marginTop: 8,
+                    justifyContent: 'center',
+                    gap: 16
+                  }}>
+                    <img
+                      src="/images/mascot.png"
+                      alt="Mascot giving instruction"
+                      style={{ width: 56, height: 56, flexShrink: 0 }}
                     />
-                    {img.alt && <p className={styles.imageCaption}>{img.alt}</p>}
-                  </motion.div>
-                ))}
-              </div>
+                    <div style={{
+                      background: '#fffbe6',
+                      borderRadius: 12,
+                      padding: '10px 18px',
+                      fontWeight: 500,
+                      color: '#7c5700',
+                      fontSize: '1.1em',
+                      boxShadow: '0 2px 8px rgba(255, 215, 0, 0.08)',
+                      minHeight: '44px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      maxWidth: 400,
+                      wordBreak: 'break-word'
+                    }}>
+                      Click a card to select a hardware part!
+                    </div>
+                  </div>
+                )}
+                <div className={styles.exampleImagesGrid}>
+                  {exampleImages.map((img, index) => (
+                    <motion.div
+                      key={index}
+                      className={
+                        `${styles.imageWrapper} ` +
+                        (selectedCard === index ? styles.selectedCard : '')
+                      }
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                      style={{ cursor: 'pointer', position: 'relative' }}
+                      onClick={() => setSelectedCard(index)}
+                    >
+                      <motion.img
+                        src={img.src}
+                        alt={img.alt}
+                        title={img.alt}
+                        className={styles.exampleImage}
+                        whileHover={{
+                          scale: 1.05,
+                          rotate: Math.random() * 4 - 2,
+                          boxShadow: '0px 5px 15px rgba(0,0,0,0.1)',
+                        }}
+                      />
+                      {selectedCard === index && (
+                        <span className={styles.checkmarkOverlay}>✔</span>
+                      )}
+                      {img.alt && <p className={styles.imageCaption}>{img.alt}</p>}
+                    </motion.div>
+                  ))}
+                </div>
+              </>
             )}
 
             {/* Custom layout for Questions to Ponder */}
