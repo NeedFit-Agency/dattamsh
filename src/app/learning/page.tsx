@@ -115,7 +115,6 @@ export default function LearningPage() {
   const [progress, setProgress] = useState(0);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [hearts, setHearts] = useState(3);
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const router = useRouter();
 
   const initialLessonContent = standards["2"][0].lessonContent;
@@ -129,10 +128,7 @@ export default function LearningPage() {
     manMadeTarget: []
   });
   const [dndChecked, setDndChecked] = useState<boolean>(false);
-  const [dndFeedback, setDndFeedback] = useState<string | null>(null);
   const [itemCorrectness, setItemCorrectness] = useState<{ [itemId: string]: boolean }>({});
-
-  const [showConfetti, setShowConfetti] = useState(false);
 
   const totalSlides = chapterContent.length;
   const currentContent = chapterContent[currentSlideIndex] || chapterContent[0] || null;
@@ -168,11 +164,10 @@ export default function LearningPage() {
     setCurrentSlideIndex(0);
     setProgress(0);
 
-  }, []);
+  }, [initialLessonContent]);
 
   useEffect(() => {
     window.speechSynthesis?.cancel();
-    setIsAudioPlaying(false);
 
     const currentSlideData = chapterContent[currentSlideIndex];
     if (currentSlideData && currentSlideData.type === 'drag-drop') {
@@ -182,9 +177,7 @@ export default function LearningPage() {
         manMadeTarget: []
       });
       setDndChecked(false);
-      setDndFeedback(null);
       setItemCorrectness({});
-      setShowConfetti(false);
     }
   }, [currentSlideIndex, chapterContent]);
 
@@ -269,7 +262,6 @@ export default function LearningPage() {
     } else {
       if (incorrectCount === 0) {
         setDndFeedback("Great job! All items are in the correct boxes!");
-        setShowConfetti(true);
         const confettiContainer = document.createElement('div');
         confettiContainer.className = styles.confettiContainer;
         document.body.appendChild(confettiContainer);
@@ -284,7 +276,6 @@ export default function LearningPage() {
 
         setTimeout(() => {
           confettiContainer.remove();
-          setShowConfetti(false);
         }, 5000);
 
       } else {

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones, faCheckCircle, faTimesCircle, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { DragDropProps } from './types';
 import styles from './dragdrop.module.css';
+import Image from 'next/image';
 
 interface DragItem {
   id: string;
@@ -14,12 +15,6 @@ interface DragItem {
   imageUrl?: string;
   placed: boolean;
   targetId: string;
-}
-
-interface Target {
-  id: string;
-  title: string;
-  type: string;
 }
 
 export const DragDrop: React.FC<DragDropProps> = ({
@@ -63,7 +58,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
       return;
     }
 
-    let textToSpeak = speakText || instruction;
+    const textToSpeak = speakText || instruction;
 
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
       try {
@@ -158,6 +153,15 @@ export const DragDrop: React.FC<DragDropProps> = ({
         message = 'Great job! All items are correctly sorted!';
         setFeedback({ show: true, correct: true, message });
         setAllCompleted(true);
+        // Store drag and drop completion data in localStorage with a unique key
+        const completionData = {
+          timestamp: Date.now(),
+          title,
+          instruction,
+          items: dragItems,
+          targets,
+        };
+        localStorage.setItem(`dragDropCompletion_${title.replace(/\s+/g, '_')}` , JSON.stringify(completionData));
       }
     } else {
       message = 'Some items are in the wrong category. Try again!';
@@ -239,7 +243,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
                 >
                   {item.imageUrl && (
                     <div className={styles.dragItemImage}>
-                      <img src={item.imageUrl} alt={item.text} />
+                      <Image src={item.imageUrl} alt={item.text} width={50} height={50} />
                     </div>
                   )}
                   <span className={styles.dragItemText}>{item.text}</span>
@@ -270,7 +274,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
                   >
                     {item.imageUrl && (
                       <div className={styles.droppedItemImage}>
-                        <img src={item.imageUrl} alt={item.text} />
+                        <Image src={item.imageUrl} alt={item.text} width={50} height={50} />
                       </div>
                     )}
                     <span className={styles.droppedItemText}>{item.text}</span>

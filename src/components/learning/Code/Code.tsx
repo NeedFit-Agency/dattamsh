@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones, faArrowLeft, faArrowRight, faShield, faGem, faHeart, faCog, faCopy } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 import styles from './code.module.css';
+import Image from 'next/image';
 
 export interface OutputContent {
   type: 'text' | 'image' | 'html';
@@ -141,9 +142,11 @@ const Code: React.FC<CodeProps> = ({
     switch (outputContent.type) {
       case 'image':
         return (
-          <img 
+          <Image 
             src={outputContent.content} 
             alt={outputContent.alt || 'Code output'} 
+            width={300}
+            height={200}
           />
         );
       case 'html':
