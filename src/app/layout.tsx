@@ -7,7 +7,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import Header from '@/components/layout/Header/Header'
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { motion } from "framer-motion";
 config.autoAddCss = false 
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800", "900"] }); 
