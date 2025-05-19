@@ -103,16 +103,22 @@ export interface ApplicationSlide extends BaseContentProps {
   }[];
   // Format will be 'application'
 }
-
-
-export type LessonContent = LearningSlide | DragDropSlide | QuizSlide | TypesSlide ;
-  format: 'step-by-step';
-  title: string;
-  steps: Step[];
-  audioSrc?: string;
-  speakText?: string;
+export interface TypesSlide extends BaseContentProps {
+  type: 'learn';
+  description: string;
+  types: {
+    id: string;
+    name: string;
+    description: string;
+    icon?: string;
+    imageUrl?: string;
+  }[];
+  // Format will be 'types'
 }
 
+
+export type LessonContent = LearningSlide | DragDropSlide | QuizSlide | TypesSlide | HistorySlide | StepByStepSlide | ApplicationSlide;
+  
 export interface Chapter {
   id: number;
   title: string;
@@ -1083,7 +1089,6 @@ export const standards: Standard = {
             {
               "id": "line-1",
               "number": 1,
-              "title": "Click on the 'Line' tool",
               "instruction": "Click on the 'Line' tool.",
               "visualContent": { "src": "/images/horizontal_line.png", "alt": "Horizontal line" },
               "audioContent": "Click on the 'Line' tool."
