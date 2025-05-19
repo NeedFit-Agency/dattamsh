@@ -9,7 +9,6 @@ import styles from '../../../learning/learning.module.css';
 import Image from 'next/image';
 
 export const ImageGallery: React.FC<ImageGalleryProps> = ({
-  title,
   description,
   images,
   audioSrc,

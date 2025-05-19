@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +13,7 @@ import {
   faGraduationCap,
   faAward
 } from '@fortawesome/free-solid-svg-icons';
-import styles from '../page.module.css';
+import styles from './page.module.css';
 
 export default function HomePage() {
   const Standards = [
