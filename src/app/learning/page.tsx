@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -12,41 +12,6 @@ import styles from './learning.module.css';
 import { standards } from '../../data/standardsData';
 import ContentRenderer from '../../components/learning/ContentRenderer';
 import type { DraggableItemData, LessonContent } from '../../data/standardsData';
-
-
-export const formatContentWithEmojis = (text: string): React.ReactNode => {
-  const hasEmojis = /[\p{Emoji}]/u.test(text);
-
-  if (hasEmojis) {
-    const parts = text.split(/(\p{Emoji}+)/u);
-    return parts.map((part, index) => {
-      if (/[\p{Emoji}]/u.test(part)) {
-        return (
-          <span
-            key={index}
-            className="emoji"
-            style={{
-              fontSize: '1.4em',
-              verticalAlign: 'middle',
-              display: 'inline-block',
-              margin: '0 2px',
-            }}
-          >
-            {part}
-          </span>
-        );
-      }
-      return part;
-    });
-  }
-
-  if (/^\s*(\d+[\.\)]|[•\-\*])\s+/.test(text)) {
-    return <strong style={{ fontWeight: 600 }}>{text}</strong>;
-  }
-
-  return text;
-};
-
 
 export interface ExampleImage {
   src: string;
@@ -67,6 +32,14 @@ const createConfetti = () => {
 };
 
 export default function LearningPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LearningPageContent />
+    </Suspense>
+  );
+}
+
+function LearningPageContent() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [showExitConfirm, setShowExitConfirm] = useState(false);

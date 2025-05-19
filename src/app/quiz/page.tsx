@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +13,14 @@ import styles from './QuizPage.module.css';
 import Image from 'next/image';
 
 export default function QuizPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <QuizPageContent />
+    </Suspense>
+  );
+}
+
+function QuizPageContent() {
   const searchParams = useSearchParams();
   const standardId = searchParams.get('standard') || '1';
   const lessonId = searchParams.get('chapter') || '1';
