@@ -1,12 +1,10 @@
 // src/hooks/useLearningState.ts
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { standards, LessonContent } from '@/data/standardsData';
 
 export function useLearningState() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [hearts, setHearts] = useState(3);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const router = useRouter();
 
@@ -49,8 +47,6 @@ export function useLearningState() {
 
   return {
     currentSlideIndex,
-    progress,
-    hearts,
     currentContent,
     handleBackClick,
     handleContinue,

@@ -10,6 +10,7 @@ import AnswerOption from '@/components/quiz/AnswerOption/AnswerOption';
 import LegendaryTrophy from '@/components/quiz/LegendaryTrophy/LegendaryTrophy';
 import { quizzes } from '@/data/quizeData';
 import styles from './QuizPage.module.css';
+import Image from 'next/image';
 
 export default function QuizPage() {
   const searchParams = useSearchParams();
@@ -214,10 +215,12 @@ export default function QuizPage() {
               >
                 {currentQuestion.imageUrl && (
                   <div className={styles.questionImage}>
-                    <img 
+                    <Image 
                       src={currentQuestion.imageUrl} 
                       alt="Question visual" 
                       className={styles.machineImage}
+                      width={200}
+                      height={200}
                     />
                   </div>
                 )}

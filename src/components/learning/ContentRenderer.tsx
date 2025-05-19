@@ -2,7 +2,6 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { FormatType } from '../../data/standardsData';
 import LoadingSpinner from './LoadingSpinner';
 
 const Application = dynamic(() => import('./Application'), { 

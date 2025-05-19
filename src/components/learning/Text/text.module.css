@@ -1,8 +1,8 @@
-/* Text Component Styles - Matching StepByStep Design */
-
 /* Main Container & Card */
 .mainContainer { 
-  max-width: 850px;
+  height: 100%;
+  min-height: 80dvh;
+  width: 80%;
   margin: 30px auto; 
   background-color: var(--white, #ffffff); 
   border-radius: 15px; 
@@ -313,4 +313,90 @@
   margin-right: 8px;
   flex-shrink: 0;
   margin-top: 2px;
+}
+
+.interactiveList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px 32px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+@media (max-width: 600px) {
+  .interactiveList {
+    grid-template-columns: 1fr;
+  }
+}
+
+.interactiveItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 18px 22px;
+  font-size: 1.15em;
+  font-weight: 500;
+  color: #1a365d;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(28, 176, 246, 0.04);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  min-width: 200px;
+  min-height: 80px;
+  padding: 28px 32px;
+  border-radius: 22px;
+}
+
+.interactiveItem:hover {
+  background: #e0f0ff;
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(28, 176, 246, 0.10);
+}
+
+.interactiveList .interactiveItem:nth-child(1) { background: #ffe5ec; color: #a8325e; }
+.interactiveList .interactiveItem:nth-child(2) { background: #e0f7fa; color: #00796b; }
+.interactiveList .interactiveItem:nth-child(3) { background: #fff9c4; color: #bfa100; }
+.interactiveList .interactiveItem:nth-child(4) { background: #e1f5fe; color: #0277bd; }
+.interactiveList .interactiveItem:nth-child(5) { background: #e8f5e9; color: #388e3c; }
+.interactiveList .interactiveItem:nth-child(6) { background: #f3e5f5; color: #6a1b9a; }
+
+.funFact {
+  margin-top: 10px;
+  background: #fffbe6;
+  border-left: 4px solid #ffd700;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.98em;
+  color: #7c5700;
+  animation: popIn 0.3s;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.95);}
+  to { opacity: 1; transform: scale(1);}
+}
+
+.selectedCard {
+  border: 3px solid #28a745;
+  box-shadow: 0 0 0 4px #e6f9ed;
+}
+
+.checkmarkOverlay {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: #28a745;
+  color: #fff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  box-shadow: 0 2px 6px rgba(40,167,69,0.15);
+  z-index: 2;
 }

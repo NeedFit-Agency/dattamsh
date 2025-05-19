@@ -148,6 +148,21 @@
   /* --- Layout --- */
   --sidebar-width: 300px;
   --right-rail-width: 400px;
+
+  /* Add these to the end of the existing :root block: */
+  --primary: #ffb347;
+  --primary-dark: #ff9800;
+  --success-green: #4caf50;
+  --success-dark: #388e3c;
+  --error-red: #e57373;
+  --background-light: #fff8e1;
+  --background-medium: #ffe0b2;
+  --border-light: #ffd180;
+  --border-medium: #ffb74d;
+  --text-dark: #4e260e;
+  --text-medium: #a67c52;
+  --text-light: #ffe0b2;
+  --font-family: 'Comic Sans MS', 'Comic Sans', 'Nunito', 'Quicksand', cursive, sans-serif;
 }
 
 
