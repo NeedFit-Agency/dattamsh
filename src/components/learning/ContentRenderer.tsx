@@ -2,8 +2,8 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { FormatType } from '../../data/standardsData';
 import LoadingSpinner from './LoadingSpinner';
+import type { LessonContent } from '../../data/standardsData';
 
 const Application = dynamic(() => import('./Application'), { 
   loading: () => <LoadingSpinner message="Loading application content..." /> 
@@ -45,12 +45,12 @@ const Text = dynamic(() => import('./Text'), {
 const UnsupportedFormat: React.FC<{format: string}> = ({ format }) => (
   <div style={{ padding: '20px', border: '1px solid #ff6b6b', borderRadius: '8px', color: '#ff6b6b' }}>
     <h3>Unsupported Content Format</h3>
-    <p>The content format "{format}" is not currently supported.</p>
+    <p>The content format {format} is not currently supported.</p>
   </div>
 );
 
 interface ContentRendererProps {
-  content: any; // The content object with format field
+  content: LessonContent | null; // The content object with format field
   onBack?: () => void;
   onComplete?: () => void;
   progress?: number;
@@ -70,135 +70,147 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
 
   // Map content format to corresponding component
   switch (format) {
-    case 'application':
+    case 'application': {
+      const appContent = content as any;
       return (
         <Application
-          title={content.title}
-          subtitle={content.subtitle}
-          examples={content.examples}
-          audioContent={content.audioContent}
+          title={appContent.title}
+          subtitle={appContent.subtitle}
+          examples={appContent.examples}
+          audioContent={appContent.audioContent}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
         />
       );
-
-    case 'type':
+    }
+    case 'type': {
+      const typeContent = content as any;
       return (
         <Types
-          title={content.title}
-          subtitle={content.subtitle}
-          types={content.types}
-          audioContent={content.audioContent}
+          title={typeContent.title}
+          subtitle={typeContent.subtitle}
+          types={typeContent.types}
+          audioContent={typeContent.audioContent}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
         />
       );
-
-    case 'code':
+    }
+    case 'code': {
+      const codeContent = content as any;
       return (
         <Code
-          title={content.title}
-          description={content.description}
-          code={content.code}
-          language={content.language}
-          outputTitle={content.outputTitle}
-          outputContent={content.outputContent}
-          audioContent={content.audioContent}
+          title={codeContent.title}
+          description={codeContent.description}
+          code={codeContent.code}
+          language={codeContent.language}
+          outputTitle={codeContent.outputTitle}
+          outputContent={codeContent.outputContent}
+          audioContent={codeContent.audioContent}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
         />
       );
-
-    case 'component':
+    }
+    case 'component': {
+      const compContent = content as any;
       return (
         <Component
-          title={content.title}
-          subtitle={content.subtitle}
-          components={content.components}
-          audioContent={content.audioContent}
+          title={compContent.title}
+          subtitle={compContent.subtitle}
+          components={compContent.components}
+          audioContent={compContent.audioContent}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
         />
       );
-
-    case 'drag-drop':
+    }
+    case 'drag-drop': {
+      // DragDropSlide is in standardsData
+      const dndContent = content as import('../../data/standardsData').DragDropSlide;
       return (
         <DragDrop
-          title={content.title}
-          instruction={content.instruction}
-          items={content.items}
-          targets={content.targets}
-          audioSrc={content.audioSrc}
-          speakText={content.speakText}
+          title={dndContent.title}
+          instruction={dndContent.instruction}
+          items={dndContent.items}
+          targets={dndContent.targets}
+          audioSrc={dndContent.audioSrc}
+          speakText={dndContent.speakText}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
         />
       );
-
-    case 'history':
+    }
+    case 'history': {
+      // HistorySlide is in standardsData
+      const historyContent = content as import('../../data/standardsData').HistorySlide;
       return (
         <History
-          title={content.title}
-          subtitle={content.subtitle}
-          items={content.items}
-          audioContent={content.audioContent}
+          title={historyContent.title}
+          items={historyContent.items}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
         />
       );
-
-    case 'step-by-step':
+    }
+    case 'step-by-step': {
+      const stepContent = content as import('../../data/standardsData').StepByStepSlide;
+      const steps = stepContent.steps.map(step => ({
+        ...step,
+        visualContent: typeof step.visualContent === 'string' ? step.visualContent : ''
+      }));
       return (
         <StepByStep
-          title={content.title}
-          steps={content.steps}
-          initialStepIndex={content.initialStepIndex}
+          title={stepContent.title}
+          steps={steps}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
-          onStepChange={content.onStepChange}
         />
       );
-
-    case 'video':
+    }
+    case 'video': {
+      const videoContent = content as any;
       return (
         <Video
-          title={content.title}
-          videoSrc={content.videoSrc}
-          videoType={content.videoType}
-          youtubeId={content.youtubeId}
-          vimeoId={content.vimeoId}
-          mascotImage={content.mascotImage}
-          mascotTitle={content.mascotTitle}
-          keyPoints={content.keyPoints}
-          audioContent={content.audioContent}
+          title={videoContent.title}
+          videoSrc={videoContent.videoSrc}
+          videoType={videoContent.videoType}
+          youtubeId={videoContent.youtubeId}
+          vimeoId={videoContent.vimeoId}
+          mascotImage={videoContent.mascotImage}
+          mascotTitle={videoContent.mascotTitle}
+          keyPoints={videoContent.keyPoints}
+          audioContent={videoContent.audioContent}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
         />
       );
-
-    case 'text':
+    }
+    case 'text': {
+      // LearningSlide is in standardsData
+      const textContent = content as import('../../data/standardsData').LearningSlide;
       return (
         <Text
-          title={content.title}
-          description={content.description}
-          imageUrl={content.imageUrl}
-          exampleImages={content.exampleImages}
-          audioSrc={content.audioSrc}
-          speakText={content.speakText}
+          title={textContent.title}
+          description={textContent.description}
+          imageUrl={textContent.imageUrl}
+          exampleImages={textContent.exampleImages}
+          audioSrc={textContent.audioSrc}
+          speakText={textContent.speakText}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
         />
       );
-    
+    }
     default:
       return <UnsupportedFormat format={format} />;
   }

@@ -59,7 +59,6 @@ export interface QuizSlide extends BaseContentProps {
   }[];
   explanation?: string;
   imageUrl?: string;
-  // Format will be 'quiz'
 }
 
 export interface HistorySlide extends BaseContentProps {
@@ -79,6 +78,7 @@ export interface HistorySlide extends BaseContentProps {
 }
 
 export type LessonContent = LearningSlide | DragDropSlide | QuizSlide | HistorySlide;
+
 
 export interface Chapter {
   id: number;
@@ -166,23 +166,6 @@ export const standards: Standard = {
           speakText:
             'Hoot hoot! Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Chapter Quiz: Nature and Man-made',
-          description: ["Let's check what you've learned about natural and man-made things!"],
-          question: "Which of these is a natural thing?",
-          options: [
-            { id: "q1-opt1", text: "Pencil", isCorrect: false, explanation: "A pencil is made by people, so it's a man-made thing." },
-            { id: "q1-opt2", text: "Mountain", isCorrect: true, explanation: "Correct! Mountains are found in nature and weren't made by people." },
-            { id: "q1-opt3", text: "Book", isCorrect: false, explanation: "Books are made by people, so they are man-made things." },
-            { id: "q1-opt4", text: "Desk", isCorrect: false, explanation: "Desks are made by people, so they are man-made things." }
-          ],
-          explanation: "Natural things are found in nature and not made by humans. Man-made things are created by people.",
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/quiz1.mp3',
-          speakText: "Let's check what you've learned about natural and man-made things! Which of these is a natural thing?"
-        },
       ],
     }, {
       id: 2,
@@ -197,7 +180,7 @@ export const standards: Standard = {
             "A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things.",
             "Let's learn what computers are and how they help us!",
           ],
-          imageUrl: '/images/mascot.png',
+          imageUrl: '/images/computer.png',
           audioSrc: '/audio/computer_intro.mp3',
           speakText: "Hi there! I'm Zippy! Today we're going to learn about computers! A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things. Let's learn what computers are and how they help us!"
         },
@@ -214,16 +197,16 @@ export const standards: Standard = {
             "5. Listen to music and watch videos",
           ],
           exampleImages: [
-            { src: '/images/tools.png', alt: 'Using a computer to write' },
-            { src: '/images/school-bus.png', alt: 'Using a computer to draw' },
-            { src: '/images/mascot.png', alt: 'Playing games on a computer' },
-            { src: '/images/chair.png', alt: 'Talking with family on a computer' },
+            { src: '/images/1st-standard/computer-to-write.png', alt: 'Using a computer to write' },
+            { src: '/images/1st-standard/computer-to-draw.png', alt: 'Using a computer to draw' },
+            { src: '/images/1st-standard/computer-to-play.png', alt: 'Playing games on a computer' },
+            { src: '/images/1st-standard/computer-to-watch.png', alt: 'Watching videos on a computer' },
           ],
           audioSrc: '/audio/computer_uses.mp3',
           speakText: "Computers help us do many things: Type or write letters, stories, and poems. Draw colorful and beautiful paintings. Play fun games. Talk to family and friends who are far away. Listen to music and watch videos."
         }, {
           type: 'learn',
-          format: 'type',
+          format: 'text',
           title: 'Parts of a Computer',
           description: [
             "Just like our body has different parts that help us do different things, a computer also has different parts!",
@@ -248,7 +231,7 @@ export const standards: Standard = {
             { id: 'dnd-item-1', text: 'Monitor', type: 'natural', imageUrl: '/images/sun.png' },
             { id: 'dnd-item-2', text: 'Keyboard', type: 'man-made', imageUrl: '/images/chair.png' },
             { id: 'dnd-item-3', text: 'Mouse', type: 'natural', imageUrl: '/images/bird.png' },
-            { id: 'dnd-item-4', text: 'CPU', type: 'man-made', imageUrl: '/images/cycle.png' },
+            { id: 'dnd-item-4', text: 'CPU', type: 'man-made', imageUrl: '/images/cycle.pxng' },
             { id: 'dnd-item-5', text: 'Speakers', type: 'natural', imageUrl: '/images/tree.png' },
           ],
           targets: [
@@ -301,24 +284,6 @@ export const standards: Standard = {
           audioSrc: '/audio/computer_summary.mp3',
           speakText: "Points to remember: A computer is a machine that makes our work easy. A computer is called a supermachine. Computers help us write, draw, play games, talk to people, and listen to music. The main parts of a computer are the monitor, keyboard, mouse, CPU, and speakers."
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Chapter Quiz: All About Computers',
-          description: [
-            "Let's see what we've learned about computers!"
-          ],
-          audioSrc: '/audio/computer_quiz.mp3',
-          speakText: "Let's see what we've learned about computers! Answer these fun questions!",
-          question: "Which part of the computer is called its 'brain'?",
-          options: [
-            { id: "q1-opt1", text: "Monitor", isCorrect: false, explanation: "The monitor shows what the computer is doing, but it's not the brain." },
-            { id: "q1-opt2", text: "Keyboard", isCorrect: false, explanation: "The keyboard helps us type, but it's not the brain." },
-            { id: "q1-opt3", text: "CPU", isCorrect: true, explanation: "Correct! The CPU (Central Processing Unit) is the brain of the computer." },
-            { id: "q1-opt4", text: "Mouse", isCorrect: false, explanation: "The mouse helps us point and click, but it's not the brain." }
-          ],
-          explanation: "The CPU (Central Processing Unit) is like the brain of the computer. It does all the thinking and processing of information!"
-        }
       ]
     }, {
       id: 3,
@@ -457,23 +422,6 @@ export const standards: Standard = {
           audioSrc: '/audio/care_summary.mp3',
           speakText: "Points to remember: Sit up straight when using a computer. Take breaks every 30 minutes. Keep food and drinks away from computers. Clean the screen and keyboard with a soft cloth. Always shut down your computer properly. Use gentle hands when typing and using the mouse. Keep computers in cool, dust-free places."
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Chapter Quiz: Computer Care and Safety',
-          description: ["Let's check what you've learned about taking care of computers!"],
-          question: "Which of these is a good computer care habit?",
-          options: [
-            { id: "q3-opt1", text: "Eating snacks while using the computer", isCorrect: false, explanation: "Food and drinks should be kept away from computers to avoid damage." },
-            { id: "q3-opt2", text: "Pressing the keys very hard when typing", isCorrect: false, explanation: "You should press keys gently to avoid damaging the keyboard." },
-            { id: "q3-opt3", text: "Shutting down the computer properly", isCorrect: true, explanation: "Correct! Always shut down your computer properly to keep it working well." },
-            { id: "q3-opt4", text: "Using the computer without taking breaks", isCorrect: false, explanation: "Taking breaks is important for your eyes and body when using a computer." }
-          ],
-          explanation: "Taking care of computers helps them last longer, and taking care of ourselves while using computers keeps us healthy!",
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/quiz3.mp3',
-          speakText: "Let's check what you've learned about taking care of computers! Which of these is a good computer care habit?"
-        }
       ]
     }, {
       id: 4,
@@ -646,23 +594,6 @@ export const standards: Standard = {
           audioSrc: '/audio/keyboard_mouse_summary.mp3',
           speakText: "Points to remember: The keyboard and mouse help us communicate with the computer. The keyboard has alphabet keys, number keys, and special keys like Space Bar and Enter. We use the keyboard to type letters, words, numbers, and symbols. The mouse helps us point to and select things on the screen. A mouse has left and right buttons and usually a scroll wheel in the middle. When we move the mouse on the table, the pointer moves on the screen. We should hold the mouse gently and press keyboard keys softly."
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Chapter Quiz: Keyboard and Mouse Fun',
-          description: ["Let's see what you've learned about keyboards and mice!"],
-          question: "Which is the longest key on the keyboard?",
-          options: [
-            { id: "q4-opt1", text: "Enter key", isCorrect: false, explanation: "The Enter key is important but it's not the longest key." },
-            { id: "q4-opt2", text: "Space bar", isCorrect: true, explanation: "Correct! The Space bar is the longest key on the keyboard and puts spaces between words." },
-            { id: "q4-opt3", text: "Shift key", isCorrect: false, explanation: "The Shift key helps make capital letters, but it's not the longest key." },
-            { id: "q4-opt4", text: "Backspace key", isCorrect: false, explanation: "The Backspace key helps delete mistakes, but it's not the longest key." }
-          ],
-          explanation: "The Space bar is the longest key on the keyboard. It helps us put spaces between words when we type.",
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/quiz4.mp3',
-          speakText: "Let's see what you've learned about keyboards and mice! Which is the longest key on the keyboard?"
-        }
       ]
     }
   ],
@@ -769,7 +700,7 @@ export const standards: Standard = {
             "Smartphones are like small computers that fit in your pocket. They can do many things. For example: make phone calls, send messages and emails, take pictures, play games, listen to music, help people find their way with maps, search for information on the internet."
           ],
           "exampleImages": [
-            { "src": "/images/smartphone_calls.png", "alt": "Making phone calls" },
+            { "src": "/images/2nd-standard/communications.png", "alt": "Making phone calls" },
             { "src": "/images/smartphone_messages.png", "alt": "Sending messages" },
             { "src": "/images/smartphone_camera.png", "alt": "Taking pictures" },
             { "src": "/images/smartphone_games.png", "alt": "Playing games" },
@@ -914,58 +845,6 @@ export const standards: Standard = {
           ],
           "audioSrc": "/audio/ch2_summary.mp3",
           "speakText": "Smartphones are like tiny computers, similar to big ones, and apps like YouTube help us learn and have fun."
-        },
-        {
-          "type": "learn",
-          "format": "quiz",
-          "title": "Workstation A: Tick the Correct Sentence",
-          "description": ["Tick the correct sentence and cross the incorrect sentence."],
-          "question": "Which of these statements are true? (Tick all that apply)",
-          "options": [
-            { "id": "q1-opt1", "text": "Smartphones can be used to play games and watch videos.", "isCorrect": true },
-            { "id": "q1-opt2", "text": "YouTube is an app used for sending text messages.", "isCorrect": false },
-            { "id": "q1-opt3", "text": "Playing outside can help improve physical fitness and mood.", "isCorrect": true },
-            { "id": "q1-opt4", "text": "Smartphones can help people find their way using maps.", "isCorrect": true },
-            { "id": "q1-opt5", "text": "Computers and smartphones are completely different and cannot perform similar tasks.", "isCorrect": false }
-          ],
-          "explanation": "Smartphones can play games, watch videos, and use maps. YouTube is for videos, not messages. Playing outside is good for you.",
-          "audioSrc": "/audio/ch2_quiz_a.mp3",
-          "speakText": "Tick the sentences that are true."
-        },
-        {
-          "type": "learn",
-          "format": "quiz",
-          "title": "Workstation B: Select Smartphone Tasks",
-          "description": ["Select the tasks a smartphone can perform by ticking the correct options from the list below."],
-          "question": "Which of these can a smartphone do? (Tick all that apply)",
-          "options": [
-            { "id": "q2-opt1", "text": "Make phone calls", "isCorrect": true },
-            { "id": "q2-opt2", "text": "Cook food", "isCorrect": false },
-            { "id": "q2-opt3", "text": "Send messages and emails", "isCorrect": true },
-            { "id": "q2-opt4", "text": "Take pictures", "isCorrect": true },
-            { "id": "q2-opt5", "text": "Drive a car", "isCorrect": false },
-            { "id": "q2-opt6", "text": "Play games", "isCorrect": true }
-          ],
-          "explanation": "Smartphones can call, message, take pictures, and play games, but not cook or drive.",
-          "audioSrc": "/audio/ch2_quiz_b.mp3",
-          "speakText": "Tick what smartphones can do."
-        },
-        {
-          "type": "learn",
-          "format": "quiz",
-          "title": "Workstation C: Match Columns",
-          "description": ["Match column 'A' to column 'B'."],
-          "question": "Match the items in column A with their descriptions in column B.",
-          "options": [
-            { "id": "q3-opt1", "text": "1. Smartphones - e. small computer that fits in your pocket", "isCorrect": true },
-            { "id": "q3-opt2", "text": "2. YouTube - d. watch your favourite cartoon", "isCorrect": true },
-            { "id": "q3-opt3", "text": "3. Flipkart - a. shopping", "isCorrect": true },
-            { "id": "q3-opt4", "text": "4. Apple maps - b. help people find their way", "isCorrect": true },
-            { "id": "q3-opt5", "text": "5. WhatsApp - c. make calls and send messages to family and friends", "isCorrect": true }
-          ],
-          "explanation": "Smartphones are pocket computers, YouTube is for cartoons, Flipkart is for shopping, Apple Maps helps with directions, and WhatsApp is for communication.",
-          "audioSrc": "/audio/ch2_quiz_c.mp3",
-          "speakText": "Match the items to their descriptions."
         },
         {
           "type": "learn",
@@ -1115,39 +994,6 @@ export const standards: Standard = {
           ],
           "audioSrc": "/audio/ch3_summary.mp3",
           "speakText": "Notepad is easy to use for typing and saving stories with your keyboard."
-        },
-        {
-          "type": "learn",
-          "format": "quiz",
-          "title": "Workstation A: True or False",
-          "description": ["State whether the following statements are True or False."],
-          "question": "Are these statements true or false?",
-          "options": [
-            { "id": "q1-opt1", "text": "Notepad helps us write and save our stories.", "isCorrect": true },
-            { "id": "q1-opt2", "text": "The monitor displays what we type in Notepad.", "isCorrect": true },
-            { "id": "q1-opt3", "text": "We use a pencil to write in Notepad.", "isCorrect": false },
-            { "id": "q1-opt4", "text": "The keyboard helps us type words on the computer.", "isCorrect": true },
-            { "id": "q1-opt5", "text": "We save our work by closing Notepad.", "isCorrect": false }
-          ],
-          "explanation": "Notepad is for writing and saving, the monitor shows it, and we use the keyboard, not a pencil. Saving isn't done by closing.",
-          "audioSrc": "/audio/ch3_quiz_a.mp3",
-          "speakText": "Decide if these are true or false."
-        },
-        {
-          "type": "learn",
-          "format": "quiz",
-          "title": "Workstation B: Match Components",
-          "description": ["Match the following components of Notepad in column A to their descriptions in column B."],
-          "question": "Match each component to its description.",
-          "options": [
-            { "id": "q2-opt1", "text": "1. Notepad - b. a simple app on your computer used for typing", "isCorrect": true },
-            { "id": "q2-opt2", "text": "2. Title Bar - c. the top part that displays the name of your file", "isCorrect": true },
-            { "id": "q2-opt3", "text": "3. Menu Bar - d. contains options like File, Edit, View", "isCorrect": true },
-            { "id": "q2-opt4", "text": "4. Text Area - a. the area where you type your story or notes", "isCorrect": true }
-          ],
-          "explanation": "Notepad is the app, Title Bar shows the file name, Menu Bar has options, and Text Area is for typing.",
-          "audioSrc": "/audio/ch3_quiz_b.mp3",
-          "speakText": "Match each part of Notepad to what it does."
         },
         {
           "type": "learn",
@@ -1315,6 +1161,36 @@ export const standards: Standard = {
           "description": [
             "Nidhi wanted to draw mountains in MS Paint. She made a mistake making one side too small but used the Undo button to fix it. She finished her mountains, added a blue sky, and wrote 'I love mountains!' in colourful letters. Her friends loved it!"
           ],
+          "items": [
+            {
+              "id": "1",
+              "title": "Drawing the Mountains",
+              "description": "Nidhi started drawing mountains in MS Paint.",
+              "visualIcon": "/images/nidhi_mountains.png",
+              "position": "left"
+            },
+            {
+              "id": "2",
+              "title": "A Small Mistake",
+              "description": "She made one side of the mountain too small.",
+              "visualIcon": "/images/undo_icon.png",
+              "position": "right"
+            },
+            {
+              "id": "3",
+              "title": "Using Undo",
+              "description": "Nidhi used the Undo button to fix her mistake.",
+              "visualIcon": "/images/undo_icon.png",
+              "position": "left"
+            },
+            {
+              "id": "4",
+              "title": "Finishing Touches",
+              "description": "She added a blue sky and wrote 'I love mountains!' in colourful letters.",
+              "visualIcon": "/images/nidhi_mountains.png",
+              "position": "right"
+            }
+          ],
           "imageUrl": "/images/nidhi_mountains.png",
           "audioSrc": "/audio/ch4_caselet.mp3",
           "speakText": "Nidhi fixed a mistake in her mountain drawing with Undo and added text."
@@ -1402,3 +1278,12 @@ export const standards: Standard = {
     }
   ]
 };
+
+export interface Step {
+  id: string;
+  number: number;
+  title: string;
+  instruction: string;
+  visualContent: string | { src: string; alt?: string };
+  audioContent?: string;
+}

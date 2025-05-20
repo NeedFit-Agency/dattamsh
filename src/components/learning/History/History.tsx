@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphones, faArrowLeft, faArrowRight, faShield, faGem, faHeart, faCog } from '@fortawesome/free-solid-svg-icons';
-import { motion, AnimatePresence } from 'framer-motion';
+import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import { motion } from 'framer-motion';
 import styles from './history.module.css';
+import Image from 'next/image';
 
 export interface HistoryItem {
   id: string;
@@ -32,9 +33,6 @@ const History: React.FC<HistoryProps> = ({
   subtitle,
   items,
   progress = 60,
-  hearts = 3,
-  gems = 234,
-  shields = 1,
   audioContent,
   onComplete,
   onBack
@@ -51,12 +49,6 @@ const History: React.FC<HistoryProps> = ({
   const handlePrevious = () => {
     if (onBack) {
       onBack();
-    }
-  };
-
-  const handleContinue = () => {
-    if (onComplete) {
-      onComplete();
     }
   };
 
@@ -94,9 +86,6 @@ const History: React.FC<HistoryProps> = ({
 
   return (
     <div className={styles.mainContainer}>
-      {/* Header */}
-      {/* No header section */}
-
       {/* Content */}
       <div className={styles.contentWrapper}>
         <div className={styles.navigationHeader}>
@@ -131,15 +120,18 @@ const History: React.FC<HistoryProps> = ({
               >
                 <div className={styles.timelineContent}>
                   <div className={styles.timelineVisual}>
-                    {item.visualIcon && item.visualIcon.startsWith('/story/') ? (
-                      <img
-                        src={item.visualIcon}
-                        alt={item.title}
-                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                      />
-                    ) : (
-                      <span>{item.visualIcon}</span>
-                    )}
+                    {item.visualIcon &&
+                      (/(\.png$|\.jpg$|\.jpeg$|\.gif$|\.svg$)/i.test(item.visualIcon)) ? (
+                        <Image
+                          src={item.visualIcon}
+                          alt={item.title}
+                          width={100}
+                          height={100}
+                          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                        />
+                      ) : (
+                        <span>{item.visualIcon}</span>
+                      )}
                   </div>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>

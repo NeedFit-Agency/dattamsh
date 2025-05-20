@@ -181,20 +181,131 @@ export const quizzes: QuizStandard = {
           explanation: 'Scratch is a software application. The others are hardware.'
         }
       ]
-    }
-  ],
-  "3": [
+    },
     {
-      id: 1,
-      title: "3rd Quiz",
+      id: 2,
+      title: "Smartphones: Pocket Computers",
       questions: [
         {
           id: 1,
-          prompt: 'What is the capital of France?',
-          options: ['Paris', 'London', 'Berlin', 'Madrid'],
+          prompt: 'Why are smartphones called "pocket computers"?',
+          options: [
+            'Because they are small',
+            'Because they can do many things like computers',
+            'Because they have screens',
+            'Because they have batteries'
+          ],
+          correctAnswer: 1,
+          explanation: 'Smartphones are called "pocket computers" because they can perform many functions similar to computers, such as accessing the internet, running apps, and more.'
+        },
+        {
+          id: 2,
+          prompt: 'What is YouTube?',
+          options: [
+            'A game',
+            'A place to watch videos',
+            'A shopping app',
+            'A messaging app'
+          ],
+          correctAnswer: 1,
+          explanation: 'YouTube is a platform where you can watch and share videos.'
+        },
+        {
+          id: 3,
+          prompt: 'What can a smartphone do that a regular phone cannot?',
+          options: [
+            'Make phone calls',
+            'Send text messages',
+            'Access the internet',
+            'Turn on and off'
+          ],
+          correctAnswer: 2,
+          explanation: 'Unlike regular phones, smartphones can access the internet, allowing you to browse websites and use apps.'
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Introduction to Notepad",
+      questions: [
+        {
+          id: 1,
+          prompt: 'What is Notepad?',
+          options: [
+            'A game',
+            'A drawing program',
+            'A text editor',
+            'A web browser'
+          ],
+          correctAnswer: 2,
+          explanation: 'Notepad is a simple text editor where you can write and save text files.'
+        },
+        {
+          id: 2,
+          prompt: 'How do you save a file in Notepad?',
+          options: [
+            'Click "File" then "Save As"',
+            'Close the window',
+            'Press the power button',
+            'Click "Edit" then "Save"'
+          ],
           correctAnswer: 0,
-          explanation: 'Paris is the capital of France.'
-        } 
+          explanation: 'To save a file in Notepad, you click "File" and then "Save As" to choose a name and location for your file.'
+        },
+        {
+          id: 3,
+          prompt: 'What is the Text Area in Notepad?',
+          options: [
+            'Where you type your text',
+            'The top bar',
+            'The menu options',
+            'The settings panel'
+          ],
+          correctAnswer: 0,
+          explanation: 'The Text Area is the large blank space where you type your words and sentences.'
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "Drawing with MS Paint (Part 2)",
+      questions: [
+        {
+          id: 1,
+          prompt: 'Which tool would you use to draw a straight line in MS Paint?',
+          options: [
+            'Brush tool',
+            'Line tool',
+            'Curve tool',
+            'Text tool'
+          ],
+          correctAnswer: 1,
+          explanation: 'The Line tool is specifically designed to draw straight lines in MS Paint.'
+        },
+        {
+          id: 2,
+          prompt: 'What does the Undo button do in MS Paint?',
+          options: [
+            'Adds colors',
+            'Fixes a mistake by removing the last action',
+            'Makes your drawing bigger',
+            'Adds text'
+          ],
+          correctAnswer: 1,
+          explanation: 'The Undo button reverses the last action you performed, helping you correct mistakes.'
+        },
+        {
+          id: 3,
+          prompt: 'How do you add words to your picture in MS Paint?',
+          options: [
+            'Use the Line tool',
+            'Use the Text tool',
+            'Use the Eraser',
+            'Use the Brush tool'
+          ],
+          correctAnswer: 1,
+          explanation: 'The Text tool allows you to add words or labels to your drawing in MS Paint.'
+        }
       ]
     }
   ]

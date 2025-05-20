@@ -5,6 +5,16 @@ import { TextContentProps } from './types';
 import styles from '../../../learning/learning.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
+
+export interface Step {
+  id: string;
+  number: number;
+  title: string;
+  instruction: string;
+  visualContent: string | React.ReactNode;
+  audioContent?: string;
+}
 
 export const TextContent: React.FC<TextContentProps> = ({
   title,
@@ -32,7 +42,7 @@ export const TextContent: React.FC<TextContentProps> = ({
       return;
     }
 
-    let textToSpeak = speakText || 
+    const textToSpeak = speakText || 
       (Array.isArray(content) ? content.join('. ') : content) || 
       (description ? (Array.isArray(description) ? description.join('. ') : description) : '');
 
@@ -116,10 +126,12 @@ export const TextContent: React.FC<TextContentProps> = ({
         <div className={styles.contentImages}>
           {images.map((image, index) => (
             <figure key={`img-${index}`} className={styles.contentImageContainer}>
-              <img 
+              <Image 
                 src={image.src} 
                 alt={image.alt} 
                 className={styles.contentImage}
+                width={600}
+                height={400}
               />
               {image.caption && (
                 <figcaption className={styles.imageCaption}>

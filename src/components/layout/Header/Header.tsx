@@ -1,9 +1,6 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -21,7 +18,7 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.headerContent}>
-        <Link href="/home" className={styles.logoLink}>
+        <Link href="/landing" className={styles.logoLink}>
           <div className={styles.logo}>
             <div className={styles.logoIconWrapper}>
               <span className={styles.codeBracket}>{"<"}</span>
