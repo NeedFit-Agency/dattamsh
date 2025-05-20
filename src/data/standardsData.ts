@@ -188,7 +188,7 @@ export const standards: Standard = {
             "A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things.",
             "Let's learn what computers are and how they help us!",
           ],
-          imageUrl: '/images/mascot.png',
+          imageUrl: '/images/computer.png',
           audioSrc: '/audio/computer_intro.mp3',
           speakText: "Hi there! I'm Zippy! Today we're going to learn about computers! A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things. Let's learn what computers are and how they help us!"
         },
@@ -205,16 +205,16 @@ export const standards: Standard = {
             "5. Listen to music and watch videos",
           ],
           exampleImages: [
-            { src: '/images/tools.png', alt: 'Using a computer to write' },
-            { src: '/images/school-bus.png', alt: 'Using a computer to draw' },
-            { src: '/images/mascot.png', alt: 'Playing games on a computer' },
-            { src: '/images/chair.png', alt: 'Talking with family on a computer' },
+            { src: '/images/1st-standard/computer-to-write.png', alt: 'Using a computer to write' },
+            { src: '/images/1st-standard/computer-to-draw.png', alt: 'Using a computer to draw' },
+            { src: '/images/1st-standard/computer-to-play.png', alt: 'Playing games on a computer' },
+            { src: '/images/1st-standard/computer-to-watch.png', alt: 'Watching videos on a computer' },
           ],
           audioSrc: '/audio/computer_uses.mp3',
           speakText: "Computers help us do many things: Type or write letters, stories, and poems. Draw colorful and beautiful paintings. Play fun games. Talk to family and friends who are far away. Listen to music and watch videos."
         },        {
           type: 'learn',
-          format: 'type',
+          format: 'text',
           title: 'Parts of a Computer',
           description: [
             "Just like our body has different parts that help us do different things, a computer also has different parts!",
@@ -708,7 +708,7 @@ export const standards: Standard = {
             "Smartphones are like small computers that fit in your pocket. They can do many things. For example: make phone calls, send messages and emails, take pictures, play games, listen to music, help people find their way with maps, search for information on the internet."
           ],
           "exampleImages": [
-            { "src": "/images/smartphone_calls.png", "alt": "Making phone calls" },
+            { "src": "/images/2nd-standard/communications.png", "alt": "Making phone calls" },
             { "src": "/images/smartphone_messages.png", "alt": "Sending messages" },
             { "src": "/images/smartphone_camera.png", "alt": "Taking pictures" },
             { "src": "/images/smartphone_games.png", "alt": "Playing games" },
