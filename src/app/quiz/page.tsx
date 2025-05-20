@@ -5,7 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck, faTimes, faFire, faHeadphones, faX } from '@fortawesome/free-solid-svg-icons';
-import { useAnalyticsContext } from '@/components/analytics/AnalyticsProvider';
+// import { useAnalyticsContext } from '@/components/analytics/AnalyticsProvider'; // Keep commented out or remove if fully migrated
+import { AnalyticsService } from '@/utils/analyticsService'; 
 import Link from 'next/link';
 import AnswerOption from '@/components/quiz/AnswerOption/AnswerOption';
 import LegendaryTrophy from '@/components/quiz/LegendaryTrophy/LegendaryTrophy';
@@ -24,11 +25,10 @@ export default function QuizPage() {
 function QuizPageContent() {
   const searchParams = useSearchParams();
   const standardId = searchParams.get('standard') || '1';
-  const lessonId = searchParams.get('chapter') || '1';
+  const lessonId = searchParams.get('chapter') || '1'; // chapterId is referred to as lessonId here
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
   
-  // Get analytics context
-  const analytics = useAnalyticsContext();
+  // const analytics = useAnalyticsContext(); // Ensure this is commented out or removed
   
   // Timing tracking
   const [quizStartTime, setQuizStartTime] = useState<number>(Date.now());
@@ -57,17 +57,23 @@ function QuizPageContent() {
       if (chapters && chapters.length > 0) {
         setQuestions(chapters[chapterIndex].questions);
         
-        // Track quiz start when questions are loaded
-        analytics.trackQuizStart(standardId, lessonId);
+        AnalyticsService.logGameplayEvent(
+          `quiz_standard_${standardId}_chapter_${lessonId}`,
+          'start',
+          { 
+            completion_status: 'started',
+            total_questions: chapters[chapterIndex].questions.length
+          }
+        );
         
-        // Reset timing trackers
         setQuizStartTime(Date.now());
         setQuestionStartTime(Date.now());
       } else {
         setQuestions([]);
       }
     }, 500);
-  }, [standardId, lessonId, chapterIndex, analytics]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps 
+  }, [standardId, lessonId, chapterIndex]); // Removed 'analytics' from dependency array
 
   // Calculate percentage score
   const scorePercentage = questions.length > 0 
@@ -88,6 +94,16 @@ function QuizPageContent() {
     speech.onend = () => setIsListening(false);
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(speech);
+
+    // Log listen interaction
+    AnalyticsService.logGameplayEvent(
+      `quiz_standard_${standardId}_chapter_${lessonId}_q${currentQuestionIndex}`,
+      'interaction',
+      { 
+        interaction_type: 'listen_to_question',
+        question_prompt: currentQuestion.prompt.substring(0, 100) // Log a snippet
+      }
+    );
   };
 
   useEffect(() => {
@@ -111,12 +127,26 @@ function QuizPageContent() {
     setIsGraded(true);
     
     // Track question answer
-    analytics.trackQuestionAnswer(
-      standardId,
-      lessonId, 
-      currentQuestionIndex, 
-      isAnswerCorrect, 
-      timeSpentMs
+    // analytics.trackQuestionAnswer( // OLD way
+    //   standardId,
+    //   lessonId, 
+    //   currentQuestionIndex, 
+    //   isAnswerCorrect, 
+    //   timeSpentMs
+    // );
+    AnalyticsService.logGameplayEvent(
+      `quiz_standard_${standardId}_chapter_${lessonId}_q${currentQuestionIndex}`,
+      'answer',
+      {
+        question_prompt: currentQuestion?.prompt.substring(0,100),
+        selected_answer_index: selectedAnswerIndex,
+        selected_answer_text: currentQuestion?.options[selectedAnswerIndex]?.substring(0,100),
+        correct_answer_index: currentQuestion?.correctAnswer,
+        correct_answer_text: currentQuestion?.options[currentQuestion?.correctAnswer]?.substring(0,100),
+        is_correct: isAnswerCorrect,
+        time_spent_ms: timeSpentMs,
+        streak_before_answer: streak
+      }
     );
     
     if (isAnswerCorrect) {
@@ -151,12 +181,24 @@ function QuizPageContent() {
       const totalTimeSpentMs = Date.now() - quizStartTime;
       
       // Track quiz completion
-      analytics.trackQuizCompletion(
-        standardId,
-        lessonId,
-        correctAnswers,
-        questions.length,
-        totalTimeSpentMs
+      // analytics.trackQuizCompletion( // OLD way
+      //   standardId,
+      //   lessonId,
+      //   correctAnswers,
+      //   questions.length,
+      //   totalTimeSpentMs
+      // );
+      AnalyticsService.logGameplayEvent(
+        `quiz_standard_${standardId}_chapter_${lessonId}`,
+        'complete',
+        {
+          completion_status: 'completed',
+          score: correctAnswers,
+          total_questions: questions.length,
+          score_percentage: scorePercentage,
+          time_spent_ms: totalTimeSpentMs,
+          final_streak: streak
+        }
       );
       
       // Mark chapter as completed in localStorage
@@ -166,6 +208,24 @@ function QuizPageContent() {
         localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
       }
     }
+  };
+
+  const handleQuitConfirmed = () => {
+    const totalTimeSpentMs = Date.now() - quizStartTime;
+    AnalyticsService.logGameplayEvent(
+      `quiz_standard_${standardId}_chapter_${lessonId}`,
+      'quit',
+      {
+        completion_status: 'quit',
+        last_question_index: currentQuestionIndex,
+        correct_answers_so_far: correctAnswers,
+        total_questions: questions.length,
+        time_spent_ms: totalTimeSpentMs,
+        current_streak: streak
+      }
+    );
+    // Navigate away, e.g., back to chapter list or home
+    // router.push(`/standard/${standardId}/chapter/${lessonId}`); // Or wherever quit should lead
   };
 
   if (!currentQuestion && !completed) {
@@ -409,7 +469,11 @@ function QuizPageContent() {
                 >
                   CONTINUE LESSON
                 </button>
-                <Link href={`/standard/${standardId}/chapter/${lessonId}`} className={styles.quitConfirmButton}>
+                <Link 
+                  href={`/standard/${standardId}/chapter/${lessonId}`}
+                  className={styles.quitConfirmButton}
+                  onClick={handleQuitConfirmed} 
+                >
                   QUIT
                 </Link>
               </div>
@@ -420,3 +484,6 @@ function QuizPageContent() {
     </div>
   );
 }
+
+// Ensure QuizPageContent is correctly typed if it wasn't before, though it seems to be a function component already.
+// The error might have been a side effect of other syntax issues.

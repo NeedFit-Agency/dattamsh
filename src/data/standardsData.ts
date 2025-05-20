@@ -87,7 +87,11 @@ export interface StepByStepSlide extends BaseContentProps {
     id: string;
     number: number;
     instruction: string;
-    visualContent?: string;
+    visualContent?: {
+      src? : string;
+      alt? : string;
+    } | string; // Can be a string or an object with src and alt
+    audioContent?: string;
   }[];
   // Format will be 'step-by-step'
 }
@@ -1083,6 +1087,7 @@ export const standards: Standard = {
         },
         {
           "type": "learn",
+          "description": "Line tool",
           "format": "step-by-step",
           "title": "Line Tool",
           "steps": [
@@ -1096,7 +1101,6 @@ export const standards: Standard = {
             {
               "id": "line-2",
               "number": 2,
-              "title": "Draw the line",
               "instruction": "Click on the drawing area where you want the line to start, drag it to where you want it to end, and release the mouse button.",
               "visualContent": { "src": "/images/vertical_line.png", "alt": "Vertical line" },
               "audioContent": "Draw the line by dragging and releasing the mouse button."

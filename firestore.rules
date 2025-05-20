@@ -1,0 +1,157 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper for admin-like operations (assumes admins are authenticated)
+    // This should be replaced with a proper role check if available, e.g.,
+    // function isAdmin() { return request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'; }
+    function isAdmin() {
+      return request.auth != null;
+    }
+
+    // Institutions: Readable by all, writable by admins.
+    match /institutions/{institutionId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Grades: Readable by all, writable by admins.
+    // Grade must belong to an existing institution.
+    match /grades/{gradeId} {
+      allow read: if true;
+      allow create: if isAdmin() &&
+                       request.resource.data.institution_id is string &&
+                       exists(/databases/$(database)/documents/institutions/$(request.resource.data.institution_id));
+      allow update: if isAdmin() &&
+                       // institution_id should be immutable for an existing grade
+                       request.resource.data.institution_id == resource.data.institution_id;
+      allow delete: if isAdmin();
+    }
+
+    // Classes: Readable by all, writable by admins.
+    // Class must belong to an existing grade.
+    match /classes/{classId} {
+      allow read: if true;
+      allow create: if isAdmin() &&
+                       request.resource.data.grade_id is string &&
+                       exists(/databases/$(database)/documents/grades/$(request.resource.data.grade_id));
+      allow update: if isAdmin() &&
+                       // grade_id should be immutable for an existing class
+                       request.resource.data.grade_id == resource.data.grade_id;
+      allow delete: if isAdmin();
+    }
+
+    // Sessions
+    match /sessions/{sessionId} {
+      // Allow creation by anyone if data is valid and references exist.
+      // user_agent is optional. end_timestamp and duration_ms are not set on creation.
+      allow create: if request.resource.data.institution_id is string &&
+                       request.resource.data.grade_id is string &&
+                       request.resource.data.class_id is string &&
+                       request.resource.data.start_timestamp == request.time &&
+                       request.resource.data.last_active == request.time &&
+                       request.resource.data.is_active == true &&
+                       !request.resource.data.keys().hasAny(['end_timestamp', 'duration_ms']) &&
+                       request.resource.data.keys().hasOnly([
+                         'institution_id', 'grade_id', 'class_id',
+                         'start_timestamp', 'last_active', 'is_active',
+                         'user_agent' // Optional
+                       ]) &&
+                       exists(/databases/$(database)/documents/institutions/$(request.resource.data.institution_id)) &&
+                       exists(/databases/$(database)/documents/grades/$(request.resource.data.grade_id)) &&
+                       exists(/databases/$(database)/documents/classes/$(request.resource.data.class_id));
+
+      allow read: if isAdmin(); // Restricted to admins/backend
+
+      // Allow specific update patterns:
+      // 1. Reactivating/updating active session (e.g., by createSession if exists)
+      // 2. Updating last_active for an active session
+      // 3. Ending a session
+      allow update: if
+                    // Immutable fields must not change (user_agent can be set once if initially null)
+                    request.resource.data.institution_id == resource.data.institution_id &&
+                    request.resource.data.grade_id == resource.data.grade_id &&
+                    request.resource.data.class_id == resource.data.class_id &&
+                    request.resource.data.start_timestamp == resource.data.start_timestamp &&
+                    (request.resource.data.user_agent == resource.data.user_agent || resource.data.user_agent == null) &&
+
+                    (
+                      // Case 1 & 2: Updating activity (last_active, is_active can be set to true or remain true)
+                      (
+                        request.resource.data.last_active == request.time &&
+                        (request.resource.data.is_active == true || request.resource.data.is_active == resource.data.is_active) && // is_active is true or unchanged
+                        // Allow only these fields in this case (plus immutable ones for the check)
+                        request.resource.data.keys().hasOnly([
+                            'last_active', 'is_active',
+                            'institution_id', 'grade_id', 'class_id', 'start_timestamp', 'user_agent'
+                        ])
+                      ) ||
+                      // Case 3: Ending a session (marking is_active: false)
+                      (
+                        resource.data.is_active == true && // Must be an active session to end it
+                        request.resource.data.is_active == false &&
+                        request.resource.data.end_timestamp == request.time &&
+                        request.resource.data.duration_ms is number &&
+                        request.resource.data.last_active == request.time && // Update last_active as well
+                        // Allow only these fields in this case (plus immutable ones for the check)
+                        request.resource.data.keys().hasOnly([
+                            'last_active', 'is_active', 'end_timestamp', 'duration_ms',
+                            'institution_id', 'grade_id', 'class_id', 'start_timestamp', 'user_agent'
+                        ])
+                      )
+                    );
+
+      allow delete: if isAdmin(); // Sessions are marked inactive, deletion by admin only.
+
+      // Subcollection: events
+      match /events/{eventId} {
+        allow create: if exists(/databases/$(database)/documents/sessions/$(sessionId)) &&
+                         request.resource.data.timestamp == request.time &&
+                         request.resource.data.event_name is string &&
+                         request.resource.data.params is map &&
+                         request.resource.data.keys().hasOnly(['timestamp', 'event_name', 'params']);
+
+        allow read: if isAdmin();
+        allow update: if false; // Events are immutable
+        allow delete: if isAdmin();
+      }
+
+      // Subcollection: moduleLogs
+      match /moduleLogs/{moduleLogId} {
+        allow create: if exists(/databases/$(database)/documents/sessions/$(sessionId)) &&
+                         request.resource.data.module_id is string &&
+                         request.resource.data.status is string &&
+                         request.resource.data.start_timestamp == request.time &&
+                         request.resource.data.last_updated == request.time &&
+                         (request.resource.data.score is number || !request.resource.data.keys().hasAny(['score'])) &&
+                         (request.resource.data.details is map || !request.resource.data.keys().hasAny(['details'])) &&
+                         !request.resource.data.keys().hasAny(['end_timestamp']) && // Not on create
+                         request.resource.data.keys().hasOnly([
+                            'module_id', 'status', 'start_timestamp', 'last_updated',
+                            'score', 'details'
+                         ]);
+
+        allow update: if exists(/databases/$(database)/documents/sessions/$(sessionId)) &&
+                         // Immutable fields
+                         request.resource.data.module_id == resource.data.module_id &&
+                         request.resource.data.start_timestamp == resource.data.start_timestamp &&
+                         // Updatable fields
+                         (request.resource.data.status is string || !request.resource.data.keys().hasAny(['status'])) &&
+                         (request.resource.data.last_updated == request.time || !request.resource.data.keys().hasAny(['last_updated'])) &&
+                         (request.resource.data.score is number || !request.resource.data.keys().hasAny(['score'])) &&
+                         (request.resource.data.details is map || !request.resource.data.keys().hasAny(['details'])) &&
+                         (request.resource.data.end_timestamp is timestamp || !request.resource.data.keys().hasAny(['end_timestamp'])) &&
+                         // If status becomes 'completed', end_timestamp should be set to request.time
+                         (request.resource.data.status != 'completed' || request.resource.data.end_timestamp == request.time) &&
+                         request.resource.data.keys().hasOnly([
+                            'module_id', 'start_timestamp', // For immutable check
+                            'status', 'last_updated', 'score', 'details', 'end_timestamp'
+                         ]);
+
+        allow read: if isAdmin();
+        allow delete: if isAdmin();
+      }
+    }
+  }
+}

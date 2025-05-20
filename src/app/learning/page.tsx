@@ -8,6 +8,7 @@ import {
   faArrowRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { useAnalyticsContext } from '@/components/analytics/AnalyticsProvider';
+import { AnalyticsService } from '@/utils/analyticsService'; // Import AnalyticsService
 
 import styles from './learning.module.css';
 import { standards } from '../../data/standardsData';
@@ -46,10 +47,12 @@ function LearningPageContent() {
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [hearts, setHearts] = useState(3);
   const router = useRouter();
-  // Import analytics context
-  const analytics = useAnalyticsContext();
-  // Track time spent on lesson
+  
+  // OLD analytics context - to be reviewed if still needed or can be replaced by AnalyticsService calls
+  const analytics = useAnalyticsContext(); 
+  
   const [lessonStartTime, setLessonStartTime] = useState<number>(Date.now());
+  const [slideStartTime, setSlideStartTime] = useState<number>(Date.now()); // For slide-specific time
 
   const initialLessonContent = standards["2"][0].lessonContent;
   const [chapterContent, setChapterContent] = useState<LessonContent[]>(initialLessonContent);
@@ -82,10 +85,16 @@ function LearningPageContent() {
     setChapter(chapterParam);
     
     // Track chapter start using analytics
-    analytics.trackChapterStart(standardParam, chapterParam);
+    // analytics.trackChapterStart(standardParam, chapterParam); // OLD way
+    AnalyticsService.logGameplayEvent(
+      `standard_${standardParam}_chapter_${chapterParam}`,
+      'start',
+      { completion_status: 'started' }
+    );
     
     // Reset lesson start time when chapter changes
     setLessonStartTime(Date.now());
+    setSlideStartTime(Date.now()); // Reset slide start time as well
 
     let selectedContent: LessonContent[] = initialLessonContent;
     const standardChapters = standards[standardParam];
@@ -109,6 +118,19 @@ function LearningPageContent() {
     window.speechSynthesis?.cancel();
 
     const currentSlideData = chapterContent[currentSlideIndex];
+    if (currentSlideData) {
+      // Log slide view event
+      AnalyticsService.logGameplayEvent(
+        `standard_${standard}_chapter_${chapter}_slide_${currentSlideIndex}`,
+        'view',
+        { 
+          slide_type: currentSlideData.type,
+          slide_title: currentSlideData.title || 'untitled'
+        }
+      );
+      setSlideStartTime(Date.now()); // Reset slide start time for the new slide
+    }
+
     if (currentSlideData && currentSlideData.type === 'drag-drop') {
       setDndState({
         sourceItems: currentSlideData.items ? [...currentSlideData.items] : [],
@@ -161,6 +183,17 @@ function LearningPageContent() {
 
   const handleConfirmExit = () => {
       setShowExitConfirm(false);
+      // Log lesson exit/quit if not completed
+      const timeSpentOnLessonMs = Date.now() - lessonStartTime;
+      AnalyticsService.logGameplayEvent(
+        `standard_${standard}_chapter_${chapter}`,
+        'quit',
+        { 
+          completion_status: 'quit',
+          time_spent_ms: timeSpentOnLessonMs,
+          last_slide_index: currentSlideIndex
+        }
+      );
       router.push(`/standard/${standard}/chapter/${chapter}`);
     };
   const handleCancelExit = () => setShowExitConfirm(false);
@@ -191,6 +224,19 @@ function LearningPageContent() {
 
     setItemCorrectness(newCorrectnessMap);
     setDndChecked(true);
+
+    const timeSpentOnSlideMs = Date.now() - slideStartTime;
+    AnalyticsService.logGameplayEvent(
+      `standard_${standard}_chapter_${chapter}_slide_${currentSlideIndex}_dnd_check`,
+      'interaction',
+      { 
+        interaction_type: 'check_answers',
+        items_placed_natural: dndState.naturalTarget?.length || 0,
+        items_placed_man_made: dndState.manMadeTarget?.length || 0,
+        incorrect_count: incorrectCount,
+        time_spent_ms: timeSpentOnSlideMs
+      }
+    );
 
     const totalPlacedInTargets = (dndState.naturalTarget?.length || 0) + (dndState.manMadeTarget?.length || 0);
     const allItemsPlaced = areAllItemsPlaced();
@@ -244,19 +290,47 @@ function LearningPageContent() {
 
     // Calculate time spent on this lesson slide
     const timeSpentMs = Date.now() - lessonStartTime;
+    const timeSpentOnSlideMs = Date.now() - slideStartTime; // Time for current slide
     
-    // Track current lesson view
-    analytics.trackLessonView(standard, chapter, currentSlideIndex);
+    // Track current lesson view (or slide completion)
+    // analytics.trackLessonView(standard, chapter, currentSlideIndex); // OLD way
+    AnalyticsService.logGameplayEvent(
+      `standard_${standard}_chapter_${chapter}_slide_${currentSlideIndex}`,
+      'complete', // Marking slide as complete before moving to next or finishing
+      { 
+        completion_status: 'completed',
+        time_spent_ms: timeSpentOnSlideMs,
+        slide_type: currentContent.type,
+        slide_title: currentContent.title || 'untitled',
+        // Add dnd specific results if it was a dnd slide
+        ...(currentContent.type === 'drag-drop' ? {
+          dnd_all_items_placed: areAllItemsPlaced(),
+          dnd_any_incorrect: Object.values(itemCorrectness).some(correct => !correct),
+          dnd_hearts_remaining: hearts
+        } : {})
+      }
+    );
 
     if (currentSlideIndex < totalSlides - 1) {
         setCurrentSlideIndex(currentSlideIndex + 1);
         // Reset lesson start time for the next slide
-        setLessonStartTime(Date.now());
+        // setLessonStartTime(Date.now()); // This was resetting overall lesson time, keep it for slide time
+        setSlideStartTime(Date.now()); // Reset for the new slide
     }
     else {
         console.log("Lesson Finished! Redirecting to quiz page for Standard/Chapter:", standard, chapter);
         // Track chapter completion before redirecting to quiz
-        analytics.trackChapterCompletion(standard, chapter, timeSpentMs);
+        // analytics.trackChapterCompletion(standard, chapter, timeSpentMs); // OLD way
+        const totalLessonTimeSpentMs = Date.now() - lessonStartTime;
+        AnalyticsService.logGameplayEvent(
+          `standard_${standard}_chapter_${chapter}`,
+          'complete',
+          { 
+            completion_status: 'completed',
+            time_spent_ms: totalLessonTimeSpentMs,
+            total_slides: totalSlides
+          }
+        );
         router.push(`/quiz?standard=${standard}&chapter=${chapter}`);
     }
   };

@@ -6,6 +6,19 @@ import useAnalytics from '@/hooks/useAnalytics';
 
 // Create a context to provide analytics throughout the app
 interface AnalyticsContextType {
+  // Session information
+  sessionId: string | null;
+  hasContext: boolean;
+  institutionId?: string;
+  gradeId?: string;
+  classId?: string;
+  
+  // Session tracking
+  trackUserVisit: () => void;
+  trackSessionStart: () => void;
+  trackSessionEnd: (timeSpentMs: number) => void;
+  
+  // Legacy analytics events
   trackStandardSelection: (standardId: string) => void;
   trackChapterStart: (standardId: string, chapterId: string) => void;
   trackChapterCompletion: (standardId: string, chapterId: string, timeSpentMs: number) => void;
@@ -25,8 +38,27 @@ interface AnalyticsContextType {
     isCorrect: boolean,
     timeSpentMs: number
   ) => void;
+  
+  // New module tracking
+  trackModuleStart: (moduleId: string, additionalData?: any) => boolean | Promise<void>;
+  trackModuleProgress: (moduleId: string, additionalData?: any) => boolean | Promise<void>;
+  trackModuleCompletion: (
+    moduleId: string, 
+    timeSpentMs?: number, 
+    score?: number, 
+    errors?: number, 
+    additionalData?: any
+  ) => boolean | Promise<void>;
+  trackModuleQuit: (
+    moduleId: string, 
+    timeSpentMs?: number, 
+    additionalData?: any
+  ) => boolean | Promise<void>;
+  
+  // Hook-specific methods
   recordUserInteraction: () => void;
   getSessionDuration: () => number;
+  getTimeSinceLastInteraction: () => number;
 }
 
 const AnalyticsContext = createContext<AnalyticsContextType | undefined>(undefined);

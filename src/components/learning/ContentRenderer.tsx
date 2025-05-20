@@ -163,6 +163,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
       const stepContent = content as import('../../data/standardsData').StepByStepSlide;
       const steps = stepContent.steps.map(step => ({
         ...step,
+        title: step.instruction || `Step ${step.number}`, // Add title if missing
         visualContent: typeof step.visualContent === 'string' ? step.visualContent : ''
       }));
       return (
