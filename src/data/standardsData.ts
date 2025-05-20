@@ -140,15 +140,15 @@ export const standards: Standard = {
           format: 'text',
           title: 'Introduction to Nature and Man-made',
           description: [
-            "Hi there! I'm Zippy! We see so many things around us every day.",
-            'Some things, like trees and birds, are found in nature.',
-            'Other things, like chairs and cars, are made by people.',
+            "Hi! I'm Arjun! We see so many things around us every day in our beautiful country.",
+            'Some things, like the Himalayas and peacocks, are found in nature.',
+            'Other things, like auto-rickshaws and buildings, are made by people.',
             "Let's learn the difference together!",
           ],
           imageUrl: '/images/intro-scene.png',
           audioSrc: '/audio/01_intro.mp3',
           speakText:
-            "Hi there! I'm Zippy! We see so many things around us every day. Some things, like trees and birds, are found in nature. Other things, like chairs and cars, are made by people. Let's learn the difference together!",
+            "Hi! I'm Arjun! We see so many things around us every day in our beautiful country. Some things, like the Himalayas and peacocks, are found in nature. Other things, like auto-rickshaws and buildings, are made by people. Let's learn the difference together!",
         },
         {
           type: 'learn',
@@ -159,9 +159,9 @@ export const standards: Standard = {
           ],
           exampleImages: [
             { src: '/images/sun.png', alt: 'The bright Sun' },
-            { src: '/images/water.png', alt: 'Flowing Water' },
-            { src: '/images/tree.png', alt: 'A tall Tree' },
-            { src: '/images/bird.png', alt: 'A flying Bird' },
+            { src: '/images/water.png', alt: 'The Ganges River' },
+            { src: '/images/tree.png', alt: 'A Banyan Tree' },
+            { src: '/images/bird.png', alt: 'A Peacock' },
           ],
           audioSrc: '/audio/02_natural.mp3',
           speakText:
@@ -175,9 +175,9 @@ export const standards: Standard = {
             'Man-made things are things that people build or create. Can you spot some things people made here?',
           ],
           exampleImages: [
-            { src: '/images/school-bus.png', alt: 'A yellow School Bus' },
-            { src: '/images/cycle.png', alt: 'A shiny Cycle' },
-            { src: '/images/chair.png', alt: 'A comfy Chair' },
+            { src: '/images/school-bus.png', alt: 'An Auto-rickshaw' },
+            { src: '/images/cycle.png', alt: 'A shiny Bicycle' },
+            { src: '/images/chair.png', alt: 'A wooden Charpai' },
             { src: '/images/blackboard.png', alt: 'A classroom Blackboard' },
           ],
           audioSrc: '/audio/03_manmade.mp3',
@@ -188,18 +188,18 @@ export const standards: Standard = {
           format: 'drag-drop',
           title: 'Activity: Sort Them Out!',
           instruction:
-            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
+            'Hi! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Human-made Things".',
           items: [
-            { id: 'dnd-item-1', text: 'Tree', type: 'natural', imageUrl: '/images/tree.png' },
-            { id: 'dnd-item-2', text: 'Chair', type: 'man-made', imageUrl: '/images/chair.png' },
-            { id: 'dnd-item-3', text: 'Bird', type: 'natural', imageUrl: '/images/bird.png' },
-            { id: 'dnd-item-4', text: 'Cycle', type: 'man-made', imageUrl: '/images/cycle.png' },
+            { id: 'dnd-item-1', text: 'Banyan Tree', type: 'natural', imageUrl: '/images/tree.png' },
+            { id: 'dnd-item-2', text: 'Charpai', type: 'man-made', imageUrl: '/images/chair.png' },
+            { id: 'dnd-item-3', text: 'Peacock', type: 'natural', imageUrl: '/images/bird.png' },
+            { id: 'dnd-item-4', text: 'Bicycle', type: 'man-made', imageUrl: '/images/cycle.png' },
             { id: 'dnd-item-5', text: 'Sun', type: 'natural', imageUrl: '/images/sun.png' },
             { id: 'dnd-item-6', text: 'Blackboard', type: 'man-made', imageUrl: '/images/blackboard.png' },
           ],
           targets: [
             { id: 'naturalTarget', title: 'Natural Things', type: 'natural' },
-            { id: 'manMadeTarget', title: 'Man-made Things', type: 'man-made' },
+            { id: 'manMadeTarget', title: 'Human-made Things', type: 'man-made' },
           ],
           audioSrc: '/audio/04_dnd_instruction.mp3',
           speakText:
@@ -215,13 +215,13 @@ export const standards: Standard = {
           format: 'text',
           title: 'Introduction to Computers',
           description: [
-            "Hi there! I'm Zippy! Today we're going to learn about computers!",
+            "Hi friends! I'm Arjun! Today we're going to learn about computers!",
             "A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things.",
             "Let's learn what computers are and how they help us!",
           ],
           imageUrl: '/images/mascot.png',
           audioSrc: '/audio/computer_intro.mp3',
-          speakText: "Hi there! I'm Zippy! Today we're going to learn about computers! A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things. Let's learn what computers are and how they help us!"
+          speakText: "Hi friends! I'm Arjun! Today we're going to learn about computers! A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things. Let's learn what computers are and how they help us!"
         },
         {
           type: 'learn',
@@ -285,15 +285,15 @@ export const standards: Standard = {
           format: 'history',
           title: 'Story: The Magic of Computers',
           description: [
-            "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer.",
-            "Raju asked, 'Dad, what are you doing?'",
-            "His father replied, 'I'm writing a letter to your uncle using this computer.'",
-            "Raju was amazed! He asked his teacher the next day about computers. His teacher showed the class how computers work.",
-            "Raju learned that computers can help people do many things quickly and easily. He was very excited to learn more about computers!"
+            "Priya was a young student from Mumbai. One day, she was going home from school. On the way, she saw her parent working on a computer.",
+            "Priya asked, 'What are you doing?'",
+            "Her parent replied, 'I'm writing an email to your aunt in Delhi using this computer.'",
+            "Priya was amazed! She asked her teacher the next day about computers. Her teacher showed the class how computers work.",
+            "Priya learned that computers can help people do many things quickly and easily. She was very excited to learn more about computers!"
           ],
           imageUrl: '/images/mascot.png',
           audioSrc: '/audio/computer_story.mp3',
-          speakText: "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer. Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.' Raju was amazed! He asked his teacher the next day about computers. His teacher showed the class how computers work. Raju learned that computers can help people do many things quickly and easily. He was very excited to learn more about computers!"
+          speakText: "Priya was a young student from Mumbai. One day, she was going home from school. On the way, she saw her parent working on a computer. Priya asked, 'What are you doing?' Her parent replied, 'I'm writing an email to your aunt in Delhi using this computer.' Priya was amazed! She asked her teacher the next day about computers. Her teacher showed the class how computers work. Priya learned that computers can help people do many things quickly and easily. She was very excited to learn more about computers!"
         },
         {
           type: 'learn',
@@ -333,13 +333,13 @@ export const standards: Standard = {
           format: 'text',
           title: 'Taking Care of Computers',
           description: [
-            "Hi there! I'm Zippy! Just like you take care of your toys and games, it's very important to take care of computers too!",
+            "Hi friends! I'm Arjun! Just like you take care of your cricket bats and board games, it's very important to take care of computers too!",
             "Today, we will learn how to keep our computers safe and make them last longer.",
             "Let's explore how to take good care of computers and ourselves when using them!"
           ],
           imageUrl: '/images/mascot.png',
           audioSrc: '/audio/computer_care_intro.mp3',
-          speakText: "Hi there! I'm Zippy! Just like you take care of your toys and games, it's very important to take care of computers too! Today, we will learn how to keep our computers safe and make them last longer. Let's explore how to take good care of computers and ourselves when using them!"
+          speakText: "Hi friends! I'm Arjun! Just like you take care of your cricket bats and board games, it's very important to take care of computers too! Today, we will learn how to keep our computers safe and make them last longer. Let's explore how to take good care of computers and ourselves when using them!"
         },
         {
           type: 'learn',
@@ -385,12 +385,12 @@ export const standards: Standard = {
           instruction:
             'Sort these habits into "Good Habits" or "Bad Habits" for computer care!',
           items: [
-            { id: 'dnd-item-1', text: 'Eating chips while using the computer', type: 'man-made', imageUrl: '/images/chair.png' },
+            { id: 'dnd-item-1', text: 'Eating samosas while using the computer', type: 'man-made', imageUrl: '/images/chair.png' },
             { id: 'dnd-item-2', text: 'Wiping the screen with a soft cloth', type: 'natural', imageUrl: '/images/water.png' },
             { id: 'dnd-item-3', text: 'Shutting down properly', type: 'natural', imageUrl: '/images/sun.png' },
-            { id: 'dnd-item-4', text: 'Banging on the keyboard when angry', type: 'man-made', imageUrl: '/images/cycle.png' },
+            { id: 'dnd-item-4', text: 'Hitting the keyboard when frustrated', type: 'man-made', imageUrl: '/images/cycle.png' },
             { id: 'dnd-item-5', text: 'Taking breaks during computer use', type: 'natural', imageUrl: '/images/tree.png' },
-            { id: 'dnd-item-6', text: 'Putting drinks next to the computer', type: 'man-made', imageUrl: '/images/blackboard.png' }
+            { id: 'dnd-item-6', text: 'Putting chai next to the computer', type: 'man-made', imageUrl: '/images/blackboard.png' }
           ],
           targets: [
             { id: 'naturalTarget', title: 'Good Habits', type: 'natural' },
@@ -420,19 +420,19 @@ export const standards: Standard = {
         },        {
           type: 'learn',
           format: 'history',
-          title: "Story: Leo's Computer Lesson",
+          title: "Story: Rohan's Computer Lesson",
           description: [
-            "Leo loved playing games on his computer. One day, the computer stopped working!",
-            "Leo was very upset and called his dad for help.",
-            "Dad explained that computers need proper care. Leo had been shutting down his computer incorrectly by just pressing the power button.",
-            "'Computers are like friends,' said Dad. 'You have to say goodbye properly.'",
-            "Dad showed Leo how to shut down the computer correctly by saving his work, closing all programs, and clicking on Shut Down.",
-            "Leo learned his lesson and always took good care of his computer after that. His computer worked well for a very long time!",
+            "Rohan from Bangalore loved playing games on his computer. One day, the computer stopped working!",
+            "Rohan was very upset and called his parent for help.",
+            "His parent explained that computers need proper care. Rohan had been shutting down his computer incorrectly by just pressing the power button.",
+            "'Computers are like friends,' said his parent. 'You have to say goodbye properly.'",
+            "His parent showed Rohan how to shut down the computer correctly by saving his work, closing all programs, and clicking on Shut Down.",
+            "Rohan learned his lesson and always took good care of his computer after that. His computer worked well for a very long time!",
             "Remember: Always shut down your computer properly!"
           ],
           imageUrl: '/images/mascot.png',
           audioSrc: '/audio/leo_story.mp3',
-          speakText: "Leo loved playing games on his computer. One day, the computer stopped working! Leo was very upset and called his dad for help. Dad explained that computers need proper care. Leo had been shutting down his computer incorrectly by just pressing the power button. 'Computers are like friends,' said Dad. 'You have to say goodbye properly.' Dad showed Leo how to shut down the computer correctly by saving his work, closing all programs, and clicking on Shut Down. Leo learned his lesson and always took good care of his computer after that. His computer worked well for a very long time! Remember: Always shut down your computer properly!"
+          speakText: "Rohan from Bangalore loved playing games on his computer. One day, the computer stopped working! Rohan was very upset and called his parent for help. His parent explained that computers need proper care. Rohan had been shutting down his computer incorrectly by just pressing the power button. 'Computers are like friends,' said his parent. 'You have to say goodbye properly.' His parent showed Rohan how to shut down the computer correctly by saving his work, closing all programs, and clicking on Shut Down. Rohan learned his lesson and always took good care of his computer after that. His computer worked well for a very long time! Remember: Always shut down your computer properly!"
         },
         {
           type: 'learn',
@@ -471,13 +471,13 @@ export const standards: Standard = {
           format: 'text',
           title: 'Introduction to Keyboard and Mouse',
           description: [
-            "Hi there! I'm Zippy! Today we're going to learn about two very important parts of a computer - the keyboard and mouse!",
+            "Hi there! I'm Arjun! Today we're going to learn about two very important parts of a computer - the keyboard and mouse!",
             "These parts help us talk to the computer and tell it what to do.",
             "Let's have fun learning about the keyboard and mouse!",
           ],
           imageUrl: '/images/mascot.png',
           audioSrc: '/audio/keyboard_intro.mp3',
-          speakText: "Hi there! I'm Zippy! Today we're going to learn about two very important parts of a computer - the keyboard and mouse! These parts help us talk to the computer and tell it what to do. Let's have fun learning about the keyboard and mouse!"
+          speakText: "Hi there! I'm Arjun! Today we're going to learn about two very important parts of a computer - the keyboard and mouse! These parts help us talk to the computer and tell it what to do. Let's have fun learning about the keyboard and mouse!"
         },
         {
           type: 'learn',
@@ -703,7 +703,7 @@ export const standards: Standard = {
           format: 'text',
           title: 'Hardware Parts',
           description: [
-            "Zippy says: Click a card to check whether that is a hardware part!"
+            "Arjun says: Click a card to check whether that is a hardware part!"
           ],
           exampleImages: [
             { src: '/images/printer.png', alt: 'Printer' },
