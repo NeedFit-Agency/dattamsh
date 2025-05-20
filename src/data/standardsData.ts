@@ -85,9 +85,11 @@ export interface StepByStepSlide extends BaseContentProps {
   description: string;
   steps: {
     id: string;
+    
     number: number;
     instruction: string;
-    visualContent?: string;
+    visualContent?: string | { src: string; alt: string; };
+    audioContent?: string;
   }[];
   // Format will be 'step-by-step'
 }
@@ -219,7 +221,7 @@ export const standards: Standard = {
             "A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things.",
             "Let's learn what computers are and how they help us!",
           ],
-          imageUrl: '/images/computer.png',
+          imageUrl: '/images/mascot.png',
           audioSrc: '/audio/computer_intro.mp3',
           speakText: "Hi friends! I'm Arjun! Today we're going to learn about computers! A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things. Let's learn what computers are and how they help us!"
         },
@@ -236,16 +238,16 @@ export const standards: Standard = {
             "5. Listen to music and watch videos",
           ],
           exampleImages: [
-            { src: '/images/1st-standard/computer-to-write.png', alt: 'Using a computer to write' },
-            { src: '/images/1st-standard/computer-to-draw.png', alt: 'Using a computer to draw' },
-            { src: '/images/1st-standard/computer-to-play.png', alt: 'Playing games on a computer' },
-            { src: '/images/1st-standard/computer-to-watch.png', alt: 'Watching videos on a computer' },
+            { src: '/images/tools.png', alt: 'Using a computer to write' },
+            { src: '/images/school-bus.png', alt: 'Using a computer to draw' },
+            { src: '/images/mascot.png', alt: 'Playing games on a computer' },
+            { src: '/images/chair.png', alt: 'Talking with family on a computer' },
           ],
           audioSrc: '/audio/computer_uses.mp3',
           speakText: "Computers help us do many things: Type or write letters, stories, and poems. Draw colorful and beautiful paintings. Play fun games. Talk to family and friends who are far away. Listen to music and watch videos."
         },        {
           type: 'learn',
-          format: 'text',
+          format: 'type',
           title: 'Parts of a Computer',
           description: [
             "Just like our body has different parts that help us do different things, a computer also has different parts!",
@@ -738,7 +740,7 @@ export const standards: Standard = {
             "Smartphones are like small computers that fit in your pocket. They can do many things. For example: make phone calls, send messages and emails, take pictures, play games, listen to music, help people find their way with maps, search for information on the internet."
           ],
           "exampleImages": [
-            { "src": "/images/2nd-standard/communications.png", "alt": "Making phone calls" },
+            { "src": "/images/smartphone_calls.png", "alt": "Making phone calls" },
             { "src": "/images/smartphone_messages.png", "alt": "Sending messages" },
             { "src": "/images/smartphone_camera.png", "alt": "Taking pictures" },
             { "src": "/images/smartphone_games.png", "alt": "Playing games" },
@@ -1085,6 +1087,7 @@ export const standards: Standard = {
           "type": "learn",
           "format": "step-by-step",
           "title": "Line Tool",
+          "description": "Line tool",
           "steps": [
             {
               "id": "line-1",
@@ -1096,7 +1099,6 @@ export const standards: Standard = {
             {
               "id": "line-2",
               "number": 2,
-              "title": "Draw the line",
               "instruction": "Click on the drawing area where you want the line to start, drag it to where you want it to end, and release the mouse button.",
               "visualContent": { "src": "/images/vertical_line.png", "alt": "Vertical line" },
               "audioContent": "Draw the line by dragging and releasing the mouse button."
