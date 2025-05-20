@@ -1,6 +1,6 @@
-export type FormatType = 
+export type FormatType =
   | 'application'
-  | 'type' 
+  | 'type'
   | 'code'
   | 'component'
   | 'drag-drop'
@@ -77,16 +77,8 @@ export interface HistorySlide extends BaseContentProps {
   speakText?: string;
 }
 
-export interface StepByStepSlide extends BaseContentProps {
-  type: 'learn';
-  format: 'step-by-step';
-  title: string;
-  steps: Step[];
-  audioSrc?: string;
-  speakText?: string;
-}
+export type LessonContent = LearningSlide | DragDropSlide | QuizSlide | HistorySlide;
 
-export type LessonContent = LearningSlide | DragDropSlide | QuizSlide | HistorySlide | StepByStepSlide;
 
 export interface Chapter {
   id: number;
@@ -152,7 +144,7 @@ export const standards: Standard = {
           audioSrc: '/audio/03_manmade.mp3',
           speakText:
             'Man-made things are things that people build or create. Can you spot some things people made here? A yellow School Bus, a shiny Cycle, a comfy Chair, and a classroom Blackboard.',
-        },        {
+        }, {
           type: 'drag-drop',
           format: 'drag-drop',
           title: 'Activity: Sort Them Out!',
@@ -175,7 +167,7 @@ export const standards: Standard = {
             'Hoot hoot! Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
         },
       ],
-    },{
+    }, {
       id: 2,
       title: "All About Computers",
       lessonContent: [
@@ -212,7 +204,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/computer_uses.mp3',
           speakText: "Computers help us do many things: Type or write letters, stories, and poems. Draw colorful and beautiful paintings. Play fun games. Talk to family and friends who are far away. Listen to music and watch videos."
-        },        {
+        }, {
           type: 'learn',
           format: 'text',
           title: 'Parts of a Computer',
@@ -239,7 +231,7 @@ export const standards: Standard = {
             { id: 'dnd-item-1', text: 'Monitor', type: 'natural', imageUrl: '/images/sun.png' },
             { id: 'dnd-item-2', text: 'Keyboard', type: 'man-made', imageUrl: '/images/chair.png' },
             { id: 'dnd-item-3', text: 'Mouse', type: 'natural', imageUrl: '/images/bird.png' },
-            { id: 'dnd-item-4', text: 'CPU', type: 'man-made', imageUrl: '/images/cycle.png' },
+            { id: 'dnd-item-4', text: 'CPU', type: 'man-made', imageUrl: '/images/cycle.pxng' },
             { id: 'dnd-item-5', text: 'Speakers', type: 'natural', imageUrl: '/images/tree.png' },
           ],
           targets: [
@@ -249,7 +241,7 @@ export const standards: Standard = {
           audioSrc: '/audio/computer_activity.mp3',
           speakText:
             'Drag each computer part to the correct description box! Is it an input device or an output device?',
-        },        {
+        }, {
           type: 'learn',
           format: 'history',
           title: 'Story: The Magic of Computers',
@@ -275,7 +267,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/computer_facts.mp3',
           speakText: "Did you know? The first electronic computer, ENIAC, weighed more than 27 tons and took up the size of a small house! Modern computers can be as small as your pocket! Computers can do millions of calculations in just one second!"
-        },        {
+        }, {
           type: 'learn',
           format: 'text',
           title: 'Points to Remember',
@@ -293,7 +285,7 @@ export const standards: Standard = {
           speakText: "Points to remember: A computer is a machine that makes our work easy. A computer is called a supermachine. Computers help us write, draw, play games, talk to people, and listen to music. The main parts of a computer are the monitor, keyboard, mouse, CPU, and speakers."
         },
       ]
-    },    {
+    }, {
       id: 3,
       title: "Computer Care and Safety",
       lessonContent: [
@@ -367,7 +359,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/computer_habits.mp3',
           speakText: "Let's sort these habits into good habits and bad habits for computer care! Drag each item to the correct box."
-        },        {
+        }, {
           type: 'learn',
           format: 'step-by-step',
           title: 'How to Shut Down a Computer Properly',
@@ -386,7 +378,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/shutdown_computer.mp3',
           speakText: "One of the most important ways to take care of your computer is to shut it down properly. Here's how: Save your work first. Close all open programs. Click on the Start button at the bottom left of the screen. Click on Shut Down. Wait for the computer to turn off completely before switching off the power."
-        },        {
+        }, {
           type: 'learn',
           format: 'history',
           title: "Story: Leo's Computer Lesson",
@@ -414,7 +406,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/computer_care_facts.mp3',
           speakText: "Did you know? If you try to shut down your computer without closing your programs, the computer will ask if you still want to shut down. Shutting down your computer properly can make it last longer! Taking short breaks when using the computer is good for your eyes and body!"
-        },        {
+        }, {
           type: 'learn',
           format: 'text',
           title: 'Points to Remember',
@@ -431,7 +423,7 @@ export const standards: Standard = {
           speakText: "Points to remember: Sit up straight when using a computer. Take breaks every 30 minutes. Keep food and drinks away from computers. Clean the screen and keyboard with a soft cloth. Always shut down your computer properly. Use gentle hands when typing and using the mouse. Keep computers in cool, dust-free places."
         },
       ]
-    },    {
+    }, {
       id: 4,
       title: "Keyboard and Mouse Fun",
       lessonContent: [
@@ -515,7 +507,7 @@ export const standards: Standard = {
           imageUrl: '/images/mascot.png',
           audioSrc: '/audio/mouse_parts.mp3',
           speakText: "A mouse has different parts: Left Button is the main button used for clicking on things. Right Button is used for special menus and options. Scroll Wheel is the wheel in the middle that helps scroll up and down on pages. Mouse Body is the part you hold in your hand. Mouse Pointer is the arrow on the screen that moves when you move the mouse."
-        },        {
+        }, {
           type: 'learn',
           format: 'step-by-step',
           title: 'How to Hold a Mouse',
@@ -556,7 +548,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/match_parts.mp3',
           speakText: 'Drag each item to the correct category! Is it a part of the keyboard or a part of the mouse?'
-        },        {
+        }, {
           type: 'learn',
           format: 'history',
           title: 'Story: The Friendly Keyboard and Mouse',
@@ -586,7 +578,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/keyboard_mouse_facts.mp3',
           speakText: "Did you know? A standard keyboard has 104 keys! The arrangement of keys on a keyboard is called QWERTY, named after the first six letters on the top row. The computer mouse was invented by Douglas Engelbart in 1964. The mouse got its name because the cord coming out looked like a mouse's tail! On laptops, instead of a mouse, there's often a touchpad that works the same way."
-        },        {
+        }, {
           type: 'learn',
           format: 'text',
           title: 'Points to Remember',
@@ -605,7 +597,7 @@ export const standards: Standard = {
       ]
     }
   ],
-
+  
   "2": [
     {
       id: 1,
@@ -631,7 +623,7 @@ export const standards: Standard = {
             '🏢 Office: In offices, people use computers to write letters, send emails, and complete important tasks efficiently. Computers are also used in offices to maintain records and to store information.',
             '🏥 Hospital: Doctors use computers to store patient information. Some advanced computers also help operate machines used in medical procedures.',
             '🏠 Home:  We use computers at home to watch our favourite cartoons, play games, type letters, draw and colour, to learn, watch videos, listen to music, etc.',
-            '🏦 Bank:  Banks use computers to keep track of customer’s accounts and money. They also help with withdrawing cash from ATMs.'
+            '🏦 Bank:  Banks use computers to keep track of customer\'s accounts and money. They also help with withdrawing cash from ATMs.'
           ]
         },
         {
@@ -640,12 +632,12 @@ export const standards: Standard = {
           title: 'Activity: Sort the Places',
           instruction: 'Drag each place into the correct box: "Places where computers are used" or "Places where computers are not used".',
           items: [
-            { id: 'dnd-place-1', text: 'School', type: 'man-made'},
-            { id: 'dnd-place-3', text: 'Library', type: 'man-made'},
-            { id: 'dnd-place-4', text: 'Bank', type: 'man-made'},
-            { id: 'dnd-place-6', text: 'Playground', type: 'natural'},
-            { id: 'dnd-place-7', text: 'Forest', type: 'natural'},
-            { id: 'dnd-place-8', text: 'Beach', type: 'natural'}
+            { id: 'dnd-place-1', text: 'School', type: 'man-made' },
+            { id: 'dnd-place-3', text: 'Library', type: 'man-made' },
+            { id: 'dnd-place-4', text: 'Bank', type: 'man-made' },
+            { id: 'dnd-place-6', text: 'Playground', type: 'natural' },
+            { id: 'dnd-place-7', text: 'Forest', type: 'natural' },
+            { id: 'dnd-place-8', text: 'Beach', type: 'natural' }
           ],
           targets: [
             { id: 'manMadeTarget', title: 'Places where computers are used', type: 'man-made' },
@@ -1055,26 +1047,49 @@ export const standards: Standard = {
           "type": "learn",
           "format": "step-by-step",
           "title": "Line Tool",
-          "steps": [
-            {
-              "id": "line-1",
-              "number": 1,
-              "title": "Click on the 'Line' tool",
-              "instruction": "Click on the 'Line' tool.",
-              "visualContent": { "src": "/images/horizontal_line.png", "alt": "Horizontal line" },
-              "audioContent": "Click on the 'Line' tool."
-            },
-            {
-              "id": "line-2",
-              "number": 2,
-              "title": "Draw the line",
-              "instruction": "Click on the drawing area where you want the line to start, drag it to where you want it to end, and release the mouse button.",
-              "visualContent": { "src": "/images/vertical_line.png", "alt": "Vertical line" },
-              "audioContent": "Draw the line by dragging and releasing the mouse button."
-            }
+          "description": [
+            "In MS Paint, using a Line tool you can draw straight lines.",
+            "Step 1: Click on the 'Line' tool.",
+            "Step 2: Click on the drawing area where you want the line to start, drag it to where you want it to end, and release the mouse button."
+          ],
+          "exampleImages": [
+            { "src": "/images/horizontal_line.png", "alt": "Horizontal line" },
+            { "src": "/images/vertical_line.png", "alt": "Vertical line" },
+            { "src": "/images/slant_line.png", "alt": "Slant line" }
           ],
           "audioSrc": "/audio/ch4_line_tool.mp3",
           "speakText": "Use the Line tool to draw straight lines by clicking and dragging."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Curve Tool",
+          "description": [
+            "In MS Paint, using a Curve tool you can draw curved and wavy lines.",
+            "Step 1: Click on the 'Curve' tool.",
+            "Step 2: Draw a straight line first, then click and drag the line to make it curve."
+          ],
+          "exampleImages": [
+            { "src": "/images/curve_example.png", "alt": "Curved line" }
+          ],
+          "audioSrc": "/audio/ch4_curve_tool.mp3",
+          "speakText": "Use the Curve tool to make wavy lines by dragging a straight line."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Brushes Tool",
+          "description": [
+            "The Brushes tool in MS Paint lets you apply colour with various strokes and styles.",
+            "Step 1: Click on the Brushes tool to see the different options. Select the type of stroke you want.",
+            "Step 2: Drag the mouse pointer on the drawing area to draw.",
+            "Step 3: Try different Brushes to see what strokes they make."
+          ],
+          "exampleImages": [
+            { "src": "/images/brush_fish.png", "alt": "Fish drawn with Calligraphy pen" }
+          ],
+          "audioSrc": "/audio/ch4_brushes.mp3",
+          "speakText": "The Brushes tool lets you draw with different styles and colours."
         },
         {
           "type": "learn",
@@ -1087,6 +1102,21 @@ export const standards: Standard = {
           "imageUrl": "/images/flower_example.png",
           "audioSrc": "/audio/ch4_activity_flower.mp3",
           "speakText": "Draw a flower in MS Paint using the Circle, Line, Curve, and Brush tools."
+        },
+        {
+          "type": "learn",
+          "format": "step-by-step",
+          "title": "Add Words to Pictures",
+          "description": [
+            "Step 1: Open MS Paint and draw a picture (like the flower from the activity).",
+            "Step 2: Click the Text Tool (letter 'A') in the Ribbon.",
+            "Step 3: Click where you want to add words; a box will pop up.",
+            "Step 4: Type your words in the box.",
+            "Step 5: Click outside the box to fix the text.",
+            "Step 6: Save your picture by clicking 'File', then 'Save As', name it, and click 'Save'."
+          ],
+          "audioSrc": "/audio/ch4_text_tool.mp3",
+          "speakText": "Add words to your picture with the Text tool and save it."
         },
         {
           "type": "learn",
@@ -1193,6 +1223,57 @@ export const standards: Standard = {
           "audioSrc": "/audio/ch4_summary.mp3",
           "speakText": "Remember the tools like Line, Curve, Brushes, Undo, Redo, Eraser, and Save in MS Paint."
         },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation A: Multiple Choice",
+          "description": ["Answer the following questions by choosing the correct options."],
+          "question": "Choose the correct answer for each question.",
+          "options": [
+            { "id": "q1-opt1", "text": "1. Which tool would you use to draw a straight line in MS Paint? a. Brush tool b. Line tool c. Curve tool", "isCorrect": true },
+            { "id": "q1-opt2", "text": "2. What does the 'Undo' button do in MS Paint? a. It adds colours b. It fixes a mistake c. It makes your drawing bigger", "isCorrect": true },
+            { "id": "q1-opt3", "text": "3. What tool would you use to draw a curved line? a. Line tool b. Curve tool c. Eraser tool", "isCorrect": true },
+            { "id": "q1-opt4", "text": "4. What happens when you click the 'Redo' button? a. It erases b. It brings back the last action c. It adds text", "isCorrect": true },
+            { "id": "q1-opt5", "text": "5. Which tool would you choose to write your name? a. Eraser tool b. Line tool c. Text tool", "isCorrect": true }
+          ],
+          "explanation": "Line tool draws straight lines, Undo fixes mistakes, Curve tool makes curves, Redo brings back actions, and Text tool adds words.",
+          "audioSrc": "/audio/ch4_quiz_a.mp3",
+          "speakText": "Pick the right answers about MS Paint tools."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation B: True or False",
+          "description": ["State whether the following statements are True or False."],
+          "question": "Are these statements true or false?",
+          "options": [
+            { "id": "q2-opt1", "text": "1. You can use the Text tool to add colours to your picture.", "isCorrect": false },
+            { "id": "q2-opt2", "text": "2. The Brushes tool can make different strokes.", "isCorrect": true },
+            { "id": "q2-opt3", "text": "3. The Curve tool is used for adding text to your pictures.", "isCorrect": false },
+            { "id": "q2-opt4", "text": "4. To undo a mistake in MS Paint, you use the Redo button.", "isCorrect": false },
+            { "id": "q2-opt5", "text": "5. The Eraser tool in MS Paint can only remove entire drawings, not just parts.", "isCorrect": false }
+          ],
+          "explanation": "Text tool adds words, not colours; Brushes make strokes; Curve is for lines, not text; Undo fixes mistakes, not Redo; Eraser can remove parts.",
+          "audioSrc": "/audio/ch4_quiz_b.mp3",
+          "speakText": "Decide if these are true or false about MS Paint."
+        },
+        {
+          "type": "learn",
+          "format": "quiz",
+          "title": "Workstation C: Match Tools",
+          "description": ["Match the tools in column 'A' with their functions in column 'B'."],
+          "question": "Match each tool to its function.",
+          "options": [
+            { "id": "q3-opt1", "text": "1. Brushes - a. adds colours and different stroke styles", "isCorrect": true },
+            { "id": "q3-opt2", "text": "2. Line - b. draws straight lines", "isCorrect": true },
+            { "id": "q3-opt3", "text": "3. Eraser - c. fixes mistakes by erasing part of the drawing", "isCorrect": true },
+            { "id": "q3-opt4", "text": "4. Curve - d. draws curved and wavy lines", "isCorrect": true },
+            { "id": "q3-opt5", "text": "5. Text - e. adds text to the picture", "isCorrect": true }
+          ],
+          "explanation": "Brushes add styles, Line draws straight, Eraser fixes, Curve makes waves, Text adds words.",
+          "audioSrc": "/audio/ch4_quiz_c.mp3",
+          "speakText": "Match the MS Paint tools to what they do."
+        }
       ]
     }
   ]
