@@ -1938,7 +1938,7 @@ export const standards: Standard = {
         },
         {
           type: 'learn',
-          format: 'types',
+          format: 'type',
           title: 'Uses of the Internet',
           description: "The internet is very useful! Here are some ways we use it:",
           types: [
@@ -1981,7 +1981,7 @@ export const standards: Standard = {
         },
         {
           type: 'learn',
-          format: 'types',
+format: 'type',
           title: 'Browser Tools: Components of Web Browsers',
           description: "Web browsers have helpful buttons and boxes. Let's see what they do:",
           types: [
