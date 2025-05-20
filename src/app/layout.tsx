@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import Header from '@/components/layout/Header/Header'
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider';
 config.autoAddCss = false 
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800", "900"] }); 
@@ -31,29 +32,30 @@ export default function RootLayout({
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
   return (
     <html lang="en">
       <body className={nunito.className}>
-        {isMobile && (
-          <div className="mobile-block-overlay">
-            <div className="mobile-block-content">
-              <div style={{ width: '100%', maxWidth: 400, height: 200 }}>
-                <iframe 
-                  src="https://my.spline.design/genkubgreetingrobot-g9XhUJ4JKrYmgSia0lfFllkT/" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ display: 'block', width: '100%', height: '100%', border: 'none', background: 'transparent' }}
-                  allowFullScreen
-                  title="robot"
-                ></iframe>
+        <AnalyticsProvider>
+          {isMobile && (
+            <div className="mobile-block-overlay">
+              <div className="mobile-block-content">
+                <div style={{ width: '100%', maxWidth: 400, height: 200 }}>
+                  <iframe 
+                    src="https://my.spline.design/genkubgreetingrobot-g9XhUJ4JKrYmgSia0lfFllkT/" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ display: 'block', width: '100%', height: '100%', border: 'none', background: 'transparent' }}
+                    allowFullScreen
+                    title="robot"
+                  ></iframe>
+                </div>
+                <h2 style={{ marginTop: '2rem', color: '#1AA2FF', fontWeight: 900, fontSize: '2rem', textAlign: 'center' }}>Coming soon on mobile!<br/>Please check on a laptop or desktop.</h2>
               </div>
-              <h2 style={{ marginTop: '2rem', color: '#1AA2FF', fontWeight: 900, fontSize: '2rem', textAlign: 'center' }}>Coming soon on mobile!<br/>Please check on a laptop or desktop.</h2>
             </div>
-          </div>
-        )}
-        {!isMobile && !isQuizPage && <Header />}
-        {!isMobile && children}
+          )}
+          {!isMobile && !isQuizPage && <Header />}
+          {!isMobile && children}
+        </AnalyticsProvider>
       </body>
     </html>
   );

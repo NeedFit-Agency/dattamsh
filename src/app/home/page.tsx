@@ -14,8 +14,12 @@ import {
   faAward
 } from '@fortawesome/free-solid-svg-icons';
 import styles from './page.module.css';
+import { useAnalyticsContext } from '@/components/analytics/AnalyticsProvider';
 
 export default function HomePage() {
+  // Get analytics context
+  const analytics = useAnalyticsContext();
+  
   const Standards = [
     {
       id: "1",
@@ -145,10 +149,15 @@ export default function HomePage() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-              >
-                <Link 
+              >                <Link 
                   href={Standard.status === 'active' ? `/standard/${Standard.id}/chapter/1` : '#'} 
                   className={`${styles.standardLink} ${Standard.status === 'locked' ? styles.locked : ''}`}
+                  onClick={() => {
+                    if (Standard.status === 'active') {
+                      // Track standard selection
+                      analytics.trackStandardSelection(Standard.id);
+                    }
+                  }}
                 >
                   <div className={styles.standardContent}>
                     <div className={styles.standardHeader}>

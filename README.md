@@ -1,5 +1,27 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Binary Brains Educational Platform
+
+This educational platform is designed to teach computer education concepts with interactive lessons and quizzes.
+
+## Analytics Implementation
+
+The platform includes Firebase Analytics to collect anonymized usage data:
+
+- **Data Collected:**
+  - Grade level (standard) selected
+  - Game modules/chapters played
+  - Time spent on each lesson and quiz
+  - Error rates in quizzes
+  - Number of times modules are played
+  - Anonymous user count
+
+- **Privacy Compliance:**
+  - No personally identifiable information (PII) is collected
+  - All data is anonymized
+  - No user progress is tracked across sessions
+  - Complies with standard privacy regulations
+
 ## Getting Started
 
 First, run the development server:
@@ -12,6 +34,23 @@ yarn dev
 pnpm dev
 # or
 bun dev
+```
+
+### Firebase Analytics Setup
+
+1. Copy the `.env.example` file to `.env.local`
+2. Update the Firebase configuration values with your own Firebase project details
+3. The analytics will automatically initialize when the app runs
+
+```bash
+# Example .env.local configuration
+NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your-measurement-id
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

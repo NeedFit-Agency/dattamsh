@@ -7,6 +7,7 @@ import {
   faArrowLeft,
   faArrowRight,
 } from '@fortawesome/free-solid-svg-icons';
+import { useAnalyticsContext } from '@/components/analytics/AnalyticsProvider';
 
 import styles from './learning.module.css';
 import { standards } from '../../data/standardsData';
@@ -45,6 +46,10 @@ function LearningPageContent() {
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [hearts, setHearts] = useState(3);
   const router = useRouter();
+  // Import analytics context
+  const analytics = useAnalyticsContext();
+  // Track time spent on lesson
+  const [lessonStartTime, setLessonStartTime] = useState<number>(Date.now());
 
   const initialLessonContent = standards["2"][0].lessonContent;
   const [chapterContent, setChapterContent] = useState<LessonContent[]>(initialLessonContent);
@@ -65,7 +70,6 @@ function LearningPageContent() {
   const areAllItemsPlaced = useCallback(() => {
     return (dndState.sourceItems?.length || 0) === 0;
   }, [dndState.sourceItems]);
-
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -76,6 +80,12 @@ function LearningPageContent() {
     console.log("URL Parameters:", { standard: standardParam, chapter: chapterParam });
     setStandard(standardParam);
     setChapter(chapterParam);
+    
+    // Track chapter start using analytics
+    analytics.trackChapterStart(standardParam, chapterParam);
+    
+    // Reset lesson start time when chapter changes
+    setLessonStartTime(Date.now());
 
     let selectedContent: LessonContent[] = initialLessonContent;
     const standardChapters = standards[standardParam];
@@ -214,7 +224,6 @@ function LearningPageContent() {
       }
     }
   };
-
   const handleContinue = () => {
     if (!currentContent) return;
 
@@ -233,11 +242,21 @@ function LearningPageContent() {
          }
     }
 
+    // Calculate time spent on this lesson slide
+    const timeSpentMs = Date.now() - lessonStartTime;
+    
+    // Track current lesson view
+    analytics.trackLessonView(standard, chapter, currentSlideIndex);
+
     if (currentSlideIndex < totalSlides - 1) {
         setCurrentSlideIndex(currentSlideIndex + 1);
+        // Reset lesson start time for the next slide
+        setLessonStartTime(Date.now());
     }
     else {
         console.log("Lesson Finished! Redirecting to quiz page for Standard/Chapter:", standard, chapter);
+        // Track chapter completion before redirecting to quiz
+        analytics.trackChapterCompletion(standard, chapter, timeSpentMs);
         router.push(`/quiz?standard=${standard}&chapter=${chapter}`);
     }
   };

@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck, faTimes, faFire, faHeadphones, faX } from '@fortawesome/free-solid-svg-icons';
+import { useAnalyticsContext } from '@/components/analytics/AnalyticsProvider';
 import Link from 'next/link';
 import AnswerOption from '@/components/quiz/AnswerOption/AnswerOption';
 import LegendaryTrophy from '@/components/quiz/LegendaryTrophy/LegendaryTrophy';
@@ -25,6 +26,13 @@ function QuizPageContent() {
   const standardId = searchParams.get('standard') || '1';
   const lessonId = searchParams.get('chapter') || '1';
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
+  
+  // Get analytics context
+  const analytics = useAnalyticsContext();
+  
+  // Timing tracking
+  const [quizStartTime, setQuizStartTime] = useState<number>(Date.now());
+  const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now());
 
   // Quiz state
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -42,18 +50,24 @@ function QuizPageContent() {
   const chapterIndex = Number(lessonId) - 1;
   const chapter = quizzes[standardId]?.[chapterIndex];
   const chapterTitle = chapter?.title || `Chapter ${lessonId}`;
-
   // Load questions based on lessonId
   useEffect(() => {
     setTimeout(() => {
       const chapters = quizzes[standardId];
       if (chapters && chapters.length > 0) {
         setQuestions(chapters[chapterIndex].questions);
+        
+        // Track quiz start when questions are loaded
+        analytics.trackQuizStart(standardId, lessonId);
+        
+        // Reset timing trackers
+        setQuizStartTime(Date.now());
+        setQuestionStartTime(Date.now());
       } else {
         setQuestions([]);
       }
     }, 500);
-  }, [standardId, lessonId, chapterIndex]);
+  }, [standardId, lessonId, chapterIndex, analytics]);
 
   // Calculate percentage score
   const scorePercentage = questions.length > 0 
@@ -86,12 +100,25 @@ function QuizPageContent() {
     if (isGraded) return;
     setSelectedAnswerIndex(index);
   };
-
   const handleCheckAnswer = () => {
     if (selectedAnswerIndex === null) return;
+    
+    // Calculate time spent on this question
+    const timeSpentMs = Date.now() - questionStartTime;
+    
     const isAnswerCorrect = selectedAnswerIndex === currentQuestion?.correctAnswer;
     setIsCorrect(isAnswerCorrect);
     setIsGraded(true);
+    
+    // Track question answer
+    analytics.trackQuestionAnswer(
+      standardId,
+      lessonId, 
+      currentQuestionIndex, 
+      isAnswerCorrect, 
+      timeSpentMs
+    );
+    
     if (isAnswerCorrect) {
       setCorrectAnswers(prev => prev + 1);
       const audio = new Audio('/sounds/correct.mp3');
@@ -107,16 +134,31 @@ function QuizPageContent() {
       setStreak(0);
     }
   };
-
   const handleContinue = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setSelectedAnswerIndex(null);
         setIsGraded(false);
+        
+        // Reset question start time for the next question
+        setQuestionStartTime(Date.now());
       }, 300);
     } else {
       setCompleted(true);
+      
+      // Calculate total time spent on the quiz
+      const totalTimeSpentMs = Date.now() - quizStartTime;
+      
+      // Track quiz completion
+      analytics.trackQuizCompletion(
+        standardId,
+        lessonId,
+        correctAnswers,
+        questions.length,
+        totalTimeSpentMs
+      );
+      
       // Mark chapter as completed in localStorage
       if (typeof window !== 'undefined') {
         const completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '{}');
