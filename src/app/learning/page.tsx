@@ -46,7 +46,7 @@ function LearningPageContent() {
   const [hearts, setHearts] = useState(3);
   const router = useRouter();
 
-  const initialLessonContent = standards["1"][0].lessonContent;
+  const initialLessonContent = standards["2"][0].lessonContent;
   const [chapterContent, setChapterContent] = useState<LessonContent[]>(initialLessonContent);
   const [standard, setStandard] = useState<string>('1');
   const [chapter, setChapter] = useState<string>('1');
