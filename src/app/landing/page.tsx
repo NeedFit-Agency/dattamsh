@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faLaptopCode, 
   faRobot, 
-  faMicrochip, 
   faCode,
   faBrain,
   faGraduationCap,
@@ -24,7 +23,7 @@ import {
   faInstagram,
   faLinkedin
 } from '@fortawesome/free-brands-svg-icons';
-import styles from '../landing.module.css';
+import styles from './landing.module.css';
 
 export default function LandingPage() {
   const ref = useRef<HTMLDivElement>(null);
@@ -134,15 +133,16 @@ export default function LandingPage() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-          >            <div className={styles.laptopMockup}>
-              <Image 
-                src="/images/intro-scene.png" 
-                alt="Binary Brains Learning Platform" 
-                width={600}
-                height={400}
-                priority
-                style={{ borderRadius: "12px", boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)" }}
-              />
+          >
+            <div className={styles.splineFullHero}>
+              <iframe 
+                src="https://my.spline.design/genkubgreetingrobot-g9XhUJ4JKrYmgSia0lfFllkT/" 
+                width="100%" 
+                height="100%" 
+                style={{ display: 'block', width: '100%', height: '100%', border: 'none', background: 'transparent' }}
+                allowFullScreen
+                title="robot"
+              ></iframe>
             </div>
           </motion.div>
         </div>
@@ -241,7 +241,7 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            Don't just take our word for it. Hear from students who have experienced the Binary Brains difference.
+            Don&apos;t just take our word for it. Hear from students who have experienced the Binary Brains difference.
           </motion.p>
           
           <div className={styles.testimonialCards}>
@@ -257,12 +257,12 @@ export default function LandingPage() {
                 role: "5th Grade Student"
               },
               {
-                quote: "As a parent, I appreciate how the platform makes technology education accessible and engaging. My child's confidence with computers has improved tremendously.",
+                quote: "As a parent, I appreciate how the platform makes technology education accessible and engaging. My child&apos;s confidence with computers has improved tremendously.",
                 name: "Priya M.",
                 role: "Parent"
               },
               {
-                quote: "The curriculum aligns perfectly with our school standards. It's an excellent resource that supplements our classroom teaching.",
+                quote: "The curriculum aligns perfectly with our school standards. It&apos;s an excellent resource that supplements our classroom teaching.",
                 name: "Robert J.",
                 role: "Elementary School Teacher"
               }
@@ -275,7 +275,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 viewport={{ once: true, margin: "-50px" }}
               >
-                <p className={styles.testimonialQuote}>"{testimonial.quote}"</p>
+                <p className={styles.testimonialQuote}>&quot;{testimonial.quote}&quot;</p>
                 <div className={styles.testimonialAuthor}>
                   <div className={styles.testimonialAvatar}>
                     {testimonial.name.charAt(0)}

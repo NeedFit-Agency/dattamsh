@@ -6,9 +6,9 @@ import { faHeadphones, faArrowLeft, faArrowRight, faExpand, faTimes } from '@for
 import { motion, AnimatePresence } from 'framer-motion';
 import { ImageGalleryProps } from './types';
 import styles from '../../../learning/learning.module.css';
+import Image from 'next/image';
 
 export const ImageGallery: React.FC<ImageGalleryProps> = ({
-  title,
   description,
   images,
   audioSrc,
@@ -162,7 +162,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                 className={`${styles.thumbnail} ${index === currentImageIndex ? styles.activeThumbnail : ''}`}
                 onClick={() => handleThumbnailClick(index)}
               >
-                <img src={image.src} alt={`Thumbnail ${index + 1}`} />
+                <Image src={image.src} alt={`Thumbnail ${index + 1}`} width={100} height={100} />
               </div>
             ))}
           </div>
@@ -180,10 +180,12 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
             <FontAwesomeIcon icon={faTimes} />
           </button>
           
-          <img 
+          <Image 
             src={images[currentImageIndex].src} 
             alt={images[currentImageIndex].alt}
             className={styles.fullscreenImage}
+            width={1920}
+            height={1080}
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on image
           />
           

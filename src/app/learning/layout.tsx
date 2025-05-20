@@ -9,7 +9,6 @@ export default function LearningLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // This component applies base layout styles if needed
   return (
     <div className={styles.learningLayout}>
       {children}

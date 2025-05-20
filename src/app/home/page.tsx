@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +13,7 @@ import {
   faGraduationCap,
   faAward
 } from '@fortawesome/free-solid-svg-icons';
-import styles from '../page.module.css';
+import styles from './page.module.css';
 
 export default function HomePage() {
   const Standards = [
@@ -43,7 +42,7 @@ export default function HomePage() {
       id: "3",
       subtitle: "Intermediate Computer Education",
       title: "3rd Standard",
-      status: "locked",
+      status: "active",
       progress: "0/4 completed",
       units: "4 Chapters",
       icon: faMicrochip,
@@ -53,7 +52,7 @@ export default function HomePage() {
       id: "4",
       subtitle: "Expert Level",
       title: "4th Standard",
-      status: "locked",
+      status: "active",
       progress: "0/4 completed",
       units: "4 Chapters",
       icon: faRobot,
@@ -64,7 +63,7 @@ export default function HomePage() {
       id: "5",
       subtitle: "Advanced Computing",
       title: "5th Standard",
-      status: "locked",
+      status: "active",
       progress: "0/4 completed",
       units: "4 Chapters",
       icon: faCode,
@@ -74,7 +73,7 @@ export default function HomePage() {
       id: "6",
       subtitle: "Digital Literacy",
       title: "6th Standard",
-      status: "locked",
+      status: "active",
       progress: "0/4 completed",
       units: "4 Chapters",
       icon: faBrain,
@@ -84,7 +83,7 @@ export default function HomePage() {
       id: "7",
       subtitle: "Programming Fundamentals",
       title: "7th Standard",
-      status: "locked",
+      status: "active",
       progress: "0/4 completed",
       units: "4 Chapters",
       icon: faLaptopCode,
@@ -94,7 +93,7 @@ export default function HomePage() {
       id: "8",
       subtitle: "Computer Science Principles",
       title: "8th Standard",
-      status: "locked",
+      status: "active",
       progress: "0/4 completed",
       units: "4 Chapters",
       icon: faMicrochip,
@@ -126,18 +125,6 @@ export default function HomePage() {
             <FontAwesomeIcon icon={item.icon} />
           </motion.div>
         ))}
-
-        <motion.div 
-          className={styles.heroSection}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className={styles.heroTitle}>Begin Your Learning Journey</h2>
-          <p className={styles.heroSubtitle}>
-            Welcome to Binary Brains - Where Learning Computers Becomes an Adventure!
-          </p>
-        </motion.div>
         
         <div className={styles.standardsContainer}>
           <motion.div 

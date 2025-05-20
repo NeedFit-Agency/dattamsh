@@ -2,19 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphones, faArrowLeft, faArrowRight, faShield, faGem, faHeart, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Step, StepByStepProps } from './types';
+import { StepByStepProps } from './types';
 import styles from './stepbystep.module.css';
+import Image from 'next/image';
 
 const StepByStep: React.FC<StepByStepProps> = ({
   title,
   steps,
   initialStepIndex = 0,
   progress = 40,
-  hearts = 3,
-  gems = 234,
-  shields = 1,
   onComplete,
   onStepChange,
   onBack
@@ -39,7 +37,7 @@ const StepByStep: React.FC<StepByStepProps> = ({
     if (initialStepIndex !== currentStepIndex) {
       setCurrentStepIndex(initialStepIndex);
     }
-  }, [initialStepIndex]);
+  }, [initialStepIndex, currentStepIndex]);
 
   useEffect(() => {
     // Cleanup audio when component unmounts
@@ -161,9 +159,11 @@ const StepByStep: React.FC<StepByStepProps> = ({
                     typeof currentStep.visualContent === 'object' &&
                     'src' in currentStep.visualContent
                     ? (
-                      <img
+                      <Image
                         src={(currentStep.visualContent as { src: string }).src}
                         alt={('alt' in currentStep.visualContent ? (currentStep.visualContent as { alt?: string }).alt : '') || ''}
+                        width={200}
+                        height={200}
                         style={{ maxWidth: '100%', maxHeight: '200px' }}
                       />
                     )

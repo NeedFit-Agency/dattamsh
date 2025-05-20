@@ -79,10 +79,6 @@ export default function ChapterPage({
   };
 
   // Positioning Configuration
-  const itemSize = 80;
-  const verticalSpacing = 60;
-  const standardHeight = 700;
-
   const positions: { [key: number]: React.CSSProperties } = {
     1: {
       top: '50px',
