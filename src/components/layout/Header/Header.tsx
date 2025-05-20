@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.headerContent}>
-        <Link href="/home" className={styles.logoLink}>
+        <Link href="/landing" className={styles.logoLink}>
           <div className={styles.logo}>
             <div className={styles.logoIconWrapper}>
               <span className={styles.codeBracket}>{"<"}</span>
