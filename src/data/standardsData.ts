@@ -5,7 +5,6 @@ export type FormatType =
   | 'component'
   | 'drag-drop'
   | 'history'
-  | 'quiz'
   | 'step-by-step'
   | 'video'
   | 'text'
@@ -1406,45 +1405,7 @@ export const standards: Standard = {
             "Ÿ macOS versions are named after California locations (Yosemite, Big Sur)."
           ]
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: OS Basics',
-          description: ["Let's check your understanding of Operating Systems!"],
-          question: "What is the main function of an operating system (OS)?",
-          options: [
-            { id: 'c1q1opt1', text: "To create hardware", isCorrect: false, explanation: "Hardware is the physical parts; the OS manages them." },
-            { id: 'c1q1opt2', text: "To manage computer resources and make it user-friendly", isCorrect: true, explanation: "Correct! The OS is the 'boss' that manages everything and helps you use the computer." },
-            { id: 'c1q1opt3', text: "To make games", isCorrect: false, explanation: "Games are applications that run on an OS." },
-            { id: 'c1q1opt4', text: "To connect to the internet", isCorrect: false, explanation: "The OS helps manage network connections, but its main role is broader." }
-          ],
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: OS Types',
-          description: ["Which OS is primarily used on Apple's mobile devices like iPhones?"],
-          question: "Which operating system runs on Apple's iPhones and iPads?",
-          options: [
-            { id: 'c1q2opt1', text: "Android", isCorrect: false, explanation: "Android is used on many non-Apple smartphones and tablets." },
-            { id: 'c1q2opt2', text: "Windows", isCorrect: false, explanation: "Windows is mainly for desktop and laptop computers." },
-            { id: 'c1q2opt3', text: "iOS", isCorrect: true, explanation: "Correct! iOS is Apple's operating system for its mobile devices." },
-            { id: 'c1q2opt4', text: "Linux", isCorrect: false, explanation: "Linux is more common on servers and for specialized computer users." }
-          ],
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: OS Components',
-          description: ["What is the 'brain' of the operating system called?"],
-          question: "Which component of the OS directly interacts with the computer's hardware and manages core tasks?",
-          options: [
-            { id: 'c1q3opt1', text: "User Interface", isCorrect: false, explanation: "The User Interface is how you interact with the OS, not its core brain." },
-            { id: 'c1q3opt2', text: "Device Driver", isCorrect: false, explanation: "Device drivers help the OS talk to specific hardware parts." },
-            { id: 'c1q3opt3', text: "Kernel", isCorrect: true, explanation: "Correct! The Kernel is the central part of the OS, managing hardware and software." },
-            { id: 'c1q3opt4', text: "System Utility", isCorrect: false, explanation: "System Utilities are tools for maintenance, not the core brain." }
-          ],
-        }
+        
       ]
     },
     {
@@ -1593,45 +1554,7 @@ export const standards: Standard = {
             "Ÿ The Windows logo has changed 11 times since 1985."
           ]
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Windows Basics',
-          description: ["Let's check your understanding of Windows!"],
-          question: "What is the primary purpose of an operating system like Windows?",
-          options: [
-            { id: 'c2q1opt1', text: "To increase the speed of the internet", isCorrect: false, explanation: "Internet speed depends on your connection, not just the OS." },
-            { id: 'c2q1opt2', text: "To help manage all parts of a computer and make it user-friendly", isCorrect: true, explanation: "Correct! Windows manages hardware and software, providing an easy way to use the computer." },
-            { id: 'c2q1opt3', text: "To prevent the computer from turning off", isCorrect: false, explanation: "The OS manages power, but its main purpose is broader." },
-            { id: 'c2q1opt4', text: "To store all programs", isCorrect: false, explanation: "Programs are stored on the hard drive; the OS helps run them." }
-          ],
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Windows Features',
-          description: ["What icon on the Windows Desktop is used to access all your files, folders, and storage devices?"],
-          question: "Which Windows feature is like a digital office desk, showing frequently used files and application shortcuts?",
-          options: [
-            { id: 'c2q2opt1', text: "Recycle Bin", isCorrect: false, explanation: "The Recycle Bin stores deleted files." },
-            { id: 'c2q2opt2', text: "Desktop", isCorrect: true, explanation: "Correct! The Desktop is your main workspace on Windows." },
-            { id: 'c2q2opt3', text: "Settings", isCorrect: false, explanation: "Settings is for configuring the system." },
-            { id: 'c2q2opt4', text: "This PC", isCorrect: false, explanation: "'This PC' lets you browse storage, but the Desktop is the main visual workspace." }
-          ],
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: CPU Speed',
-          description: ["What unit is used to measure the speed of a CPU?"],
-          question: "The speed of a CPU (Central Processing Unit) is measured in:",
-          options: [
-            { id: 'c2q3opt1', text: "Megabytes (MB)", isCorrect: false, explanation: "Megabytes measure storage capacity or file size." },
-            { id: 'c2q3opt2', text: "Gigahertz (GHz)", isCorrect: true, explanation: "Correct! Gigahertz measures the number of instructions a CPU can process per second." },
-            { id: 'c2q3opt3', text: "Kilowatts (kW)", isCorrect: false, explanation: "Kilowatts measure power." },
-            { id: 'c2q3opt4', text: "Pixels per inch (PPI)", isCorrect: false, explanation: "PPI measures screen resolution." }
-          ],
-        }
+       
       ]
     },
     {
@@ -1783,45 +1706,7 @@ export const standards: Standard = {
             "Ÿ PDFs are common for school notes because they look the same on any device."
           ]
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: File Types Basics',
-          description: ["Let's test your knowledge of file types!"],
-          question: "Which file type is commonly used for storing written documents that you create in Microsoft Word?",
-          options: [
-            { id: 'c3q1opt1', text: ".jpg", isCorrect: false, explanation: ".jpg is for images." },
-            { id: 'c3q1opt2', text: ".mp3", isCorrect: false, explanation: ".mp3 is for audio music files." },
-            { id: 'c3q1opt3', text: ".docx", isCorrect: true, explanation: "Correct! .docx is the file extension for Microsoft Word documents." },
-            { id: 'c3q1opt4', text: ".mp4", isCorrect: false, explanation: ".mp4 is for video files." }
-          ],
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: File Extensions',
-          description: ["What does a file extension like '.zip' usually indicate?"],
-          question: "If you see a file ending with '.zip', what kind of file is it most likely?",
-          options: [
-            { id: 'c3q2opt1', text: "An audio file", isCorrect: false, explanation: "Audio files usually have extensions like .mp3 or .wav." },
-            { id: 'c3q2opt2', text: "A video file", isCorrect: false, explanation: "Video files often end in .mp4 or .avi." },
-            { id: 'c3q2opt3', text: "A compressed file", isCorrect: true, explanation: "Correct! .zip indicates a compressed file containing one or more other files." },
-            { id: 'c3q2opt4', text: "A plain text file", isCorrect: false, explanation: "Plain text files usually end in .txt." }
-          ],
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Converting Files',
-          description: ["Why might you convert a file from a PNG image to a JPEG image?"],
-          question: "One common reason to convert a PNG image file to a JPEG image file is:",
-          options: [
-            { id: 'c3q3opt1', text: "To make the image quality much better", isCorrect: false, explanation: "JPEG is a lossy compression, so quality might slightly decrease, not improve significantly over PNG in all cases." },
-            { id: 'c3q3opt2', text: "To add animation to the image", isCorrect: false, explanation: "Neither PNG nor JPEG typically support animation; .gif is used for that." },
-            { id: 'c3q3opt3', text: "To save space, as JPEGs are often smaller than PNGs", isCorrect: true, explanation: "Correct! JPEGs often have smaller file sizes than PNGs for photographic images, which saves space." },
-            { id: 'c3q3opt4', text: "To be able to edit the image in Microsoft Word", isCorrect: false, explanation: "Both PNG and JPEG can be inserted into Word, but conversion isn't primarily for editing capability in Word." }
-          ],
-        }
+        
       ]
     },
     {
@@ -2032,45 +1917,7 @@ export const standards: Standard = {
             "Ÿ The longest Word document ever created had over 100,000 pages."
           ]
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Insert Tab',
-          description: ["Let's test your knowledge of Word's Insert Tab!"],
-          question: "Which group in the 'Insert' tab would you use to add a pre-designed diagram like a cycle or a process list?",
-          options: [
-            { id: 'c4q1opt1', text: "Tables", isCorrect: false, explanation: "The Tables group is for creating rows and columns of data." },
-            { id: 'c4q1opt2', text: "Illustrations (specifically SmartArt)", isCorrect: true, explanation: "Correct! SmartArt, found in the Illustrations group, is used for such diagrams." },
-            { id: 'c4q1opt3', text: "Header & Footer", isCorrect: false, explanation: "Header & Footer is for adding content to the top/bottom of pages." },
-            { id: 'c4q1opt4', text: "Text", isCorrect: false, explanation: "The Text group includes Text Boxes, WordArt, etc., but SmartArt is for diagrams." }
-          ],
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Table Features',
-          description: ["What is the purpose of the 'Merge Cells' feature in the Table Layout tab?"],
-          question: "If you want to combine several cells in a table into one single, larger cell, which feature would you use?",
-          options: [
-            { id: 'c4q2opt1', text: "Split Cells", isCorrect: false, explanation: "Split Cells divides one cell into multiple smaller cells." },
-            { id: 'c4q2opt2', text: "Table Styles", isCorrect: false, explanation: "Table Styles changes the visual appearance (colors, borders) of the table." },
-            { id: 'c4q2opt3', text: "Merge Cells", isCorrect: true, explanation: "Correct! Merge Cells combines selected cells into one." },
-            { id: 'c4q2opt4', text: "Insert Row", isCorrect: false, explanation: "Insert Row adds a new row to the table." }
-          ],
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Document Elements',
-          description: ["Where would you typically add a page number that appears on every page?"],
-          question: "If you want text like 'Page 1', 'Page 2' to appear automatically on each page, where would you insert it?",
-          options: [
-            { id: 'c4q3opt1', text: "As a Watermark", isCorrect: false, explanation: "A watermark is a faint background image or text." },
-            { id: 'c4q3opt2', text: "In the Header or Footer using Page Number option", isCorrect: true, explanation: "Correct! Page numbers are typically placed in the Header or Footer." },
-            { id: 'c4q3opt3', text: "Using SmartArt", isCorrect: false, explanation: "SmartArt is for creating diagrams." },
-            { id: 'c4q3opt4', text: "In a Text Box in the middle of the page", isCorrect: false, explanation: "While possible, this wouldn't automatically repeat on every page or update correctly." }
-          ],
-        }
+        
       ]
     }
   ],
@@ -2245,48 +2092,7 @@ export const standards: Standard = {
             "Ÿ The first ever website was made in 1991 and it is still working. Its name is info.cern.ch."
           ]
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Online Tasks',
-          description: ["Let's check your understanding!"],
-          question: "Which of these tasks is commonly done online using the internet?",
-          options: [
-            { id: 'c1q1opt1', text: "Drawing a picture in a physical book", isCorrect: false, explanation: "Drawing in a physical book does not require the internet." },
-            { id: 'c1q1opt2', text: "Watching videos on YouTube", isCorrect: true, explanation: "Correct! YouTube is a website where you can watch videos online." },
-            { id: 'c1q1opt3', text: "Planting a tree in your garden", isCorrect: false, explanation: "Planting a tree is a physical activity done outdoors." },
-            { id: 'c1q1opt4', text: "Riding a bicycle", isCorrect: false, explanation: "Riding a bicycle is a physical activity." }
-          ],
-          explanation: "The internet allows us to do many things like watching videos, shopping, and sending emails."
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Web Browsers',
-          description: ["Test your knowledge about web browsers!"],
-          question: "Which of the following is a popular web browser?",
-          options: [
-            { id: 'c1q2opt1', text: "Microsoft Word", isCorrect: false, explanation: "Microsoft Word is a word processor, not a web browser." },
-            { id: 'c1q2opt2', text: "Google Chrome", isCorrect: true, explanation: "Correct! Google Chrome is a widely used web browser." },
-            { id: 'c1q2opt3', text: "Notepad", isCorrect: false, explanation: "Notepad is a simple text editor." },
-            { id: 'c1q2opt4', text: "Calculator", isCorrect: false, explanation: "A calculator is used for calculations." }
-          ],
-          explanation: "Web browsers like Google Chrome, Firefox, and Safari help us visit websites on the internet."
-        },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Online Safety',
-          description: ["What should you do to stay safe online?"],
-          question: "If a website asks for your home address to win a free gift, what should you do?",
-          options: [
-            { id: 'c1q3opt1', text: "Enter your address quickly to get the gift.", isCorrect: false, explanation: "Never share personal information like your address for online gifts without asking a trusted adult." },
-            { id: 'c1q3opt2', text: "Ask your parents or a trusted adult before doing anything.", isCorrect: true, explanation: "Correct! Always ask a trusted adult if you are unsure or if a website asks for personal information." },
-            { id: 'c1q3opt3', text: "Make up an address and enter it.", isCorrect: false, explanation: "It's best not to interact with such requests and to inform an adult." },
-            { id: 'c1q3opt4', text: "Close the website and tell no one.", isCorrect: false, explanation: "You should close it, but also tell a parent or trusted adult about it." }
-          ],
-          explanation: "It's important to be very careful about sharing personal information online. Always ask a trusted adult for help."
-        }
+       
       ]
     },
     {
@@ -2384,23 +2190,7 @@ export const standards: Standard = {
             "Ÿ Always follow email etiquette: be clear, polite, and respectful."
           ]
         },
-        {
-          type: 'learn',
-          format: 'quiz',
-          title: 'Quiz: Email Basics',
-          description: ["Let's test your knowledge about emails!"],
-          question: "What do you need to send an email?",
-          options: [
-            { id: 'email_q1_opt1', text: "A device and internet connection", isCorrect: true, explanation: "Correct! You need a device and internet connection to send an email." },
-            { id: 'email_q1_opt2', text: "A phone number", isCorrect: false, explanation: "You don't need a phone number to send an email." },
-            { id: 'email_q1_opt3', text: "A postal address", isCorrect: false, explanation: "You don't need a postal address to send an email." },
-            { id: 'email_q1_opt4', text: "All of the above", isCorrect: false, explanation: "You only need a device and internet connection." }
-          ],
-          explanation: "To send an email, you need a device like a phone or computer, and an internet connection. You don't need a phone number or postal address.",
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/quiz_email_basics.mp3',
-          speakText: "Let's test your knowledge about emails! What do you need to send an email?"
-        }
+      
       ]
     },
     {
