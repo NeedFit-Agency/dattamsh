@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphones, faArrowLeft, faArrowRight, faShield, faGem, faHeart, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 import styles from './history.module.css';
 import Image from 'next/image';
@@ -33,9 +33,6 @@ const History: React.FC<HistoryProps> = ({
   subtitle,
   items,
   progress = 60,
-  hearts = 3,
-  gems = 234,
-  shields = 1,
   audioContent,
   onComplete,
   onBack
@@ -52,12 +49,6 @@ const History: React.FC<HistoryProps> = ({
   const handlePrevious = () => {
     if (onBack) {
       onBack();
-    }
-  };
-
-  const handleContinue = () => {
-    if (onComplete) {
-      onComplete();
     }
   };
 
@@ -95,23 +86,6 @@ const History: React.FC<HistoryProps> = ({
 
   return (
     <div className={styles.mainContainer}>
-      {/* Header */}
-      <div className={styles.appHeader}>
-        <div className={styles.appName}>&lt;/&gt; Learning History</div>
-        <div className={styles.userStats}>
-          <div className={styles.statItem}>
-            <FontAwesomeIcon icon={faShield} className={styles.iconPlaceholder} /> {shields}
-          </div>
-          <div className={styles.statItem}>
-            <FontAwesomeIcon icon={faGem} className={styles.iconPlaceholder} /> {gems}
-          </div>
-          <div className={`${styles.statItem} ${styles.hearts}`}>
-            <FontAwesomeIcon icon={faHeart} /> {hearts}
-          </div>
-          <FontAwesomeIcon icon={faCog} className={styles.settingsIcon} />
-        </div>
-      </div>
-
       {/* Content */}
       <div className={styles.contentWrapper}>
         <div className={styles.navigationHeader}>
@@ -170,22 +144,6 @@ const History: React.FC<HistoryProps> = ({
             </div>
           )}
         </div>
-      </div>
-
-      {/* Footer Navigation */}
-      <div className={styles.footerNav}>
-        <button 
-          className={`${styles.navButton} ${styles.navButtonPrevious}`} 
-          onClick={handlePrevious}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} /> Previous
-        </button>
-        <button 
-          className={`${styles.navButton} ${styles.navButtonContinue}`} 
-          onClick={handleContinue}
-        >
-          Continue <FontAwesomeIcon icon={faArrowRight} />
-        </button>
       </div>
     </div>
   );

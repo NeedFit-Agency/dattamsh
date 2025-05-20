@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -11,90 +11,11 @@ import {
 import styles from './learning.module.css';
 import { standards } from '../../data/standardsData';
 import ContentRenderer from '../../components/learning/ContentRenderer';
-
-
-export const formatContentWithEmojis = (text: string): React.ReactNode => {
-  const hasEmojis = /[\p{Emoji}]/u.test(text);
-
-  if (hasEmojis) {
-    const parts = text.split(/(\p{Emoji}+)/u);
-    return parts.map((part, index) => {
-      if (/[\p{Emoji}]/u.test(part)) {
-        return (
-          <span
-            key={index}
-            className="emoji"
-            style={{
-              fontSize: '1.4em',
-              verticalAlign: 'middle',
-              display: 'inline-block',
-              margin: '0 2px',
-            }}
-          >
-            {part}
-          </span>
-        );
-      }
-      return part;
-    });
-  }
-
-  if (/^\s*(\d+[\.\)]|[•\-\*])\s+/.test(text)) {
-    return <strong style={{ fontWeight: 600 }}>{text}</strong>;
-  }
-
-  return text;
-};
-
+import type { DraggableItemData, LessonContent } from '../../data/standardsData';
 
 export interface ExampleImage {
   src: string;
   alt: string;
-}
-
-interface LearningSlide {
-  type: 'learn';
-  title: string;
-  description: string | string[];
-  imageUrl?: string;
-  exampleImages?: { src: string; alt: string }[];
-  audioSrc?: string;
-  speakText?: string;
-}
-
-interface DraggableItemData {
-  id: string;
-  text: string;
-  type: 'natural' | 'man-made';
-  imageUrl?: string;
-}
-
-interface DropTargetData {
-  id: 'naturalTarget' | 'manMadeTarget';
-  title: string;
-  type: 'natural' | 'man-made';
-}
-
-interface DragDropSlide {
-  type: 'drag-drop';
-  title: string;
-  instruction: string;
-  items: DraggableItemData[];
-  targets: DropTargetData[];
-  audioSrc?: string;
-  speakText?: string;
-}
-
-type LessonContent = LearningSlide | DragDropSlide;
-
-interface Chapter {
-  id: number;
-  title: string;
-  lessonContent: LessonContent[];
-}
-
-interface Standard {
-  [key: string]: Chapter[];
 }
 
 const createConfetti = () => {
@@ -111,6 +32,14 @@ const createConfetti = () => {
 };
 
 export default function LearningPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LearningPageContent />
+    </Suspense>
+  );
+}
+
+function LearningPageContent() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
@@ -193,11 +122,15 @@ export default function LearningPage() {
     if (!chapterContent || chapterContent.length === 0) return;
 
     chapterContent.forEach(slide => {
-      if (slide.type === 'learn') {
-        if (slide.imageUrl) { const img = new Image(); img.src = slide.imageUrl; }
-        slide.exampleImages?.forEach(imgData => { const img = new Image(); img.src = imgData.src; });
-      } else if (slide.type === 'drag-drop') {
-        slide.items?.forEach(item => { if (item.imageUrl) { const img = new Image(); img.src = item.imageUrl; }});
+      if ('imageUrl' in slide && slide.imageUrl) {
+        const img = new Image();
+        img.src = slide.imageUrl;
+      }
+      if ('exampleImages' in slide && slide.exampleImages) {
+        slide.exampleImages.forEach((imgData: { src: string }) => {
+          const img = new Image();
+          img.src = imgData.src;
+        });
       }
     });
   }, [chapterContent]);
@@ -231,22 +164,19 @@ export default function LearningPage() {
   const checkDragDrop = () => {
     if (!currentContent || currentContent.type !== 'drag-drop') return;
 
-    let correctCount = 0;
     let incorrectCount = 0;
     const newCorrectnessMap: { [itemId: string]: boolean } = {};
 
     dndState.naturalTarget?.forEach(item => {
       const isCorrect = item.type === 'natural';
       newCorrectnessMap[item.id] = isCorrect;
-      if(isCorrect) correctCount++;
-      else incorrectCount++;
+      if(!isCorrect) incorrectCount++;
     });
 
     dndState.manMadeTarget?.forEach(item => {
       const isCorrect = item.type === 'man-made';
       newCorrectnessMap[item.id] = isCorrect;
-      if(isCorrect) correctCount++;
-      else incorrectCount++;
+      if(!isCorrect) incorrectCount++;
     });
 
     setItemCorrectness(newCorrectnessMap);
@@ -256,12 +186,12 @@ export default function LearningPage() {
     const allItemsPlaced = areAllItemsPlaced();
 
     if (totalPlacedInTargets === 0) {
-      setDndFeedback("Drag the items into the boxes first!");
+      // setDndFeedback("Drag the items into the boxes first!");
     } else if (!allItemsPlaced) {
-      setDndFeedback(`Keep going! Drag all the items. ${correctCount} placed correctly so far.`);
+      // setDndFeedback(`Keep going! Drag all the items. ${correctCount} placed correctly so far.`);
     } else {
       if (incorrectCount === 0) {
-        setDndFeedback("Great job! All items are in the correct boxes!");
+        // setDndFeedback("Great job! All items are in the correct boxes!");
         const confettiContainer = document.createElement('div');
         confettiContainer.className = styles.confettiContainer;
         document.body.appendChild(confettiContainer);
@@ -279,7 +209,7 @@ export default function LearningPage() {
         }, 5000);
 
       } else {
-        setDndFeedback(`Nice try! ${correctCount} correct, ${incorrectCount} incorrect. Look closely!`);
+        // setDndFeedback(`Nice try! ${correctCount} correct, ${incorrectCount} incorrect. Look closely!`);
         setHearts(prev => Math.max(0, prev - 1));
       }
     }
@@ -298,7 +228,7 @@ export default function LearningPage() {
 
          if (hearts <= 0 && anyIncorrect && allPlaced) {
              console.log("Out of hearts / Failed DND - Cannot continue");
-             setDndFeedback("Oops! You're out of hearts. Try reviewing the items again or move to the next lesson.");
+             // setDndFeedback("Oops! You're out of hearts. Try reviewing the items again or move to the next lesson.");
              return;
          }
     }

@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +13,7 @@ import {
   faGraduationCap,
   faAward
 } from '@fortawesome/free-solid-svg-icons';
-import styles from '../page.module.css';
+import styles from './page.module.css';
 
 export default function HomePage() {
   const Standards = [
@@ -126,18 +125,6 @@ export default function HomePage() {
             <FontAwesomeIcon icon={item.icon} />
           </motion.div>
         ))}
-
-        <motion.div 
-          className={styles.heroSection}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className={styles.heroTitle}>Begin Your Learning Journey</h2>
-          <p className={styles.heroSubtitle}>
-            Welcome to Binary Brains - Where Learning Computers Becomes an Adventure!
-          </p>
-        </motion.div>
         
         <div className={styles.standardsContainer}>
           <motion.div 
