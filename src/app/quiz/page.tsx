@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,11 +8,19 @@ import { faStar, faCheck, faTimes, faFire, faHeadphones, faX } from '@fortawesom
 import Link from 'next/link';
 import AnswerOption from '@/components/quiz/AnswerOption/AnswerOption';
 import LegendaryTrophy from '@/components/quiz/LegendaryTrophy/LegendaryTrophy';
-import { quizzes } from '@/data/quizeData';
+import { quizzes, type Question } from '@/data/quizeData';
 import styles from './QuizPage.module.css';
 import Image from 'next/image';
 
 export default function QuizPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <QuizPageContent />
+    </Suspense>
+  );
+}
+
+function QuizPageContent() {
   const searchParams = useSearchParams();
   const standardId = searchParams.get('standard') || '1';
   const lessonId = searchParams.get('chapter') || '1';
@@ -24,7 +32,7 @@ export default function QuizPage() {
   const [isGraded, setIsGraded] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [completed, setCompleted] = useState(false);
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [streak, setStreak] = useState(0);
   const [showStars, setShowStars] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -45,7 +53,7 @@ export default function QuizPage() {
         setQuestions([]);
       }
     }, 500);
-  }, [standardId, lessonId]);
+  }, [standardId, lessonId, chapterIndex]);
 
   // Calculate percentage score
   const scorePercentage = questions.length > 0 
@@ -145,7 +153,7 @@ export default function QuizPage() {
             transition={{ delay: 0.5 }}
           />
         </div>
-        <p className={styles.completionText}>You've completed this lesson.</p>
+        <p className={styles.completionText}>You&apos;ve completed this lesson.</p>
         <div className={styles.scorePercentage}>
           <span className={styles.scoreValue}>{scorePercentage}%</span>
           <span className={styles.scoreLabel}>Accuracy</span>
@@ -288,7 +296,7 @@ export default function QuizPage() {
                     <h3>{isCorrect ? "Great job!" : "Not quite."}</h3>
                     <p>
                       {isCorrect 
-                        ? "That's correct!" 
+                        ? "That&apos;s correct!" 
                         : <>
                             The correct answer is <span className={styles.correctAnswer}>
                               {currentQuestion.options[currentQuestion.correctAnswer]}
