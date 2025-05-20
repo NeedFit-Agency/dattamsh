@@ -331,7 +331,7 @@ export default function LandingPage() {
             <div className={styles.footerColumn}>
               <h4>Platform</h4>
               <ul className={styles.footerLinks}>
-                <li><Link href="/">Home</Link></li>
+                <li><Link href="/home">Home</Link></li>
                 <li><Link href="#features">Features</Link></li>
                 <li><Link href="#testimonials">Testimonials</Link></li>
                 <li><Link href="#about">About Us</Link></li>

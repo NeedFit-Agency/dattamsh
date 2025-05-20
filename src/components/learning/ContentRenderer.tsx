@@ -160,11 +160,23 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
       );
     }
     case 'step-by-step': {
-      const stepContent = content as import('../../data/standardsData').StepByStepSlide;
-      const steps = stepContent.steps.map(step => ({
-        ...step,
-        visualContent: typeof step.visualContent === 'string' ? step.visualContent : ''
-      }));
+      const stepContent = content as any;
+      const steps = Array.isArray(stepContent.steps)
+        ? stepContent.steps.map((step: any) => ({
+            ...step,
+            visualContent: typeof step.visualContent === 'string' ? step.visualContent : ''
+          }))
+        : [
+            {
+              id: "1",
+              number: 1,
+              title: stepContent.title,
+              instruction: Array.isArray(stepContent.description)
+                ? stepContent.description[0]
+                : stepContent.description,
+              visualContent: typeof stepContent.visualContent === 'string' ? stepContent.visualContent : ''
+            }
+          ];
       return (
         <StepByStep
           title={stepContent.title}

@@ -77,7 +77,17 @@ export interface HistorySlide extends BaseContentProps {
   speakText?: string;
 }
 
-export type LessonContent = LearningSlide | DragDropSlide | QuizSlide | HistorySlide;
+export interface StepByStepSlide extends BaseContentProps {
+  type: 'learn';
+  format: 'step-by-step';
+  title: string;
+  steps: Step[];
+  exampleImages?: { src: string; alt?: string }[];
+  audioSrc?: string;
+  speakText?: string;
+}
+
+export type LessonContent = LearningSlide | DragDropSlide | QuizSlide | HistorySlide | StepByStepSlide;
 
 
 export interface Chapter {
@@ -359,7 +369,8 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/computer_habits.mp3',
           speakText: "Let's sort these habits into good habits and bad habits for computer care! Drag each item to the correct box."
-        }, {
+        }, 
+        {
           type: 'learn',
           format: 'step-by-step',
           title: 'How to Shut Down a Computer Properly',
@@ -892,9 +903,35 @@ export const standards: Standard = {
           "type": "learn",
           "format": "step-by-step",
           "title": "Open Notepad",
-          "description": [
-            "Step 1: Go to the search bar in the Start icon on your computer.",
-            "Step 2: Search for Notepad. The icon looks like a small white paper Notepad. Click on it to Open."
+          "steps": [
+            {
+              "id": "1",
+              "number": 1,
+              "title": "Go to the Start Menu",
+              "instruction": "Go to the search bar in the Start icon on your computer.",
+              "visualContent": "/images/search_notepad.png"
+            },
+            {
+              "id": "2",
+              "number": 2,
+              "title": "Search for Notepad",
+              "instruction": "Search for Notepad. The icon looks like a small white paper Notepad. Click on it to Open.",
+              "visualContent": "/images/notepad_icon.png"
+            },
+            {
+              "id": "3",
+              "number": 3,
+              "title": "Pin Notepad to Taskbar (Optional)",
+              "instruction": "Right-click the Notepad icon and select 'Pin to taskbar' for quick access.",
+              "visualContent": ""
+            },
+            {
+              "id": "4",
+              "number": 4,
+              "title": "Open Notepad",
+              "instruction": "Click the Notepad icon to open the application.",
+              "visualContent": ""
+            }
           ],
           "exampleImages": [
             { "src": "/images/search_notepad.png", "alt": "Searching for Notepad" },
@@ -921,9 +958,21 @@ export const standards: Standard = {
           "type": "learn",
           "format": "step-by-step",
           "title": "Practice Typing",
-          "description": [
-            "Step 1: Use the keyboard to type your name. Press the Enter key to start typing on a new line.",
-            "Step 2: Type the names of 4 to 5 of your classmates."
+          "steps": [
+            {
+              "id": "1",
+              "number": 1,
+              "title": "Type Your Name",
+              "instruction": "Use the keyboard to type your name. Press the Enter key to start typing on a new line.",
+              "visualContent": ""
+            },
+            {
+              "id": "2",
+              "number": 2,
+              "title": "Type Classmates' Names",
+              "instruction": "Type the names of 4 to 5 of your classmates.",
+              "visualContent": ""
+            }
           ],
           "audioSrc": "/audio/ch3_typing_practice.mp3",
           "speakText": "Type your name and your friends' names in Notepad using the keyboard."
@@ -966,9 +1015,39 @@ export const standards: Standard = {
           "description": [
             "Saketh is a little boy who loves to write stories. One day, his teacher showed him Notepad on the computer. 'You can type your stories here!' she said. Saketh typed a story about his dog Ruby. When he finished, he saved it as 'RubyAdventure' and felt proud. He loves Notepad because it keeps his stories neat and safe."
           ],
-          "imageUrl": "/images/saketh_notepad.png",
-          "audioSrc": "/audio/ch3_caselet.mp3",
-          "speakText": "Saketh used Notepad to write and save a story about his dog Ruby."
+          "items": [
+            {
+              "id": "1",
+              "title": "Ravi loves games",
+              "description": "Ravi spent hours playing games on his parent's phone.",
+              "visualIcon": "/story/scenerio-img1.png",
+              "position": "left"
+            },
+            {
+              "id": "2",
+              "title": "Trip to the park",
+              "description": "His family took him to the park, where he saw children playing.",
+              "visualIcon": "/story/scenerio-img2.png",
+              "position": "right"
+            },
+            {
+              "id": "3",
+              "title": "New fun",
+              "description": "Ravi joined the games and discovered the joy of outdoor play.",
+              "visualIcon": "/story/scenerio-img3.png",
+              "position": "left"
+            },
+            {
+              "id": "4",
+              "title": "Lesson learned",
+              "description": "Ravi realized outdoor play is fun and healthy.",
+              "visualIcon": "/story/scenerio-img4.png",
+              "position": "right"
+            }
+          ],
+          "imageUrl": "/images/ravi_park.png",
+          "audioSrc": "/audio/ch2_caselet.mp3",
+          "speakText": "Ravi learned that playing outside is fun and keeps you healthy."
         },
         {
           "type": "learn",

@@ -133,8 +133,7 @@ export default function ChapterPage({
           </div>
         </div>
         <button className={styles.guidebookButton}>
-          <FontAwesomeIcon icon={faBookOpen} className={styles.icon} />
-          GUIDEBOOK
+          <FontAwesomeIcon icon={faBookOpen} className={styles.icon} /> 
         </button>
       </div>
 
