@@ -296,7 +296,7 @@ function QuizPageContent() {
                     <h3>{isCorrect ? "Great job!" : "Not quite."}</h3>
                     <p>
                       {isCorrect 
-                        ? "That&apos;s correct!" 
+                        ? "That's correct!" 
                         : <>
                             The correct answer is <span className={styles.correctAnswer}>
                               {currentQuestion.options[currentQuestion.correctAnswer]}

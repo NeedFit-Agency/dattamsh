@@ -250,20 +250,50 @@ export const standards: Standard = {
           audioSrc: '/audio/computer_activity.mp3',
           speakText:
             'Drag each computer part to the correct description box! Is it an input device or an output device?',
-        }, {
-          type: 'learn',
-          format: 'history',
-          title: 'Story: The Magic of Computers',
-          description: [
+        },{
+          "type": "learn",
+          "format": "history",
+          "title": "Story: The Magic of Computers",
+          "description": [
             "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer.",
             "Raju asked, 'Dad, what are you doing?'",
             "His father replied, 'I'm writing a letter to your uncle using this computer.'",
             "Raju was amazed! He asked his teacher the next day about computers. His teacher showed the class how computers work.",
             "Raju learned that computers can help people do many things quickly and easily. He was very excited to learn more about computers!"
           ],
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/computer_story.mp3',
-          speakText: "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer. Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.' Raju was amazed! He asked his teacher the next day about computers. His teacher showed the class how computers work. Raju learned that computers can help people do many things quickly and easily. He was very excited to learn more about computers!"
+          "items": [
+            {
+              "id": "1",
+              "title": "Raju's Discovery",
+              "description": "Raju was a young boy. One day, he saw his father working on a computer while going home from school.",
+              "visualIcon": "/story/scenerio-img1.png",
+              "position": "left"
+            },
+            {
+              "id": "2",
+              "title": "Raju's Question",
+              "description": "Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.'",
+              "visualIcon": "/story/scenerio-img2.png",
+              "position": "right"
+            },
+            {
+              "id": "3",
+              "title": "Learning at School",
+              "description": "Raju was amazed and asked his teacher about computers. The teacher showed the class how computers work.",
+              "visualIcon": "/story/scenerio-img3.png",
+              "position": "left"
+            },
+            {
+              "id": "4",
+              "title": "Lesson Learned",
+              "description": "Raju learned that computers can help people do many things quickly and easily. He was excited to learn more!",
+              "visualIcon": "/story/scenerio-img4.png",
+              "position": "right"
+            }
+          ],
+          "imageUrl": "/images/mascot.png",
+          "audioSrc": "/audio/computer_story.mp3",
+          "speakText": "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer. Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.' Raju was amazed! He asked his teacher the next day about computers. His teacher showed the class how computers work. Raju learned that computers can help people do many things quickly and easily. He was very excited to learn more about computers!"
         },
         {
           type: 'learn',
@@ -389,21 +419,51 @@ export const standards: Standard = {
           audioSrc: '/audio/shutdown_computer.mp3',
           speakText: "One of the most important ways to take care of your computer is to shut it down properly. Here's how: Save your work first. Close all open programs. Click on the Start button at the bottom left of the screen. Click on Shut Down. Wait for the computer to turn off completely before switching off the power."
         }, {
-          type: 'learn',
-          format: 'history',
-          title: "Story: Leo's Computer Lesson",
-          description: [
-            "Leo loved playing games on his computer. One day, the computer stopped working!",
-            "Leo was very upset and called his dad for help.",
-            "Dad explained that computers need proper care. Leo had been shutting down his computer incorrectly by just pressing the power button.",
+          "type": "learn",
+          "format": "history",
+          "title": "Story: Arjun's Computer Lesson",
+          "description": [
+            "Arjun loved playing games on his computer. One day, the computer stopped working!",
+            "Arjun was very upset and called his dad for help.",
+            "Dad explained that computers need proper care. Arjun had been shutting down his computer incorrectly by just pressing the power button.",
             "'Computers are like friends,' said Dad. 'You have to say goodbye properly.'",
-            "Dad showed Leo how to shut down the computer correctly by saving his work, closing all programs, and clicking on Shut Down.",
-            "Leo learned his lesson and always took good care of his computer after that. His computer worked well for a very long time!",
+            "Dad showed Arjun how to shut down the computer correctly by saving his work, closing all programs, and clicking on Shut Down.",
+            "Arjun learned his lesson and always took good care of his computer after that. His computer worked well for a very long time!",
             "Remember: Always shut down your computer properly!"
           ],
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/leo_story.mp3',
-          speakText: "Leo loved playing games on his computer. One day, the computer stopped working! Leo was very upset and called his dad for help. Dad explained that computers need proper care. Leo had been shutting down his computer incorrectly by just pressing the power button. 'Computers are like friends,' said Dad. 'You have to say goodbye properly.' Dad showed Leo how to shut down the computer correctly by saving his work, closing all programs, and clicking on Shut Down. Leo learned his lesson and always took good care of his computer after that. His computer worked well for a very long time! Remember: Always shut down your computer properly!"
+          "items": [
+            {
+              "id": "1",
+              "title": "Arjun's Computer Trouble",
+              "description": "Arjun loved playing games on his computer, but one day, it stopped working, leaving him upset.",
+              "visualIcon": "/story/scenerio-img1.png",
+              "position": "left"
+            },
+            {
+              "id": "2",
+              "title": "Calling for Help",
+              "description": "Arjun called his dad for help to fix his computer.",
+              "visualIcon": "/story/scenerio-img2.png",
+              "position": "right"
+            },
+            {
+              "id": "3",
+              "title": "Dad's Advice",
+              "description": "Dad explained that Arjun was shutting down the computer incorrectly by pressing the power button instead of using the proper method.",
+              "visualIcon": "/story/scenerio-img3.png",
+              "position": "left"
+            },
+            {
+              "id": "4",
+              "title": "Lesson Learned",
+              "description": "Dad taught Arjun to shut down the computer properly by saving work and closing programs. Arjun followed this advice, and his computer worked well for a long time.",
+              "visualIcon": "/story/scenerio-img4.png",
+              "position": "right"
+            }
+          ],
+          "imageUrl": "/images/mascot.png",
+          "audioSrc": "/audio/leo_story.mp3",
+          "speakText": "Arjun loved playing games on his computer. One day, the computer stopped working! Arjun was very upset and called his dad for help. Dad explained that computers need proper care. Arjun had been shutting down his computer incorrectly by just pressing the power button. 'Computers are like friends,' said Dad. 'You have to say goodbye properly.' Dad showed Arjun how to shut down the computer correctly by saving his work, closing all programs, and clicking on Shut Down. Arjun learned his lesson and always took good care of his computer after that. His computer worked well for a very long time! Remember: Always shut down your computer properly!"
         },
         {
           type: 'learn',
@@ -559,21 +619,51 @@ export const standards: Standard = {
           audioSrc: '/audio/match_parts.mp3',
           speakText: 'Drag each item to the correct category! Is it a part of the keyboard or a part of the mouse?'
         }, {
-          type: 'learn',
-          format: 'history',
-          title: 'Story: The Friendly Keyboard and Mouse',
-          description: [
-            "Once upon a time, there was a friendly Keyboard named Kaya and a helpful Mouse named Max.",
+          "type": "learn",
+          "format": "history",
+          "title": "Story: The Friendly Keyboard and Mouse",
+          "description": [
+            "Once upon a time, there was a friendly Keyboard named Ananya and a helpful Mouse named Vikram.",
             "They both lived inside a computer and were the best of friends. Their job was to help children use the computer.",
-            "Kaya the Keyboard would help children type letters and words to write stories and do homework.",
-            "Max the Mouse would help children point, click, and move things around on the screen.",
-            "Together, they made using the computer fun and easy! Whenever children needed help, Kaya and Max were ready to work.",
-            "Kaya would say, 'Just press my keys gently to type.' And Max would add, 'Move me smoothly and click my buttons to select things!'",
-            "The children loved using Kaya and Max to play games, learn new things, and create beautiful pictures on the computer."
+            "Ananya the Keyboard would help children type letters and words to write stories and do homework.",
+            "Vikram the Mouse would help children point, click, and move things around on the screen.",
+            "Together, they made using the computer fun and easy! Whenever children needed help, Ananya and Vikram were ready to work.",
+            "Ananya would say, 'Just press my keys gently to type.' And Vikram would add, 'Move me smoothly and click my buttons to select things!'",
+            "The children loved using Ananya and Vikram to play games, learn new things, and create beautiful pictures on the computer."
           ],
-          imageUrl: '/images/mascot.png',
-          audioSrc: '/audio/keyboard_mouse_story.mp3',
-          speakText: "Once upon a time, there was a friendly Keyboard named Kaya and a helpful Mouse named Max. They both lived inside a computer and were the best of friends. Their job was to help children use the computer. Kaya the Keyboard would help children type letters and words to write stories and do homework. Max the Mouse would help children point, click, and move things around on the screen. Together, they made using the computer fun and easy! Whenever children needed help, Kaya and Max were ready to work. Kaya would say, 'Just press my keys gently to type.' And Max would add, 'Move me smoothly and click my buttons to select things!' The children loved using Kaya and Max to play games, learn new things, and create beautiful pictures on the computer."
+          "items": [
+            {
+              "id": "1",
+              "title": "Meet Ananya and Vikram",
+              "description": "Ananya the Keyboard and Vikram the Mouse were best friends living inside a computer, ready to help children.",
+              "visualIcon": "/story/scenerio-img1.png",
+              "position": "left"
+            },
+            {
+              "id": "2",
+              "title": "Ananya's Typing Magic",
+              "description": "Ananya helped children type letters and words to write stories and complete homework.",
+              "visualIcon": "/story/scenerio-img2.png",
+              "position": "right"
+            },
+            {
+              "id": "3",
+              "title": "Vikram's Pointing Skills",
+              "description": "Vikram the Mouse assisted children by pointing, clicking, and moving things on the computer screen.",
+              "visualIcon": "/story/scenerio-img3.png",
+              "position": "left"
+            },
+            {
+              "id": "4",
+              "title": "Fun and Learning Together",
+              "description": "Ananya and Vikram made computers fun, helping children play games, learn, and create pictures with ease.",
+              "visualIcon": "/story/scenerio-img4.png",
+              "position": "right"
+            }
+          ],
+          "imageUrl": "/images/mascot.png",
+          "audioSrc": "/audio/keyboard_mouse_story.mp3",
+          "speakText": "Once upon a time, there was a friendly Keyboard named Ananya and a helpful Mouse named Vikram. They both lived inside a computer and were the best of friends. Their job was to help children use the computer. Ananya the Keyboard would help children type letters and words to write stories and do homework. Vikram the Mouse would help children point, click, and move things around on the screen. Together, they made using the computer fun and easy! Whenever children needed help, Ananya and Vikram were ready to work. Ananya would say, 'Just press my keys gently to type.' And Vikram would add, 'Move me smoothly and click my buttons to select things!' The children loved using Ananya and Vikram to play games, learn new things, and create beautiful pictures on the computer."
         },
         {
           type: 'learn',
