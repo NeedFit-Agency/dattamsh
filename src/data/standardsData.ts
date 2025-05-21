@@ -23,7 +23,6 @@ export interface LearningSlide extends BaseContentProps {
   description: string | string[];
   imageUrl?: string;
   exampleImages?: { src: string; alt: string }[];
-  // Format will typically be 'text', 'video', etc.
 }
 
 export interface DraggableItemData {
@@ -1302,57 +1301,6 @@ export const standards: Standard = {
           "audioSrc": "/audio/ch4_summary.mp3",
           "speakText": "Remember the tools like Line, Curve, Brushes, Undo, Redo, Eraser, and Save in MS Paint."
         },
-        {
-          "type": "learn",
-          "format": "quiz",
-          "title": "Workstation A: Multiple Choice",
-          "description": ["Answer the following questions by choosing the correct options."],
-          "question": "Choose the correct answer for each question.",
-          "options": [
-            { "id": "q1-opt1", "text": "1. Which tool would you use to draw a straight line in MS Paint? a. Brush tool b. Line tool c. Curve tool", "isCorrect": true },
-            { "id": "q1-opt2", "text": "2. What does the 'Undo' button do in MS Paint? a. It adds colours b. It fixes a mistake c. It makes your drawing bigger", "isCorrect": true },
-            { "id": "q1-opt3", "text": "3. What tool would you use to draw a curved line? a. Line tool b. Curve tool c. Eraser tool", "isCorrect": true },
-            { "id": "q1-opt4", "text": "4. What happens when you click the 'Redo' button? a. It erases b. It brings back the last action c. It adds text", "isCorrect": true },
-            { "id": "q1-opt5", "text": "5. Which tool would you choose to write your name? a. Eraser tool b. Line tool c. Text tool", "isCorrect": true }
-          ],
-          "explanation": "Line tool draws straight lines, Undo fixes mistakes, Curve tool makes curves, Redo brings back actions, and Text tool adds words.",
-          "audioSrc": "/audio/ch4_quiz_a.mp3",
-          "speakText": "Pick the right answers about MS Paint tools."
-        },
-        {
-          "type": "learn",
-          "format": "quiz",
-          "title": "Workstation B: True or False",
-          "description": ["State whether the following statements are True or False."],
-          "question": "Are these statements true or false?",
-          "options": [
-            { "id": "q2-opt1", "text": "1. You can use the Text tool to add colours to your picture.", "isCorrect": false },
-            { "id": "q2-opt2", "text": "2. The Brushes tool can make different strokes.", "isCorrect": true },
-            { "id": "q2-opt3", "text": "3. The Curve tool is used for adding text to your pictures.", "isCorrect": false },
-            { "id": "q2-opt4", "text": "4. To undo a mistake in MS Paint, you use the Redo button.", "isCorrect": false },
-            { "id": "q2-opt5", "text": "5. The Eraser tool in MS Paint can only remove entire drawings, not just parts.", "isCorrect": false }
-          ],
-          "explanation": "Text tool adds words, not colours; Brushes make strokes; Curve is for lines, not text; Undo fixes mistakes, not Redo; Eraser can remove parts.",
-          "audioSrc": "/audio/ch4_quiz_b.mp3",
-          "speakText": "Decide if these are true or false about MS Paint."
-        },
-        {
-          "type": "learn",
-          "format": "quiz",
-          "title": "Workstation C: Match Tools",
-          "description": ["Match the tools in column 'A' with their functions in column 'B'."],
-          "question": "Match each tool to its function.",
-          "options": [
-            { "id": "q3-opt1", "text": "1. Brushes - a. adds colours and different stroke styles", "isCorrect": true },
-            { "id": "q3-opt2", "text": "2. Line - b. draws straight lines", "isCorrect": true },
-            { "id": "q3-opt3", "text": "3. Eraser - c. fixes mistakes by erasing part of the drawing", "isCorrect": true },
-            { "id": "q3-opt4", "text": "4. Curve - d. draws curved and wavy lines", "isCorrect": true },
-            { "id": "q3-opt5", "text": "5. Text - e. adds text to the picture", "isCorrect": true }
-          ],
-          "explanation": "Brushes add styles, Line draws straight, Eraser fixes, Curve makes waves, Text adds words.",
-          "audioSrc": "/audio/ch4_quiz_c.mp3",
-          "speakText": "Match the MS Paint tools to what they do."
-        }
       ]
     }
   ]
