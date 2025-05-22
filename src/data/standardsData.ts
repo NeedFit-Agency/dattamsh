@@ -33,9 +33,9 @@ export interface DraggableItemData {
 }
 
 export interface DropTargetData {
-  id: string;      // Unique identifier for the drop target
-  title: string;   // Display title for the drop target
-  type: string;    // Type/category for matching logic
+  id: string;      
+  title: string;   
+  type: string;    
 }
 
 export interface DragDropSlide extends BaseContentProps {
@@ -43,7 +43,6 @@ export interface DragDropSlide extends BaseContentProps {
   instruction: string;
   items: DraggableItemData[];
   targets: DropTargetData[];
-  // Format will typically be 'drag-drop'
 }
 
 export interface QuizSlide extends BaseContentProps {
