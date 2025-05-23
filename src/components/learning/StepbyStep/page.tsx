@@ -33,11 +33,8 @@ const StepByStep: React.FC<StepByStepProps> = ({
   const isLastStep = currentStepIndex === steps.length - 1;
 
   useEffect(() => {
-    // If the step changes externally, update our internal state
-    if (initialStepIndex !== currentStepIndex) {
-      setCurrentStepIndex(initialStepIndex);
-    }
-  }, [initialStepIndex, currentStepIndex]);
+    setCurrentStepIndex(initialStepIndex);
+  }, [initialStepIndex]);
 
   useEffect(() => {
     // Cleanup audio when component unmounts
@@ -88,7 +85,6 @@ const StepByStep: React.FC<StepByStepProps> = ({
 
     const textToSpeak = currentStep.audioContent || currentStep.instruction;
 
-    // Use speech synthesis
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
       try {
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
