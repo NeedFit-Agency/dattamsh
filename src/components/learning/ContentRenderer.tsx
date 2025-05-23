@@ -130,7 +130,6 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
       );
     }
     case 'drag-drop': {
-      // DragDropSlide is in standardsData
       const dndContent = content as import('../../data/standardsData').DragDropSlide;
       return (
         <DragDrop
