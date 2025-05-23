@@ -86,13 +86,13 @@ const dummyVideo = {
   title: 'Time-lapse: Plant Growing',
   description: 'Watch this time-lapse video of a plant growing from seed to maturity.',
   videoSrc: 'https://www.w3schools.com/html/mov_bbb.mp4',
-  videoType: 'video/mp4',
+  videoType: 'mp4',
   poster: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b',
   transcript: [
     'The video shows a plant growing from a seedling to a mature plant.',
     'Notice how the leaves unfurl and the stem grows taller over time.'
   ]
-};
+} as const;
 
 const page = () => {
   return (
@@ -106,6 +106,7 @@ const page = () => {
       <hr style={{ margin: '32px 0' }} />
       <TextContent {...dummyTextContent} />
       <hr style={{ margin: '32px 0' }} />
+      <Video {...dummyVideo} />
       <hr style={{ margin: '32px 0' }} />
       <hr style={{ margin: '32px 0' }} />
       <CodeExample {...dummyCodeExample} />

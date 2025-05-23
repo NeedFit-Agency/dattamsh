@@ -245,22 +245,6 @@ const Video: React.FC<VideoProps> = ({
 
   return (
     <div className={styles.mainContainer}>
-      {/* Header */}
-      <div className={styles.appHeader}>
-        <div className={styles.appName}>&lt;/&gt; Learning Videos</div>
-        <div className={styles.userStats}>
-          <div className={styles.statItem}>
-            <FontAwesomeIcon icon={faShield} className={styles.iconPlaceholder} /> {shields}
-          </div>
-          <div className={styles.statItem}>
-            <FontAwesomeIcon icon={faGem} className={styles.iconPlaceholder} /> {gems}
-          </div>
-          <div className={`${styles.statItem} ${styles.hearts}`}>
-            <FontAwesomeIcon icon={faHeart} /> {hearts}
-          </div>
-          <FontAwesomeIcon icon={faCog} className={styles.settingsIcon} />
-        </div>
-      </div>
 
       {/* Content */}
       <div className={styles.contentWrapper}>
@@ -325,22 +309,6 @@ const Video: React.FC<VideoProps> = ({
             </div>
           </div>
         </motion.div>
-      </div>
-
-      {/* Footer Navigation */}
-      <div className={styles.footerNav}>
-        <button 
-          className={`${styles.navButton} ${styles.navButtonPrevious}`} 
-          onClick={handlePrevious}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} /> Previous
-        </button>
-        <button 
-          className={`${styles.navButton} ${styles.navButtonContinue}`} 
-          onClick={handleContinue}
-        >
-          Continue <FontAwesomeIcon icon={faArrowRight} />
-        </button>
       </div>
     </div>
   );
