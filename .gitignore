@@ -45,3 +45,7 @@ next-env.d.ts
 
 # history
 .history
+
+# Playwright
+test-results/
+playwright-report/
