@@ -4,12 +4,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faHeadphones, 
-  faArrowLeft, 
-  faArrowRight, 
-  faShield, 
-  faGem, 
-  faHeart, 
-  faCog,
   faPlay,
   faPause,
   faVolumeUp,
@@ -47,7 +41,7 @@ const Video: React.FC<VideoProps> = ({
   videoType = 'placeholder',
   youtubeId,
   vimeoId,
-  mascotImage = '🤖',
+  mascotImage = '/images/mascot.png',
   mascotTitle = 'Watch Out For:',
   keyPoints = [],
   audioContent,
@@ -279,7 +273,9 @@ const Video: React.FC<VideoProps> = ({
           <div className={styles.infoArea}>
             <div className={styles.mascotInteraction}>
               <div className={styles.mascotImage}>
-                {typeof mascotImage === 'string' ? mascotImage : mascotImage}
+                {typeof mascotImage === 'string' ? (
+                  <img src={mascotImage} alt="Mascot" className={styles.mascotImgTag} />
+                ) : mascotImage}
               </div>
               <div className={styles.mascotSpeech}>
                 <div className={styles.speechTitle}>{mascotTitle}</div>

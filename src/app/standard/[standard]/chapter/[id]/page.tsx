@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faBookOpen, faArrowDown, faLaptopCode, faRobot, faMicrochip, faCode } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faBookOpen, faArrowDown, faLaptopCode, faRobot, faMicrochip } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import LessonPathItem from '@/components/learn/LessonPathItem/LessonPathItem';
 import styles from './LearnPage.module.css';
@@ -59,7 +59,6 @@ const getChapterData = (standardId: string, chapterId: string) => {
       { type: 'level-badge' as const, id: 2, level: 2, completed: false },
       { type: 'level-badge' as const, id: 3, level: 3, completed: true },
       { type: 'level-badge' as const, id: 4, level: 4, completed: true },
-      { type: 'chest' as const, id: 5, completed: false },
       { type: 'duo' as const, id: 6, completed: false }
     ] as ContentItemType[]
   };
@@ -117,7 +116,6 @@ export default function ChapterPage({
     { icon: faLaptopCode, style: { top: '10%', left: '10%' } },
     { icon: faRobot, style: { top: '30%', right: '15%' } },
     { icon: faMicrochip, style: { bottom: '25%', left: '15%' } },
-    { icon: faCode, style: { bottom: '15%', right: '10%' } },
   ];
 
   return (
@@ -153,51 +151,47 @@ export default function ChapterPage({
           </div>
         ))}
 
-        {/* Existing lesson path items - UPDATED to redirect to learning page */}
-        {chapterData.content.map((item) => {
-          // Only 'duo' should never be clickable
-          const isDuo = item.type === 'duo';
-          const isClickable = !isDuo && !(item.type === 'checkmark' && item.completed);
-          const itemStyle = positions[item.id] || {};
+        {(() => {
+          const nodes: React.ReactNode[] = [];
+          chapterData.content.forEach((item, idx) => {
+            // Only 'duo' should never be clickable
+            const isDuo = item.type === 'duo';
+            const isClickable = !isDuo && !(item.type === 'checkmark' && item.completed);
+            const itemStyle = positions[item.id] || {};
 
-          return isClickable ? (
-            <Link
-              key={item.id}
-              href={`/learning?standard=${standard}&chapter=${item.id}&lesson=${item.id}`}
-              className={styles.lessonLink}
-              style={itemStyle}
-              aria-label={`Start or practice lesson ${item.id}`}
-            >
-              <LessonPathItem
-                type={item.type}
-                level={item.type === 'level-badge' ? item.level : undefined}
-                completed={item.completed}
-              />
-            </Link>
-          ) : (
-            <div
-              key={item.id}
-              className={styles.lessonLink}
-              style={itemStyle}
-              aria-label={`Lesson ${item.id} completed`}
-            >
-              <LessonPathItem
-                type={item.type}
-                level={item.type === 'level-badge' ? item.level : undefined}
-                completed={item.completed}
-              />
-            </div>
-          );
-        })}
+            const lessonNode = isClickable ? (
+              <Link
+                key={item.id}
+                href={`/learning?standard=${standard}&chapter=${item.id}&lesson=${item.id}`}
+                className={styles.lessonLink}
+                style={itemStyle}
+                aria-label={`Start or practice lesson ${item.id}`}
+              >
+                <LessonPathItem
+                  type={item.type}
+                  level={item.type === 'level-badge' ? item.level : undefined}
+                  completed={item.completed}
+                />
+              </Link>
+            ) : (
+              <div
+                key={item.id}
+                className={styles.lessonLink}
+                style={itemStyle}
+                aria-label={`Lesson ${item.id} completed`}
+              >
+                <LessonPathItem
+                  type={item.type}
+                  level={item.type === 'level-badge' ? item.level : undefined}
+                  completed={item.completed}
+                />
+              </div>
+            );
+            nodes.push(lessonNode);
+          });
+          return nodes;
+        })()}
       </div>
-
-      <button 
-        className={styles.scrollDownButton} 
-        onClick={handleScrollDown}
-        aria-label="Scroll down"
-      >
-        <FontAwesomeIcon icon={faArrowDown} className={styles.icon} />
-      </button>
     </main>
   );
 }
