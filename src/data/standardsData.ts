@@ -269,22 +269,22 @@ export const standards: Standard = {
             {
               "id": "2",
               "title": "Raju's Question",
-              "description": "Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.'",
-              "visualIcon": "/story/scenerio-img2.png",
+              "description": "Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.",
+              "visualIcon": "/images/1st-standard/2_chapter/raju-2.png",
               "position": "right"
             },
             {
               "id": "3",
               "title": "Learning at School",
               "description": "Raju was amazed and asked his teacher about computers. The teacher showed the class how computers work.",
-              "visualIcon": "/story/scenerio-img3.png",
+              "visualIcon": "/images/1st-standard/2_chapter/raju-3.png",
               "position": "left"
             },
             {
               "id": "4",
               "title": "Lesson Learned",
               "description": "Raju learned that computers can help people do many things quickly and easily. He was excited to learn more!",
-              "visualIcon": "/story/scenerio-img4.png",
+              "visualIcon": "/images/1st-standard/2_chapter/raju-4.png",
               "position": "right"
             }
           ],
