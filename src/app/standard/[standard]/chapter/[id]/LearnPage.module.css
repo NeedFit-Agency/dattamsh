@@ -336,7 +336,7 @@
 
 /* --- Scroll Down Button --- */
 .scrollDownButton {
-  align-self: center; /* Center horizontally */
+  align-self: center;
   background-color: #f7f7f7;
   border: 2px solid #e5e5e5;
   border-radius: 50%;
@@ -346,10 +346,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-top: 30px; /* Space above button */
-  color: #afafaf; /* Gray icon */
+  margin-top: 30px;
+  color: #afafaf;
   font-size: 20px;
   transition: background-color 0.2s;
+  z-index: 2;
 }
 .scrollDownButton:hover {
   background-color: #efefef;
