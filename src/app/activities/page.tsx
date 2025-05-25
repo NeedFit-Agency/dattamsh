@@ -3,6 +3,8 @@ import StepByStep  from '@/components/learning/StepbyStep/page';
 import TextContent from '@/components/learning/Text/Text';
 import CodeExample from '@/components/learning/Code/Code';
 import Video from '@/components/learning/Video/Video';
+import Flashcard from '@/components/learning/Flashcard/Flashcard';
+import { DragDrop } from '@/components/learning/DragDrop/DragDrop';
 
 const seedPlantingSteps = [
     {
@@ -38,28 +40,6 @@ const dummyTextContent = {
   ]
 };
 
-const dummyImageGallery = {
-  title: 'Plant Growth Stages',
-  description: 'Observe the different stages of plant growth.',
-  images: [
-    {
-      src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
-      alt: 'Seedling',
-      caption: 'A young seedling.'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
-      alt: 'Growing plant',
-      caption: 'A plant in its growing stage.'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b',
-      alt: 'Mature plant',
-      caption: 'A mature plant.'
-    }
-  ],
-  layout: 'carousel'
-};
 
 const dummyQuiz = {
   title: 'Quiz: Plant Needs',
@@ -94,10 +74,30 @@ const dummyVideo = {
   ]
 } as const;
 
+const dummyFlashcard = {
+  imageUrl: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80',
+  cardName: 'Growing Plant',
+};
+
+const dummyDragDrop = {
+  title: 'Sort the Items',
+  instruction: 'Drag each item to the correct category.',
+  items: [
+    { id: '1', text: 'Apple', type: 'fruit' },
+    { id: '2', text: 'Carrot', type: 'vegetable' },
+    { id: '3', text: 'Banana', type: 'fruit' },
+    { id: '4', text: 'Broccoli', type: 'vegetable' },
+  ],
+  targets: [
+    { id: 't1', title: 'Fruits', type: 'fruit' },
+    { id: 't2', title: 'Vegetables', type: 'vegetable' },
+  ],
+};
+
 const page = () => {
   return (
-    <div style={{ maxWidth: 800, margin: '0 auto', padding: 24 }}>
-      <h1>Learning Formats Showcase</h1>
+    <div >
+      <h1 style={{ textAlign: 'center', margin: '32px 0' }}>Learning Formats Showcase</h1>
       <StepByStep
         title="Step-by-Step: Planting a Seed"
         steps={seedPlantingSteps}
@@ -108,8 +108,15 @@ const page = () => {
       <hr style={{ margin: '32px 0' }} />
       <Video {...dummyVideo} />
       <hr style={{ margin: '32px 0' }} />
-      <hr style={{ margin: '32px 0' }} />
       <CodeExample {...dummyCodeExample} />
+      <hr style={{ margin: '32px 0' }} />
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '32px 0' }}>
+        <Flashcard imageUrl={dummyFlashcard.imageUrl} cardName={dummyFlashcard.cardName} />
+      </div>
+      <hr style={{ margin: '32px 0' }} />
+      <div >
+        <DragDrop {...dummyDragDrop} />
+      </div>
       <hr style={{ margin: '32px 0' }} />
     </div>
   );
