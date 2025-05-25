@@ -233,23 +233,21 @@ export const standards: Standard = {
           type: 'drag-drop',
           format: 'drag-drop',
           title: 'Activity: Match Computer Parts',
-          instruction:
-            'Drag each computer part to the correct description box!',
+          instruction: 'Drag each computer part to the correct description box!',
           items: [
-            { id: 'dnd-item-1', text: 'Monitor', type: 'natural', imageUrl: '/images/sun.png' },
-            { id: 'dnd-item-2', text: 'Keyboard', type: 'man-made', imageUrl: '/images/chair.png' },
-            { id: 'dnd-item-3', text: 'Mouse', type: 'natural', imageUrl: '/images/bird.png' },
-            { id: 'dnd-item-4', text: 'CPU', type: 'man-made', imageUrl: '/images/cycle.pxng' },
-            { id: 'dnd-item-5', text: 'Speakers', type: 'natural', imageUrl: '/images/tree.png' },
+            { id: 'dnd-item-1', text: 'Monitor', type: 'output', imageUrl: '/images/monitor.png' },
+            { id: 'dnd-item-2', text: 'Keyboard', type: 'input', imageUrl: '/images/keyboard.png' },
+            { id: 'dnd-item-3', text: 'Mouse', type: 'input', imageUrl: '/images/mouse.png' },
+            { id: 'dnd-item-5', text: 'Speakers', type: 'output', imageUrl: '/images/speaker.png' },
           ],
           targets: [
-            { id: 'naturalTarget', title: 'Input Devices', type: 'natural' },
-            { id: 'manMadeTarget', title: 'Output Devices', type: 'man-made' },
+            { id: 'inputTarget', title: 'Input Devices', type: 'input' },
+            { id: 'outputTarget', title: 'Output Devices', type: 'output' },
           ],
           audioSrc: '/audio/computer_activity.mp3',
-          speakText:
-            'Drag each computer part to the correct description box! Is it an input device or an output device?',
-        },{
+          speakText: 'Drag each computer part to the correct description box! Is it an input device or an output device?',
+        },
+        {
           "type": "learn",
           "format": "history",
           "title": "Story: The Magic of Computers",
