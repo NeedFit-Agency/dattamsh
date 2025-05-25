@@ -1069,17 +1069,49 @@ export const standards: Standard = {
           "type": "learn",
           "format": "step-by-step",
           "title": "Type and Save a Story",
-          "description": [
-            "Step 1: Think of a short story.",
-            "Step 2: Start typing your story in Notepad. For example, 'Once upon a time, there was a cat.' Use the backspace key to fix mistakes.",
-            "Step 3: Click on the 'File' menu at the top.",
-            "Step 4: Choose 'Save As'.",
-            "Step 5: Give your file a name, like 'MyStory'.",
-            "Step 6: Click 'Save'."
-          ],
-          "exampleImages": [
-            { "src": "/images/typing_story.png", "alt": "Typing a story" },
-            { "src": "/images/save_as.png", "alt": "Saving the file" }
+          "steps": [
+            {
+              "id": "1",
+              "number": 1,
+              "title": "Think of a Story",
+              "instruction": "Think of a short story to write, like a tale about a cat or a magical adventure.",
+              "visualContent": ""
+            },
+            {
+              "id": "2",
+              "number": 2,
+              "title": "Start Typing in Notepad",
+              "instruction": "Open Notepad on your computer. Start typing your story, for example, 'Once upon a time, there was a cat.' Use the backspace key to fix any mistakes.",
+              "visualContent": "/images/typing_story.png"
+            },
+            {
+              "id": "3",
+              "number": 3,
+              "title": "Open the File Menu",
+              "instruction": "Click on the 'File' menu at the top of Notepad.",
+              "visualContent": ""
+            },
+            {
+              "id": "4",
+              "number": 4,
+              "title": "Choose Save As",
+              "instruction": "In the File menu, choose 'Save As' to save your story.",
+              "visualContent": ""
+            },
+            {
+              "id": "5",
+              "number": 5,
+              "title": "Name Your File",
+              "instruction": "Give your file a name, like 'MyStory', in the save window.",
+              "visualContent": ""
+            },
+            {
+              "id": "6",
+              "number": 6,
+              "title": "Save Your Story",
+              "instruction": "Click the 'Save' button to save your story as 'MyStory.txt'.",
+              "visualContent": "/images/save_as.png"
+            }
           ],
           "audioSrc": "/audio/ch3_save_story.mp3",
           "speakText": "Write a story in Notepad and save it with a name like 'MyStory'."
