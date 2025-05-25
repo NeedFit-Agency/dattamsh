@@ -265,7 +265,7 @@ export const standards: Standard = {
               "id": "1",
               "title": "Raju's Discovery",
               "description": "Raju was a young boy. One day, he saw his father working on a computer while going home from school.",
-              "visualIcon": "/story/scenerio-img1.png",
+              "visualIcon": "/images/1st-standard/2_chapter/raju-1.png",
               "position": "left"
             },
             {
