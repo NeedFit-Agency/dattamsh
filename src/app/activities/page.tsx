@@ -1,3 +1,4 @@
+'use client';
 import React from 'react'
 import StepByStep  from '@/components/learning/StepbyStep/page';
 import TextContent from '@/components/learning/Text/Text';
@@ -5,6 +6,7 @@ import CodeExample from '@/components/learning/Code/Code';
 import Video from '@/components/learning/Video/Video';
 import Flashcard from '@/components/learning/Flashcard/Flashcard';
 import { DragDrop } from '@/components/learning/DragDrop/DragDrop';
+import Puzzle from '@/components/learning/Puzzle/Puzzle';
 
 const seedPlantingSteps = [
     {
@@ -94,10 +96,21 @@ const dummyDragDrop = {
   ],
 };
 
+const dummyActivity = {
+  title: 'Meet the Computer!',
+  avatarUrl: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=facearea&w=256&h=256&facepad=2',
+  chatText: "Hi friend! Let's find parts of the computer!",
+  imageUrl: 'images/background/image-1.png',
+  prompt: 'Computers show us games and cartoons! Can you find the part that shows pictures?',
+  actionText: "Let's Go!",
+};
+
 const page = () => {
   return (
     <div >
-      <h1 style={{ textAlign: 'center', margin: '32px 0' }}>Learning Formats Showcase</h1>
+      <Puzzle {...dummyActivity} />
+      <hr style={{ margin: '32px 0' }} />
+      <div style={{ margin: '32px 0' }} />
       <StepByStep
         title="Step-by-Step: Planting a Seed"
         steps={seedPlantingSteps}

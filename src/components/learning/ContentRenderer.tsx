@@ -41,6 +41,10 @@ const Text = dynamic(() => import('./Text'), {
   loading: () => <LoadingSpinner message="Loading text content..." /> 
 });
 
+const Puzzle = dynamic(() => import('./Puzzle'), { 
+  loading: () => <LoadingSpinner message="Loading puzzle content..." /> 
+});
+
 // Fallback component when a format doesn't have a corresponding component
 const UnsupportedFormat: React.FC<{format: string}> = ({ format }) => (
   <div style={{ padding: '20px', border: '1px solid #ff6b6b', borderRadius: '8px', color: '#ff6b6b' }}>
@@ -219,6 +223,21 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
+        />
+      );
+    }
+    case 'puzzle': {
+      // Map the content to PuzzleProps
+      const puzzleContent = content as any;
+      return (
+        <Puzzle
+          title={puzzleContent.title}
+          subtitle={puzzleContent.subtitle}
+          avatarUrl={puzzleContent.avatarUrl || '/images/mascot.png'}
+          chatText={Array.isArray(puzzleContent.description) ? puzzleContent.description[0] : (puzzleContent.description || 'Can you solve the puzzle?')}
+          imageUrl={puzzleContent.imageUrl}
+          prompt={puzzleContent.prompt}
+          onBack={onBack}
         />
       );
     }

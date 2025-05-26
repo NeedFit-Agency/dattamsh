@@ -1,7 +1,7 @@
 .statBox {
     flex: 1;
     background-color: white;
-    border: 2px solid var(--duo-border);
+    border: 2px solid var(--robo-border);
     border-radius: 16px;
     text-align: center;
     overflow: hidden;
@@ -34,7 +34,7 @@
   .subtext { /* For smaller text like 'Day streak' */
       font-size: 14px;
       font-weight: 700;
-      color: var(--duo-gray-dark);
+      color: var(--robo-gray-dark);
       display: block;
       margin-top: 2px;
   }
@@ -44,39 +44,39 @@
   
   /* XP Box (Yellow/Gold) */
   .xp {
-    border-color: var(--duo-yellow-dark);
+    border-color: var(--robo-yellow-dark);
   }
   .xp .label {
-    background-color: var(--duo-yellow);
-    color: var(--duo-yellow-dark);
+    background-color: var(--robo-yellow);
+    color: var(--robo-yellow-dark);
   }
   .xp .content {
-    color: var(--duo-yellow);
+    color: var(--robo-yellow);
   }
   
   /* Accuracy Box (Blue) */
   .accuracy {
-    border-color: var(--duo-blue-dark); /* Use Blue */
+    border-color: var(--robo-blue-dark); /* Use Blue */
   }
   .accuracy .label {
-    background-color: var(--duo-blue-primary); /* Use Blue */
-    color: var(--duo-blue-dark); /* Use Blue */
+    background-color: var(--robo-blue-primary); /* Use Blue */
+    color: var(--robo-blue-dark); /* Use Blue */
   }
   .accuracy .content {
-    color: var(--duo-blue-primary); /* Use Blue */
+    color: var(--robo-blue-primary); /* Use Blue */
   }
   
   /* Streak Box (Orange) - From Profile */
   .streak {
-    border-color: var(--duo-orange-dark);
+    border-color: var(--robo-orange-dark);
   }
   .streak .label {
      background-color: transparent; /* No colored label bg */
-     color: var(--duo-gray-dark); /* Standard label text */
+     color: var(--robo-gray-dark); /* Standard label text */
      padding-bottom: 0;
   }
   .streak .content {
-    color: var(--duo-orange);
+    color: var(--robo-orange);
     padding-top: 10px; /* Adjust spacing if label is different */
     flex-direction: column; /* Stack icon/number and text */
     gap: 0;
@@ -84,22 +84,22 @@
   
   /* League Box (Gray) - From Profile */
   .league {
-   border-color: var(--duo-border); /* Standard border */
+   border-color: var(--robo-border); /* Standard border */
   }
   .league .label {
      background-color: transparent;
-     color: var(--duo-gray-dark);
+     color: var(--robo-gray-dark);
      padding-bottom: 0;
   }
   .league .content {
-    color: var(--duo-gray-medium); /* Muted color */
+    color: var(--robo-gray-medium); /* Muted color */
     padding-top: 10px;
      flex-direction: column;
      gap: 0;
   }
   .league .icon { /* Specific icon style for league */
-      background-color: var(--duo-gray-light);
-      color: var(--duo-gray-medium);
+      background-color: var(--robo-gray-light);
+      color: var(--robo-gray-medium);
       border-radius: 50%;
       width: 30px;
       height: 30px;

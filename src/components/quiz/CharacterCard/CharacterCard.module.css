@@ -22,7 +22,7 @@
 .characterDisplay { /* Renamed from arabic-char */
     font-size: 70px; /* Adjust as needed */
     font-weight: bold;
-    color: var(--duo-text-dark);
+    color: var(--robo-text-dark);
     line-height: 1;
     text-align: center;
 }

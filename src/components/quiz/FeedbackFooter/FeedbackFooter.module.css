@@ -1,6 +1,6 @@
 /* Common */
 .feedbackArea {
-    border-top: 2px solid var(--duo-border);
+    border-top: 2px solid var(--robo-border);
     padding: 15px 30px;
     display: flex;
     align-items: center; /* Center vertically for simple */
@@ -13,14 +13,14 @@
   /* Backgrounds */
   .correctBg {
      /* Light green for positive feedback */
-     background-color: var(--duo-green-feedback);
+     background-color: var(--robo-green-feedback);
   }
   .incorrectBg {
      /* Light red for negative feedback */
      background-color: #ffebee;
   }
   .neutralBg {
-      background-color: var(--duo-gray-lightest); /* Or just white */
+      background-color: var(--robo-gray-lightest); /* Or just white */
   }
   
   
@@ -42,41 +42,41 @@
       align-items: center;
       justify-content: center;
       font-size: 24px;
-      border: 2px solid var(--duo-border);
+      border: 2px solid var(--robo-border);
   }
-  .correctIcon { color: var(--duo-green); }
-  .incorrectIcon { color: var(--duo-red); } /* Example */
+  .correctIcon { color: var(--robo-green); }
+  .incorrectIcon { color: var(--robo-red); } /* Example */
   
   .feedbackText strong {
       font-size: 18px;
       font-weight: 800;
       display: block;
   }
-  .correctText { color: var(--duo-green-dark); }
-  .incorrectText { color: var(--duo-red); } /* Example */
+  .correctText { color: var(--robo-green-dark); }
+  .incorrectText { color: var(--robo-red); } /* Example */
   
   .reportLink {
       font-size: 14px;
       font-weight: 700;
-      color: var(--duo-gray-medium);
+      color: var(--robo-gray-medium);
       text-decoration: none;
       text-transform: uppercase;
   }
   .reportLink:hover {
-      color: var(--duo-gray-dark);
+      color: var(--robo-gray-dark);
   }
   
-  /* Duo Variant */
-  .duoFeedback {
+  /* robo Variant */
+  .roboFeedback {
       align-items: flex-end; /* Align items to bottom */
        min-height: 110px;
   }
-  .feedbackContent { /* For Duo variant */
+  .feedbackContent { /* For robo variant */
       display: flex;
       align-items: flex-end;
       gap: 15px;
   }
-  .duoCharacter {
+  .roboCharacter {
       height: 100px;
       width: auto;
       display: block;
@@ -93,12 +93,12 @@
       background-color: white;
       padding: 15px 20px;
       border-radius: 12px;
-      border: 2px solid var(--duo-border);
+      border: 2px solid var(--robo-border);
       position: relative;
       margin-bottom: 10px;
       font-size: 16px;
       font-weight: 700;
-      color: var(--duo-text-dark);
+      color: var(--robo-text-dark);
       max-width: 350px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
@@ -112,7 +112,7 @@
       height: 0;
       border-top: 8px solid transparent;
       border-bottom: 8px solid transparent;
-      border-right: 10px solid var(--duo-border);
+      border-right: 10px solid var(--robo-border);
   }
   .speechBubble::after {
       content: '';
@@ -135,20 +135,20 @@
           padding: 15px;
           min-height: auto;
       }
-      .feedbackContent { /* Duo variant adjustments */
+      .feedbackContent { /* robo variant adjustments */
          order: 1;
          margin-top: 10px;
          align-items: center;
          flex-direction: column;
          text-align: center;
       }
-       .duoCharacter { height: 80px; animation: none; }
+       .roboCharacter { height: 80px; animation: none; }
        .speechBubble { margin-bottom: 0; max-width: 90%; }
        /* Adjust tail for center */
        .speechBubble::before, .speechBubble::after {
            left: 50%; transform: translateX(-50%); bottom: -10px;
            border-right-color: transparent; border-left-color: transparent;
-           border-top-color: var(--duo-border); border-top-width: 10px;
+           border-top-color: var(--robo-border); border-top-width: 10px;
            border-right-width: 8px; border-left-width: 8px; border-bottom-width: 0;
        }
         .speechBubble::after { bottom: -8px; border-top-color: white; }

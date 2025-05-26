@@ -4,11 +4,13 @@ export type FormatType =
   | 'code'
   | 'component'
   | 'drag-drop'
+  | 'choose'
   | 'history'
   | 'quiz'
   | 'step-by-step'
   | 'video'
-  | 'text';
+  | 'text'
+  | 'puzzle';
 
 export interface BaseContentProps {
   type: string;
@@ -23,6 +25,7 @@ export interface LearningSlide extends BaseContentProps {
   description: string | string[];
   imageUrl?: string;
   exampleImages?: { src: string; alt: string }[];
+  prompt?: string;
 }
 
 export interface DraggableItemData {
@@ -100,10 +103,43 @@ export interface Standard {
 
 export const standards: Standard = {
   "1": [
+    
     {
       id: 1,
       title: "Introduction to Nature and Man-made",
       lessonContent: [
+        {
+          type: 'learn',
+          format: 'puzzle',
+          title: 'Meet the Computer! (Puzzle)',
+          description: [
+            'Hi friend! Let\'s find parts of the computer! Computers show us games and cartoons! Can you find the part that shows pictures?'
+          ],
+          imageUrl: '/images/1st-standard/image-1.png',
+          prompt: 'Click the center of the image!'
+        },
+        {
+          type: 'drag-drop',
+          format: 'drag-drop',
+          title: 'Sort Them Out!',
+          instruction:
+            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
+          items: [
+            { id: 'dnd-item-1', text: 'Tree', type: 'natural', imageUrl: '/images/tree.png' },
+            { id: 'dnd-item-2', text: 'Chair', type: 'man-made', imageUrl: '/images/chair.png' },
+            { id: 'dnd-item-3', text: 'Bird', type: 'natural', imageUrl: '/images/bird.png' },
+            { id: 'dnd-item-4', text: 'Cycle', type: 'man-made', imageUrl: '/images/cycle.png' },
+            { id: 'dnd-item-5', text: 'Sun', type: 'natural', imageUrl: '/images/sun.png' },
+            { id: 'dnd-item-6', text: 'Blackboard', type: 'man-made', imageUrl: '/images/blackboard.png' },
+          ],
+          targets: [
+            { id: 'naturalTarget', title: 'Natural Things', type: 'natural' },
+            { id: 'manMadeTarget', title: 'Man-made Things', type: 'man-made' },
+          ],
+          audioSrc: '/audio/04_dnd_instruction.mp3',
+          speakText:
+            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
+        },
         {
           type: 'learn',
           format: 'text',
@@ -152,28 +188,7 @@ export const standards: Standard = {
           audioSrc: '/audio/03_manmade.mp3',
           speakText:
             'Man-made things are things that people build or create. Can you spot some things people made here? A yellow School Bus, a shiny Cycle, a comfy Chair, and a classroom Blackboard.',
-        }, {
-          type: 'drag-drop',
-          format: 'drag-drop',
-          title: 'Activity: Sort Them Out!',
-          instruction:
-            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
-          items: [
-            { id: 'dnd-item-1', text: 'Tree', type: 'natural', imageUrl: '/images/tree.png' },
-            { id: 'dnd-item-2', text: 'Chair', type: 'man-made', imageUrl: '/images/chair.png' },
-            { id: 'dnd-item-3', text: 'Bird', type: 'natural', imageUrl: '/images/bird.png' },
-            { id: 'dnd-item-4', text: 'Cycle', type: 'man-made', imageUrl: '/images/cycle.png' },
-            { id: 'dnd-item-5', text: 'Sun', type: 'natural', imageUrl: '/images/sun.png' },
-            { id: 'dnd-item-6', text: 'Blackboard', type: 'man-made', imageUrl: '/images/blackboard.png' },
-          ],
-          targets: [
-            { id: 'naturalTarget', title: 'Natural Things', type: 'natural' },
-            { id: 'manMadeTarget', title: 'Man-made Things', type: 'man-made' },
-          ],
-          audioSrc: '/audio/04_dnd_instruction.mp3',
-          speakText:
-            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
-        },
+        }, 
       ],
     }, {
       id: 2,
@@ -230,29 +245,9 @@ export const standards: Standard = {
           speakText: "Just like our body has different parts that help us do different things, a computer also has different parts! Let's learn about the main parts of a computer: Monitor, Keyboard, Mouse, CPU, and Speakers."
         },
         {
-          type: 'drag-drop',
-          format: 'drag-drop',
-          title: 'Activity: Match Computer Parts',
-          instruction:
-            'Drag each computer part to the correct description box!',
-          items: [
-            { id: 'dnd-item-1', text: 'Monitor', type: 'natural', imageUrl: '/images/sun.png' },
-            { id: 'dnd-item-2', text: 'Keyboard', type: 'man-made', imageUrl: '/images/chair.png' },
-            { id: 'dnd-item-3', text: 'Mouse', type: 'natural', imageUrl: '/images/bird.png' },
-            { id: 'dnd-item-4', text: 'CPU', type: 'man-made', imageUrl: '/images/cycle.pxng' },
-            { id: 'dnd-item-5', text: 'Speakers', type: 'natural', imageUrl: '/images/tree.png' },
-          ],
-          targets: [
-            { id: 'naturalTarget', title: 'Input Devices', type: 'natural' },
-            { id: 'manMadeTarget', title: 'Output Devices', type: 'man-made' },
-          ],
-          audioSrc: '/audio/computer_activity.mp3',
-          speakText:
-            'Drag each computer part to the correct description box! Is it an input device or an output device?',
-        },{
           "type": "learn",
           "format": "history",
-          "title": "Story: The Magic of Computers",
+          "title": "The Magic of Computers",
           "description": [
             "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer.",
             "Raju asked, 'Dad, what are you doing?'",
@@ -265,34 +260,52 @@ export const standards: Standard = {
               "id": "1",
               "title": "Raju's Discovery",
               "description": "Raju was a young boy. One day, he saw his father working on a computer while going home from school.",
-              "visualIcon": "/story/scenerio-img1.png",
+              "visualIcon": "/images/1st-standard/2_chapter/raju-1.png",
               "position": "left"
             },
             {
               "id": "2",
               "title": "Raju's Question",
-              "description": "Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.'",
-              "visualIcon": "/story/scenerio-img2.png",
+              "description": "Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.",
+              "visualIcon": "/images/1st-standard/2_chapter/raju-2.png",
               "position": "right"
             },
             {
               "id": "3",
               "title": "Learning at School",
               "description": "Raju was amazed and asked his teacher about computers. The teacher showed the class how computers work.",
-              "visualIcon": "/story/scenerio-img3.png",
+              "visualIcon": "/images/1st-standard/2_chapter/raju-3.png",
               "position": "left"
             },
             {
               "id": "4",
               "title": "Lesson Learned",
               "description": "Raju learned that computers can help people do many things quickly and easily. He was excited to learn more!",
-              "visualIcon": "/story/scenerio-img4.png",
+              "visualIcon": "/images/1st-standard/2_chapter/raju-4.png",
               "position": "right"
             }
           ],
           "imageUrl": "/images/mascot.png",
           "audioSrc": "/audio/computer_story.mp3",
           "speakText": "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer. Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.' Raju was amazed! He asked his teacher the next day about computers. His teacher showed the class how computers work. Raju learned that computers can help people do many things quickly and easily. He was very excited to learn more about computers!"
+        },
+        {
+          type: 'drag-drop',
+          format: 'drag-drop',
+          title: 'Activity: Match Computer Parts',
+          instruction: 'Drag each computer part to the correct description box!',
+          items: [
+            { id: 'dnd-item-1', text: 'Monitor', type: 'output', imageUrl: '/images/monitor.png' },
+            { id: 'dnd-item-2', text: 'Keyboard', type: 'input', imageUrl: '/images/keyboard.png' },
+            { id: 'dnd-item-3', text: 'Mouse', type: 'input', imageUrl: '/images/mouse.png' },
+            { id: 'dnd-item-5', text: 'Speakers', type: 'output', imageUrl: '/images/speaker.png' },
+          ],
+          targets: [
+            { id: 'inputTarget', title: 'Input Devices', type: 'input' },
+            { id: 'outputTarget', title: 'Output Devices', type: 'output' },
+          ],
+          audioSrc: '/audio/computer_activity.mp3',
+          speakText: 'Drag each computer part to the correct description box! Is it an input device or an output device?',
         },
         {
           type: 'learn',
@@ -1069,17 +1082,49 @@ export const standards: Standard = {
           "type": "learn",
           "format": "step-by-step",
           "title": "Type and Save a Story",
-          "description": [
-            "Step 1: Think of a short story.",
-            "Step 2: Start typing your story in Notepad. For example, 'Once upon a time, there was a cat.' Use the backspace key to fix mistakes.",
-            "Step 3: Click on the 'File' menu at the top.",
-            "Step 4: Choose 'Save As'.",
-            "Step 5: Give your file a name, like 'MyStory'.",
-            "Step 6: Click 'Save'."
-          ],
-          "exampleImages": [
-            { "src": "/images/typing_story.png", "alt": "Typing a story" },
-            { "src": "/images/save_as.png", "alt": "Saving the file" }
+          "steps": [
+            {
+              "id": "1",
+              "number": 1,
+              "title": "Think of a Story",
+              "instruction": "Think of a short story to write, like a tale about a cat or a magical adventure.",
+              "visualContent": ""
+            },
+            {
+              "id": "2",
+              "number": 2,
+              "title": "Start Typing in Notepad",
+              "instruction": "Open Notepad on your computer. Start typing your story, for example, 'Once upon a time, there was a cat.' Use the backspace key to fix any mistakes.",
+              "visualContent": "/images/typing_story.png"
+            },
+            {
+              "id": "3",
+              "number": 3,
+              "title": "Open the File Menu",
+              "instruction": "Click on the 'File' menu at the top of Notepad.",
+              "visualContent": ""
+            },
+            {
+              "id": "4",
+              "number": 4,
+              "title": "Choose Save As",
+              "instruction": "In the File menu, choose 'Save As' to save your story.",
+              "visualContent": ""
+            },
+            {
+              "id": "5",
+              "number": 5,
+              "title": "Name Your File",
+              "instruction": "Give your file a name, like 'MyStory', in the save window.",
+              "visualContent": ""
+            },
+            {
+              "id": "6",
+              "number": 6,
+              "title": "Save Your Story",
+              "instruction": "Click the 'Save' button to save your story as 'MyStory.txt'.",
+              "visualContent": "/images/save_as.png"
+            }
           ],
           "audioSrc": "/audio/ch3_save_story.mp3",
           "speakText": "Write a story in Notepad and save it with a name like 'MyStory'."
