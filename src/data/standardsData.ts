@@ -230,27 +230,9 @@ export const standards: Standard = {
           speakText: "Just like our body has different parts that help us do different things, a computer also has different parts! Let's learn about the main parts of a computer: Monitor, Keyboard, Mouse, CPU, and Speakers."
         },
         {
-          type: 'drag-drop',
-          format: 'drag-drop',
-          title: 'Activity: Match Computer Parts',
-          instruction: 'Drag each computer part to the correct description box!',
-          items: [
-            { id: 'dnd-item-1', text: 'Monitor', type: 'output', imageUrl: '/images/monitor.png' },
-            { id: 'dnd-item-2', text: 'Keyboard', type: 'input', imageUrl: '/images/keyboard.png' },
-            { id: 'dnd-item-3', text: 'Mouse', type: 'input', imageUrl: '/images/mouse.png' },
-            { id: 'dnd-item-5', text: 'Speakers', type: 'output', imageUrl: '/images/speaker.png' },
-          ],
-          targets: [
-            { id: 'inputTarget', title: 'Input Devices', type: 'input' },
-            { id: 'outputTarget', title: 'Output Devices', type: 'output' },
-          ],
-          audioSrc: '/audio/computer_activity.mp3',
-          speakText: 'Drag each computer part to the correct description box! Is it an input device or an output device?',
-        },
-        {
           "type": "learn",
           "format": "history",
-          "title": "Story: The Magic of Computers",
+          "title": "The Magic of Computers",
           "description": [
             "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer.",
             "Raju asked, 'Dad, what are you doing?'",
@@ -291,6 +273,24 @@ export const standards: Standard = {
           "imageUrl": "/images/mascot.png",
           "audioSrc": "/audio/computer_story.mp3",
           "speakText": "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer. Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.' Raju was amazed! He asked his teacher the next day about computers. His teacher showed the class how computers work. Raju learned that computers can help people do many things quickly and easily. He was very excited to learn more about computers!"
+        },
+        {
+          type: 'drag-drop',
+          format: 'drag-drop',
+          title: 'Activity: Match Computer Parts',
+          instruction: 'Drag each computer part to the correct description box!',
+          items: [
+            { id: 'dnd-item-1', text: 'Monitor', type: 'output', imageUrl: '/images/monitor.png' },
+            { id: 'dnd-item-2', text: 'Keyboard', type: 'input', imageUrl: '/images/keyboard.png' },
+            { id: 'dnd-item-3', text: 'Mouse', type: 'input', imageUrl: '/images/mouse.png' },
+            { id: 'dnd-item-5', text: 'Speakers', type: 'output', imageUrl: '/images/speaker.png' },
+          ],
+          targets: [
+            { id: 'inputTarget', title: 'Input Devices', type: 'input' },
+            { id: 'outputTarget', title: 'Output Devices', type: 'output' },
+          ],
+          audioSrc: '/audio/computer_activity.mp3',
+          speakText: 'Drag each computer part to the correct description box! Is it an input device or an output device?',
         },
         {
           type: 'learn',

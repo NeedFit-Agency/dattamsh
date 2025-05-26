@@ -95,18 +95,20 @@ const History: React.FC<HistoryProps> = ({
           </div>
         </div>
 
-        <h1 className={styles.contentTitle}>{title}</h1>
-        {subtitle && (
-          <p className={styles.contentSubtitle}>
-            {subtitle}
-            <button 
-              className={`${styles.listenButton} ${isAudioPlaying ? styles.listenButtonPlaying : ''}`}
-              onClick={playAudio}
-            >
-              <FontAwesomeIcon icon={faHeadphones} /> {isAudioPlaying ? "Listening..." : "Listen"}
-            </button>
-          </p>
-        )}
+        <div className={styles.headerContent}>
+          <h1 className={styles.contentTitle}>{title}</h1>
+          {subtitle && (
+            <p className={styles.contentSubtitle}>
+              {subtitle}
+              <button 
+                className={`${styles.listenButton} ${isAudioPlaying ? styles.listenButtonPlaying : ''}`}
+                onClick={playAudio}
+              >
+                <FontAwesomeIcon icon={faHeadphones} /> {isAudioPlaying ? "Listening..." : "Listen"}
+              </button>
+            </p>
+          )}
+        </div>
 
         <div className={styles.timeline}>
           {Array.isArray(items) && items.length > 0 ? (
@@ -125,8 +127,8 @@ const History: React.FC<HistoryProps> = ({
                         <Image
                           src={item.visualIcon}
                           alt={item.title}
-                          width={100}
-                          height={100}
+                          width={160}
+                          height={160}
                           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                         />
                       ) : (

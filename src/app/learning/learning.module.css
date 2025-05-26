@@ -474,10 +474,10 @@
 .modalOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.2s ease-out; }
 .modalContent { background-color: var(--white); border-radius: 16px; padding: 24px; max-width: 400px; width: 90%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); animation: slideInModal 0.3s ease-out; }
 .modalButtons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
-.modalCancel, .modalConfirm { padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: var(--font-size-sm); }
+.modalCancel, .modalConfirm { padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: var(--font-size-sm); }
 .modalCancel { background-color: var(--white); border: 1px solid var(--border-light); color: var(--text-dark); }
 .modalCancel:hover { background-color: var(--background-medium); }
-.modalConfirm { background-color: var(--error-red); color: var(--white); }
+.modalConfirm { background-color: var(--error-red); color: var(--white); border: 2px solid #b91c1c; font-weight: 700; box-shadow: 0 2px 8px rgba(220,38,38,0.10); }
 .modalConfirm:hover { background-color: #dc2626; }
 
 /* ----- Animations ----- */
