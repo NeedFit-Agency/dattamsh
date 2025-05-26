@@ -4,11 +4,13 @@ export type FormatType =
   | 'code'
   | 'component'
   | 'drag-drop'
+  | 'choose'
   | 'history'
   | 'quiz'
   | 'step-by-step'
   | 'video'
-  | 'text';
+  | 'text'
+  | 'puzzle';
 
 export interface BaseContentProps {
   type: string;
@@ -23,6 +25,7 @@ export interface LearningSlide extends BaseContentProps {
   description: string | string[];
   imageUrl?: string;
   exampleImages?: { src: string; alt: string }[];
+  prompt?: string;
 }
 
 export interface DraggableItemData {
@@ -100,10 +103,43 @@ export interface Standard {
 
 export const standards: Standard = {
   "1": [
+    
     {
       id: 1,
       title: "Introduction to Nature and Man-made",
       lessonContent: [
+        {
+          type: 'learn',
+          format: 'puzzle',
+          title: 'Meet the Computer! (Puzzle)',
+          description: [
+            'Hi friend! Let\'s find parts of the computer! Computers show us games and cartoons! Can you find the part that shows pictures?'
+          ],
+          imageUrl: '/images/1st-standard/image-1.png',
+          prompt: 'Click the center of the image!'
+        },
+        {
+          type: 'drag-drop',
+          format: 'drag-drop',
+          title: 'Sort Them Out!',
+          instruction:
+            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
+          items: [
+            { id: 'dnd-item-1', text: 'Tree', type: 'natural', imageUrl: '/images/tree.png' },
+            { id: 'dnd-item-2', text: 'Chair', type: 'man-made', imageUrl: '/images/chair.png' },
+            { id: 'dnd-item-3', text: 'Bird', type: 'natural', imageUrl: '/images/bird.png' },
+            { id: 'dnd-item-4', text: 'Cycle', type: 'man-made', imageUrl: '/images/cycle.png' },
+            { id: 'dnd-item-5', text: 'Sun', type: 'natural', imageUrl: '/images/sun.png' },
+            { id: 'dnd-item-6', text: 'Blackboard', type: 'man-made', imageUrl: '/images/blackboard.png' },
+          ],
+          targets: [
+            { id: 'naturalTarget', title: 'Natural Things', type: 'natural' },
+            { id: 'manMadeTarget', title: 'Man-made Things', type: 'man-made' },
+          ],
+          audioSrc: '/audio/04_dnd_instruction.mp3',
+          speakText:
+            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
+        },
         {
           type: 'learn',
           format: 'text',
@@ -152,28 +188,7 @@ export const standards: Standard = {
           audioSrc: '/audio/03_manmade.mp3',
           speakText:
             'Man-made things are things that people build or create. Can you spot some things people made here? A yellow School Bus, a shiny Cycle, a comfy Chair, and a classroom Blackboard.',
-        }, {
-          type: 'drag-drop',
-          format: 'drag-drop',
-          title: 'Activity: Sort Them Out!',
-          instruction:
-            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
-          items: [
-            { id: 'dnd-item-1', text: 'Tree', type: 'natural', imageUrl: '/images/tree.png' },
-            { id: 'dnd-item-2', text: 'Chair', type: 'man-made', imageUrl: '/images/chair.png' },
-            { id: 'dnd-item-3', text: 'Bird', type: 'natural', imageUrl: '/images/bird.png' },
-            { id: 'dnd-item-4', text: 'Cycle', type: 'man-made', imageUrl: '/images/cycle.png' },
-            { id: 'dnd-item-5', text: 'Sun', type: 'natural', imageUrl: '/images/sun.png' },
-            { id: 'dnd-item-6', text: 'Blackboard', type: 'man-made', imageUrl: '/images/blackboard.png' },
-          ],
-          targets: [
-            { id: 'naturalTarget', title: 'Natural Things', type: 'natural' },
-            { id: 'manMadeTarget', title: 'Man-made Things', type: 'man-made' },
-          ],
-          audioSrc: '/audio/04_dnd_instruction.mp3',
-          speakText:
-            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
-        },
+        }, 
       ],
     }, {
       id: 2,

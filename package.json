@@ -18,7 +18,7 @@
     "@splinetool/runtime": "^1.9.96",
     "@types/react-beautiful-dnd": "^13.1.8",
     "@vercel/speed-insights": "^1.2.0",
-    "framer-motion": "^12.6.2",
+    "framer-motion": "^12.12.2",
     "motion": "^12.6.2",
     "next": "15.2.4",
     "react": "^19.0.0",

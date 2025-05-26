@@ -7,7 +7,7 @@ import styles from './LessonPathItem.module.css'; // Ensure this path is correct
 import React, { useState, useEffect } from 'react';
 
 interface LessonPathItemProps {
-  type: 'checkmark' | 'chest' | 'duo' | 'level-badge';
+  type: 'checkmark' | 'chest' | 'robo' | 'level-badge';
   level?: number; // For level-badge
   completed?: boolean; // For checkmark styling
   onClick?: () => void; // Optional click handler
@@ -17,9 +17,9 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
   const [isAnimating, setIsAnimating] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
 
-  // Spin on mount for 'duo'
+  // Spin on mount for 'robo'
   useEffect(() => {
-    if (type === 'duo') {
+    if (type === 'robo') {
       setIsSpinning(true);
       setTimeout(() => setIsSpinning(false), 700); // match spin duration
     }
@@ -34,7 +34,7 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
   }
 
   const handleMascotClick = () => {
-    if (type === 'duo') {
+    if (type === 'robo') {
       setIsAnimating(true);
       setIsSpinning(true);
       setTimeout(() => setIsSpinning(false), 700); // match spin duration
@@ -73,7 +73,7 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
         return <FontAwesomeIcon icon={faCheck} className={styles.icon} />;
       case 'chest':
         return <div className={styles.chestContent}></div>;
-      case 'duo':
+      case 'robo':
         return (
           <div
             className={

@@ -1,14 +1,14 @@
 .progressBar {
     flex-grow: 1;
     height: 16px;
-    background-color: var(--duo-gray-light);
+    background-color: var(--robo-gray-light);
     border-radius: 8px;
     overflow: hidden;
   }
   
   .progressFill {
     height: 100%;
-    background-color: var(--duo-blue-primary);
+    background-color: var(--robo-blue-primary);
     border-radius: 8px;
     transition: width 0.3s ease;
   }

@@ -24,9 +24,9 @@
   
   /* Variants */
   .primaryBlue {
-    background-color: var(--duo-blue-primary);
+    background-color: var(--robo-blue-primary);
     color: white;
-    border-bottom-color: var(--duo-blue-dark);
+    border-bottom-color: var(--robo-blue-dark);
   }
   .primaryBlue:hover {
      background-color: #1aa3e6;
@@ -34,13 +34,13 @@
   
   .secondaryGray {
     background-color: white;
-    color: var(--duo-gray-medium);
-    border: 2px solid var(--duo-border);
+    color: var(--robo-gray-medium);
+    border: 2px solid var(--robo-border);
     border-bottom-width: 4px; /* Ensure consistent sizing */
   }
   .secondaryGray:hover {
     background-color: #f7f7f7;
-    color: var(--duo-gray-dark);
+    color: var(--robo-gray-dark);
   }
   .secondaryGray:active {
       transform: translateY(1px); /* Less travel for bordered */
@@ -49,9 +49,9 @@
   
   
   .yellow {
-    background: linear-gradient(to bottom, #ffdd40, var(--duo-yellow));
-    color: var(--duo-yellow-dark);
-    border-bottom-color: var(--duo-yellow-dark);
+    background: linear-gradient(to bottom, #ffdd40, var(--robo-yellow));
+    color: var(--robo-yellow-dark);
+    border-bottom-color: var(--robo-yellow-dark);
   }
   .yellow:hover {
     background: linear-gradient(to bottom, #ffe460, #ffcf20);

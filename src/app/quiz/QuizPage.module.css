@@ -3,6 +3,7 @@
   flex-direction: column;
   max-width: 800px;
   margin: 0 auto;
+  margin-top: 80px;
   padding: 20px;
   height: 100%;
   gap: 30px;
@@ -484,14 +485,18 @@
   justify-content: center;
   padding: 24px 0 16px 0;
   position: relative;
-  background: transparent;
+  background-color: #f8a915;
   min-height: 60px;
+  font-family: 'Poppins', sans-serif;
+  font-size: large;
+  color: #ffffff;
 }
 
 .headerTitle {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 600;
   color: #222;
+  font-family: 'Poppins', sans-serif;
   letter-spacing: 0.5px;
   text-align: center;
   flex: 1;
