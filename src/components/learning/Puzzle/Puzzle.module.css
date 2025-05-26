@@ -276,3 +276,25 @@
   0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
   100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
+
+.schoolTitle {
+  font-family: 'Fredoka One', 'Comic Sans MS', 'Chalkboard SE', 'Comic Sans', cursive, sans-serif;
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #4a90e2;
+  letter-spacing: 2px;
+  text-align: center;
+  text-shadow: 2px 4px 0 #fff, 0 2px 8px #7ebaff99;
+  position: relative;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.schoolTitle::after {
+  content: '';
+  display: block;
+  width: 80%;
+  height: 12px;
+  margin: 0 auto;
+  background: url('data:image/svg+xml;utf8,<svg width="100%25" height="100%25" viewBox="0 0 300 12" xmlns="http://www.w3.org/2000/svg"><path d="M10 10 Q 60 2, 110 10 T 210 10 T 290 10" stroke="%23f9d923" stroke-width="6" fill="none"/></svg>') no-repeat center/contain;
+  margin-top: 0.1em;
+}

@@ -48,7 +48,7 @@ const Puzzle: React.FC<PuzzleProps & { onBack?: () => void }> = ({
         {/* Header */}
         <div className={styles.headerRow}>
           <div className={styles.titleRow}>
-            <span className={styles.title}>{title}</span>
+            <span className={styles.schoolTitle}>{title}</span>
           </div>
         </div>
 

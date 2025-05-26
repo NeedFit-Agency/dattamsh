@@ -176,7 +176,15 @@ function QuizPageContent() {
           className={styles.continueButton}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => window.location.href = `/standard/${lessonId}`}
+          onClick={() => {
+            const nextLessonId = Number(lessonId) + 1;
+            const chapters = quizzes[standardId];
+            if (chapters && chapters[nextLessonId - 1]) {
+              window.location.href = `/standard/${standardId}/chapter/${nextLessonId}`;
+            } else {
+              window.location.href = '/home';
+            }
+          }}
         >
           CONTINUE
         </motion.button>

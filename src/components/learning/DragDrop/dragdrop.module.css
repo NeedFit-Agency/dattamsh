@@ -442,3 +442,34 @@
     justify-content: center;
   }
 }
+
+.chooseBackButton {
+  background: none;
+  border: none;
+  color: var(--text-medium, #666);
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.25em;
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+}
+.chooseBackButton:hover {
+  background-color: var(--background-medium, #f0f7ff);
+  color: var(--text-dark, #222);
+}
+.backText {
+  font-size: 1em;
+  font-weight: 600;
+  margin-left: 2px;
+  display: none;
+}
+@media (min-width: 640px) {
+  .backText { display: inline; }
+}
