@@ -12,14 +12,14 @@
   }
   
   .card {
-      border: 2px solid var(--duo-border);
+      border: 2px solid var(--robo-border);
       border-radius: 16px;
       padding: 20px;
       background-color: white;
   }
   
   .superCard {
-      border-color: var(--duo-purple);
+      border-color: var(--robo-purple);
       position: relative;
       text-align: center;
   }
@@ -35,10 +35,10 @@
       font-size: 12px;
       letter-spacing: 0.5px;
   }
-  .superImagePlaceholder { /* Placeholder for Super Duo */
+  .superImagePlaceholder { /* Placeholder for Super robo */
       width: 80px;
       height: 70px;
-      background: linear-gradient(135deg, var(--duo-blue-primary), var(--duo-purple)); /* Use Blue */
+      background: linear-gradient(135deg, var(--robo-blue-primary), var(--robo-purple)); /* Use Blue */
       border-radius: 50%;
       margin: 10px auto 15px;
       opacity: 0.7;
@@ -47,16 +47,16 @@
       font-size: 20px;
       margin-bottom: 8px;
       font-weight: 800;
-      color: var(--duo-text-dark);
+      color: var(--robo-text-dark);
   }
   .superCard p {
       font-size: 15px;
-      color: var(--duo-gray-dark);
+      color: var(--robo-gray-dark);
       margin-bottom: 20px;
       line-height: 1.4;
   }
   .ctaButton { /* Blue button */
-      background-color: var(--duo-blue-primary);
+      background-color: var(--robo-blue-primary);
       color: white;
       border: none;
       width: 100%;
@@ -66,7 +66,7 @@
       font-weight: 700;
       cursor: pointer;
       text-transform: uppercase;
-      border-bottom: 4px solid var(--duo-blue-dark);
+      border-bottom: 4px solid var(--robo-blue-dark);
       transition: background-color 0.2s ease;
   }
   .ctaButton:hover {
@@ -86,17 +86,17 @@
   .leaderboardIcon {
       width: 50px;
       height: 50px;
-      background-color: var(--duo-gray-light);
+      background-color: var(--robo-gray-light);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--duo-gray-medium);
+      color: var(--robo-gray-medium);
       font-size: 24px;
       margin-right: 15px;
   }
   .leaderboardContent p {
-      color: var(--duo-gray-dark);
+      color: var(--robo-gray-dark);
       font-size: 15px;
       flex: 1;
   }
@@ -113,7 +113,7 @@
       font-weight: 800;
   }
   .questsHeader a {
-      color: var(--duo-blue-primary); /* Use blue */
+      color: var(--robo-blue-primary); /* Use blue */
       text-decoration: none;
       font-weight: 700;
       font-size: 14px;
@@ -128,10 +128,10 @@
   .questIcon {
       font-size: 24px;
       margin-right: 12px;
-      color: var(--duo-yellow); /* Use yellow for star */
+      color: var(--robo-yellow); /* Use yellow for star */
   }
   .questItem p {
       font-size: 15px;
       font-weight: 700;
-      color: var(--duo-text-dark);
+      color: var(--robo-text-dark);
   }

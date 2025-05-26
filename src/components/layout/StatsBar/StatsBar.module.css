@@ -19,17 +19,17 @@
     vertical-align: middle;
   }
   .streakFreeze {
-    color: var(--duo-gray-medium);
+    color: var(--robo-gray-medium);
   }
   .streakFreeze .icon {
     font-size: 24px;
   }
   .streakCount {
-    color: var(--duo-orange);
+    color: var(--robo-orange);
   }
   .gems {
-    color: var(--duo-blue-primary); /* Use blue */
+    color: var(--robo-blue-primary); /* Use blue */
   }
   .hearts {
-    color: var(--duo-red);
+    color: var(--robo-red);
   }

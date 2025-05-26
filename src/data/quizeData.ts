@@ -32,18 +32,6 @@ export const quizzes: QuizStandard = {
         },
         {
           id: 2,
-          prompt: 'What are machines?',
-          options: [
-            'Things that grow in nature',
-            'Man-made things that help us do work easily',
-            'Things that are always electronic',
-            'Only large factory equipment'
-          ],
-          correctAnswer: 1,
-          explanation: 'Machines are man-made things that help us do our work easily and save time.'
-        },
-        {
-          id: 3,
           imageUrl: '/images/washing-machine.png',
           prompt: 'What does this machine help us do?',
           options: ['Wash clothes', 'Keep food cold', 'Cut paper', 'Sharpen pencils'],
@@ -51,26 +39,12 @@ export const quizzes: QuizStandard = {
           explanation: 'A washing machine helps us wash clothes quickly with less manual effort.'
         },
         {
-          id: 4,
-          prompt: 'Which of these is a MAN-MADE thing?',
-          options: ['Sun', 'Bird', 'Water', 'Scissors'],
-          correctAnswer: 3,
-          explanation: 'Scissors are man-made tools designed to cut things like paper and cloth.'
-        },
-        {
-          id: 5,
+          id: 3,
           imageUrl: '/images/scissors.png',
           prompt: 'What is this machine used for?',
           options: ['Washing clothes', 'Keeping food cold', 'Cutting things', 'Making air move'],
           correctAnswer: 2,
           explanation: 'Scissors are used for cutting things like paper, cloth, and other materials.'
-        },
-        {
-          id: 6,
-          prompt: 'Which of these is NOT a machine?',
-          options: ['Fan', 'Washing Machine', 'Sun', 'Sharpener'],
-          correctAnswer: 2,
-          explanation: 'The Sun is a natural object, not a machine. All other options are machines made by people.'
         }
       ]
     }, 

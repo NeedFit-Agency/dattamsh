@@ -9,7 +9,7 @@ import styles from './LearnPage.module.css';
 import { chapters } from '@/data/chaptersData';
 
 type ContentItemType = {
-  type: 'checkmark' | 'chest' | 'level-badge' | 'duo';
+  type: 'checkmark' | 'chest' | 'level-badge' | 'robo';
   id: number;
   completed: boolean;
   level?: number;
@@ -59,7 +59,7 @@ const getChapterData = (standardId: string, chapterId: string) => {
       { type: 'level-badge' as const, id: 2, level: 2, completed: false },
       { type: 'level-badge' as const, id: 3, level: 3, completed: true },
       { type: 'level-badge' as const, id: 4, level: 4, completed: true },
-      { type: 'duo' as const, id: 6, completed: false }
+      { type: 'robo' as const, id: 6, completed: false }
     ] as ContentItemType[]
   };
 };
@@ -154,9 +154,9 @@ export default function ChapterPage({
         {(() => {
           const nodes: React.ReactNode[] = [];
           chapterData.content.forEach((item, idx) => {
-            // Only 'duo' should never be clickable
-            const isDuo = item.type === 'duo';
-            const isClickable = !isDuo && !(item.type === 'checkmark' && item.completed);
+            // Only 'robo' should never be clickable
+            const isrobo = item.type === 'robo';
+            const isClickable = !isrobo && !(item.type === 'checkmark' && item.completed);
             const itemStyle = positions[item.id] || {};
 
             const lessonNode = isClickable ? (

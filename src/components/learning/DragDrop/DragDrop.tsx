@@ -199,6 +199,13 @@ export const DragDrop: React.FC<DragDropProps> = ({
 
   return (
     <div className={styles.container}>
+      {/* Back Button */}
+      {onBack && (
+        <button className={styles.chooseBackButton} onClick={onBack} aria-label="Go back">
+          <FontAwesomeIcon icon={faArrowLeft} />
+          <span className={styles.backText}>Back</span>
+        </button>
+      )}
       {/* Progress indicator */}
       {typeof progress === 'number' && (
         <div className={styles.progressContainer}>
@@ -209,11 +216,9 @@ export const DragDrop: React.FC<DragDropProps> = ({
         </div>
       )}
 
-      <h2 className={styles.title}>{title}</h2>
-      
       <div className={styles.instructionBox}>
+        <h2 className={styles.title}>{title}</h2>
         <p className={styles.instruction}>{instruction}</p>
-        
         {(audioSrc || speakText) && (
           <button 
             className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`} 

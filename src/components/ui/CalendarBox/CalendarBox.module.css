@@ -1,6 +1,6 @@
 /* Copy all styles from streak_style.css for calendar */
 .calendarBox {
-    border: 2px solid var(--duo-border);
+    border: 2px solid var(--robo-border);
     border-radius: 16px;
     padding: 20px 25px;
     background-color: white;
@@ -19,34 +19,34 @@
   .calendarDays .day {
     font-size: 14px;
     font-weight: 700;
-    color: var(--duo-gray-medium);
+    color: var(--robo-gray-medium);
     width: 30px;
     text-align: center;
   }
   
   .calendarDays .day.active {
-    color: var(--duo-orange); /* Keep Orange */
+    color: var(--robo-orange); /* Keep Orange */
   }
   
   .calendarCircles .circle {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: var(--duo-gray-light);
+    background-color: var(--robo-gray-light);
     display: flex;
     align-items: center;
     justify-content: center;
   }
   
   .calendarCircles .circle.checked {
-    background-color: var(--duo-orange); /* Keep Orange */
+    background-color: var(--robo-orange); /* Keep Orange */
     color: white;
     font-size: 16px;
   }
   
   .calendarInfo {
     font-size: 15px;
-    color: var(--duo-gray-dark);
+    color: var(--robo-gray-dark);
     line-height: 1.4;
     margin-top: 10px;
     text-align: center;

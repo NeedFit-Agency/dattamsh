@@ -56,8 +56,8 @@
     20%, 100% { transform: translateX(100%) rotate(45deg); }
 }
 
-/* Duo Character */
-.duo {
+/* robo Character */
+.robo {
     /* background: linear-gradient(135deg, #4DB9FF, #1AA2FF); */
     /* border-radius: 50% 50% 45% 45%; */
     transform-origin: bottom;
