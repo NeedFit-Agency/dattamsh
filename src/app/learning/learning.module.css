@@ -423,51 +423,80 @@
   z-index: 100;
 }
 .previousButton, .continueButton {
-  padding: 12px 24px;
   border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: bold;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s;
   min-width: 140px;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 15px 35px;
+  box-shadow: 0 4px 0 #2563eb;
+  border: none;
 }
 .previousButton {
-  background-color: var(--white);
-  border: 2px solid var(--border-light);
-  color: var(--text-medium);
+  background-color: #fff;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+  border-radius: 12px;
+  padding: 15px 35px;
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  min-width: 140px;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 0 #2563eb;
 }
 .previousButton:hover:not(:disabled) {
-  background-color: var(--background-medium);
-  border-color: var(--text-light);
-  color: var(--text-dark);
+  background-color: #e5eeff;
+  color: #2563eb;
+  border-color: #2563eb;
   transform: translateY(-2px);
+  box-shadow: 0 4px 0 #2563eb;
+}
+.previousButton:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2563eb;
 }
 .previousButton:disabled {
-  opacity: 0.5;
+  background-color: #e5e5e5;
+  color: #aaaaaa;
+  border-color: #e5e5e5;
   cursor: not-allowed;
+  box-shadow: 0 4px 0 #c5c5c5;
 }
 .continueButton {
-  background-color: #4CAF50;
+  background-color: #3b82f6;
   color: white;
-  border: none;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
 }
 .continueButton:hover:not(:disabled) {
+  background-color: #60a5fa;
+  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.3);
-  background-color: #45a049;
+  box-shadow: 0 4px 0 #2563eb;
+}
+.continueButton:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2563eb;
 }
 .continueButton:disabled {
-  background-color: var(--text-light);
-  border-bottom-color: var(--text-medium);
-  opacity: 0.7;
+  background-color: #e5e5e5;
+  color: #aaaaaa;
   cursor: not-allowed;
-  box-shadow: none;
+  box-shadow: 0 4px 0 #c5c5c5;
 }
 
 /* ----- Modals ----- */
