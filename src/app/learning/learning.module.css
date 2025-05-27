@@ -2,7 +2,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 100%; 
+  max-width: 100%;
   overflow: hidden;
   min-height: calc(100vh - 3rem); /* Adjusted to match container padding */
   background-color: #f5f4ed;
@@ -46,7 +46,7 @@
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
   border-radius: 20px;
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -65,7 +65,8 @@
   color: var(--error-red);
   font-size: var(--font-size-lg); /* Heart icon size */
 }
-.heartsContainer span { /* Optional: Add heart count */
+.heartsContainer span {
+  /* Optional: Add heart count */
   font-size: var(--font-size-base);
   font-weight: 700;
   color: var(--error-red);
@@ -118,7 +119,7 @@
   max-width: 400px;
   height: auto;
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   display: block;
   border: 1px solid var(--border-light);
@@ -140,8 +141,7 @@
   margin-left: auto;
   margin-right: auto;
   backdrop-filter: blur(10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1),
-              0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .exampleImage {
@@ -163,16 +163,16 @@
 }
 
 .exampleImage::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0.05) 100%
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 100%
   );
   z-index: 1;
   opacity: 0;
@@ -181,8 +181,7 @@
 
 .exampleImage:hover {
   transform: translateY(-8px) scale(1.05) rotate(2deg);
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1),
-              0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
   z-index: 2;
 }
 
@@ -226,14 +225,14 @@
 
 /* Speech bubble tail */
 .mascotSpeechBubble::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 100%; /* Position tail to the right of the bubble */
   top: 30px; /* Adjust vertical position */
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
   border-left: 15px solid #e7f8ff; /* Pointing left from bubble */
-  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.03));
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.03));
 }
 
 .mascotSpeechBubble p {
@@ -267,12 +266,12 @@
   background-color: var(--primary-blue-dark);
 }
 .audioButton:active {
-    transform: translateY(1px); /* Subtle press effect */
-    border-bottom-width: 1px;
+  transform: translateY(1px); /* Subtle press effect */
+  border-bottom-width: 1px;
 }
 /* Animation for when audio is playing */
 .audioButtonPlaying {
-    animation: pulse 1.5s infinite;
+  animation: pulse 1.5s infinite;
 }
 
 /* ----- Drag and Drop Specific ----- */
@@ -422,7 +421,8 @@
   width: 100%;
   z-index: 100;
 }
-.previousButton, .continueButton {
+.previousButton,
+.continueButton {
   border-radius: 12px;
   font-size: var(--font-size-sm);
   font-weight: bold;
@@ -437,13 +437,13 @@
   text-transform: uppercase;
   letter-spacing: 0.8px;
   padding: 15px 35px;
-  box-shadow: 0 4px 0 #2563eb;
+  box-shadow: 0 4px 0 #1db0f6;
   border: none;
 }
 .previousButton {
   background-color: #fff;
-  color: #3b82f6;
-  border: 2px solid #3b82f6;
+  color: #1db0f6;
+  border: 1px solid #1db0f6;
   border-radius: 12px;
   padding: 15px 35px;
   font-size: var(--font-size-sm);
@@ -458,18 +458,19 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 0 #2563eb;
+  box-shadow: 0px 5px 0.3px #1999d6;
 }
 .previousButton:hover:not(:disabled) {
   background-color: #e5eeff;
-  color: #2563eb;
-  border-color: #2563eb;
+  color: #1db0f6;
+  border-color: #1db0f6;
   transform: translateY(-2px);
-  box-shadow: 0 4px 0 #2563eb;
+  box-shadow: 0px 5px 0.3px #1999d6;
 }
 .previousButton:active:not(:disabled) {
   transform: translateY(2px);
-  box-shadow: 0 2px 0 #2563eb;
+  
+  box-shadow: 0px 5px 0.3px #1999d6;
 }
 .previousButton:disabled {
   background-color: #e5e5e5;
@@ -479,18 +480,18 @@
   box-shadow: 0 4px 0 #c5c5c5;
 }
 .continueButton {
-  background-color: #3b82f6;
+  background-color: #1db0f6;
   color: white;
 }
 .continueButton:hover:not(:disabled) {
   background-color: #60a5fa;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 0 #2563eb;
+  box-shadow: 0px 5px 0.3px #1999d6;
 }
 .continueButton:active:not(:disabled) {
   transform: translateY(2px);
-  box-shadow: 0 2px 0 #2563eb;
+  box-shadow: 0px 5px 0.3px #1999d6;
 }
 .continueButton:disabled {
   background-color: #e5e5e5;
@@ -500,29 +501,124 @@
 }
 
 /* ----- Modals ----- */
-.modalOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.2s ease-out; }
-.modalContent { background-color: var(--white); border-radius: 16px; padding: 24px; max-width: 400px; width: 90%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); animation: slideInModal 0.3s ease-out; }
-.modalButtons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
-.modalCancel, .modalConfirm { padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: var(--font-size-sm); }
-.modalCancel { background-color: var(--white); border: 1px solid var(--border-light); color: var(--text-dark); }
-.modalCancel:hover { background-color: var(--background-medium); }
-.modalConfirm { background-color: var(--error-red); color: var(--white); border: 2px solid #b91c1c; font-weight: 700; box-shadow: 0 2px 8px rgba(220,38,38,0.10); }
-.modalConfirm:hover { background-color: #dc2626; }
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+.modalContent {
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideInModal 0.3s ease-out;
+}
+.modalButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.modalCancel,
+.modalConfirm {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+}
+.modalCancel {
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  color: var(--text-dark);
+}
+.modalCancel:hover {
+  background-color: var(--background-medium);
+}
+.modalConfirm {
+  background-color: var(--error-red);
+  color: var(--white);
+  border: 2px solid #b91c1c;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+}
+.modalConfirm:hover {
+  background-color: #dc2626;
+}
 
 /* ----- Animations ----- */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideInModal { from { transform: translateY(-20px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
-@keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-@keyframes mascotBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideInModal {
+  from {
+    transform: translateY(-20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes mascotBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 /* ----- Responsive Styles ----- */
 @media (min-width: 640px) {
-  .backText { display: inline; }
-  .headerNavigation { flex-wrap: nowrap; }
+  .backText {
+    display: inline;
+  }
+  .headerNavigation {
+    flex-wrap: nowrap;
+  }
 }
-@media (min-width: 768px) { 
-    .mascotSpeechBubble::after { top: 20px; }
+@media (min-width: 768px) {
+  .mascotSpeechBubble::after {
+    top: 20px;
+  }
 }
 @media (min-width: 1024px) {
 }
@@ -530,31 +626,31 @@
   .learningContainer {
     padding: 0;
   }
-  
+
   .learningContent {
     min-height: 100dvh;
   }
-  
+
   .learningMain {
     padding: 1.5rem 1rem;
   }
-  
+
   .mascotContainer {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .exampleImageContainer {
     grid-template-columns: 1fr;
     padding: 1rem;
     gap: 1rem;
   }
-  
+
   .dropTargetsContainer {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .learningFooter {
     padding: 1rem;
   }
@@ -562,13 +658,13 @@
 
 @media (max-width: 640px) {
   .exampleImageContainer {
-      grid-template-columns: 1fr; /* Single column on mobile */
-      padding: 15px;
-      gap: 15px;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    padding: 15px;
+    gap: 15px;
   }
 
   .exampleImage {
-      height: 140px;
+    height: 140px;
   }
 }
 
@@ -580,102 +676,112 @@
 
 /* Image Styling */
 .draggableItem img {
-    height: 30px;
-    width: 30px;
-    margin-right: 8px;
-    pointer-events: none;
-    object-fit: contain;
+  height: 30px;
+  width: 30px;
+  margin-right: 8px;
+  pointer-events: none;
+  object-fit: contain;
 }
 
 /* Ensure images in the source list are properly sized */
 .draggableSourceList img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-    vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 /* Add some hover effects to the images */
 .draggableItem:hover img {
-    transform: scale(1.1);
-    transition: transform 0.2s ease;
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .exampleImage {
-    animation: fadeInUp 0.6s ease-out forwards;
-    animation-delay: calc(var(--image-index, 0) * 0.1s);
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-delay: calc(var(--image-index, 0) * 0.1s);
 }
 
 /* Tooltip styles */
 .tooltipWrapper {
-    position: relative;
-    display: inline-block;
-    width: 100%;
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 .tooltipWrapper:before {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-8px);
-    padding: 8px 12px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    font-size: 14px;
-    border-radius: 6px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    pointer-events: none;
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  padding: 8px 12px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 .tooltipWrapper:after {
-    content: '';
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 6px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 .tooltipWrapper:hover:before,
 .tooltipWrapper:hover:after {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Add spring animation to example images */
 @keyframes springIn {
-    0% { transform: scale(0.3); opacity: 0; }
-    50% { transform: scale(1.1); }
-    70% { transform: scale(0.9); }
-    100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .exampleImage {
-    animation: springIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-    animation-delay: calc(var(--image-index, 0) * 0.1s);
+  animation: springIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation-delay: calc(var(--image-index, 0) * 0.1s);
 }
 
 .dropTargetColumn.allCorrect {
@@ -708,7 +814,7 @@
   position: absolute;
   width: 10px;
   height: 10px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   opacity: 0;
 }
 
@@ -760,13 +866,17 @@
 
 /* Success sparkle effect */
 .dragDropFeedbackCorrect::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -10%;
   left: -10%;
   right: -10%;
   bottom: -10%;
-  background: radial-gradient(circle, rgba(76, 175, 80, 0.2) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(76, 175, 80, 0.2) 0%,
+    transparent 70%
+  );
   animation: sparkle 2s ease-in-out infinite;
   z-index: -1;
   border-radius: inherit;
@@ -797,7 +907,7 @@
 }
 
 .itemCorrect::before {
-  content: '✓';
+  content: "✓";
   position: absolute;
   right: 10px;
   color: var(--success-green);

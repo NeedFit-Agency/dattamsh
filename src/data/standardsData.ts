@@ -140,57 +140,43 @@ export const standards: Standard = {
           speakText:
             'Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
         },
-        {
-          type: 'learn',
-          format: 'text',
-          title: 'Introduction to Nature and Man-made',
-          description: [
-            "Hi there! I'm Zippy! We see so many things around us every day.",
-            'Some things, like trees and birds, are found in nature.',
-            'Other things, like chairs and cars, are made by people.',
-            "Let's learn the difference together!",
-          ],
-          imageUrl: '/images/intro-scene.png',
-          audioSrc: '/audio/01_intro.mp3',
-          speakText:
-            "Hi there! I'm Zippy! We see so many things around us every day. Some things, like trees and birds, are found in nature. Other things, like chairs and cars, are made by people. Let's learn the difference together!",
-        },
-        {
-          type: 'learn',
-          format: 'text',
-          title: 'Natural Things',
-          description: [
-            "Natural things are things we find in nature. People didn't make them. Look at these examples!",
-          ],
-          exampleImages: [
-            { src: '/images/sun.png', alt: 'The bright Sun' },
-            { src: '/images/water.png', alt: 'Flowing Water' },
-            { src: '/images/tree.png', alt: 'A tall Tree' },
-            { src: '/images/bird.png', alt: 'A flying Bird' },
-          ],
-          audioSrc: '/audio/02_natural.mp3',
-          speakText:
-            "Natural things are things we find in nature. People didn't make them. Look at these examples! The bright Sun, flowing Water, a tall Tree, and a flying Bird.",
-        },
-        {
-          type: 'learn',
-          format: 'text',
-          title: 'Man-made Things',
-          description: [
-            'Man-made things are things that people build or create. Can you spot some things people made here?',
-          ],
-          exampleImages: [
-            { src: '/images/school-bus.png', alt: 'A yellow School Bus' },
-            { src: '/images/cycle.png', alt: 'A shiny Cycle' },
-            { src: '/images/chair.png', alt: 'A comfy Chair' },
-            { src: '/images/blackboard.png', alt: 'A classroom Blackboard' },
-          ],
-          audioSrc: '/audio/03_manmade.mp3',
-          speakText:
-            'Man-made things are things that people build or create. Can you spot some things people made here? A yellow School Bus, a shiny Cycle, a comfy Chair, and a classroom Blackboard.',
-        }, 
+        // {
+        //   type: 'learn',
+        //   format: 'text',
+        //   title: 'Natural Things',
+        //   description: [
+        //     "Natural things are things we find in nature. People didn't make them. Look at these examples!",
+        //   ],
+        //   exampleImages: [
+        //     { src: '/images/sun.png', alt: 'The bright Sun' },
+        //     { src: '/images/water.png', alt: 'Flowing Water' },
+        //     { src: '/images/tree.png', alt: 'A tall Tree' },
+        //     { src: '/images/bird.png', alt: 'A flying Bird' },
+        //   ],
+        //   audioSrc: '/audio/02_natural.mp3',
+        //   speakText:
+        //     "Natural things are things we find in nature. People didn't make them. Look at these examples! The bright Sun, flowing Water, a tall Tree, and a flying Bird.",
+        // },
+        // {
+        //   type: 'learn',
+        //   format: 'text',
+        //   title: 'Man-made Things',
+        //   description: [
+        //     'Man-made things are things that people build or create. Can you spot some things people made here?',
+        //   ],
+        //   exampleImages: [
+        //     { src: '/images/school-bus.png', alt: 'A yellow School Bus' },
+        //     { src: '/images/cycle.png', alt: 'A shiny Cycle' },
+        //     { src: '/images/chair.png', alt: 'A comfy Chair' },
+        //     { src: '/images/blackboard.png', alt: 'A classroom Blackboard' },
+        //   ],
+        //   audioSrc: '/audio/03_manmade.mp3',
+        //   speakText:
+        //     'Man-made things are things that people build or create. Can you spot some things people made here? A yellow School Bus, a shiny Cycle, a comfy Chair, and a classroom Blackboard.',
+        // }, 
       ],
-    }, {
+    }, 
+    {
       id: 2,
       title: "All About Computers",
       lessonContent: [
