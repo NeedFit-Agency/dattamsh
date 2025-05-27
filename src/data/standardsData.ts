@@ -292,7 +292,7 @@ export const standards: Standard = {
         {
           type: 'drag-drop',
           format: 'drag-drop',
-          title: 'Activity: Match Computer Parts',
+          title: 'Match Computer Parts',
           instruction: 'Drag each computer part to the correct description box!',
           items: [
             { id: 'dnd-item-1', text: 'Monitor', type: 'output', imageUrl: '/images/monitor.png' },
@@ -393,7 +393,7 @@ export const standards: Standard = {
         {
           type: 'drag-drop',
           format: 'drag-drop',
-          title: 'Activity: Good or Bad Computer Habits',
+          title: 'Good or Bad Computer Habits',
           instruction:
             'Sort these habits into "Good Habits" or "Bad Habits" for computer care!',
           items: [
@@ -613,7 +613,7 @@ export const standards: Standard = {
         {
           type: 'drag-drop',
           format: 'drag-drop',
-          title: 'Activity: Match the Computer Parts',
+          title: 'Match the Computer Parts',
           instruction:
             'Drag each item to the correct category: Keyboard Parts or Mouse Parts',
           items: [
@@ -741,7 +741,7 @@ export const standards: Standard = {
         {
           type: 'drag-drop',
           format: 'drag-drop',
-          title: 'Activity: Sort the Places',
+          title: 'Sort the Places',
           instruction: 'Drag each place into the correct box: "Places where computers are used" or "Places where computers are not used".',
           items: [
             { id: 'dnd-place-1', text: 'School', type: 'man-made' },
@@ -826,7 +826,7 @@ export const standards: Standard = {
         {
           "type": "learn",
           "format": "text",
-          "title": "Activity: Think and Discuss",
+          "title": "Think and Discuss",
           "description": [
             "Can you think of any other things you can do on a smartphone? Discuss them in class."
           ],
@@ -1132,7 +1132,7 @@ export const standards: Standard = {
         {
           "type": "learn",
           "format": "text",
-          "title": "Activity: Copy a Story",
+          "title": "Copy a Story",
           "description": [
             "1. Find a Story: Take a story from a storybook or write your own in a notebook.",
             "2. Type the Story: Open Notepad and type the story.",
@@ -1306,7 +1306,7 @@ export const standards: Standard = {
         {
           "type": "learn",
           "format": "text",
-          "title": "Activity: Draw a Flower",
+          "title": "Draw a Flower",
           "description": [
             "Use MS Paint on your computer to draw a flower.",
             "Instructions: 1. Use the Circle Tool for the centre. 2. Use the Line Tool for petal outlines. 3. Use the Curve Tool to shape petals. 4. Use the Brush Tool to add details and colours."
@@ -1333,7 +1333,7 @@ export const standards: Standard = {
         {
           "type": "learn",
           "format": "text",
-          "title": "Activity: Draw a Tree",
+          "title": "Draw a Tree",
           "description": [
             "Try drawing a tree using the Line, Curve, and other tools. Add a name to your drawing using the Text tool."
           ],
@@ -1355,7 +1355,7 @@ export const standards: Standard = {
         {
           "type": "learn",
           "format": "text",
-          "title": "Activity: Drawing What You See",
+          "title": "Drawing What You See",
           "description": [
             "1. Find a Picture: Look around for something like a cup or book.",
             "2. Open MS Paint: Click the Paint icon.",
