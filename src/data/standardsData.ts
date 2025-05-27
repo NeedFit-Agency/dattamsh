@@ -123,7 +123,7 @@ export const standards: Standard = {
           format: 'drag-drop',
           title: 'Sort Them Out!',
           instruction:
-            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
+            'Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
           items: [
             { id: 'dnd-item-1', text: 'Tree', type: 'natural', imageUrl: '/images/tree.png' },
             { id: 'dnd-item-2', text: 'Chair', type: 'man-made', imageUrl: '/images/chair.png' },
@@ -138,7 +138,7 @@ export const standards: Standard = {
           ],
           audioSrc: '/audio/04_dnd_instruction.mp3',
           speakText:
-            'Hoot hoot! Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
+            'Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.',
         },
         {
           type: 'learn',

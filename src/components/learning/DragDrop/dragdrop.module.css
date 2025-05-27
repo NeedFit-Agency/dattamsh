@@ -93,20 +93,23 @@
 
 .activityArea {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 24px;
   margin-bottom: 24px;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  padding: 24px;
+  padding: 20px;
+  align-items: flex-start;
 }
 
 .itemsContainer {
   background-color: #f8f9fa;
   border: 1px solid #bbddff;
   border-radius: 12px;
-  padding: 16px;
+  padding: 10px;
+  flex: 1;
+  margin-right: 10px;
 }
 
 .itemsTitle {
@@ -118,9 +121,10 @@
 }
 
 .dragItems {
+  margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 50px;
   justify-content: center;
 }
 
@@ -128,7 +132,7 @@
   background-color: white;
   border: 2px solid #bbddff;
   border-radius: 8px;
-  padding: 8px 12px;
+  padding: 20px 20px;
   min-width: 120px;
   cursor: grab;
   display: flex;
@@ -146,8 +150,8 @@
 }
 
 .dragItemImage {
-  width: 40px;
-  height: 40px;
+  width: 150px;
+  height: 150px;
   overflow: hidden;
   border-radius: 4px;
   display: flex;
@@ -169,7 +173,8 @@
 
 .targetsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  flex: 2;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
@@ -187,7 +192,13 @@
 }
 
 .dropTarget {
-  min-height: 150px;
+  min-width: 340px;
+  max-width: 520px;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  max-height: 420px;
+  height: 320px;
   background-color: #bbddff;
   border: 2px dashed #adb5bd;
   border-radius: 12px;
@@ -196,6 +207,8 @@
   flex-direction: column;
   gap: 12px;
   transition: border-color 0.2s, background-color 0.2s;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .dropTarget:hover {
@@ -246,36 +259,6 @@
   color: var(--text-dark, #343a40);
   flex-grow: 1;
 }
-
-.feedbackIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-}
-
-.correctItem {
-  border-color: var(--success-green, #28a745);
-  background-color: rgba(40, 167, 69, 0.1);
-}
-
-.incorrectItem {
-  border-color: var(--error-red, #dc3545);
-  background-color: rgba(220, 53, 69, 0.1);
-}
-
-.correctIcon {
-  color: var(--success-green, #28a745);
-  font-size: 20px;
-}
-
-.incorrectIcon {
-  color: var(--error-red, #dc3545);
-  font-size: 20px;
-}
-
 .activityControls {
   display: flex;
   justify-content: center;
@@ -354,29 +337,32 @@
 }
 
 .feedbackMessage {
-  padding: 16px;
+  padding: 8px 12px;
   border-radius: 8px;
-  margin-bottom: 24px;
+  margin-top: 10px;
+  margin-bottom: 0;
   text-align: center;
   animation: fadeIn 0.3s ease;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .correctFeedback {
-  background-color: #28a745;
+  background-color: #e6f9ed;
   border: 1px solid var(--success-green, #28a745);
-  color: #fff;
+  color: #218838;
 }
 
 .incorrectFeedback {
-  background-color: rgba(220, 53, 69, 0.1);
+  background-color: #fff0f0;
   border: 1px solid var(--error-red, #dc3545);
-  color: var(--error-red, #dc3545);
+  color: #d32f2f;
 }
 
 .navigationFooter {
   position: absolute;
   left: 0;
-  bottom: -80px;
+  bottom: -20px;
   width: 100vw;
   background: #fff;
   box-shadow: none;
@@ -463,27 +449,25 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .activityArea {
+    flex-direction: column;
     gap: 16px;
   }
-  
+  .itemsContainer {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
   .targetsGrid {
     grid-template-columns: 1fr;
   }
-  
-  .dragItem, .droppedItem {
-    min-width: 100px;
-  }
-  
-  .navigationFooter {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .navigationButton {
+  .dropTarget {
+    min-width: 180px;
+    max-width: 100%;
     width: 100%;
-    justify-content: center;
+    min-height: 120px;
+    max-height: 220px;
+    height: 140px;
   }
 }
 
@@ -516,4 +500,18 @@
 }
 @media (min-width: 640px) {
   .backText { display: inline; }
+}
+
+.dragItemDisabled {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(0.7);
+}
+
+.emptyMessage {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  font-size: 18px;
+  font-style: italic;
 }

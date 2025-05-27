@@ -413,7 +413,7 @@
 
 .learningFooter {
   display: flex;
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1rem;
   border-top: 1px solid var(--border-light);
   background-color: var(--white);
   justify-content: space-between;
@@ -569,6 +569,12 @@
 
   .exampleImage {
       height: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .learningFooter {
+    padding: 0.5rem 0.5rem;
   }
 }
 
