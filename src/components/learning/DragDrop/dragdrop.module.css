@@ -473,3 +473,36 @@
 @media (min-width: 640px) {
   .backText { display: inline; }
 }
+
+.demoContainer {
+  width: 400px;
+  height: 200px;
+  border: 2px dashed #1aa2ff;
+  border-radius: 16px;
+  margin: 40px auto;
+  position: relative;
+  background: #f0f8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demoBox {
+  width: 100px;
+  height: 100px;
+  background-color: #dd00ee;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: box-shadow 0.2s, background 0.2s;
+}

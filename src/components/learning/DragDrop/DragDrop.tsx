@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones, faCheckCircle, faTimesCircle, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -341,5 +341,26 @@ export const DragDrop: React.FC<DragDropProps> = ({
     </div>
   );
 };
+
+export function DragDemo() {
+  const constraintsRef = useRef(null);
+
+  return (
+    <div
+      ref={constraintsRef}
+      className={styles.demoContainer}
+    >
+      <motion.div
+        drag
+        dragConstraints={constraintsRef}
+        className={styles.demoBox}
+        whileDrag={{ scale: 1.15, rotate: 10, boxShadow: "0 8px 24px rgba(26,162,255,0.25)" }}
+        whileTap={{ cursor: "grabbing" }}
+      >
+        Drag me!
+      </motion.div>
+    </div>
+  );
+}
 
 export default DragDrop;
