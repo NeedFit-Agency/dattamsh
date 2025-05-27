@@ -51,8 +51,8 @@
 }
 
 .instructionBox {
-  background-color: var(--background-light, #f8f9fa);
-  border: 1px solid var(--border-light, #dee2e6);
+  background-color:#f8f9fa;
+  border: 1px solid var(--border-light);
   border-radius: 12px;
   padding: 16px;
   margin-top: 20px;
@@ -103,7 +103,7 @@
 }
 
 .itemsContainer {
-  background-color: var(--background-light, #f8f9fa);
+  background-color: #f8f9fa;
   border: 1px solid var(--border-light, #dee2e6);
   border-radius: 12px;
   padding: 16px;
@@ -188,8 +188,8 @@
 
 .dropTarget {
   min-height: 150px;
-  background-color: var(--background-light, #f8f9fa);
-  border: 2px dashed var(--border-medium, #adb5bd);
+  background-color: #bbddff;
+  border: 2px dashed #adb5bd;
   border-radius: 12px;
   padding: 16px;
   display: flex;
@@ -284,43 +284,73 @@
 }
 
 .checkButton {
-  background-color: var(--primary, #1aa2ff);
+  background-color: #3b82f6;
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: 12px;
+  padding: 15px 35px;
+  font-weight: bold;
+  font-size: var(--font-size-sm);
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 .checkButton:hover:not(:disabled) {
-  background-color: var(--primary-dark, #0080e6);
+  background-color: #60a5fa;
+  transform: translateY(-2px);
+}
+
+.checkButton:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2563eb;
 }
 
 .checkButton:disabled {
-  background-color: var(--text-light, #adb5bd);
+  background-color: #e5e5e5;
+  color: #aaaaaa;
   cursor: not-allowed;
+  box-shadow: 0 4px 0 #c5c5c5;
 }
 
 .resetButton {
-  background-color: var(--text-medium, #6c757d);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
+  background-color: #fff;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+  border-radius: 12px;
+  padding: 15px 35px;
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #2563eb;
 }
 
-.resetButton:hover {
-  background-color: var(--text-dark, #343a40);
+.resetButton:hover:not(:disabled) {
+  background-color: #e5eeff;
+  color: #2563eb;
+  border-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #2563eb;
+}
+
+.resetButton:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2563eb;
+}
+
+.resetButton:disabled {
+  background-color: #e5e5e5;
+  color: #aaaaaa;
+  border-color: #e5e5e5;
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 #c5c5c5;
 }
 
 .feedbackMessage {
@@ -358,29 +388,43 @@
 }
 
 .navigationButton {
-  min-width: 160px;
-  min-height: 48px;
-  border-radius: 18px;
-  padding: 12px 28px;
-  font-size: 20px;
-  margin: 0 56px;
+  background-color: #3b82f6;
+  color: white;
   border: none;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  min-width: 100px;
+  min-height: 20px;
+  margin: 0 40px;
   display: flex;
   align-items: center;
   gap: 12px;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-
-.navigationButton {
-  background: #fff3d4;
-  color: #a06c4e;
 }
 
 .navigationButton:hover:not(:disabled) {
-  background: #ffe7a0;
-  color: #7a4a1e;
-  box-shadow: 0 4px 16px rgba(160,108,78,0.10);
+  background-color: #60a5fa;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #2563eb;
+}
+
+.navigationButton:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2563eb;
+}
+
+.navigationButton:disabled {
+  background-color: #e5e5e5;
+  color: #aaaaaa;
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 #c5c5c5;
 }
 
 .continueButton {
