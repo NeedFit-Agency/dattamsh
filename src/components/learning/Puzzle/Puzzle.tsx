@@ -22,13 +22,14 @@ const Puzzle: React.FC<PuzzleProps & {
 }) => {
   const [feedback, setFeedback] = useState<'success' | 'wrong' | null>(null);
   const [clickedHotspots, setClickedHotspots] = useState<Set<string>>(new Set());
+  const [wrongHotspotIndex, setWrongHotspotIndex] = useState<number | null>(null);
 
   const handleBack = () => {
     if (onBack) onBack();
     else if (typeof window !== 'undefined') window.history.back();
   };
 
-  const handleHotspot = (hotspot: { part: string; position: string; isCorrect: boolean }) => {
+  const handleHotspot = (hotspot: { part: string; position: string; isCorrect: boolean }, index: number) => {
     // Prevent multiple clicks on the same hotspot
     if (clickedHotspots.has(hotspot.part)) return;
 
@@ -37,20 +38,25 @@ const Puzzle: React.FC<PuzzleProps & {
       setClickedHotspots(prev => new Set(prev).add(hotspot.part));
       setTimeout(() => {
         setFeedback(null);
+        setWrongHotspotIndex(null);
         if (typeof onNext === 'function') {
           onNext();
         }
       }, 2000);
     } else {
       setFeedback('wrong');
-      setTimeout(() => setFeedback(null), 1200);
+      setWrongHotspotIndex(index);
+      setTimeout(() => {
+        setFeedback(null);
+        setWrongHotspotIndex(null);
+      }, 1200);
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent, hotspot: { part: string; position: string; isCorrect: boolean }) => {
+  const handleKeyDown = (e: React.KeyboardEvent, hotspot: { part: string; position: string; isCorrect: boolean }, index: number) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      handleHotspot(hotspot);
+      handleHotspot(hotspot, index);
     }
   };
 
@@ -104,16 +110,25 @@ const Puzzle: React.FC<PuzzleProps & {
                 key={`${hotspot.part}-${index}`}
                 className={`${styles.hotspot} ${positionClass}`}
                 aria-label={`Click on ${hotspot.part}`}
-                onClick={() => handleHotspot(hotspot)}
-                onKeyDown={(e) => handleKeyDown(e, hotspot)}
+                onClick={() => handleHotspot(hotspot, index)}
+                onKeyDown={(e) => handleKeyDown(e, hotspot, index)}
                 tabIndex={0}
                 disabled={isClicked}
                 style={{
                   opacity: isClicked ? 0.5 : 1,
-                  pointerEvents: isClicked ? 'none' : 'auto'
+                  pointerEvents: isClicked ? 'none' : 'auto',
+                  position: 'absolute',
+                  overflow: 'visible',
                 }}
                 title={`Find the ${hotspot.part}`}
-              />
+              >
+                {/* Feedback overlays for wrong answer, shown inside the clicked hotspot */}
+                {feedback === 'wrong' && wrongHotspotIndex === index && (
+                  <span className={styles.hotspotFeedback} role="alert" aria-live="assertive">
+                    <span role="img" aria-label="Try again">❌</span> Try again!
+                  </span>
+                )}
+              </button>
             );
           })}
 
@@ -127,18 +142,6 @@ const Puzzle: React.FC<PuzzleProps & {
             >
               <span role="img" aria-label="Correct">✅</span> 
               Great job!
-            </motion.div>
-          )}
-          
-          {feedback === 'wrong' && (
-            <motion.div 
-              className={styles.wrongFeedback}
-              initial={{ scale: 0.6, opacity: 0, x: '-50%', y: '-50%' }}
-              animate={{ scale: 1, opacity: 1, x: '-50%', y: '-50%' }}
-              exit={{ scale: 0, opacity: 0, x: '-50%', y: '-50%' }}
-            >
-              <span role="img" aria-label="Try again">❌</span> 
-              Try again!
             </motion.div>
           )}
           
