@@ -4,6 +4,7 @@ import { PuzzleProps } from './types';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Confetti from '../../shared/Confetti/Confetti';
 
 const Puzzle: React.FC<PuzzleProps & { 
   onBack?: () => void; 
@@ -49,6 +50,7 @@ const Puzzle: React.FC<PuzzleProps & {
       setTimeout(() => {
         setFeedback(null);
         setWrongHotspotIndex(null);
+        setClickedHotspots(prev => new Set(prev).add(hotspot.part));
       }, 1200);
     }
   };
@@ -105,6 +107,8 @@ const Puzzle: React.FC<PuzzleProps & {
             const positionClass = styles[hotspot.position] || '';
             const isClicked = clickedHotspots.has(hotspot.part);
             
+            if (isClicked) return null;
+            
             return (
               <button
                 key={`${hotspot.part}-${index}`}
@@ -113,10 +117,7 @@ const Puzzle: React.FC<PuzzleProps & {
                 onClick={() => handleHotspot(hotspot, index)}
                 onKeyDown={(e) => handleKeyDown(e, hotspot, index)}
                 tabIndex={0}
-                disabled={isClicked}
                 style={{
-                  opacity: isClicked ? 0.5 : 1,
-                  pointerEvents: isClicked ? 'none' : 'auto',
                   position: 'absolute',
                   overflow: 'visible',
                 }}
@@ -132,7 +133,8 @@ const Puzzle: React.FC<PuzzleProps & {
             );
           })}
 
-          {/* Feedback overlays */}
+          {/* Confetti and Feedback overlays */}
+          {feedback === 'success' && <Confetti count={40} />}
           {feedback === 'success' && (
             <motion.div 
               className={styles.successFeedback}
