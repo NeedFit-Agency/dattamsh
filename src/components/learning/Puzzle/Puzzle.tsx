@@ -7,7 +7,8 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Puzzle: React.FC<PuzzleProps & { 
   onBack?: () => void; 
-  hotspots?: { part: string; position: string; isCorrect: boolean }[] 
+  hotspots?: { part: string; position: string; isCorrect: boolean }[]; 
+  onNext?: () => void;
 }> = ({
   title,
   subtitle,
@@ -17,6 +18,7 @@ const Puzzle: React.FC<PuzzleProps & {
   prompt,
   onBack,
   hotspots = [],
+  onNext,
 }) => {
   const [feedback, setFeedback] = useState<'success' | 'wrong' | null>(null);
   const [clickedHotspots, setClickedHotspots] = useState<Set<string>>(new Set());
@@ -33,7 +35,12 @@ const Puzzle: React.FC<PuzzleProps & {
     if (hotspot.isCorrect) {
       setFeedback('success');
       setClickedHotspots(prev => new Set(prev).add(hotspot.part));
-      setTimeout(() => setFeedback(null), 2000);
+      setTimeout(() => {
+        setFeedback(null);
+        if (typeof onNext === 'function') {
+          onNext();
+        }
+      }, 2000);
     } else {
       setFeedback('wrong');
       setTimeout(() => setFeedback(null), 1200);
@@ -114,9 +121,9 @@ const Puzzle: React.FC<PuzzleProps & {
           {feedback === 'success' && (
             <motion.div 
               className={styles.successFeedback}
-              initial={{ scale: 0.6, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.6, opacity: 0 }}
+              initial={{ scale: 0.6, opacity: 0, x: '-50%', y: '-50%' }}
+              animate={{ scale: 1, opacity: 1, x: '-50%', y: '-50%' }}
+              exit={{ scale: 0, opacity: 0, x: '-50%', y: '-50%' }}
             >
               <span role="img" aria-label="Correct">✅</span> 
               Great job!
@@ -126,14 +133,15 @@ const Puzzle: React.FC<PuzzleProps & {
           {feedback === 'wrong' && (
             <motion.div 
               className={styles.wrongFeedback}
-              initial={{ scale: 0.6, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.6, opacity: 0 }}
+              initial={{ scale: 0.6, opacity: 0, x: '-50%', y: '-50%' }}
+              animate={{ scale: 1, opacity: 1, x: '-50%', y: '-50%' }}
+              exit={{ scale: 0, opacity: 0, x: '-50%', y: '-50%' }}
             >
               <span role="img" aria-label="Try again">❌</span> 
               Try again!
             </motion.div>
           )}
+          
         </motion.div>
 
         {/* Prompt */}

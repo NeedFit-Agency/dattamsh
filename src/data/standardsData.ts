@@ -112,16 +112,15 @@ export const standards: Standard = {
         {
           type: 'learn',
           format: 'puzzle',
-          title: 'Meet the Keyboard!',
+          title: 'Meet the Monitor!',
           description: [
-            'Hi friend! Let\'s find parts of the computer! The keyboard helps us type words and numbers!'
+            'Hi friend! Let\'s find parts of the computer! The monitor helps us see what the computer is doing!'
           ],
           imageUrl: '/images/1st-standard/puzzle.png',
-          prompt: 'Can you find the part of computer that helps you type letters and numbers?',
+          prompt: 'Can you find the part of computer that helps you see what the computer is doing?',
           hotspots: [
             { part: 'monitor', position: 'center', isCorrect: true },
             { part: 'keyboard', position: 'leftTop', isCorrect: false },
-            { part: 'star', position: 'rightTop', isCorrect: false }
           ]
         },
         // {
