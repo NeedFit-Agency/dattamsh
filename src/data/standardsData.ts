@@ -26,6 +26,7 @@ export interface LearningSlide extends BaseContentProps {
   imageUrl?: string;
   exampleImages?: { src: string; alt: string }[];
   prompt?: string;
+  hotspots?: { part: string; position: string; isCorrect: boolean }[];
 }
 
 export interface DraggableItemData {
@@ -111,13 +112,28 @@ export const standards: Standard = {
         {
           type: 'learn',
           format: 'puzzle',
-          title: 'Meet the Computer! (Puzzle)',
+          title: 'Meet the Keyboard!',
           description: [
-            'Hi friend! Let\'s find parts of the computer! Computers show us games and cartoons! Can you find the part that shows pictures?'
+            'Hi friend! Let\'s find parts of the computer! The keyboard helps us type words and numbers!'
           ],
-          imageUrl: '/images/1st-standard/image-1.png',
-          prompt: 'Click the center of the image!'
+          imageUrl: '/images/1st-standard/puzzle.png',
+          prompt: 'Can you find the part of computer that helps you type letters and numbers?',
+          hotspots: [
+            { part: 'monitor', position: 'center', isCorrect: true },
+            { part: 'keyboard', position: 'leftTop', isCorrect: false },
+            { part: 'star', position: 'rightTop', isCorrect: false }
+          ]
         },
+        // {
+        //   type: 'learn',
+        //   format: 'puzzle',
+        //   title: 'Meet the Keyboard!',
+        //   description: [
+        //     'Hi friend! Let\'s find parts of the computer! The keyboard helps us type words and numbers!'
+        //   ],
+        //   imageUrl: '/images/1st-standard/puzzle.png',
+        //   prompt: 'Can you find the part of computer that helps you type letters and numbers?'
+        // },
         {
           type: 'drag-drop',
           format: 'drag-drop',

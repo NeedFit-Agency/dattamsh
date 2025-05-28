@@ -237,6 +237,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
           chatText={Array.isArray(puzzleContent.description) ? puzzleContent.description[0] : (puzzleContent.description || 'Can you solve the puzzle?')}
           imageUrl={puzzleContent.imageUrl}
           prompt={puzzleContent.prompt}
+          hotspots={puzzleContent.hotspots}
           onBack={onBack}
         />
       );
