@@ -106,6 +106,24 @@ export interface Standard {
   [key: string]: Chapter[];
 }
 
+export interface Step {
+  id: string;
+  number: number;
+  title: string;
+  instruction: string;
+  visualContent: string | { src: string; alt?: string };
+  audioContent?: string;
+}
+
+// Fun facts for 'What Can Computers Do?' lesson (1st standard, chapter 2)
+export const funFacts = [
+  "Computers help us write stories and letters!",
+  "You can draw amazing pictures on a computer!",
+  "Playing games on a computer is super fun!",
+  "You can watch videos and learn new things!",
+];
+
+
 export const standards: Standard = {
   "1": [
     {
@@ -151,43 +169,43 @@ export const standards: Standard = {
             {
               id: "dnd-item-1",
               text: "Tree",
-              type: "natural",
+              type: "option-1",
               imageUrl: "/images/tree.png",
             },
             {
               id: "dnd-item-2",
               text: "Chair",
-              type: "man-made",
+              type: "option-2",
               imageUrl: "/images/chair.png",
             },
             {
               id: "dnd-item-3",
               text: "Bird",
-              type: "natural",
+              type: "option-1",
               imageUrl: "/images/bird.png",
             },
             {
               id: "dnd-item-4",
               text: "Cycle",
-              type: "man-made",
+              type: "option-2",
               imageUrl: "/images/cycle.png",
             },
             {
               id: "dnd-item-5",
               text: "Sun",
-              type: "natural",
+              type: "option-1",
               imageUrl: "/images/sun.png",
             },
             {
               id: "dnd-item-6",
               text: "Blackboard",
-              type: "man-made",
+              type: "option-2",
               imageUrl: "/images/blackboard.png",
             },
           ],
           targets: [
-            { id: "naturalTarget", title: "Natural Things", type: "natural" },
-            { id: "manMadeTarget", title: "Man-made Things", type: "man-made" },
+            { id: "naturalTarget", title: "Natural Things", type: "option-1" },
+            { id: "manMadeTarget", title: "Man-made Things", type: "option-2" },
           ],
           audioSrc: "/audio/04_dnd_instruction.mp3",
           speakText:
@@ -496,43 +514,43 @@ export const standards: Standard = {
             {
               id: "dnd-item-1",
               text: "Eating chips while using the computer",
-              type: "man-made",
+              type: "option-2",
               imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-2",
               text: "Wiping the screen with a soft cloth",
-              type: "natural",
+              type: "option-1",
               imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-3",
               text: "Shutting down properly",
-              type: "natural",
+              type: "option-1",
               imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-4",
               text: "Banging on the keyboard when angry",
-              type: "man-made",
+              type: "option-2",
               imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-5",
               text: "Taking breaks during computer use",
-              type: "natural",
+              type: "option-1",
               imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-6",
               text: "Putting drinks next to the computer",
-              type: "man-made",
+              type: "option-2",
               imageUrl: "/images/1st-standard/clean-computer.png",
             },
           ],
           targets: [
-            { id: "naturalTarget", title: "Good Habits", type: "natural" },
-            { id: "manMadeTarget", title: "Bad Habits", type: "man-made" },
+            { id: "naturalTarget", title: "Good Habits", type: "option-1" },
+            { id: "manMadeTarget", title: "Bad Habits", type: "option-2" },
           ],
           audioSrc: "/audio/computer_habits.mp3",
           speakText:
@@ -716,43 +734,43 @@ export const standards: Standard = {
             {
               id: "dnd-item-1",
               text: "Space Bar",
-              type: "natural",
+              type: "option-1",
               imageUrl: "/images/1st-standard/space-bar.png",
             },
             {
               id: "dnd-item-2",
               text: "Left Click Button",
-              type: "man-made",
+              type: "option-2",
               imageUrl: "/images/1st-standard/left-click-button.png",
             },
             {
               id: "dnd-item-3",
               text: "Enter Key",
-              type: "natural",
+              type: "option-1",
               imageUrl: "/images/1st-standard/enter-key.png",
             },
             {
               id: "dnd-item-4",
               text: "Scroll Wheel",
-              type: "man-made",
+              type: "option-2",
               imageUrl: "/images/1st-standard/scroll-wheel.png",
             },
             {
               id: "dnd-item-5",
               text: "Arrow Keys",
-              type: "natural",
+              type: "option-1",
               imageUrl: "/images/1st-standard/arrow-keys.png",
             },
             {
               id: "dnd-item-6",
               text: "Right Click Button",
-              type: "man-made",
+              type: "option-2",
               imageUrl: "/images/1st-standard/right-click-button.png",
             },
           ],
           targets: [
-            { id: "naturalTarget", title: "Keyboard Parts", type: "natural" },
-            { id: "manMadeTarget", title: "Mouse Parts", type: "man-made" },
+            { id: "naturalTarget", title: "Keyboard Parts", type: "option-1" },
+            { id: "manMadeTarget", title: "Mouse Parts", type: "option-2" },
           ],
           audioSrc: "/audio/match_parts.mp3",
           speakText:
@@ -854,23 +872,23 @@ export const standards: Standard = {
           instruction:
             'Drag each place into the correct box: "Places where computers are used" or "Places where computers are not used".',
           items: [
-            { id: "dnd-place-1", text: "School", type: "man-made" },
-            { id: "dnd-place-3", text: "Library", type: "man-made" },
-            { id: "dnd-place-4", text: "Bank", type: "man-made" },
-            { id: "dnd-place-6", text: "Playground", type: "natural" },
-            { id: "dnd-place-7", text: "Forest", type: "natural" },
-            { id: "dnd-place-8", text: "Beach", type: "natural" },
+            { id: "dnd-place-1", text: "School", type: "option-2" },
+            { id: "dnd-place-3", text: "Library", type: "option-2" },
+            { id: "dnd-place-4", text: "Bank", type: "option-2" },
+            { id: "dnd-place-6", text: "Playground", type: "option-1" },
+            { id: "dnd-place-7", text: "Forest", type: "option-1" },
+            { id: "dnd-place-8", text: "Beach", type: "option-1" },
           ],
           targets: [
             {
               id: "manMadeTarget",
               title: "Places where computers are used",
-              type: "man-made",
+              type: "option-2",
             },
             {
               id: "naturalTarget",
               title: "Places where computers are not used",
-              type: "natural",
+              type: "option-1",
             },
           ],
           audioSrc: "/audio/dragdrop_places.mp3",
@@ -932,10 +950,7 @@ export const standards: Standard = {
             "Smartphones are like small computers that fit in your pocket. They can do many things. For example: make phone calls, send messages and emails, take pictures, play games, listen to music, help people find their way with maps, search for information on the internet.",
           ],
           exampleImages: [
-            {
-              src: "/images/2nd-standard/communications.png",
-              alt: "Making phone calls",
-            },
+            { src: "/images/smartphone_calls.png", alt: "Making phone calls" },
             { src: "/images/smartphone_messages.png", alt: "Sending messages" },
             { src: "/images/smartphone_camera.png", alt: "Taking pictures" },
             { src: "/images/smartphone_games.png", alt: "Playing games" },
@@ -1623,19 +1638,3 @@ export const standards: Standard = {
   ],
 };
 
-export interface Step {
-  id: string;
-  number: number;
-  title: string;
-  instruction: string;
-  visualContent: string | { src: string; alt?: string };
-  audioContent?: string;
-}
-
-// Fun facts for 'What Can Computers Do?' lesson (1st standard, chapter 2)
-export const funFacts = [
-  "Computers help us write stories and letters!",
-  "You can draw amazing pictures on a computer!",
-  "Playing games on a computer is super fun!",
-  "You can watch videos and learn new things!",
-];
