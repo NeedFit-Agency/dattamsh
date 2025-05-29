@@ -24,7 +24,7 @@ export interface LearningSlide extends BaseContentProps {
   type: 'learn';
   description: string | string[];
   imageUrl?: string;
-  exampleImages?: { src: string; alt: string }[];
+  exampleImages?: { src: string; alt: string; fact?: string }[];
   prompt?: string;
   hotspots?: { part: string; position: string; isCorrect: boolean }[];
 }
@@ -216,10 +216,10 @@ export const standards: Standard = {
             "Pick the card by clicking on it!",
           ],
           exampleImages: [
-            { src: '/images/1st-standard/computer-to-write.png', alt: 'Using a computer to write' },
-            { src: '/images/1st-standard/computer-to-draw.png', alt: 'Using a computer to draw' },
-            { src: '/images/1st-standard/computer-to-play.png', alt: 'Playing games on a computer' },
-            { src: '/images/1st-standard/computer-to-watch.png', alt: 'Watching videos on a computer' },
+            { src: '/images/1st-standard/computer-to-write.png', alt: 'Using a computer to write', fact: 'Computers help us write stories and letters!' },
+            { src: '/images/1st-standard/computer-to-draw.png', alt: 'Using a computer to draw', fact: 'You can draw amazing pictures on a computer!' },
+            { src: '/images/1st-standard/computer-to-play.png', alt: 'Playing games on a computer', fact: 'Playing games on a computer is super fun!' },
+            { src: '/images/1st-standard/computer-to-watch.png', alt: 'Watching videos on a computer', fact: 'You can watch videos and learn new things!' },
           ],
           audioSrc: '/audio/computer_uses.mp3',
           speakText: "Pick the card by clicking on it!"
@@ -230,13 +230,7 @@ export const standards: Standard = {
           title: 'Parts of a Computer',
           description: [
           ],
-          exampleImages: [
-            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
-            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
-            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
-            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
-            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
-          ],
+  
           imageUrl: '/images/mascot.png',
           audioSrc: '/audio/computer_parts.mp3',
           speakText: "Just like our body has different parts that help us do different things, a computer also has different parts! Let's learn about the main parts of a computer: Monitor, Keyboard, Mouse, CPU, and Speakers."
@@ -1445,3 +1439,11 @@ export interface Step {
   visualContent: string | { src: string; alt?: string };
   audioContent?: string;
 }
+
+// Fun facts for 'What Can Computers Do?' lesson (1st standard, chapter 2)
+export const funFacts = [
+  'Computers help us write stories and letters!',
+  'You can draw amazing pictures on a computer!',
+  'Playing games on a computer is super fun!',
+  'You can watch videos and learn new things!'
+];

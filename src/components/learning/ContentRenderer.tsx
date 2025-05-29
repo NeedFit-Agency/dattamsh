@@ -210,7 +210,6 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
       );
     }
     case 'text': {
-      // LearningSlide is in standardsData
       const textContent = content as import('../../data/standardsData').LearningSlide;
       return (
         <Text

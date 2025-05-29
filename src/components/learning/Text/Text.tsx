@@ -34,14 +34,6 @@ const formatContentWithEmojis = (text: string): React.ReactNode => {
   return text;
 };
 
-// Fun facts for each example image (fallback if not provided)
-const defaultFunFacts = [
-  'Computers help us write stories and letters!',
-  'You can draw amazing pictures on a computer!',
-  'Playing games on a computer is super fun!',
-  'You can watch videos and learn new things!'
-];
-
 const mascotPhrases = [
   'Great job!',
   'Awesome pick!',
@@ -234,12 +226,7 @@ const Text: React.FC<TextProps> = ({
                           aria-live="polite"
                         >
                           <span className={styles.funFact}>
-                            {img.alt && img.alt.includes('write') && 'Did you know? Computers help us write stories and letters!'}
-                            {img.alt && img.alt.includes('draw') && 'You can draw amazing pictures on a computer!'}
-                            {img.alt && img.alt.includes('games') && 'Playing games on a computer is super fun!'}
-                            {img.alt && img.alt.includes('videos') && 'You can watch videos and learn new things!'}
-                            {/* fallback */}
-                            {!img.alt && defaultFunFacts[index]}
+                            {img.fact || ''}
                           </span>
                           {flippedIndex === index && (
                             <div className={styles.greatJobBadge} aria-live="polite">Great job!</div>
