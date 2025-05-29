@@ -11,9 +11,6 @@ export function useLearningState() {
   const initialLessonContent = standards["1"][0].lessonContent;
   const currentContent = initialLessonContent[currentSlideIndex] || null;
 
-  useEffect(() => {
-    // Logic to fetch and set chapter content
-  }, []);
 
   const handleBackClick = () => {
     if (currentSlideIndex > 0) {

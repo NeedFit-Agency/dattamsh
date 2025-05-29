@@ -308,15 +308,19 @@ export const standards: Standard = {
           speakText: "Pick the card by clicking on it!",
         },
         {
-          type: "learn",
-          format: "text",
-          title: "Parts of a Computer",
-          description: [],
-
-          imageUrl: "/images/mascot.png",
-          audioSrc: "/audio/computer_parts.mp3",
-          speakText:
-            "Just like our body has different parts that help us do different things, a computer also has different parts! Let's learn about the main parts of a computer: Monitor, Keyboard, Mouse, CPU, and Speakers.",
+          "type": "learn",
+          "format": "text",
+          "title": "Parts of a Computer",
+          "description": "Just like our body has different parts, a computer has parts too! Click to learn about them!",
+          "exampleImages": [
+            { "src": "/images/1st-standard/monitor.png", "alt": "A computer Monitor", "fact": "The monitor shows us pictures and videos!" },
+            { "src": "/images/1st-standard/keyboard.png", "alt": "A computer Keyboard", "fact": "The keyboard helps us type letters and numbers!" },
+            { "src": "/images/1st-standard/mouse.png", "alt": "A computer Mouse", "fact": "The mouse lets us click and move on the screen!" },
+            { "src": "/images/1st-standard/cpu.png", "alt": "A computer CPU", "fact": "The CPU is the brain that makes the computer work!" },
+            { "src": "/images/1st-standard/speakers.png", "alt": "Computer Speakers", "fact": "Speakers play music and sounds for us!" }
+          ],
+          "audioSrc": "/audio/computer_parts.mp3",
+          "speakText": "Just like our body has different parts that help us do different things, a computer also has different parts! Let's learn about the main parts of a computer: Monitor, Keyboard, Mouse, CPU, and Speakers."
         },
         {
           type: "learn",
@@ -408,37 +412,41 @@ export const standards: Standard = {
           speakText:
             "Drag each computer part to the correct description box! Is it an input device or an output device?",
         },
-        {
-          type: "learn",
-          format: "text",
-          title: "Did You Know?",
-          description: [
-            "The first electronic computer, ENIAC, weighed more than 27 tons and took up the size of a small house!",
-            "Modern computers can be as small as your pocket!",
-            "Computers can do millions of calculations in just one second!",
-          ],
-          audioSrc: "/audio/computer_facts.mp3",
-          speakText:
-            "Did you know? The first electronic computer, ENIAC, weighed more than 27 tons and took up the size of a small house! Modern computers can be as small as your pocket! Computers can do millions of calculations in just one second!",
-        },
-        {
-          type: "learn",
-          format: "text",
-          title: "Points to Remember",
-          description: [
-            "1. A computer is a machine that makes our work easy.",
-            "2. A computer is called a supermachine.",
-            "3. Computers help us write, draw, play games, talk to people, and listen to music.",
-            "4. The main parts of a computer are the monitor, keyboard, mouse, CPU, and speakers.",
-            "5. The monitor shows what the computer is doing.",
-            "6. The keyboard helps us type letters and numbers.",
-            "7. The mouse helps us point and click.",
-            "8. The CPU is the brain of the computer.",
-          ],
-          audioSrc: "/audio/computer_summary.mp3",
-          speakText:
-            "Points to remember: A computer is a machine that makes our work easy. A computer is called a supermachine. Computers help us write, draw, play games, talk to people, and listen to music. The main parts of a computer are the monitor, keyboard, mouse, CPU, and speakers.",
-        },
+        // {
+        //   "type": "learn",
+        //   "format": "text",
+        //   "title": "Did You Know?",
+        //   "description": [
+        //     "The first electronic computer, ENIAC, weighed more than 27 tons and took up the size of a small house!",
+        //     "Modern computers can be as small as your pocket!",
+        //     "Computers can do millions of calculations in just one second!"
+        //   ],
+        //   "exampleImages": [
+        //     { "src": "/images/1st-standard/eniac.png", "alt": "The ENIAC computer", "fact": "ENIAC was huge, like a small house!" },
+        //     { "src": "/images/1st-standard/pocket-computer.png", "alt": "A pocket-sized computer", "fact": "Tiny computers fit in your pocket!" },
+        //     { "src": "/images/1st-standard/calculations.png", "alt": "A computer doing calculations", "fact": "Computers calculate super fast!" }
+        //   ],
+        //   "audioSrc": "/audio/computer_facts.mp3",
+        //   "speakText": "Did you know? The first electronic computer, ENIAC, weighed more than 27 tons and took up the size of a small house! Modern computers can be as small as your pocket! Computers can do millions of calculations in just one second!"
+        // },
+        // {
+        //   type: "learn",
+        //   format: "text",
+        //   title: "Points to Remember",
+        //   description: [
+        //     "1. A computer is a machine that makes our work easy.",
+        //     "2. A computer is called a supermachine.",
+        //     "3. Computers help us write, draw, play games, talk to people, and listen to music.",
+        //     "4. The main parts of a computer are the monitor, keyboard, mouse, CPU, and speakers.",
+        //     "5. The monitor shows what the computer is doing.",
+        //     "6. The keyboard helps us type letters and numbers.",
+        //     "7. The mouse helps us point and click.",
+        //     "8. The CPU is the brain of the computer.",
+        //   ],
+        //   audioSrc: "/audio/computer_summary.mp3",
+        //   speakText:
+        //     "Points to remember: A computer is a machine that makes our work easy. A computer is called a supermachine. Computers help us write, draw, play games, talk to people, and listen to music. The main parts of a computer are the monitor, keyboard, mouse, CPU, and speakers.",
+        // },
       ],
     },
     {
@@ -446,57 +454,37 @@ export const standards: Standard = {
       title: "Computer Care and Safety",
       lessonContent: [
         {
-          type: "learn",
-          format: "text",
-          title: "Taking Care of Computers",
-          description: [
-            "Hi there! I'm Zippy! Just like you take care of your toys and games, it's very important to take care of computers too!",
-            "Today, we will learn how to keep our computers safe and make them last longer.",
-            "Let's explore how to take good care of computers and ourselves when using them!",
+          "type": "learn",
+          "format": "text",
+          "title": "Taking Care of Yourself While Using Computers",
+          "description": [
           ],
-          imageUrl: "/images/mascot.png",
-          audioSrc: "/audio/computer_care_intro.mp3",
-          speakText:
-            "Hi there! I'm Zippy! Just like you take care of your toys and games, it's very important to take care of computers too! Today, we will learn how to keep our computers safe and make them last longer. Let's explore how to take good care of computers and ourselves when using them!",
+          "exampleImages": [
+            { "src": "/images/1st-standard/chair.png", "alt": "Proper sitting posture", "fact": "Sitting straight keeps your back happy!" },
+            { "src": "/images/1st-standard/screen-level.png", "alt": "Screen at eye level", "fact": "Keep the screen at eye level to see better!" },
+            { "src": "/images/1st-standard/break.png", "alt": "Taking a break", "fact": "Take breaks to rest your eyes!" },
+            { "src": "/images/1st-standard/stretch.png", "alt": "Stretching during breaks", "fact": "Stretching makes your body feel great!" },
+            { "src": "/images/1st-standard/lighting.png", "alt": "Having proper lighting", "fact": "Good light helps you see clearly!" },
+            { "src": "/images/1st-standard/screen-distance.png", "alt": "Sitting at the right distance", "fact": "Stay a little away from the screen!" }
+          ],
+          "audioSrc": "/audio/self_care_computers.mp3",
+          "speakText": "When using computers, it's important to take care of your body too! Here's how: Sit up straight with your back against the chair. Keep the screen at eye level - not too high or too low. Take a break every 30 minutes and look at something far away. Stretch your arms, legs, and neck during breaks. Make sure there's enough light in the room. Don't sit too close to the screen."
         },
         {
-          type: "learn",
-          format: "text",
-          title: "Taking Care of Yourself While Using Computers",
-          description: [
-            "When using computers, it's important to take care of your body too! Here's how:",
-            "1. Sit up straight with your back against the chair",
-            "2. Keep the screen at eye level - not too high or too low",
-            "3. Take a break every 30 minutes and look at something far away",
-            "4. Stretch your arms, legs, and neck during breaks",
-            "5. Make sure there's enough light in the room",
-            "6. Don't sit too close to the screen",
+          "type": "learn",
+          "format": "text",
+          "title": "How to Keep Your Computer Safe",
+          "description": [
           ],
-          exampleImages: [
-            { src: "/images/chair.png", alt: "Proper sitting posture" },
-            { src: "/images/mascot.png", alt: "Taking a break" },
-            { src: "/images/sun.png", alt: "Having proper lighting" },
+          "exampleImages": [
+            { "src": "/images/1st-standard/clean-computer.png", "alt": "Cleaning a computer", "fact": "A clean computer works better!" },
+            { "src": "/images/1st-standard/no-food-drinks.png", "alt": "No food or drinks near computer", "fact": "Keep snacks away to protect your computer!" },
+            { "src": "/images/1st-standard/gentle-hands.png", "alt": "Using gentle hands on computer", "fact": "Gentle hands keep the computer happy!" },
+            { "src": "/images/1st-standard/cool-place.png", "alt": "Computer in a cool place", "fact": "A cool place helps your computer stay safe!" },
+            { "src": "/images/1st-standard/shutdown.png", "alt": "Shutting down a computer", "fact": "Turn off your computer the right way!" }
           ],
-          audioSrc: "/audio/self_care_computers.mp3",
-          speakText:
-            "When using computers, it's important to take care of your body too! Here's how: Sit up straight with your back against the chair. Keep the screen at eye level - not too high or too low. Take a break every 30 minutes and look at something far away. Stretch your arms, legs, and neck during breaks. Make sure there's enough light in the room. Don't sit too close to the screen.",
-        },
-        {
-          type: "learn",
-          format: "text",
-          title: "How to Keep Your Computer Safe",
-          description: [
-            "Let's learn how to take care of computers:",
-            "1. Keep it Clean: Use a soft cloth to gently clean the screen and keyboard",
-            "2. No Food or Drinks: Keep food and drinks away from the computer",
-            "3. Gentle Hands: Press keys gently and handle the mouse carefully",
-            "4. Cool Place: Keep computers in cool, dust-free places",
-            "5. Proper Shutdown: Always turn off the computer properly when you're done",
-          ],
-          imageUrl: "/images/mascot.png",
-          audioSrc: "/audio/computer_care_tips.mp3",
-          speakText:
-            "Let's learn how to take care of computers: Keep it Clean: Use a soft cloth to gently clean the screen and keyboard. No Food or Drinks: Keep food and drinks away from the computer. Gentle Hands: Press keys gently and handle the mouse carefully. Cool Place: Keep computers in cool, dust-free places. Proper Shutdown: Always turn off the computer properly when you're done.",
+          "audioSrc": "/audio/computer_care_tips.mp3",
+          "speakText": "Let's learn how to take care of computers: Keep it Clean: Use a soft cloth to gently clean the screen and keyboard. No Food or Drinks: Keep food and drinks away from the computer. Gentle Hands: Press keys gently and handle the mouse carefully. Cool Place: Keep computers in cool, dust-free places. Proper Shutdown: Always turn off the computer properly when you're done."
         },
         {
           type: "drag-drop",
@@ -509,37 +497,37 @@ export const standards: Standard = {
               id: "dnd-item-1",
               text: "Eating chips while using the computer",
               type: "man-made",
-              imageUrl: "/images/chair.png",
+              imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-2",
               text: "Wiping the screen with a soft cloth",
               type: "natural",
-              imageUrl: "/images/water.png",
+              imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-3",
               text: "Shutting down properly",
               type: "natural",
-              imageUrl: "/images/sun.png",
+              imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-4",
               text: "Banging on the keyboard when angry",
               type: "man-made",
-              imageUrl: "/images/cycle.png",
+              imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-5",
               text: "Taking breaks during computer use",
               type: "natural",
-              imageUrl: "/images/tree.png",
+              imageUrl: "/images/1st-standard/clean-computer.png",
             },
             {
               id: "dnd-item-6",
               text: "Putting drinks next to the computer",
               type: "man-made",
-              imageUrl: "/images/blackboard.png",
+              imageUrl: "/images/1st-standard/clean-computer.png",
             },
           ],
           targets: [
@@ -622,36 +610,19 @@ export const standards: Standard = {
           speakText:
             "Arjun loved playing games on his computer. One day, the computer stopped working! Arjun was very upset and called his dad for help. Dad explained that computers need proper care. Arjun had been shutting down his computer incorrectly by just pressing the power button. 'Computers are like friends,' said Dad. 'You have to say goodbye properly.' Dad showed Arjun how to shut down the computer correctly by saving his work, closing all programs, and clicking on Shut Down. Arjun learned his lesson and always took good care of his computer after that. His computer worked well for a very long time! Remember: Always shut down your computer properly!",
         },
-        {
-          type: "learn",
-          format: "text",
-          title: "Did You Know?",
-          description: [
-            "If you try to shut down your computer without closing your programs, the computer will ask if you still want to shut down.",
-            "Shutting down your computer properly can make it last longer!",
-            "Taking short breaks when using the computer is good for your eyes and body!",
-          ],
-          audioSrc: "/audio/computer_care_facts.mp3",
-          speakText:
-            "Did you know? If you try to shut down your computer without closing your programs, the computer will ask if you still want to shut down. Shutting down your computer properly can make it last longer! Taking short breaks when using the computer is good for your eyes and body!",
-        },
-        {
-          type: "learn",
-          format: "text",
-          title: "Points to Remember",
-          description: [
-            "1. Sit up straight when using a computer.",
-            "2. Take breaks every 30 minutes.",
-            "3. Keep food and drinks away from computers.",
-            "4. Clean the screen and keyboard with a soft cloth.",
-            "5. Always shut down your computer properly.",
-            "6. Use gentle hands when typing and using the mouse.",
-            "7. Keep computers in cool, dust-free places.",
-          ],
-          audioSrc: "/audio/care_summary.mp3",
-          speakText:
-            "Points to remember: Sit up straight when using a computer. Take breaks every 30 minutes. Keep food and drinks away from computers. Clean the screen and keyboard with a soft cloth. Always shut down your computer properly. Use gentle hands when typing and using the mouse. Keep computers in cool, dust-free places.",
-        },
+        // {
+        //   type: "learn",
+        //   format: "text",
+        //   title: "Did You Know?",
+        //   description: [
+        //     "If you try to shut down your computer without closing your programs, the computer will ask if you still want to shut down.",
+        //     "Shutting down your computer properly can make it last longer!",
+        //     "Taking short breaks when using the computer is good for your eyes and body!",
+        //   ],
+        //   audioSrc: "/audio/computer_care_facts.mp3",
+        //   speakText:
+        //     "Did you know? If you try to shut down your computer without closing your programs, the computer will ask if you still want to shut down. Shutting down your computer properly can make it last longer! Taking short breaks when using the computer is good for your eyes and body!",
+        // },
       ],
     },
     {
@@ -659,55 +630,41 @@ export const standards: Standard = {
       title: "Keyboard and Mouse Fun",
       lessonContent: [
         {
-          type: "learn",
-          format: "text",
-          title: "Introduction to Keyboard and Mouse",
-          description: [
-            "Hi there! I'm Zippy! Today we're going to learn about two very important parts of a computer - the keyboard and mouse!",
-            "These parts help us talk to the computer and tell it what to do.",
-            "Let's have fun learning about the keyboard and mouse!",
-          ],
-          imageUrl: "/images/mascot.png",
-          audioSrc: "/audio/keyboard_intro.mp3",
-          speakText:
-            "Hi there! I'm Zippy! Today we're going to learn about two very important parts of a computer - the keyboard and mouse! These parts help us talk to the computer and tell it what to do. Let's have fun learning about the keyboard and mouse!",
-        },
-        {
-          type: "learn",
-          format: "text",
-          title: "All About the Keyboard",
-          description: [
+          "type": "learn",
+          "format": "text",
+          "title": "All About the Keyboard",
+          "description": [
             "A keyboard is a board with many buttons called keys.",
             "We press these keys to type letters, numbers, and symbols on the computer.",
             "When we press keys on the keyboard, the letters show up on the monitor!",
-            "The keyboard helps us write words, sentences, stories, and even do math on the computer.",
+            "The keyboard helps us write words, sentences, stories, and even do math on the computer."
           ],
-          exampleImages: [
-            { src: "/images/tools.png", alt: "A computer keyboard" },
-            { src: "/images/mascot.png", alt: "Typing on a keyboard" },
+          "exampleImages": [
+            { "src": "/images/1st-standard/keyboard.png", "alt": "A computer keyboard", "fact": "A keyboard has keys for typing!" },
+            { "src": "/images/1st-standard/typing-keys.png", "alt": "Typing letters and numbers", "fact": "Keys let us type letters and numbers!" },
+            { "src": "/images/1st-standard/monitor-display.png", "alt": "Letters on a monitor", "fact": "Keyboard keys show letters on the screen!" },
+            { "src": "/images/1st-standard/writing-story.png", "alt": "Writing with a keyboard", "fact": "Keyboards help us write stories and do math!" }
           ],
-          audioSrc: "/audio/keyboard_basics.mp3",
-          speakText:
-            "A keyboard is a board with many buttons called keys. We press these keys to type letters, numbers, and symbols on the computer. When we press keys on the keyboard, the letters show up on the monitor! The keyboard helps us write words, sentences, stories, and even do math on the computer.",
+          "audioSrc": "/audio/keyboard_basics.mp3",
+          "speakText": "A keyboard is a board with many buttons called keys. We press these keys to type letters, numbers, and symbols on the computer. When we press keys on the keyboard, the letters show up on the monitor! The keyboard helps us write words, sentences, stories, and even do math on the computer."
         },
         {
-          type: "learn",
-          format: "text",
-          title: "Special Keys on the Keyboard",
-          description: [
-            "The keyboard has many special keys that do different things:",
-            "1. Alphabet Keys: These keys have letters A to Z for typing words",
-            "2. Number Keys: These have numbers 0-9 for typing numbers",
-            "3. Space Bar: The longest key at the bottom that puts a space between words",
-            "4. Enter Key: This key moves to a new line, like when you finish a sentence",
-            "5. Backspace Key: This key erases mistakes when you type",
-            "6. Arrow Keys: These keys help move around in your text",
-            "7. Caps Lock Key: This key makes all letters CAPITAL when turned on",
+          "type": "learn",
+          "format": "text",
+          "title": "Special Keys on the Keyboard",
+          "description": [
           ],
-          imageUrl: "/images/mascot.png",
-          audioSrc: "/audio/special_keys.mp3",
-          speakText:
-            "The keyboard has many special keys that do different things: Alphabet Keys have letters A to Z for typing words. Number Keys have numbers 0-9 for typing numbers. Space Bar is the longest key at the bottom that puts a space between words. Enter Key moves to a new line, like when you finish a sentence. Backspace Key erases mistakes when you type. Arrow Keys help move around in your text. Caps Lock Key makes all letters CAPITAL when turned on.",
+          "exampleImages": [
+            { "src": "/images/1st-standard/alphabet-keys.png", "alt": "Alphabet keys on a keyboard", "fact": "Alphabet keys help us type words!" },
+            { "src": "/images/1st-standard/number-keys.png", "alt": "Number keys on a keyboard", "fact": "Number keys let us type numbers!" },
+            { "src": "/images/1st-standard/space-bar.png", "alt": "Space bar on a keyboard", "fact": "The space bar adds spaces between words!" },
+            { "src": "/images/1st-standard/enter-key.png", "alt": "Enter key on a keyboard", "fact": "The enter key starts a new line!" },
+            { "src": "/images/1st-standard/backspace-key.png", "alt": "Backspace key on a keyboard", "fact": "Backspace erases typing mistakes!" },
+            { "src": "/images/1st-standard/arrow-keys.png", "alt": "Arrow keys on a keyboard", "fact": "Arrow keys move your text cursor!" },
+            { "src": "/images/1st-standard/caps-lock.png", "alt": "Caps lock key on a keyboard", "fact": "Caps lock makes letters BIG!" }
+          ],
+          "audioSrc": "/audio/special_keys.mp3",
+          "speakText": "The keyboard has many special keys that do different things: Alphabet Keys have letters A to Z for typing words. Number Keys have numbers 0-9 for typing numbers. Space Bar is the longest key at the bottom that puts a space between words. Enter Key moves to a new line, like when you finish a sentence. Backspace Key erases mistakes when you type. Arrow Keys help move around in your text. Caps Lock Key makes all letters CAPITAL when turned on."
         },
         {
           type: "learn",
@@ -726,23 +683,6 @@ export const standards: Standard = {
           audioSrc: "/audio/mouse_basics.mp3",
           speakText:
             "A mouse is a small device that helps us point at things on the computer screen. When we move the mouse on the table, a pointer (small arrow) moves on the screen. The mouse has buttons that we can click to select things or open programs. Using a mouse is like pointing at something with your finger to show what you want!",
-        },
-        {
-          type: "learn",
-          format: "text",
-          title: "Parts of a Mouse",
-          description: [
-            "A mouse has different parts:",
-            "1. Left Button: The main button used for clicking on things",
-            "2. Right Button: Used for special menus and options",
-            "3. Scroll Wheel: The wheel in the middle that helps scroll up and down on pages",
-            "4. Mouse Body: The part you hold in your hand",
-            "5. Mouse Pointer: The arrow on the screen that moves when you move the mouse",
-          ],
-          imageUrl: "/images/mascot.png",
-          audioSrc: "/audio/mouse_parts.mp3",
-          speakText:
-            "A mouse has different parts: Left Button is the main button used for clicking on things. Right Button is used for special menus and options. Scroll Wheel is the wheel in the middle that helps scroll up and down on pages. Mouse Body is the part you hold in your hand. Mouse Pointer is the arrow on the screen that moves when you move the mouse.",
         },
         {
           type: "learn",
@@ -777,37 +717,37 @@ export const standards: Standard = {
               id: "dnd-item-1",
               text: "Space Bar",
               type: "natural",
-              imageUrl: "/images/sun.png",
+              imageUrl: "/images/1st-standard/space-bar.png",
             },
             {
               id: "dnd-item-2",
               text: "Left Click Button",
               type: "man-made",
-              imageUrl: "/images/chair.png",
+              imageUrl: "/images/1st-standard/left-click-button.png",
             },
             {
               id: "dnd-item-3",
               text: "Enter Key",
               type: "natural",
-              imageUrl: "/images/tree.png",
+              imageUrl: "/images/1st-standard/enter-key.png",
             },
             {
               id: "dnd-item-4",
               text: "Scroll Wheel",
               type: "man-made",
-              imageUrl: "/images/cycle.png",
+              imageUrl: "/images/1st-standard/scroll-wheel.png",
             },
             {
               id: "dnd-item-5",
               text: "Arrow Keys",
               type: "natural",
-              imageUrl: "/images/bird.png",
+              imageUrl: "/images/1st-standard/arrow-keys.png",
             },
             {
               id: "dnd-item-6",
               text: "Right Click Button",
               type: "man-made",
-              imageUrl: "/images/blackboard.png",
+              imageUrl: "/images/1st-standard/right-click-button.png",
             },
           ],
           targets: [
@@ -870,38 +810,21 @@ export const standards: Standard = {
           speakText:
             "Once upon a time, there was a friendly Keyboard named Ananya and a helpful Mouse named Vikram. They both lived inside a computer and were the best of friends. Their job was to help children use the computer. Ananya the Keyboard would help children type letters and words to write stories and do homework. Vikram the Mouse would help children point, click, and move things around on the screen. Together, they made using the computer fun and easy! Whenever children needed help, Ananya and Vikram were ready to work. Ananya would say, 'Just press my keys gently to type.' And Vikram would add, 'Move me smoothly and click my buttons to select things!' The children loved using Ananya and Vikram to play games, learn new things, and create beautiful pictures on the computer.",
         },
-        {
-          type: "learn",
-          format: "text",
-          title: "Did You Know?",
-          description: [
-            "A standard keyboard has 104 keys!",
-            "The arrangement of keys on a keyboard is called QWERTY, named after the first six letters on the top row.",
-            "The computer mouse was invented by Douglas Engelbart in 1964.",
-            "The mouse got its name because the cord coming out looked like a mouse's tail!",
-            "On laptops, instead of a mouse, there's often a touchpad that works the same way.",
-          ],
-          audioSrc: "/audio/keyboard_mouse_facts.mp3",
-          speakText:
-            "Did you know? A standard keyboard has 104 keys! The arrangement of keys on a keyboard is called QWERTY, named after the first six letters on the top row. The computer mouse was invented by Douglas Engelbart in 1964. The mouse got its name because the cord coming out looked like a mouse's tail! On laptops, instead of a mouse, there's often a touchpad that works the same way.",
-        },
-        {
-          type: "learn",
-          format: "text",
-          title: "Points to Remember",
-          description: [
-            "1. The keyboard and mouse help us communicate with the computer.",
-            "2. The keyboard has alphabet keys, number keys, and special keys like Space Bar and Enter.",
-            "3. We use the keyboard to type letters, words, numbers, and symbols.",
-            "4. The mouse helps us point to and select things on the screen.",
-            "5. A mouse has left and right buttons and usually a scroll wheel in the middle.",
-            "6. When we move the mouse on the table, the pointer moves on the screen.",
-            "7. We should hold the mouse gently and press keyboard keys softly.",
-          ],
-          audioSrc: "/audio/keyboard_mouse_summary.mp3",
-          speakText:
-            "Points to remember: The keyboard and mouse help us communicate with the computer. The keyboard has alphabet keys, number keys, and special keys like Space Bar and Enter. We use the keyboard to type letters, words, numbers, and symbols. The mouse helps us point to and select things on the screen. A mouse has left and right buttons and usually a scroll wheel in the middle. When we move the mouse on the table, the pointer moves on the screen. We should hold the mouse gently and press keyboard keys softly.",
-        },
+        // {
+        //   type: "learn",
+        //   format: "text",
+        //   title: "Did You Know?",
+        //   description: [
+        //     "A standard keyboard has 104 keys!",
+        //     "The arrangement of keys on a keyboard is called QWERTY, named after the first six letters on the top row.",
+        //     "The computer mouse was invented by Douglas Engelbart in 1964.",
+        //     "The mouse got its name because the cord coming out looked like a mouse's tail!",
+        //     "On laptops, instead of a mouse, there's often a touchpad that works the same way.",
+        //   ],
+        //   audioSrc: "/audio/keyboard_mouse_facts.mp3",
+        //   speakText:
+        //     "Did you know? A standard keyboard has 104 keys! The arrangement of keys on a keyboard is called QWERTY, named after the first six letters on the top row. The computer mouse was invented by Douglas Engelbart in 1964. The mouse got its name because the cord coming out looked like a mouse's tail! On laptops, instead of a mouse, there's often a touchpad that works the same way.",
+        // },
       ],
     },
   ],
@@ -911,16 +834,6 @@ export const standards: Standard = {
       id: 1,
       title: "More about Computers",
       lessonContent: [
-        {
-          type: "learn",
-          format: "text",
-          title: "Questions to Ponder",
-          description: [
-            "In which places have you seen a computer being used?",
-            "How does a computer listen and talk?",
-            "How does a computer turn your ideas into results?",
-          ],
-        },
         {
           type: "learn",
           format: "text",
