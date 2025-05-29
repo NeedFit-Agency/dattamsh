@@ -195,30 +195,25 @@ export const standards: Standard = {
       id: 2,
       title: "All About Computers",
       lessonContent: [
-        {
-          type: 'learn',
-          format: 'text',
-          title: 'Introduction to Computers',
-          description: [
-            "Hi there! I'm Zippy! Today we're going to learn about computers!",
-            "A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things.",
-            "Let's learn what computers are and how they help us!",
-          ],
-          imageUrl: '/images/computer.png',
-          audioSrc: '/audio/computer_intro.mp3',
-          speakText: "Hi there! I'm Zippy! Today we're going to learn about computers! A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things. Let's learn what computers are and how they help us!"
-        },
+        // {
+        //   type: 'learn',
+        //   format: 'text',
+        //   title: 'Introduction to Computers',
+        //   description: [
+        //     "Hi there! I'm Zippy! Today we're going to learn about computers!",
+        //     "A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things.",
+        //     "Let's learn what computers are and how they help us!",
+        //   ],
+        //   imageUrl: '/images/computer.png',
+        //   audioSrc: '/audio/computer_intro.mp3',
+        //   speakText: "Hi there! I'm Zippy! Today we're going to learn about computers! A computer is a machine. It makes our work easy. A computer is called a supermachine because it helps us do many things. Let's learn what computers are and how they help us!"
+        // },
         {
           type: 'learn',
           format: 'text',
           title: 'What Can Computers Do?',
           description: [
-            "Computers help us do many things:",
-            "1. Type or write letters, stories, and poems",
-            "2. Draw colorful and beautiful paintings",
-            "3. Play fun games",
-            "4. Talk to family and friends who are far away",
-            "5. Listen to music and watch videos",
+            "Pick the card by clicking on it!",
           ],
           exampleImages: [
             { src: '/images/1st-standard/computer-to-write.png', alt: 'Using a computer to write' },
@@ -227,19 +222,20 @@ export const standards: Standard = {
             { src: '/images/1st-standard/computer-to-watch.png', alt: 'Watching videos on a computer' },
           ],
           audioSrc: '/audio/computer_uses.mp3',
-          speakText: "Computers help us do many things: Type or write letters, stories, and poems. Draw colorful and beautiful paintings. Play fun games. Talk to family and friends who are far away. Listen to music and watch videos."
-        }, {
+          speakText: "Pick the card by clicking on it!"
+        }, 
+        {
           type: 'learn',
           format: 'text',
           title: 'Parts of a Computer',
           description: [
-            "Just like our body has different parts that help us do different things, a computer also has different parts!",
-            "Let's learn about the main parts of a computer:",
-            "1. Monitor: Like a TV screen that shows what the computer is doing",
-            "2. Keyboard: Has letters, numbers, and other buttons to type with",
-            "3. Mouse: Helps move the pointer on the screen and select things",
-            "4. CPU (Central Processing Unit): The brain of the computer inside the CPU cabinet",
-            "5. Speakers: Where sound comes from",
+          ],
+          exampleImages: [
+            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
+            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
+            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
+            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
+            { src: '/images/1st-standard/computer-parts.png', alt: 'Parts of a computer' },
           ],
           imageUrl: '/images/mascot.png',
           audioSrc: '/audio/computer_parts.mp3',
