@@ -210,7 +210,6 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
       );
     }
     case 'text': {
-      // LearningSlide is in standardsData
       const textContent = content as import('../../data/standardsData').LearningSlide;
       return (
         <Text
@@ -237,6 +236,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
           chatText={Array.isArray(puzzleContent.description) ? puzzleContent.description[0] : (puzzleContent.description || 'Can you solve the puzzle?')}
           imageUrl={puzzleContent.imageUrl}
           prompt={puzzleContent.prompt}
+          hotspots={puzzleContent.hotspots}
           onBack={onBack}
         />
       );

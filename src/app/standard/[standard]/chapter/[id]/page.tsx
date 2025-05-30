@@ -122,7 +122,7 @@ export default function ChapterPage({
     <main className={styles.contentArea}>
       <div className={`${styles.lessonHeader} ${chapterData.headerTheme}`}>
         <div className={styles.headerLeft}>
-          <Link href="/" className={styles.backButton}>
+          <Link href="/home" className={styles.backButton}>
             <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />
           </Link>
           <div className={styles.headerTitle}>

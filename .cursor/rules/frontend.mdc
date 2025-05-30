@@ -1,0 +1,173 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# 🧠 Cursor Rule 1: Ultra-Deep Thinking Mode for Next.js with CSS Modules
+
+**Purpose:**  
+Develop like a senior front-end engineer for a Next.js project using CSS modules. Code should reflect the architectural clarity of **Ryan Florence**, the compositional elegance of **Kent C. Dodds**, the pragmatic component and state-management best practices championed by **Dan Abramov**, and a strong focus on accessibility.
+
+---
+
+## 🧩 Thought Process Plan
+
+### 1. Understand the Task
+- Clearly define the problem and its boundaries.
+- Consider edge cases, error flows, and data structure.
+- Think from the perspective of user, dev, and product.
+
+### 2. Break Into Subtasks
+- Prioritize logic first, then structure the UI around it.
+- Compose each task as a small, independent piece.
+- Defer configuration to the outer layer; keep core components clean.
+
+### 3. Challenge Assumptions
+- Try to break your own plan: bad data, bad timing, invalid states.
+- Ask: *How will a screen reader behave?* *What happens on slow networks?*
+
+### 4. Build Like Kent, Ryan, and Dan
+- **Ryan Florence**: Declarative flow, clean routing, local reasoning.
+- **Kent C. Dodds**: Hook-based abstractions, readable and idiomatic code, minimal prop drilling.
+- **Dan Abramov**: Pragmatic state-management patterns and clarity-first component design.
+
+---
+
+## 🧩 Component Composition Rules
+
+- ✅ Prefer **composition over configuration**.
+- ✅ Use custom UI components or a chosen UI library for inputs, buttons, overlays, etc.
+- ✅ Avoid passing too many props — use children and composition to handle control flow.
+- ✅ Extract logic into hooks (e.g., `useFormState`, `useModalControl`) where needed.
+- ✅ One file = one purpose. Keep files under **200 lines**.
+- ✅ If longer: split into UI, logic (hook), and types/constants as needed.
+
+---
+
+## 💡 CSS Modules & Layout Guidelines
+
+- ✅ For pages, use `page.module.css` for styles specific to that page.
+- ✅ For components, use component-specific CSS modules (e.g., `UserProfile.module.css`).
+- ✅ Use the **BEM (Block Element Modifier)** naming convention for class names to avoid conflicts and improve readability (e.g., `.button`, `.button--primary`).
+- ✅ Define layout using **Flexbox** and **CSS Grid**, leveraging CSS variables (e.g., `--spacing-sm: 8px`) for consistent spacing and sizing.
+- ✅ Avoid global styles; keep styles scoped to components or pages.
+- ✅ Stick to a consistent spacing and sizing scale (e.g., 4px, 8px, 16px) for margins, paddings, and gaps.
+
+**Example CSS Module:**
+```css
+/* pages/user-profile.module.css */
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.profile__avatar {
+  border-radius: 50%;
+}
+
+.profile__avatar--large {
+  width: 120px;
+  height: 120px;
+}
+```
+
+**Example Usage in a Page:**
+```jsx
+// pages/user-profile.tsx
+import styles from './user-profile.module.css';
+
+export default function UserProfile() {
+  return (
+    <div className={styles.profile}>
+      <img
+        src="/avatar.jpg"
+        alt="User avatar"
+        className={`${styles.profile__avatar} ${styles['profile__avatar--large']}`}
+      />
+      <h1>User Name</h1>
+    </div>
+  );
+}
+```
+
+---
+
+## 📛 Naming Conventions
+
+| Type             | Folder Naming     | File Naming      | Example Folder/File Path                   |
+|------------------|-------------------|------------------|---------------------------------------------|
+| Components       | PascalCase        | PascalCase       | `components/UserProfile/UserProfile.tsx`    |
+| Hooks            | camelCase         | camelCase        | `hooks/useAuth.ts`                          |
+| Utilities        | camelCase         | camelCase        | `lib/formatDate.ts`                         |
+| Styles           | kebab-case        | kebab-case       | `styles/global.css`                         |
+| Pages            | kebab-case        | kebab-case       | `pages/user-profile.tsx`                    |
+
+- **Pages Note:** In Next.js, pages are defined in the `pages/` directory with kebab-case filenames (e.g., `user-profile.tsx` maps to `/user-profile` route).
+- **Handler Naming:** Prefix all event callbacks with `handle` (e.g., `handleClick`, `handleChange`, `handleKeyDown`).
+- **Boolean Naming:** Prefix with verbs for clarity (e.g., `isLoading`, `hasError`, `canSubmit`).
+
+---
+
+## 🧭 Logic Preferences
+
+- ✅ Prefer `switch` statements over long `if/else` chains:
+  ```jsx
+  switch (status) {
+    case 'loading': return <Loader />;
+    case 'error': return <ErrorState />;
+    case 'success': return <Results />;
+    default: return null;
+  }
+  ```
+
+- ✅ Prefer enums (object literals or string unions) over multiple booleans:
+  ```jsx
+  const ViewMode = {
+    EMPTY: 'empty',
+    LOADING: 'loading',
+    ERROR: 'error',
+    SUCCESS: 'success',
+  };
+
+  const [view, setView] = useState(ViewMode.EMPTY);
+  ```
+
+- ❌ Avoid deeply nested `if` statements. Use early returns:
+  ```jsx
+  if (!data) return <EmptyState />;
+  if (isLoading) return <Loader />;
+  ```
+
+---
+
+## ⚙️ State Management Preferences
+
+- ✅ Prefer `useState` for local component state in most use cases:
+  ```jsx
+  const [count, setCount] = useState(0);
+  ```
+- 🚫 Use Recoil only as a last resort for global or higher-level shared state.
+
+**Note:** For client-side interactivity in Next.js, ensure components requiring hooks or state include the `'use client'` directive at the top of the file if using the App Router.
+
+---
+
+## 🧠 Code Quality Checklist
+
+- ✅ Use early returns to reduce nesting.
+- ✅ Use descriptive handler and state naming.
+- ✅ Always use semantic HTML (e.g., `button`, `dialog`, `section`) with proper `aria-*`, `role`, and `tabIndex` attributes.
+- ✅ Use CSS modules for styling, keeping styles scoped and maintainable.
+- ✅ Respect mobile-first responsive design (e.g., use `min-width` media queries).
+- ✅ Maintain clean, legible, declarative code.
+- ❌ Don’t use barrel imports (e.g., avoid `index.ts` files that re-export everything).
+
+---
+
+> *"Build small, sharp, reusable components. Let composition handle complexity."*  
+> — You, writing resilient and scalable UIs in Next.js with CSS modules.
+
+---
+This adapted Cursor Rule ensures that your Next.js project maintains high standards of code quality, accessibility, and modularity while leveraging `page.module.css` for styling and aligning with Next.js conventions. The removal of Tailwind CSS and ShadCN dependencies has been replaced with CSS module best practices and flexible component composition guidelines.

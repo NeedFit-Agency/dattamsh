@@ -48,7 +48,6 @@
   font-weight: 700;
   color: #948787;
   letter-spacing: 1px;
-  
 }
 
 .emoji {
@@ -83,6 +82,7 @@
   margin-top: 8px;
   position: relative;
 }
+
 .chatBubble:before {
   content: '';
   position: absolute;
@@ -107,6 +107,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative; /* Important for hotspot positioning */
 }
 
 .mainImage {
@@ -128,57 +129,203 @@
   line-height: 1.4;
 }
 
-@media (max-width: 900px) {
-  .activityCard {
-    max-width: 100dvh;
-    padding: 24px 2vw 24px 2vw;
+/* Puzzle Hotspots - Fixed */
+.hotspot {
+  position: absolute;
+  background: rgba(30, 144, 255, 0.1); /* Slightly visible background */
+  border: 2px solid rgba(30, 144, 255, 0.3); /* Visible border */
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 100; /* Lower z-index but still above image */
+  transition: all 0.3s ease;
+  outline: none;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.hotspot:hover, 
+.hotspot:focus {
+  background: rgba(30, 144, 255, 0.2);
+  border: 3px solid #1e90ff;
+  box-shadow: 
+    0 0 0 3px rgba(30, 144, 255, 0.3),
+    0 4px 12px rgba(30, 144, 255, 0.4);
+  transform: scale(1.05);
+}
+
+.hotspot:active {
+  transform: scale(0.95);
+  box-shadow: 
+    0 0 0 2px rgba(30, 144, 255, 0.5),
+    0 2px 8px rgba(30, 144, 255, 0.3);
+}
+
+/* Position classes for hotspots */
+.center {
+  left: 35%;
+  top: 25%;
+  width: 30%;
+  height: 40%;
+}
+
+.leftTop {
+  left: 5%;
+  top: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.rightTop {
+  right: 5%;
+  top: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.leftBottom {
+  left: 5%;
+  bottom: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.rightBottom {
+  right: 5%;
+  bottom: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.centerTop {
+  left: 37.5%;
+  top: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.centerBottom {
+  left: 37.5%;
+  bottom: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+/* Specific hotspot positions for your monitor/keyboard example */
+.monitor {
+  left: 30%;
+  top: 20%;
+  width: 40%;
+  height: 50%;
+}
+
+.keyboard {
+  left: 5%;
+  top: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.pencil {
+  left: 15%;
+  bottom: 8%;
+  width: 10%;
+  height: 25%;
+}
+
+.star {
+  left: 5%;
+  top: 5%;
+  width: 20%;
+  height: 25%;
+}
+
+/* Feedback overlays */
+.successFeedback, 
+.wrongFeedback {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: rgba(255, 255, 255, 0.98);
+  color: #222;
+  font-size: 1.4em;
+  font-family: 'Fredoka', 'Comic Sans MS', cursive, sans-serif;
+  border-radius: 16px;
+  padding: 16px 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: popIn 0.4s ease-out;
+  backdrop-filter: blur(5px);
+}
+
+.successFeedback {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  color: #111;
+  font-size: 1.2em;
+  font-weight: 700;
+  font-family: 'Fredoka', 'Comic Sans MS', cursive, sans-serif;
+  border-radius: 14px;
+  padding: 14px 28px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  z-index: 1001;
+  border: 3px solid #4caf50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  animation: popIn 0.4s ease-out;
+  min-width: 120px;
+  min-height: 40px;
+  white-space: nowrap;
+  opacity: 0.98;
+}
+
+.wrongFeedback {
+  border: 4px solid #ff5252;
+  background: rgba(255, 82, 82, 0.25); /* more visible */
+}
+
+@keyframes popIn {
+  0% { 
+    transform: translate(-50%, -50%) scale(0.6); 
+    opacity: 0; 
   }
-  .imageWrapper {
-    max-width: 98vw;
-    height: 38vw;
-    min-height: 180px;
+  60% { 
+    transform: translate(-50%, -50%) scale(1.1); 
   }
-  .title {
-    font-size: 1.6em;
-  }
-  .avatar {
-    width: 56px;
-    height: 56px;
-  }
-  .chatBubble {
-    font-size: 1em;
-    padding: 12px 14px;
+  100% { 
+    transform: translate(-50%, -50%) scale(1); 
+    opacity: 1; 
   }
 }
 
-@media (max-width: 600px) {
-  .activityCard {
-    padding: 12px 2vw 12px 2vw;
-    max-width: 100dvh;
-    gap: 18px;
-  }
-  .mainImage, .imageWrapper {
-    width: 99vw;
-    max-width: 99vw;
-    height: 38vw;
-    min-height: 120px;
-    border-radius: 12px;
-  }
-  .title {
-    font-size: 1.1em;
-  }
-  .avatar {
-    width: 38px;
-    height: 38px;
-  }
-  .chatBubble {
-    font-size: 0.95em;
-    padding: 8px 8px;
-  }
-  .prompt {
-    font-size: 1em;
-    margin: 10px 0 0 0;
-  }
+.schoolTitle {
+  font-family: 'Fredoka One', 'Comic Sans MS', 'Chalkboard SE', 'Comic Sans', cursive, sans-serif;
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #4a90e2;
+  letter-spacing: 2px;
+  text-align: center;
+  text-shadow: 2px 4px 0 #fff, 0 2px 8px #7ebaff99;
+  position: relative;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.schoolTitle::after {
+  content: '';
+  display: block;
+  width: 80%;
+  height: 12px;
+  margin: 0 auto;
+  background: url('data:image/svg+xml;utf8,<svg width="100%25" height="100%25" viewBox="0 0 300 12" xmlns="http://www.w3.org/2000/svg"><path d="M10 10 Q 60 2, 110 10 T 210 10 T 290 10" stroke="%23f9d923" stroke-width="6" fill="none"/></svg>') no-repeat center/contain;
+  margin-top: 0.1em;
 }
 
 .chooseBackButton {
@@ -198,103 +345,133 @@
   left: 18px;
   z-index: 2;
 }
+
 .chooseBackButton:hover {
   background-color: var(--background-medium, #f0f7ff);
   color: var(--text-dark, #222);
 }
+
 .backText {
   font-size: 1em;
   font-weight: 600;
   margin-left: 2px;
   display: none;
 }
+
 @media (min-width: 640px) {
-  .backText { display: inline; }
+  .backText { 
+    display: inline; 
+  }
 }
 
-/* Puzzle Hotspots */
-.hotspot {
-  position: absolute;
-  background: rgba(255,255,255,0.01); /* invisible but clickable */
-  border: 2px solid transparent;
-  border-radius: 12px;
-  cursor: pointer;
-  z-index: 2;
-  transition: border 0.2s, box-shadow 0.2s;
-}
-.hotspot:hover, .hotspot:focus {
-  border: 2px solid #7ebaff;
-  box-shadow: 0 0 0 4px #7ebaff33;
+@media (max-width: 900px) {
+  .activityCard {
+    max-width: 100dvh;
+    padding: 24px 2vw 24px 2vw;
+  }
+  
+  .imageWrapper {
+    max-width: 98vw;
+    height: 38vw;
+    min-height: 180px;
+  }
+  
+  .title {
+    font-size: 1.6em;
+  }
+  
+  .avatar {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .chatBubble {
+    font-size: 1em;
+    padding: 12px 14px;
+  }
+  
+  .hotspot {
+    border-width: 2px;
+    min-width: 15px;
+    min-height: 15px;
+  }
+  
+  .hotspot:hover, 
+  .hotspot:focus {
+    border-width: 2px;
+  }
 }
 
-/* Positioning for each hotspot (tweak as needed for your image) */
-.monitor {
-  left: 32%;
-  top: 22%;
-  width: 36%;
-  height: 55%;
-}
-.pencil {
-  left: 18%;
-  bottom: 10%;
-  width: 7%;
-  height: 18%;
-}
-.star {
-  left: 7%;
-  top: 7%;
-  width: 18%;
-  height: 22%;
+@media (max-width: 600px) {
+  .activityCard {
+    padding: 12px 2vw 12px 2vw;
+    max-width: 100dvh;
+    gap: 18px;
+  }
+  
+  .mainImage, 
+  .imageWrapper {
+    width: 99vw;
+    max-width: 99vw;
+    height: 38vw;
+    min-height: 120px;
+    border-radius: 12px;
+  }
+  
+  .title {
+    font-size: 1.1em;
+  }
+  
+  .avatar {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .chatBubble {
+    font-size: 0.95em;
+    padding: 8px 8px;
+  }
+  
+  .prompt {
+    font-size: 1em;
+    margin: 10px 0 0 0;
+  }
+  
+  .hotspot {
+    border-width: 1px;
+    min-width: 12px;
+    min-height: 12px;
+  }
+  
+  .successFeedback, 
+  .wrongFeedback {
+    font-size: 1.1em;
+    padding: 12px 20px;
+  }
 }
 
-/* Feedback overlays */
-.successFeedback, .wrongFeedback {
+.hotspotFeedback {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255,255,255,0.95);
-  color: #222;
-  font-size: 1.5em;
+  background: #fff;
+  color: #111;
+  font-size: 1.2em;
+  font-weight: 700;
   font-family: 'Fredoka', 'Comic Sans MS', cursive, sans-serif;
-  border-radius: 16px;
-  padding: 18px 32px;
-  box-shadow: 0 2px 16px #7ebaff44;
-  z-index: 10;
+  border-radius: 14px;
+  padding: 14px 28px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  z-index: 1001;
+  border: 3px solid #ff3333;
   display: flex;
   align-items: center;
-  gap: 12px;
-  animation: popIn 0.3s;
-}
-.successFeedback {
-  border: 2px solid #4caf50;
-}
-.wrongFeedback {
-  border: 2px solid #ff5252;
-}
-@keyframes popIn {
-  0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
-
-.schoolTitle {
-  font-family: 'Fredoka One', 'Comic Sans MS', 'Chalkboard SE', 'Comic Sans', cursive, sans-serif;
-  font-size: 1.5em;
-  font-weight: 900;
-  color: #4a90e2;
-  letter-spacing: 2px;
-  text-align: center;
-  text-shadow: 2px 4px 0 #fff, 0 2px 8px #7ebaff99;
-  position: relative;
-  margin-bottom: 8px;
-  line-height: 1.1;
-}
-.schoolTitle::after {
-  content: '';
-  display: block;
-  width: 80%;
-  height: 12px;
-  margin: 0 auto;
-  background: url('data:image/svg+xml;utf8,<svg width="100%25" height="100%25" viewBox="0 0 300 12" xmlns="http://www.w3.org/2000/svg"><path d="M10 10 Q 60 2, 110 10 T 210 10 T 290 10" stroke="%23f9d923" stroke-width="6" fill="none"/></svg>') no-repeat center/contain;
-  margin-top: 0.1em;
+  gap: 10px;
+  pointer-events: none;
+  animation: popIn 0.4s ease-out;
+  min-width: 120px;
+  min-height: 40px;
+  white-space: nowrap;
+  opacity: 0.98;
 }

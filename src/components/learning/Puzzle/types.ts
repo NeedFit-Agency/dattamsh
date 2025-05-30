@@ -5,4 +5,5 @@ export interface PuzzleProps {
   chatText: string;
   imageUrl: string;
   prompt: string;
+  hotspots?: { part: string; position: string; isCorrect: boolean }[];
 } 
