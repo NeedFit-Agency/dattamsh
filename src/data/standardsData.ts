@@ -123,7 +123,6 @@ export const funFacts = [
   "You can watch videos and learn new things!",
 ];
 
-
 export const standards: Standard = {
   "1": [
     {
@@ -145,20 +144,6 @@ export const standards: Standard = {
             { part: "keyboard", position: "leftTop", isCorrect: false },
           ],
         },
-        // {
-        //   type: 'learn',
-        //   format: 'puzzle',
-        //   title: 'Meet the Keyboard!',
-        //   description: [
-        //     'Hi friend! Let\'s find parts of the computer! The keyboard helps us type words and numbers!'
-        //   ],
-        //   imageUrl: '/images/1st-standard/puzzle2.png',
-        //   prompt: 'Can you find the part of computer that helps you type letters and numbers?',
-        //   hotspots: [
-        //     { part: 'keyboard', position: 'center', isCorrect: true },
-        //     { part: 'mouse', position: 'leftTop', isCorrect: false },
-        //   ]
-        // },
         {
           type: "drag-drop",
           format: "drag-drop",
@@ -211,7 +196,23 @@ export const standards: Standard = {
           speakText:
             "Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.",
         },
-
+        {
+          type: "learn",
+          format: "puzzle",
+          title: "Meet the Keyboard!",
+          description: [
+            "Hi friend! Let's find parts of the computer! The keyboard helps us type words and numbers!",
+          ],
+          imageUrl: "/images/1st-standard/puzzle2.png",
+          prompt:
+            "Can you find the part of computer that helps you type letters and numbers?",
+          hotspots: [
+            { part: "keyboard", position: "rightTop", isCorrect: true },
+            { part: "mouse", position: "leftBottom", isCorrect: false },
+            { part: "cpu", position: "leftTop", isCorrect: false },
+            { part: "speaker", position: "rightBottom", isCorrect: false },
+          ],
+        },
         {
           type: "learn",
           format: "text",
@@ -282,6 +283,46 @@ export const standards: Standard = {
       id: 2,
       title: "All About Computers",
       lessonContent: [
+        {
+          type: "drag-drop",
+          format: "drag-drop",
+          title: "Match Computer Parts",
+          instruction:
+            "Drag each computer part to the correct description box!",
+          items: [
+            {
+              id: "dnd-item-1",
+              text: "Monitor",
+              type: "output",
+              imageUrl: "/images/monitor.png",
+            },
+            {
+              id: "dnd-item-2",
+              text: "Keyboard",
+              type: "input",
+              imageUrl: "/images/keyboard.png",
+            },
+            {
+              id: "dnd-item-3",
+              text: "Mouse",
+              type: "input",
+              imageUrl: "/images/mouse.png",
+            },
+            {
+              id: "dnd-item-5",
+              text: "Speakers",
+              type: "output",
+              imageUrl: "/images/speaker.png",
+            },
+          ],
+          targets: [
+            { id: "inputTarget", title: "Input Devices", type: "input" },
+            { id: "outputTarget", title: "Output Devices", type: "output" },
+          ],
+          audioSrc: "/audio/computer_activity.mp3",
+          speakText:
+            "Drag each computer part to the correct description box! Is it an input device or an output device?",
+        },
         // {
         //   type: 'learn',
         //   format: 'text',
@@ -326,19 +367,41 @@ export const standards: Standard = {
           speakText: "Pick the card by clicking on it!",
         },
         {
-          "type": "learn",
-          "format": "text",
-          "title": "Parts of a Computer",
-          "description": "Just like our body has different parts, a computer has parts too! Click to learn about them!",
-          "exampleImages": [
-            { "src": "/images/1st-standard/monitor.png", "alt": "A computer Monitor", "fact": "The monitor shows us pictures and videos!" },
-            { "src": "/images/1st-standard/keyboard.png", "alt": "A computer Keyboard", "fact": "The keyboard helps us type letters and numbers!" },
-            { "src": "/images/1st-standard/mouse.png", "alt": "A computer Mouse", "fact": "The mouse lets us click and move on the screen!" },
-            { "src": "/images/1st-standard/cpu.png", "alt": "A computer CPU", "fact": "The CPU is the brain that makes the computer work!" },
-            { "src": "/images/1st-standard/speakers.png", "alt": "Computer Speakers", "fact": "Speakers play music and sounds for us!" }
+          type: "learn",
+          format: "text",
+          title: "Parts of a Computer",
+          description:
+            "Just like our body has different parts, a computer has parts too! Click to learn about them!",
+          exampleImages: [
+            {
+              src: "/images/1st-standard/monitor.png",
+              alt: "A computer Monitor",
+              fact: "The monitor shows us pictures and videos!",
+            },
+            {
+              src: "/images/1st-standard/keyboard.png",
+              alt: "A computer Keyboard",
+              fact: "The keyboard helps us type letters and numbers!",
+            },
+            {
+              src: "/images/1st-standard/mouse.png",
+              alt: "A computer Mouse",
+              fact: "The mouse lets us click and move on the screen!",
+            },
+            {
+              src: "/images/1st-standard/cpu.png",
+              alt: "A computer CPU",
+              fact: "The CPU is the brain that makes the computer work!",
+            },
+            {
+              src: "/images/1st-standard/speakers.png",
+              alt: "Computer Speakers",
+              fact: "Speakers play music and sounds for us!",
+            },
           ],
-          "audioSrc": "/audio/computer_parts.mp3",
-          "speakText": "Just like our body has different parts that help us do different things, a computer also has different parts! Let's learn about the main parts of a computer: Monitor, Keyboard, Mouse, CPU, and Speakers."
+          audioSrc: "/audio/computer_parts.mp3",
+          speakText:
+            "Just like our body has different parts that help us do different things, a computer also has different parts! Let's learn about the main parts of a computer: Monitor, Keyboard, Mouse, CPU, and Speakers.",
         },
         {
           type: "learn",
@@ -390,46 +453,6 @@ export const standards: Standard = {
           speakText:
             "Raju was a young boy. One day, he was going home from school. On the way, he saw his father working on a computer. Raju asked, 'Dad, what are you doing?' His father replied, 'I'm writing a letter to your uncle using this computer.' Raju was amazed! He asked his teacher the next day about computers. His teacher showed the class how computers work. Raju learned that computers can help people do many things quickly and easily. He was very excited to learn more about computers!",
         },
-        {
-          type: "drag-drop",
-          format: "drag-drop",
-          title: "Match Computer Parts",
-          instruction:
-            "Drag each computer part to the correct description box!",
-          items: [
-            {
-              id: "dnd-item-1",
-              text: "Monitor",
-              type: "output",
-              imageUrl: "/images/monitor.png",
-            },
-            {
-              id: "dnd-item-2",
-              text: "Keyboard",
-              type: "input",
-              imageUrl: "/images/keyboard.png",
-            },
-            {
-              id: "dnd-item-3",
-              text: "Mouse",
-              type: "input",
-              imageUrl: "/images/mouse.png",
-            },
-            {
-              id: "dnd-item-5",
-              text: "Speakers",
-              type: "output",
-              imageUrl: "/images/speaker.png",
-            },
-          ],
-          targets: [
-            { id: "inputTarget", title: "Input Devices", type: "input" },
-            { id: "outputTarget", title: "Output Devices", type: "output" },
-          ],
-          audioSrc: "/audio/computer_activity.mp3",
-          speakText:
-            "Drag each computer part to the correct description box! Is it an input device or an output device?",
-        },
         // {
         //   "type": "learn",
         //   "format": "text",
@@ -472,37 +495,81 @@ export const standards: Standard = {
       title: "Computer Care and Safety",
       lessonContent: [
         {
-          "type": "learn",
-          "format": "text",
-          "title": "Taking Care of Yourself While Using Computers",
-          "description": [
+          type: "learn",
+          format: "text",
+          title: "Taking Care of Yourself While Using Computers",
+          description: [],
+          exampleImages: [
+            {
+              src: "/images/1st-standard/chair.png",
+              alt: "Proper sitting posture",
+              fact: "Sitting straight keeps your back happy!",
+            },
+            {
+              src: "/images/1st-standard/screen-level.png",
+              alt: "Screen at eye level",
+              fact: "Keep the screen at eye level to see better!",
+            },
+            {
+              src: "/images/1st-standard/break.png",
+              alt: "Taking a break",
+              fact: "Take breaks to rest your eyes!",
+            },
+            {
+              src: "/images/1st-standard/stretch.png",
+              alt: "Stretching during breaks",
+              fact: "Stretching makes your body feel great!",
+            },
+            {
+              src: "/images/1st-standard/lighting.png",
+              alt: "Having proper lighting",
+              fact: "Good light helps you see clearly!",
+            },
+            {
+              src: "/images/1st-standard/screen-distance.png",
+              alt: "Sitting at the right distance",
+              fact: "Stay a little away from the screen!",
+            },
           ],
-          "exampleImages": [
-            { "src": "/images/1st-standard/chair.png", "alt": "Proper sitting posture", "fact": "Sitting straight keeps your back happy!" },
-            { "src": "/images/1st-standard/screen-level.png", "alt": "Screen at eye level", "fact": "Keep the screen at eye level to see better!" },
-            { "src": "/images/1st-standard/break.png", "alt": "Taking a break", "fact": "Take breaks to rest your eyes!" },
-            { "src": "/images/1st-standard/stretch.png", "alt": "Stretching during breaks", "fact": "Stretching makes your body feel great!" },
-            { "src": "/images/1st-standard/lighting.png", "alt": "Having proper lighting", "fact": "Good light helps you see clearly!" },
-            { "src": "/images/1st-standard/screen-distance.png", "alt": "Sitting at the right distance", "fact": "Stay a little away from the screen!" }
-          ],
-          "audioSrc": "/audio/self_care_computers.mp3",
-          "speakText": "When using computers, it's important to take care of your body too! Here's how: Sit up straight with your back against the chair. Keep the screen at eye level - not too high or too low. Take a break every 30 minutes and look at something far away. Stretch your arms, legs, and neck during breaks. Make sure there's enough light in the room. Don't sit too close to the screen."
+          audioSrc: "/audio/self_care_computers.mp3",
+          speakText:
+            "When using computers, it's important to take care of your body too! Here's how: Sit up straight with your back against the chair. Keep the screen at eye level - not too high or too low. Take a break every 30 minutes and look at something far away. Stretch your arms, legs, and neck during breaks. Make sure there's enough light in the room. Don't sit too close to the screen.",
         },
         {
-          "type": "learn",
-          "format": "text",
-          "title": "How to Keep Your Computer Safe",
-          "description": [
+          type: "learn",
+          format: "text",
+          title: "How to Keep Your Computer Safe",
+          description: [],
+          exampleImages: [
+            {
+              src: "/images/1st-standard/clean-computer.png",
+              alt: "Cleaning a computer",
+              fact: "A clean computer works better!",
+            },
+            {
+              src: "/images/1st-standard/no-food-drinks.png",
+              alt: "No food or drinks near computer",
+              fact: "Keep snacks away to protect your computer!",
+            },
+            {
+              src: "/images/1st-standard/gentle-hands.png",
+              alt: "Using gentle hands on computer",
+              fact: "Gentle hands keep the computer happy!",
+            },
+            {
+              src: "/images/1st-standard/cool-place.png",
+              alt: "Computer in a cool place",
+              fact: "A cool place helps your computer stay safe!",
+            },
+            {
+              src: "/images/1st-standard/shutdown.png",
+              alt: "Shutting down a computer",
+              fact: "Turn off your computer the right way!",
+            },
           ],
-          "exampleImages": [
-            { "src": "/images/1st-standard/clean-computer.png", "alt": "Cleaning a computer", "fact": "A clean computer works better!" },
-            { "src": "/images/1st-standard/no-food-drinks.png", "alt": "No food or drinks near computer", "fact": "Keep snacks away to protect your computer!" },
-            { "src": "/images/1st-standard/gentle-hands.png", "alt": "Using gentle hands on computer", "fact": "Gentle hands keep the computer happy!" },
-            { "src": "/images/1st-standard/cool-place.png", "alt": "Computer in a cool place", "fact": "A cool place helps your computer stay safe!" },
-            { "src": "/images/1st-standard/shutdown.png", "alt": "Shutting down a computer", "fact": "Turn off your computer the right way!" }
-          ],
-          "audioSrc": "/audio/computer_care_tips.mp3",
-          "speakText": "Let's learn how to take care of computers: Keep it Clean: Use a soft cloth to gently clean the screen and keyboard. No Food or Drinks: Keep food and drinks away from the computer. Gentle Hands: Press keys gently and handle the mouse carefully. Cool Place: Keep computers in cool, dust-free places. Proper Shutdown: Always turn off the computer properly when you're done."
+          audioSrc: "/audio/computer_care_tips.mp3",
+          speakText:
+            "Let's learn how to take care of computers: Keep it Clean: Use a soft cloth to gently clean the screen and keyboard. No Food or Drinks: Keep food and drinks away from the computer. Gentle Hands: Press keys gently and handle the mouse carefully. Cool Place: Keep computers in cool, dust-free places. Proper Shutdown: Always turn off the computer properly when you're done.",
         },
         {
           type: "drag-drop",
@@ -648,41 +715,86 @@ export const standards: Standard = {
       title: "Keyboard and Mouse Fun",
       lessonContent: [
         {
-          "type": "learn",
-          "format": "text",
-          "title": "All About the Keyboard",
-          "description": [
+          type: "learn",
+          format: "text",
+          title: "All About the Keyboard",
+          description: [
             "A keyboard is a board with many buttons called keys.",
             "We press these keys to type letters, numbers, and symbols on the computer.",
             "When we press keys on the keyboard, the letters show up on the monitor!",
-            "The keyboard helps us write words, sentences, stories, and even do math on the computer."
+            "The keyboard helps us write words, sentences, stories, and even do math on the computer.",
           ],
-          "exampleImages": [
-            { "src": "/images/1st-standard/keyboard.png", "alt": "A computer keyboard", "fact": "A keyboard has keys for typing!" },
-            { "src": "/images/1st-standard/typing-keys.png", "alt": "Typing letters and numbers", "fact": "Keys let us type letters and numbers!" },
-            { "src": "/images/1st-standard/monitor-display.png", "alt": "Letters on a monitor", "fact": "Keyboard keys show letters on the screen!" },
-            { "src": "/images/1st-standard/writing-story.png", "alt": "Writing with a keyboard", "fact": "Keyboards help us write stories and do math!" }
+          exampleImages: [
+            {
+              src: "/images/1st-standard/keyboard.png",
+              alt: "A computer keyboard",
+              fact: "A keyboard has keys for typing!",
+            },
+            {
+              src: "/images/1st-standard/typing-keys.png",
+              alt: "Typing letters and numbers",
+              fact: "Keys let us type letters and numbers!",
+            },
+            {
+              src: "/images/1st-standard/monitor-display.png",
+              alt: "Letters on a monitor",
+              fact: "Keyboard keys show letters on the screen!",
+            },
+            {
+              src: "/images/1st-standard/writing-story.png",
+              alt: "Writing with a keyboard",
+              fact: "Keyboards help us write stories and do math!",
+            },
           ],
-          "audioSrc": "/audio/keyboard_basics.mp3",
-          "speakText": "A keyboard is a board with many buttons called keys. We press these keys to type letters, numbers, and symbols on the computer. When we press keys on the keyboard, the letters show up on the monitor! The keyboard helps us write words, sentences, stories, and even do math on the computer."
+          audioSrc: "/audio/keyboard_basics.mp3",
+          speakText:
+            "A keyboard is a board with many buttons called keys. We press these keys to type letters, numbers, and symbols on the computer. When we press keys on the keyboard, the letters show up on the monitor! The keyboard helps us write words, sentences, stories, and even do math on the computer.",
         },
         {
-          "type": "learn",
-          "format": "text",
-          "title": "Special Keys on the Keyboard",
-          "description": [
+          type: "learn",
+          format: "text",
+          title: "Special Keys on the Keyboard",
+          description: [],
+          exampleImages: [
+            {
+              src: "/images/1st-standard/alphabet-keys.png",
+              alt: "Alphabet keys on a keyboard",
+              fact: "Alphabet keys help us type words!",
+            },
+            {
+              src: "/images/1st-standard/number-keys.png",
+              alt: "Number keys on a keyboard",
+              fact: "Number keys let us type numbers!",
+            },
+            {
+              src: "/images/1st-standard/space-bar.png",
+              alt: "Space bar on a keyboard",
+              fact: "The space bar adds spaces between words!",
+            },
+            {
+              src: "/images/1st-standard/enter-key.png",
+              alt: "Enter key on a keyboard",
+              fact: "The enter key starts a new line!",
+            },
+            {
+              src: "/images/1st-standard/backspace-key.png",
+              alt: "Backspace key on a keyboard",
+              fact: "Backspace erases typing mistakes!",
+            },
+            {
+              src: "/images/1st-standard/arrow-keys.png",
+              alt: "Arrow keys on a keyboard",
+              fact: "Arrow keys move your text cursor!",
+            },
+            {
+              src: "/images/1st-standard/caps-lock.png",
+              alt: "Caps lock key on a keyboard",
+              fact: "Caps lock makes letters BIG!",
+            },
           ],
-          "exampleImages": [
-            { "src": "/images/1st-standard/alphabet-keys.png", "alt": "Alphabet keys on a keyboard", "fact": "Alphabet keys help us type words!" },
-            { "src": "/images/1st-standard/number-keys.png", "alt": "Number keys on a keyboard", "fact": "Number keys let us type numbers!" },
-            { "src": "/images/1st-standard/space-bar.png", "alt": "Space bar on a keyboard", "fact": "The space bar adds spaces between words!" },
-            { "src": "/images/1st-standard/enter-key.png", "alt": "Enter key on a keyboard", "fact": "The enter key starts a new line!" },
-            { "src": "/images/1st-standard/backspace-key.png", "alt": "Backspace key on a keyboard", "fact": "Backspace erases typing mistakes!" },
-            { "src": "/images/1st-standard/arrow-keys.png", "alt": "Arrow keys on a keyboard", "fact": "Arrow keys move your text cursor!" },
-            { "src": "/images/1st-standard/caps-lock.png", "alt": "Caps lock key on a keyboard", "fact": "Caps lock makes letters BIG!" }
-          ],
-          "audioSrc": "/audio/special_keys.mp3",
-          "speakText": "The keyboard has many special keys that do different things: Alphabet Keys have letters A to Z for typing words. Number Keys have numbers 0-9 for typing numbers. Space Bar is the longest key at the bottom that puts a space between words. Enter Key moves to a new line, like when you finish a sentence. Backspace Key erases mistakes when you type. Arrow Keys help move around in your text. Caps Lock Key makes all letters CAPITAL when turned on."
+          audioSrc: "/audio/special_keys.mp3",
+          speakText:
+            "The keyboard has many special keys that do different things: Alphabet Keys have letters A to Z for typing words. Number Keys have numbers 0-9 for typing numbers. Space Bar is the longest key at the bottom that puts a space between words. Enter Key moves to a new line, like when you finish a sentence. Backspace Key erases mistakes when you type. Arrow Keys help move around in your text. Caps Lock Key makes all letters CAPITAL when turned on.",
         },
         {
           type: "learn",
@@ -1637,4 +1749,3 @@ export const standards: Standard = {
     },
   ],
 };
-
