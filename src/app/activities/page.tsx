@@ -7,6 +7,7 @@ import Video from '@/components/learning/Video/Video';
 import Flashcard from '@/components/learning/Flashcard/Flashcard';
 import { DragDrop } from '@/components/learning/DragDrop/DragDrop';
 import Puzzle from '@/components/learning/Puzzle/Puzzle';
+import Choose from '@/components/learning/Choose';
 
 const seedPlantingSteps = [
     {
@@ -110,6 +111,7 @@ const page = () => {
     <div >
       <Puzzle {...dummyActivity} />
       <hr style={{ margin: '32px 0' }} />
+      <Choose />
       <div style={{ margin: '32px 0' }} />
       <StepByStep
         title="Step-by-Step: Planting a Seed"

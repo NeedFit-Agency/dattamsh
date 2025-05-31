@@ -23,6 +23,16 @@
   --correct-green: #1AA2FF; /* Same as accent for consistency */
   --incorrect-red: #ef4444; /* Same as error */
 
+  --choose-bg: #f6f8fc;
+  --choose-border: #b3c6e0;
+  --choose-hover-bg: #eaf4ff;
+  --choose-hover-border: #5b9aff;
+  --choose-matched-bg: #e6fbe8;
+  --choose-matched-border: #34c759;
+  --choose-wrong-bg: #fff0f0;
+  --choose-wrong-border: #ff5a5f;
+  --choose-text: #22314a;
+
   /* Font Sizes */
   --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
   --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
