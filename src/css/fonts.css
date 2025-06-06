@@ -1,0 +1,76 @@
+@font-face {
+    font-family: "Futura";
+    src: url("$lib/fonts/futura-pt_light.woff2") format("woff2");
+    font-weight: 300;
+  }
+  
+  @font-face {
+    font-family: "Futura";
+    src: url("$lib/fonts/futura-pt_book.woff2") format("woff2");
+    font-weight: 400;
+  }
+  
+  @font-face {
+    font-family: "Futura";
+    src: url("$lib/fonts/futura-pt_medium.woff2") format("woff2");
+    font-weight: 500;
+  }
+  
+  @font-face {
+    font-family: "Futura";
+    src: url("$lib/fonts/futura-pt_demi.woff2") format("woff2");
+    font-weight: 600;
+  }
+  
+  @font-face {
+    font-family: "Futura";
+    src: url("$lib/fonts/futura-pt_bold.woff2") format("woff2");
+    font-weight: 700;
+  }
+  
+  @font-face {
+    font-family: "Circular";
+    src: url("$lib/fonts/Circular-Bold.woff") format("woff");
+    font-weight: 700;
+  }
+  
+  @font-face {
+    font-family: "Circular";
+    src: url("$lib/fonts/Circular-BoldItalic.woff") format("woff");
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "Circular";
+    src: url("$lib/fonts/Circular-Italic.woff") format("woff");
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "Circular";
+    src: url("$lib/fonts/Circular-Light.woff") format("woff");
+    font-weight: 300;
+  }
+  
+  @font-face {
+    font-family: "Circular";
+    src: url("$lib/fonts/Circular-MediumItalic.woff") format("woff");
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  
+  
+  @font-face {
+    font-family: "Circular";
+    src: url("$lib/fonts/Circular-Regular.woff") format("woff");
+    font-weight: 400;
+  }
+  
+  @font-face {
+    font-family: "Circular";
+    src: url("$lib/fonts/Circular-Medium.woff") format("woff");
+    font-weight: 500;
+  }

@@ -1,0 +1,8 @@
+@import url("$lib/css/reset.css") layer(reset);
+@import url("$lib/css/fonts.css") layer(fonts);
+@import url("$lib/css/variables.css") layer(variables);
+@import url("$lib/css/defaults.css") layer(defaults);
+@import url("$lib/css/utilities.css") layer(utilities);
+
+
+@layer reset, fonts, variables, defaults, utilities, components, overrides;
