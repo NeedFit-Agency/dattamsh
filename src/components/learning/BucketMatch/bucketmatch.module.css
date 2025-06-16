@@ -1,0 +1,306 @@
+/* --- Basic Setup & Fonts --- */
+/* It's recommended to add this font import globally in your Next.js project (e.g., in _app.tsx or a global CSS file) */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+/* 
+  These CSS variables are used throughout the styles.
+  Ideally, define them in a global scope (e.g., :root in a global CSS file) 
+  so they are accessible by this module.
+  Example global definition:
+  :root {
+    --bg-color: #fdf5e6;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --main-font: 'Nunito', sans-serif;
+    --success-color: #4CAF50;
+    --success-glow: rgba(76, 175, 80, 0.5);
+    --error-color: #f44336;
+    --drop-hover-bg: #e8f5e9;
+    --drop-hover-border: #a5d6a7;
+  }
+*/
+
+.container {
+  /* Styles for the main component container, can be mapped to worksheetCard or kept separate */
+  /* For now, let's assume the existing .container wraps the .worksheetCard equivalent */
+  padding: 20px;
+  font-family: var(--main-font, 'Nunito', sans-serif);
+  background-color: var(--bg-color, #fdf5e6);
+  color: var(--text-color, #333);
+  display: flex;
+  flex-direction: column; /* To accommodate header, progress, and game area */
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* --- Main Card (Adapted from worksheet-card) --- */
+.worksheetCard {
+  background-color: var(--card-bg, #ffffff);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  margin-top: 20px; /* Added margin if header/progress are above */
+}
+
+.gameTitle { /* Mapped from h1 in test.html */
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: #444;
+}
+
+/* --- Matching Area Layout --- */
+.matchArea {
+  /* Container for fruits and baskets if needed, or apply styles directly to their containers */
+}
+
+.fruitsContainer,
+.basketsContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.fruitsContainer {
+  margin-bottom: 40px;
+}
+
+.fruitItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.fruitItem.placed {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.colorName {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+/* --- Draggable Fruit Styling --- */
+.fruitDraggable {
+  width: 90px;
+  height: 90px;
+  cursor: grab;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  display: flex; /* For centering SVG if needed */
+  justify-content: center;
+  align-items: center;
+}
+
+.fruitDraggable.dragging {
+  cursor: grabbing;
+  opacity: 0.5;
+  transform: scale(1.1);
+}
+
+/* --- Basket Dropzone Styling --- */
+.basketDropzone {
+  width: 130px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 3px dashed transparent;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  background-color: var(--card-bg, #fff); /* Ensure basket bg is distinct */
+}
+
+.basketDropzone .basketSvg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.basketDropzone .droppedFruit {
+  width: 60px; /* Smaller fruit inside basket */
+  height: 60px;
+  z-index: 2;
+  position: relative;
+  top: -15px; /* Position it nicely in the basket */
+  cursor: default;
+  display: flex; /* For centering SVG if needed */
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Drag & Drop States --- */
+.basketDropzone.dragOver {
+  background-color: var(--drop-hover-bg, #e8f5e9);
+  border-color: var(--drop-hover-border, #a5d6a7);
+}
+
+.basketDropzone.correct {
+  border-color: var(--success-color, #4CAF50);
+  box-shadow: 0 0 15px var(--success-glow, rgba(76, 175, 80, 0.5));
+}
+
+.basketDropzone.incorrect {
+  animation: shake 0.5s ease;
+  border-color: var(--error-color, #f44336);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* --- Feedback & Reset Button --- */
+.feedbackMessage {
+  height: 25px;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.feedbackMessage.correctText {
+  color: var(--success-color, #4CAF50);
+}
+
+.feedbackMessage.incorrectText {
+  color: var(--error-color, #f44336);
+}
+
+.resetButton {
+  background-color: var(--success-color, #4CAF50);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.2s, transform 0.2s;
+  /* display: none; /* Controlled by React state */
+}
+
+.resetButton:hover {
+  background-color: #45a049; /* Darken success color */
+  transform: scale(1.05);
+}
+
+/* --- Existing styles from BucketMatch - to be reviewed/merged/removed --- */
+/* Header, Progress, Instruction - Keep if they are outside the 'worksheetCard' scope */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 700px; /* Match worksheetCard width */
+  margin-bottom: 20px;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color, #333);
+}
+
+.mainTitle {
+  font-size: 1.8rem; /* Adjusted to fit with gameTitle */
+  color: var(--text-color, #333);
+  margin: 0;
+}
+
+.audioButton {
+  background-color: var(--success-color, #4CAF50);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.progressContainer {
+  width: 100%;
+  max-width: 700px; /* Match worksheetCard width */
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.progressBar {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--success-color, #4CAF50);
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: 0.9rem;
+  color: var(--text-color, #333);
+}
+
+.instruction {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 25px;
+  max-width: 700px; /* Match worksheetCard width */
+  text-align: center;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 600px) {
+  .worksheetCard {
+    padding: 20px;
+  }
+  .gameTitle {
+    font-size: 2rem;
+  }
+  .fruitsContainer,
+  .basketsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+  .fruitDraggable {
+    width: 70px;
+    height: 70px;
+  }
+  .basketDropzone {
+    width: 100%;
+    max-width: 120px;
+    height: 90px;
+    margin: 0 auto;
+  }
+  .basketDropzone .droppedFruit {
+    width: 50px;
+    height: 50px;
+    top: -10px;
+  }
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mainTitle {
+    font-size: 1.5rem;
+  }
+}

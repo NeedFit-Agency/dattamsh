@@ -1,0 +1,272 @@
+/* --- Google Font & Basic Setup --- */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+/* --- Main Game Card --- */
+.gameCard {
+    /* CSS Variables defined within the component */
+    --bg-yellow: #fffbeb;
+    --card-bg: #faf6ef;
+    --char-blue: #38bdf8;
+    --text-dark: #5c4b40;
+    --main-font: 'Quicksand', sans-serif;
+    
+    --btn-bg: #fff;
+    --btn-border: #e8e1d6;
+    --btn-shadow: #d4c7b8;
+
+    --win-green: #34d399;
+    --win-green-bg: #f0fdf4;
+    --win-green-shadow: #a7f3d0;
+    --lose-red: #f87171;
+    --lose-red-bg: #fef2f2;
+    --lose-red-shadow: #fca5a5;
+    
+    background-color: var(--card-bg);
+    border-radius: 28px;
+    box-shadow: 0 10px 40px rgba(92, 75, 64, 0.1);
+    padding: 30px 40px;
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    margin: 20px auto;
+    font-family: var(--main-font);
+    color: var(--text-dark);
+    box-sizing: border-box;
+}
+
+.gameCard:hover {
+    transform: none; /* Remove the rotation hover effect to match other components */
+}
+
+/* --- Decorative Icons --- */
+.gameCard::before {
+    content: '🤔';
+    font-size: 24px;
+    position: absolute;
+    top: 35px;
+    left: 25px;
+    opacity: 0.5;
+    transform: rotate(-15deg);
+}
+
+.gameCard::after {
+    content: '✨';
+    font-size: 18px;
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    opacity: 0.7;
+    transform: rotate(15deg);
+}
+
+.gearIcon {
+    position: absolute;
+    top: 38px;
+    right: 28px;
+    font-size: 22px;
+    opacity: 0.5;
+    transform: rotate(15deg);
+}
+
+/* --- Character Mascot --- */
+.characterContainer {
+    margin: 0 auto 20px;
+    width: 100px;
+    height: 80px;
+    animation: bob 3s ease-in-out infinite;
+}
+
+@keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* --- Riddle/Prompt Area --- */
+.promptText {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin: 0 0 15px 0;
+    font-weight: 500;
+}
+
+.promptQuestion {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--char-blue);
+    margin: 0 0 30px 0;
+    text-shadow: none; /* Remove text shadow for cleaner look */
+}
+
+/* --- Answer Options --- */
+.optionsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    transition: opacity 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.gameCard.gameOver .optionsContainer {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.optionButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 20px 15px;
+    background-color: var(--btn-bg);
+    border: 2px solid var(--btn-border);
+    border-radius: 12px;
+    box-shadow: 0 4px 0 0 var(--btn-shadow);
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--main-font);
+    color: var(--text-dark);
+}
+
+.optionButton:not(:disabled):hover {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 0 var(--btn-shadow);
+}
+
+.optionButton:not(:disabled):active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 0 var(--btn-shadow);
+}
+
+.optionIcon {
+    width: 40px;
+    height: 40px;
+}
+
+/* --- Feedback Styles --- */
+.optionButton.correct {
+    background-color: var(--win-green-bg);
+    box-shadow: 0 6px 0 0 var(--win-green-shadow);
+    animation: pop 0.5s ease;
+    color: var(--win-green); /* Text color for correct answer */
+    border-color: var(--win-green);
+}
+
+.optionButton.incorrect {
+    background-color: var(--lose-red-bg);
+    box-shadow: 0 6px 0 0 var(--lose-red-shadow);
+    animation: shake 0.5s ease;
+    color: var(--lose-red); /* Text color for incorrect answer */
+    border-color: var(--lose-red);
+}
+
+@keyframes pop {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px) rotate(-3deg); }
+    40%, 80% { transform: translateX(8px) rotate(3deg); }
+}
+
+.optionButton:disabled { 
+    cursor: not-allowed; 
+    opacity: 0.7; /* Slightly dim disabled buttons */
+}
+
+/* --- Win Screen --- */
+.winScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border-radius: 28px; /* Match card's radius */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+    transition: all 0.3s ease-in-out;
+}
+
+.winScreen.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.winText {
+    font-size: 4rem;
+    color: var(--win-green);
+    text-shadow: 3px 3px 0 #fff, 6px 6px 0 var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.starContainer {
+    position: relative; /* Needed for absolute positioning of stars */
+    width: 100%; /* Or a fixed width if preferred */
+    height: 100px; /* Adjust as needed, or make it dynamic */
+    margin-bottom: 20px;
+}
+
+.star {
+    position: absolute;
+    color: #ffc700;
+    font-size: 2rem;
+    animation: star-animation 1s ease-out forwards;
+    opacity: 0;
+}
+
+.star.s1 { top: 15%; left: 20%; animation-delay: 0.1s; }
+.star.s2 { top: 25%; left: 80%; animation-delay: 0.2s; font-size: 1.5rem; }
+.star.s3 { top: 70%; left: 10%; animation-delay: 0.3s; font-size: 2.5rem; }
+.star.s4 { top: 80%; left: 75%; animation-delay: 0.4s; }
+.star.s5 { top: 40%; left: 50%; animation-delay: 0.5s; font-size: 3rem; }
+
+@keyframes star-animation {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+    100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+
+.playAgainBtn {
+    font-family: var(--main-font);
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 12px 25px;
+    border-radius: 12px;
+    border: 2px solid var(--text-dark);
+    box-shadow: 0 4px 0 0 var(--btn-shadow);
+    background-color: var(--char-blue);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.playAgainBtn:hover {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 0 var(--btn-shadow);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .optionsContainer { 
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .optionButton { 
+        padding: 15px 10px;
+    }
+}

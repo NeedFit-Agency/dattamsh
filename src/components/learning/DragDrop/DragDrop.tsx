@@ -239,7 +239,10 @@ export const DragDrop: React.FC<DragDropProps> = ({
                       key={nextItem.id}
                       className={styles.dragItem}
                       draggable
-                      onDragStart={(e) => handleDragStart(e as unknown as React.DragEvent<HTMLDivElement>, nextItem)}
+                      onDragStart={(e: MouseEvent | TouchEvent | PointerEvent) => {
+                        const dragEvent = e as unknown as React.DragEvent<HTMLDivElement>;
+                        handleDragStart(dragEvent, nextItem);
+                      }}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.5 }}

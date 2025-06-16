@@ -1,0 +1,333 @@
+/* --- Google Font & Basic Setup --- */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+/* --- Main Card --- */
+.worksheetCard {
+    background-color: #faf6ef;
+    border-radius: 28px;
+    box-shadow: 0 10px 40px rgba(92, 75, 64, 0.1);
+    padding: 30px 40px;
+    width: 100%;
+    max-width: 900px; /* Increased for horizontal layout */
+    text-align: center;
+    position: relative;
+    margin: 20px auto; /* For centering in a typical page flow */
+    font-family: 'Quicksand', sans-serif;
+    color: #5c4b40;
+    box-sizing: border-box;
+}
+
+/* --- Decorative Icons --- */
+.worksheetCard::before,
+.worksheetCard::after {
+    content: '';
+    position: absolute;
+    opacity: 0.5;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.worksheetCard::before { /* Book Icon */
+    content: '📖';
+    font-size: 24px;
+    top: 35px;
+    left: 25px;
+    transform: rotate(-15deg);
+}
+
+.worksheetCard::after { /* Sparkle Icon */
+    content: '✨';
+    font-size: 18px;
+    top: 80px;
+    left: 20px;
+    opacity: 0.7;
+    transform: rotate(15deg);
+}
+
+.gearIcon { /* Gear Icon */
+    position: absolute;
+    top: 38px;
+    right: 28px;
+    font-size: 22px;
+    opacity: 0.5;
+    transform: rotate(15deg);
+}
+
+/* --- Title --- */
+.title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding: 0 20px;
+}
+
+/* --- Main Content Container --- */
+.mainContent {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+/* --- Drop Zones (Targets) --- */
+.dropTargets {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    max-width: 300px;
+}
+
+.dropTargets h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+    color: #5c4b40;
+    opacity: 0.8;
+}
+
+.dropZone {
+    height: 55px;
+    background-color: #fff;
+    border: 2px solid #e8e1d6;
+    border-radius: 12px;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.dropZone.dragOver {
+    background-color: #f0ebe4;
+    border-color: #c9c1b6;
+}
+
+/* --- Draggable Items --- */
+.draggableItems {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 200px; /* Reserve space */
+    flex: 1;
+    max-width: 300px;
+    padding: 20px;
+    background-color: #f8f6f0;
+    border-radius: 16px;
+    border: 2px dashed #e8e1d6;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.draggableItems.dragOver {
+    border-color: #c9c1b6;
+    background-color: #f0ebe4;
+}
+
+.draggableItems h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+    color: #5c4b40;
+    opacity: 0.8;
+}
+
+.stepItem {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: grab;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stepItem.dragging {
+    opacity: 0.5;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: scale(1.05);
+    cursor: grabbing;
+}
+
+.stepIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.stepIcon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Item Specific Colors (IDs will be handled by styles object in React) */
+.stepOpen { background-color: #fde68a; }
+.stepOpen .stepIcon { background-color: #facc15; }
+.stepOpen .stepIcon svg { fill: #92400e; }
+
+.stepStart { background-color: #a5f3fc; }
+.stepStart .stepIcon { background-color: #67e8f9; }
+.stepStart .stepIcon svg { stroke: #0e7490; }
+
+.stepType { background-color: #fca5a5; }
+.stepType .stepIcon { background-color: #f87171; }
+.stepType .stepIcon svg { stroke: #b91c1c; }
+
+.stepSave { background-color: #a7f3d0; }
+.stepSave .stepIcon { background-color: #6ee7b7; }
+.stepSave .stepIcon svg { fill: #065f46; }
+
+/* --- Buttons & Feedback --- */
+.actionButton {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: 'Quicksand', sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.actionButton:hover {
+    transform: translateY(-2px);
+}
+
+/* IDs will be handled by styles object in React */
+.checkAnswerBtn {
+    background-color: #34d399;
+    color: white;
+    box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
+}
+
+.tryAgainBtn {
+    background-color: #5c4b40;
+    color: white;
+    box-shadow: 0 4px 15px rgba(92, 75, 64, 0.3);
+    /* display: none; /* Initially hidden - will be controlled by component state */
+}
+
+.feedbackMessage {
+    min-height: 24px;
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.feedbackCorrect {
+    color: #34d399;
+}
+
+.feedbackIncorrect {
+    color: #ef4444;
+}
+
+.slotCorrect {
+    background-color: #e6f9f3 !important;
+    border-color: #34d399 !important;
+}
+
+.slotIncorrect {
+    background-color: #fdeeee !important;
+    border-color: #ef4444 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .worksheetCard {
+        padding: 25px 20px;
+        border-radius: 20px;
+        max-width: 100%;
+    }
+
+    .mainContent {
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+    }
+
+    .dropTargets,
+    .draggableItems {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .worksheetCard {
+        padding: 20px 15px;
+        border-radius: 16px;
+    }
+
+    .title {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+
+    .mainContent {
+        gap: 20px;
+    }
+
+    .draggableItems {
+        padding: 15px;
+        min-height: 150px;
+    }
+
+    .dropZone {
+        height: 50px;
+    }
+
+    .stepItem {
+        font-size: 1rem;
+        padding: 6px;
+    }
+
+    .stepIcon {
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+    }
+
+    .stepIcon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .actionButton {
+        padding: 12px;
+        font-size: 1.1rem;
+    }
+
+    .worksheetCard::before {
+        font-size: 20px;
+        top: 15px;
+        left: 15px;
+    }
+
+    .worksheetCard::after {
+        font-size: 16px;
+        top: 45px;
+        left: 12px;
+    }
+
+    .gearIcon {
+        font-size: 20px;
+        top: 18px;
+        right: 18px;
+    }
+}

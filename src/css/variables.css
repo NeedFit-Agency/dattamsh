@@ -276,12 +276,22 @@
     --input: 0 0% 12%;
   }
   :where(html) {
-    --radius-0: 0;
-    --radius-1: 4px;
+    --radius-0: 0;    --radius-1: 4px;
     --radius-2: 8px;
     --radius-3: 12px;
     --radius-4: 16px;
     --radius-5: 20px;
     /* --radius-6: 24px; */
     --radius-full: 9999px;
+
+    /* BucketMatch Component Variables */
+    --bg-color: #fdf5e6;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --main-font: 'Nunito', sans-serif;
+    --success-color: #4CAF50;
+    --success-glow: rgba(76, 175, 80, 0.5);
+    --error-color: #f44336;
+    --drop-hover-bg: #e8f5e9;
+    --drop-hover-border: #a5d6a7;
   }

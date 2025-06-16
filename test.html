@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Am I? The Game!</title>
+    <style>
+        /* --- Google Font & Basic Setup --- */
+        @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+        :root {
+            --bg-yellow: #fffbeb;
+            --card-bg: #ffffff;
+            --char-blue: #38bdf8;
+            --text-dark: #475569;
+            --main-font: 'Lilita One', sans-serif;
+            
+            --btn-bg: #f8fafc;
+            --btn-border: #e2e8f0;
+            --btn-shadow: #cbd5e1;
+
+            --win-green: #34d399;
+            --win-green-bg: #f0fdf4;
+            --win-green-shadow: #a7f3d0;
+            --lose-red: #f87171;
+            --lose-red-bg: #fef2f2;
+            --lose-red-shadow: #fca5a5;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--main-font);
+            background-color: var(--bg-yellow);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        
+        /* --- Main Game Card --- */
+        .game-card {
+            background-color: var(--card-bg);
+            border-radius: 32px;
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 6px var(--text-dark), 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            transform: rotate(-1.5deg);
+            transition: transform 0.2s ease;
+        }
+
+        .game-card:hover {
+            transform: rotate(0deg);
+        }
+
+        /* --- Character Mascot --- */
+        .character-container {
+            margin: -80px auto 10px;
+            width: 100px;
+            height: 80px;
+            animation: bob 3s ease-in-out infinite;
+        }
+        
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- Riddle/Prompt Area --- */
+        .prompt-text {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin: 0 0 10px 0;
+        }
+
+        .prompt-question {
+            font-size: 1.8rem;
+            color: var(--char-blue);
+            margin: 0 0 25px 0;
+            text-shadow: 2px 2px 0 #fff, 4px 4px 0 var(--text-dark);
+        }
+        
+        /* --- Answer Options --- */
+        .options-container {
+            display: grid;
+            gap: 15px;
+            transition: opacity 0.3s ease;
+        }
+
+        .game-card.game-over .options-container {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .option-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--btn-bg);
+            border: 3px solid var(--text-dark);
+            border-radius: 16px;
+            box-shadow: 0 6px 0 0 var(--btn-shadow);
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .option-button:not(:disabled):hover {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 0 var(--btn-shadow);
+        }
+
+        .option-button:not(:disabled):active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 var(--btn-shadow);
+        }
+
+        .option-icon {
+            width: 45px;
+            height: 45px;
+        }
+        
+        /* --- Feedback Styles --- */
+        .option-button.correct {
+            background-color: var(--win-green-bg);
+            box-shadow: 0 6px 0 0 var(--win-green-shadow);
+            animation: pop 0.5s ease;
+        }
+        
+        .option-button.incorrect {
+            background-color: var(--lose-red-bg);
+            box-shadow: 0 6px 0 0 var(--lose-red-shadow);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes pop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px) rotate(-3deg); }
+            40%, 80% { transform: translateX(8px) rotate(3deg); }
+        }
+
+        .option-button:disabled { cursor: not-allowed; }
+        
+        /* --- Win Screen --- */
+        .win-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 28px; /* Match card's radius */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .win-screen.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+        
+        .win-text {
+            font-size: 4rem;
+            color: var(--win-green);
+            text-shadow: 3px 3px 0 #fff, 6px 6px 0 var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .star {
+            position: absolute;
+            color: #ffc700;
+            font-size: 2rem;
+            animation: star-animation 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .star.s1 { top: 15%; left: 20%; animation-delay: 0.1s; }
+        .star.s2 { top: 25%; left: 80%; animation-delay: 0.2s; font-size: 1.5rem; }
+        .star.s3 { top: 70%; left: 10%; animation-delay: 0.3s; font-size: 2.5rem; }
+        .star.s4 { top: 80%; left: 75%; animation-delay: 0.4s; }
+        .star.s5 { top: 40%; left: 50%; animation-delay: 0.5s; font-size: 3rem; }
+
+        @keyframes star-animation {
+            0% { transform: scale(0) rotate(0deg); }
+            50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+            100% { transform: scale(1) rotate(360deg); opacity: 1; }
+        }
+
+        .play-again-btn {
+            font-family: var(--main-font);
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            padding: 15px 30px;
+            border-radius: 16px;
+            border: 3px solid var(--text-dark);
+            box-shadow: 0 6px 0 0 var(--btn-shadow);
+            background-color: var(--char-blue);
+            color: white;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .play-again-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 0 var(--btn-shadow);
+        }
+        
+        @media (min-width: 550px) {
+            .options-container { grid-template-columns: repeat(3, 1fr); }
+            .option-button { flex-direction: column; }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Sound Effects - embedded to keep it a single file -->
+    <audio id="correct-sound" src="data:audio/mpeg;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVhvT18IAgEBDQRLRw0QDhVOTE9PEA4ADw8OEQ4OFA8PDhQODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4_TTE="></audio>
+    <audio id="incorrect-sound" src="data:audio/mpeg;base64,UklGRkFvT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YV1vT18BAwZAB1d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f-"></audio>
+
+    <div class="game-card">
+        <!-- Win Screen (Initially Hidden) -->
+        <div class="win-screen" id="win-screen">
+            <div class="win-text">YOU DID IT!</div>
+            <!-- Decorative stars that will animate -->
+            <div class="star-container">
+                <div class="star s1">⭐</div>
+                <div class="star s2">✨</div>
+                <div class="star s3">⭐</div>
+                <div class="star s4">✨</div>
+                <div class="star s5">⭐</div>
+            </div>
+            <button class="play-again-btn" id="play-again-btn">Play Again</button>
+        </div>
+        
+        <!-- Main Game Content -->
+        <div class="character-container">
+            <svg viewBox="0 0 100 80"><path fill="#38bdf8" d="M10,80 C10,46.86 36.86,20 70,20 L75,20 C75,30 70,40 60,40 C50,40 45,30 45,20 L50,20 C83.14,20 110,46.86 110,80 L10,80 Z"></path><path fill="#7dd3fc" d="M50,20 C50,9 60,0 70,0 C80,0 90,9 90,20 L50,20 Z"></path><circle fill="#fff" cx="55" cy="55" r="12"></circle><circle fill="#475569" cx="52" cy="58" r="5"></circle><circle fill="#fff" cx="85" cy="55" r="12"></circle><circle fill="#475569" cx="88" cy="58" r="5"></circle></svg>
+        </div>
+
+        <div class="prompt-container">
+            <p class="prompt-text">I am yellow, I love bananas, and I swing from trees.</p>
+            <h2 class="prompt-question">WHO AM I?</h2>
+        </div>
+
+        <div class="options-container">
+            <!-- Option 1: Lion -->
+            <button class="option-button" data-animal="lion">
+                <div class="option-icon"><svg viewBox="0 0 24 24"><path fill="#fbbf24" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12C20,12.76 19.89,13.5 19.68,14.2C19.5,14.07 19.26,14 19,14H18.75A2.75,2.75 0 0,0 16,11.25V11A4,4 0 0,0 12,7A4,4 0 0,0 8,11V11.25A2.75,2.75 0 0,0 5.25,14H5C4.74,14 4.5,14.07 4.32,14.2C4.11,13.5 4,12.76 4,12A8,8 0 0,1 12,4M12,9A2,2 0 0,1 14,11V11.25A4.75,4.75 0 0,1 9.25,16H9A1,1 0 0,1 8,15V12A1,1 0 0,1 9,11H9.5A2.5,2.5 0 0,0 12,8.5V9M15,11A1,1 0 0,1 16,12V15A1,1 0 0,1 15,16H14.75A4.75,4.75 0 0,1 10,11.25V11A2,2 0 0,1 12,9V8.5A2.5,2.5 0 0,0 14.5,11H15Z" /></svg></div>
+                <span>Lion</span>
+            </button>
+            <!-- Option 2: Monkey -->
+            <button class="option-button" data-animal="monkey">
+                <div class="option-icon"><svg viewBox="0 0 24 24"><path fill="#ca8a04" d="M12,2C6.5,2 2,6.5 2,12C2,17.5 6.5,22 12,22C17.5,22 22,17.5 22,12C22,6.5 17.5,2 12,2M10,4.3C10.5,4.1 11.2,4 12,4C12.8,4 13.5,4.1 14,4.3C14,5.2 13.1,6 12,6C10.9,6 10,5.2 10,4.3M12,20C8.1,20 5,16.9 5,13C5,12.4 5.1,11.9 5.2,11.4C6.1,12.2 7.5,12.7 9,12.9V15H15V12.9C16.5,12.7 17.9,12.2 18.8,11.4C18.9,11.9 19,12.4 19,13C19,16.9 15.9,20 12,20Z" /></svg></div>
+                <span>Monkey</span>
+            </button>
+            <!-- Option 3: Snake -->
+            <button class="option-button" data-animal="snake">
+                <div class="option-icon"><svg viewBox="0 0 24 24"><path fill="#4d7c0f" d="M11.5,2C15.09,2 18,4.91 18,8.5C18,10.74 16.97,12.72 15.3,13.96L16.24,14.9L14.83,16.31L13.89,15.37C12.65,15.75 11.3,16 10,16C6,16 3,13 3,9C3,5 6,2 10,2H11.5M10.5,4C7.5,4 5,6.24 5,9C5,11.76 7.5,14 10.5,14C11.38,14 12.2,13.81 12.9,13.47L13.89,14.46L19.34,9.01L18.39,8.06C18.76,7.24 19,6.34 19,5.38C19,5.06 18.96,4.73 18.89,4.41C17.5,5.63 15.63,6.24 13.5,6C13.5,4.67 12.5,4 10.5,4Z" /></svg></div>
+                <span>Snake</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const optionButtons = document.querySelectorAll('.option-button');
+            const playAgainBtn = document.getElementById('play-again-btn');
+            const winScreen = document.getElementById('win-screen');
+            const gameCard = document.querySelector('.game-card');
+            const correctSound = document.getElementById('correct-sound');
+            const incorrectSound = document.getElementById('incorrect-sound');
+            
+            const CORRECT_ANSWER = 'monkey';
+            let isAnswered = false;
+
+            function handleOptionClick(event) {
+                if (isAnswered) return;
+                isAnswered = true;
+
+                const clickedButton = event.currentTarget;
+                const selectedAnswer = clickedButton.dataset.animal;
+                
+                // Disable all buttons immediately
+                optionButtons.forEach(button => button.disabled = true);
+
+                if (selectedAnswer === CORRECT_ANSWER) {
+                    correctSound.play();
+                    clickedButton.classList.add('correct');
+                    // Wait for animation before showing win screen
+                    setTimeout(() => {
+                        gameCard.classList.add('game-over');
+                        winScreen.classList.add('visible');
+                    }, 800);
+                } else {
+                    incorrectSound.play();
+                    clickedButton.classList.add('incorrect');
+                    // Show the correct answer as well
+                    document.querySelector(`[data-animal="${CORRECT_ANSWER}"]`).classList.add('correct');
+                     // Wait for animation then show the play again button on the win screen
+                    setTimeout(() => {
+                        gameCard.classList.add('game-over');
+                        winScreen.querySelector('.win-text').textContent = "TRY AGAIN!";
+                        winScreen.classList.add('visible');
+                    }, 1200);
+                }
+            }
+            
+            function resetGame() {
+                isAnswered = false;
+                winScreen.classList.remove('visible');
+                gameCard.classList.remove('game-over');
+                winScreen.querySelector('.win-text').textContent = "YOU DID IT!";
+
+                optionButtons.forEach(button => {
+                    button.classList.remove('correct', 'incorrect');
+                    button.disabled = false;
+                });
+            }
+
+            optionButtons.forEach(button => {
+                button.addEventListener('click', handleOptionClick);
+            });
+            
+            playAgainBtn.addEventListener('click', resetGame);
+        });
+    </script>
+</body>
+</html>

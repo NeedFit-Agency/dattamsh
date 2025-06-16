@@ -45,6 +45,10 @@ const Puzzle = dynamic(() => import('./Puzzle'), {
   loading: () => <LoadingSpinner message="Loading puzzle content..." /> 
 });
 
+const BucketMatch = dynamic(() => import('./BucketMatch'), { 
+  loading: () => <LoadingSpinner message="Loading bucket matching game..." /> 
+});
+
 // Fallback component when a format doesn't have a corresponding component
 const UnsupportedFormat: React.FC<{format: string}> = ({ format }) => (
   <div style={{ padding: '20px', border: '1px solid #ff6b6b', borderRadius: '8px', color: '#ff6b6b' }}>
@@ -238,6 +242,22 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
           prompt={puzzleContent.prompt}
           hotspots={puzzleContent.hotspots}
           onBack={onBack}
+        />
+      );
+    }
+    case 'bucket-match': {
+      const bucketMatchContent = content as import('../../data/standardsData').BucketMatchSlide;
+      return (
+        <BucketMatch
+          title={bucketMatchContent.title}
+          instruction={bucketMatchContent.instruction}
+          items={bucketMatchContent.items}
+          buckets={bucketMatchContent.buckets}
+          audioSrc={bucketMatchContent.audioSrc}
+          speakText={bucketMatchContent.speakText}
+          progress={progress}
+          onBack={onBack}
+          onComplete={onComplete}
         />
       );
     }

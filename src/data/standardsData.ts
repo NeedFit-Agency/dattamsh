@@ -10,7 +10,8 @@ export type FormatType =
   | "step-by-step"
   | "video"
   | "text"
-  | "puzzle";
+  | "puzzle"
+  | "bucket-match";
 
 export interface BaseContentProps {
   type: string;
@@ -89,12 +90,36 @@ export interface StepByStepSlide extends BaseContentProps {
   speakText?: string;
 }
 
+export interface BucketMatchItem {
+  id: string;
+  text: string;
+  type: string;
+  imageUrl?: string;
+  color?: string;
+}
+
+export interface BucketData {
+  id: string;
+  title: string;
+  type: string;
+  color?: string;
+}
+
+export interface BucketMatchSlide extends BaseContentProps {
+  type: "bucket-match";
+  format: "bucket-match";
+  instruction: string;
+  items: BucketMatchItem[];
+  buckets: BucketData[];
+}
+
 export type LessonContent =
   | LearningSlide
   | DragDropSlide
   | QuizSlide
   | HistorySlide
-  | StepByStepSlide;
+  | StepByStepSlide
+  | BucketMatchSlide;
 
 export interface Chapter {
   id: number;
