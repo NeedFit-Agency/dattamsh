@@ -231,14 +231,12 @@ function LearningPageContent() {
              // setDndFeedback("Oops! You're out of hearts. Try reviewing the items again or move to the next lesson.");
              return;
          }
-    }
-
-    if (currentSlideIndex < totalSlides - 1) {
+    }    if (currentSlideIndex < totalSlides - 1) {
         setCurrentSlideIndex(currentSlideIndex + 1);
     }
     else {
-        console.log("Lesson Finished! Redirecting to quiz page for Standard/Chapter:", standard, chapter);
-        router.push(`/quiz?standard=${standard}&chapter=${chapter}`);
+        console.log("Lesson Finished! Redirecting back to chapter page for Standard/Chapter:", standard, chapter);
+        router.push(`/standard/${standard}/chapter/${chapter}`);
     }
   };
 
@@ -271,11 +269,10 @@ function LearningPageContent() {
   } else {
       continueButtonClass += ` ${styles.continueButtonCorrect}`;
   }
-
   if (currentSlideIndex === totalSlides - 1 && (!currentContent || currentContent.type !== 'drag-drop' || dndChecked)) {
     const allowFinish = currentContent.type !== 'drag-drop' || (dndChecked && !(hearts <= 0 && Object.values(itemCorrectness).some(c => !c) && areAllItemsPlaced()));
     if (allowFinish) {
-        continueButtonText = "Start Quiz";
+        continueButtonText = "Finish Lesson";
     }
   }
 

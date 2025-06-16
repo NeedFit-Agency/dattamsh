@@ -5,48 +5,20 @@ import dynamic from 'next/dynamic';
 import LoadingSpinner from './LoadingSpinner';
 import type { LessonContent } from '../../data/standardsData';
 
-const Application = dynamic(() => import('./Application'), { 
-  loading: () => <LoadingSpinner message="Loading application content..." /> 
-});
-
-const Types = dynamic(() => import('./Types'), { 
-  loading: () => <LoadingSpinner message="Loading types content..." /> 
-});
-
-const Code = dynamic(() => import('./Code'), { 
-  loading: () => <LoadingSpinner message="Loading code content..." /> 
-});
-
-const Component = dynamic(() => import('./Component'), { 
-  loading: () => <LoadingSpinner message="Loading component content..." /> 
-});
-
 const DragDrop = dynamic(() => import('./DragDrop'), { 
   loading: () => <LoadingSpinner message="Loading drag-drop content..." /> 
 });
 
-const History = dynamic(() => import('./History'), { 
-  loading: () => <LoadingSpinner message="Loading history content..." /> 
-});
-
-const StepByStep = dynamic(() => import('./StepbyStep'), { 
-  loading: () => <LoadingSpinner message="Loading step-by-step content..." /> 
-});
-
-const Video = dynamic(() => import('./Video'), { 
-  loading: () => <LoadingSpinner message="Loading video content..." /> 
-});
-
-const Text = dynamic(() => import('./Text'), { 
-  loading: () => <LoadingSpinner message="Loading text content..." /> 
-});
-
-const Puzzle = dynamic(() => import('./Puzzle'), { 
-  loading: () => <LoadingSpinner message="Loading puzzle content..." /> 
-});
-
 const BucketMatch = dynamic(() => import('./BucketMatch'), { 
   loading: () => <LoadingSpinner message="Loading bucket matching game..." /> 
+});
+
+const SequenceMatcher = dynamic(() => import('./SequenceMatcher'), { 
+  loading: () => <LoadingSpinner message="Loading sequence matching game..." /> 
+});
+
+const WhoAmI = dynamic(() => import('./WhoAmI'), { 
+  loading: () => <LoadingSpinner message="Loading who am I game..." /> 
 });
 
 // Fallback component when a format doesn't have a corresponding component
@@ -78,66 +50,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
 
   // Map content format to corresponding component
   switch (format) {
-    case 'application': {
-      const appContent = content as any;
-      return (
-        <Application
-          title={appContent.title}
-          subtitle={appContent.subtitle}
-          examples={appContent.examples}
-          audioContent={appContent.audioContent}
-          progress={progress}
-          onBack={onBack}
-          onComplete={onComplete}
-        />
-      );
-    }
-    case 'type': {
-      const typeContent = content as any;
-      return (
-        <Types
-          title={typeContent.title}
-          subtitle={typeContent.subtitle}
-          types={typeContent.types}
-          audioContent={typeContent.audioContent}
-          progress={progress}
-          onBack={onBack}
-          onComplete={onComplete}
-        />
-      );
-    }
-    case 'code': {
-      const codeContent = content as any;
-      return (
-        <Code
-          title={codeContent.title}
-          description={codeContent.description}
-          code={codeContent.code}
-          language={codeContent.language}
-          outputTitle={codeContent.outputTitle}
-          outputContent={codeContent.outputContent}
-          audioContent={codeContent.audioContent}
-          progress={progress}
-          onBack={onBack}
-          onComplete={onComplete}
-        />
-      );
-    }
-    case 'component': {
-      const compContent = content as any;
-      return (
-        <Component
-          title={compContent.title}
-          subtitle={compContent.subtitle}
-          components={compContent.components}
-          audioContent={compContent.audioContent}
-          progress={progress}
-          onBack={onBack}
-          onComplete={onComplete}
-        />
-      );
-    }
-    case 'drag-drop': {
+   case 'drag-drop': {
       const dndContent = content as import('../../data/standardsData').DragDropSlide;
       return (
         <DragDrop
@@ -146,106 +59,42 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
           items={dndContent.items}
           targets={dndContent.targets}
           audioSrc={dndContent.audioSrc}
-          speakText={dndContent.speakText}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
         />
       );
     }
-    case 'history': {
-      // HistorySlide is in standardsData
-      const historyContent = content as import('../../data/standardsData').HistorySlide;
+    case 'sequence-match': {
+      const sequenceMatchContent = content as import('../../data/standardsData').SequenceMatchSlide;
       return (
-        <History
-          title={historyContent.title}
-          items={historyContent.items}
-          progress={progress}
-          onBack={onBack}
+        <SequenceMatcher
+          title={sequenceMatchContent.title}
+          items={sequenceMatchContent.items}
+          dropZoneCount={sequenceMatchContent.dropZoneCount}
+          correctOrder={sequenceMatchContent.correctOrder}
           onComplete={onComplete}
         />
       );
-    }
-    case 'step-by-step': {
-      const stepContent = content as any;
-      const steps = Array.isArray(stepContent.steps)
-        ? stepContent.steps.map((step: any) => ({
-            ...step,
-            visualContent: typeof step.visualContent === 'string' ? step.visualContent : ''
-          }))
-        : [
-            {
-              id: "1",
-              number: 1,
-              title: stepContent.title,
-              instruction: Array.isArray(stepContent.description)
-                ? stepContent.description[0]
-                : stepContent.description,
-              visualContent: typeof stepContent.visualContent === 'string' ? stepContent.visualContent : ''
-            }
-          ];
+    }    case 'who-am-i': {
+      const whoAmIContent = content as import('../../data/standardsData').WhoAmISlide;
+      const correctOption = whoAmIContent.options.find(opt => opt.isCorrect);
+      const adaptedOptions = whoAmIContent.options.map(option => ({
+        id: option.id,
+        text: option.text,
+        icon: <span>💡</span> // Default icon for all options
+      }));
+      
       return (
-        <StepByStep
-          title={stepContent.title}
-          steps={steps}
-          progress={progress}
-          onBack={onBack}
+        <WhoAmI
+          riddleText={whoAmIContent.riddleText}
+          questionText={whoAmIContent.questionText}
+          options={adaptedOptions}
+          correctAnswerId={correctOption?.id || whoAmIContent.options[0]?.id}
           onComplete={onComplete}
         />
       );
-    }
-    case 'video': {
-      const videoContent = content as any;
-      return (
-        <Video
-          title={videoContent.title}
-          videoSrc={videoContent.videoSrc}
-          videoType={videoContent.videoType}
-          youtubeId={videoContent.youtubeId}
-          vimeoId={videoContent.vimeoId}
-          mascotImage={videoContent.mascotImage}
-          mascotTitle={videoContent.mascotTitle}
-          keyPoints={videoContent.keyPoints}
-          audioContent={videoContent.audioContent}
-          progress={progress}
-          onBack={onBack}
-          onComplete={onComplete}
-        />
-      );
-    }
-    case 'text': {
-      const textContent = content as import('../../data/standardsData').LearningSlide;
-      return (
-        <Text
-          title={textContent.title}
-          description={textContent.description}
-          imageUrl={textContent.imageUrl}
-          exampleImages={textContent.exampleImages}
-          audioSrc={textContent.audioSrc}
-          speakText={textContent.speakText}
-          progress={progress}
-          onBack={onBack}
-          onComplete={onComplete}
-        />
-      );
-    }
-    case 'puzzle': {
-      // Map the content to PuzzleProps
-      const puzzleContent = content as any;
-      return (
-        <Puzzle
-          title={puzzleContent.title}
-          subtitle={puzzleContent.subtitle}
-          avatarUrl={puzzleContent.avatarUrl || '/images/mascot.png'}
-          chatText={Array.isArray(puzzleContent.description) ? puzzleContent.description[0] : (puzzleContent.description || 'Can you solve the puzzle?')}
-          imageUrl={puzzleContent.imageUrl}
-          prompt={puzzleContent.prompt}
-          hotspots={puzzleContent.hotspots}
-          onBack={onBack}
-        />
-      );
-    }
-    case 'bucket-match': {
+    }   case 'bucket-match': {
       const bucketMatchContent = content as import('../../data/standardsData').BucketMatchSlide;
       return (
         <BucketMatch
@@ -254,10 +103,14 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
           items={bucketMatchContent.items}
           buckets={bucketMatchContent.buckets}
           audioSrc={bucketMatchContent.audioSrc}
-          speakText={bucketMatchContent.speakText}
           progress={progress}
           onBack={onBack}
           onComplete={onComplete}
+          successMessage={bucketMatchContent.successMessage}
+          correctMessage={bucketMatchContent.correctMessage}
+          tryAgainMessage={bucketMatchContent.tryAgainMessage}
+          resetLabel={bucketMatchContent.resetLabel}
+          playAgainLabel={bucketMatchContent.playAgainLabel}
         />
       );
     }

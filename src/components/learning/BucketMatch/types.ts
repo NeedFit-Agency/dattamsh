@@ -33,6 +33,11 @@ export interface BucketMatchProps {
   progress?: number;                 // Optional progress value (e.g., 0-100)
   onBack?: () => void;               // Optional callback function for a back button
   onComplete?: () => void;           // Optional callback function when all items are correctly matched
+  successMessage?: string;           // Message shown when all items are matched successfully
+  correctMessage?: string;           // Message shown when an item is correctly placed
+  tryAgainMessage?: string;          // Message shown when an item is incorrectly placed
+  resetLabel?: string;               // Label for the reset button
+  playAgainLabel?: string;           // Label for the play again button
 }
 
 // Defines the structure for feedback messages (if needed separately from component state).
