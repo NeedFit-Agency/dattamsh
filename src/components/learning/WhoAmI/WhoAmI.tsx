@@ -102,13 +102,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
             Play Again
           </button>
         </div>
-      )}
-
-      <div className={styles.characterContainer}>
-        {mascot}
-      </div>
-
-      <div className={styles.promptContainer}>
+      )}      <div className={styles.promptContainer}>
         <p className={styles.promptText}>{riddleText}</p>
         <h2 className={styles.promptQuestion}>{questionText}</h2>
       </div>

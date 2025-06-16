@@ -104,14 +104,6 @@ export interface Standard {
   [key: string]: Chapter[];
 }
 
-// Fun facts for reference (can be used in components if needed)
-export const funFacts = [
-  "Computers help us write stories and letters!",
-  "You can draw amazing pictures on a computer!",
-  "Playing games on a computer is super fun!",
-  "You can watch videos and learn new things!",
-];
-
 export const standards: Standard = {
   "1": [
     {
@@ -176,7 +168,8 @@ export const standards: Standard = {
       id: 2,
       title: "Color Matching",
       lessonContent: [
-        {          type: "bucket-match",
+        {
+          type: "bucket-match",
           format: "bucket-match",
           title: "Match the Colors",
           instruction: "Drag each fruit to its matching color bucket!",
@@ -333,7 +326,8 @@ export const standards: Standard = {
       id: 2,
       title: "School Supplies Sorting",
       lessonContent: [
-        {          type: "bucket-match",
+        {
+          type: "bucket-match",
           format: "bucket-match",
           title: "Sort School Supplies",
           instruction: "Put each school supply in the correct category bucket!",
@@ -421,5 +415,363 @@ export const standards: Standard = {
         },
       ],
     },
+  ],
+  "3": [
+    {
+      id: 1,
+      title: "Internet Tools",
+      lessonContent: [
+        {
+          type: "drag-drop",
+          format: "drag-drop",
+          title: "Internet vs Non-Internet",
+          instruction:
+            'Sort these items. Drag them into the correct box: "Internet Tools" or "Non-Internet Tools".',
+          items: [
+            {
+              id: "dnd-item-1",
+              text: "Web Browser",
+              type: "option-1",
+              imageUrl: "/images/standard3/chapter1/chrome_logo.png",
+            },
+            {
+              id: "dnd-item-2",
+              text: "Compass",
+              type: "option-2",
+              imageUrl: "/images/standard3/compass.png",
+            },
+            {
+              id: "dnd-item-3",
+              text: "Email",
+              type: "option-1",
+              imageUrl: "/images/standard3/chapter2/email_concept.png",
+            },
+            {
+              id: "dnd-item-4",
+              text: "Calculator",
+              type: "option-2",
+              imageUrl: "/images/standard3/calculator.png",
+            },
+            {
+              id: "dnd-item-5",
+              text: "Search Engine",
+              type: "option-1",
+              imageUrl: "/images/standard3/chapter1/browser_search_box.png",
+            },
+            {
+              id: "dnd-item-6",
+              text: "Ruler",
+              type: "option-2",
+              imageUrl: "/images/standard3/ruler.png",
+            },
+          ],
+          targets: [
+            { id: "internetTarget", title: "Internet Tools", type: "option-1" },
+            { id: "nonInternetTarget", title: "Non-Internet Tools", type: "option-2" },
+          ],
+          audioSrc: "/audio/internet_tools.mp3",
+          speakText:
+            "Sort these items. Drag them into the correct box: Internet Tools or Non-Internet Tools.",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Email Components",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match Email Components",
+          instruction: "Drag each email component to its matching description bucket!",
+          items: [
+            {
+              id: "subject",
+              text: "Subject Line",
+              type: "subject",
+              imageUrl: "/images/standard3/chapter2/subject.png",
+              color: "#ff5252"
+            },
+            {
+              id: "attachment",
+              text: "Attachment",
+              type: "attachment",
+              imageUrl: "/images/standard3/chapter2/attachment.png",
+              color: "#ffeb3b"
+            },
+            {
+              id: "recipient",
+              text: "To Field",
+              type: "recipient",
+              imageUrl: "/images/standard3/chapter2/recipient.png",
+              color: "#ff9800"
+            },
+            {
+              id: "cc",
+              text: "CC",
+              type: "cc",
+              imageUrl: "/images/standard3/chapter2/cc.png",
+              color: "#9c27b0"
+            }
+          ],
+          buckets: [
+            {
+              id: "subject-bucket",
+              title: "Title of your email",
+              type: "subject",
+              color: "#ff5252"
+            },
+            {
+              id: "attachment-bucket",
+              title: "Files you send with email",
+              type: "attachment",
+              color: "#ffeb3b"
+            },
+            {
+              id: "recipient-bucket",
+              title: "Main person you're writing to",
+              type: "recipient",
+              color: "#ff9800"
+            },
+            {
+              id: "cc-bucket",
+              title: "People who get copies",
+              type: "cc",
+              color: "#9c27b0"
+            }
+          ],
+          audioSrc: "/audio/email_components.mp3",
+          speakText: "Drag each email component to its matching description bucket.",
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Online Safety Steps",
+      lessonContent: [
+        {
+          type: "sequence-match",
+          format: "sequence-match",
+          title: "Steps for Online Safety",
+          instruction: "Put these online safety steps in the correct order!",
+          items: [
+            {
+              id: "step1",
+              content: "Ask an adult before sharing any information online"
+            },
+            {
+              id: "step2",
+              content: "Create a strong password using letters, numbers, and symbols"
+            },
+            {
+              id: "step3",
+              content: "Only visit websites approved by your parents or teachers"
+            },
+            {
+              id: "step4",
+              content: "Tell an adult if something makes you uncomfortable online"
+            }
+          ],
+          correctOrder: ["step1", "step3", "step2", "step4"],
+          dropZoneCount: 4,
+          audioSrc: "/audio/online_safety.mp3",
+          speakText: "Put these online safety steps in the correct order!",
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "Browser Identification",
+      lessonContent: [
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Guess the Web Browser",
+          riddleText: "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
+          questionText: "Which web browser am I?",
+          options: [
+            { id: "chrome", text: "Google Chrome", isCorrect: true },
+            { id: "edge", text: "Microsoft Edge", isCorrect: false },
+            { id: "firefox", text: "Mozilla Firefox", isCorrect: false },
+            { id: "safari", text: "Safari", isCorrect: false }
+          ],
+          audioSrc: "/audio/browser_riddle.mp3",
+          speakText: "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
+        }
+      ]
+    }
+  ],
+  "4": [
+    {
+      id: 1,
+      title: "Operating Systems",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match OS to Device",
+          instruction: "Drag each operating system to its matching device type!",
+          items: [
+            {
+              id: "android",
+              text: "Android",
+              type: "mobile",
+              imageUrl: "/images/standard4/chapter1/android_logo.png",
+              color: "#a4c639"
+            },
+            {
+              id: "windows",
+              text: "Windows",
+              type: "desktop",
+              imageUrl: "/images/standard4/chapter1/windows_logo.png",
+              color: "#0078d4"
+            },
+            {
+              id: "ios",
+              text: "iOS",
+              type: "mobile",
+              imageUrl: "/images/standard4/chapter1/ios_logo.png",
+              color: "#000000"
+            },
+            {
+              id: "macos",
+              text: "macOS",
+              type: "desktop",
+              imageUrl: "/images/standard4/chapter1/macos_logo.png",
+              color: "#999999"
+            }
+          ],
+          buckets: [
+            {
+              id: "mobile-bucket",
+              title: "Mobile Devices",
+              type: "mobile",
+              color: "#e91e63"
+            },
+            {
+              id: "desktop-bucket",
+              title: "Desktop Computers",
+              type: "desktop",
+              color: "#3f51b5"
+            }
+          ],
+          audioSrc: "/audio/match_os_device.mp3",
+          speakText: "Drag each operating system to its matching device type!",
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "Windows Components",
+      lessonContent: [
+        {
+          type: "drag-drop",
+          format: "drag-drop",
+          title: "Identify Windows Components",
+          instruction:
+            'Drag these Windows components to their correct category: "User Interface" or "System Utility".',
+          items: [
+            {
+              id: "dnd-item-1",
+              text: "Taskbar",
+              type: "option-1",
+              imageUrl: "/images/standard4/chapter2/windows_desktop_overview.png",
+            },
+            {
+              id: "dnd-item-2",
+              text: "Disk Cleanup",
+              type: "option-2",
+              imageUrl: "/images/standard4/chapter2/disk_cleanup.png",
+            },
+            {
+              id: "dnd-item-3",
+              text: "Desktop Icons",
+              type: "option-1",
+              imageUrl: "/images/standard4/chapter2/this_pc_icon.png",
+            },
+            {
+              id: "dnd-item-4",
+              text: "Task Manager",
+              type: "option-2",
+              imageUrl: "/images/standard4/chapter2/task_manager.png",
+            },
+            {
+              id: "dnd-item-5",
+              text: "Start Menu",
+              type: "option-1",
+              imageUrl: "/images/standard4/chapter2/start_button.png",
+            },
+            {
+              id: "dnd-item-6",
+              text: "Antivirus",
+              type: "option-2",
+              imageUrl: "/images/standard4/chapter2/antivirus.png",
+            },
+          ],
+          targets: [
+            { id: "uiTarget", title: "User Interface", type: "option-1" },
+            { id: "utilityTarget", title: "System Utility", type: "option-2" },
+          ],
+          audioSrc: "/audio/windows_components.mp3",
+          speakText:
+            "Drag these Windows components to their correct category: User Interface or System Utility.",
+        },
+      ]
+    },
+    {
+      id: 3,
+      title: "File Types",
+      lessonContent: [
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Guess the File Type",
+          riddleText: "I store photos and pictures. My name starts with 'J' and I'm very common on the internet. Who am I?",
+          questionText: "Which file type am I?",
+          options: [
+            { id: "jpg", text: ".jpg / .jpeg", isCorrect: true },
+            { id: "txt", text: ".txt", isCorrect: false },
+            { id: "mp3", text: ".mp3", isCorrect: false },
+            { id: "doc", text: ".doc", isCorrect: false }
+          ],
+          audioSrc: "/audio/file_type_riddle.mp3",
+          speakText: "I store photos and pictures. My name starts with 'J' and I'm very common on the internet. Who am I?",
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "MS Word Elements",
+      lessonContent: [
+        {
+          type: "sequence-match",
+          format: "sequence-match",
+          title: "Steps to Insert a Table in MS Word",
+          instruction: "Put these steps in the correct order to insert a table in Microsoft Word!",
+          items: [
+            {
+              id: "step1",
+              content: "Click on the Insert tab in the ribbon"
+            },
+            {
+              id: "step2",
+              content: "Click the Table button"
+            },
+            {
+              id: "step3",
+              content: "Select the number of rows and columns you need"
+            },
+            {
+              id: "step4",
+              content: "Click to insert the table into your document"
+            }
+          ],
+          correctOrder: ["step1", "step2", "step3", "step4"],
+          dropZoneCount: 4,
+          audioSrc: "/audio/word_table_steps.mp3",
+          speakText: "Put these steps in the correct order to insert a table in Microsoft Word!",
+        }
+      ]
+    }
   ],
 };
