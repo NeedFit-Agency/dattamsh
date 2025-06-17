@@ -175,33 +175,33 @@ export const standards: Standard = {
           instruction: "Drag each fruit to its matching color bucket!",
           items: [
             {
-              id: "apple",
-              text: "Apple",
-              type: "red",
-              imageUrl: "/images/fruits/apple.svg",
-              color: "#ff5252"
-            },
-            {
               id: "banana",
               text: "Banana",
               type: "yellow",
-              imageUrl: "/images/fruits/banana.svg",
+              imageUrl: "/images/fruits/banana.png",
               color: "#ffeb3b"
             },
             {
-              id: "orange",
-              text: "Orange",
-              type: "orange",
-              imageUrl: "/images/fruits/orange.svg",
-              color: "#ff9800"
+              id: "apple",
+              text: "Apple",
+              type: "red",
+              imageUrl: "/images/fruits/apple.png",
+              color: "#ff5252"
             },
             {
               id: "grapes",
               text: "Grapes",
               type: "purple",
-              imageUrl: "/images/fruits/grapes.svg",
+              imageUrl: "/images/fruits/grapes.png",
               color: "#9c27b0"
-            }
+            },
+            {
+              id: "orange",
+              text: "Orange",
+              type: "orange",
+              imageUrl: "/images/fruits/orange.png",
+              color: "#ff9800"
+            },
           ],
           buckets: [
             { id: "red-bucket", title: "Red", type: "red", color: "#ff5252" },
