@@ -173,6 +173,21 @@
   --text-medium: #a67c52;
   --text-light: #ffe0b2;
   --font-family: 'Comic Sans MS', 'Comic Sans', 'Nunito', 'Quicksand', cursive, sans-serif;
+  --apple-glass-bg: rgba(255,255,255,0.65);
+  --apple-glass-blur: blur(18px);
+  --apple-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  --apple-border: 1.5px solid rgba(200, 200, 255, 0.25);
+  --apple-radius: 28px;
+  --apple-blue: #007aff;
+  --apple-green: #34c759;
+  --apple-yellow: #ffd60a;
+  --apple-gray: #f2f2f7;
+  --apple-text: #222;
+  --apple-accent: #f5f6fa;
+  --apple-gradient: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+  --apple-gradient-blue: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  --apple-gradient-yellow: linear-gradient(135deg, #fffbe6 0%, #fff9db 100%);
+  --apple-gradient-green: linear-gradient(135deg, #e6fff5 0%, #e0ffe7 100%);
 }
 
 

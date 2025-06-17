@@ -206,13 +206,16 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
       default:
         return <div>📄</div>; // Default icon
     }
-  };  return (
+  };
+
+  return (
     <div className={styles.container}>
       <div className={styles.worksheetCard}>
         <span className={styles.gearIcon}>⚙️</span>
         <h1 className={styles.title}>{title}</h1>
 
-        <div className={styles.mainContent}>          <div className={styles.dropTargets}>
+        <div className={styles.mainContent}>
+          <div className={styles.dropTargets}>
             <h3>Drop Zones</h3>
             {Array.from({ length: dropZoneCount }, (_, index) => (
               <div 
@@ -241,6 +244,14 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                 )}
               </div>
             ))}
+          </div>
+
+          <div className={styles.centerContent}>
+            <div className={styles.centerMascot}>
+              <img src="/images/mascot-small.png" alt="Mascot" />
+            </div>
+            <div className={styles.centerConnector}></div>
+            <span className={styles.centerSparkle}>✨</span>
           </div>
 
           <div 
