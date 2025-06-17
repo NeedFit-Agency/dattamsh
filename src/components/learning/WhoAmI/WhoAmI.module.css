@@ -273,48 +273,46 @@
 }
 
 .optionIcon {
-    width: clamp(100px, 13vw, 150px); /* Even larger icon container size */
-    height: clamp(100px, 13vw, 150px); /* Even larger icon container size */
+    width: 90% !important;
+    height: 90% !important;
+    max-width: 180px;
+    max-height: 180px;
+    min-width: 100px;
+    min-height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(240, 248, 255, 0.4) 100%);
-    border-radius: 50%;
-    border: 4px solid rgba(187, 221, 255, 0.7); /* Thicker border with slightly more opacity */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12); /* Added shadow for better depth */
-    padding: 5px; /* Added padding inside icon container */
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 auto;
 }
 
-/* Added styles for SVG and images inside the option icons */
-.optionIcon svg {
-    width: clamp(65px, 9vw, 100px); /* Even larger SVG size */
-    height: clamp(65px, 9vw, 100px);
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15)); /* Added shadow for better visibility */
-}
-
+.optionIcon svg,
 .optionIcon img {
-    width: clamp(65px, 9vw, 100px); /* Even larger image size */
-    height: clamp(65px, 9vw, 100px);
-    object-fit: contain; /* Maintain aspect ratio */
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15)); /* Added shadow for better visibility */
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 180px;
+    max-height: 180px;
+    min-width: 100px;
+    min-height: 100px;
+    object-fit: contain;
+    filter: none !important;
+    transform: none !important;
 }
 
 .optionButton:not(:disabled):hover .optionIcon {
-    transform: scale(1.18) rotate(-8deg);
-    filter: brightness(1.2) drop-shadow(0 10px 20px rgba(26, 162, 255, 0.6)); /* Enhanced shadow effect */
-    background: radial-gradient(circle, rgba(26, 162, 255, 0.18) 0%, rgba(135, 206, 250, 0.1) 100%); /* Stronger gradient */
-    border-color: rgba(26, 162, 255, 0.8); /* Highlight border on hover */
+    transform: none !important;
+    filter: none !important;
+    background: none !important;
+    border: none !important;
 }
 
 .optionButton:not(:disabled):hover .optionIcon svg,
 .optionButton:not(:disabled):hover .optionIcon img {
-    filter: drop-shadow(0 5px 10px rgba(26, 162, 255, 0.7)); /* Enhanced shadow for icons when hovered */
-    transform: scale(1.08); /* Slightly scale up the icon itself */
-}
-
-.optionButton:not(:disabled):active .optionIcon {
-    transform: scale(0.95) rotate(4deg);
+    filter: none !important;
+    transform: none !important;
 }
 
 /* --- Feedback Styles --- */
@@ -633,16 +631,19 @@
         font-size: clamp(1.1rem, 4vw, 1.5rem); /* Adjusted for mobile */
     }
     
-    .optionIcon { 
-        width: clamp(80px, 15vw, 120px); /* Keep icons large on mobile */
-        height: clamp(80px, 15vw, 120px); 
-        border-width: 3px;
+    .optionIcon {
+        max-width: 140px;
+        max-height: 140px;
+        min-width: 80px;
+        min-height: 80px;
     }
     
     .optionIcon svg,
     .optionIcon img {
-        width: clamp(55px, 10vw, 85px); /* Keep icon contents large on mobile */
-        height: clamp(55px, 10vw, 85px);
+        max-width: 140px;
+        max-height: 140px;
+        min-width: 80px;
+        min-height: 80px;
     }
     
     .mascotContainer { 

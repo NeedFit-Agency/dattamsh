@@ -256,7 +256,7 @@ export const standards: Standard = {
             { id: "option-1", text: "Monitor", isCorrect: true, imageUrl: "/images/monitor.png" },
             { id: "option-2", text: "Keyboard", isCorrect: false, imageUrl: "/images/keyboard.png" },
             { id: "option-3", text: "Mouse", isCorrect: false, imageUrl: "/images/mouse.png" },
-            { id: "option-4", text: "Speaker", isCorrect: false, imageUrl: "/images/speaker.png" },
+            { id: "option-4", text: "CPU", isCorrect: false, imageUrl: "/images/cpu.png" },
           ],
           audioSrc: "/audio/computer_riddle.mp3",
           speakText: "I help you see everything the computer shows. Without me, you can't watch videos or play games. I have a screen that displays colorful pictures and text. What am I?",
