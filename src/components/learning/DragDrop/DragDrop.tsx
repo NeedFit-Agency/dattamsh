@@ -186,7 +186,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
       {onBack && (
         <button className={styles.chooseBackButton} onClick={onBack} aria-label="Go back">
           <FontAwesomeIcon icon={faArrowLeft} />
-          <span className={styles.backText}>Previous</span>
+          <span className={styles.backText}>Back</span>
         </button>
       )}
       {/* Progress indicator */}
@@ -319,7 +319,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
             className={styles.navigationButton}
             onClick={onBack}
           >
-            <FontAwesomeIcon icon={faArrowLeft} /> Previous
+            <FontAwesomeIcon icon={faArrowLeft} /> Back
           </button>
         )}
         {onComplete && (

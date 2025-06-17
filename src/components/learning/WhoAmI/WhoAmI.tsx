@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './WhoAmI.module.css';
 
@@ -93,9 +92,9 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
           <div className={styles.winText}>{winScreenMessage}</div>
           <div className={styles.starContainer}>
             <div className={`${styles.star} ${styles.s1}`}>⭐</div>
-            <div className={`${styles.star} ${styles.s2}`}>✨</div>
+            <div className={`${styles.star} ${styles.s2}`}>⭐</div>
             <div className={`${styles.star} ${styles.s3}`}>⭐</div>
-            <div className={`${styles.star} ${styles.s4}`}>✨</div>
+            <div className={`${styles.star} ${styles.s4}`}>⭐</div>
             <div className={`${styles.star} ${styles.s5}`}>⭐</div>
           </div>
           <button className={styles.playAgainBtn} onClick={resetGame}>

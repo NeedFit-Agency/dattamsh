@@ -22,6 +22,13 @@ const getFruitSvg = (itemType: string, imageUrl?: string) => {
   return <div>{itemType}</div>; // Simple text fallback
 };
 
+const BackButton: React.FC<{ onClick: () => void }> = ({ onClick }) => (
+  <button className={styles.chooseBackButton} onClick={onClick} aria-label="Go back">
+    <FontAwesomeIcon icon={faArrowLeft} />
+    <span className={styles.backText}>Back</span>
+  </button>
+);
+
 export const BucketMatch: React.FC<BucketMatchProps> = ({
   title = 'Match the Following', // Default title
   instruction,
@@ -147,14 +154,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     <div className={styles.container}>
       {onBack && (
         <div className={styles.header}>
-          <button
-            className={styles.chooseBackButton}
-            onClick={onBack}
-            aria-label="Go back"
-          >
-            <FontAwesomeIcon icon={faArrowLeft} />
-            <span className={styles.backText}>Back</span>
-          </button>
           {title && <h2 className={styles.mainTitle}>{title}</h2>}
           {audioSrc && (
             <>

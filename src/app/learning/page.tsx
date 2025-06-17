@@ -158,6 +158,8 @@ function LearningPageContent() {
   const handlePrevious = () => {
     if (currentSlideIndex > 0) {
       setCurrentSlideIndex(currentSlideIndex - 1);
+    } else {
+      router.push(`/standard/${standard}/chapter/${chapter}`);
     }
   };
 
@@ -297,10 +299,8 @@ function LearningPageContent() {
             <button
               className={styles.previousButton}
               onClick={handlePrevious}
-              disabled={currentSlideIndex === 0}
-              aria-disabled={currentSlideIndex === 0}
             >
-              <FontAwesomeIcon icon={faArrowLeft} /> Previous
+              <FontAwesomeIcon icon={faArrowLeft} /> Back
             </button>
             <button
               className={continueButtonClass}
