@@ -46,10 +46,9 @@ function LearningPageContent() {
   const [hearts, setHearts] = useState(3);
   const router = useRouter();
 
-  const initialLessonContent = standards["1"][0].lessonContent;
-  const [chapterContent, setChapterContent] = useState<LessonContent[]>(initialLessonContent);
   const [standard, setStandard] = useState<string>('1');
   const [chapter, setChapter] = useState<string>('1');
+  const [chapterContent, setChapterContent] = useState<LessonContent[]>([]);
 
   const [dndState, setDndState] = useState<{ [key: string]: DraggableItemData[] }>({
     sourceItems: [],
@@ -73,27 +72,50 @@ function LearningPageContent() {
     const standardParam = searchParams.get('standard') || '1';
     const chapterParam = searchParams.get('chapter') || '1';
 
-    console.log("URL Parameters:", { standard: standardParam, chapter: chapterParam });
     setStandard(standardParam);
     setChapter(chapterParam);
 
-    let selectedContent: LessonContent[] = initialLessonContent;
     const standardChapters = standards[standardParam];
     const chapterIndex = parseInt(chapterParam, 10) - 1;
-
+    let selectedContent: LessonContent[] = [];
     if (standardChapters && standardChapters[chapterIndex]) {
       selectedContent = standardChapters[chapterIndex].lessonContent;
     } else {
-      console.warn(`Chapter ${chapterParam} not found for Standard ${standardParam}. Defaulting to first chapter.`);
-      selectedContent = standardChapters ? standardChapters[0].lessonContent : initialLessonContent;
+      selectedContent = standardChapters ? standardChapters[0].lessonContent : [];
     }
-
-    console.log(`Selected content for Standard ${standardParam}, Chapter ${chapterParam} with ${selectedContent.length} slides.`);
     setChapterContent(selectedContent);
     setCurrentSlideIndex(0);
     setProgress(0);
+  }, []);
 
-  }, [initialLessonContent]);
+  useEffect(() => {
+    const handlePopState = () => {
+      const searchParams = new URLSearchParams(window.location.search);
+      const standardParam = searchParams.get('standard') || '1';
+      const chapterParam = searchParams.get('chapter') || '1';
+      setStandard(standardParam);
+      setChapter(chapterParam);
+      const standardChapters = standards[standardParam];
+      const chapterIndex = parseInt(chapterParam, 10) - 1;
+      let selectedContent: LessonContent[] = [];
+      if (standardChapters && standardChapters[chapterIndex]) {
+        selectedContent = standardChapters[chapterIndex].lessonContent;
+      } else {
+        selectedContent = standardChapters ? standardChapters[0].lessonContent : [];
+      }
+      setChapterContent(selectedContent);
+      setCurrentSlideIndex(0);
+      setProgress(0);
+    };
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('pushstate', handlePopState);
+    window.addEventListener('replacestate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('pushstate', handlePopState);
+      window.removeEventListener('replacestate', handlePopState);
+    };
+  }, []);
 
   useEffect(() => {
     window.speechSynthesis?.cancel();
@@ -242,7 +264,6 @@ function LearningPageContent() {
     }
   };
 
-
   let continueButtonText = "Continue";
   let continueButtonDisabled = false;
   let continueButtonClass = `${styles.continueButton}`;
@@ -272,10 +293,24 @@ function LearningPageContent() {
       continueButtonClass += ` ${styles.continueButtonCorrect}`;
   }
   if (currentSlideIndex === totalSlides - 1 && (!currentContent || currentContent.type !== 'drag-drop' || dndChecked)) {
-    const allowFinish = currentContent.type !== 'drag-drop' || (dndChecked && !(hearts <= 0 && Object.values(itemCorrectness).some(c => !c) && areAllItemsPlaced()));
+    const allowFinish = !currentContent || currentContent.type !== 'drag-drop' || (dndChecked && !(hearts <= 0 && Object.values(itemCorrectness).some(c => !c) && areAllItemsPlaced()));
     if (allowFinish) {
         continueButtonText = "Finish Lesson";
     }
+  }
+
+  // Guard: If no content is available, show fallback UI
+  if (!currentContent) {
+    return (
+      <div className={styles.learningContent}>
+        <main className={styles.learningMain}>
+          <div style={{ padding: 32, textAlign: 'center', color: '#b00', fontWeight: 600 }}>
+            No lesson content available for this standard/chapter.<br />
+            Please check your URL or contact support.
+          </div>
+        </main>
+      </div>
+    );
   }
 
   return (
