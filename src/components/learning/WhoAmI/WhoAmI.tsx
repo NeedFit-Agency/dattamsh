@@ -82,42 +82,52 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (optionId === correctAnswerId) return `${styles.optionButton} ${styles.correct}`;
     if (optionId === selectedAnswer && optionId !== correctAnswerId) return `${styles.optionButton} ${styles.incorrect}`;
     return styles.optionButton;
-  };
-  return (
-    <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
-      <span className={styles.gearIcon}>⚙️</span>
-      
-      {showWinScreen && (
-        <div className={`${styles.winScreen} ${styles.visible}`}>
-          <div className={styles.winText}>{winScreenMessage}</div>
-          <div className={styles.starContainer}>
-            <div className={`${styles.star} ${styles.s1}`}>⭐</div>
-            <div className={`${styles.star} ${styles.s2}`}>⭐</div>
-            <div className={`${styles.star} ${styles.s3}`}>⭐</div>
-            <div className={`${styles.star} ${styles.s4}`}>⭐</div>
-            <div className={`${styles.star} ${styles.s5}`}>⭐</div>
+  };  return (
+    <div className={styles.container}>
+      <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
+        <span className={styles.gearIcon}>⚙️</span>
+        
+        {showWinScreen && (
+          <div className={`${styles.winScreen} ${styles.visible}`}>
+            <div className={styles.winText}>{winScreenMessage}</div>
+            <div className={styles.starContainer}>
+              <div className={`${styles.star} ${styles.s1}`}>⭐</div>
+              <div className={`${styles.star} ${styles.s2}`}>⭐</div>
+              <div className={`${styles.star} ${styles.s3}`}>⭐</div>
+              <div className={`${styles.star} ${styles.s4}`}>⭐</div>
+              <div className={`${styles.star} ${styles.s5}`}>⭐</div>
+            </div>
+            <div className={styles.winMascot}>
+              {mascot}
+            </div>
+            <button className={styles.playAgainBtn} onClick={resetGame}>
+              Play Again
+            </button>
           </div>
-          <button className={styles.playAgainBtn} onClick={resetGame}>
-            Play Again
-          </button>
-        </div>
-      )}      <div className={styles.promptContainer}>
-        <p className={styles.promptText}>{riddleText}</p>
-        <h2 className={styles.promptQuestion}>{questionText}</h2>
-      </div>
+        )}
 
-      <div className={styles.optionsContainer}>
-        {options.map((option) => (
-          <button
-            key={option.id}
-            className={getButtonClass(option.id)}
-            onClick={() => handleOptionClick(option.id)}
-            disabled={isAnswered}
-          >
-            <div className={styles.optionIcon}>{option.icon}</div>
-            <span>{option.text}</span>
-          </button>
-        ))}
+        <div className={styles.mascotContainer}>
+          {mascot}
+        </div>
+
+        <div className={styles.promptContainer}>
+          <p className={styles.promptText}>{riddleText}</p>
+          <h2 className={styles.promptQuestion}>{questionText}</h2>
+        </div>
+
+        <div className={styles.optionsContainer}>
+          {options.map((option) => (
+            <button
+              key={option.id}
+              className={getButtonClass(option.id)}
+              onClick={() => handleOptionClick(option.id)}
+              disabled={isAnswered}
+            >
+              <div className={styles.optionIcon}>{option.icon}</div>
+              <span>{option.text}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -206,97 +206,100 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
       default:
         return <div>📄</div>; // Default icon
     }
-  };
-  return (
-    <div className={styles.worksheetCard}>
-      <span className={styles.gearIcon}>⚙️</span>
-      <h1 className={styles.title}>{title}</h1>
+  };  return (
+    <div className={styles.container}>
+      <div className={styles.worksheetCard}>
+        <span className={styles.gearIcon}>⚙️</span>
+        <h1 className={styles.title}>{title}</h1>
 
-      <div className={styles.mainContent}>
-        <div className={styles.dropTargets}>
-          <h3>Drop Zones</h3>
-          {Array.from({ length: dropZoneCount }, (_, index) => (
-            <div 
-              key={index}
-              className={styles.dropZone} 
-              data-index={index}
-              onDragOver={(e) => handleDragOver(e, index)}
-              onDragLeave={handleDragLeave}
-              onDrop={(e) => handleDrop(e, index)}
-            >
-              {placedItems[index] && (
-                <div 
-                  className={`${styles.stepItem} ${getItemStyleClass(placedItems[index])}`}
-                  draggable="true"
-                  onDragStart={(e) => handleDragStart(e, placedItems[index])}
-                  onDragEnd={handleDragEnd}
-                  data-id={placedItems[index].id}
-                >
-                  <span className={styles.stepIcon}>
-                    {getItemIcon(placedItems[index])}
-                  </span>
-                  <span>{placedItems[index].content}</span>
-                </div>
-              )}
-            </div>
-          ))}
+        <div className={styles.mainContent}>          <div className={styles.dropTargets}>
+            <h3>Drop Zones</h3>
+            {Array.from({ length: dropZoneCount }, (_, index) => (
+              <div 
+                key={index}
+                className={styles.dropZone} 
+                data-index={index}
+                data-number={index + 1} /* Add sequence number (1-based) */
+                onDragOver={(e) => handleDragOver(e, index)}
+                onDragLeave={handleDragLeave}
+                onDrop={(e) => handleDrop(e, index)}
+              >
+                {placedItems[index] && (
+                  <div 
+                    className={`${styles.stepItem} ${getItemStyleClass(placedItems[index])}`}
+                    draggable="true"
+                    onDragStart={(e) => handleDragStart(e, placedItems[index])}
+                    onDragEnd={handleDragEnd}
+                    data-id={placedItems[index].id}
+                    style={{'--item-index': index} as React.CSSProperties}
+                  >
+                    <span className={styles.stepIcon}>
+                      {getItemIcon(placedItems[index])}
+                    </span>
+                    <span>{placedItems[index].content}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div 
+            className={styles.draggableItems}
+            onDragOver={(e) => {
+              e.preventDefault();
+              e.currentTarget.classList.add(styles.dragOver);
+            }}
+            onDragLeave={(e) => {
+              e.currentTarget.classList.remove(styles.dragOver);
+            }}
+            onDrop={handleDropToDraggableArea}
+          >
+            <h3>Available Items</h3>
+            {availableItems.map((item, index) => (
+              <div 
+                key={item.id}
+                className={`${styles.stepItem} ${getItemStyleClass(item)}`}
+                draggable="true" 
+                data-id={item.id}
+                onDragStart={(e) => handleDragStart(e, item)}
+                onDragEnd={handleDragEnd}
+                style={{'--item-index': index} as React.CSSProperties}
+              >
+                <span className={styles.stepIcon}>
+                  {getItemIcon(item)}
+                </span>
+                <span>{item.content}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div 
-          className={styles.draggableItems}
-          onDragOver={(e) => {
-            e.preventDefault();
-            e.currentTarget.classList.add(styles.dragOver);
-          }}
-          onDragLeave={(e) => {
-            e.currentTarget.classList.remove(styles.dragOver);
-          }}
-          onDrop={handleDropToDraggableArea}
+        <div className={`${styles.feedbackMessage} ${
+          feedback.type === 'correct' ? styles.feedbackCorrect : 
+          feedback.type === 'incorrect' ? styles.feedbackIncorrect : ''
+        }`}>
+          {feedback.message}
+        </div>
+
+        <button 
+          className={`${styles.actionButton} ${styles.checkAnswerBtn}`}
+          onClick={checkAnswer}
+          style={{ display: showTryAgain ? 'none' : 'inline-flex' }}
         >
-          <h3>Available Items</h3>
-          {availableItems.map((item) => (
-            <div 
-              key={item.id}
-              className={`${styles.stepItem} ${getItemStyleClass(item)}`}
-              draggable="true" 
-              data-id={item.id}
-              onDragStart={(e) => handleDragStart(e, item)}
-              onDragEnd={handleDragEnd}
-            >
-              <span className={styles.stepIcon}>
-                {getItemIcon(item)}
-              </span>
-              <span>{item.content}</span>
-            </div>
-          ))}
-        </div>
+          <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
+            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+          </svg>
+          <span>Check Answer</span>
+        </button>
+        
+        <button 
+          className={`${styles.actionButton} ${styles.tryAgainBtn}`}
+          onClick={resetGame}
+          style={{ display: showTryAgain ? 'inline-flex' : 'none' }}
+        >
+          Try Again
+        </button>
       </div>
-
-      <div className={`${styles.feedbackMessage} ${
-        feedback.type === 'correct' ? styles.feedbackCorrect : 
-        feedback.type === 'incorrect' ? styles.feedbackIncorrect : ''
-      }`}>
-        {feedback.message}
-      </div>
-
-      <button 
-        className={`${styles.actionButton} ${styles.checkAnswerBtn}`}
-        onClick={checkAnswer}
-        style={{ display: showTryAgain ? 'none' : 'inline-flex' }}
-      >
-        <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
-          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-        </svg>
-        <span>Check Answer</span>
-      </button>
-      
-      <button 
-        className={`${styles.actionButton} ${styles.tryAgainBtn}`}
-        onClick={resetGame}
-        style={{ display: showTryAgain ? 'inline-flex' : 'none' }}
-      >
-        Try Again
-      </button>
     </div>
   );
 };

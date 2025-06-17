@@ -12,6 +12,8 @@
     --card-bg: #ffffff;
     --text-color: #333;
     --main-font: 'Nunito', sans-serif;
+
+
     --success-color: #4CAF50;
     --success-glow: rgba(76, 175, 80, 0.5);
     --error-color: #f44336;
@@ -56,7 +58,8 @@
   margin-top: clamp(10px, 1.5vh, 20px);
   backdrop-filter: blur(5px);
   border: 2px solid #bbddff;
-  overflow: auto;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Allow vertical scroll only */
   display: flex;
   flex-direction: column;
 }
@@ -73,40 +76,28 @@
 .matchArea {
   display: flex;
   flex-direction: column;
-  gap: clamp(12px, 2vh, 24px);
-  padding: clamp(10px, 2vh, 20px);
+  padding: clamp(15px, 2.5vh, 25px);
   align-items: center;
   flex: 1;
-  min-height: 0;
-  overflow: hidden;
+  min-height: 400px; /* Ensure enough vertical space */
   width: 100%;
-}
-
-.fruitsContainer {
-  background-color: #f8f9fa;
-  border: 1px solid #bbddff;
-  border-radius: 16px;
-  padding: clamp(10px, 1.5vh, 20px);
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: clamp(10px, 1.5vw, 20px);
-  width: 100%;
-  max-height: 40%;
-  margin: 0 auto;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-  overflow: auto;
+  overflow: visible; /* Changed to visible to prevent double scrollbars */
 }
 
 .basketsContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: clamp(15px, 2vw, 30px);
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(25px, 3.5vw, 45px);
   width: 100%;
-  flex: 1;
-  min-height: 0;
+  padding: 20px 10px;
   overflow: visible;
+  /* Ensure consistent alignment for mixed content */
+  align-content: flex-start;
+  /* Fix for preventing duplicate containers */
+  position: relative;
 }
 
 .fruitItem {
@@ -114,7 +105,10 @@
   flex-direction: column;
   align-items: center;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  margin: clamp(5px, 0.75vh, 10px);
+  width: 100%;
+  max-width: 200px;
+  margin: clamp(5px, 1vh, 10px);
+  flex-shrink: 0;
 }
 
 .fruitItem.placed {
@@ -122,7 +116,9 @@
   visibility: hidden;
 }
 
+/* Hidden by default as requested */
 .colorName {
+  display: none;
   font-size: clamp(0.9rem, 1.5vw, 1.2rem);
   font-weight: 700;
   margin-top: clamp(8px, 1vh, 15px);
@@ -131,18 +127,18 @@
 
 /* --- Draggable Fruit Styling --- */
 .fruitDraggable {
-  width: clamp(80px, 10vw, 120px);
-  height: clamp(80px, 10vw, 120px);
+  width: clamp(120px, 14vw, 180px);
+  height: clamp(120px, 14vw, 180px);
   cursor: grab;
   transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s;
   display: flex; /* For centering SVG if needed */
   justify-content: center;
   align-items: center;
   background-color: white;
-  border: 2px solid #bbddff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: clamp(5px, 0.75vw, 10px);
+  border: 3px solid #bbddff;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: clamp(8px, 1vw, 15px);
 }
 
 .fruitDraggable:hover {
@@ -159,17 +155,17 @@
 
 /* --- Basket Dropzone Styling --- */
 .basketDropzone {
-  width: clamp(120px, 13vw, 160px);
-  height: clamp(100px, 13vh, 130px);
+  width: clamp(140px, 16vw, 200px);
+  height: clamp(120px, 16vh, 160px);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   border: 3px dashed #adb5bd;
-  border-radius: 15px;
+  border-radius: 20px;
   transition: all 0.3s ease;
   background-color: #bbddff; /* Colored background for the basket area */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
 
 .basketDropzone .basketSvg {
@@ -180,26 +176,51 @@
 }
 
 .basketDropzone .droppedFruit {
-  width: clamp(50px, 7vw, 70px); 
-  height: clamp(50px, 7vw, 70px);
+  width: clamp(70px, 9vw, 100px); 
+  height: clamp(70px, 9vw, 100px);
   z-index: 2;
   position: relative;
-  top: clamp(-10px, -1.5vh, -15px); /* Position it nicely in the basket */
+  top: clamp(-15px, -2vh, -20px); /* Adjusted position to fit better in the basket */
   cursor: default;
   display: flex; /* For centering SVG if needed */
   justify-content: center;
   align-items: center;
   animation: dropIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+.basketDropzone .bucketInstructionText {
+  position: absolute;
+  z-index: 2;
+  color: #666;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 4px 8px;
+  border-radius: 8px;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  animation: fadeIn 0.5s ease;
+  user-select: none;
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px dashed #aab2bd;
 }
 
 @keyframes dropIn {
   0% {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-30px) scale(0.8);
+  }
+  50% {
+    transform: translateY(5px) scale(1.1);
+  }
+  75% {
+    transform: translateY(-5px) scale(1);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -207,7 +228,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 200px;
   margin: clamp(5px, 1vh, 10px);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.bucketContainer:hover {
+  transform: translateY(-3px);
 }
 
 .bucketLabel {
@@ -358,6 +387,15 @@
   100% {
     transform: translateY(100vh) rotate(720deg);
     opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -536,20 +574,20 @@
 /* For screens with height below 800px (shorter laptops) */
 @media (max-height: 800px) {
   .matchArea {
-    gap: 10px;
+    gap: clamp(15px, 2vh, 25px);
   }
   
   .fruitDraggable {
-    width: clamp(70px, 8vw, 100px);
-    height: clamp(70px, 8vw, 100px);
+    width: clamp(100px, 12vw, 150px);
+    height: clamp(100px, 12vw, 150px);
   }
   
   .basketDropzone {
-    width: clamp(100px, 11vw, 140px);
-    height: clamp(80px, 11vh, 110px);
+    width: clamp(120px, 14vw, 180px);
+    height: clamp(100px, 14vh, 140px);
   }
   
-  .colorName, .bucketLabel {
+  .bucketLabel {
     font-size: clamp(0.8rem, 1vw, 1rem);
     margin-top: 8px;
   }
@@ -557,6 +595,12 @@
   .instruction {
     margin-bottom: 10px;
     padding: 8px 15px;
+  }
+  
+  .basketDropzone .droppedFruit {
+    width: clamp(60px, 8vw, 90px);
+    height: clamp(60px, 8vw, 90px);
+    top: clamp(-12px, -1.8vh, -18px);
   }
 }
 
@@ -575,29 +619,33 @@
     font-size: 1.5rem;
   }
   
-  .fruitsContainer,
   .basketsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    padding: 10px;
+    gap: 18px;
+    padding: 15px;
   }
   
   .fruitDraggable {
-    width: 65px;
-    height: 65px;
+    width: 85px;
+    height: 85px;
   }
   
   .basketDropzone {
-    width: 90px;
-    height: 80px;
+    width: 110px;
+    height: 100px;
     margin: 0 auto;
   }
   
   .basketDropzone .droppedFruit {
-    width: 45px;
-    height: 45px;
-    top: -5px;
+    width: 60px;
+    height: 60px;
+    top: -8px;
+  }
+  
+  .basketDropzone .bucketInstructionText {
+    font-size: 0.7rem;
+    padding: 3px 6px;
   }
   
   .header {
@@ -632,7 +680,16 @@
     height: 70px;
   }
   
+  .basketDropzone .bucketInstructionText {
+    font-size: 0.6rem;
+    padding: 2px 4px;
+  }
+  
   .colorName, .bucketLabel {
     font-size: 0.8rem;
+  }
+  
+  .bucketContainer, .fruitItem {
+    margin: 2px;  
   }
 }

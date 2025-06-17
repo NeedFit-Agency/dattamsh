@@ -86,7 +86,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     const target = e.currentTarget as HTMLElement;
     target.classList.remove(styles.dragOver);
   };
-
   const handleDrop = (e: React.DragEvent, targetBucket: Bucket) => {
     e.preventDefault();
     const targetBucketElement = e.currentTarget as HTMLElement;
@@ -104,12 +103,20 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     const isCorrect = draggedItem.type === targetBucket.type;
 
     if (isCorrect) {
+      // Store the placement in state
       setPlacedItems(prev => ({ ...prev, [draggedItem.id]: targetBucket.id }));
       setFeedback({ type: 'correct', bucketId: targetBucket.id });
       targetBucketElement.classList.add(styles.correct);
       
+      // Play success audio if available
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch(e => console.log("Audio play failed:", e));
+      }
+      
       // Remove feedback message after a delay, unless all items are matched
-      if (Object.keys(placedItems).length + 1 < allItemsCount) {
+      const updatedItemCount = Object.keys(placedItems).length + 1;
+      if (updatedItemCount < allItemsCount) {
         setTimeout(() => setFeedback({ type: null }), 1500);
       }
 
@@ -151,11 +158,16 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       }, i * 150); // Stagger the confetti creation
     }
   };
-
   useEffect(() => {
     if (allItemsMatched) {
       setFeedback({ type: 'correct' }); // General success feedback
       createConfetti(); // Create confetti celebration
+      
+      // Play success audio if available
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch(e => console.log("Success audio play failed:", e));
+      }
       
       if (onComplete) {
         setTimeout(() => {
@@ -164,13 +176,24 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       }
     }
   }, [allItemsMatched, onComplete]);
-
   const handleReset = () => {
+    // Reset state
     setPlacedItems({});
     setFeedback({ type: null });
     setDraggedItemId(null);
+    
+    // Remove all visual classes
     document.querySelectorAll(`.${styles.basketDropzone}`).forEach(el => {
       el.classList.remove(styles.correct, styles.incorrect, styles.dragOver);
+    });
+    
+    // Re-enable draggable items
+    document.querySelectorAll(`.${styles.fruitDraggable}`).forEach(el => {
+      el.setAttribute('draggable', 'true');
+    });
+      // Reset any instruction text visibility
+    document.querySelectorAll(`.${styles.bucketInstructionText}`).forEach(el => {
+      (el as HTMLElement).style.opacity = '1';
     });
   };
 
@@ -213,16 +236,15 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       )}
       
       <div className={styles.worksheetCard}>
-        {instruction && <p className={styles.instruction}>{instruction}</p>}
-
-        <div className={styles.matchArea}>
-          <div className={styles.fruitsContainer}>
+        {instruction && <p className={styles.instruction}>{instruction}</p>}        <div className={styles.matchArea}>
+          <div className={styles.basketsContainer}>
+            {/* Fruits Items */}
             {items.map((item) => (
               <div 
                 key={item.id} 
                 className={`${styles.fruitItem} ${placedItems[item.id] ? styles.placed : ''}`}
                 data-source-color={item.type}
-              >
+              >                
                 <div
                   id={`fruit-${item.id}`}
                   className={styles.fruitDraggable}
@@ -230,20 +252,22 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                   onDragStart={(e) => handleDragStart(e, item)}
                   onDragEnd={handleDragEnd}
                   data-color={item.type}
+                  title={item.text || item.type.charAt(0).toUpperCase() + item.type.slice(1)} /* Added title for accessibility */
                 >
                   {getFruitSvg(item.type, item.imageUrl)}
                 </div>
+                {/* Color name text is hidden via CSS but kept for accessibility */}
                 <p className={styles.colorName}>{item.text || item.type.charAt(0).toUpperCase() + item.type.slice(1)}</p>
               </div>
             ))}
-          </div>
-
-          <div className={styles.basketsContainer}>
+            
+            {/* Bucket Items in the same container */}
             {buckets.map((bucket) => {
               const isCorrectlyFilled = Object.entries(placedItems).some(([itemId, bId]) => 
                 bId === bucket.id && items.find(i => i.id === itemId)?.type === bucket.type
               );
-              const itemInThisBucket = items.find(i => placedItems[i.id] === bucket.id);              return (
+              const itemInThisBucket = items.find(i => placedItems[i.id] === bucket.id);
+              return (
                 <div key={bucket.id} className={styles.bucketContainer}>
                   <div
                     data-bucket-id={bucket.id}
@@ -254,6 +278,12 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                     data-target-color={bucket.type}
                   >
                     <BasketSvg />
+                    {/* Show instruction text until an item is dropped */}
+                    {!itemInThisBucket && (
+                      <div className={styles.bucketInstructionText}>
+                        Drop here
+                      </div>
+                    )}
                     {itemInThisBucket && isCorrectlyFilled && (
                       <div className={styles.droppedFruit}>
                         {getFruitSvg(itemInThisBucket.type, itemInThisBucket.imageUrl)}
@@ -265,7 +295,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
               );
             })}
           </div>
-        </div>        <div 
+        </div><div 
             id="feedback-message" 
             className={`${styles.feedbackMessage} ${feedback.type === 'correct' ? styles.correctText : feedback.type === 'incorrect' ? styles.incorrectText : ''}`}
         >

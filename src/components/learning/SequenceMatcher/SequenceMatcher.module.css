@@ -1,20 +1,73 @@
 /* --- Google Font & Basic Setup --- */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Quicksand:wght@500;700&display=swap');
+
+/* --- Container --- */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    left: 0;
+    top: 0;
+    position: absolute;
+    padding: 1rem;
+    margin: 0;
+    font-family: 'Nunito', 'Quicksand', sans-serif;
+    background-image: url('/images/background/image-1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #5c4b40;
+    box-sizing: border-box;
+    overflow: hidden;
+    animation: fadeInBackground 0.5s ease-in;
+}
+
+@keyframes fadeInBackground {
+    from {
+        opacity: 0.7;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
 /* --- Main Card --- */
 .worksheetCard {
-    background-color: #faf6ef;
-    border-radius: 28px;
-    box-shadow: 0 10px 40px rgba(92, 75, 64, 0.1);
-    padding: 30px 40px;
-    width: 100%;
-    max-width: 900px; /* Increased for horizontal layout */
+    background-color: rgba(255, 255, 255, 0.9);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
+    border-radius: clamp(20px, 3vw, 30px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(135, 206, 250, 0.2);
+    padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
+    width: 95%;
+    max-width: min(90vw, 1200px);
+    max-height: calc(90vh - 80px);
     text-align: center;
     position: relative;
-    margin: 20px auto; /* For centering in a typical page flow */
-    font-family: 'Quicksand', sans-serif;
+    margin: 0 auto;
+    font-family: 'Nunito', 'Quicksand', sans-serif;
     color: #5c4b40;
     box-sizing: border-box;
+    backdrop-filter: blur(5px);
+    border: 3px solid #bbddff;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    animation: cardEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes cardEnter {
+    from {
+        transform: translateY(10px) scale(0.98);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }
 
 /* --- Decorative Icons --- */
@@ -22,237 +75,776 @@
 .worksheetCard::after {
     content: '';
     position: absolute;
-    opacity: 0.5;
+    opacity: 0.75;
     background-size: contain;
     background-repeat: no-repeat;
+    z-index: 1;
 }
 
 .worksheetCard::before { /* Book Icon */
-    content: '📖';
-    font-size: 24px;
-    top: 35px;
-    left: 25px;
+    content: '�';
+    font-size: clamp(24px, 3.5vw, 32px);
+    top: clamp(20px, 3vh, 35px);
+    left: clamp(15px, 2vw, 25px);
     transform: rotate(-15deg);
+    animation: float 3s ease-in-out infinite alternate;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .worksheetCard::after { /* Sparkle Icon */
     content: '✨';
-    font-size: 18px;
-    top: 80px;
-    left: 20px;
-    opacity: 0.7;
+    font-size: clamp(18px, 2.5vw, 26px);
+    top: clamp(65px, 8vh, 80px);
+    left: clamp(15px, 2vw, 25px);
+    opacity: 0.9;
     transform: rotate(15deg);
+    animation: twinkle 2s ease-in-out infinite alternate;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .gearIcon { /* Gear Icon */
     position: absolute;
-    top: 38px;
-    right: 28px;
-    font-size: 22px;
-    opacity: 0.5;
+    top: clamp(25px, 4vh, 38px);
+    right: clamp(20px, 3vw, 28px);
+    font-size: clamp(22px, 3vw, 30px);
+    opacity: 0.8;
     transform: rotate(15deg);
+    animation: spin 8s linear infinite;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(-15deg);
+    }
+    100% {
+        transform: translateY(-5px) rotate(-10deg);
+    }
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.6;
+        transform: scale(0.9) rotate(15deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.1) rotate(20deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    15% { transform: translateX(-8px) rotate(-1deg); }
+    30% { transform: translateX(8px) rotate(1deg); }
+    45% { transform: translateX(-6px) rotate(-0.5deg); }
+    60% { transform: translateX(6px) rotate(0.5deg); }
+    75% { transform: translateX(-4px) rotate(-0.25deg); }
+    85% { transform: translateX(4px) rotate(0.25deg); }
+}
+
+@keyframes confetti {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 /* --- Title --- */
 .title {
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
     font-weight: 700;
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: clamp(15px, 2.5vh, 25px);
     padding: 0 20px;
+    color: #333;
+    font-family: "Comic Sans MS", "Comic Sans", 'Nunito', 'Quicksand', cursive, sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(45deg, #4e54c8, #8f94fb);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: titlePop 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes titlePop {
+    0% {
+        transform: translateY(-10px) scale(0.95);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(5px) scale(1.02);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }
 
 /* --- Main Content Container --- */
 .mainContent {
     display: flex;
-    gap: 40px;
+    gap: clamp(20px, 4vw, 40px);
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: clamp(20px, 3vh, 30px);
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    padding: clamp(5px, 1vh, 10px);
+    animation: contentFadeIn 0.8s ease-in-out;
+}
+
+@keyframes contentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- Drop Zones (Targets) --- */
 .dropTargets {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: clamp(10px, 1.8vh, 16px);
     flex: 1;
-    max-width: 300px;
+    max-width: clamp(220px, 40%, 320px);
+    background-color: rgba(250, 246, 239, 0.85);
+    background-image: linear-gradient(to bottom, rgba(255, 250, 245, 0.9), rgba(246, 236, 220, 0.8));
+    border: 2px solid #bbddff;
+    border-radius: clamp(16px, 2.5vw, 24px);
+    padding: clamp(12px, 2.2vh, 22px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), inset 0 -4px 0 rgba(0, 0, 0, 0.05);
+    position: relative;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateY(2deg);
+    transition: transform 0.3s ease;
+    animation: dropTargetsEnter 0.6s ease-out;
+}
+
+.dropTargets:hover {
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+@keyframes dropTargetsEnter {
+    from {
+        transform: perspective(1000px) rotateY(15deg) translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: perspective(1000px) rotateY(2deg) translateX(0);
+        opacity: 1;
+    }
 }
 
 .dropTargets h3 {
-    margin: 0 0 15px 0;
-    font-size: 1.1rem;
-    color: #5c4b40;
-    opacity: 0.8;
+    margin: 0 0 clamp(16px, 2.5vh, 22px) 0;
+    font-size: clamp(1.25rem, 2vw, 1.6rem); /* Larger font size */
+    color: #333;
+    opacity: 0.95;
+    font-family: "Comic Sans MS", "Comic Sans", 'Nunito', sans-serif;
+    background-color: #ffefd5;
+    padding: clamp(8px, 1.2vh, 12px) clamp(14px, 1.8vw, 22px); /* Increased padding */
+    border-radius: clamp(12px, 1.8vw, 18px); /* Increased border radius */
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12); /* Enhanced shadow */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Added text shadow */
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .dropZone {
-    height: 55px;
-    background-color: #fff;
-    border: 2px solid #e8e1d6;
-    border-radius: 12px;
-    transition: background-color 0.3s, border-color 0.3s;
+    height: clamp(70px, 10vh, 85px); /* Increased height for better visibility */
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 4px dashed #bbddff; /* Made border thicker */
+    border-radius: clamp(15px, 2.5vw, 22px); /* Increased border radius */
+
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: clamp(6px, 1.2vh, 12px);
+    padding-left: 50px; /* Increased padding for the number */
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.05), 0 6px 0 rgba(0, 0, 0, 0.03); /* Enhanced shadow */
+    position: relative;
+    overflow: hidden;
+}
+
+.dropZone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+    pointer-events: none;
+}
+
+/* Add numbering to drop zones */
+.dropZone::after {
+    content: attr(data-number);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 45px; /* Increased width for larger numbers */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #bbddff;
+    color: #1a73e8;
+    font-weight: bold;
+    font-size: 24px; /* Increased font size */
+    border-right: 3px solid rgba(187, 221, 255, 0.5); /* Thicker border */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    box-shadow: inset -3px 0 6px rgba(255, 255, 255, 0.5);
 }
 
 .dropZone.dragOver {
-    background-color: #f0ebe4;
-    border-color: #c9c1b6;
+    background-color: rgba(26, 162, 255, 0.25); /* More visible background */
+    border-color: #1aa2ff;
+    border-width: 5px; /* Thicker border when dragging over */
+    border-style: dashed;
+    transform: scale(1.08); /* Slightly larger scale */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 4px 8px rgba(26, 162, 255, 0.2); /* Enhanced shadow */
+    animation: pulse 1s infinite alternate; /* Faster animation */
+}
+
+/* Ensure number remains visible when items are placed */
+.dropZone:has(.stepItem) {
+    padding-left: 50px; /* Updated to match the new padding from .dropZone */
+}
+
+@keyframes pulse {
+    from {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 4px 8px rgba(26, 162, 255, 0.2);
+        border-color: #1aa2ff;
+    }
+    to {
+        box-shadow: 0 12px 24px rgba(26, 162, 255, 0.3), inset 0 6px 12px rgba(26, 162, 255, 0.25);
+        border-color: #0085ff; /* Slightly darker for contrast */
+    }
 }
 
 /* --- Draggable Items --- */
 .draggableItems {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    min-height: 200px; /* Reserve space */
+    gap: clamp(10px, 1.8vh, 16px);
+    min-height: clamp(170px, 28vh, 280px);
     flex: 1;
-    max-width: 300px;
-    padding: 20px;
-    background-color: #f8f6f0;
-    border-radius: 16px;
-    border: 2px dashed #e8e1d6;
-    transition: border-color 0.3s, background-color 0.3s;
+    max-width: clamp(220px, 40%, 320px);
+    padding: clamp(15px, 2.2vh, 22px);
+    background-color: #f0f8ff;
+    background-image: linear-gradient(to bottom, rgba(240, 248, 255, 0.9), rgba(230, 240, 250, 0.8));
+    border-radius: clamp(16px, 2.5vw, 24px);
+    border: 2px dashed #bbddff;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.08);
+    overflow-y: auto;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateY(-2deg);
+    animation: draggableItemsEnter 0.6s ease-out;
+}
+
+@keyframes draggableItemsEnter {
+    from {
+        transform: perspective(1000px) rotateY(-15deg) translateX(20px);
+        opacity: 0;
+    }
+    to {
+        transform: perspective(1000px) rotateY(-2deg) translateX(0);
+        opacity: 1;
+    }
+}
+
+.draggableItems:hover {
+    transform: perspective(1000px) rotateY(0deg);
 }
 
 .draggableItems.dragOver {
-    border-color: #c9c1b6;
-    background-color: #f0ebe4;
+    border-color: #1aa2ff;
+    background-color: rgba(26, 162, 255, 0.1);
+    transform: scale(1.02) perspective(1000px) rotateY(0deg);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12), inset 0 3px 10px rgba(26, 162, 255, 0.1);
+    animation: dragOverGlow 1.2s infinite alternate;
+}
+
+@keyframes dragOverGlow {
+    from {
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12), inset 0 3px 10px rgba(26, 162, 255, 0.1);
+    }
+    to {
+        box-shadow: 0 6px 22px rgba(26, 162, 255, 0.2), inset 0 3px 15px rgba(26, 162, 255, 0.15);
+    }
 }
 
 .draggableItems h3 {
-    margin: 0 0 15px 0;
-    font-size: 1.1rem;
-    color: #5c4b40;
-    opacity: 0.8;
+    margin: 0 0 clamp(16px, 2.5vh, 22px) 0;
+    font-size: clamp(1.25rem, 2vw, 1.6rem); /* Larger font size */
+    color: #333;
+    opacity: 0.95;
+    font-family: "Comic Sans MS", "Comic Sans", 'Nunito', sans-serif;
+    background-color: #e6f2ff;
+    padding: clamp(8px, 1.2vh, 12px) clamp(14px, 1.8vw, 22px); /* Increased padding */
+    border-radius: clamp(12px, 1.8vw, 18px); /* Increased border radius */
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9); /* Enhanced text shadow */
+    position: relative;
+    z-index: 2;
 }
 
 .stepItem {
     display: flex;
     align-items: center;
-    padding: 8px;
-    border-radius: 12px;
+    padding: clamp(12px, 1.8vh, 16px); /* Increased padding */
+    border-radius: clamp(16px, 2.5vw, 22px); /* Increased border radius */
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: clamp(1.15rem, 1.8vw, 1.35rem); /* Larger text */
     cursor: grab;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 0 rgba(0,0,0,0.08); /* Enhanced shadow */
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
+    background-color: white;
+    border: 3px solid transparent; /* Thicker border */
+    position: relative;
+    overflow: hidden;
+    animation: itemBounce 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+    animation-delay: calc(var(--item-index, 0) * 0.1s);
+    min-width: 180px; /* Ensure minimum width for readability */
+}
+
+@keyframes itemBounce {
+    0% {
+        transform: translateY(15px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.stepItem::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+    pointer-events: none;
+}
+
+.stepItem:hover {
+    transform: translateY(-8px); /* Enhanced hover effect */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18), 0 5px 0 rgba(0,0,0,0.08); /* Enhanced shadow */
 }
 
 .stepItem.dragging {
-    opacity: 0.5;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    transform: scale(1.05);
+    opacity: 0.9;
+    box-shadow: 0 16px 28px rgba(0,0,0,0.2); /* Enhanced shadow */
+    transform: scale(1.1); /* Slightly larger scale when dragging */
     cursor: grabbing;
+    z-index: 10;
 }
 
 .stepIcon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: clamp(50px, 7vw, 60px); /* Significantly increased icon container size */
+    height: clamp(50px, 7vw, 60px);
+    border-radius: 14px; /* Increased border radius */
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-right: 15px;
+    margin-right: clamp(14px, 2vw, 22px); /* Increased margin */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Enhanced shadow */
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.stepItem:hover .stepIcon {
+    transform: rotate(10deg) scale(1.2); /* Enhanced rotation and scale */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25); /* Enhanced shadow */
 }
 
 .stepIcon svg {
-    width: 24px;
-    height: 24px;
+    width: clamp(30px, 5vw, 38px); /* Significantly increased SVG size */
+    height: clamp(30px, 5vw, 38px);
+    stroke-width: 2px; /* Added to make SVG paths more visible */
 }
 
-/* Item Specific Colors (IDs will be handled by styles object in React) */
-.stepOpen { background-color: #fde68a; }
-.stepOpen .stepIcon { background-color: #facc15; }
-.stepOpen .stepIcon svg { fill: #92400e; }
+/* Item Specific Colors with more vibrant, child-friendly colors */
+.stepOpen { 
+    background-color: #fff9e6; 
+    border-color: #fcd34d;
+    background-image: linear-gradient(to bottom, #fffcf0, #fff5d6);
+}
+.stepOpen .stepIcon { 
+    background-color: #fbbf24; 
+    background-image: linear-gradient(135deg, #fcd34d, #f59e0b);
+    animation: pulse-yellow 3s infinite alternate;
+}
+.stepOpen .stepIcon svg { 
+    fill: #92400e; 
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
 
-.stepStart { background-color: #a5f3fc; }
-.stepStart .stepIcon { background-color: #67e8f9; }
-.stepStart .stepIcon svg { stroke: #0e7490; }
+.stepStart { 
+    background-color: #e6f2ff; 
+    border-color: #93c5fd;
+    background-image: linear-gradient(to bottom, #f0f7ff, #dbeafe);
+}
+.stepStart .stepIcon { 
+    background-color: #60a5fa; 
+    background-image: linear-gradient(135deg, #93c5fd, #3b82f6);
+    animation: pulse-blue 3s infinite alternate;
+}
+.stepStart .stepIcon svg { 
+    stroke: #1e40af; 
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
 
-.stepType { background-color: #fca5a5; }
-.stepType .stepIcon { background-color: #f87171; }
-.stepType .stepIcon svg { stroke: #b91c1c; }
+.stepType { 
+    background-color: #ffebeb; 
+    border-color: #fca5a5;
+    background-image: linear-gradient(to bottom, #fff1f1, #fee2e2);
+}
+.stepType .stepIcon { 
+    background-color: #f87171; 
+    background-image: linear-gradient(135deg, #fca5a5, #ef4444);
+    animation: pulse-red 3s infinite alternate;
+}
+.stepType .stepIcon svg { 
+    stroke: #b91c1c; 
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
 
-.stepSave { background-color: #a7f3d0; }
-.stepSave .stepIcon { background-color: #6ee7b7; }
-.stepSave .stepIcon svg { fill: #065f46; }
+.stepSave { 
+    background-color: #e6fff0; 
+    border-color: #6ee7b7;
+    background-image: linear-gradient(to bottom, #f0fff7, #d1fae5);
+}
+.stepSave .stepIcon { 
+    background-color: #34d399; 
+    background-image: linear-gradient(135deg, #6ee7b7, #10b981);
+    animation: pulse-green 3s infinite alternate;
+}
+.stepSave .stepIcon svg { 
+    fill: #065f46; 
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes pulse-yellow {
+    0% { box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); transform: scale(1); }
+    100% { box-shadow: 0 0 18px rgba(251, 191, 36, 0.9); transform: scale(1.05); }
+}
+
+@keyframes pulse-blue {
+    0% { box-shadow: 0 0 8px rgba(96, 165, 250, 0.6); transform: scale(1); }
+    100% { box-shadow: 0 0 18px rgba(96, 165, 250, 0.9); transform: scale(1.05); }
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 8px rgba(248, 113, 113, 0.6); transform: scale(1); }
+    100% { box-shadow: 0 0 18px rgba(248, 113, 113, 0.9); transform: scale(1.05); }
+}
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 8px rgba(52, 211, 153, 0.6); transform: scale(1); }
+    100% { box-shadow: 0 0 18px rgba(52, 211, 153, 0.9); transform: scale(1.05); }
+}
 
 /* --- Buttons & Feedback --- */
 .actionButton {
     width: 100%;
-    padding: 15px;
+    padding: clamp(12px, 2vh, 18px);
     border: none;
-    border-radius: 25px;
-    font-size: 1.2rem;
+    border-radius: clamp(20px, 3vw, 30px);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
     font-weight: 700;
-    font-family: 'Quicksand', sans-serif;
+    font-family: "Comic Sans MS", "Comic Sans", 'Quicksand', sans-serif;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    transition: transform 0.2s, background-color 0.2s;
+    gap: clamp(8px, 1.2vw, 15px);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    margin-top: clamp(5px, 1vh, 10px);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.actionButton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+    pointer-events: none;
 }
 
 .actionButton:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.01);
+}
+
+.actionButton:active {
+    transform: translateY(2px);
 }
 
 /* IDs will be handled by styles object in React */
 .checkAnswerBtn {
     background-color: #34d399;
+    background-image: linear-gradient(135deg, #6ee7b7, #10b981);
     color: white;
-    box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
+    box-shadow: 0 6px 20px rgba(52, 211, 153, 0.4), 0 4px 0 #0e9f6e;
+    animation: buttonPop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.checkAnswerBtn:hover {
+    background-image: linear-gradient(135deg, #7eebc2, #15c28a);
+    box-shadow: 0 8px 25px rgba(52, 211, 153, 0.5), 0 5px 0 #0e9f6e;
+}
+
+.checkAnswerBtn:active {
+    box-shadow: 0 3px 15px rgba(52, 211, 153, 0.3), 0 2px 0 #0e9f6e;
+}
+
+@keyframes buttonPop {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .tryAgainBtn {
     background-color: #5c4b40;
+    background-image: linear-gradient(135deg, #7c6657, #4a3c33);
     color: white;
-    box-shadow: 0 4px 15px rgba(92, 75, 64, 0.3);
-    /* display: none; /* Initially hidden - will be controlled by component state */
+    box-shadow: 0 6px 20px rgba(92, 75, 64, 0.4), 0 4px 0 #3d3228;
+    animation: buttonPop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tryAgainBtn:hover {
+    background-image: linear-gradient(135deg, #8a7362, #574639);
+    box-shadow: 0 8px 25px rgba(92, 75, 64, 0.5), 0 5px 0 #3d3228;
+}
+
+.tryAgainBtn:active {
+    box-shadow: 0 3px 15px rgba(92, 75, 64, 0.3), 0 2px 0 #3d3228;
 }
 
 .feedbackMessage {
-    min-height: 24px;
-    margin-top: 20px;
+    min-height: clamp(30px, 4vh, 40px);
+    margin-top: clamp(15px, 2.5vh, 25px);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+    border-radius: clamp(10px, 1.5vw, 16px);
+    padding: clamp(8px, 1.2vh, 12px);
+    transition: all 0.3s ease;
+    font-family: "Comic Sans MS", "Comic Sans", 'Nunito', sans-serif;
+    position: relative;
+    animation: feedbackEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes feedbackEnter {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .feedbackCorrect {
-    color: #34d399;
+    color: #0e9f6e;
+    background-color: #e6f9f3;
+    border: 2px solid #34d399;
+    box-shadow: 0 4px 12px rgba(52, 211, 153, 0.2);
+}
+
+.feedbackCorrect::before {
+    content: '🎉 ';
+    margin-right: 6px;
+    animation: bounce 0.8s infinite alternate;
+    display: inline-block;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-4px);
+    }
 }
 
 .feedbackIncorrect {
-    color: #ef4444;
+    color: #cf1f1f;
+    background-color: #fdeeee;
+    border: 2px solid #ef4444;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.feedbackIncorrect::before {
+    content: '🤔 ';
+    margin-right: 6px;
 }
 
 .slotCorrect {
     background-color: #e6f9f3 !important;
     border-color: #34d399 !important;
+    border-style: solid !important;
+    box-shadow: 0 0 15px rgba(52, 211, 153, 0.5) !important;
+    animation: correctSlotGlow 1.5s infinite alternate !important;
+}
+
+@keyframes correctSlotGlow {
+    0% {
+        box-shadow: 0 0 8px rgba(52, 211, 153, 0.4) !important;
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(52, 211, 153, 0.7) !important;
+    }
 }
 
 .slotIncorrect {
     background-color: #fdeeee !important;
     border-color: #ef4444 !important;
+    border-style: solid !important;
+    animation: shake 0.5s ease !important;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5) !important;
+}
+
+/* Update number style when slot is correct/incorrect */
+.slotCorrect::after {
+    background-color: #34d399 !important;
+    color: white !important;
+    border-right-color: rgba(52, 211, 153, 0.5) !important;
+}
+
+.slotIncorrect::after {
+    background-color: #ef4444 !important;
+    color: white !important;
+    border-right-color: rgba(239, 68, 68, 0.5) !important;
 }
 
 /* Responsive adjustments */
+/* For standard laptops (1366x768, 1440x900) */
+@media (max-height: 900px) {
+    .worksheetCard {
+        max-height: calc(95vh - 60px);
+        padding: clamp(12px, 1.8vw, 25px) clamp(15px, 2.5vw, 35px);
+    }
+    
+    .mainContent {
+        gap: clamp(15px, 3vw, 30px);
+    }
+    
+    .stepItem {
+        padding: clamp(6px, 0.8vh, 10px);
+    }
+    
+    .dropZone {
+        height: clamp(45px, 6.5vh, 60px);
+    }
+    
+    .feedbackMessage {
+        min-height: clamp(25px, 3.5vh, 35px);
+        margin-top: clamp(12px, 2vh, 20px);
+    }
+    
+    .actionButton {
+        padding: clamp(10px, 1.5vh, 15px);
+    }
+}
+
+/* For smaller laptops (1280x800) */
+@media (max-height: 800px) {
+    .worksheetCard {
+        max-height: calc(98vh - 50px);
+        padding: clamp(10px, 1.5vw, 20px) clamp(12px, 2vw, 30px);
+    }
+    
+    .title {
+        font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+        margin-bottom: clamp(10px, 2vh, 20px);
+    }
+    
+    .mainContent {
+        gap: clamp(12px, 2.5vw, 25px);
+        margin-bottom: clamp(12px, 2vh, 20px);
+    }
+    
+    .dropTargets h3,
+    .draggableItems h3 {
+        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+        padding: clamp(5px, 0.8vh, 8px) clamp(8px, 1.2vw, 15px);
+        margin-bottom: clamp(8px, 1.5vh, 12px);
+    }
+    
+    .stepIcon {
+        width: clamp(30px, 5vw, 40px);
+        height: clamp(30px, 5vw, 40px);
+    }
+    
+    .actionButton {
+        font-size: clamp(1rem, 1.6vw, 1.2rem);
+    }
+}
+
+/* For tablets and smaller displays */
 @media (max-width: 768px) {
     .worksheetCard {
-        padding: 25px 20px;
-        border-radius: 20px;
-        max-width: 100%;
+        padding: clamp(15px, 2.5vw, 25px);
+        border-radius: clamp(16px, 2.5vw, 20px);
+        max-width: 95%;
     }
 
     .mainContent {
         flex-direction: column;
-        gap: 25px;
+        gap: clamp(20px, 4vh, 30px);
         align-items: center;
     }
 
@@ -260,74 +852,130 @@
     .draggableItems {
         max-width: 100%;
         width: 100%;
+        transform: perspective(1000px) rotateY(0deg);
     }
 
     .title {
-        font-size: 1.6rem;
-        margin-bottom: 20px;
+        font-size: clamp(1.4rem, 4vw, 1.8rem);
+        margin-bottom: clamp(15px, 2.5vh, 25px);
+    }
+    
+    /* Add a little space between the containers in mobile view */
+    .dropTargets {
+        margin-bottom: clamp(10px, 2vh, 20px);
+    }
+    
+    /* Adjust animations for mobile */
+    @keyframes dropTargetsEnter {
+        from {
+            transform: translateY(-15px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes draggableItemsEnter {
+        from {
+            transform: translateY(15px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 }
 
+/* For mobile phones */
 @media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
     .worksheetCard {
-        padding: 20px 15px;
+        padding: 15px 12px;
         border-radius: 16px;
+        border-width: 2px;
     }
 
     .title {
-        font-size: 1.4rem;
-        margin-bottom: 15px;
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        padding: 0 10px;
     }
 
     .mainContent {
-        gap: 20px;
+        gap: 15px;
+        padding: 0;
     }
 
     .draggableItems {
-        padding: 15px;
-        min-height: 150px;
+        padding: 12px;
+        min-height: 140px;
+    }    .dropZone {
+        height: 60px; /* Increased height for mobile view */
+        padding-left: 40px; /* Adjusted padding for number */
     }
-
-    .dropZone {
-        height: 50px;
+    
+    .dropZone::after {
+        width: 35px; /* Adjusted width for number label */
+        font-size: 20px; /* Still keeping number visible */
     }
 
     .stepItem {
-        font-size: 1rem;
-        padding: 6px;
+        font-size: 1rem; /* Slightly larger font for better readability */
+        padding: 8px 10px; /* Increased padding */
+        min-width: 140px; /* Ensure minimum width */
     }
 
     .stepIcon {
-        width: 35px;
-        height: 35px;
+        width: 40px; /* Larger icon container */
+        height: 40px;
         margin-right: 10px;
     }
 
     .stepIcon svg {
-        width: 20px;
-        height: 20px;
+        width: 24px; /* Larger SVG icons */
+        height: 24px;
     }
 
     .actionButton {
-        padding: 12px;
-        font-size: 1.1rem;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 16px;
     }
 
     .worksheetCard::before {
-        font-size: 20px;
-        top: 15px;
-        left: 15px;
-    }
-
-    .worksheetCard::after {
-        font-size: 16px;
-        top: 45px;
+        font-size: 18px;
+        top: 12px;
         left: 12px;
     }
 
+    .worksheetCard::after {
+        font-size: 14px;
+        top: 40px;
+        left: 10px;
+    }
+
     .gearIcon {
-        font-size: 20px;
-        top: 18px;
-        right: 18px;
+        font-size: 18px;
+        top: 15px;
+        right: 15px;
+    }
+    
+    .feedbackMessage {
+        font-size: 0.95rem;
+        min-height: 20px;
+        margin-top: 12px;
+        padding: 6px 10px;
+    }
+      .dropTargets h3,
+    .draggableItems h3 {
+        font-size: 1.2rem; /* Slightly larger font */
+        padding: 8px 14px; /* More padding */
+        margin-bottom: 12px;
     }
 }
