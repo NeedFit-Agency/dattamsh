@@ -48,6 +48,7 @@
     left: 25px;
     opacity: 0.5;
     transform: rotate(-15deg);
+    animation: float-bg 6s ease-in-out infinite alternate;
 }
 
 .gameCard::after {
@@ -58,6 +59,7 @@
     left: 20px;
     opacity: 0.7;
     transform: rotate(15deg);
+    animation: float-bg 6s ease-in-out infinite alternate;
 }
 
 .gearIcon {
@@ -102,9 +104,9 @@
 .optionsContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    gap: 28px;
     transition: opacity 0.3s ease;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
 }
 
 .gameCard.gameOver .optionsContainer {
@@ -143,8 +145,21 @@
 }
 
 .optionIcon {
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), filter 0.2s;
+}
+
+.optionButton:not(:disabled):hover .optionIcon {
+    transform: scale(1.12) rotate(-6deg);
+    filter: brightness(1.1) drop-shadow(0 2px 8px #38bdf8aa);
+}
+
+.optionButton:not(:disabled):active .optionIcon {
+    transform: scale(0.98) rotate(2deg);
 }
 
 /* --- Feedback Styles --- */
@@ -269,4 +284,52 @@
     .optionButton { 
         padding: 15px 10px;
     }
+    .mascotContainer { height: 70px; }
+    .optionIcon { width: 56px; height: 56px; }
+    .winMascot { width: 90px; height: 80px; }
+}
+
+.mascotContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+    width: 100%;
+    height: 110px;
+    animation: mascot-bounce 2.5s infinite cubic-bezier(0.4,0,0.2,1);
+    z-index: 2;
+}
+
+@keyframes mascot-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px) scale(1.08); }
+}
+
+/* Win Mascot (overlay) */
+.winMascot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 18px 0 0 0;
+    width: 140px;
+    height: 120px;
+    animation: mascot-celebrate 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+@keyframes mascot-celebrate {
+    0% { transform: scale(0.7) rotate(-10deg); opacity: 0; }
+    60% { transform: scale(1.15) rotate(8deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Prompt area visually distinct */
+.promptContainer {
+    background: var(--bg-yellow);
+    border-radius: 18px;
+    box-shadow: 0 2px 12px #ffe9b3aa;
+    padding: 18px 12px 10px 12px;
+    margin-bottom: 28px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }

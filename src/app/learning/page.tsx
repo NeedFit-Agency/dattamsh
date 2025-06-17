@@ -122,11 +122,11 @@ function LearningPageContent() {
     if (!chapterContent || chapterContent.length === 0) return;
 
     chapterContent.forEach(slide => {
-      if ('imageUrl' in slide && slide.imageUrl) {
+      if ('imageUrl' in slide && typeof slide.imageUrl === 'string' && slide.imageUrl) {
         const img = new Image();
         img.src = slide.imageUrl;
       }
-      if ('exampleImages' in slide && slide.exampleImages) {
+      if ('exampleImages' in slide && Array.isArray(slide.exampleImages)) {
         slide.exampleImages.forEach((imgData: { src: string }) => {
           const img = new Image();
           img.src = imgData.src;

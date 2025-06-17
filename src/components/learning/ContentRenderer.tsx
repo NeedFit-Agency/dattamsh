@@ -82,7 +82,9 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
       const adaptedOptions = whoAmIContent.options.map(option => ({
         id: option.id,
         text: option.text,
-        icon: <span>💡</span> // Default icon for all options
+        icon: option.imageUrl
+          ? <img src={option.imageUrl} alt={option.text} style={{ width: 40, height: 40, objectFit: 'contain' }} />
+          : <span>💡</span>
       }));
       
       return (
