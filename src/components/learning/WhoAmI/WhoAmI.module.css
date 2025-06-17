@@ -231,16 +231,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: clamp(8px, 1.5vh, 15px);
+    gap: clamp(12px, 2vh, 20px); /* Increased gap between icon and text */
     width: 100%;
-    padding: clamp(15px, 2.5vh, 25px) clamp(12px, 2vw, 20px);
+    padding: clamp(18px, 3vh, 30px) clamp(15px, 2.5vw, 25px); /* Increased padding for larger button */
     background-color: var(--btn-bg);
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.8));
-    border: 3px solid var(--btn-border);
-    border-radius: clamp(15px, 2.5vw, 20px);
-    box-shadow: 0 6px 0 0 var(--btn-shadow), 0 6px 12px rgba(0, 0, 0, 0.1);
-    font-size: clamp(1rem, 2vw, 1.3rem);
-    font-weight: 600;
+    border: 4px solid var(--btn-border); /* Thicker border */
+    border-radius: clamp(18px, 3vw, 24px); /* More rounded corners */
+    box-shadow: 0 8px 0 0 var(--btn-shadow), 0 8px 16px rgba(0, 0, 0, 0.12); /* Enhanced shadow */
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem); /* Larger text */
+    font-weight: 700; /* Bolder text */
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
     font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
@@ -261,33 +261,47 @@
 }
 
 .optionButton:not(:disabled):hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 0 0 var(--btn-shadow), 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px) scale(1.03); /* Enhanced lift effect and scaling */
+    box-shadow: 0 12px 0 0 var(--btn-shadow), 0 12px 24px rgba(0, 0, 0, 0.18); /* Enhanced shadow */
     border-color: #1aa2ff;
-    background-image: linear-gradient(to bottom, rgba(26, 162, 255, 0.1), rgba(135, 206, 250, 0.05));
+    background-image: linear-gradient(to bottom, rgba(26, 162, 255, 0.12), rgba(135, 206, 250, 0.06)); /* Slightly stronger gradient */
 }
 
 .optionButton:not(:disabled):active {
-    transform: translateY(3px) scale(0.98);
-    box-shadow: 0 3px 0 0 var(--btn-shadow), 0 3px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(4px) scale(0.98);
+    box-shadow: 0 3px 0 0 var(--btn-shadow), 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjusted shadow for active state */
 }
 
 .optionIcon {
-    width: clamp(60px, 8vw, 90px);
-    height: clamp(60px, 8vw, 90px);
+    width: clamp(85px, 11vw, 120px); /* Significantly increased icon container size */
+    height: clamp(85px, 11vw, 120px); /* Significantly increased icon container size */
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(240, 248, 255, 0.4) 100%);
     border-radius: 50%;
-    border: 2px solid rgba(187, 221, 255, 0.5);
+    border: 3px solid rgba(187, 221, 255, 0.6); /* Thicker border with slightly more opacity */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Added shadow for better depth */
+}
+
+/* Added styles for SVG and images inside the option icons */
+.optionIcon svg {
+    width: clamp(50px, 7vw, 80px); /* Large SVG size */
+    height: clamp(50px, 7vw, 80px);
+}
+
+.optionIcon img {
+    width: clamp(50px, 7vw, 80px); /* Large image size */
+    height: clamp(50px, 7vw, 80px);
+    object-fit: contain; /* Maintain aspect ratio */
 }
 
 .optionButton:not(:disabled):hover .optionIcon {
     transform: scale(1.15) rotate(-8deg);
-    filter: brightness(1.1) drop-shadow(0 4px 12px rgba(26, 162, 255, 0.4));
-    background: radial-gradient(circle, rgba(26, 162, 255, 0.1) 0%, rgba(135, 206, 250, 0.05) 100%);
+    filter: brightness(1.15) drop-shadow(0 8px 16px rgba(26, 162, 255, 0.5)); /* Enhanced shadow effect */
+    background: radial-gradient(circle, rgba(26, 162, 255, 0.15) 0%, rgba(135, 206, 250, 0.08) 100%); /* Slightly stronger gradient */
+    border-color: rgba(26, 162, 255, 0.7); /* Highlight border on hover */
 }
 
 .optionButton:not(:disabled):active .optionIcon {
