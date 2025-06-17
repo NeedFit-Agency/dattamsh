@@ -123,14 +123,44 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     }
     // Dragged item ID is cleared in handleDragEnd
   };
+  const createConfetti = () => {
+    // Add 30 confetti elements to celebrate success
+    for (let i = 0; i < 30; i++) {
+      setTimeout(() => {
+        const confetti = document.createElement('div');
+        confetti.className = styles.confetti;
+        
+        // Random colors for confetti
+        const colors = ['#4CAF50', '#8BC34A', '#CDDC39', '#FFC107', '#2196F3', '#E91E63', '#9C27B0'];
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Random position and animation duration
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        confetti.style.opacity = '1';
+        
+        // Append to document body
+        document.body.appendChild(confetti);
+        
+        // Remove after animation completes
+        setTimeout(() => {
+          if (confetti.parentNode) {
+            confetti.parentNode.removeChild(confetti);
+          }
+        }, 5000);
+      }, i * 150); // Stagger the confetti creation
+    }
+  };
 
   useEffect(() => {
     if (allItemsMatched) {
       setFeedback({ type: 'correct' }); // General success feedback
+      createConfetti(); // Create confetti celebration
+      
       if (onComplete) {
         setTimeout(() => {
           onComplete();
-        }, 1000); // Delay completion call slightly for feedback visibility
+        }, 2000); // Delay completion call slightly for feedback visibility
       }
     }
   }, [allItemsMatched, onComplete]);

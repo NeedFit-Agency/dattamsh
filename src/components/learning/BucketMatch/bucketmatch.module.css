@@ -21,29 +21,44 @@
 */
 
 .container {
-  /* Styles for the main component container, can be mapped to worksheetCard or kept separate */
-  /* For now, let's assume the existing .container wraps the .worksheetCard equivalent */
-  padding: 20px;
-  font-family: var(--main-font, 'Nunito', sans-serif);
-  background-color: var(--bg-color, #fdf5e6);
-  color: var(--text-color, #333);
   display: flex;
-  flex-direction: column; /* To accommodate header, progress, and game area */
+  flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  left: 0;
+  top: 0;
+  position: absolute;
+  padding: 1rem;
+  margin: 0;
+  font-family: var(--font-family, 'Nunito', sans-serif);
+  background-image: url('/images/background/image-1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text-color, #333);
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* --- Main Card (Adapted from worksheet-card) --- */
 .worksheetCard {
-  background-color: var(--card-bg, #ffffff);
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  padding: 30px 40px;
-  width: 100%;
-  max-width: 700px;
+  padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
+  width: 95%;
+  max-width: min(90vw, 1200px);
+  max-height: calc(90vh - 80px); /* Allow room for header/progress */
   text-align: center;
-  margin-top: 20px; /* Added margin if header/progress are above */
+  margin-top: clamp(10px, 1.5vh, 20px);
+  backdrop-filter: blur(5px);
+  border: 2px solid #bbddff;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .gameTitle { /* Mapped from h1 in test.html */
@@ -56,19 +71,42 @@
 
 /* --- Matching Area Layout --- */
 .matchArea {
-  /* Container for fruits and baskets if needed, or apply styles directly to their containers */
-}
-
-.fruitsContainer,
-.basketsContainer {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: column;
+  gap: clamp(12px, 2vh, 24px);
+  padding: clamp(10px, 2vh, 20px);
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
 }
 
 .fruitsContainer {
-  margin-bottom: 40px;
+  background-color: #f8f9fa;
+  border: 1px solid #bbddff;
+  border-radius: 16px;
+  padding: clamp(10px, 1.5vh, 20px);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(10px, 1.5vw, 20px);
+  width: 100%;
+  max-height: 40%;
+  margin: 0 auto;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: auto;
+}
+
+.basketsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(15px, 2vw, 30px);
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: visible;
 }
 
 .fruitItem {
@@ -76,6 +114,7 @@
   flex-direction: column;
   align-items: center;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  margin: clamp(5px, 0.75vh, 10px);
 }
 
 .fruitItem.placed {
@@ -84,40 +123,53 @@
 }
 
 .colorName {
-  font-size: 1.2rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
   font-weight: 700;
-  margin-top: 10px;
+  margin-top: clamp(8px, 1vh, 15px);
+  color: #343a40;
 }
 
 /* --- Draggable Fruit Styling --- */
 .fruitDraggable {
-  width: 90px;
-  height: 90px;
+  width: clamp(80px, 10vw, 120px);
+  height: clamp(80px, 10vw, 120px);
   cursor: grab;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s;
   display: flex; /* For centering SVG if needed */
   justify-content: center;
   align-items: center;
+  background-color: white;
+  border: 2px solid #bbddff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: clamp(5px, 0.75vw, 10px);
+}
+
+.fruitDraggable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .fruitDraggable.dragging {
   cursor: grabbing;
-  opacity: 0.5;
-  transform: scale(1.1);
+  opacity: 0.8;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* --- Basket Dropzone Styling --- */
 .basketDropzone {
-  width: 130px;
-  height: 100px;
+  width: clamp(120px, 13vw, 160px);
+  height: clamp(100px, 13vh, 130px);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  border: 3px dashed transparent;
+  border: 3px dashed #adb5bd;
   border-radius: 15px;
   transition: all 0.3s ease;
-  background-color: var(--card-bg, #fff); /* Ensure basket bg is distinct */
+  background-color: #bbddff; /* Colored background for the basket area */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .basketDropzone .basketSvg {
@@ -128,73 +180,185 @@
 }
 
 .basketDropzone .droppedFruit {
-  width: 60px; /* Smaller fruit inside basket */
-  height: 60px;
+  width: clamp(50px, 7vw, 70px); 
+  height: clamp(50px, 7vw, 70px);
   z-index: 2;
   position: relative;
-  top: -15px; /* Position it nicely in the basket */
+  top: clamp(-10px, -1.5vh, -15px); /* Position it nicely in the basket */
   cursor: default;
   display: flex; /* For centering SVG if needed */
   justify-content: center;
   align-items: center;
+  animation: dropIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bucketContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: clamp(5px, 1vh, 10px);
+}
+
+.bucketLabel {
+  font-size: clamp(0.9rem, 1.25vw, 1.3rem);
+  font-weight: 700;
+  margin-top: clamp(8px, 1vh, 15px);
+  color: #333;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: clamp(4px, 0.75vh, 8px) clamp(8px, 1vw, 16px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: clamp(100px, 12vw, 160px);
+  max-width: clamp(140px, 16vw, 200px);
+  border: 2px solid #bbddff;
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* --- Drag & Drop States --- */
 .basketDropzone.dragOver {
-  background-color: var(--drop-hover-bg, #e8f5e9);
-  border-color: var(--drop-hover-border, #a5d6a7);
+  background-color: rgba(26, 162, 255, 0.15);
+  border-color: #1aa2ff;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .basketDropzone.correct {
   border-color: var(--success-color, #4CAF50);
-  box-shadow: 0 0 15px var(--success-glow, rgba(76, 175, 80, 0.5));
+  border-style: solid;
+  border-width: 3px;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.7);
+  animation: correctPulse 1.5s infinite alternate;
 }
 
 .basketDropzone.incorrect {
   animation: shake 0.5s ease;
   border-color: var(--error-color, #f44336);
+  border-style: solid;
+  border-width: 3px;
+  box-shadow: 0 0 20px rgba(244, 67, 54, 0.7);
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-7px); }
+  80% { transform: translateX(7px); }
+}
+
+@keyframes correctPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+  }
 }
 
 /* --- Feedback & Reset Button --- */
 .feedbackMessage {
-  height: 25px;
-  margin-top: 20px;
-  font-size: 1.1rem;
+  min-height: clamp(25px, 3vh, 35px);
+  margin-top: clamp(15px, 2vh, 25px);
+  font-size: clamp(1rem, 1.25vw, 1.3rem);
   font-weight: 700;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  padding: clamp(4px, 0.75vh, 8px) clamp(8px, 1vw, 16px);
+  border-radius: 10px;
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .feedbackMessage.correctText {
-  color: var(--success-color, #4CAF50);
+  color: #218838;
+  background-color: #e6f9ed;
+  border: 2px solid var(--success-color, #4CAF50);
+  animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .feedbackMessage.incorrectText {
-  color: var(--error-color, #f44336);
+  color: #d32f2f;
+  background-color: #fff0f0;
+  border: 2px solid var(--error-color, #f44336);
+  animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .resetButton {
-  background-color: var(--success-color, #4CAF50);
+  background-color: #3b82f6;
   color: white;
   border: none;
-  border-radius: 10px;
-  padding: 12px 25px;
-  font-size: 1.1rem;
+  border-radius: 12px;
+  padding: clamp(10px, 1.5vh, 15px) clamp(20px, 2.5vw, 35px);
+  font-size: clamp(0.9rem, 1.1vw, 1.2rem);
   font-weight: 700;
   cursor: pointer;
-  margin-top: 15px;
-  transition: background-color 0.2s, transform 0.2s;
-  /* display: none; /* Controlled by React state */
+  margin-top: clamp(10px, 1.5vh, 20px);
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 .resetButton:hover {
-  background-color: #45a049; /* Darken success color */
-  transform: scale(1.05);
+  background-color: #60a5fa;
+  transform: translateY(-2px);
+}
+
+.resetButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2563eb;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- Confetti Animation --- */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
 }
 
 /* --- Existing styles from BucketMatch - to be reviewed/merged/removed --- */
@@ -203,32 +367,41 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: 700px; /* Match worksheetCard width */
-  margin-bottom: 20px;
+  width: 95%;
+  max-width: min(90vw, 1200px);
+  margin-bottom: clamp(10px, 1.5vh, 20px);
+  height: auto;
 }
 
 .chooseBackButton {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #bbddff;
   color: var(--text-medium, #666);
   cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: clamp(6px, 0.8vh, 10px) clamp(10px, 1vw, 16px);
+  border-radius: 12px;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 1.25em;
+  font-size: clamp(1rem, 1.1vw, 1.25em);
   position: relative;
   z-index: 2;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 .chooseBackButton:hover {
-  background-color: var(--background-medium, #f0f7ff);
+  background-color: #f0f7ff;
   color: var(--text-dark, #222);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+.chooseBackButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .backText {
-  font-size: 1em;
+  font-size: clamp(0.8em, 1vw, 1em);
   font-weight: 600;
   margin-left: 2px;
   display: none;
@@ -238,90 +411,228 @@
 }
 
 .mainTitle {
-  font-size: 1.8rem; /* Adjusted to fit with gameTitle */
-  color: var(--text-color, #333);
+  font-size: clamp(1.5rem, 2vw, 2.2rem); /* Responsive title */
+  color: #333;
   margin: 0;
   font-family: "Comic Sans MS", "Comic Sans", Nunito, Quicksand, cursive, sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .audioButton {
-  background: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--primary, #1aa2ff);
+  color: white;
   border: none;
-  font-size: 1.5rem;
+  border-radius: 12px;
+  padding: clamp(6px, 0.8vh, 10px) clamp(10px, 1vw, 16px);
+  font-size: clamp(14px, 1vw, 16px);
   cursor: pointer;
-  color: var(--text-color, #333);
+  transition: all 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.audioButton:hover {
+  background-color: var(--primary-dark, #0080e6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.audioButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .progressContainer {
-  width: 100%;
-  max-width: 700px; /* Match worksheetCard width */
+  width: 95%;
+  max-width: min(90vw, 1200px);
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: clamp(10px, 1.5vh, 20px);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: clamp(5px, 1vh, 10px) clamp(10px, 2vw, 20px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  height: auto;
 }
 
 .progressBar {
   flex-grow: 1;
-  height: 10px;
+  height: clamp(8px, 1vh, 12px);
   background-color: #e0e0e0;
-  border-radius: 5px;
+  border-radius: 6px;
   overflow: hidden;
-  margin-right: 10px;
+  margin-right: clamp(8px, 1vw, 15px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .progressFill {
   height: 100%;
-  background-color: var(--success-color, #4CAF50);
-  transition: width 0.3s ease;
+  background-color: var(--primary, #1aa2ff);
+  transition: width 0.5s ease;
+  border-radius: 6px;
+  background-image: linear-gradient(45deg, 
+                    rgba(255, 255, 255, 0.15) 25%, 
+                    transparent 25%, 
+                    transparent 50%, 
+                    rgba(255, 255, 255, 0.15) 50%, 
+                    rgba(255, 255, 255, 0.15) 75%, 
+                    transparent 75%, 
+                    transparent);
+  background-size: clamp(12px, 1.5vw, 20px) clamp(12px, 1.5vw, 20px);
+  animation: progressStripes 1s linear infinite;
+}
+
+@keyframes progressStripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: clamp(12px, 1.5vw, 20px) 0;
+  }
 }
 
 .progressText {
-  font-size: 0.9rem;
-  color: var(--text-color, #333);
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  font-weight: 700;
+  color: var(--primary, #1aa2ff);
+  margin-left: 5px;
+  white-space: nowrap;
 }
 
 .instruction {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 25px;
-  max-width: 700px; /* Match worksheetCard width */
+  font-size: clamp(1rem, 1.25vw, 1.3rem);
+  color: #333;
+  margin: 0 auto clamp(15px, 3vh, 30px);
+  max-width: 100%;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: clamp(8px, 1.5vh, 15px) clamp(15px, 2vw, 25px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid #bbddff;
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.instruction:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
+  pointer-events: none;
 }
 
 /* --- Responsive Adjustments --- */
+/* For screens with height below 800px (shorter laptops) */
+@media (max-height: 800px) {
+  .matchArea {
+    gap: 10px;
+  }
+  
+  .fruitDraggable {
+    width: clamp(70px, 8vw, 100px);
+    height: clamp(70px, 8vw, 100px);
+  }
+  
+  .basketDropzone {
+    width: clamp(100px, 11vw, 140px);
+    height: clamp(80px, 11vh, 110px);
+  }
+  
+  .colorName, .bucketLabel {
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    margin-top: 8px;
+  }
+  
+  .instruction {
+    margin-bottom: 10px;
+    padding: 8px 15px;
+  }
+}
+
+/* For standard mobile devices */
 @media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+  
   .worksheetCard {
-    padding: 20px;
+    padding: 15px;
+    max-width: 95vw;
   }
+  
   .gameTitle {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
+  
   .fruitsContainer,
   .basketsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px;
+    gap: 15px;
+    padding: 10px;
   }
+  
   .fruitDraggable {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
   }
+  
   .basketDropzone {
-    width: 100%;
-    max-width: 120px;
-    height: 90px;
+    width: 90px;
+    height: 80px;
     margin: 0 auto;
   }
+  
   .basketDropzone .droppedFruit {
-    width: 50px;
-    height: 50px;
-    top: -10px;
+    width: 45px;
+    height: 45px;
+    top: -5px;
   }
+  
   .header {
     flex-direction: column;
     gap: 10px;
   }
+  
   .mainTitle {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+  }
+  
+  .instruction {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+  
+  .resetButton {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 400px) {
+  .fruitDraggable {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .basketDropzone {
+    width: 80px;
+    height: 70px;
+  }
+  
+  .colorName, .bucketLabel {
+    font-size: 0.8rem;
   }
 }
