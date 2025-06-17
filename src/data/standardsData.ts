@@ -78,6 +78,7 @@ export interface WhoAmIOption {
   id: string;
   text: string;
   isCorrect: boolean;
+  imageUrl?: string;
 }
 
 export interface WhoAmISlide extends BaseContentProps {
@@ -252,10 +253,10 @@ export const standards: Standard = {
           riddleText: "I help you see everything the computer shows. Without me, you can't watch videos or play games. I have a screen that displays colorful pictures and text. What am I?",
           questionText: "Which computer part am I?",
           options: [
-            { id: "option-1", text: "Monitor", isCorrect: true },
-            { id: "option-2", text: "Keyboard", isCorrect: false },
-            { id: "option-3", text: "Mouse", isCorrect: false },
-            { id: "option-4", text: "Speaker", isCorrect: false },
+            { id: "option-1", text: "Monitor", isCorrect: true, imageUrl: "/images/monitor.png" },
+            { id: "option-2", text: "Keyboard", isCorrect: false, imageUrl: "/images/keyboard.png" },
+            { id: "option-3", text: "Mouse", isCorrect: false, imageUrl: "/images/mouse.png" },
+            { id: "option-4", text: "Speaker", isCorrect: false, imageUrl: "/images/speaker.png" },
           ],
           audioSrc: "/audio/computer_riddle.mp3",
           speakText: "I help you see everything the computer shows. Without me, you can't watch videos or play games. I have a screen that displays colorful pictures and text. What am I?",

@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { BucketMatchProps, Item, Bucket } from './types';
 import styles from './bucketmatch.module.css';
 import { itemSvgMap, BasketSvg } from './ItemSvgs';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 // Helper to get the SVG for a fruit based on its type/color
 const getFruitSvg = (itemType: string, imageUrl?: string) => {
@@ -146,11 +148,12 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       {onBack && (
         <div className={styles.header}>
           <button
-            className={styles.backButton}
+            className={styles.chooseBackButton}
             onClick={onBack}
             aria-label="Go back"
           >
-            ←
+            <FontAwesomeIcon icon={faArrowLeft} />
+            <span className={styles.backText}>Back</span>
           </button>
           {title && <h2 className={styles.mainTitle}>{title}</h2>}
           {audioSrc && (
@@ -160,7 +163,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                 onClick={playAudio}
                 aria-label="Play audio"
               >
-                🔊 Play
+                <img src="/images/sound.png" alt="Play sound" style={{ width: 24, height: 24 }} />
               </button>
               <audio ref={audioRef} src={audioSrc} />
             </>
@@ -181,7 +184,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       )}
       
       <div className={styles.worksheetCard}>
-        <h1 className={styles.gameTitle}>{title}</h1>
         {instruction && <p className={styles.instruction}>{instruction}</p>}
 
         <div className={styles.matchArea}>

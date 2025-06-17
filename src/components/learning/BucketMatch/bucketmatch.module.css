@@ -51,6 +51,7 @@
   margin-top: 0;
   margin-bottom: 30px;
   color: #444;
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, Quicksand, cursive, sans-serif;
 }
 
 /* --- Matching Area Layout --- */
@@ -207,28 +208,48 @@
   margin-bottom: 20px;
 }
 
-.backButton {
+.chooseBackButton {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  color: var(--text-medium, #666);
   cursor: pointer;
-  color: var(--text-color, #333);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.25em;
+  position: relative;
+  z-index: 2;
+}
+.chooseBackButton:hover {
+  background-color: var(--background-medium, #f0f7ff);
+  color: var(--text-dark, #222);
+}
+.backText {
+  font-size: 1em;
+  font-weight: 600;
+  margin-left: 2px;
+  display: none;
+}
+@media (min-width: 640px) {
+  .backText { display: inline; }
 }
 
 .mainTitle {
   font-size: 1.8rem; /* Adjusted to fit with gameTitle */
   color: var(--text-color, #333);
   margin: 0;
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, Quicksand, cursive, sans-serif;
 }
 
 .audioButton {
-  background-color: var(--success-color, #4CAF50);
-  color: white;
+  background: none;
   border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
+  font-size: 1.5rem;
   cursor: pointer;
-  font-size: 0.9rem;
+  color: var(--text-color, #333);
 }
 
 .progressContainer {
