@@ -114,7 +114,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
             onClick={() => handleOptionClick(option.id)}
             disabled={isAnswered}
           >
-            <div className={styles.optionIcon}>{option.icon}</div>
+            <div>{option.icon}</div>
             <span>{option.text}</span>
           </button>
         ))}

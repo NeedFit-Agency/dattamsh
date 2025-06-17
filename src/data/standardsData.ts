@@ -383,7 +383,7 @@ export const standards: Standard = {
           title: "Daily School Routine",
           instruction: "Put these daily school activities in the correct order!",
           items: [
-            { id: "school-1", content: "Wake up in the morning" },
+            { id: "school-1", content: "Wake up in the morning"  },
             { id: "school-2", content: "Get ready for school" },
             { id: "school-3", content: "Go to school" },
             { id: "school-4", content: "Come back home" },
@@ -406,10 +406,10 @@ export const standards: Standard = {
           riddleText: "I am a place where children come to learn every day. I have many classrooms, teachers, and students. You can find books, blackboards, and desks here. Children make friends and play games in my playground. What am I?",
           questionText: "Which place am I?",
           options: [
-            { id: "option-1", text: "School", isCorrect: true },
-            { id: "option-2", text: "Hospital", isCorrect: false },
-            { id: "option-3", text: "Market", isCorrect: false },
-            { id: "option-4", text: "Park", isCorrect: false },
+            { id: "option-1", text: "School", isCorrect: true, imageUrl: "/images/2nd/school.png" },
+            { id: "option-2", text: "Hospital", isCorrect: false, imageUrl: "/images/2nd/hospital.png" },
+            { id: "option-3", text: "Market", isCorrect: false, imageUrl: "/images/2nd/market.png" },
+            { id: "option-4", text: "Park", isCorrect: false, imageUrl: "/images/2nd/park.png" },
           ],
           audioSrc: "/audio/school_riddle.mp3",
           speakText: "I am a place where children come to learn every day. I have many classrooms, teachers, and students. You can find books, blackboards, and desks here. Children make friends and play games in my playground. What am I?",
