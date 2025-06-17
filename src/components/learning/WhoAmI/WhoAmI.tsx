@@ -15,6 +15,8 @@ export interface WhoAmIProps {
   onComplete?: () => void;
   onIncorrectAttempt?: () => void;
   mascot?: React.ReactNode; // Optional custom mascot
+  buttonTextWhenCorrect?: string; // Text to display on the button when answer is correct
+  buttonTextWhenIncorrect?: string; // Text to display on the button when answer is incorrect
 }
 
 const DefaultMascot = () => (
@@ -29,11 +31,14 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   onComplete,
   onIncorrectAttempt,
   mascot = <DefaultMascot />,
+  buttonTextWhenCorrect = "Next",
+  buttonTextWhenIncorrect = "Try Again",
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [showWinScreen, setShowWinScreen] = useState(false);
   const [winScreenMessage, setWinScreenMessage] = useState("YOU DID IT!");
+  const [buttonText, setButtonText] = useState("Next");
 
   const correctSoundRef = useRef<HTMLAudioElement>(null);
   const incorrectSoundRef = useRef<HTMLAudioElement>(null);
@@ -47,8 +52,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         const incorrectAudio = new Audio("data:audio/mpeg;base64,UklGRkFvT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YV1vT18BAwZAB1d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d");
         incorrectSoundRef.current = incorrectAudio;
     }
-  }, []);
-  const handleOptionClick = (optionId: string) => {
+  }, []);  const handleOptionClick = (optionId: string) => {
     if (isAnswered) return;
 
     setIsAnswered(true);
@@ -57,6 +61,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (optionId === correctAnswerId) {
       correctSoundRef.current?.play().catch(console.error);
       setWinScreenMessage("YOU DID IT!");
+      setButtonText(buttonTextWhenCorrect);
       setTimeout(() => {
         setShowWinScreen(true);
         if (onComplete) onComplete();
@@ -64,6 +69,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     } else {
       incorrectSoundRef.current?.play().catch(console.error);
       setWinScreenMessage("TRY AGAIN!");
+      setButtonText(buttonTextWhenIncorrect);
       setTimeout(() => {
         setShowWinScreen(true);
         if (onIncorrectAttempt) onIncorrectAttempt();
@@ -99,9 +105,8 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
             </div>
             <div className={styles.winMascot}>
               {mascot}
-            </div>
-            <button className={styles.playAgainBtn} onClick={resetGame}>
-              Play Again
+            </div>            <button className={styles.playAgainBtn} onClick={resetGame}>
+              {buttonText}
             </button>
           </div>
         )}
