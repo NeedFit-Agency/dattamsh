@@ -1,24 +1,31 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useImperativeHandle, forwardRef } from 'react';
 import styles from './SequenceMatcher.module.css';
 import { SequenceMatcherProps, DraggableItem } from './types';
+import Confetti from '../../shared/Confetti/Confetti';
 
-const SequenceMatcher: React.FC<SequenceMatcherProps> = ({ 
+export interface SequenceMatcherImperativeHandle {
+  checkAnswer: () => boolean;
+  resetGame: () => void;
+}
+
+const SequenceMatcher = forwardRef<SequenceMatcherImperativeHandle, SequenceMatcherProps>(function SequenceMatcher({ 
   title = 'Arrange the Steps in the Correct Order!',
   items = [],
   dropZoneCount = 4,
   correctOrder = [],
   onComplete,
   onIncorrectAttempt
-}) => {
+}, ref) {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [placedItems, setPlacedItems] = useState<{[zoneIndex: number]: DraggableItem}>({});
   const [feedback, setFeedback] = useState<{ type: 'correct' | 'incorrect' | null, message: string }>({ type: null, message: '' });
   const [showTryAgain, setShowTryAgain] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
   const draggedElementRef = useRef<HTMLElement | null>(null);
 
   // Get items that are not yet placed in drop zones
-  const availableItems = items.filter(item => 
-    !Object.values(placedItems).some(placedItem => placedItem.id === item.id)
+  const availableItems = items.filter((item: DraggableItem) => 
+    !Object.values(placedItems).some((placedItem) => placedItem.id === item.id)
   );
 
   // Drag and Drop Event Handlers
@@ -26,7 +33,6 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     setDraggedItemId(item.id);
     e.dataTransfer.setData('text/plain', item.id);
     e.dataTransfer.effectAllowed = 'move';
-    
     const draggingElement = e.currentTarget as HTMLElement;
     draggedElementRef.current = draggingElement;
     draggingElement.classList.add(styles.dragging);
@@ -43,7 +49,6 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   const handleDragOver = (e: React.DragEvent, zoneIndex: number) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
-    
     const target = e.currentTarget as HTMLElement;
     // Only add drag-over style if the zone is empty
     if (!placedItems[zoneIndex]) {
@@ -60,18 +65,13 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     e.preventDefault();
     const target = e.currentTarget as HTMLElement;
     target.classList.remove(styles.dragOver);
-
     if (!draggedItemId) return;
-
     // Prevent dropping into a filled slot
     if (placedItems[zoneIndex]) return;
-
-    const draggedItem = items.find(item => item.id === draggedItemId);
+    const draggedItem = items.find((item) => item.id === draggedItemId);
     if (!draggedItem) return;
-
     // Place the item in the drop zone
-    setPlacedItems(prev => ({ ...prev, [zoneIndex]: draggedItem }));
-    
+    setPlacedItems((prev) => ({ ...prev, [zoneIndex]: draggedItem }));
     // Clear any existing feedback when placing items
     setFeedback({ type: null, message: '' });
   };
@@ -81,12 +81,10 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     e.preventDefault();
     const target = e.currentTarget as HTMLElement;
     target.classList.remove(styles.dragOver);
-
     if (!draggedItemId) return;
-
     // Remove item from any drop zone it was in
     const newPlacedItems = { ...placedItems };
-    Object.keys(newPlacedItems).forEach(key => {
+    Object.keys(newPlacedItems).forEach((key) => {
       if (newPlacedItems[parseInt(key)].id === draggedItemId) {
         delete newPlacedItems[parseInt(key)];
       }
@@ -94,29 +92,22 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     setPlacedItems(newPlacedItems);
   };
 
-  // Check Answer Logic
+  // Check Answer Logic (for ref and internal use)
   const checkAnswer = () => {
     const placedCount = Object.keys(placedItems).length;
-    
     if (placedCount < correctOrder.length) {
       setFeedback({ type: 'incorrect', message: 'Please place all items before checking!' });
-      return;
+      return false;
     }
-
     let isAllCorrect = true;
     const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
-    
-    // Clear previous feedback classes
-    dropZones.forEach(zone => {
+    dropZones.forEach((zone) => {
       zone.classList.remove(styles.slotCorrect, styles.slotIncorrect);
     });
-
-    // Check each placed item against correct order
     Object.entries(placedItems).forEach(([zoneIndexStr, item]) => {
       const zoneIndex = parseInt(zoneIndexStr);
       const expectedItemId = correctOrder[zoneIndex];
       const zone = dropZones[zoneIndex] as HTMLElement;
-      
       if (item.id === expectedItemId) {
         zone.classList.add(styles.slotCorrect);
       } else {
@@ -124,34 +115,39 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         isAllCorrect = false;
       }
     });
-
     if (isAllCorrect) {
       setFeedback({ type: 'correct', message: 'Perfect! You got it right!' });
       setShowTryAgain(true);
-      if (onComplete) {
-        setTimeout(() => onComplete(), 1500);
-      }
+      setIsCompleted(true);
+      return true;
     } else {
       setFeedback({ type: 'incorrect', message: 'Not quite, check the highlighted steps.' });
       setShowTryAgain(true);
+      setIsCompleted(false);
       if (onIncorrectAttempt) {
         onIncorrectAttempt();
       }
+      return false;
     }
   };
 
-  // Reset Game Logic
+  // Reset Game Logic (for ref and internal use)
   const resetGame = () => {
     setPlacedItems({});
     setFeedback({ type: null, message: '' });
     setShowTryAgain(false);
-    
-    // Clear visual feedback
+    setIsCompleted(false);
     const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
-    dropZones.forEach(zone => {
+    dropZones.forEach((zone) => {
       zone.classList.remove(styles.slotCorrect, styles.slotIncorrect, styles.dragOver);
     });
   };
+
+  // Expose imperative methods to parent
+  useImperativeHandle(ref, () => ({
+    checkAnswer,
+    resetGame,
+  }), [placedItems, correctOrder, onIncorrectAttempt]);
 
   // Helper functions to get styling and icons for items
   const getItemStyleClass = (item: DraggableItem) => {
@@ -210,6 +206,32 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
 
   return (
     <div className={styles.container}>
+      {isCompleted && feedback.type === 'correct' && (
+        <div className={styles.congratsOverlay} role="dialog" aria-modal="true" tabIndex={-1}>
+          <div className={styles.congratsCard}>
+            <Confetti count={40} />
+            <div className={styles.congratsTitle}>🎉 You did it!</div>
+            <div className={styles.congratsMessage}>Perfect! You got it right!</div>
+            <div className={styles.congratsButtons}>
+              <button
+                className={styles.congratsButton}
+                onClick={() => {
+                  if (onComplete) onComplete();
+                }}
+                autoFocus
+              >
+                Finish Lesson
+              </button>
+              <button
+                className={styles.congratsButton}
+                onClick={resetGame}
+              >
+                Play Again
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className={styles.worksheetCard}>
         <span className={styles.gearIcon}>⚙️</span>
         <h1 className={styles.title}>{title}</h1>
@@ -265,8 +287,8 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             }}
             onDrop={handleDropToDraggableArea}
           >
-            <h3>Available Items</h3>
-            {availableItems.map((item, index) => (
+            <h3>Steps</h3>
+            {availableItems.map((item: DraggableItem, index: number) => (
               <div 
                 key={item.id}
                 className={`${styles.stepItem} ${getItemStyleClass(item)}`}
@@ -285,34 +307,23 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
           </div>
         </div>
 
-        <div className={`${styles.feedbackMessage} ${
-          feedback.type === 'correct' ? styles.feedbackCorrect : 
-          feedback.type === 'incorrect' ? styles.feedbackIncorrect : ''
-        }`}>
-          {feedback.message}
-        </div>
+        {/* Centered feedback message below main content */}
+        {feedback.message && (
+          <div className={styles.centeredFeedbackMessage} aria-live="polite">
+             {feedback.message}
+          </div>
+        )}
 
-        <button 
-          className={`${styles.actionButton} ${styles.checkAnswerBtn}`}
-          onClick={checkAnswer}
-          style={{ display: showTryAgain ? 'none' : 'inline-flex' }}
-        >
-          <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
-            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-          </svg>
-          <span>Check Answer</span>
-        </button>
-        
         <button 
           className={`${styles.actionButton} ${styles.tryAgainBtn}`}
           onClick={resetGame}
-          style={{ display: showTryAgain ? 'inline-flex' : 'none' }}
+          style={{ display: showTryAgain && !(isCompleted && feedback.type === 'correct') ? 'inline-flex' : 'none' }}
         >
           Try Again
         </button>
       </div>
     </div>
   );
-};
+});
 
 export default SequenceMatcher;

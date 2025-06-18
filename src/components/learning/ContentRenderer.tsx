@@ -34,13 +34,15 @@ interface ContentRendererProps {
   onBack?: () => void;
   onComplete?: () => void;
   progress?: number;
+  sequenceMatcherRef?: React.Ref<{ checkAnswer: () => boolean }>;
 }
 
 const ContentRenderer: React.FC<ContentRendererProps> = ({
   content,
   onBack,
   onComplete,
-  progress = 0
+  progress = 0,
+  sequenceMatcherRef
 }) => {
   if (!content) {
     return <div>No content available</div>;
@@ -69,6 +71,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
       const sequenceMatchContent = content as import('../../data/standardsData').SequenceMatchSlide;
       return (
         <SequenceMatcher
+          ref={sequenceMatcherRef}
           title={sequenceMatchContent.title}
           items={sequenceMatchContent.items}
           dropZoneCount={sequenceMatchContent.dropZoneCount}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, Suspense, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -65,6 +65,9 @@ function LearningPageContent() {
   const areAllItemsPlaced = useCallback(() => {
     return (dndState.sourceItems?.length || 0) === 0;
   }, [dndState.sourceItems]);
+
+  const sequenceMatcherRef = useRef<any>(null);
+  const [sequenceMatchCompleted, setSequenceMatchCompleted] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -140,6 +143,11 @@ function LearningPageContent() {
       window.speechSynthesis?.cancel();
     };
   }, []);
+
+  useEffect(() => {
+    // Reset sequenceMatchCompleted when slide changes
+    setSequenceMatchCompleted(false);
+  }, [currentSlideIndex, chapterContent]);
 
   const handleBackClick = () => {
     if (currentSlideIndex > 0) {
@@ -220,25 +228,35 @@ function LearningPageContent() {
   const handleContinue = () => {
     if (!currentContent) return;
 
-    if (currentContent.type === 'drag-drop') {
-        if (!dndChecked) {
-            checkDragDrop();
-            return;
+    if (currentContent.type === 'sequence-match') {
+      if (!sequenceMatchCompleted) {
+        if (sequenceMatcherRef.current) {
+          const isCorrect = sequenceMatcherRef.current.checkAnswer();
+          if (isCorrect) {
+            setSequenceMatchCompleted(true);
+          }
         }
-         const allPlaced = areAllItemsPlaced();
-         const anyIncorrect = Object.values(itemCorrectness).some(correct => !correct);
-
-         if (hearts <= 0 && anyIncorrect && allPlaced) {
-             console.log("Out of hearts / Failed DND - Cannot continue");
-             // setDndFeedback("Oops! You're out of hearts. Try reviewing the items again or move to the next lesson.");
-             return;
-         }
-    }    if (currentSlideIndex < totalSlides - 1) {
-        setCurrentSlideIndex(currentSlideIndex + 1);
+        return; // Block navigation until overlay is dismissed
+      } else {
+        // Overlay was dismissed via Finish Lesson, so advance
+        setSequenceMatchCompleted(false);
+      }
     }
-    else {
-        console.log("Lesson Finished! Redirecting back to chapter page for Standard/Chapter:", standard, chapter);
-        router.push(`/standard/${standard}/chapter/${chapter}`);
+    if (currentContent.type === 'drag-drop') {
+      if (!dndChecked) {
+        checkDragDrop();
+        return;
+      }
+      const allPlaced = areAllItemsPlaced();
+      const anyIncorrect = Object.values(itemCorrectness).some(correct => !correct);
+      if (hearts <= 0 && anyIncorrect && allPlaced) {
+        return;
+      }
+    }
+    if (currentSlideIndex < totalSlides - 1) {
+      setCurrentSlideIndex(currentSlideIndex + 1);
+    } else {
+      router.push(`/standard/${standard}/chapter/${chapter}`);
     }
   };
 
@@ -274,7 +292,7 @@ function LearningPageContent() {
   if (currentSlideIndex === totalSlides - 1 && (!currentContent || currentContent.type !== 'drag-drop' || dndChecked)) {
     const allowFinish = currentContent.type !== 'drag-drop' || (dndChecked && !(hearts <= 0 && Object.values(itemCorrectness).some(c => !c) && areAllItemsPlaced()));
     if (allowFinish) {
-        continueButtonText = "Finish Lesson";
+        continueButtonText = "Continue";
     }
   }
 
@@ -291,6 +309,7 @@ function LearningPageContent() {
             onBack={handleBackClick}
             onComplete={handleContinue}
             progress={progress}
+            sequenceMatcherRef={sequenceMatcherRef}
           />
         </main>
 

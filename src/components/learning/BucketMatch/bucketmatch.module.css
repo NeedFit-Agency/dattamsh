@@ -84,20 +84,51 @@
   overflow: visible; /* Changed to visible to prevent double scrollbars */
 }
 
-.basketsContainer {
+.fruitsRow {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(25px, 3vw, 40px);
+  margin-bottom: clamp(20px, 3vh, 32px);
+  width: 100%;
+}
+
+.bucketsRow {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  gap: clamp(25px, 3.5vw, 45px);
+  gap: clamp(25px, 3vw, 40px);
+  margin-bottom: clamp(20px, 3vh, 32px);
   width: 100%;
-  padding: 20px 10px;
-  overflow: visible;
-  /* Ensure consistent alignment for mixed content */
-  align-content: flex-start;
-  /* Fix for preventing duplicate containers */
+}
+
+.feedbackActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: auto;
+  width: 100%;
   position: relative;
+  z-index: 2;
+}
+
+.celebrationOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 20px;
 }
 
 .fruitItem {
@@ -551,23 +582,21 @@
   text-align: center;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 16px;
-  padding: clamp(8px, 1.5vh, 15px) clamp(15px, 2vw, 25px);
+  padding: 10px 24px; /* Reduced padding for better height */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   border: 2px solid #bbddff;
   font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Ensure text is never clipped */
+  line-height: 1.4;
+  min-height: unset; /* Remove any min-height that could cause excess height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .instruction:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
-  pointer-events: none;
+  display: none; /* Remove gradient overlay that may cause visual issues */
 }
 
 /* --- Responsive Adjustments --- */
@@ -691,5 +720,77 @@
   
   .bucketContainer, .fruitItem {
     margin: 2px;  
+  }
+}
+
+.congratsOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s;
+}
+.congratsCard {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  padding: 48px 32px 32px 32px;
+  min-width: 340px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.congratsTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #38b85d;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.congratsMessage {
+  font-size: 1.2rem;
+  color: #343a40;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.congratsButtons {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+}
+.congratsButton {
+  background: #4ecb6e;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(56,184,93,0.18);
+  transition: background 0.2s, transform 0.2s;
+  outline: none;
+}
+.congratsButton:hover, .congratsButton:focus {
+  background: #38b85d;
+  transform: translateY(-2px) scale(1.04);
+}
+@media (max-width: 600px) {
+  .congratsCard {
+    min-width: 90vw;
+    padding: 32px 8px 24px 8px;
+  }
+  .congratsButtons {
+    flex-direction: column;
+    gap: 16px;
   }
 }

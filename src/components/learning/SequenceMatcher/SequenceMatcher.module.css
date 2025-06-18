@@ -273,20 +273,20 @@
 }
 
 .dropZone {
-    height: clamp(70px, 10vh, 85px); /* Increased height for better visibility */
+    height: clamp(90px, 12vh, 120px);
     background-color: rgba(255, 255, 255, 0.9);
-    border: 4px dashed #bbddff; /* Made border thicker */
-    border-radius: clamp(15px, 2.5vw, 22px); /* Increased border radius */
-
+    border: 6px dashed #bbddff;
+    border-radius: 24px;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: clamp(6px, 1.2vh, 12px);
-    padding-left: 50px; /* Increased padding for the number */
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.05), 0 6px 0 rgba(0, 0, 0, 0.03); /* Enhanced shadow */
+    padding: clamp(10px, 2vh, 18px);
+    padding-left: 60px;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.05), 0 6px 0 rgba(0, 0, 0, 0.03);
     position: relative;
     overflow: hidden;
+    font-size: 1.25rem;
 }
 
 .dropZone::before {
@@ -307,15 +307,15 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 45px; /* Increased width for larger numbers */
+    width: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #bbddff;
     color: #1a73e8;
     font-weight: bold;
-    font-size: 24px; /* Increased font size */
-    border-right: 3px solid rgba(187, 221, 255, 0.5); /* Thicker border */
+    font-size: 2rem;
+    border-right: 3px solid rgba(187, 221, 255, 0.5);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
@@ -323,18 +323,18 @@
 }
 
 .dropZone.dragOver {
-    background-color: rgba(26, 162, 255, 0.25); /* More visible background */
+    background-color: rgba(26, 162, 255, 0.25);
     border-color: #1aa2ff;
-    border-width: 5px; /* Thicker border when dragging over */
+    border-width: 5px;
     border-style: dashed;
-    transform: scale(1.08); /* Slightly larger scale */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 4px 8px rgba(26, 162, 255, 0.2); /* Enhanced shadow */
-    animation: pulse 1s infinite alternate; /* Faster animation */
+    transform: scale(1.08);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 4px 8px rgba(26, 162, 255, 0.2);
+    animation: pulse 1s infinite alternate;
 }
 
 /* Ensure number remains visible when items are placed */
 .dropZone:has(.stepItem) {
-    padding-left: 50px; /* Updated to match the new padding from .dropZone */
+    padding-left: 50px;
 }
 
 @keyframes pulse {
@@ -344,7 +344,7 @@
     }
     to {
         box-shadow: 0 12px 24px rgba(26, 162, 255, 0.3), inset 0 6px 12px rgba(26, 162, 255, 0.25);
-        border-color: #0085ff; /* Slightly darker for contrast */
+        border-color: #0085ff;
     }
 }
 
@@ -404,15 +404,15 @@
 
 .draggableItems h3 {
     margin: 0 0 clamp(16px, 2.5vh, 22px) 0;
-    font-size: clamp(1.25rem, 2vw, 1.6rem); /* Larger font size */
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
     color: #333;
     opacity: 0.95;
     font-family: "Comic Sans MS", "Comic Sans", 'Nunito', sans-serif;
     background-color: #e6f2ff;
-    padding: clamp(8px, 1.2vh, 12px) clamp(14px, 1.8vw, 22px); /* Increased padding */
-    border-radius: clamp(12px, 1.8vw, 18px); /* Increased border radius */
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08); /* Enhanced shadow */
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9); /* Enhanced text shadow */
+    padding: clamp(8px, 1.2vh, 12px) clamp(14px, 1.8vw, 22px);
+    border-radius: clamp(12px, 1.8vw, 18px);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9);
     position: relative;
     z-index: 2;
 }
@@ -420,21 +420,21 @@
 .stepItem {
     display: flex;
     align-items: center;
-    padding: clamp(12px, 1.8vh, 16px); /* Increased padding */
-    border-radius: clamp(16px, 2.5vw, 22px); /* Increased border radius */
+    padding: clamp(12px, 1.8vh, 16px);
+    border-radius: clamp(16px, 2.5vw, 22px);
     font-weight: 700;
-    font-size: clamp(1.15rem, 1.8vw, 1.35rem); /* Larger text */
+    font-size: clamp(1.15rem, 1.8vw, 1.35rem);
     cursor: grab;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 0 rgba(0,0,0,0.08); /* Enhanced shadow */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 0 rgba(0,0,0,0.08);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
     background-color: white;
-    border: 3px solid transparent; /* Thicker border */
+    border: 3px solid transparent;
     position: relative;
     overflow: hidden;
     animation: itemBounce 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     animation-fill-mode: both;
     animation-delay: calc(var(--item-index, 0) * 0.1s);
-    min-width: 180px; /* Ensure minimum width for readability */
+    min-width: 180px;
 }
 
 @keyframes itemBounce {
@@ -463,40 +463,40 @@
 }
 
 .stepItem:hover {
-    transform: translateY(-8px); /* Enhanced hover effect */
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18), 0 5px 0 rgba(0,0,0,0.08); /* Enhanced shadow */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18), 0 5px 0 rgba(0,0,0,0.08);
 }
 
 .stepItem.dragging {
     opacity: 0.9;
-    box-shadow: 0 16px 28px rgba(0,0,0,0.2); /* Enhanced shadow */
-    transform: scale(1.1); /* Slightly larger scale when dragging */
+    box-shadow: 0 16px 28px rgba(0,0,0,0.2);
+    transform: scale(1.1);
     cursor: grabbing;
     z-index: 10;
 }
 
 .stepIcon {
-    width: clamp(50px, 7vw, 60px); /* Significantly increased icon container size */
+    width: clamp(50px, 7vw, 60px);
     height: clamp(50px, 7vw, 60px);
-    border-radius: 14px; /* Increased border radius */
+    border-radius: 14px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-right: clamp(14px, 2vw, 22px); /* Increased margin */
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Enhanced shadow */
+    margin-right: clamp(14px, 2vw, 22px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     transition: transform 0.3s;
     position: relative;
 }
 
 .stepItem:hover .stepIcon {
-    transform: rotate(10deg) scale(1.2); /* Enhanced rotation and scale */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.25); /* Enhanced shadow */
+    transform: rotate(10deg) scale(1.2);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25);
 }
 
 .stepIcon svg {
-    width: clamp(30px, 5vw, 38px); /* Significantly increased SVG size */
+    width: clamp(30px, 5vw, 38px);
     height: clamp(30px, 5vw, 38px);
-    stroke-width: 2px; /* Added to make SVG paths more visible */
+    stroke-width: 2px;
 }
 
 /* Item Specific Colors with more vibrant, child-friendly colors */
@@ -654,20 +654,21 @@
 }
 
 .tryAgainBtn {
-    background-color: #5c4b40;
-    background-image: linear-gradient(135deg, #7c6657, #4a3c33);
-    color: white;
-    box-shadow: 0 6px 20px rgba(92, 75, 64, 0.4), 0 4px 0 #3d3228;
-    animation: buttonPop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    background: linear-gradient(90deg, #FFA726 0%, #FFD600 100%);
+    color: #333;
+    border: 2.5px solid #FFA726;
+    border-radius: 24px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    box-shadow: 0 6px 20px rgba(255, 167, 38, 0.18), 0 4px 0 #FFD600;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.5px;
 }
 
 .tryAgainBtn:hover {
-    background-image: linear-gradient(135deg, #8a7362, #574639);
-    box-shadow: 0 8px 25px rgba(92, 75, 64, 0.5), 0 5px 0 #3d3228;
-}
-
-.tryAgainBtn:active {
-    box-shadow: 0 3px 15px rgba(92, 75, 64, 0.3), 0 2px 0 #3d3228;
+    background: linear-gradient(90deg, #FFD600 0%, #FFA726 100%);
+    color: #222;
+    box-shadow: 0 8px 25px rgba(255, 214, 0, 0.25), 0 5px 0 #FFA726;
 }
 
 .feedbackMessage {
@@ -1179,5 +1180,107 @@
 @media (min-width: 901px) {
   .mascotMessageMobile {
     display: none;
+  }
+}
+
+.centeredFeedbackMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+  font-weight: 700;
+  color: #218838;
+  border: 2.5px solid #4CAF50;
+  border-radius: 14px;
+  padding: 16px 32px;
+  margin: 40px auto 24px auto;
+  min-height: 48px;
+  max-width: 80vw;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  z-index: 2;
+  position: relative;
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, Quicksand, cursive, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+  .centeredFeedbackMessage {
+    font-size: 1rem;
+    padding: 10px 12px;
+    margin: 24px auto 16px auto;
+    max-width: 98vw;
+  }
+}
+
+.congratsOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s;
+}
+.congratsCard {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  padding: 48px 32px 32px 32px;
+  min-width: 340px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.congratsTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #38b85d;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.congratsMessage {
+  font-size: 1.2rem;
+  color: #343a40;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.congratsButtons {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+}
+.congratsButton {
+  background: #4ecb6e;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(56,184,93,0.18);
+  transition: background 0.2s, transform 0.2s;
+  outline: none;
+}
+.congratsButton:hover, .congratsButton:focus {
+  background: #38b85d;
+  transform: translateY(-2px) scale(1.04);
+}
+@media (max-width: 600px) {
+  .congratsCard {
+    min-width: 90vw;
+    padding: 32px 8px 24px 8px;
+  }
+  .congratsButtons {
+    flex-direction: column;
+    gap: 16px;
   }
 }

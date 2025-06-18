@@ -515,3 +515,75 @@
   font-size: 18px;
   font-style: italic;
 }
+
+.congratsOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s;
+}
+.congratsCard {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  padding: 48px 32px 32px 32px;
+  min-width: 340px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.congratsTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #38b85d;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.congratsMessage {
+  font-size: 1.2rem;
+  color: #343a40;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.congratsButtons {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+}
+.congratsButton {
+  background: #4ecb6e;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(56,184,93,0.18);
+  transition: background 0.2s, transform 0.2s;
+  outline: none;
+}
+.congratsButton:hover, .congratsButton:focus {
+  background: #38b85d;
+  transform: translateY(-2px) scale(1.04);
+}
+@media (max-width: 600px) {
+  .congratsCard {
+    min-width: 90vw;
+    padding: 32px 8px 24px 8px;
+  }
+  .congratsButtons {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

@@ -43,6 +43,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
   const [isCheckingAnswers, setIsCheckingAnswers] = useState(false);
   const [allCompleted, setAllCompleted] = useState(false);
   const [showSnackbar, setShowSnackbar] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     const initialDropped: Record<string, DragItem[]> = {};
@@ -146,7 +147,6 @@ export const DragDrop: React.FC<DragDropProps> = ({
     const placedItems = dragItems.filter((i) => i.placed);
     const allItemsPlaced = placedItems.length === dragItems.length;
     if (!allItemsPlaced) return;
-
     let allCorrect = true;
     for (const item of placedItems) {
       const target = targets.find((t) => t.id === item.targetId);
@@ -158,10 +158,9 @@ export const DragDrop: React.FC<DragDropProps> = ({
     if (allCorrect) {
       setFeedback({ show: true, correct: true, message: 'Great job! All items are correctly sorted!' });
       setAllCompleted(true);
-      if (onComplete) onComplete();
+      setIsCompleted(true);
     } else {
       setFeedback({ show: true, correct: false, message: 'Some items are in the wrong category. Try again!' });
-      // Reset after a short delay
       setTimeout(() => {
         setDragItems(items.map((item) => ({
           ...item,
@@ -176,8 +175,13 @@ export const DragDrop: React.FC<DragDropProps> = ({
         setDroppedItems(resetDropped);
         setFeedback({ show: false, correct: false, message: '' });
         setAllCompleted(false);
+        setIsCompleted(false);
       }, 1500);
     }
+  };
+
+  const handleFinishLesson = () => {
+    if (onComplete) onComplete();
   };
 
   return (
@@ -332,6 +336,46 @@ export const DragDrop: React.FC<DragDropProps> = ({
           </button>
         )}
       </div>
+
+      {isCompleted && (
+        <div className={styles.congratsOverlay} role="dialog" aria-modal="true" tabIndex={-1}>
+          <div className={styles.congratsCard}>
+            <Confetti count={40} />
+            <div className={styles.congratsTitle}>🎉 You did it!</div>
+            <div className={styles.congratsMessage}>Great job! All items are correctly sorted!</div>
+            <div className={styles.congratsButtons}>
+              <button
+                className={styles.congratsButton}
+                onClick={() => {
+                  setDragItems(items.map((item) => ({
+                    ...item,
+                    placed: false,
+                    targetId: '',
+                    text: item.text || item.content || '',
+                  })));
+                  const resetDropped: Record<string, DragItem[]> = {};
+                  targets.forEach((target) => {
+                    resetDropped[target.id] = [];
+                  });
+                  setDroppedItems(resetDropped);
+                  setFeedback({ show: false, correct: false, message: '' });
+                  setAllCompleted(false);
+                  setIsCompleted(false);
+                }}
+                autoFocus
+              >
+                Play Again
+              </button>
+              <button
+                className={styles.congratsButton}
+                onClick={handleFinishLesson}
+              >
+                Finish Lesson
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

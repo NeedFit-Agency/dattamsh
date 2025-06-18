@@ -6,6 +6,7 @@ import styles from './bucketmatch.module.css';
 import { itemSvgMap, BasketSvg } from './ItemSvgs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Confetti from '../../shared/Confetti/Confetti';
 
 // Helper to get the SVG for a fruit based on its type/color
 const getFruitSvg = (itemType: string, imageUrl?: string) => {
@@ -49,6 +50,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   const [placedItems, setPlacedItems] = useState<{[itemId: string]: string}>({});
   const [feedback, setFeedback] = useState<{ type: 'correct' | 'incorrect' | null, bucketId?: string }>({ type: null });
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const allItemsCount = items.length;
   const matchedItemsCount = Object.keys(placedItems).length;
@@ -160,22 +162,18 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   };
   useEffect(() => {
     if (allItemsMatched) {
-      setFeedback({ type: 'correct' }); // General success feedback
-      createConfetti(); // Create confetti celebration
-      
-      // Play success audio if available
+      setFeedback({ type: 'correct' });
+      createConfetti();
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
         audioRef.current.play().catch(e => console.log("Success audio play failed:", e));
       }
-      
-      if (onComplete) {
-        setTimeout(() => {
-          onComplete();
-        }, 2000); // Delay completion call slightly for feedback visibility
-      }
+      setIsCompleted(true);
+      // Do NOT call onComplete here
+    } else {
+      setIsCompleted(false);
     }
-  }, [allItemsMatched, onComplete]);
+  }, [allItemsMatched]);
   const handleReset = () => {
     // Reset state
     setPlacedItems({});
@@ -203,48 +201,75 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     }
   };
 
+  const handleFinishLesson = () => {
+    if (onComplete) onComplete();
+  };
+
   return (
     <div className={styles.container}>
-      {onBack && (
-        <div className={styles.header}>
-          {title && <h2 className={styles.mainTitle}>{title}</h2>}
-          {audioSrc && (
-            <>
+      {isCompleted && (
+        <div className={styles.congratsOverlay} role="dialog" aria-modal="true" tabIndex={-1}>
+          <div className={styles.congratsCard}>
+            <Confetti count={40} />
+            <div className={styles.congratsTitle}>🎉 You did it!</div>
+            <div className={styles.congratsMessage}>{successMessage}</div>
+            <div className={styles.congratsButtons}>
               <button
-                className={styles.audioButton}
-                onClick={playAudio}
-                aria-label="Play audio"
+                className={styles.congratsButton}
+                onClick={handleReset}
+                autoFocus
               >
-                <img src="/images/sound.png" alt="Play sound" style={{ width: 24, height: 24 }} />
+                Play Again
               </button>
-              <audio ref={audioRef} src={audioSrc} />
-            </>
-          )}
-        </div>
-      )}
-
-      {typeof progress !== 'undefined' && (
-        <div className={styles.progressContainer}>
-          <div className={styles.progressBar}>
-            <div
-              className={styles.progressFill}
-              style={{ width: `${progress}%` }}
-            />
+              <button
+                className={styles.congratsButton}
+                onClick={handleFinishLesson}
+              >
+                Finish Lesson
+              </button>
+            </div>
           </div>
-          <span className={styles.progressText}>{progress}%</span>
         </div>
       )}
-      
       <div className={styles.worksheetCard}>
-        {instruction && <p className={styles.instruction}>{instruction}</p>}        <div className={styles.matchArea}>
-          <div className={styles.basketsContainer}>
-            {/* Fruits Items */}
+        {onBack && (
+          <div className={styles.header}>
+            {title && <h2 className={styles.mainTitle}>{title}</h2>}
+            {audioSrc && (
+              <>
+                <button
+                  className={styles.audioButton}
+                  onClick={playAudio}
+                  aria-label="Play audio"
+                >
+                  <img src="/images/sound.png" alt="Play sound" style={{ width: 24, height: 24 }} />
+                </button>
+                <audio ref={audioRef} src={audioSrc} />
+              </>
+            )}
+          </div>
+        )}
+        {typeof progress !== 'undefined' && (
+          <div className={styles.progressContainer}>
+            <div className={styles.progressBar}>
+              <div
+                className={styles.progressFill}
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <span className={styles.progressText}>{progress}%</span>
+          </div>
+        )}
+        {instruction && <p className={styles.instruction}>{instruction}</p>}
+        <div className={styles.matchArea}>
+          <div className={styles.fruitsRow} role="list" aria-label="Draggable fruits">
             {items.map((item) => (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 className={`${styles.fruitItem} ${placedItems[item.id] ? styles.placed : ''}`}
                 data-source-color={item.type}
-              >                
+                role="listitem"
+              >
                 <div
                   id={`fruit-${item.id}`}
                   className={styles.fruitDraggable}
@@ -252,23 +277,23 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                   onDragStart={(e) => handleDragStart(e, item)}
                   onDragEnd={handleDragEnd}
                   data-color={item.type}
-                  title={item.text || item.type.charAt(0).toUpperCase() + item.type.slice(1)} /* Added title for accessibility */
+                  title={item.text || item.type.charAt(0).toUpperCase() + item.type.slice(1)}
+                  aria-label={`Draggable fruit: ${item.text}`}
                 >
                   {getFruitSvg(item.type, item.imageUrl)}
                 </div>
-                {/* Color name text is hidden via CSS but kept for accessibility */}
                 <p className={styles.colorName}>{item.text || item.type.charAt(0).toUpperCase() + item.type.slice(1)}</p>
               </div>
             ))}
-            
-            {/* Bucket Items in the same container */}
+          </div>
+          <div className={styles.bucketsRow} role="list" aria-label="Color buckets">
             {buckets.map((bucket) => {
-              const isCorrectlyFilled = Object.entries(placedItems).some(([itemId, bId]) => 
+              const isCorrectlyFilled = Object.entries(placedItems).some(([itemId, bId]) =>
                 bId === bucket.id && items.find(i => i.id === itemId)?.type === bucket.type
               );
               const itemInThisBucket = items.find(i => placedItems[i.id] === bucket.id);
               return (
-                <div key={bucket.id} className={styles.bucketContainer}>
+                <div key={bucket.id} className={styles.bucketContainer} role="listitem">
                   <div
                     data-bucket-id={bucket.id}
                     className={`${styles.basketDropzone} ${isCorrectlyFilled ? styles.correct : ''} ${feedback.bucketId === bucket.id && feedback.type === 'incorrect' ? styles.incorrect : ''}`}
@@ -276,9 +301,10 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                     onDragLeave={handleDragLeave}
                     onDrop={(e) => handleDrop(e, bucket)}
                     data-target-color={bucket.type}
+                    aria-label={`Drop zone for ${bucket.title}`}
+                    role="region"
                   >
                     <BasketSvg />
-                    {/* Show instruction text until an item is dropped */}
                     {!itemInThisBucket && (
                       <div className={styles.bucketInstructionText}>
                         Drop here
@@ -295,23 +321,36 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
               );
             })}
           </div>
-        </div><div 
-            id="feedback-message" 
+          {/* Centered feedback message in the empty space below buckets when completed */}
+          {allItemsMatched && (
+            <div className={styles.centeredFeedbackMessage} aria-live="polite">
+              {successMessage}
+            </div>
+          )}
+        </div>
+        <div className={styles.feedbackActions}>
+          <div
+            id="feedback-message"
             className={`${styles.feedbackMessage} ${feedback.type === 'correct' ? styles.correctText : feedback.type === 'incorrect' ? styles.incorrectText : ''}`}
-        >
-          {allItemsMatched ? successMessage : 
-           feedback.type === 'correct' && !Object.values(placedItems).includes(feedback.bucketId || '') ? correctMessage : 
-           feedback.type === 'incorrect' ? tryAgainMessage : ''}
-        </div>        {(allItemsCount > 0) && (
-          <button
-            id="reset-button"
-            className={styles.resetButton}
-            onClick={handleReset}
-            style={{ display: (matchedItemsCount > 0 || allItemsMatched) ? 'block' : 'none' }}
+            aria-live="polite"
+            style={{ marginBottom: '2.5rem' }}
           >
-            {allItemsMatched ? playAgainLabel : resetLabel}
-          </button>
-        )}
+            {!allItemsMatched && (
+              feedback.type === 'correct' && !Object.values(placedItems).includes(feedback.bucketId || '') ? correctMessage :
+                feedback.type === 'incorrect' ? tryAgainMessage : ''
+            )}
+          </div>
+          {(allItemsCount > 0 && !allItemsMatched) && (
+            <button
+              id="reset-button"
+              className={styles.resetButton}
+              onClick={handleReset}
+              style={{ display: (matchedItemsCount > 0) ? 'block' : 'none' }}
+            >
+              {resetLabel}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

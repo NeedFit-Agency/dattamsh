@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './WhoAmI.module.css';
+import Confetti from '../../shared/Confetti/Confetti';
 
 interface Option {
   id: string;
@@ -39,6 +40,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   const [showWinScreen, setShowWinScreen] = useState(false);
   const [winScreenMessage, setWinScreenMessage] = useState("YOU DID IT!");
   const [buttonText, setButtonText] = useState("Next");
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const correctSoundRef = useRef<HTMLAudioElement>(null);
   const incorrectSoundRef = useRef<HTMLAudioElement>(null);
