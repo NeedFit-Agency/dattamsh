@@ -12,8 +12,6 @@
     --card-bg: #ffffff;
     --text-color: #333;
     --main-font: 'Nunito', sans-serif;
-
-
     --success-color: #4CAF50;
     --success-glow: rgba(76, 175, 80, 0.5);
     --error-color: #f44336;
@@ -26,15 +24,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
+  min-height: 100vh;
   left: 0;
   top: 0;
   position: absolute;
-  padding: 1rem;
-  margin: 0;
+  margin: 0 auto;
+  padding: 20px;
   font-family: var(--font-family, 'Nunito', sans-serif);
   background-image: url('/images/background/image-1.png');
   background-size: cover;
@@ -42,7 +39,6 @@
   background-repeat: no-repeat;
   color: var(--text-color, #333);
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 /* --- Main Card (Adapted from worksheet-card) --- */
@@ -50,18 +46,16 @@
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
+  padding: 30px 40px;
   width: 95%;
-  max-width: min(90vw, 1200px);
-  max-height: calc(90vh - 80px); /* Allow room for header/progress */
+  max-width: 1400px;
   text-align: center;
-  margin-top: clamp(10px, 1.5vh, 20px);
+  margin: 20px auto;
   backdrop-filter: blur(5px);
   border: 2px solid #bbddff;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  overflow-y: auto; /* Allow vertical scroll only */
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .gameTitle { /* Mapped from h1 in test.html */
@@ -76,28 +70,40 @@
 .matchArea {
   display: flex;
   flex-direction: column;
-  padding: clamp(15px, 2.5vh, 25px);
+  gap: 40px;
+  margin-bottom: 24px;
+  padding: 20px;
   align-items: center;
-  flex: 1;
-  min-height: 400px; /* Ensure enough vertical space */
   width: 100%;
-  overflow: visible; /* Changed to visible to prevent double scrollbars */
+  max-width: 1300px;
+}
+
+.fruitsContainer {
+  background-color: rgba(248, 249, 250, 0.9);
+  border: 2px solid #bbddff;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(3px);
 }
 
 .basketsContainer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start;
-  gap: clamp(25px, 3.5vw, 45px);
+  flex-wrap: wrap;
+  gap: 40px;
   width: 100%;
-  padding: 20px 10px;
-  overflow: visible;
-  /* Ensure consistent alignment for mixed content */
-  align-content: flex-start;
-  /* Fix for preventing duplicate containers */
-  position: relative;
+  padding: 30px;
+  background-color: rgba(248, 249, 250, 0.9);
+  border: 2px solid #bbddff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(3px);
 }
 
 .fruitItem {
@@ -105,10 +111,7 @@
   flex-direction: column;
   align-items: center;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  width: 100%;
-  max-width: 200px;
-  margin: clamp(5px, 1vh, 10px);
-  flex-shrink: 0;
+  margin: 10px;
 }
 
 .fruitItem.placed {
@@ -116,29 +119,27 @@
   visibility: hidden;
 }
 
-/* Hidden by default as requested */
 .colorName {
-  display: none;
-  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-top: clamp(8px, 1vh, 15px);
+  margin-top: 15px;
   color: #343a40;
 }
 
 /* --- Draggable Fruit Styling --- */
 .fruitDraggable {
-  width: clamp(120px, 14vw, 180px);
-  height: clamp(120px, 14vw, 180px);
+  width: 140px;
+  height: 140px;
   cursor: grab;
   transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s;
   display: flex; /* For centering SVG if needed */
   justify-content: center;
   align-items: center;
   background-color: white;
-  border: 3px solid #bbddff;
-  border-radius: 16px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  padding: clamp(8px, 1vw, 15px);
+  border: 2px solid #bbddff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 .fruitDraggable:hover {
@@ -154,18 +155,48 @@
 }
 
 /* --- Basket Dropzone Styling --- */
+.bucketContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.bucketLabel {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #343a40;
+  margin: 0;
+  text-align: center;
+}
+
+.bucketInstructionText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  color: #666;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: 8px;
+  z-index: 3;
+  pointer-events: none;
+  font-weight: 600;
+}
+
 .basketDropzone {
-  width: clamp(140px, 16vw, 200px);
-  height: clamp(120px, 16vh, 160px);
+  width: 180px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   border: 3px dashed #adb5bd;
-  border-radius: 20px;
+  border-radius: 15px;
   transition: all 0.3s ease;
   background-color: #bbddff; /* Colored background for the basket area */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .basketDropzone .basketSvg {
@@ -176,86 +207,27 @@
 }
 
 .basketDropzone .droppedFruit {
-  width: clamp(70px, 9vw, 100px); 
-  height: clamp(70px, 9vw, 100px);
+  width: 80px; /* Slightly larger fruit inside basket */
+  height: 80px;
   z-index: 2;
   position: relative;
-  top: clamp(-15px, -2vh, -20px); /* Adjusted position to fit better in the basket */
+  top: -15px; /* Position it nicely in the basket */
   cursor: default;
   display: flex; /* For centering SVG if needed */
   justify-content: center;
   align-items: center;
   animation: dropIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
-}
-
-.basketDropzone .bucketInstructionText {
-  position: absolute;
-  z-index: 2;
-  color: #666;
-  font-size: clamp(0.8rem, 1vw, 1rem);
-  font-weight: 600;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 4px 8px;
-  border-radius: 8px;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  animation: fadeIn 0.5s ease;
-  user-select: none;
-  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px dashed #aab2bd;
 }
 
 @keyframes dropIn {
   0% {
     opacity: 0;
-    transform: translateY(-30px) scale(0.8);
-  }
-  50% {
-    transform: translateY(5px) scale(1.1);
-  }
-  75% {
-    transform: translateY(-5px) scale(1);
+    transform: translateY(-20px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
-}
-
-.bucketContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 200px;
-  margin: clamp(5px, 1vh, 10px);
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-
-.bucketContainer:hover {
-  transform: translateY(-3px);
-}
-
-.bucketLabel {
-  font-size: clamp(0.9rem, 1.25vw, 1.3rem);
-  font-weight: 700;
-  margin-top: clamp(8px, 1vh, 15px);
-  color: #333;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  padding: clamp(4px, 0.75vh, 8px) clamp(8px, 1vw, 16px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  min-width: clamp(100px, 12vw, 160px);
-  max-width: clamp(140px, 16vw, 200px);
-  border: 2px solid #bbddff;
-  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* --- Drag & Drop States --- */
@@ -301,17 +273,14 @@
 
 /* --- Feedback & Reset Button --- */
 .feedbackMessage {
-  min-height: clamp(25px, 3vh, 35px);
-  margin-top: clamp(15px, 2vh, 25px);
-  font-size: clamp(1rem, 1.25vw, 1.3rem);
+  height: 35px;
+  margin-top: 25px;
+  font-size: 1.3rem;
   font-weight: 700;
   transition: all 0.3s ease;
-  padding: clamp(4px, 0.75vh, 8px) clamp(8px, 1vw, 16px);
+  padding: 8px 16px;
   border-radius: 10px;
   font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .feedbackMessage.correctText {
@@ -333,11 +302,11 @@
   color: white;
   border: none;
   border-radius: 12px;
-  padding: clamp(10px, 1.5vh, 15px) clamp(20px, 2.5vw, 35px);
-  font-size: clamp(0.9rem, 1.1vw, 1.2rem);
+  padding: 15px 35px;
+  font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
-  margin-top: clamp(10px, 1.5vh, 20px);
+  margin-top: 20px;
   transition: all 0.2s;
   box-shadow: 0 4px 0 #2563eb;
   text-transform: uppercase;
@@ -368,47 +337,15 @@
   }
 }
 
-/* --- Confetti Animation --- */
-.confetti {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: #4CAF50;
-  border-radius: 50%;
-  z-index: 9999;
-  pointer-events: none;
-}
-
-@keyframes confettiFall {
-  0% {
-    transform: translateY(-100vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(720deg);
-    opacity: 0;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 /* --- Existing styles from BucketMatch - to be reviewed/merged/removed --- */
 /* Header, Progress, Instruction - Keep if they are outside the 'worksheetCard' scope */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
-  max-width: min(90vw, 1200px);
-  margin-bottom: clamp(10px, 1.5vh, 20px);
-  height: auto;
+  width: 100%;
+  max-width: 1400px; /* Match worksheetCard width */
+  margin-bottom: 20px;
 }
 
 .chooseBackButton {
@@ -416,17 +353,16 @@
   border: 2px solid #bbddff;
   color: var(--text-medium, #666);
   cursor: pointer;
-  padding: clamp(6px, 0.8vh, 10px) clamp(10px, 1vw, 16px);
+  padding: 10px 16px;
   border-radius: 12px;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: clamp(1rem, 1.1vw, 1.25em);
+  gap: 8px;
+  font-size: 1.25em;
   position: relative;
   z-index: 2;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
 }
 .chooseBackButton:hover {
   background-color: #f0f7ff;
@@ -439,7 +375,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .backText {
-  font-size: clamp(0.8em, 1vw, 1em);
+  font-size: 1em;
   font-weight: 600;
   margin-left: 2px;
   display: none;
@@ -449,14 +385,11 @@
 }
 
 .mainTitle {
-  font-size: clamp(1.5rem, 2vw, 2.2rem); /* Responsive title */
+  font-size: 2.2rem; /* Larger title */
   color: #333;
   margin: 0;
   font-family: "Comic Sans MS", "Comic Sans", Nunito, Quicksand, cursive, sans-serif;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .audioButton {
@@ -467,12 +400,11 @@
   color: white;
   border: none;
   border-radius: 12px;
-  padding: clamp(6px, 0.8vh, 10px) clamp(10px, 1vw, 16px);
-  font-size: clamp(14px, 1vw, 16px);
+  padding: 10px 16px;
+  font-size: 16px;
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
 }
 
 .audioButton:hover {
@@ -487,25 +419,24 @@
 }
 
 .progressContainer {
-  width: 95%;
-  max-width: min(90vw, 1200px);
+  width: 100%;
+  max-width: 1400px; /* Match worksheetCard width */
   display: flex;
   align-items: center;
-  margin-bottom: clamp(10px, 1.5vh, 20px);
+  margin-bottom: 20px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 16px;
-  padding: clamp(5px, 1vh, 10px) clamp(10px, 2vw, 20px);
+  padding: 10px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  height: auto;
 }
 
 .progressBar {
   flex-grow: 1;
-  height: clamp(8px, 1vh, 12px);
+  height: 12px;
   background-color: #e0e0e0;
   border-radius: 6px;
   overflow: hidden;
-  margin-right: clamp(8px, 1vw, 15px);
+  margin-right: 15px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -522,7 +453,7 @@
                     rgba(255, 255, 255, 0.15) 75%, 
                     transparent 75%, 
                     transparent);
-  background-size: clamp(12px, 1.5vw, 20px) clamp(12px, 1.5vw, 20px);
+  background-size: 20px 20px;
   animation: progressStripes 1s linear infinite;
 }
 
@@ -531,121 +462,97 @@
     background-position: 0 0;
   }
   100% {
-    background-position: clamp(12px, 1.5vw, 20px) 0;
+    background-position: 20px 0;
   }
 }
 
 .progressText {
-  font-size: clamp(0.8rem, 1vw, 1rem);
+  font-size: 1rem;
   font-weight: 700;
   color: var(--primary, #1aa2ff);
-  margin-left: 5px;
-  white-space: nowrap;
 }
 
 .instruction {
-  font-size: clamp(1rem, 1.25vw, 1.3rem);
+  font-size: 1.2rem;
   color: #333;
-  margin: 0 auto clamp(15px, 3vh, 30px);
-  max-width: 100%;
+  margin-bottom: 30px;
+  max-width: 1400px; /* Match worksheetCard width */
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 16px;
-  padding: clamp(8px, 1.5vh, 15px) clamp(15px, 2vw, 25px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  border: 2px solid #bbddff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #bbddff;
   font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
-  position: relative;
-  overflow: hidden;
-}
-
-.instruction:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
-  pointer-events: none;
 }
 
 /* --- Responsive Adjustments --- */
-/* For screens with height below 800px (shorter laptops) */
-@media (max-height: 800px) {
-  .matchArea {
-    gap: clamp(15px, 2vh, 25px);
-  }
-  
-  .fruitDraggable {
-    width: clamp(100px, 12vw, 150px);
-    height: clamp(100px, 12vw, 150px);
-  }
-  
-  .basketDropzone {
-    width: clamp(120px, 14vw, 180px);
-    height: clamp(100px, 14vh, 140px);
-  }
-  
-  .bucketLabel {
-    font-size: clamp(0.8rem, 1vw, 1rem);
-    margin-top: 8px;
-  }
-  
-  .instruction {
-    margin-bottom: 10px;
-    padding: 8px 15px;
-  }
-  
-  .basketDropzone .droppedFruit {
-    width: clamp(60px, 8vw, 90px);
-    height: clamp(60px, 8vw, 90px);
-    top: clamp(-12px, -1.8vh, -18px);
-  }
-}
-
-/* For standard mobile devices */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .container {
-    padding: 10px;
+    padding: 15px;
   }
   
   .worksheetCard {
+    padding: 20px;
+    max-width: 95%;
+  }
+  
+  .matchArea {
+    gap: 30px;
     padding: 15px;
-    max-width: 95vw;
+  }
+  
+  .fruitsContainer,
+  .basketsContainer {
+    padding: 15px;
+    gap: 20px;
   }
   
   .gameTitle {
-    font-size: 1.5rem;
-  }
-  
-  .basketsContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    padding: 15px;
+    font-size: 2rem;
   }
   
   .fruitDraggable {
-    width: 85px;
-    height: 85px;
+    width: 100px;
+    height: 100px;
   }
   
   .basketDropzone {
-    width: 110px;
-    height: 100px;
-    margin: 0 auto;
+    width: 140px;
+    height: 120px;
   }
   
   .basketDropzone .droppedFruit {
     width: 60px;
     height: 60px;
-    top: -8px;
+    top: -10px;
   }
   
-  .basketDropzone .bucketInstructionText {
-    font-size: 0.7rem;
-    padding: 3px 6px;
+  .mainTitle {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .fruitsContainer,
+  .basketsContainer {
+    justify-content: center;
+  }
+  
+  .fruitDraggable {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .basketDropzone {
+    width: 120px;
+    height: 100px;
+  }
+  
+  .basketDropzone .droppedFruit {
+    width: 50px;
+    height: 50px;
+    top: -8px;
   }
   
   .header {
@@ -654,42 +561,6 @@
   }
   
   .mainTitle {
-    font-size: 1.3rem;
-  }
-  
-  .instruction {
-    font-size: 0.9rem;
-    padding: 8px 12px;
-  }
-  
-  .resetButton {
-    padding: 8px 20px;
-    font-size: 0.9rem;
-  }
-}
-
-/* For very small screens */
-@media (max-width: 400px) {
-  .fruitDraggable {
-    width: 55px;
-    height: 55px;
-  }
-  
-  .basketDropzone {
-    width: 80px;
-    height: 70px;
-  }
-  
-  .basketDropzone .bucketInstructionText {
-    font-size: 0.6rem;
-    padding: 2px 4px;
-  }
-  
-  .colorName, .bucketLabel {
-    font-size: 0.8rem;
-  }
-  
-  .bucketContainer, .fruitItem {
-    margin: 2px;  
+    font-size: 1.5rem;
   }
 }

@@ -18,4 +18,5 @@ export interface DragDropProps {
   progress?: number;
   onBack?: () => void;
   onComplete?: () => void;
+  isLastLesson?: boolean;
 }

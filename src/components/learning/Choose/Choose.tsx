@@ -3,6 +3,7 @@ import styles from './Choose.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import ProgressBar from '../../ui/ProgressBar/ProgressBar';
+import CongratulationsScreen from '../../shared/CongratulationsScreen';
 
 interface MatchItem {
   id: string;
@@ -35,14 +36,17 @@ const correctMatches: Record<string, string> = {
 
 interface KidsMatchingGameProps {
   onBack?: () => void;
+  onComplete?: () => void;
+  isLastLesson?: boolean;
 }
 
-const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack }) => {
+const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack, onComplete, isLastLesson = false }) => {
   const [connections, setConnections] = useState<Connection[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState<{id: string, x: number, y: number} | null>(null);
   const [dragEnd, setDragEnd] = useState<{x: number, y: number} | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
+  const [showCongratulations, setShowCongratulations] = useState(false);
   const [dragOverTarget, setDragOverTarget] = useState<string | null>(null);
   
   const containerRef = useRef<HTMLDivElement>(null);
@@ -160,18 +164,36 @@ const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack }) => {
   const isAllCorrect = isComplete && connections.every(conn => 
     correctMatches[conn.leftId] === conn.rightId
   );
-
   // Show celebration when all correct
   useEffect(() => {
     if (isAllCorrect) {
       setShowCelebration(true);
-      setTimeout(() => setShowCelebration(false), 3000);
+      setTimeout(() => {
+        setShowCelebration(false);
+        setShowCongratulations(true);
+      }, 2000);
     }
   }, [isAllCorrect]);
+
+  useEffect(() => {
+    if (isAllCorrect && onComplete) {
+      onComplete();
+    }
+  }, [isAllCorrect, onComplete]);
+
+  const handleCongratulationsNext = () => {
+    if (onComplete) {
+      onComplete();
+    } else {
+      // Reset the game if no onComplete handler
+      handleReset();
+    }
+  };
 
   const handleReset = () => {
     setConnections([]);
     setShowCelebration(false);
+    setShowCongratulations(false);
   };
 
   const removeConnection = (leftId: string) => {
@@ -370,13 +392,18 @@ const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack }) => {
 
         {/* Instructions */}
         <div className={styles.chooseInstructions}>
-          <p>
-            <strong>Tip:</strong> Drag from the left boxes to the right boxes to make connections!
+          <p>            <strong>Tip:</strong> Drag from the left boxes to the right boxes to make connections!
           </p>
           <p>
             Click the ✕ button to remove a connection
           </p>
-        </div>
+        </div>        <CongratulationsScreen
+          isVisible={showCongratulations}
+          message="Great job! You matched everything correctly!"
+          buttonText={isLastLesson ? "Finish" : "Next"}
+          onButtonClick={handleCongratulationsNext}
+          showStars={true}
+        />
       </div>
     </div>
   );

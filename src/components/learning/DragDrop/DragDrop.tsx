@@ -8,6 +8,7 @@ import { DragDropProps } from './types';
 import styles from './dragdrop.module.css';
 import Image from 'next/image';
 import Confetti from '../../shared/Confetti/Confetti';
+import CongratulationsScreen from '../../shared/CongratulationsScreen';
 
 interface DragItem {
   id: string;
@@ -27,7 +28,8 @@ export const DragDrop: React.FC<DragDropProps> = ({
   speakText,
   progress = 0,
   onBack,
-  onComplete
+  onComplete,
+  isLastLesson = false
 }) => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [dragItems, setDragItems] = useState<DragItem[]>(
@@ -43,6 +45,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
   const [isCheckingAnswers, setIsCheckingAnswers] = useState(false);
   const [allCompleted, setAllCompleted] = useState(false);
   const [showSnackbar, setShowSnackbar] = useState(false);
+  const [showCongratulations, setShowCongratulations] = useState(false);
 
   useEffect(() => {
     const initialDropped: Record<string, DragItem[]> = {};
@@ -142,6 +145,28 @@ export const DragDrop: React.FC<DragDropProps> = ({
     setAllCompleted(false);
   };
 
+  const handleCongratulationsNext = () => {
+    if (onComplete) {
+      onComplete();
+    } else {
+      // Reset the game if no onComplete handler
+      setShowCongratulations(false);
+      setAllCompleted(false);
+      setDragItems(items.map((item) => ({
+        ...item,
+        placed: false,
+        targetId: '',
+        text: item.text || item.content || '',
+      })));
+      const resetDropped: Record<string, DragItem[]> = {};
+      targets.forEach((target) => {
+        resetDropped[target.id] = [];
+      });
+      setDroppedItems(resetDropped);
+      setFeedback({ show: false, correct: false, message: '' });
+    }
+  };
+
   const handleContinueButton = () => {
     const placedItems = dragItems.filter((i) => i.placed);
     const allItemsPlaced = placedItems.length === dragItems.length;
@@ -154,11 +179,13 @@ export const DragDrop: React.FC<DragDropProps> = ({
         allCorrect = false;
         break;
       }
-    }
-    if (allCorrect) {
+    }    if (allCorrect) {
       setFeedback({ show: true, correct: true, message: 'Great job! All items are correctly sorted!' });
       setAllCompleted(true);
-      if (onComplete) onComplete();
+      // Show congratulations screen after a short delay
+      setTimeout(() => {
+        setShowCongratulations(true);
+      }, 1000);
     } else {
       setFeedback({ show: true, correct: false, message: 'Some items are in the wrong category. Try again!' });
       // Reset after a short delay
@@ -331,7 +358,15 @@ export const DragDrop: React.FC<DragDropProps> = ({
             Continue <FontAwesomeIcon icon={faArrowRight} />
           </button>
         )}
-      </div>
+      </div>      {showCongratulations && (
+        <CongratulationsScreen
+          isVisible={showCongratulations}
+          message="You've completed the activity!"
+          buttonText={isLastLesson ? "Finish" : "Next"}
+          onButtonClick={handleCongratulationsNext}
+          showStars={true}
+        />
+      )}
     </div>
   );
 };

@@ -19,5 +19,6 @@ export interface SequenceMatcherProps {
   correctOrder?: string[]; // Made optional with default
   onComplete?: () => void;
   onIncorrectAttempt?: () => void;
+  isLastLesson?: boolean;
   // Potentially props for audio, progress, back button like in BucketMatch
 }

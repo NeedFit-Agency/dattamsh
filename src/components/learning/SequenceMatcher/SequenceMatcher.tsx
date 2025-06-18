@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styles from './SequenceMatcher.module.css';
 import { SequenceMatcherProps, DraggableItem } from './types';
+import CongratulationsScreen from '../../shared/CongratulationsScreen';
 
 const SequenceMatcher: React.FC<SequenceMatcherProps> = ({ 
   title = 'Arrange the Steps in the Correct Order!',
@@ -8,12 +9,14 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   dropZoneCount = 4,
   correctOrder = [],
   onComplete,
-  onIncorrectAttempt
+  onIncorrectAttempt,
+  isLastLesson = false
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [placedItems, setPlacedItems] = useState<{[zoneIndex: number]: DraggableItem}>({});
   const [feedback, setFeedback] = useState<{ type: 'correct' | 'incorrect' | null, message: string }>({ type: null, message: '' });
   const [showTryAgain, setShowTryAgain] = useState(false);
+  const [showCongratulations, setShowCongratulations] = useState(false);
   const draggedElementRef = useRef<HTMLElement | null>(null);
 
   // Get items that are not yet placed in drop zones
@@ -123,14 +126,13 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         zone.classList.add(styles.slotIncorrect);
         isAllCorrect = false;
       }
-    });
-
-    if (isAllCorrect) {
+    });    if (isAllCorrect) {
       setFeedback({ type: 'correct', message: 'Perfect! You got it right!' });
       setShowTryAgain(true);
-      if (onComplete) {
-        setTimeout(() => onComplete(), 1500);
-      }
+      // Show congratulations screen after a short delay
+      setTimeout(() => {
+        setShowCongratulations(true);
+      }, 1000);
     } else {
       setFeedback({ type: 'incorrect', message: 'Not quite, check the highlighted steps.' });
       setShowTryAgain(true);
@@ -140,11 +142,21 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     }
   };
 
+  const handleCongratulationsNext = () => {
+    if (onComplete) {
+      onComplete();
+    } else {
+      // Reset the game if no onComplete handler
+      resetGame();
+    }
+  };
+
   // Reset Game Logic
   const resetGame = () => {
     setPlacedItems({});
     setFeedback({ type: null, message: '' });
     setShowTryAgain(false);
+    setShowCongratulations(false);
     
     // Clear visual feedback
     const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
@@ -309,7 +321,15 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
           style={{ display: showTryAgain ? 'inline-flex' : 'none' }}
         >
           Try Again
-        </button>
+        </button>        {showCongratulations && (
+          <CongratulationsScreen 
+            isVisible={showCongratulations}
+            message="You've arranged the steps in the correct order!"
+            buttonText={isLastLesson ? "Finish" : "Next"}
+            onButtonClick={handleCongratulationsNext}
+            showStars={true}
+          />
+        )}
       </div>
     </div>
   );

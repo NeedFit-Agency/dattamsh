@@ -38,6 +38,7 @@ export interface BucketMatchProps {
   tryAgainMessage?: string;          // Message shown when an item is incorrectly placed
   resetLabel?: string;               // Label for the reset button
   playAgainLabel?: string;           // Label for the play again button
+  isLastLesson?: boolean;            // Whether this is the last lesson in the chapter
 }
 
 // Defines the structure for feedback messages (if needed separately from component state).

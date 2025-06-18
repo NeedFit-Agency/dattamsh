@@ -6,10 +6,12 @@ import styles from './bucketmatch.module.css';
 import { itemSvgMap, BasketSvg } from './ItemSvgs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import CongratulationsScreen from '../../shared/CongratulationsScreen';
 
 // Helper to get the SVG for a fruit based on its type/color
 const getFruitSvg = (itemType: string, imageUrl?: string) => {
   if (imageUrl) {
+
     return <img src={imageUrl} alt={itemType} style={{width: '100%', height: '100%', objectFit: 'contain'}} />;
   }
   
@@ -42,12 +44,14 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   correctMessage = 'Correct!',
   tryAgainMessage = 'Try Again!',
   resetLabel = 'Reset Game',
-  playAgainLabel = 'Play Again'
+  playAgainLabel = 'Play Again',
+  isLastLesson = false
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   // Store item id and its target bucket id for items placed in buckets
   const [placedItems, setPlacedItems] = useState<{[itemId: string]: string}>({});
   const [feedback, setFeedback] = useState<{ type: 'correct' | 'incorrect' | null, bucketId?: string }>({ type: null });
+  const [showCongratulations, setShowCongratulations] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const allItemsCount = items.length;
@@ -157,8 +161,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         }, 5000);
       }, i * 150); // Stagger the confetti creation
     }
-  };
-  useEffect(() => {
+  };  useEffect(() => {
     if (allItemsMatched) {
       setFeedback({ type: 'correct' }); // General success feedback
       createConfetti(); // Create confetti celebration
@@ -169,18 +172,27 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         audioRef.current.play().catch(e => console.log("Success audio play failed:", e));
       }
       
-      if (onComplete) {
-        setTimeout(() => {
-          onComplete();
-        }, 2000); // Delay completion call slightly for feedback visibility
-      }
+      // Show congratulations screen after a short delay
+      setTimeout(() => {
+        setShowCongratulations(true);
+      }, 1000);
     }
   }, [allItemsMatched, onComplete]);
+  const handleCongratulationsNext = () => {
+    if (onComplete) {
+      onComplete();
+    } else {
+      // If no onComplete handler, reset the game
+      handleReset();
+    }
+  };
+
   const handleReset = () => {
     // Reset state
     setPlacedItems({});
     setFeedback({ type: null });
     setDraggedItemId(null);
+    setShowCongratulations(false);
     
     // Remove all visual classes
     document.querySelectorAll(`.${styles.basketDropzone}`).forEach(el => {
@@ -237,8 +249,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       
       <div className={styles.worksheetCard}>
         {instruction && <p className={styles.instruction}>{instruction}</p>}        <div className={styles.matchArea}>
-          <div className={styles.basketsContainer}>
-            {/* Fruits Items */}
+          {/* Fruits Section - Top */}
+          <div className={styles.fruitsContainer}>
             {items.map((item) => (
               <div 
                 key={item.id} 
@@ -260,8 +272,10 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                 <p className={styles.colorName}>{item.text || item.type.charAt(0).toUpperCase() + item.type.slice(1)}</p>
               </div>
             ))}
-            
-            {/* Bucket Items in the same container */}
+          </div>
+          
+          {/* Buckets Section - Bottom */}
+          <div className={styles.basketsContainer}>
             {buckets.map((bucket) => {
               const isCorrectlyFilled = Object.entries(placedItems).some(([itemId, bId]) => 
                 bId === bucket.id && items.find(i => i.id === itemId)?.type === bucket.type
@@ -307,11 +321,17 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
             id="reset-button"
             className={styles.resetButton}
             onClick={handleReset}
-            style={{ display: (matchedItemsCount > 0 || allItemsMatched) ? 'block' : 'none' }}
+            style={{ display: (matchedItemsCount > 0 || allItemsMatched) && !showCongratulations ? 'block' : 'none' }}
           >
             {allItemsMatched ? playAgainLabel : resetLabel}
           </button>
-        )}
+        )}        <CongratulationsScreen
+          isVisible={showCongratulations}
+          message={successMessage}
+          buttonText={isLastLesson ? "Finish" : "Next"}
+          onButtonClick={handleCongratulationsNext}
+          showStars={true}
+        />
       </div>
     </div>
   );

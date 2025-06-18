@@ -17,6 +17,7 @@ export interface WhoAmIProps {
   mascot?: React.ReactNode; // Optional custom mascot
   buttonTextWhenCorrect?: string; // Text to display on the button when answer is correct
   buttonTextWhenIncorrect?: string; // Text to display on the button when answer is incorrect
+  isLastLesson?: boolean; // Whether this is the last lesson in the chapter
 }
 
 const DefaultMascot = () => (
@@ -33,12 +34,13 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   mascot = <DefaultMascot />,
   buttonTextWhenCorrect = "Next",
   buttonTextWhenIncorrect = "Try Again",
+  isLastLesson = false,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [showWinScreen, setShowWinScreen] = useState(false);
   const [winScreenMessage, setWinScreenMessage] = useState("YOU DID IT!");
-  const [buttonText, setButtonText] = useState("Next");
+  const [buttonText, setButtonText] = useState(isLastLesson ? "Finish" : buttonTextWhenCorrect);
 
   const correctSoundRef = useRef<HTMLAudioElement>(null);
   const incorrectSoundRef = useRef<HTMLAudioElement>(null);
@@ -61,7 +63,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (optionId === correctAnswerId) {
       correctSoundRef.current?.play().catch(console.error);
       setWinScreenMessage("YOU DID IT!");
-      setButtonText(buttonTextWhenCorrect);
+      setButtonText(isLastLesson ? "Finish" : buttonTextWhenCorrect);
       setTimeout(() => {
         setShowWinScreen(true);
         if (onComplete) onComplete();
