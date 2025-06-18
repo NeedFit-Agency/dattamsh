@@ -321,11 +321,10 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
           style={{ display: showTryAgain ? 'inline-flex' : 'none' }}
         >
           Try Again
-        </button>        {showCongratulations && (
-          <CongratulationsScreen 
+        </button>        {showCongratulations && (          <CongratulationsScreen 
             isVisible={showCongratulations}
             message="You've arranged the steps in the correct order!"
-            buttonText={isLastLesson ? "Finish" : "Next"}
+            buttonText="Finish"
             onButtonClick={handleCongratulationsNext}
             showStars={true}
           />

@@ -234,18 +234,16 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
           )}
         </div>
       )}
-
-      {typeof progress !== 'undefined' && (
-        <div className={styles.progressContainer}>
-          <div className={styles.progressBar}>
-            <div
-              className={styles.progressFill}
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <span className={styles.progressText}>{progress}%</span>
-        </div>
-      )}
+      {/* {typeof progress !== 'undefined' && (
+        // <div className={styles.progressContainer}>
+        //   <div className={styles.progressBar}>
+        //     <div
+        //       className={styles.progressFill}
+        //       style={{ width: `${progress}%` }}
+        //     />
+        //   </div>
+        // </div>
+      )} */}
       
       <div className={styles.worksheetCard}>
         {instruction && <p className={styles.instruction}>{instruction}</p>}        <div className={styles.matchArea}>
@@ -290,6 +288,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                     onDragLeave={handleDragLeave}
                     onDrop={(e) => handleDrop(e, bucket)}
                     data-target-color={bucket.type}
+
                   >
                     <BasketSvg />
                     {/* Show instruction text until an item is dropped */}
@@ -328,7 +327,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         )}        <CongratulationsScreen
           isVisible={showCongratulations}
           message={successMessage}
-          buttonText={isLastLesson ? "Finish" : "Next"}
+          buttonText="Finish"
           onButtonClick={handleCongratulationsNext}
           showStars={true}
         />

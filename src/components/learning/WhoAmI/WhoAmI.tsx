@@ -40,7 +40,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   const [isAnswered, setIsAnswered] = useState(false);
   const [showWinScreen, setShowWinScreen] = useState(false);
   const [winScreenMessage, setWinScreenMessage] = useState("YOU DID IT!");
-  const [buttonText, setButtonText] = useState(isLastLesson ? "Finish" : buttonTextWhenCorrect);
+  const [buttonText, setButtonText] = useState(buttonTextWhenCorrect);
 
   const correctSoundRef = useRef<HTMLAudioElement>(null);
   const incorrectSoundRef = useRef<HTMLAudioElement>(null);

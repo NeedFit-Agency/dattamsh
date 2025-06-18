@@ -362,7 +362,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
         <CongratulationsScreen
           isVisible={showCongratulations}
           message="You've completed the activity!"
-          buttonText={isLastLesson ? "Finish" : "Next"}
+          buttonText="Finish"
           onButtonClick={handleCongratulationsNext}
           showStars={true}
         />

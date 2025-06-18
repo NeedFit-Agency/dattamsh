@@ -400,7 +400,7 @@ const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack, onComplete,
         </div>        <CongratulationsScreen
           isVisible={showCongratulations}
           message="Great job! You matched everything correctly!"
-          buttonText={isLastLesson ? "Finish" : "Next"}
+          buttonText="Finish"
           onButtonClick={handleCongratulationsNext}
           showStars={true}
         />

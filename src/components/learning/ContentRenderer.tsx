@@ -94,6 +94,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
           options={adaptedOptions}
           correctAnswerId={correctOption?.id || whoAmIContent.options[0]?.id}
           onComplete={onComplete}
+          // No useFinishButton for WhoAmI - will use "Next" instead
         />
       );
     }   case 'bucket-match': {

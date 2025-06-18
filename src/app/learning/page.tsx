@@ -291,27 +291,7 @@ function LearningPageContent() {
             onBack={handleBackClick}
             onComplete={handleContinue}
             progress={progress}
-          />
-        </main>
-
-        {currentContent.type !== 'drag-drop' && (
-          <footer className={styles.learningFooter}>
-            <button
-              className={styles.previousButton}
-              onClick={handlePrevious}
-            >
-              <FontAwesomeIcon icon={faArrowLeft} /> Back
-            </button>
-            <button
-              className={continueButtonClass}
-              onClick={handleContinue}
-              disabled={continueButtonDisabled}
-              aria-disabled={continueButtonDisabled}
-            >
-              {continueButtonText} <FontAwesomeIcon icon={faArrowRight} />
-            </button>
-          </footer>
-        )}
+          />        </main>
       </div>
 
       {showExitConfirm && (
