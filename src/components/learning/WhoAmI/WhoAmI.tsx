@@ -37,23 +37,19 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   buttonTextWhenIncorrect = "Try Again",
   isLastLesson = false,
 }) => {  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [isAnswered, setIsAnswered] = useState(false);
-  const [showWinScreen, setShowWinScreen] = useState(false);
+  const [isAnswered, setIsAnswered] = useState(false);  const [showWinScreen, setShowWinScreen] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [winScreenMessage, setWinScreenMessage] = useState("YOU DID IT!");
   const [buttonText, setButtonText] = useState(buttonTextWhenCorrect);
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
+  const [lessonCompleted, setLessonCompleted] = useState(false);
 
   const correctSoundRef = useRef<HTMLAudioElement>(null);
   const incorrectSoundRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     // Preload audio - consider moving audio to public folder and using paths
-    if (typeof Audio !== "undefined") {
-      const correctAudio = new Audio("data:audio/mpeg;base64,UklGRkFvT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YV1vT18BAwZAB1d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3");
-        const incorrectAudio = new Audio("data:audio/mpeg;base64,UklGRkFvT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YV1vT18BAwZAB1d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d");
-        incorrectSoundRef.current = incorrectAudio;
-    }
+ 
   }, []);  const handleOptionClick = (optionId: string) => {
     if (isAnswered) return;
 
@@ -63,6 +59,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (optionId === correctAnswerId) {
       correctSoundRef.current?.play().catch(console.error);
       setIsCorrectAnswer(true);
+      setLessonCompleted(true); // Mark lesson as completed
       setWinScreenMessage("YOU DID IT!");
       setButtonText(isLastLesson ? "Finish" : buttonTextWhenCorrect);
       setTimeout(() => {
@@ -78,21 +75,28 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         if (onIncorrectAttempt) onIncorrectAttempt();
       }, 1200);
     }
-  };
-  const resetGame = () => {
+  };  const resetGame = () => {
     setIsAnswered(false);
     setSelectedAnswer(null);
     setShowWinScreen(false);
     setShowCongratulations(false);
     setIsCorrectAnswer(false);
-  };
-
-  const handleCongratulationsNext = () => {
+    // We don't reset the lessonCompleted flag here to maintain the completion state
+  };const handleCongratulationsNext = () => {
+    // First fully reset component state and hide all UI elements
+    // This is crucial for when this component is reused in the lesson flow
+    setShowCongratulations(false);
+    setIsAnswered(false);
+    setSelectedAnswer(null);
+    setShowWinScreen(false);
+    setIsCorrectAnswer(false);
+    
+    // Then immediately proceed to next lesson
+    // This immediate navigation prevents showing congratulation screen again
     if (onComplete) {
+      setLessonCompleted(false);
+      // The onComplete callback will handle routing to the next lesson's OMI component
       onComplete();
-    } else {
-      // Reset the game if no onComplete handler
-      resetGame();
     }
   };
 
@@ -104,6 +108,17 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     setIsCorrectAnswer(false);
   };
 
+  // Reset state when we detect a new lesson (based on key props changing)
+  useEffect(() => {
+    // Reset all component state when key props change (indicates new lesson)
+    setIsAnswered(false);
+    setSelectedAnswer(null);
+    setShowWinScreen(false);
+    setShowCongratulations(false);
+    setIsCorrectAnswer(false);
+    setLessonCompleted(false);
+  }, [correctAnswerId, riddleText]);
+  
   const getButtonClass = (optionId: string) => {
     if (!isAnswered) return styles.optionButton;
     if (optionId === correctAnswerId) return `${styles.optionButton} ${styles.correct}`;
@@ -153,9 +168,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
               <span>{option.text}</span>
             </button>          ))}
         </div>
-      </div>
-
-      {showCongratulations && (
+      </div>      {showCongratulations && (
         <CongratulationsScreen
           isVisible={showCongratulations}
           message="Great job! You got it right!"
