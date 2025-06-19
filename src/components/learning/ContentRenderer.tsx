@@ -1,9 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import LoadingSpinner from './LoadingSpinner';
 import type { LessonContent } from '../../data/standardsData';
+
+// Add fade transition styles
+const fadeTransitionStyles = {
+  entering: { opacity: 0 },
+  entered: { opacity: 1, transition: 'opacity 0.5s ease-in-out' },
+};
 
 const DragDrop = dynamic(() => import('./DragDrop'), { 
   loading: () => <LoadingSpinner message="Loading drag-drop content..." /> 
@@ -42,39 +48,107 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
   onComplete,
   progress = 0
 }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [prevContentFormat, setPrevContentFormat] = useState<string | null>(null);
+  const [fadeIn, setFadeIn] = useState(false);
+  const [contentKey, setContentKey] = useState(0); // Used to force component re-render with fade effect
+  // Enhanced loading state management
+  useEffect(() => {
+    // Always show loading state on component mount or content change
+    setIsLoading(true);
+    
+    if (!content) {
+      // Even with no content, show loading briefly for consistent UX
+      const timer = setTimeout(() => setIsLoading(false), 1000);
+      return () => clearTimeout(timer);
+    }    // Simulate minimum loading time for better UX
+    const minLoadTime = 1800; // ms - longer loading time for better experience
+    const startTime = Date.now();
+      // Track current timer to clean up properly
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+      setPrevContentFormat(content.format);
+      setContentKey(prev => prev + 1); // Force re-render with new key
+      
+      // Start fade in effect after content has loaded
+      setTimeout(() => setFadeIn(true), 50);
+    }, minLoadTime);
+
+    return () => clearTimeout(loadingTimer);
+  }, [content]); // Only depend on content to prevent unnecessary re-renders
+  if (isLoading) {
+    return (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 1000,
+        backdropFilter: 'blur(5px)', // Adds a nice blur effect
+        WebkitBackdropFilter: 'blur(5px)' // For Safari support
+      }}>
+        <LoadingSpinner 
+          message={`Loading ${content?.format?.replace('-', ' ') || 'learning'} content...`}
+          fullScreen 
+        />
+      </div>
+    );
+  }
   if (!content) {
     return <div>No content available</div>;
   }
 
+  // Create wrapper with fade-in effect
+  const ContentWrapper = ({ children }: { children: React.ReactNode }) => (
+    <div 
+      key={contentKey}
+      style={{
+        opacity: fadeIn ? 1 : 0,
+        transition: 'opacity 0.5s ease-in-out',
+        width: '100%',
+        height: '100%'
+      }}
+    >
+      {children}
+    </div>
+  );
+
   const { format } = content;
 
   // Map content format to corresponding component
-  switch (format) {
-   case 'drag-drop': {
+  switch (format) {   case 'drag-drop': {
       const dndContent = content as import('../../data/standardsData').DragDropSlide;
       return (
-        <DragDrop
-          title={dndContent.title}
-          instruction={dndContent.instruction}
-          items={dndContent.items}
-          targets={dndContent.targets}
-          audioSrc={dndContent.audioSrc}
-          progress={progress}
-          onBack={onBack}
-          onComplete={onComplete}
-        />
+        <ContentWrapper>
+          <DragDrop
+            title={dndContent.title}
+            instruction={dndContent.instruction}
+            items={dndContent.items}
+            targets={dndContent.targets}
+            audioSrc={dndContent.audioSrc}
+            progress={progress}
+            onBack={onBack}
+            onComplete={onComplete}
+          />
+        </ContentWrapper>
       );
-    }
-    case 'sequence-match': {
+    }    case 'sequence-match': {
       const sequenceMatchContent = content as import('../../data/standardsData').SequenceMatchSlide;
       return (
-        <SequenceMatcher
-          title={sequenceMatchContent.title}
-          items={sequenceMatchContent.items}
-          dropZoneCount={sequenceMatchContent.dropZoneCount}
-          correctOrder={sequenceMatchContent.correctOrder}
-          onComplete={onComplete}
-        />
+        <ContentWrapper>
+          <SequenceMatcher
+            title={sequenceMatchContent.title}
+            items={sequenceMatchContent.items}
+            dropZoneCount={sequenceMatchContent.dropZoneCount}
+            correctOrder={sequenceMatchContent.correctOrder}
+            onComplete={onComplete}
+          />
+        </ContentWrapper>
       );
     }    case 'who-am-i': {
       const whoAmIContent = content as import('../../data/standardsData').WhoAmISlide;
@@ -86,39 +160,40 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
           ? <img src={option.imageUrl} alt={option.text} style={{ width: 40, height: 40, objectFit: 'contain' }} />
           : <span>💡</span>
       }));
-      
-      return (
-        <WhoAmI
-          riddleText={whoAmIContent.riddleText}
-          questionText={whoAmIContent.questionText}
-          options={adaptedOptions}
-          correctAnswerId={correctOption?.id || whoAmIContent.options[0]?.id}
-          onComplete={onComplete}
-          // No useFinishButton for WhoAmI - will use "Next" instead
-        />
+        return (
+        <ContentWrapper>
+          <WhoAmI
+            riddleText={whoAmIContent.riddleText}
+            questionText={whoAmIContent.questionText}
+            options={adaptedOptions}
+            correctAnswerId={correctOption?.id || whoAmIContent.options[0]?.id}
+            onComplete={onComplete}
+            // No useFinishButton for WhoAmI - will use "Next" instead
+          />
+        </ContentWrapper>
       );
     }   case 'bucket-match': {
-      const bucketMatchContent = content as import('../../data/standardsData').BucketMatchSlide;
-      return (
-        <BucketMatch
-          title={bucketMatchContent.title}
-          instruction={bucketMatchContent.instruction}
-          items={bucketMatchContent.items}
-          buckets={bucketMatchContent.buckets}
-          audioSrc={bucketMatchContent.audioSrc}
-          progress={progress}
-          onBack={onBack}
-          onComplete={onComplete}
-          successMessage={bucketMatchContent.successMessage}
-          correctMessage={bucketMatchContent.correctMessage}
-          tryAgainMessage={bucketMatchContent.tryAgainMessage}
-          resetLabel={bucketMatchContent.resetLabel}
-          playAgainLabel={bucketMatchContent.playAgainLabel}
-        />
+      const bucketMatchContent = content as import('../../data/standardsData').BucketMatchSlide;      return (
+        <ContentWrapper>
+          <BucketMatch
+            title={bucketMatchContent.title}
+            instruction={bucketMatchContent.instruction}
+            items={bucketMatchContent.items}
+            buckets={bucketMatchContent.buckets}
+            audioSrc={bucketMatchContent.audioSrc}
+            progress={progress}
+            onBack={onBack}
+            onComplete={onComplete}
+            successMessage={bucketMatchContent.successMessage}
+            correctMessage={bucketMatchContent.correctMessage}
+            tryAgainMessage={bucketMatchContent.tryAgainMessage}
+            resetLabel={bucketMatchContent.resetLabel}
+            playAgainLabel={bucketMatchContent.playAgainLabel}
+          />
+        </ContentWrapper>
       );
-    }
-    default:
-      return <UnsupportedFormat format={format} />;
+    }    default:
+      return <ContentWrapper><UnsupportedFormat format={format} /></ContentWrapper>;
   }
 };
 
