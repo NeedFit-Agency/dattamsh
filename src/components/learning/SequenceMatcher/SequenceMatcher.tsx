@@ -237,14 +237,11 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                 data-number={index + 1} /* Add sequence number (1-based) */
                 onDragOver={(e) => handleDragOver(e, index)}
                 onDragLeave={handleDragLeave}
-                onDrop={(e) => handleDrop(e, index)}
-              >
+                onDrop={(e) => handleDrop(e, index)}              >
                 {placedItems[index] && (
                   <div 
                     className={`${styles.stepItem} ${getItemStyleClass(placedItems[index])}`}
-                    draggable="true"
-                    onDragStart={(e) => handleDragStart(e, placedItems[index])}
-                    onDragEnd={handleDragEnd}
+                    draggable="false"
                     data-id={placedItems[index].id}
                     style={{'--item-index': index} as React.CSSProperties}
                   >
@@ -277,7 +274,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             }}
             onDrop={handleDropToDraggableArea}
           >
-            <h3>Available Items</h3>
+            <h3>Available Steps</h3>
             {availableItems.map((item, index) => (
               <div 
                 key={item.id}
@@ -320,13 +317,18 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
           onClick={resetGame}
           style={{ display: showTryAgain ? 'inline-flex' : 'none' }}
         >
-          Try Again
-        </button>        {showCongratulations && (          <CongratulationsScreen 
+          Try Again        </button>
+
+        {showCongratulations && (
+          <CongratulationsScreen 
             isVisible={showCongratulations}
             message="You've arranged the steps in the correct order!"
             buttonText="Finish"
             onButtonClick={handleCongratulationsNext}
             showStars={true}
+            showTryAgain={true}
+            tryAgainText="Try Again"
+            onTryAgainClick={resetGame}
           />
         )}
       </div>

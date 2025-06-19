@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphones, faCheckCircle, faTimesCircle, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faHeadphones, faCheckCircle, faTimesCircle, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { DragDropProps } from './types';
 import styles from './dragdrop.module.css';
 import Image from 'next/image';
@@ -103,7 +103,6 @@ export const DragDrop: React.FC<DragDropProps> = ({
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
-
   const handleDrop = (e: React.DragEvent, targetId: string) => {
     e.preventDefault();
     const itemId = e.dataTransfer.getData('itemId');
@@ -111,13 +110,13 @@ export const DragDrop: React.FC<DragDropProps> = ({
 
     if (!draggedItem || draggedItem.placed) return;
 
-    setDragItems(prev =>
-      prev.map((item) =>
-        item.id === itemId
-          ? { ...item, placed: true, targetId: targetId }
-          : item
-      )
+    const updatedDragItems = dragItems.map((item) =>
+      item.id === itemId
+        ? { ...item, placed: true, targetId: targetId }
+        : item
     );
+
+    setDragItems(updatedDragItems);
 
     setDroppedItems(prev => ({
       ...prev,
@@ -125,6 +124,47 @@ export const DragDrop: React.FC<DragDropProps> = ({
     }));
 
     setFeedback({ show: false, correct: false, message: '' });
+
+    // Check if all items are placed
+    const allItemsPlaced = updatedDragItems.every(item => item.placed);
+    if (allItemsPlaced) {
+      // Check if all items are correctly placed
+      let allCorrect = true;
+      for (const item of updatedDragItems) {
+        const target = targets.find((t) => t.id === item.targetId);
+        if (target && item.type !== target.type) {
+          allCorrect = false;
+          break;
+        }
+      }
+
+      if (allCorrect) {
+        setFeedback({ show: true, correct: true, message: 'Great job! All items are correctly sorted!' });
+        setAllCompleted(true);
+        // Show congratulations screen after a short delay
+        setTimeout(() => {
+          setShowCongratulations(true);
+        }, 1000);
+      } else {
+        setFeedback({ show: true, correct: false, message: 'Some items are in the wrong category. Try again!' });
+        // Reset after a short delay
+        setTimeout(() => {
+          setDragItems(items.map((item) => ({
+            ...item,
+            placed: false,
+            targetId: '',
+            text: item.text || item.content || '',
+          })));
+          const resetDropped: Record<string, DragItem[]> = {};
+          targets.forEach((target) => {
+            resetDropped[target.id] = [];
+          });
+          setDroppedItems(resetDropped);
+          setFeedback({ show: false, correct: false, message: '' });
+          setAllCompleted(false);
+        }, 1500);
+      }
+    }
   };
 
   const handleRemoveItem = (targetId: string, itemId: string) => {
@@ -167,55 +207,25 @@ export const DragDrop: React.FC<DragDropProps> = ({
     }
   };
 
-  const handleContinueButton = () => {
-    const placedItems = dragItems.filter((i) => i.placed);
-    const allItemsPlaced = placedItems.length === dragItems.length;
-    if (!allItemsPlaced) return;
-
-    let allCorrect = true;
-    for (const item of placedItems) {
-      const target = targets.find((t) => t.id === item.targetId);
-      if (target && item.type !== target.type) {
-        allCorrect = false;
-        break;
-      }
-    }    if (allCorrect) {
-      setFeedback({ show: true, correct: true, message: 'Great job! All items are correctly sorted!' });
-      setAllCompleted(true);
-      // Show congratulations screen after a short delay
-      setTimeout(() => {
-        setShowCongratulations(true);
-      }, 1000);
-    } else {
-      setFeedback({ show: true, correct: false, message: 'Some items are in the wrong category. Try again!' });
-      // Reset after a short delay
-      setTimeout(() => {
-        setDragItems(items.map((item) => ({
-          ...item,
-          placed: false,
-          targetId: '',
-          text: item.text || item.content || '',
-        })));
-        const resetDropped: Record<string, DragItem[]> = {};
-        targets.forEach((target) => {
-          resetDropped[target.id] = [];
-        });
-        setDroppedItems(resetDropped);
-        setFeedback({ show: false, correct: false, message: '' });
-        setAllCompleted(false);
-      }, 1500);
-    }
+  // Reset function for Try Again button
+  const handleReset = () => {
+    setShowCongratulations(false);
+    setAllCompleted(false);
+    setDragItems(items.map((item) => ({
+      ...item,
+      placed: false,
+      targetId: '',
+      text: item.text || item.content || '',
+    })));
+    const resetDropped: Record<string, DragItem[]> = {};
+    targets.forEach((target) => {
+      resetDropped[target.id] = [];
+    });
+    setDroppedItems(resetDropped);    setFeedback({ show: false, correct: false, message: '' });
   };
 
   return (
     <div className={styles.container}>
-      {/* Back Button */}
-      {onBack && (
-        <button className={styles.chooseBackButton} onClick={onBack} aria-label="Go back">
-          <FontAwesomeIcon icon={faArrowLeft} />
-          <span className={styles.backText}>Back</span>
-        </button>
-      )}
       {/* Progress indicator */}
       {typeof progress === 'number' && (
         <div className={styles.progressContainer}>
@@ -338,26 +348,6 @@ export const DragDrop: React.FC<DragDropProps> = ({
 
       <div className={styles.activityControls}>
         {/* No check/reset buttons, logic is in Continue below */}
-      </div>
-
-      <div className={styles.navigationFooter}>
-        {onBack && (
-          <button
-            className={styles.navigationButton}
-            onClick={onBack}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} /> Back
-          </button>
-        )}
-        {onComplete && (
-          <button
-            className={`${styles.navigationButton} ${styles.continueButton} ${dragItems.filter((item) => !item.placed).length === 0 ? styles.enabledButton : styles.disabledButton}`}
-            onClick={handleContinueButton}
-            disabled={dragItems.filter((item) => !item.placed).length !== 0}
-          >
-            Continue <FontAwesomeIcon icon={faArrowRight} />
-          </button>
-        )}
       </div>      {showCongratulations && (
         <CongratulationsScreen
           isVisible={showCongratulations}
@@ -365,6 +355,9 @@ export const DragDrop: React.FC<DragDropProps> = ({
           buttonText="Finish"
           onButtonClick={handleCongratulationsNext}
           showStars={true}
+          showTryAgain={true}
+          tryAgainText="Try Again"
+          onTryAgainClick={handleReset}
         />
       )}
     </div>

@@ -40,11 +40,10 @@
     background-color: rgba(255, 255, 255, 0.9);
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
     border-radius: clamp(20px, 3vw, 30px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(135, 206, 250, 0.2);
-    padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
-    width: 95%;
-    max-width: min(90vw, 1200px);
-    max-height: calc(90vh - 80px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(135, 206, 250, 0.2);    padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
+    width: 98%; /* Increased from 95% to use more screen space */
+    max-width: min(95vw, 1400px); /* Increased from 1200px to 1400px */
+    max-height: calc(95vh - 60px); /* Increased from 90vh to 95vh */
     text-align: center;
     position: relative;
     margin: 0 auto;
@@ -199,7 +198,7 @@
 /* --- Main Content Container --- */
 .mainContent {
     display: flex;
-    gap: clamp(20px, 4vw, 40px);
+    gap: clamp(30px, 5vw, 60px); /* Increased gap from 20px-40px to 30px-60px */
     align-items: flex-start;
     justify-content: center;
     margin-bottom: clamp(20px, 3vh, 30px);
@@ -208,7 +207,7 @@
     overflow: hidden;
     width: 100%;
     position: relative;
-    padding: clamp(5px, 1vh, 10px);
+    padding: clamp(10px, 2vh, 20px); /* Increased padding from 5px-10px to 10px-20px */
     animation: contentFadeIn 0.8s ease-in-out;
 }
 
@@ -227,14 +226,14 @@
 .dropTargets {
     display: flex;
     flex-direction: column;
-    gap: clamp(10px, 1.8vh, 16px);
-    flex: 1;
-    max-width: clamp(220px, 40%, 320px);
+    gap: clamp(12px, 2vh, 18px); /* Increased gap */
+    flex: 1.2; /* Increased from 1 to 1.2 to take more space */
+    max-width: clamp(350px, 55%, 500px); /* Significantly increased from 220px-320px to 350px-500px */
     background-color: rgba(250, 246, 239, 0.85);
     background-image: linear-gradient(to bottom, rgba(255, 250, 245, 0.9), rgba(246, 236, 220, 0.8));
     border: 2px solid #bbddff;
     border-radius: clamp(16px, 2.5vw, 24px);
-    padding: clamp(12px, 2.2vh, 22px);
+    padding: clamp(18px, 2.5vh, 28px); /* Increased padding */
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), inset 0 -4px 0 rgba(0, 0, 0, 0.05);
     position: relative;
     transform-style: preserve-3d;
@@ -273,7 +272,7 @@
 }
 
 .dropZone {
-    height: clamp(70px, 10vh, 85px); /* Increased height for better visibility */
+    height: clamp(90px, 12vh, 110px); /* Increased height to accommodate larger icons and content */
     background-color: rgba(255, 255, 255, 0.9);
     border: 4px dashed #bbddff; /* Made border thicker */
     border-radius: clamp(15px, 2.5vw, 22px); /* Increased border radius */
@@ -281,12 +280,15 @@
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: clamp(6px, 1.2vh, 12px);
-    padding-left: 50px; /* Increased padding for the number */
+    justify-content: flex-start; /* Changed from center to flex-start for better left alignment */
+    padding: clamp(8px, 1.5vh, 15px); /* Increased padding for better content spacing */
+    padding-left: 55px; /* Increased padding for the number to accommodate larger content */
+    padding-right: clamp(15px, 2vh, 25px); /* Added right padding for better spacing */
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.05), 0 6px 0 rgba(0, 0, 0, 0.03); /* Enhanced shadow */
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* Changed to visible to ensure content doesn't get cut off */
+    min-width: clamp(280px, 35vw, 450px); /* Significantly increased minimum width */
+    width: 100%; /* Take full width of container */
 }
 
 .dropZone::before {
@@ -307,17 +309,17 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 45px; /* Increased width for larger numbers */
+    width: 50px; /* Increased width for larger numbers */
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #bbddff;
     color: #1a73e8;
     font-weight: bold;
-    font-size: 24px; /* Increased font size */
+    font-size: 26px; /* Increased font size */
     border-right: 3px solid rgba(187, 221, 255, 0.5); /* Thicker border */
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 12px; /* Increased border radius */
+    border-bottom-left-radius: 12px;
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     box-shadow: inset -3px 0 6px rgba(255, 255, 255, 0.5);
 }
@@ -334,7 +336,7 @@
 
 /* Ensure number remains visible when items are placed */
 .dropZone:has(.stepItem) {
-    padding-left: 50px; /* Updated to match the new padding from .dropZone */
+    padding-left: 55px; /* Updated to match the new padding from .dropZone */
 }
 
 @keyframes pulse {
@@ -352,11 +354,11 @@
 .draggableItems {
     display: flex;
     flex-direction: column;
-    gap: clamp(10px, 1.8vh, 16px);
-    min-height: clamp(170px, 28vh, 280px);
-    flex: 1;
-    max-width: clamp(220px, 40%, 320px);
-    padding: clamp(15px, 2.2vh, 22px);
+    gap: clamp(12px, 2vh, 18px); /* Increased gap to match dropTargets */
+    min-height: clamp(180px, 30vh, 300px); /* Increased minimum height */
+    flex: 1.2; /* Increased from 1 to 1.2 to match dropTargets */
+    max-width: clamp(500px, 75%, 650px); /* Increased from 400px-500px to 500px-650px */
+    padding: clamp(18px, 2.5vh, 28px); /* Increased padding to match dropTargets */
     background-color: #f0f8ff;
     background-image: linear-gradient(to bottom, rgba(240, 248, 255, 0.9), rgba(230, 240, 250, 0.8));
     border-radius: clamp(16px, 2.5vw, 24px);
@@ -476,13 +478,13 @@
 }
 
 .stepIcon {
-    width: clamp(50px, 7vw, 60px); /* Significantly increased icon container size */
-    height: clamp(50px, 7vw, 60px);
-    border-radius: 14px; /* Increased border radius */
+    width: clamp(60px, 8vw, 75px); /* Further increased icon container size */
+    height: clamp(60px, 8vw, 75px);
+    border-radius: 16px; /* Increased border radius */
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-right: clamp(14px, 2vw, 22px); /* Increased margin */
+    margin-right: clamp(16px, 2.5vw, 24px); /* Increased margin */
     box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Enhanced shadow */
     transition: transform 0.3s;
     position: relative;
@@ -494,8 +496,8 @@
 }
 
 .stepIcon svg {
-    width: clamp(30px, 5vw, 38px); /* Significantly increased SVG size */
-    height: clamp(30px, 5vw, 38px);
+    width: clamp(36px, 6vw, 45px); /* Further increased SVG size */
+    height: clamp(36px, 6vw, 45px);
     stroke-width: 2px; /* Added to make SVG paths more visible */
 }
 
@@ -785,9 +787,8 @@
     .stepItem {
         padding: clamp(6px, 0.8vh, 10px);
     }
-    
-    .dropZone {
-        height: clamp(45px, 6.5vh, 60px);
+      .dropZone {
+        height: clamp(65px, 8vh, 80px); /* Increased height for tablet view */
     }
     
     .feedbackMessage {
@@ -823,10 +824,9 @@
         padding: clamp(5px, 0.8vh, 8px) clamp(8px, 1.2vw, 15px);
         margin-bottom: clamp(8px, 1.5vh, 12px);
     }
-    
-    .stepIcon {
-        width: clamp(30px, 5vw, 40px);
-        height: clamp(30px, 5vw, 40px);
+      .stepIcon {
+        width: clamp(40px, 6vw, 50px);
+        height: clamp(40px, 6vw, 50px);
     }
     
     .actionButton {
@@ -846,13 +846,12 @@
         flex-direction: column;
         gap: clamp(20px, 4vh, 30px);
         align-items: center;
-    }
-
-    .dropTargets,
+    }    .dropTargets,
     .draggableItems {
         max-width: 100%;
         width: 100%;
         transform: perspective(1000px) rotateY(0deg);
+        flex: 1; /* Reset flex for tablet view */
     }
 
     .title {
@@ -914,32 +913,30 @@
 
     .draggableItems {
         padding: 12px;
-        min-height: 140px;
-    }    .dropZone {
-        height: 60px; /* Increased height for mobile view */
-        padding-left: 40px; /* Adjusted padding for number */
+        min-height: 140px;    }    .dropZone {
+        height: 75px; /* Increased height for mobile view to accommodate larger icons */
+        padding-left: 45px; /* Adjusted padding for number */
+        min-width: 180px; /* Added minimum width for mobile */
     }
     
     .dropZone::after {
-        width: 35px; /* Adjusted width for number label */
-        font-size: 20px; /* Still keeping number visible */
+        width: 40px; /* Adjusted width for number label */
+        font-size: 22px; /* Increased font size for better visibility */
     }
 
     .stepItem {
         font-size: 1rem; /* Slightly larger font for better readability */
         padding: 8px 10px; /* Increased padding */
         min-width: 140px; /* Ensure minimum width */
-    }
-
-    .stepIcon {
-        width: 40px; /* Larger icon container */
-        height: 40px;
-        margin-right: 10px;
+    }    .stepIcon {
+        width: 50px; /* Larger icon container */
+        height: 50px;
+        margin-right: 12px;
     }
 
     .stepIcon svg {
-        width: 24px; /* Larger SVG icons */
-        height: 24px;
+        width: 30px; /* Larger SVG icons */
+        height: 30px;
     }
 
     .actionButton {
@@ -1180,4 +1177,20 @@
   .mascotMessageMobile {
     display: none;
   }
+}
+
+/* Placed items styling - non-draggable */
+.dropZone .stepItem {
+    cursor: default !important; /* Override draggable cursor */
+    user-select: none; /* Prevent text selection */
+    opacity: 0.9; /* Slightly muted to show they're placed */
+}
+
+.dropZone .stepItem:hover {
+    transform: none !important; /* Disable hover transform for placed items */
+    cursor: default !important;
+}
+
+.dropZone .stepItem .stepIcon:hover {
+    transform: none !important; /* Disable icon hover transform for placed items */
 }

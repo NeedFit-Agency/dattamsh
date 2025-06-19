@@ -323,13 +323,17 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
             style={{ display: (matchedItemsCount > 0 || allItemsMatched) && !showCongratulations ? 'block' : 'none' }}
           >
             {allItemsMatched ? playAgainLabel : resetLabel}
-          </button>
-        )}        <CongratulationsScreen
+          </button>        )}
+
+        <CongratulationsScreen
           isVisible={showCongratulations}
           message={successMessage}
           buttonText="Finish"
           onButtonClick={handleCongratulationsNext}
           showStars={true}
+          showTryAgain={true}
+          tryAgainText="Try Again"
+          onTryAgainClick={handleReset}
         />
       </div>
     </div>

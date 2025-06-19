@@ -8,6 +8,9 @@ interface CongratulationsScreenProps {
   onButtonClick: () => void;
   mascot?: React.ReactNode;
   showStars?: boolean;
+  showTryAgain?: boolean;
+  tryAgainText?: string;
+  onTryAgainClick?: () => void;
 }
 
 const DefaultMascot = () => (
@@ -27,7 +30,10 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   buttonText = "Next",
   onButtonClick,
   mascot = <DefaultMascot />,
-  showStars = true
+  showStars = true,
+  showTryAgain = false,
+  tryAgainText = "Try Again",
+  onTryAgainClick
 }) => {
   if (!isVisible) return null;
 
@@ -44,14 +50,20 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
           <div className={`${styles.star} ${styles.s5}`}>⭐</div>
         </div>
       )}
-      
-      <div className={styles.winMascot}>
+        <div className={styles.winMascot}>
         {mascot}
       </div>
       
-      <button className={styles.playAgainBtn} onClick={onButtonClick}>
-        {buttonText}
-      </button>
+      <div className={styles.buttonContainer}>
+        {showTryAgain && onTryAgainClick && (
+          <button className={`${styles.playAgainBtn} ${styles.tryAgainBtn}`} onClick={onTryAgainClick}>
+            {tryAgainText}
+          </button>
+        )}
+        <button className={styles.playAgainBtn} onClick={onButtonClick}>
+          {buttonText}
+        </button>
+      </div>
     </div>
   );
 };

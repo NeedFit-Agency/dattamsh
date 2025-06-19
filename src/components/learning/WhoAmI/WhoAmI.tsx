@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './WhoAmI.module.css';
+import CongratulationsScreen from '../../shared/CongratulationsScreen';
 
 interface Option {
   id: string;
@@ -35,12 +36,13 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   buttonTextWhenCorrect = "Next",
   buttonTextWhenIncorrect = "Try Again",
   isLastLesson = false,
-}) => {
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+}) => {  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [showWinScreen, setShowWinScreen] = useState(false);
+  const [showCongratulations, setShowCongratulations] = useState(false);
   const [winScreenMessage, setWinScreenMessage] = useState("YOU DID IT!");
   const [buttonText, setButtonText] = useState(buttonTextWhenCorrect);
+  const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
 
   const correctSoundRef = useRef<HTMLAudioElement>(null);
   const incorrectSoundRef = useRef<HTMLAudioElement>(null);
@@ -48,9 +50,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   useEffect(() => {
     // Preload audio - consider moving audio to public folder and using paths
     if (typeof Audio !== "undefined") {
-        const correctAudio = new Audio("data:audio/mpeg;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVhvT18IAgEBDQRLRw0QDhVOTE9PEA4ADw8OEQ4OFA8PDhQODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4QDg8ODhEOEA4PDw4RDg4_TTE=");
-        correctSoundRef.current = correctAudio;
-
+      const correctAudio = new Audio("data:audio/mpeg;base64,UklGRkFvT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YV1vT18BAwZAB1d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3");
         const incorrectAudio = new Audio("data:audio/mpeg;base64,UklGRkFvT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YV1vT18BAwZAB1d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d/f3d/f3Z/f3d/f3Z/f3d/f3Z/f3d");
         incorrectSoundRef.current = incorrectAudio;
     }
@@ -62,14 +62,15 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
 
     if (optionId === correctAnswerId) {
       correctSoundRef.current?.play().catch(console.error);
+      setIsCorrectAnswer(true);
       setWinScreenMessage("YOU DID IT!");
       setButtonText(isLastLesson ? "Finish" : buttonTextWhenCorrect);
       setTimeout(() => {
-        setShowWinScreen(true);
-        if (onComplete) onComplete();
+        setShowCongratulations(true);
       }, 800);
     } else {
       incorrectSoundRef.current?.play().catch(console.error);
+      setIsCorrectAnswer(false);
       setWinScreenMessage("TRY AGAIN!");
       setButtonText(buttonTextWhenIncorrect);
       setTimeout(() => {
@@ -78,11 +79,29 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       }, 1200);
     }
   };
-
   const resetGame = () => {
     setIsAnswered(false);
     setSelectedAnswer(null);
     setShowWinScreen(false);
+    setShowCongratulations(false);
+    setIsCorrectAnswer(false);
+  };
+
+  const handleCongratulationsNext = () => {
+    if (onComplete) {
+      onComplete();
+    } else {
+      // Reset the game if no onComplete handler
+      resetGame();
+    }
+  };
+
+  const handleReset = () => {
+    setIsAnswered(false);
+    setSelectedAnswer(null);
+    setShowWinScreen(false);
+    setShowCongratulations(false);
+    setIsCorrectAnswer(false);
   };
 
   const getButtonClass = (optionId: string) => {
@@ -91,8 +110,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (optionId === selectedAnswer && optionId !== correctAnswerId) return `${styles.optionButton} ${styles.incorrect}`;
     return styles.optionButton;
   };  return (
-    <div className={styles.container}>
-      <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
+    <div className={styles.container}>      <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
         <span className={styles.gearIcon}>⚙️</span>
         
         {showWinScreen && (
@@ -107,7 +125,8 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
             </div>
             <div className={styles.winMascot}>
               {mascot}
-            </div>            <button className={styles.playAgainBtn} onClick={resetGame}>
+            </div>
+            <button className={styles.playAgainBtn} onClick={resetGame}>
               {buttonText}
             </button>
           </div>
@@ -132,10 +151,23 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
             >
               <div className={styles.optionIcon}>{option.icon}</div>
               <span>{option.text}</span>
-            </button>
-          ))}
+            </button>          ))}
         </div>
       </div>
+
+      {showCongratulations && (
+        <CongratulationsScreen
+          isVisible={showCongratulations}
+          message="Great job! You got it right!"
+          buttonText={isLastLesson ? "Finish" : "Next"}
+          onButtonClick={handleCongratulationsNext}
+          showStars={true}
+          showTryAgain={true}
+          tryAgainText="Try Again"
+          onTryAgainClick={handleReset}
+          mascot={mascot}
+        />
+      )}
     </div>
   );
 };

@@ -396,13 +396,17 @@ const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack, onComplete,
           </p>
           <p>
             Click the ✕ button to remove a connection
-          </p>
-        </div>        <CongratulationsScreen
+          </p>        </div>
+
+        <CongratulationsScreen
           isVisible={showCongratulations}
           message="Great job! You matched everything correctly!"
           buttonText="Finish"
           onButtonClick={handleCongratulationsNext}
           showStars={true}
+          showTryAgain={true}
+          tryAgainText="Try Again"
+          onTryAgainClick={handleReset}
         />
       </div>
     </div>
