@@ -1,0 +1,68 @@
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Power supply switch icon -->
+  <defs>
+    <linearGradient id="switchGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFC107;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8F00;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#00000040"/>
+    </filter>
+  </defs>
+  
+  <!-- Power supply unit -->
+  <rect x="15" y="30" width="50" height="25" rx="3" ry="3" 
+        fill="#616161" 
+        stroke="#424242" 
+        stroke-width="2" 
+        filter="url(#shadow)"/>
+  
+  <!-- Power supply fan grille -->
+  <circle cx="40" cy="42" r="8" 
+          fill="none" 
+          stroke="#333333" 
+          stroke-width="1"/>
+  <circle cx="40" cy="42" r="5" 
+          fill="none" 
+          stroke="#333333" 
+          stroke-width="0.5"/>
+  <circle cx="40" cy="42" r="2" 
+          fill="#333333"/>
+  
+  <!-- Power cord -->
+  <path d="M 65 42 Q 70 42 70 37 Q 70 32 65 32" 
+        fill="none" 
+        stroke="#212121" 
+        stroke-width="3" 
+        stroke-linecap="round"/>
+  
+  <!-- Power switch (highlighted) -->
+  <rect x="20" y="35" width="8" height="4" rx="2" ry="2" 
+        fill="url(#switchGrad)" 
+        stroke="#FF6F00" 
+        stroke-width="1"/>
+  
+  <!-- Switch position indicator -->
+  <rect x="21" y="36" width="2" height="2" rx="1" ry="1" 
+        fill="#ffffff">
+    <animate attributeName="x" values="21;25;21" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- ON/OFF labels -->
+  <text x="22" y="33" 
+        font-family="Arial, sans-serif" 
+        font-size="4" 
+        font-weight="bold" 
+        fill="#ffffff">ON</text>
+  <text x="22" y="47" 
+        font-family="Arial, sans-serif" 
+        font-size="4" 
+        font-weight="bold" 
+        fill="#ffffff">OFF</text>
+  
+  <!-- Action indicator -->
+  <path d="M 30 25 L 35 20 L 32 20 L 32 15 L 30 15 L 30 20 L 27 20 Z" 
+        fill="#FFC107">
+    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+  </path>
+</svg>

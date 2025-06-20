@@ -183,43 +183,37 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
       default:
         return styles.stepOpen; // Default style
     }
-  };
-
-  const getItemIcon = (item: DraggableItem) => {
+  };  const getItemIcon = (item: DraggableItem) => {
     switch (item.id) {
-      case 'step-open':
-      case 'open':
+      case 'step-1': // Save your work
         return (
-          <svg viewBox="0 0 24 24">
-            <path d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.9-2-2-2h-8l-2-2z"></path>
-          </svg>
+          <img src="/images/save-work.svg" alt="Save" className={styles.imageIcon} />
         );
-      case 'step-start':
-      case 'start':
+      case 'step-2': // Open the Start menu
         return (
-          <svg fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5"></path>
-          </svg>
+          <img src="/images/start-menu.svg" alt="Start Menu" className={styles.imageIcon} />
         );
-      case 'step-type':
-      case 'type':
+      case 'step-3': // Click on the power button
         return (
-          <svg fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"></path>
-          </svg>
+          <img src="/images/power-button.svg" alt="Power Button" className={styles.imageIcon} />
         );
-      case 'step-save':
-      case 'save':
+      case 'step-4': // Select "Shut down"
         return (
-          <svg viewBox="0 0 20 20">
-            <path d="M15.833 2.5H4.167A1.667 1.667 0 0 0 2.5 4.167v11.666A1.667 1.667 0 0 0 4.167 17.5h11.666A1.667 1.667 0 0 0 17.5 15.833V4.167A1.667 1.667 0 0 0 15.833 2.5zM10 14.167a1.667 1.667 0 1 1 0-3.334 1.667 1.667 0 0 1 0 3.334zm3.333-8.334H5.833V4.167h7.5v1.666z"></path>
-          </svg>
+          <img src="/images/select-shutdown.svg" alt="Shut Down" className={styles.imageIcon} />
+        );
+      case 'step-5': // Wait for the computer to turn off
+        return (
+          <img src="/images/computer-turning-off.svg" alt="Computer Off" className={styles.imageIcon} />
+        );
+      case 'step-6': // Switch off the power supply
+        return (
+          <img src="/images/power-supply-switch.svg" alt="Power Switch" className={styles.imageIcon} />
         );
       default:
-        return <div>📄</div>; // Default icon
+        // Use computer.png as a default icon for any other steps
+        return <img src="/images/computer.png" alt="Default" className={styles.imageIcon} />;
     }
   };
-
   return (
     <div className={styles.container}>
       <div className={styles.worksheetCard}>
@@ -229,30 +223,33 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         <div className={styles.mainContent}>
           <div className={styles.dropTargets}>
             <h3>Drop Zones</h3>
-            {Array.from({ length: dropZoneCount }, (_, index) => (
-              <div 
-                key={index}
-                className={styles.dropZone} 
-                data-index={index}
-                data-number={index + 1} /* Add sequence number (1-based) */
-                onDragOver={(e) => handleDragOver(e, index)}
-                onDragLeave={handleDragLeave}
-                onDrop={(e) => handleDrop(e, index)}              >
-                {placedItems[index] && (
-                  <div 
-                    className={`${styles.stepItem} ${getItemStyleClass(placedItems[index])}`}
-                    draggable="false"
-                    data-id={placedItems[index].id}
-                    style={{'--item-index': index} as React.CSSProperties}
-                  >
-                    <span className={styles.stepIcon}>
-                      {getItemIcon(placedItems[index])}
-                    </span>
-                    <span>{placedItems[index].content}</span>
-                  </div>
-                )}
-              </div>
-            ))}
+            <div className={styles.dropZonesContainer}>
+              {Array.from({ length: dropZoneCount }, (_, index) => (
+                <div 
+                  key={index}
+                  className={styles.dropZone} 
+                  data-index={index}
+                  data-number={index + 1} /* Add sequence number (1-based) */
+                  onDragOver={(e) => handleDragOver(e, index)}
+                  onDragLeave={handleDragLeave}
+                  onDrop={(e) => handleDrop(e, index)}
+                >
+                  {placedItems[index] && (
+                    <div 
+                      className={`${styles.stepItem} ${getItemStyleClass(placedItems[index])}`}
+                      draggable="false"
+                      data-id={placedItems[index].id}
+                      style={{'--item-index': index} as React.CSSProperties}
+                    >
+                      <span className={`${styles.stepIcon} ${styles.imageIcon}`}>
+                        {getItemIcon(placedItems[index])}
+                      </span>
+                      <span>{placedItems[index].content}</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className={styles.centerContent}>
@@ -262,7 +259,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             <div className={styles.centerConnector}></div>
             <span className={styles.centerSparkle}>✨</span>
           </div>
-
+          
           <div 
             className={styles.draggableItems}
             onDragOver={(e) => {
@@ -275,22 +272,24 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             onDrop={handleDropToDraggableArea}
           >
             <h3>Available Steps</h3>
-            {availableItems.map((item, index) => (
-              <div 
-                key={item.id}
-                className={`${styles.stepItem} ${getItemStyleClass(item)}`}
-                draggable="true" 
-                data-id={item.id}
-                onDragStart={(e) => handleDragStart(e, item)}
-                onDragEnd={handleDragEnd}
-                style={{'--item-index': index} as React.CSSProperties}
-              >
-                <span className={styles.stepIcon}>
-                  {getItemIcon(item)}
-                </span>
-                <span>{item.content}</span>
-              </div>
-            ))}
+            <div className={styles.stepsContainer}>
+              {availableItems.map((item, index) => (
+                <div 
+                  key={item.id}
+                  className={`${styles.stepItem} ${getItemStyleClass(item)}`}
+                  draggable="true" 
+                  data-id={item.id}
+                  onDragStart={(e) => handleDragStart(e, item)}
+                  onDragEnd={handleDragEnd}
+                  style={{'--item-index': index} as React.CSSProperties}
+                >
+                  <span className={`${styles.stepIcon} ${styles.imageIcon}`}>
+                    {getItemIcon(item)}
+                  </span>
+                  <span>{item.content}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -229,6 +229,7 @@
     gap: clamp(12px, 2vh, 18px); /* Increased gap */
     flex: 1.2; /* Increased from 1 to 1.2 to take more space */
     max-width: clamp(350px, 55%, 500px); /* Significantly increased from 220px-320px to 350px-500px */
+    max-height: 70vh; /* Limit height to enable scrolling */
     background-color: rgba(250, 246, 239, 0.85);
     background-image: linear-gradient(to bottom, rgba(255, 250, 245, 0.9), rgba(246, 236, 220, 0.8));
     border: 2px solid #bbddff;
@@ -240,6 +241,9 @@
     transform: perspective(1000px) rotateY(2deg);
     transition: transform 0.3s ease;
     animation: dropTargetsEnter 0.6s ease-out;
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #bbddff #f0f0f0; /* For Firefox */
 }
 
 .dropTargets:hover {
@@ -272,22 +276,22 @@
 }
 
 .dropZone {
-    height: clamp(90px, 12vh, 110px); /* Increased height to accommodate larger icons and content */
+    height: clamp(130px, 16vh, 160px); /* Significantly increased height to accommodate larger items */
     background-color: rgba(255, 255, 255, 0.9);
     border: 4px dashed #bbddff; /* Made border thicker */
-    border-radius: clamp(15px, 2.5vw, 22px); /* Increased border radius */
+    border-radius: clamp(18px, 3vw, 26px); /* Increased border radius to match step items */
 
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: flex-start; /* Changed from center to flex-start for better left alignment */
-    padding: clamp(8px, 1.5vh, 15px); /* Increased padding for better content spacing */
-    padding-left: 55px; /* Increased padding for the number to accommodate larger content */
-    padding-right: clamp(15px, 2vh, 25px); /* Added right padding for better spacing */
+    padding: clamp(12px, 2vh, 20px); /* Increased padding for better content spacing */
+    padding-left: 75px; /* Increased padding for the wider number area */
+    padding-right: clamp(20px, 3vh, 30px); /* Increased right padding for better spacing */
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.05), 0 6px 0 rgba(0, 0, 0, 0.03); /* Enhanced shadow */
     position: relative;
     overflow: visible; /* Changed to visible to ensure content doesn't get cut off */
-    min-width: clamp(280px, 35vw, 450px); /* Significantly increased minimum width */
+    min-width: clamp(320px, 45vw, 500px); /* Increased minimum width for larger items */
     width: 100%; /* Take full width of container */
 }
 
@@ -309,19 +313,20 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 50px; /* Increased width for larger numbers */
+    width: 60px; /* Further increased width for better visibility */
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #bbddff;
-    color: #1a73e8;
-    font-weight: bold;
-    font-size: 26px; /* Increased font size */
-    border-right: 3px solid rgba(187, 221, 255, 0.5); /* Thicker border */
-    border-top-left-radius: 12px; /* Increased border radius */
-    border-bottom-left-radius: 12px;
+    background: linear-gradient(135deg, #60a5fa, #1d4ed8); /* More vibrant gradient background */
+    color: white; /* Changed to white for better contrast */
+    font-weight: 900; /* Extra bold for maximum visibility */
+    font-size: 32px; /* Larger font size for young children */
+    border-right: 4px solid rgba(29, 78, 216, 0.3); /* Thicker border with better contrast */
+    border-top-left-radius: 18px; /* Larger border radius to match overall design */
+    border-bottom-left-radius: 18px;
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-    box-shadow: inset -3px 0 6px rgba(255, 255, 255, 0.5);
+    box-shadow: inset -2px 0 8px rgba(255, 255, 255, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Added text shadow for better readability */
 }
 
 .dropZone.dragOver {
@@ -336,7 +341,7 @@
 
 /* Ensure number remains visible when items are placed */
 .dropZone:has(.stepItem) {
-    padding-left: 55px; /* Updated to match the new padding from .dropZone */
+    padding-left: 75px; /* Updated to match the new padding from .dropZone */
 }
 
 @keyframes pulse {
@@ -356,6 +361,7 @@
     flex-direction: column;
     gap: clamp(12px, 2vh, 18px); /* Increased gap to match dropTargets */
     min-height: clamp(180px, 30vh, 300px); /* Increased minimum height */
+    max-height: 70vh; /* Limit height to enable scrolling */
     flex: 1.2; /* Increased from 1 to 1.2 to match dropTargets */
     max-width: clamp(500px, 75%, 650px); /* Increased from 400px-500px to 500px-650px */
     padding: clamp(18px, 2.5vh, 28px); /* Increased padding to match dropTargets */
@@ -365,7 +371,9 @@
     border: 2px dashed #bbddff;
     transition: all 0.3s ease;
     box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.08);
-    overflow-y: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #bbddff #f0f0f0; /* For Firefox */
     position: relative;
     transform-style: preserve-3d;
     transform: perspective(1000px) rotateY(-2deg);
@@ -422,10 +430,10 @@
 .stepItem {
     display: flex;
     align-items: center;
-    padding: clamp(12px, 1.8vh, 16px); /* Increased padding */
-    border-radius: clamp(16px, 2.5vw, 22px); /* Increased border radius */
+    padding: clamp(20px, 3vh, 28px); /* Significantly increased padding for better touch targets */
+    border-radius: clamp(18px, 3vw, 26px); /* Increased border radius for smoother look */
     font-weight: 700;
-    font-size: clamp(1.15rem, 1.8vw, 1.35rem); /* Larger text */
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem); /* Larger text for better readability */
     cursor: grab;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 0 rgba(0,0,0,0.08); /* Enhanced shadow */
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
@@ -436,7 +444,9 @@
     animation: itemBounce 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     animation-fill-mode: both;
     animation-delay: calc(var(--item-index, 0) * 0.1s);
-    min-width: 180px; /* Ensure minimum width for readability */
+    min-width: clamp(250px, 40vw, 350px); /* Increased minimum width for better touch accuracy */
+    min-height: clamp(90px, 12vh, 120px); /* Added minimum height for better touch targets */
+    line-height: 1.4; /* Better line spacing for readability */
 }
 
 @keyframes itemBounce {
@@ -478,27 +488,75 @@
 }
 
 .stepIcon {
-    width: clamp(60px, 8vw, 75px); /* Further increased icon container size */
-    height: clamp(60px, 8vw, 75px);
-    border-radius: 16px; /* Increased border radius */
+    width: clamp(100px, 12vw, 130px); /* Significantly increased icon container size for children */
+    height: clamp(100px, 12vw, 130px); /* Larger height for better visibility */
+    border-radius: 20px; /* Larger border radius to match increased size */
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-right: clamp(16px, 2.5vw, 24px); /* Increased margin */
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Enhanced shadow */
+    margin-right: clamp(20px, 3vw, 30px); /* Increased margin for better spacing */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Enhanced shadow for better depth */
     transition: transform 0.3s;
     position: relative;
+    overflow: hidden; /* Ensure image stays within container */
+    background-size: contain; /* Ensure image is fully visible */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    padding: 0; /* Remove padding to maximize image space */
 }
 
-.stepItem:hover .stepIcon {
-    transform: rotate(10deg) scale(1.2); /* Enhanced rotation and scale */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.25); /* Enhanced shadow */
+.stepIcon svg,
+.stepIcon img {
+    width: 100%; /* Use full container width */
+    height: 100%; /* Use full container height */
+    object-fit: cover; /* Changed from contain to cover to fill the container completely */
+    border-radius: 16px; /* Slightly rounded corners */
+    stroke-width: 2.5px; /* For SVG only */
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2)); /* Added shadow for better contrast */
 }
 
-.stepIcon svg {
-    width: clamp(36px, 6vw, 45px); /* Further increased SVG size */
-    height: clamp(36px, 6vw, 45px);
-    stroke-width: 2px; /* Added to make SVG paths more visible */
+/* Special hover effect for image icons to make them more attractive for kids */
+.stepItem:hover .stepIcon.imageIcon {
+    transform: rotate(5deg) scale(1.3); /* More dramatic scale for images */
+    box-shadow: 0 12px 24px rgba(0,0,0,0.35), 0 0 15px rgba(255, 215, 0, 0.4); /* Golden glow effect */
+    animation: bounce-rotate 1s infinite alternate; /* Bouncy animation for images */
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(10deg) scale(1.25); }
+    25% { transform: rotate(15deg) scale(1.3); }
+    50% { transform: rotate(5deg) scale(1.2); }
+    75% { transform: rotate(12deg) scale(1.25); }
+}
+
+@keyframes bounce-rotate {
+    0% { transform: rotate(5deg) scale(1.3); }
+    25% { transform: rotate(0deg) scale(1.35) translateY(-5px); }
+    50% { transform: rotate(-5deg) scale(1.3); }
+    75% { transform: rotate(0deg) scale(1.35) translateY(-5px); }
+    100% { transform: rotate(5deg) scale(1.3); }
+}
+
+.stepIcon svg,
+.stepIcon img {
+    width: 100%; /* Use full container width */
+    height: 100%; /* Use full container height */
+    object-fit: cover; /* Ensure image fits properly */
+    stroke-width: 2.5px; /* For SVG only */
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2)); /* Added shadow for better contrast */
+}
+
+/* Special class for PNG images */
+.stepIcon.imageIcon {
+    background-color: transparent !important; /* Override colored backgrounds */
+    padding: 0; /* Remove padding */
+}
+
+.stepIcon.imageIcon img {
+    border-radius: 16px; /* Slightly rounded corners for images */
+    object-fit: cover; /* Cover the entire container */
+    width: 100%; /* Ensure image takes full width */
+    height: 100%; /* Ensure image takes full height */
 }
 
 /* Item Specific Colors with more vibrant, child-friendly colors */
@@ -823,10 +881,10 @@
         font-size: clamp(0.9rem, 1.5vw, 1.1rem);
         padding: clamp(5px, 0.8vh, 8px) clamp(8px, 1.2vw, 15px);
         margin-bottom: clamp(8px, 1.5vh, 12px);
-    }
-      .stepIcon {
-        width: clamp(40px, 6vw, 50px);
-        height: clamp(40px, 6vw, 50px);
+    }    .stepIcon {
+        width: clamp(60px, 8vw, 70px); /* Larger icons for tablet screens */
+        height: clamp(60px, 8vw, 70px);
+        border-radius: 16px; /* Adjusted border radius for smaller screens */
     }
     
     .actionButton {
@@ -914,7 +972,7 @@
     .draggableItems {
         padding: 12px;
         min-height: 140px;    }    .dropZone {
-        height: 75px; /* Increased height for mobile view to accommodate larger icons */
+        height: 90px; /* Further increased height to accommodate the larger icons */
         padding-left: 45px; /* Adjusted padding for number */
         min-width: 180px; /* Added minimum width for mobile */
     }
@@ -929,14 +987,16 @@
         padding: 8px 10px; /* Increased padding */
         min-width: 140px; /* Ensure minimum width */
     }    .stepIcon {
-        width: 50px; /* Larger icon container */
-        height: 50px;
+        width: 65px; /* Much larger icon container for mobile */
+        height: 65px;
         margin-right: 12px;
+        border-radius: 14px;
     }
 
     .stepIcon svg {
-        width: 30px; /* Larger SVG icons */
-        height: 30px;
+        width: 42px; /* Much larger SVG icons for better visibility on small screens */
+        height: 42px;
+        stroke-width: 2.5px; /* Maintain thicker stroke for small screens */
     }
 
     .actionButton {
@@ -1193,4 +1253,102 @@
 
 .dropZone .stepItem .stepIcon:hover {
     transform: none !important; /* Disable icon hover transform for placed items */
+}
+
+/* Custom Scrollbar Styles for WebKit Browsers (Chrome, Safari, Edge) */
+.dropTargets::-webkit-scrollbar,
+.draggableItems::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.dropTargets::-webkit-scrollbar-track,
+.draggableItems::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.dropTargets::-webkit-scrollbar-thumb,
+.draggableItems::-webkit-scrollbar-thumb {
+    background: #bbddff;
+    border-radius: 10px;
+}
+
+.dropTargets::-webkit-scrollbar-thumb:hover,
+.draggableItems::-webkit-scrollbar-thumb:hover {
+    background: #93c5fd;
+}
+
+/* Ensure scrolling is smooth */
+.dropTargets,
+.draggableItems {
+    scroll-behavior: smooth;
+}
+
+/* Scrollable drop zones container */
+.dropZonesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vh, 18px);
+    max-height: 60vh; /* Increased height limit for more drop zones */
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #bbddff #f0f0f0; /* For Firefox */
+    padding-right: 8px; /* Space for scrollbar */
+    margin-top: 10px; /* Space between heading and items */
+    padding-bottom: 5px; /* Bottom padding */
+}
+
+/* Webkit scrollbar for drop zones container */
+.dropZonesContainer::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.dropZonesContainer::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.dropZonesContainer::-webkit-scrollbar-thumb {
+    background: #bbddff;
+    border-radius: 10px;
+}
+
+.dropZonesContainer::-webkit-scrollbar-thumb:hover {
+    background: #93c5fd;
+}
+
+/* Scrollable steps container */
+.stepsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vh, 18px);
+    max-height: 50vh; /* Limit height for scrollability */
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #bbddff #f0f0f0; /* For Firefox */
+    padding-right: 8px; /* Space for scrollbar */
+    margin-top: 10px; /* Space between heading and items */
+    padding-bottom: 5px; /* Bottom padding */
+}
+
+/* Webkit scrollbar for steps container */
+.stepsContainer::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.stepsContainer::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.stepsContainer::-webkit-scrollbar-thumb {
+    background: #bbddff;
+    border-radius: 10px;
+}
+
+.stepsContainer::-webkit-scrollbar-thumb:hover {
+    background: #93c5fd;
 }
