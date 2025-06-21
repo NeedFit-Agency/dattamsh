@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BucketMatchProps, Item, Bucket } from './types';
 import styles from './bucketmatch.module.css';
-import { itemSvgMap, BasketSvg } from './ItemSvgs';
+import { itemSvgMap } from './ItemSvgs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
@@ -291,7 +291,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                     data-target-color={bucket.type}
 
                   >
-                    <BasketSvg />
                     {/* Show instruction text until an item is dropped */}
                     {!itemInThisBucket && (
                       <div className={styles.bucketInstructionText}>
