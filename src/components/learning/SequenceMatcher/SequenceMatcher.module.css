@@ -40,10 +40,12 @@
     background-color: rgba(255, 255, 255, 0.9);
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
     border-radius: clamp(20px, 3vw, 30px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(135, 206, 250, 0.2);    padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
-    width: 98%; /* Increased from 95% to use more screen space */
-    max-width: min(95vw, 1400px); /* Increased from 1200px to 1400px */
-    max-height: calc(95vh - 60px); /* Increased from 90vh to 95vh */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(135, 206, 250, 0.2);
+    padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
+    width: 95%; /* Use more screen space */
+    max-width: 1400px;
+    height: 90vh; /* Use viewport height */
+    max-height: 900px;
     text-align: center;
     position: relative;
     margin: 0 auto;
@@ -52,7 +54,7 @@
     box-sizing: border-box;
     backdrop-filter: blur(5px);
     border: 3px solid #bbddff;
-    overflow: auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     animation: cardEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -107,7 +109,6 @@
     right: clamp(20px, 3vw, 28px);
     font-size: clamp(22px, 3vw, 30px);
     opacity: 0.8;
-    transform: rotate(15deg);
     animation: spin 8s linear infinite;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     z-index: 1;
@@ -179,6 +180,7 @@
     color: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     animation: titlePop 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    flex-shrink: 0; /* Prevent title from shrinking */
 }
 
 @keyframes titlePop {
@@ -198,8 +200,9 @@
 /* --- Main Content Container --- */
 .mainContent {
     display: flex;
-    gap: clamp(30px, 5vw, 60px); /* Increased gap from 20px-40px to 30px-60px */
-    align-items: flex-start;
+    flex-direction: row; /* Default to row layout for wider screens */
+    gap: clamp(15px, 2vw, 30px);
+    align-items: stretch;
     justify-content: center;
     margin-bottom: clamp(20px, 3vh, 30px);
     flex: 1;
@@ -207,7 +210,7 @@
     overflow: hidden;
     width: 100%;
     position: relative;
-    padding: clamp(10px, 2vh, 20px); /* Increased padding from 5px-10px to 10px-20px */
+    padding: 0;
     animation: contentFadeIn 0.8s ease-in-out;
 }
 
@@ -226,73 +229,80 @@
 .dropTargets {
     display: flex;
     flex-direction: column;
-    gap: clamp(12px, 2vh, 18px); /* Increased gap */
-    flex: 1.2; /* Increased from 1 to 1.2 to take more space */
-    max-width: clamp(350px, 55%, 500px); /* Significantly increased from 220px-320px to 350px-500px */
-    max-height: 70vh; /* Limit height to enable scrolling */
-    background-color: rgba(250, 246, 239, 0.85);
-    background-image: linear-gradient(to bottom, rgba(255, 250, 245, 0.9), rgba(246, 236, 220, 0.8));
+    gap: clamp(14px, 2vh, 20px);
+    flex: 1 1 50%; /* Adjust flex properties */
+    min-width: 300px;
+    background-color: rgba(240, 248, 255, 0.9);
     border: 2px solid #bbddff;
-    border-radius: clamp(16px, 2.5vw, 24px);
-    padding: clamp(18px, 2.5vh, 28px); /* Increased padding */
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), inset 0 -4px 0 rgba(0, 0, 0, 0.05);
+    border-radius: clamp(20px, 2.5vw, 28px);
+    padding: clamp(15px, 2.5vh, 25px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     position: relative;
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateY(2deg);
-    transition: transform 0.3s ease;
-    animation: dropTargetsEnter 0.6s ease-out;
-    overflow-y: auto; /* Enable vertical scrolling */
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #bbddff #f0f0f0; /* For Firefox */
+    transition: box-shadow 0.3s ease;
+    overflow: hidden; /* Hide overflow */
 }
 
 .dropTargets:hover {
-    transform: perspective(1000px) rotateY(0deg);
-}
-
-@keyframes dropTargetsEnter {
-    from {
-        transform: perspective(1000px) rotateY(15deg) translateX(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: perspective(1000px) rotateY(2deg) translateX(0);
-        opacity: 1;
-    }
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
 }
 
 .dropTargets h3 {
-    margin: 0 0 clamp(16px, 2.5vh, 22px) 0;
-    font-size: clamp(1.25rem, 2vw, 1.6rem); /* Larger font size */
+    margin: 0 0 clamp(18px, 2.5vh, 24px) 0;
+    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
     color: #333;
-    opacity: 0.95;
     font-family: "Comic Sans MS", "Comic Sans", 'Nunito', sans-serif;
     background-color: #ffefd5;
-    padding: clamp(8px, 1.2vh, 12px) clamp(14px, 1.8vw, 22px); /* Increased padding */
-    border-radius: clamp(12px, 1.8vw, 18px); /* Increased border radius */
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12); /* Enhanced shadow */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Added text shadow */
+    padding: clamp(10px, 1.2vh, 14px) clamp(16px, 1.8vw, 24px);
+    border-radius: clamp(14px, 1.8vw, 20px);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .dropZone {
-    height: clamp(130px, 16vh, 160px); /* Significantly increased height to accommodate larger items */
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 4px dashed #bbddff; /* Made border thicker */
-    border-radius: clamp(18px, 3vw, 26px); /* Increased border radius to match step items */
-
+    min-height: 140px; /* Adjust height to fit items snugly */
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 3px dashed #bbddff;
+    border-radius: clamp(20px, 3vw, 28px);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Changed from center to flex-start for better left alignment */
-    padding: clamp(12px, 2vh, 20px); /* Increased padding for better content spacing */
-    padding-left: 75px; /* Increased padding for the wider number area */
-    padding-right: clamp(20px, 3vh, 30px); /* Increased right padding for better spacing */
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.05), 0 6px 0 rgba(0, 0, 0, 0.03); /* Enhanced shadow */
+    justify-content: flex-start;
+    padding: clamp(12px, 1.5vh, 18px);
+    padding-left: 85px;
+    padding-right: clamp(18px, 2.5vh, 28px);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.04);
     position: relative;
-    overflow: visible; /* Changed to visible to ensure content doesn't get cut off */
-    min-width: clamp(320px, 45vw, 500px); /* Increased minimum width for larger items */
-    width: 100%; /* Take full width of container */
+    overflow: hidden;
+    width: 100%;
+}
+
+.dropZone::after {
+    content: attr(data-number);
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #60a5fa, #1d4ed8);
+    color: white;
+    font-weight: 900;
+    font-size: 26px;
+    border-radius: 50%;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.dropZone.dragOver {
+    background-color: rgba(26, 162, 255, 0.25);
+    border-color: #1aa2ff;
+    border-style: solid;
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(26, 162, 255, 0.3), inset 0 4px 8px rgba(26, 162, 255, 0.15);
 }
 
 .dropZone::before {
@@ -306,89 +316,22 @@
     pointer-events: none;
 }
 
-/* Add numbering to drop zones */
-.dropZone::after {
-    content: attr(data-number);
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 60px; /* Further increased width for better visibility */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #60a5fa, #1d4ed8); /* More vibrant gradient background */
-    color: white; /* Changed to white for better contrast */
-    font-weight: 900; /* Extra bold for maximum visibility */
-    font-size: 32px; /* Larger font size for young children */
-    border-right: 4px solid rgba(29, 78, 216, 0.3); /* Thicker border with better contrast */
-    border-top-left-radius: 18px; /* Larger border radius to match overall design */
-    border-bottom-left-radius: 18px;
-    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-    box-shadow: inset -2px 0 8px rgba(255, 255, 255, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Added text shadow for better readability */
-}
-
-.dropZone.dragOver {
-    background-color: rgba(26, 162, 255, 0.25); /* More visible background */
-    border-color: #1aa2ff;
-    border-width: 5px; /* Thicker border when dragging over */
-    border-style: dashed;
-    transform: scale(1.08); /* Slightly larger scale */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 4px 8px rgba(26, 162, 255, 0.2); /* Enhanced shadow */
-    animation: pulse 1s infinite alternate; /* Faster animation */
-}
-
-/* Ensure number remains visible when items are placed */
-.dropZone:has(.stepItem) {
-    padding-left: 75px; /* Updated to match the new padding from .dropZone */
-}
-
-@keyframes pulse {
-    from {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 4px 8px rgba(26, 162, 255, 0.2);
-        border-color: #1aa2ff;
-    }
-    to {
-        box-shadow: 0 12px 24px rgba(26, 162, 255, 0.3), inset 0 6px 12px rgba(26, 162, 255, 0.25);
-        border-color: #0085ff; /* Slightly darker for contrast */
-    }
-}
-
 /* --- Draggable Items --- */
 .draggableItems {
     display: flex;
     flex-direction: column;
-    gap: clamp(12px, 2vh, 18px); /* Increased gap to match dropTargets */
-    min-height: clamp(180px, 30vh, 300px); /* Increased minimum height */
-    max-height: 70vh; /* Limit height to enable scrolling */
-    flex: 1.2; /* Increased from 1 to 1.2 to match dropTargets */
-    max-width: clamp(500px, 75%, 650px); /* Increased from 400px-500px to 500px-650px */
-    padding: clamp(18px, 2.5vh, 28px); /* Increased padding to match dropTargets */
+    gap: clamp(12px, 2vh, 18px);
+    flex: 1 1 40%; /* Adjust flex properties */
+    min-width: 300px;
+    padding: clamp(18px, 2.5vh, 28px);
     background-color: #f0f8ff;
     background-image: linear-gradient(to bottom, rgba(240, 248, 255, 0.9), rgba(230, 240, 250, 0.8));
     border-radius: clamp(16px, 2.5vw, 24px);
     border: 2px dashed #bbddff;
     transition: all 0.3s ease;
     box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.08);
-    overflow-y: auto; /* Enable vertical scrolling */
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #bbddff #f0f0f0; /* For Firefox */
     position: relative;
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateY(-2deg);
-    animation: draggableItemsEnter 0.6s ease-out;
-}
-
-@keyframes draggableItemsEnter {
-    from {
-        transform: perspective(1000px) rotateY(-15deg) translateX(20px);
-        opacity: 0;
-    }
-    to {
-        transform: perspective(1000px) rotateY(-2deg) translateX(0);
-        opacity: 1;
-    }
+    overflow: hidden; /* Hide overflow */
 }
 
 .draggableItems:hover {
@@ -414,15 +357,15 @@
 
 .draggableItems h3 {
     margin: 0 0 clamp(16px, 2.5vh, 22px) 0;
-    font-size: clamp(1.25rem, 2vw, 1.6rem); /* Larger font size */
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
     color: #333;
     opacity: 0.95;
     font-family: "Comic Sans MS", "Comic Sans", 'Nunito', sans-serif;
     background-color: #e6f2ff;
-    padding: clamp(8px, 1.2vh, 12px) clamp(14px, 1.8vw, 22px); /* Increased padding */
-    border-radius: clamp(12px, 1.8vw, 18px); /* Increased border radius */
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08); /* Enhanced shadow */
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9); /* Enhanced text shadow */
+    padding: clamp(8px, 1.2vh, 12px) clamp(14px, 1.8vw, 22px);
+    border-radius: clamp(12px, 1.8vw, 18px);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9);
     position: relative;
     z-index: 2;
 }
@@ -430,23 +373,23 @@
 .stepItem {
     display: flex;
     align-items: center;
-    padding: clamp(20px, 3vh, 28px); /* Significantly increased padding for better touch targets */
-    border-radius: clamp(18px, 3vw, 26px); /* Increased border radius for smoother look */
+    padding: clamp(20px, 3vh, 28px);
+    border-radius: clamp(18px, 3vw, 26px);
     font-weight: 700;
-    font-size: clamp(1.3rem, 2.2vw, 1.6rem); /* Larger text for better readability */
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
     cursor: grab;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 0 rgba(0,0,0,0.08); /* Enhanced shadow */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 0 rgba(0,0,0,0.08);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
     background-color: white;
-    border: 3px solid transparent; /* Thicker border */
+    border: 3px solid transparent;
     position: relative;
     overflow: hidden;
     animation: itemBounce 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     animation-fill-mode: both;
     animation-delay: calc(var(--item-index, 0) * 0.1s);
-    min-width: clamp(250px, 40vw, 350px); /* Increased minimum width for better touch accuracy */
-    min-height: clamp(90px, 12vh, 120px); /* Added minimum height for better touch targets */
-    line-height: 1.4; /* Better line spacing for readability */
+    min-width: clamp(250px, 40vw, 350px);
+    min-height: clamp(90px, 12vh, 120px);
+    line-height: 1.4;
 }
 
 @keyframes itemBounce {
@@ -475,58 +418,50 @@
 }
 
 .stepItem:hover {
-    transform: translateY(-8px); /* Enhanced hover effect */
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18), 0 5px 0 rgba(0,0,0,0.08); /* Enhanced shadow */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18), 0 5px 0 rgba(0,0,0,0.08);
 }
 
 .stepItem.dragging {
     opacity: 0.9;
-    box-shadow: 0 16px 28px rgba(0,0,0,0.2); /* Enhanced shadow */
-    transform: scale(1.1); /* Slightly larger scale when dragging */
+    box-shadow: 0 16px 28px rgba(0,0,0,0.2);
+    transform: scale(1.1);
     cursor: grabbing;
     z-index: 10;
 }
 
 .stepIcon {
-    width: clamp(100px, 12vw, 130px); /* Significantly increased icon container size for children */
-    height: clamp(100px, 12vw, 130px); /* Larger height for better visibility */
-    border-radius: 20px; /* Larger border radius to match increased size */
+    width: clamp(100px, 12vw, 130px);
+    height: clamp(100px, 12vw, 130px);
+    border-radius: 20px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-right: clamp(20px, 3vw, 30px); /* Increased margin for better spacing */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Enhanced shadow for better depth */
+    margin-right: clamp(20px, 3vw, 30px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     transition: transform 0.3s;
     position: relative;
-    overflow: hidden; /* Ensure image stays within container */
-    background-size: contain; /* Ensure image is fully visible */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent image repetition */
-    padding: 0; /* Remove padding to maximize image space */
+    overflow: hidden;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0;
 }
 
 .stepIcon svg,
 .stepIcon img {
-    width: 100%; /* Use full container width */
-    height: 100%; /* Use full container height */
-    object-fit: cover; /* Changed from contain to cover to fill the container completely */
-    border-radius: 16px; /* Slightly rounded corners */
-    stroke-width: 2.5px; /* For SVG only */
-    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2)); /* Added shadow for better contrast */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    stroke-width: 2.5px;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
 }
 
-/* Special hover effect for image icons to make them more attractive for kids */
 .stepItem:hover .stepIcon.imageIcon {
-    transform: rotate(5deg) scale(1.3); /* More dramatic scale for images */
-    box-shadow: 0 12px 24px rgba(0,0,0,0.35), 0 0 15px rgba(255, 215, 0, 0.4); /* Golden glow effect */
-    animation: bounce-rotate 1s infinite alternate; /* Bouncy animation for images */
-}
-
-@keyframes wiggle {
-    0%, 100% { transform: rotate(10deg) scale(1.25); }
-    25% { transform: rotate(15deg) scale(1.3); }
-    50% { transform: rotate(5deg) scale(1.2); }
-    75% { transform: rotate(12deg) scale(1.25); }
+    transform: rotate(5deg) scale(1.3);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.35), 0 0 15px rgba(255, 215, 0, 0.4);
+    animation: bounce-rotate 1s infinite alternate;
 }
 
 @keyframes bounce-rotate {
@@ -537,29 +472,18 @@
     100% { transform: rotate(5deg) scale(1.3); }
 }
 
-.stepIcon svg,
-.stepIcon img {
-    width: 100%; /* Use full container width */
-    height: 100%; /* Use full container height */
-    object-fit: cover; /* Ensure image fits properly */
-    stroke-width: 2.5px; /* For SVG only */
-    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2)); /* Added shadow for better contrast */
-}
-
-/* Special class for PNG images */
 .stepIcon.imageIcon {
-    background-color: transparent !important; /* Override colored backgrounds */
-    padding: 0; /* Remove padding */
+    background-color: transparent !important;
+    padding: 0;
 }
 
 .stepIcon.imageIcon img {
-    border-radius: 16px; /* Slightly rounded corners for images */
-    object-fit: cover; /* Cover the entire container */
-    width: 100%; /* Ensure image takes full width */
-    height: 100%; /* Ensure image takes full height */
+    border-radius: 16px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
-/* Item Specific Colors with more vibrant, child-friendly colors */
 .stepOpen { 
     background-color: #fff9e6; 
     border-color: #fcd34d;
@@ -657,7 +581,6 @@
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s, box-shadow 0.3s;
     position: relative;
     overflow: hidden;
-    margin-top: clamp(5px, 1vh, 10px);
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
     letter-spacing: 0.5px;
 }
@@ -681,13 +604,14 @@
     transform: translateY(2px);
 }
 
-/* IDs will be handled by styles object in React */
 .checkAnswerBtn {
     background-color: #34d399;
     background-image: linear-gradient(135deg, #6ee7b7, #10b981);
     color: white;
     box-shadow: 0 6px 20px rgba(52, 211, 153, 0.4), 0 4px 0 #0e9f6e;
     animation: buttonPop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
 .checkAnswerBtn:hover {
@@ -732,7 +656,7 @@
 
 .feedbackMessage {
     min-height: clamp(30px, 4vh, 40px);
-    margin-top: clamp(15px, 2.5vh, 25px);
+    margin: clamp(10px, 2vh, 15px) auto 0;
     font-weight: 700;
     font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     border-radius: clamp(10px, 1.5vw, 16px);
@@ -744,6 +668,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 80%;
+    flex-shrink: 0;
 }
 
 @keyframes feedbackEnter {
@@ -817,7 +743,6 @@
     box-shadow: 0 0 15px rgba(239, 68, 68, 0.5) !important;
 }
 
-/* Update number style when slot is correct/incorrect */
 .slotCorrect::after {
     background-color: #34d399 !important;
     color: white !important;
@@ -830,280 +755,8 @@
     border-right-color: rgba(239, 68, 68, 0.5) !important;
 }
 
-/* Responsive adjustments */
-/* For standard laptops (1366x768, 1440x900) */
-@media (max-height: 900px) {
-    .worksheetCard {
-        max-height: calc(95vh - 60px);
-        padding: clamp(12px, 1.8vw, 25px) clamp(15px, 2.5vw, 35px);
-    }
-    
-    .mainContent {
-        gap: clamp(15px, 3vw, 30px);
-    }
-    
-    .stepItem {
-        padding: clamp(6px, 0.8vh, 10px);
-    }
-      .dropZone {
-        height: clamp(65px, 8vh, 80px); /* Increased height for tablet view */
-    }
-    
-    .feedbackMessage {
-        min-height: clamp(25px, 3.5vh, 35px);
-        margin-top: clamp(12px, 2vh, 20px);
-    }
-    
-    .actionButton {
-        padding: clamp(10px, 1.5vh, 15px);
-    }
-}
-
-/* For smaller laptops (1280x800) */
-@media (max-height: 800px) {
-    .worksheetCard {
-        max-height: calc(98vh - 50px);
-        padding: clamp(10px, 1.5vw, 20px) clamp(12px, 2vw, 30px);
-    }
-    
-    .title {
-        font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-        margin-bottom: clamp(10px, 2vh, 20px);
-    }
-    
-    .mainContent {
-        gap: clamp(12px, 2.5vw, 25px);
-        margin-bottom: clamp(12px, 2vh, 20px);
-    }
-    
-    .dropTargets h3,
-    .draggableItems h3 {
-        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-        padding: clamp(5px, 0.8vh, 8px) clamp(8px, 1.2vw, 15px);
-        margin-bottom: clamp(8px, 1.5vh, 12px);
-    }    .stepIcon {
-        width: clamp(60px, 8vw, 70px); /* Larger icons for tablet screens */
-        height: clamp(60px, 8vw, 70px);
-        border-radius: 16px; /* Adjusted border radius for smaller screens */
-    }
-    
-    .actionButton {
-        font-size: clamp(1rem, 1.6vw, 1.2rem);
-    }
-}
-
-/* For tablets and smaller displays */
-@media (max-width: 768px) {
-    .worksheetCard {
-        padding: clamp(15px, 2.5vw, 25px);
-        border-radius: clamp(16px, 2.5vw, 20px);
-        max-width: 95%;
-    }
-
-    .mainContent {
-        flex-direction: column;
-        gap: clamp(20px, 4vh, 30px);
-        align-items: center;
-    }    .dropTargets,
-    .draggableItems {
-        max-width: 100%;
-        width: 100%;
-        transform: perspective(1000px) rotateY(0deg);
-        flex: 1; /* Reset flex for tablet view */
-    }
-
-    .title {
-        font-size: clamp(1.4rem, 4vw, 1.8rem);
-        margin-bottom: clamp(15px, 2.5vh, 25px);
-    }
-    
-    /* Add a little space between the containers in mobile view */
-    .dropTargets {
-        margin-bottom: clamp(10px, 2vh, 20px);
-    }
-    
-    /* Adjust animations for mobile */
-    @keyframes dropTargetsEnter {
-        from {
-            transform: translateY(-15px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes draggableItemsEnter {
-        from {
-            transform: translateY(15px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-}
-
-/* For mobile phones */
-@media (max-width: 480px) {
-    .container {
-        padding: 0.5rem;
-    }
-    
-    .worksheetCard {
-        padding: 15px 12px;
-        border-radius: 16px;
-        border-width: 2px;
-    }
-
-    .title {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-        padding: 0 10px;
-    }
-
-    .mainContent {
-        gap: 15px;
-        padding: 0;
-    }
-
-    .draggableItems {
-        padding: 12px;
-        min-height: 140px;    }    .dropZone {
-        height: 90px; /* Further increased height to accommodate the larger icons */
-        padding-left: 45px; /* Adjusted padding for number */
-        min-width: 180px; /* Added minimum width for mobile */
-    }
-    
-    .dropZone::after {
-        width: 40px; /* Adjusted width for number label */
-        font-size: 22px; /* Increased font size for better visibility */
-    }
-
-    .stepItem {
-        font-size: 1rem; /* Slightly larger font for better readability */
-        padding: 8px 10px; /* Increased padding */
-        min-width: 140px; /* Ensure minimum width */
-    }    .stepIcon {
-        width: 65px; /* Much larger icon container for mobile */
-        height: 65px;
-        margin-right: 12px;
-        border-radius: 14px;
-    }
-
-    .stepIcon svg {
-        width: 42px; /* Much larger SVG icons for better visibility on small screens */
-        height: 42px;
-        stroke-width: 2.5px; /* Maintain thicker stroke for small screens */
-    }
-
-    .actionButton {
-        padding: 10px;
-        font-size: 1rem;
-        border-radius: 16px;
-    }
-
-    .worksheetCard::before {
-        font-size: 18px;
-        top: 12px;
-        left: 12px;
-    }
-
-    .worksheetCard::after {
-        font-size: 14px;
-        top: 40px;
-        left: 10px;
-    }
-
-    .gearIcon {
-        font-size: 18px;
-        top: 15px;
-        right: 15px;
-    }
-    
-    .feedbackMessage {
-        font-size: 0.95rem;
-        min-height: 20px;
-        margin-top: 12px;
-        padding: 6px 10px;
-    }
-      .dropTargets h3,
-    .draggableItems h3 {
-        font-size: 1.2rem; /* Slightly larger font */
-        padding: 8px 14px; /* More padding */
-        margin-bottom: 12px;
-    }
-}
-
-@media (max-width: 700px) {
-  .worksheetCard {
-    width: 100vw;
-    min-width: 0;
-    max-width: 100vw;
-    padding: 8px 0.5rem 16px 0.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    background: linear-gradient(135deg, #f8fafc 80%, #e0e7ff 100%);
-    margin: 0;
-  }
-  .mainContent {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    min-width: 0;
-    align-items: stretch;
-    justify-content: flex-start;
-    padding: 0;
-    margin: 0;
-  }
-  .dropTargets, .draggableItems {
-    width: 100%;
-    min-width: 0;
-    max-width: 100vw;
-    margin: 0;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    background: #fff;
-    padding: 10px 6px 14px 6px;
-  }
-  .dropTargets {
-    margin-bottom: 10px;
-  }
-  .actionButton {
-    width: 100%;
-    max-width: 100%;
-    margin: 16px 0 0 0;
-    border-radius: 999px;
-    font-size: 1.1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-}
-
-@media (max-width: 480px) {
-  .worksheetCard {
-    padding: 4px 0.25rem 10px 0.25rem;
-    border-radius: 8px;
-  }
-  .mainContent {
-    gap: 8px;
-  }
-  .dropTargets, .draggableItems {
-    border-radius: 7px;
-    padding: 6px 2px 10px 2px;
-  }
-  .actionButton {
-    font-size: 1rem;
-    margin: 12px 0 0 0;
-    border-radius: 999px;
-  }
-}
-
-/* --- Center Content (Apple-style, visually engaging) --- */
 .centerContent {
-  flex: 0 0 120px;
+  flex: 0 1 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1129,6 +782,7 @@
   animation: mascotFloat 3s ease-in-out infinite alternate;
   border: 2.5px solid #bbddff;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .centerMascot img {
@@ -1170,13 +824,6 @@
   100% { opacity: 1; transform: scale(1.1) translateX(-50%); }
 }
 
-/* --- Responsive: Hide centerContent on mobile/tablet --- */
-@media (max-width: 900px) {
-  .centerContent {
-    display: none !important;
-  }
-}
-
 .mascotMessage {
   margin-top: 8px;
   padding: 14px 22px;
@@ -1209,146 +856,94 @@
   filter: drop-shadow(0 2px 2px rgba(135, 206, 250, 0.10));
 }
 
-/* Responsive: On mobile, show mascotMessage above the main card as a banner */
-@media (max-width: 900px) {
-  .centerContent .mascotMessage {
+.mascotMessageMobile {
     display: none;
-  }
-  .mascotMessageMobile {
-    display: block;
-    margin: 0 auto 12px auto;
-    padding: 12px 16px;
-    font-size: 1rem;
-    max-width: 95vw;
-    border-radius: 18px;
-    box-shadow: 0 2px 8px rgba(135, 206, 250, 0.10);
-    background: linear-gradient(135deg, #f8fafc 80%, #e0e7ff 100%);
-    color: #333;
-    font-family: 'Nunito', 'Quicksand', 'Comic Sans MS', cursive, sans-serif;
-    font-weight: 600;
-    text-align: center;
-    border: 1.5px solid #bbddff;
-    position: relative;
-    z-index: 10;
-  }
 }
 
-@media (min-width: 901px) {
-  .mascotMessageMobile {
-    display: none;
-  }
+/* --- Responsive Layout --- */
+@media (max-width: 1024px) {
+    .mainContent {
+        flex-direction: column;
+        gap: 15px;
+        overflow-y: auto;
+        padding: 10px;
+    }
+
+    .dropTargets, .draggableItems {
+        flex: 1 1 auto; /* Allow items to grow and shrink in column layout */
+        max-height: 50%; /* Limit height to allow both sections to be visible */
+    }
+
+    .centerContent {
+        display: none; /* Hide mascot column on smaller screens */
+    }
+    
+    .mascotMessageMobile {
+        display: block;
+        margin: 0 auto 12px auto;
+        padding: 12px 16px;
+        font-size: 1rem;
+        max-width: 95vw;
+        border-radius: 18px;
+        box-shadow: 0 2px 8px rgba(135, 206, 250, 0.10);
+        background: linear-gradient(135deg, #f8fafc 80%, #e0e7ff 100%);
+        color: #333;
+        font-family: 'Nunito', 'Quicksand', 'Comic Sans MS', cursive, sans-serif;
+        font-weight: 600;
+        text-align: center;
+        border: 1.5px solid #bbddff;
+        position: relative;
+        z-index: 10;
+    }
 }
 
-/* Placed items styling - non-draggable */
-.dropZone .stepItem {
-    cursor: default !important; /* Override draggable cursor */
-    user-select: none; /* Prevent text selection */
-    opacity: 0.9; /* Slightly muted to show they're placed */
-}
-
-.dropZone .stepItem:hover {
-    transform: none !important; /* Disable hover transform for placed items */
-    cursor: default !important;
-}
-
-.dropZone .stepItem .stepIcon:hover {
-    transform: none !important; /* Disable icon hover transform for placed items */
-}
-
-/* Custom Scrollbar Styles for WebKit Browsers (Chrome, Safari, Edge) */
-.dropTargets::-webkit-scrollbar,
-.draggableItems::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-.dropTargets::-webkit-scrollbar-track,
-.draggableItems::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
-}
-
-.dropTargets::-webkit-scrollbar-thumb,
-.draggableItems::-webkit-scrollbar-thumb {
-    background: #bbddff;
-    border-radius: 10px;
-}
-
-.dropTargets::-webkit-scrollbar-thumb:hover,
-.draggableItems::-webkit-scrollbar-thumb:hover {
-    background: #93c5fd;
-}
-
-/* Ensure scrolling is smooth */
+/* Scrollable Containers */
 .dropTargets,
 .draggableItems {
     scroll-behavior: smooth;
-}
-
-/* Scrollable drop zones container */
-.dropZonesContainer {
     display: flex;
     flex-direction: column;
-    gap: clamp(12px, 2vh, 18px);
-    max-height: 60vh; /* Increased height limit for more drop zones */
-    overflow-y: auto; /* Enable vertical scrolling */
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #bbddff #f0f0f0; /* For Firefox */
-    padding-right: 8px; /* Space for scrollbar */
-    margin-top: 10px; /* Space between heading and items */
-    padding-bottom: 5px; /* Bottom padding */
 }
 
-/* Webkit scrollbar for drop zones container */
-.dropZonesContainer::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-.dropZonesContainer::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
-}
-
-.dropZonesContainer::-webkit-scrollbar-thumb {
-    background: #bbddff;
-    border-radius: 10px;
-}
-
-.dropZonesContainer::-webkit-scrollbar-thumb:hover {
-    background: #93c5fd;
-}
-
-/* Scrollable steps container */
+.dropZonesContainer,
 .stepsContainer {
     display: flex;
     flex-direction: column;
     gap: clamp(12px, 2vh, 18px);
-    max-height: 50vh; /* Limit height for scrollability */
-    overflow-y: auto; /* Enable vertical scrolling */
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #bbddff #f0f0f0; /* For Firefox */
-    padding-right: 8px; /* Space for scrollbar */
-    margin-top: 10px; /* Space between heading and items */
-    padding-bottom: 5px; /* Bottom padding */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #bbddff #f0f0f0;
+    padding: 8px 8px 8px 0;
+    margin-top: 10px;
+    flex-grow: 1;
+    min-height: 0;
 }
 
-/* Webkit scrollbar for steps container */
+.stepsContainer {
+    padding-right: 8px;
+    padding-left: 0;
+}
+
+/* Custom Scrollbar Styles */
+.dropZonesContainer::-webkit-scrollbar,
 .stepsContainer::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
 
+.dropZonesContainer::-webkit-scrollbar-track,
 .stepsContainer::-webkit-scrollbar-track {
     background: #f0f0f0;
     border-radius: 10px;
 }
 
+.dropZonesContainer::-webkit-scrollbar-thumb,
 .stepsContainer::-webkit-scrollbar-thumb {
     background: #bbddff;
     border-radius: 10px;
 }
 
+.dropZonesContainer::-webkit-scrollbar-thumb:hover,
 .stepsContainer::-webkit-scrollbar-thumb:hover {
     background: #93c5fd;
 }

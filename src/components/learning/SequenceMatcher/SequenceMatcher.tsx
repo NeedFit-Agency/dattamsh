@@ -214,6 +214,8 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         return <img src="/images/computer.png" alt="Default" className={styles.imageIcon} />;
     }
   };
+
+  
   return (
     <div className={styles.container}>
       <div className={styles.worksheetCard}>
