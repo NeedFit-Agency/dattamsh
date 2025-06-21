@@ -36,7 +36,7 @@ const correctMatches: Record<string, string> = {
 
 interface KidsMatchingGameProps {
   onBack?: () => void;
-  onComplete?: () => void;
+  onComplete?: (() => void) | { href: string };
   isLastLesson?: boolean;
 }
 
@@ -181,15 +181,6 @@ const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack, onComplete,
     }
   }, [isAllCorrect, onComplete]);
 
-  const handleCongratulationsNext = () => {
-    if (onComplete) {
-      onComplete();
-    } else {
-      // Reset the game if no onComplete handler
-      handleReset();
-    }
-  };
-
   const handleReset = () => {
     setConnections([]);
     setShowCelebration(false);
@@ -218,6 +209,14 @@ const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack, onComplete,
 
   return (
     <div className={styles.chooseBg}>
+      <CongratulationsScreen
+        isVisible={showCongratulations}
+        onButtonClick={onComplete ? onComplete : handleReset}
+        onTryAgainClick={handleReset}
+        showTryAgain={true}
+        buttonText={isLastLesson ? 'Finish Course' : 'Next Lesson'}
+        tryAgainText="Play Again"
+      />
       <div 
         ref={containerRef}
         className={styles.chooseCard}
@@ -398,16 +397,12 @@ const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack, onComplete,
             Click the ✕ button to remove a connection
           </p>        </div>
 
-        <CongratulationsScreen
-          isVisible={showCongratulations}
-          message="Great job! You matched everything correctly!"
-          buttonText="Finish"
-          onButtonClick={handleCongratulationsNext}
-          showStars={true}
-          showTryAgain={true}
-          tryAgainText="Try Again"
-          onTryAgainClick={handleReset}
-        />
+        <button 
+          className={styles.resetButton}
+          onClick={handleReset}
+        >
+          Reset Connections
+        </button>
       </div>
     </div>
   );

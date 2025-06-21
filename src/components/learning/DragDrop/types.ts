@@ -17,6 +17,6 @@ export interface DragDropProps {
   speakText?: string;
   progress?: number;
   onBack?: () => void;
-  onComplete?: () => void;
+  onComplete?: (() => void) | { href: string };
   isLastLesson?: boolean;
 }

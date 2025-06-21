@@ -142,15 +142,6 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     }
   };
 
-  const handleCongratulationsNext = () => {
-    if (onComplete) {
-      onComplete();
-    } else {
-      // Reset the game if no onComplete handler
-      resetGame();
-    }
-  };
-
   // Reset Game Logic
   const resetGame = () => {
     setPlacedItems({});
@@ -218,6 +209,14 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   
   return (
     <div className={styles.container}>
+      <CongratulationsScreen
+        isVisible={showCongratulations}
+        onButtonClick={onComplete ? onComplete : resetGame}
+        onTryAgainClick={resetGame}
+        showTryAgain={true}
+        buttonText={isLastLesson ? 'Finish Course' : 'Next Lesson'}
+        tryAgainText="Play Again"
+      />
       <div className={styles.worksheetCard}>
         <span className={styles.gearIcon}>⚙️</span>
         <h1 className={styles.title}>{title}</h1>
@@ -295,42 +294,19 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
           </div>
         </div>
 
-        <div className={`${styles.feedbackMessage} ${
-          feedback.type === 'correct' ? styles.feedbackCorrect : 
-          feedback.type === 'incorrect' ? styles.feedbackIncorrect : ''
-        }`}>
-          {feedback.message}
-        </div>
+        {feedback.type && <div className={`${styles.feedback} ${feedback.type === 'correct' ? styles.correctFeedback : styles.incorrectFeedback}`}>{feedback.message}</div>}
 
         <button 
-          className={`${styles.actionButton} ${styles.checkAnswerBtn}`}
+          className={styles.checkButton}
           onClick={checkAnswer}
-          style={{ display: showTryAgain ? 'none' : 'inline-flex' }}
+          disabled={Object.keys(placedItems).length < correctOrder.length}
         >
-          <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
-            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-          </svg>
-          <span>Check Answer</span>
+          Check My Answer
         </button>
-        
-        <button 
-          className={`${styles.actionButton} ${styles.tryAgainBtn}`}
-          onClick={resetGame}
-          style={{ display: showTryAgain ? 'inline-flex' : 'none' }}
-        >
-          Try Again        </button>
-
-        {showCongratulations && (
-          <CongratulationsScreen 
-            isVisible={showCongratulations}
-            message="You've arranged the steps in the correct order!"
-            buttonText="Finish"
-            onButtonClick={handleCongratulationsNext}
-            showStars={true}
-            showTryAgain={true}
-            tryAgainText="Try Again"
-            onTryAgainClick={resetGame}
-          />
+        {showTryAgain && (
+          <button className={`${styles.checkButton} ${styles.tryAgainButton}`} onClick={resetGame}>
+            Try Again
+          </button>
         )}
       </div>
     </div>

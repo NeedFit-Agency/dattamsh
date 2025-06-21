@@ -38,7 +38,7 @@ const UnsupportedFormat: React.FC<{format: string}> = ({ format }) => (
 interface ContentRendererProps {
   content: LessonContent | null; // The content object with format field
   onBack?: () => void;
-  onComplete?: () => void;
+  onComplete?: (() => void) | { href: string };
   progress?: number;
 }
 

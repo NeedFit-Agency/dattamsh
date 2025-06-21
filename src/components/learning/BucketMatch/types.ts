@@ -32,7 +32,7 @@ export interface BucketMatchProps {
   audioSrc?: string;                 // Optional audio source for instructions or feedback
   progress?: number;                 // Optional progress value (e.g., 0-100)
   onBack?: () => void;               // Optional callback function for a back button
-  onComplete?: () => void;           // Optional callback function when all items are correctly matched
+  onComplete?: (() => void) | { href: string }; // Optional callback for completion, can be a function or a navigation link
   successMessage?: string;           // Message shown when all items are matched successfully
   correctMessage?: string;           // Message shown when an item is correctly placed
   tryAgainMessage?: string;          // Message shown when an item is incorrectly placed

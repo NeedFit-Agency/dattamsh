@@ -178,14 +178,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       }, 1000);
     }
   }, [allItemsMatched, onComplete]);
-  const handleCongratulationsNext = () => {
-    if (onComplete) {
-      onComplete();
-    } else {
-      // If no onComplete handler, reset the game
-      handleReset();
-    }
-  };
 
   const handleReset = () => {
     // Reset state
@@ -217,6 +209,15 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
 
   return (
     <div className={styles.container}>
+      <CongratulationsScreen
+        isVisible={showCongratulations}
+        onButtonClick={onComplete ? onComplete : handleReset}
+        onTryAgainClick={handleReset}
+        showTryAgain={true}
+        buttonText={isLastLesson ? 'Finish Course' : 'Next Lesson'}
+        tryAgainText="Play Again"
+      />
+
       {onBack && (
         <div className={styles.header}>
           {title && <h2 className={styles.mainTitle}>{title}</h2>}
@@ -324,17 +325,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
           >
             {allItemsMatched ? playAgainLabel : resetLabel}
           </button>        )}
-
-        <CongratulationsScreen
-          isVisible={showCongratulations}
-          message={successMessage}
-          buttonText="Finish"
-          onButtonClick={handleCongratulationsNext}
-          showStars={true}
-          showTryAgain={true}
-          tryAgainText="Try Again"
-          onTryAgainClick={handleReset}
-        />
       </div>
     </div>
   );

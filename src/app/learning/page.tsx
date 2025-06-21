@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, Suspense } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowLeft,
@@ -45,9 +45,9 @@ function LearningPageContent() {
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [hearts, setHearts] = useState(3);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const initialLessonContent = standards["1"][0].lessonContent;
-  const [chapterContent, setChapterContent] = useState<LessonContent[]>(initialLessonContent);
+  const [chapterContent, setChapterContent] = useState<LessonContent[]>([]);
   const [standard, setStandard] = useState<string>('1');
   const [chapter, setChapter] = useState<string>('1');
 
@@ -60,40 +60,51 @@ function LearningPageContent() {
   const [itemCorrectness, setItemCorrectness] = useState<{ [itemId: string]: boolean }>({});
 
   const totalSlides = chapterContent.length;
-  const currentContent = chapterContent[currentSlideIndex] || chapterContent[0] || null;
+  const currentContent = chapterContent[currentSlideIndex] || null;
+  const isLastSlide = totalSlides > 0 && currentSlideIndex === totalSlides - 1;
 
   const areAllItemsPlaced = useCallback(() => {
     return (dndState.sourceItems?.length || 0) === 0;
   }, [dndState.sourceItems]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const searchParams = new URLSearchParams(window.location.search);
     const standardParam = searchParams.get('standard') || '1';
     const chapterParam = searchParams.get('chapter') || '1';
+    const lessonParam = searchParams.get('lesson') || '1';
 
-    console.log("URL Parameters:", { standard: standardParam, chapter: chapterParam });
     setStandard(standardParam);
     setChapter(chapterParam);
 
-    let selectedContent: LessonContent[] = initialLessonContent;
-    const standardChapters = standards[standardParam];
-    const chapterIndex = parseInt(chapterParam, 10) - 1;
+    let selectedContent: LessonContent[] = [];
+    const standardData = standards[standardParam as keyof typeof standards];
+    
+    if (standardData) {
+      // The `lesson` param from the URL corresponds to the chapter `id` in our data.
+      const chapterData = standardData.find(
+        (ch) => ch.id.toString() === lessonParam
+      );
 
-    if (standardChapters && standardChapters[chapterIndex]) {
-      selectedContent = standardChapters[chapterIndex].lessonContent;
-    } else {
-      console.warn(`Chapter ${chapterParam} not found for Standard ${standardParam}. Defaulting to first chapter.`);
-      selectedContent = standardChapters ? standardChapters[0].lessonContent : initialLessonContent;
+      if (chapterData && chapterData.lessonContent) {
+        selectedContent = chapterData.lessonContent;
+      }
     }
 
-    console.log(`Selected content for Standard ${standardParam}, Chapter ${chapterParam} with ${selectedContent.length} slides.`);
+    if (!selectedContent.length) {
+      console.warn(`Content not found for Standard ${standardParam}, Chapter ${chapterParam}, Lesson ${lessonParam}.`);
+      // Fallback logic
+      const fallbackStandard = standards['1'];
+      const fallbackChapter = fallbackStandard ? fallbackStandard[0] : null;
+      selectedContent = fallbackChapter ? fallbackChapter.lessonContent : [];
+    }
+    
     setChapterContent(selectedContent);
     setCurrentSlideIndex(0);
     setProgress(0);
+    setHearts(3);
+    setDndChecked(false);
+    setItemCorrectness({});
 
-  }, [initialLessonContent]);
+  }, [searchParams]);
 
   useEffect(() => {
     window.speechSynthesis?.cancel();
@@ -162,6 +173,17 @@ function LearningPageContent() {
       router.push(`/standard/${standard}/chapter/${chapter}`);
     }
   };
+
+  const handleActivityComplete = () => {
+    if (!isLastSlide) {
+      setCurrentSlideIndex(currentSlideIndex + 1);
+    }
+    // If it is the last slide, the onComplete prop with href will handle navigation.
+  };
+
+  const onCompleteProp = isLastSlide
+    ? { href: `/standard/${standard}/chapter/${chapter}` }
+    : handleActivityComplete;
 
   const checkDragDrop = () => {
     if (!currentContent || currentContent.type !== 'drag-drop') return;
@@ -289,7 +311,7 @@ function LearningPageContent() {
           <ContentRenderer 
             content={currentContent}
             onBack={handleBackClick}
-            onComplete={handleContinue}
+            onComplete={onCompleteProp}
             progress={progress}
           />        </main>
       </div>

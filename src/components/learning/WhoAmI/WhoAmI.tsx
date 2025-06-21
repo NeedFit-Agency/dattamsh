@@ -13,7 +13,7 @@ export interface WhoAmIProps {
   questionText?: string;
   options: Option[];
   correctAnswerId: string;
-  onComplete?: () => void;
+  onComplete?: (() => void) | { href: string };
   onIncorrectAttempt?: () => void;
   mascot?: React.ReactNode; // Optional custom mascot
   buttonTextWhenCorrect?: string; // Text to display on the button when answer is correct
@@ -82,22 +82,6 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     setShowCongratulations(false);
     setIsCorrectAnswer(false);
     // We don't reset the lessonCompleted flag here to maintain the completion state
-  };const handleCongratulationsNext = () => {
-    // First fully reset component state and hide all UI elements
-    // This is crucial for when this component is reused in the lesson flow
-    setShowCongratulations(false);
-    setIsAnswered(false);
-    setSelectedAnswer(null);
-    setShowWinScreen(false);
-    setIsCorrectAnswer(false);
-    
-    // Then immediately proceed to next lesson
-    // This immediate navigation prevents showing congratulation screen again
-    if (onComplete) {
-      setLessonCompleted(false);
-      // The onComplete callback will handle routing to the next lesson's OMI component
-      onComplete();
-    }
   };
 
   const handleReset = () => {
@@ -125,7 +109,18 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (optionId === selectedAnswer && optionId !== correctAnswerId) return `${styles.optionButton} ${styles.incorrect}`;
     return styles.optionButton;
   };  return (
-    <div className={styles.container}>      <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
+    <div className={styles.container}>
+      <CongratulationsScreen
+        isVisible={showCongratulations}
+        onButtonClick={onComplete ? onComplete : handleReset}
+        onTryAgainClick={handleReset}
+        showTryAgain={!isCorrectAnswer}
+        buttonText={isLastLesson ? 'Finish Course' : 'Next Lesson'}
+        tryAgainText="Play Again"
+        message={isCorrectAnswer ? "Great job! You got it right!" : "Not quite! Give it another shot."}
+        mascot={mascot}
+      />
+      <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
         <span className={styles.gearIcon}>⚙️</span>
         
         {showWinScreen && (
@@ -168,19 +163,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
               <span>{option.text}</span>
             </button>          ))}
         </div>
-      </div>      {showCongratulations && (
-        <CongratulationsScreen
-          isVisible={showCongratulations}
-          message="Great job! You got it right!"
-          buttonText={isLastLesson ? "Finish" : "Next"}
-          onButtonClick={handleCongratulationsNext}
-          showStars={true}
-          showTryAgain={true}
-          tryAgainText="Try Again"
-          onTryAgainClick={handleReset}
-          mascot={mascot}
-        />
-      )}
+      </div>
     </div>
   );
 };

@@ -17,7 +17,7 @@ export interface SequenceMatcherProps {
   items?: DraggableItem[]; // Made optional with default
   dropZoneCount?: number; // Made optional with default
   correctOrder?: string[]; // Made optional with default
-  onComplete?: () => void;
+  onComplete?: (() => void) | { href: string };
   onIncorrectAttempt?: () => void;
   isLastLesson?: boolean;
   // Potentially props for audio, progress, back button like in BucketMatch

@@ -185,28 +185,6 @@ export const DragDrop: React.FC<DragDropProps> = ({
     setAllCompleted(false);
   };
 
-  const handleCongratulationsNext = () => {
-    if (onComplete) {
-      onComplete();
-    } else {
-      // Reset the game if no onComplete handler
-      setShowCongratulations(false);
-      setAllCompleted(false);
-      setDragItems(items.map((item) => ({
-        ...item,
-        placed: false,
-        targetId: '',
-        text: item.text || item.content || '',
-      })));
-      const resetDropped: Record<string, DragItem[]> = {};
-      targets.forEach((target) => {
-        resetDropped[target.id] = [];
-      });
-      setDroppedItems(resetDropped);
-      setFeedback({ show: false, correct: false, message: '' });
-    }
-  };
-
   // Reset function for Try Again button
   const handleReset = () => {
     setShowCongratulations(false);
@@ -221,11 +199,20 @@ export const DragDrop: React.FC<DragDropProps> = ({
     targets.forEach((target) => {
       resetDropped[target.id] = [];
     });
-    setDroppedItems(resetDropped);    setFeedback({ show: false, correct: false, message: '' });
+    setDroppedItems(resetDropped);
+    setFeedback({ show: false, correct: false, message: '' });
   };
 
   return (
     <div className={styles.container}>
+      <CongratulationsScreen
+        isVisible={showCongratulations}
+        onButtonClick={onComplete ? onComplete : handleReset}
+        onTryAgainClick={handleReset}
+        showTryAgain={true}
+        buttonText={isLastLesson ? 'Finish Course' : 'Next Lesson'}
+        tryAgainText="Play Again"
+      />
       {/* Progress indicator */}
       {typeof progress === 'number' && (
         <div className={styles.progressContainer}>
@@ -348,18 +335,11 @@ export const DragDrop: React.FC<DragDropProps> = ({
 
       <div className={styles.activityControls}>
         {/* No check/reset buttons, logic is in Continue below */}
-      </div>      {showCongratulations && (
-        <CongratulationsScreen
-          isVisible={showCongratulations}
-          message="You've completed the activity!"
-          buttonText="Finish"
-          onButtonClick={handleCongratulationsNext}
-          showStars={true}
-          showTryAgain={true}
-          tryAgainText="Try Again"
-          onTryAgainClick={handleReset}
-        />
-      )}
+      </div>
+
+      <div className={styles.feedbackContainer}>
+        {/* Visual feedback for correct/incorrect drops can be added here */}
+      </div>
     </div>
   );
 };

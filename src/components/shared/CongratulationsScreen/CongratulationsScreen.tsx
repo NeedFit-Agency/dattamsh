@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styles from './CongratulationsScreen.module.css';
 
 interface CongratulationsScreenProps {
   isVisible: boolean;
   message?: string;
   buttonText?: string;
-  onButtonClick: () => void;
+  onButtonClick: (() => void) | { href: string };
   mascot?: React.ReactNode;
   showStars?: boolean;
   showTryAgain?: boolean;
@@ -14,53 +16,85 @@ interface CongratulationsScreenProps {
 }
 
 const DefaultMascot = () => (
-  <svg viewBox="0 0 100 80" width="100" height="80">
-    <path fill="#38bdf8" d="M10,80 C10,46.86 36.86,20 70,20 L75,20 C75,30 70,40 60,40 C50,40 45,30 45,20 L50,20 C83.14,20 110,46.86 110,80 L10,80 Z"></path>
-    <path fill="#7dd3fc" d="M50,20 C50,9 60,0 70,0 C80,0 90,9 90,20 L50,20 Z"></path>
-    <circle fill="#fff" cx="55" cy="55" r="12"></circle>
-    <circle fill="#475569" cx="52" cy="58" r="5"></circle>
-    <circle fill="#fff" cx="85" cy="55" r="12"></circle>
-    <circle fill="#475569" cx="88" cy="58" r="5"></circle>
-  </svg>
+  <Image
+    src="/images/mascot.png"
+    alt="Mascot"
+    width={120}
+    height={120}
+    className={styles.mascotImage}
+  />
+);
+
+const ConfettiPiece: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
+  <div className={styles.confetti} style={style} />
 );
 
 const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   isVisible,
-  message = "YOU DID IT!",
-  buttonText = "Next",
+  message = "You've completed the activity!",
+  buttonText = "Finish",
   onButtonClick,
   mascot = <DefaultMascot />,
   showStars = true,
   showTryAgain = false,
   tryAgainText = "Try Again",
-  onTryAgainClick
+  onTryAgainClick,
 }) => {
+  const router = useRouter();
+  const confettiPieces = useMemo(() => {
+    if (!isVisible) return [];
+    const pieces = [];
+    const colors = ['#f1c40f', '#e67e22', '#3498db', '#2ecc71', '#9b59b6', '#1abc9c'];
+    for (let i = 0; i < 80; i++) {
+      pieces.push({
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 4}s`,
+        backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+        transform: `rotate(${Math.random() * 360}deg)`,
+      });
+    }
+    return pieces;
+  }, [isVisible]);
+
   if (!isVisible) return null;
 
+  const handleButtonClick = () => {
+    if (typeof onButtonClick === 'object' && onButtonClick.href) {
+      router.push(onButtonClick.href);
+    } else if (typeof onButtonClick === 'function') {
+      onButtonClick();
+    }
+  };
+
   return (
-    <div className={`${styles.winScreen} ${isVisible ? styles.visible : ''}`}>
-      <div className={styles.winText}>{message}</div>
-      
+    <div className={`${styles.winScreen} ${styles.visible}`}>
+      <div className={styles.confettiContainer}>
+        {confettiPieces.map((style, index) => (
+          <ConfettiPiece key={index} style={style} />
+        ))}
+      </div>
+
       {showStars && (
         <div className={styles.starContainer}>
-          <div className={`${styles.star} ${styles.s1}`}>⭐</div>
-          <div className={`${styles.star} ${styles.s2}`}>⭐</div>
-          <div className={`${styles.star} ${styles.s3}`}>⭐</div>
-          <div className={`${styles.star} ${styles.s4}`}>⭐</div>
-          <div className={`${styles.star} ${styles.s5}`}>⭐</div>
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className={`${styles.star} ${styles[`s${i + 1}`]}`} />
+          ))}
         </div>
       )}
-        <div className={styles.winMascot}>
-        {mascot}
-      </div>
-      
+
+      <div className={styles.winText}>{message}</div>
+      <div className={styles.winMascot}>{mascot}</div>
+
       <div className={styles.buttonContainer}>
         {showTryAgain && onTryAgainClick && (
-          <button className={`${styles.playAgainBtn} ${styles.tryAgainBtn}`} onClick={onTryAgainClick}>
+          <button
+            className={`${styles.playAgainBtn} ${styles.tryAgainBtn}`}
+            onClick={onTryAgainClick}
+          >
             {tryAgainText}
           </button>
         )}
-        <button className={styles.playAgainBtn} onClick={onButtonClick}>
+        <button className={styles.playAgainBtn} onClick={handleButtonClick}>
           {buttonText}
         </button>
       </div>
