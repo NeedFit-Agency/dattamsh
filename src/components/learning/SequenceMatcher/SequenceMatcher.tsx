@@ -272,7 +272,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             }}
             onDrop={handleDropToDraggableArea}
           >
-            <h3>Available Steps</h3>
+            <h3>Steps</h3>
             <div className={styles.stepsContainer}>
               {availableItems.map((item, index) => (
                 <div 
@@ -296,18 +296,21 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
 
         {feedback.type && <div className={`${styles.feedback} ${feedback.type === 'correct' ? styles.correctFeedback : styles.incorrectFeedback}`}>{feedback.message}</div>}
 
-        <button 
-          className={styles.checkButton}
-          onClick={checkAnswer}
-          disabled={Object.keys(placedItems).length < correctOrder.length}
-        >
-          Check My Answer
-        </button>
-        {showTryAgain && (
-          <button className={`${styles.checkButton} ${styles.tryAgainButton}`} onClick={resetGame}>
-            Try Again
-          </button>
-        )}
+        <div className={styles.actionButtonsContainer}>
+          {!showTryAgain ? (
+            <button
+              className={`${styles.actionButton} ${styles.checkAnswerBtn}`}
+              onClick={checkAnswer}
+              disabled={Object.keys(placedItems).length < correctOrder.length}
+            >
+              Check My Answer
+            </button>
+          ) : (
+            <button className={`${styles.actionButton} ${styles.tryAgainBtn}`} onClick={resetGame}>
+              Try Again
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
