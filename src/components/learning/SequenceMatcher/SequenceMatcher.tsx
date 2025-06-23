@@ -264,7 +264,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
 
         <div className={styles.mainContent}>
           <div className={styles.dropTargets}>
-            <h3>Drop Zones</h3>
+            <h3>Column A</h3>
             <p className={styles.description}>
               Drag and drop the steps in the correct format, from 1 to {dropZoneCount}.
             </p>
@@ -317,7 +317,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             }}
             onDrop={handleDropToDraggableArea}
           >
-            <h3>Steps</h3>
+            <h3>Column B</h3>
             <div className={styles.stepsContainer}>
               {availableItems.map((item, index) => (
                 <div 

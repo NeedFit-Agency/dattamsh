@@ -325,6 +325,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
+  margin-top: 20px;
   transition: all 0.2s;
   box-shadow: 0 4px 0 #2563eb;
   text-transform: uppercase;
