@@ -12,24 +12,21 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ message, fullScreen }) 
 
   return (
     <div className={containerClasses}>
-      <Image
-        src="/images/mascot.png"
-        alt="Mascot"
-        width={100}
-        height={100}
-        className={styles.mascot}
-        priority
-      />
-
-      <div className={styles.spinner} />
+      <div className={styles.mascotContainer}>
+        <Image
+          src="/images/mascot.png"
+          alt="Mascot"
+          width={100}
+          height={100}
+          className={styles.mascot}
+          priority
+        />
+        <div className={styles.spinner} />
+      </div>
 
       {message && <div className={styles.message}>{message}</div>}
 
       <div className={styles.subText}>Get ready for fun learning!</div>
-
-      <div className={styles.progressBarContainer}>
-        <div className={styles.progressBar} />
-      </div>
 
       {fullScreen && (
         <div className={styles.footerText}>

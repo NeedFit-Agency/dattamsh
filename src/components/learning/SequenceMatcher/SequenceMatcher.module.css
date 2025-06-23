@@ -174,7 +174,7 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 2;
-    background: linear-gradient(45deg, #4e54c8, #8f94fb);
+    background: linear-gradient(45deg, #353535, #8f94fb);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -256,6 +256,16 @@
     border-radius: clamp(14px, 1.8vw, 20px);
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.description {
+  margin: -clamp(12px, 2vh, 16px) 0 clamp(12px, 2vh, 16px);
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  color: #5c4b40;
+  font-style: italic;
+  font-family: "Nunito", "Quicksand", sans-serif;
+  padding: 0 clamp(16px, 1.8vw, 24px);
+  text-align: center;
 }
 
 .dropZone {
@@ -413,7 +423,6 @@
     left: 0;
     right: 0;
     height: 50%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
     pointer-events: none;
 }
 
@@ -637,7 +646,7 @@
 }
 
 .tryAgainBtn {
-    background-color: #5c4b40;
+    background-color: #575757;
     background-image: linear-gradient(135deg, #7c6657, #4a3c33);
     color: white;
     box-shadow: 0 6px 20px rgba(92, 75, 64, 0.4), 0 4px 0 #3d3228;
@@ -956,4 +965,14 @@
   margin-top: auto;
   padding-top: 1rem;
   width: 100%;
+}
+
+.dropZone .stepItem {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dropZone .stepItem:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15), 0 5px 0 rgba(0,0,0,0.06);
 }

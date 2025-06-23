@@ -175,30 +175,14 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       // Show congratulations screen after a short delay
       setTimeout(() => {
         setShowCongratulations(true);
-      }, 1000);
+      }, 2000);
     }
-  }, [allItemsMatched, onComplete]);
+  }, [allItemsMatched]);
 
   const handleReset = () => {
-    // Reset state
     setPlacedItems({});
     setFeedback({ type: null });
-    setDraggedItemId(null);
     setShowCongratulations(false);
-    
-    // Remove all visual classes
-    document.querySelectorAll(`.${styles.basketDropzone}`).forEach(el => {
-      el.classList.remove(styles.correct, styles.incorrect, styles.dragOver);
-    });
-    
-    // Re-enable draggable items
-    document.querySelectorAll(`.${styles.fruitDraggable}`).forEach(el => {
-      el.setAttribute('draggable', 'true');
-    });
-      // Reset any instruction text visibility
-    document.querySelectorAll(`.${styles.bucketInstructionText}`).forEach(el => {
-      (el as HTMLElement).style.opacity = '1';
-    });
   };
 
   const playAudio = () => {
@@ -273,6 +257,16 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
             ))}
           </div>
           
+          {(matchedItemsCount > 0 || allItemsMatched) && !showCongratulations && (
+            <button
+              id="reset-button"
+              className={styles.resetButton}
+              onClick={handleReset}
+            >
+              {allItemsMatched ? playAgainLabel : resetLabel}
+            </button>
+          )}
+
           {/* Buckets Section - Bottom */}
           <div className={styles.basketsContainer}>
             {buckets.map((bucket) => {
@@ -310,20 +304,22 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
           </div>
         </div><div 
             id="feedback-message" 
-            className={`${styles.feedbackMessage} ${feedback.type === 'correct' ? styles.correctText : feedback.type === 'incorrect' ? styles.incorrectText : ''}`}
+            className={`${styles.feedbackMessage} ${
+              feedback.type === 'correct' && !allItemsMatched
+                ? styles.correctText
+                : feedback.type === 'incorrect'
+                ? styles.incorrectText
+                : ''
+            }`}
         >
-          {allItemsMatched ? successMessage : 
-           feedback.type === 'correct' && !Object.values(placedItems).includes(feedback.bucketId || '') ? correctMessage : 
-           feedback.type === 'incorrect' ? tryAgainMessage : ''}
-        </div>        {(allItemsCount > 0) && (
-          <button
-            id="reset-button"
-            className={styles.resetButton}
-            onClick={handleReset}
-            style={{ display: (matchedItemsCount > 0 || allItemsMatched) && !showCongratulations ? 'block' : 'none' }}
-          >
-            {allItemsMatched ? playAgainLabel : resetLabel}
-          </button>        )}
+          {allItemsMatched
+            ? successMessage
+            : feedback.type === 'correct'
+            ? correctMessage
+            : feedback.type === 'incorrect'
+            ? tryAgainMessage
+            : ''}
+        </div>
       </div>
     </div>
   );

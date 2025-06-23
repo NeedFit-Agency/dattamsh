@@ -291,6 +291,31 @@
   animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* --- Confetti --- */
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1000;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0vh) rotateZ(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotateZ(720deg);
+    opacity: 0;
+  }
+}
+
 .resetButton {
   background-color: #3b82f6;
   color: white;
@@ -300,7 +325,6 @@
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 20px;
   transition: all 0.2s;
   box-shadow: 0 4px 0 #2563eb;
   text-transform: uppercase;

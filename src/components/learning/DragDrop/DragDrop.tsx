@@ -144,7 +144,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
         // Show congratulations screen after a short delay
         setTimeout(() => {
           setShowCongratulations(true);
-        }, 1000);
+        }, 2000);
       } else {
         setFeedback({ show: true, correct: false, message: 'Some items are in the wrong category. Try again!' });
         // Reset after a short delay

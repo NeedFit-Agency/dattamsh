@@ -116,7 +116,7 @@ export const standards: Standard = {
           format: "drag-drop",
           title: "Sort Natural and Man-made Things",
           instruction:
-            'Help me sort these pictures. Drag them into the correct box: "Natural Things" or "Man-made Things".',
+            'Help me sort these pictures',
           items: [
             {
               id: "dnd-item-1",
@@ -125,10 +125,10 @@ export const standards: Standard = {
               imageUrl: "/images/sun.png",
             },
             {
-              id: "dnd-item-2",
-              text: "water",
-              type: "option-1",
-              imageUrl: "/images/water.png",
+              id: "dnd-item-7",
+              text: "chair",
+              type: "option-2",
+              imageUrl: "/images/chair.png",
             },
             {
               id: "dnd-item-3",
@@ -149,16 +149,16 @@ export const standards: Standard = {
               imageUrl: "/images/school.png",
             },
             {
+              id: "dnd-item-2",
+              text: "water",
+              type: "option-1",
+              imageUrl: "/images/water.png",
+            },
+            {
               id: "dnd-item-6",
               text: "cycle",
               type: "option-2",
               imageUrl: "/images/cycle.png",
-            },
-            {
-              id: "dnd-item-7",
-              text: "chair",
-              type: "option-2",
-              imageUrl: "/images/chair.png",
             },
             {
               id: "dnd-item-8",
@@ -202,18 +202,17 @@ export const standards: Standard = {
               color: "#4caf50"
             },
             {
-              id: "mouse-item",
-              text: "Mouse",
-              type: "pointing",
-              imageUrl: "/images/mouse.png",
-              color: "#ff9800"
-            },
-            {
               id: "cpu-item",
               text: "CPU",
               type: "brain",
               imageUrl: "/images/cpu.png",
               color: "#9c27b0"
+            },            {
+              id: "mouse-item",
+              text: "Mouse",
+              type: "pointing",
+              imageUrl: "/images/mouse.png",
+              color: "#ff9800"
             },
           ],
           buckets: [
@@ -242,12 +241,12 @@ export const standards: Standard = {
           title: "Shutting Down the Computer",
           instruction: "Put these steps in the correct order to properly shut down a computer!",
           items: [
+            { id: "step-6", content: "Switch off the power supply" },
             { id: "step-1", content: "Save your work" },
             { id: "step-2", content: "Open the Start menu" },
-            { id: "step-3", content: "Click on the power button" },
             { id: "step-4", content: "Select \"Shut down\"" },
+            { id: "step-3", content: "Click on the power button" },
             { id: "step-5", content: "Wait for the computer to turn off" },
-            { id: "step-6", content: "Switch off the power supply" },
           ],
           correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5", "step-6"],
           dropZoneCount: 6,

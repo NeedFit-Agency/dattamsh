@@ -18,6 +18,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   const [showTryAgain, setShowTryAgain] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const draggedElementRef = useRef<HTMLElement | null>(null);
+  const dropZonesContainerRef = useRef<HTMLDivElement | null>(null);
 
   // Get items that are not yet placed in drop zones
   const availableItems = items.filter(item => 
@@ -77,6 +78,28 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     
     // Clear any existing feedback when placing items
     setFeedback({ type: null, message: '' });
+
+    // Scroll to the next drop zone if it's not visible
+    const container = dropZonesContainerRef.current;
+    const nextZoneIndex = zoneIndex + 1;
+    
+    if (container && nextZoneIndex < dropZoneCount) {
+      // There are direct children, so we can use the index
+      const nextDropZone = container.children[nextZoneIndex] as HTMLElement;
+
+      if (nextDropZone) {
+        // Use a timeout to allow React to render the new item before we scroll.
+        setTimeout(() => {
+          const containerRect = container.getBoundingClientRect();
+          const nextZoneRect = nextDropZone.getBoundingClientRect();
+          
+          // If the next drop zone is outside the visible area of the container, scroll to it.
+          if (nextZoneRect.bottom > containerRect.bottom || nextZoneRect.top < containerRect.top) {
+            nextDropZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
+      }
+    }
   };
 
   // Handle dropping back to the draggable items area
@@ -127,18 +150,36 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         isAllCorrect = false;
       }
     });    if (isAllCorrect) {
-      setFeedback({ type: 'correct', message: 'Perfect! You got it right!' });
+      setFeedback({ type: 'correct', message: '' });
       setShowTryAgain(true);
       // Show congratulations screen after a short delay
       setTimeout(() => {
         setShowCongratulations(true);
-      }, 1000);
+      }, 2000);
     } else {
-      setFeedback({ type: 'incorrect', message: 'Not quite, check the highlighted steps.' });
+      setFeedback({ type: 'incorrect', message: '' });
       setShowTryAgain(true);
       if (onIncorrectAttempt) {
         onIncorrectAttempt();
       }
+    }
+  };
+
+  const returnItemToSteps = (itemToReturn: DraggableItem) => {
+    const newPlacedItems = { ...placedItems };
+    const zoneIndexToRemove = Object.keys(newPlacedItems).find(
+      (key) => newPlacedItems[parseInt(key)].id === itemToReturn.id
+    );
+
+    if (zoneIndexToRemove) {
+      delete newPlacedItems[parseInt(zoneIndexToRemove)];
+      setPlacedItems(newPlacedItems);
+
+      setFeedback({ type: null, message: '' });
+      const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
+      dropZones.forEach(zone => {
+        zone.classList.remove(styles.slotCorrect, styles.slotIncorrect);
+      });
     }
   };
 
@@ -224,7 +265,10 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         <div className={styles.mainContent}>
           <div className={styles.dropTargets}>
             <h3>Drop Zones</h3>
-            <div className={styles.dropZonesContainer}>
+            <p className={styles.description}>
+              Drag and drop the steps in the correct format, from 1 to {dropZoneCount}.
+            </p>
+            <div ref={dropZonesContainerRef} className={styles.dropZonesContainer}>
               {Array.from({ length: dropZoneCount }, (_, index) => (
                 <div 
                   key={index}
@@ -241,6 +285,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                       draggable="false"
                       data-id={placedItems[index].id}
                       style={{'--item-index': index} as React.CSSProperties}
+                      onClick={() => returnItemToSteps(placedItems[index])}
                     >
                       <span className={`${styles.stepIcon} ${styles.imageIcon}`}>
                         {getItemIcon(placedItems[index])}
@@ -307,7 +352,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             </button>
           ) : (
             <button className={`${styles.actionButton} ${styles.tryAgainBtn}`} onClick={resetGame}>
-              Try Again
+              Play Again
             </button>
           )}
         </div>

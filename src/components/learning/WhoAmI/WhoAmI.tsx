@@ -64,7 +64,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       setButtonText(isLastLesson ? "Finish" : buttonTextWhenCorrect);
       setTimeout(() => {
         setShowCongratulations(true);
-      }, 800);
+      }, 2000);
     } else {
       incorrectSoundRef.current?.play().catch(console.error);
       setIsCorrectAnswer(false);
