@@ -6,6 +6,7 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import Header from '@/components/layout/Header/Header'
 import { usePathname } from 'next/navigation';
+import MobileBlocker from '@/components/shared/MobileBlocker';
 config.autoAddCss = false
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800", "900"] }); 
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={nunito.className} suppressHydrationWarning>
+        <MobileBlocker />
         {!isQuizPage && <Header />}
         {children}
       </body>
