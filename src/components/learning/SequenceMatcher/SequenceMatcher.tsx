@@ -149,15 +149,16 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         zone.classList.add(styles.slotIncorrect);
         isAllCorrect = false;
       }
-    });    if (isAllCorrect) {
-      setFeedback({ type: 'correct', message: '' });
+    });  if (isAllCorrect) {
+      setFeedback({ type: 'correct', message: 'Well done! You arranged everything correctly!' });
       setShowTryAgain(true);
-      // Show congratulations screen after a short delay
+      
+      // Show congratulations screen after a shorter delay for better feedback
       setTimeout(() => {
         setShowCongratulations(true);
-      }, 2000);
+      }, 1200);
     } else {
-      setFeedback({ type: 'incorrect', message: '' });
+      setFeedback({ type: 'incorrect', message: 'Some steps are not in the right order. Try again!' });
       setShowTryAgain(true);
       if (onIncorrectAttempt) {
         onIncorrectAttempt();
@@ -247,14 +248,15 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     }
   };
 
-  
-  return (
+    return (
     <div className={styles.container}>
+      {/* Position congratulations screen at the top level for proper z-index */}
       <CongratulationsScreen
         isVisible={showCongratulations}
         onButtonClick={onComplete ? onComplete : resetGame}
         onTryAgainClick={resetGame}
         showTryAgain={true}
+        message="Amazing! You've arranged everything correctly!"
         buttonText={isLastLesson ? 'Finish Course' : 'Next Lesson'}
         tryAgainText="Play Again"
       />
@@ -337,9 +339,13 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
               ))}
             </div>
           </div>
-        </div>
-
-        {feedback.type && <div className={`${styles.feedback} ${feedback.type === 'correct' ? styles.correctFeedback : styles.incorrectFeedback}`}>{feedback.message}</div>}
+        </div>        {feedback.type && (
+          <div 
+            className={`${styles.feedbackMessage} ${feedback.type === 'correct' ? styles.feedbackCorrect : styles.feedbackIncorrect}`}
+          >
+            {feedback.message}
+          </div>
+        )}
 
         <div className={styles.actionButtonsContainer}>
           {!showTryAgain ? (

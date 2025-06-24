@@ -13,6 +13,7 @@ type ContentItemType = {
   id: number;
   completed: boolean;
   level?: number;
+  chapterName?: string;
 };
 
 type PageParams = {
@@ -49,11 +50,20 @@ const getChapterData = (standardId: string, chapterId: string) => {
         (chapter: { id: number; title: string; completed: boolean }) =>
           chapter.id.toString() === chapterId
       )?.title || "Unknown Chapter";
+  
+  // Get chapter names for lessons
+  const standardChapters = chapters[standardId as keyof typeof chapters] || [];
+  const lessonChapterNames: {[key: number]: string} = {};
+  
+  standardChapters.forEach((chapter, index) => {
+    lessonChapterNames[index + 1] = chapter.title;
+  });
 
   return {
     standardTitle: standardTitles[standardId as keyof typeof standardTitles] || "Unknown Standard",
     chapterTitle,
     headerTheme: headerThemes[chapterId as keyof typeof headerThemes] || styles.themeGreen,
+    lessonChapterNames,
     content: [
       { type: 'level-badge' as const, id: 1, level: 1, completed: true },
       { type: 'level-badge' as const, id: 2, level: 2, completed: false },
@@ -75,38 +85,36 @@ export default function ChapterPage({
 
   const handleScrollDown = () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  };
-
-  // Positioning Configuration
+  };  // Positioning Configuration - adjusted to accommodate larger items and alternating chapter names
   const positions: { [key: number]: React.CSSProperties } = {
     1: {
       top: '50px',
-      left: '50%',
+      left: '45%', // Centered but slightly left to make space for right label
       transform: 'translateX(-50%)',
     },
     2: {
-      top: '180px',
-      left: '30%',
+      top: '220px', // More space between items
+      left: '25%', // Further left to make space for right label
       transform: 'translateX(-50%)',
     },
     3: {
-      top: '310px',
-      left: '20%',
+      top: '390px', // More space between items
+      left: '60%', // Further right
       transform: 'translateX(-50%)',
     },
     4: {
-      top: '440px',
-      left: '40%',
+      top: '560px', // More space between items
+      left: '35%', // Back to left side
       transform: 'translateX(-50%)',
     },
     5: {
-      top: '570px',
-      left: '60%',
+      top: '730px', // More space between items
+      left: '65%', // Right side
       transform: 'translateX(-50%)',
     },
     6: {
-      top: '280px',
-      left: '65%',
+      top: '300px', // Adjusted
+      left: '75%', // Further right
       transform: 'translateX(-50%)',
     },
   };
@@ -126,8 +134,7 @@ export default function ChapterPage({
             <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />
           </Link>
           <div className={styles.headerTitle}>
-            STANDARD {standard}, CHAPTER {id}
-            <h2>{chapterData.chapterTitle}</h2>
+            <h2>STANDARD {standard} </h2>
           </div>
         </div>
         <button className={styles.guidebookButton}>
@@ -149,18 +156,22 @@ export default function ChapterPage({
           >
             <FontAwesomeIcon icon={item.icon} />
           </div>
-        ))}
-
-        {(() => {
+        ))}        {(() => {
           const nodes: React.ReactNode[] = [];
           chapterData.content.forEach((item, idx) => {
             // Only 'robo' should never be clickable
             const isrobo = item.type === 'robo';
             const isClickable = !isrobo && !(item.type === 'checkmark' && item.completed);
             const itemStyle = positions[item.id] || {};
+              // Get chapter name for the lesson based on level number
+            const chapterName = item.type === 'level-badge' && item.level 
+              ? chapterData.lessonChapterNames[item.level] 
+              : undefined;
+              
+            // Determine left or right position (alternating)
+            const position = item.level && item.level % 2 === 0 ? 'left' : 'right';
 
-            const lessonNode = isClickable ? (
-              <Link
+            const lessonNode = isClickable ? (              <Link
                 key={item.id}
                 href={`/learning?standard=${standard}&chapter=${id}&lesson=${item.id}`}
                 className={styles.lessonLink}
@@ -171,10 +182,11 @@ export default function ChapterPage({
                   type={item.type}
                   level={item.type === 'level-badge' ? item.level : undefined}
                   completed={item.completed}
+                  chapterName={chapterName}
+                  position={position}
                 />
               </Link>
-            ) : (
-              <div
+            ) : (              <div
                 key={item.id}
                 className={styles.lessonLink}
                 style={itemStyle}
@@ -184,6 +196,8 @@ export default function ChapterPage({
                   type={item.type}
                   level={item.type === 'level-badge' ? item.level : undefined}
                   completed={item.completed}
+                  chapterName={chapterName}
+                  position={position}
                 />
               </div>
             );

@@ -1,43 +1,83 @@
-<svg width="100" height="60" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
-  <!-- Caps Lock key -->
+<svg width="140" height="80" viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Improved Caps Lock key for children -->
   <defs>
+    <!-- Enhanced gradient for more vibrant appearance -->
     <linearGradient id="capslockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#e9ecef;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#dee2e6;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#fff4f0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffe8e2;stop-opacity:1" />
     </linearGradient>
-    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#00000040"/>
+    
+    <!-- Better shadow for 3D effect -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#ff8c5c20"/>
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#00000030"/>
     </filter>
+    
+    <!-- Pattern for texture -->
+    <pattern id="keyPattern" patternUnits="userSpaceOnUse" width="10" height="10">
+      <rect width="10" height="10" fill="#ffffff" fill-opacity="0.03"/>
+      <circle cx="5" cy="5" r="1" fill="#00000008"/>
+    </pattern>
   </defs>
   
-  <!-- Main caps lock key body -->
-  <rect x="5" y="10" width="90" height="40" rx="4" ry="4" 
+  <!-- Key shadow base -->
+  <rect x="15" y="22" width="110" height="36" rx="8" ry="8" 
+        fill="#ffc4b8" filter="url(#shadow)"/>
+  
+  <!-- Main caps lock key body with rounded corners -->
+  <rect x="10" y="15" width="120" height="36" rx="8" ry="8" 
         fill="url(#capslockGrad)" 
-        stroke="#adb5bd" 
-        stroke-width="1.5" 
-        filter="url(#shadow)"/>
+        stroke="#ffa8a0" 
+        stroke-width="2"/>
+        
+  <!-- Key texture -->
+  <rect x="10" y="15" width="120" height="36" rx="8" ry="8"
+        fill="url(#keyPattern)"
+        opacity="0.6"/>
   
-  <!-- Top highlight -->
-  <rect x="7" y="12" width="86" height="8" rx="2" ry="2" 
+  <!-- Top highlight for 3D effect -->
+  <rect x="12" y="17" width="116" height="8" rx="4" ry="4" 
         fill="#ffffff" 
-        opacity="0.7"/>
+        opacity="0.9"/>
   
-  <!-- Caps lock symbol (lock icon) -->
-  <rect x="42" y="22" width="16" height="12" rx="1" ry="1" 
-        fill="none" 
-        stroke="#495057" 
-        stroke-width="2"/>
-  <path d="M45 22 Q45 18 50 18 Q55 18 55 22" 
-        fill="none" 
-        stroke="#495057" 
-        stroke-width="2"/>
-  <circle cx="50" cy="28" r="1.5" fill="#495057"/>
+  <!-- Bottom shadow for 3D effect -->
+  <rect x="12" y="40" width="116" height="8" rx="4" ry="4" 
+        fill="#ff8050" 
+        opacity="0.1"/>
   
-  <!-- Text label -->
-  <text x="50" y="45" text-anchor="middle" 
+  <!-- Side bevels for 3D effect -->
+  <rect x="10" y="15" width="6" height="36" rx="6" ry="6" 
+        fill="#ffd8d0" 
+        opacity="0.8"/>
+  <rect x="124" y="15" width="6" height="36" rx="6" ry="6" 
+        fill="#ffa8a0" 
+        opacity="0.8"/>
+  
+  <!-- Improved caps lock symbol (lock icon) -->
+  <rect x="57" y="25" width="16" height="12" rx="2" ry="2" 
+        fill="none" 
+        stroke="#c05040" 
+        stroke-width="2.5"/>
+  <path d="M60 25 Q60 20 65 20 Q70 20 70 25" 
+        fill="none" 
+        stroke="#c05040" 
+        stroke-width="2.5"
+        stroke-linecap="round"/>
+  <circle cx="65" cy="31" r="2" fill="#c05040"/>
+  
+  <!-- Up arrow to indicate caps -->
+  <path d="M42 28 L47 23 L52 28 M47 23 L47 33" 
+        stroke="#c05040" 
+        stroke-width="2.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        fill="none"/>
+  
+  <!-- Child-friendly text label with better contrast -->
+  <text x="70" y="61" text-anchor="middle" 
         font-family="Arial, sans-serif" 
-        font-size="8" 
+        font-size="11" 
         font-weight="bold" 
-        fill="#495057">CAPS LOCK</text>
+        fill="#c05040">CAPS LOCK</text>
 </svg>

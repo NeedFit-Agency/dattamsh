@@ -216,10 +216,11 @@ export const standards: Standard = {
             },
           ],
           buckets: [
-            { id: "shows-bucket", title: "shows everything the computer is doing", type: "shows", color: "#2196f3" },
             { id: "typing-bucket", title: "set of buttons called keys", type: "typing", color: "#4caf50" },
             { id: "pointing-bucket", title: "moves the pointer on the screen", type: "pointing", color: "#ff9800" },
-            { id: "brain-bucket", title: "brain of the computer", type: "brain", color: "#9c27b0" }
+            { id: "brain-bucket", title: "brain of the computer", type: "brain", color: "#9c27b0" },
+                        { id: "shows-bucket", title: "shows everything the computer is doing", type: "shows", color: "#2196f3" },
+
           ],
           successMessage: "Great job! You matched all computer parts!",
           correctMessage: "That's right!",
@@ -265,10 +266,10 @@ export const standards: Standard = {
           title: "Guess the Keyboard Key",
           riddleText: "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
           questionText: "Which key am I?",          options: [
+            { id: "option-2", text: "Enter Key", isCorrect: false, imageUrl: "/images/enter.png" },
+            { id: "option-3", text: "Caps Lock Key", isCorrect: false, imageUrl: "/images/capslock.png" },
             { id: "option-1", text: "Space Bar Key", isCorrect: true, imageUrl: "/images/spacebar.svg" },
-            { id: "option-2", text: "Enter Key", isCorrect: false, imageUrl: "/images/enter.svg" },
-            { id: "option-3", text: "Caps Lock Key", isCorrect: false, imageUrl: "/images/capslock.svg" },
-            { id: "option-4", text: "Backspace Key", isCorrect: false, imageUrl: "/images/backspace.svg" },
+            { id: "option-4", text: "Backspace Key", isCorrect: false, imageUrl: "/images/backspace.png" },
           ],
           audioSrc: "/audio/spacebar_riddle.mp3",
           speakText: "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
@@ -280,8 +281,9 @@ export const standards: Standard = {
           riddleText: "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
           questionText: "Which computer part am I?",
           options: [
-            { id: "option-1", text: "Keyboard", isCorrect: true, imageUrl: "/images/keyboard.png" },
             { id: "option-2", text: "Monitor", isCorrect: false, imageUrl: "/images/monitor.png" },
+                        { id: "option-1", text: "Keyboard", isCorrect: true, imageUrl: "/images/keyboard.png" },
+
             { id: "option-3", text: "Mouse", isCorrect: false, imageUrl: "/images/mouse.png" },
             { id: "option-4", text: "Speaker", isCorrect: false, imageUrl: "/images/speaker.png" },
           ],
@@ -294,10 +296,11 @@ export const standards: Standard = {
           title: "Guess the Mouse Part",
           riddleText: "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
           questionText: "Which mouse part am I?",          options: [
-            { id: "option-1", text: "Scroll Wheel", isCorrect: true, imageUrl: "/images/scroll-wheel.svg" },
             { id: "option-2", text: "Left Button", isCorrect: false, imageUrl: "/images/left-button.svg" },
             { id: "option-3", text: "Right Button", isCorrect: false, imageUrl: "/images/right-button.svg" },
             { id: "option-4", text: "Body", isCorrect: false, imageUrl: "/images/mouse-body.svg" },
+                      { id: "option-1", text: "Scroll Wheel", isCorrect: true, imageUrl: "/images/scroll-wheel.svg" },
+
           ],
           audioSrc: "/audio/scroll_wheel_riddle.mp3",
           speakText: "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",

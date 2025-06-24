@@ -24,6 +24,8 @@
     box-sizing: border-box;
     overflow: hidden;
     animation: fadeInBackground 0.5s ease-in;
+    /* Ensure congratulations screen appears above everything */
+    z-index: 1;
 }
 
 @keyframes fadeInBackground {

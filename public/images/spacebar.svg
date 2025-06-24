@@ -1,40 +1,84 @@
-<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-  <!-- Spacebar key -->
+<svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Improved Spacebar key for children -->
   <defs>
+    <!-- Enhanced gradient for more vibrant appearance -->
     <linearGradient id="spacebarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#e9ecef;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#dee2e6;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#f0f4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8ff;stop-opacity:1" />
     </linearGradient>
-    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#00000040"/>
+    
+    <!-- Better shadow for 3D effect -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#8c8cff20"/>
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#00000030"/>
     </filter>
+    
+    <!-- Soft inner glow for depth -->
+    <filter id="innerGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="arithmetic" k1="1" k2="1" k3="0" k4="0"/>
+    </filter>
+    
+    <!-- Pattern for texture -->
+    <pattern id="keyPattern" patternUnits="userSpaceOnUse" width="10" height="10">
+      <rect width="10" height="10" fill="#ffffff" fill-opacity="0.03"/>
+      <circle cx="5" cy="5" r="1" fill="#00000008"/>
+    </pattern>
   </defs>
   
-  <!-- Main spacebar body -->
-  <rect x="10" y="15" width="180" height="30" rx="4" ry="4" 
+  <!-- Key shadow base -->
+  <rect x="25" y="22" width="190" height="36" rx="8" ry="8" 
+        fill="#b8c4ff" filter="url(#shadow)"/>
+  
+  <!-- Main spacebar body with rounded corners -->
+  <rect x="20" y="15" width="200" height="36" rx="8" ry="8" 
         fill="url(#spacebarGrad)" 
-        stroke="#adb5bd" 
-        stroke-width="1.5" 
-        filter="url(#shadow)"/>
+        stroke="#a0a8ff" 
+        stroke-width="2"/>
+        
+  <!-- Key texture -->
+  <rect x="20" y="15" width="200" height="36" rx="8" ry="8"
+        fill="url(#keyPattern)"
+        opacity="0.6"/>
   
-  <!-- Top highlight -->
-  <rect x="12" y="17" width="176" height="8" rx="2" ry="2" 
+  <!-- Top highlight for 3D effect -->
+  <rect x="22" y="17" width="196" height="8" rx="4" ry="4" 
         fill="#ffffff" 
-        opacity="0.7"/>
+        opacity="0.9"/>
   
-  <!-- Side bevels -->
-  <rect x="10" y="15" width="4" height="30" rx="4" ry="4" 
-        fill="#ced4da" 
+  <!-- Bottom shadow for 3D effect -->
+  <rect x="22" y="40" width="196" height="8" rx="4" ry="4" 
+        fill="#8080ff" 
+        opacity="0.1"/>
+  
+  <!-- Side bevels for 3D effect -->
+  <rect x="20" y="15" width="6" height="36" rx="6" ry="6" 
+        fill="#d0d8ff" 
         opacity="0.8"/>
-  <rect x="186" y="15" width="4" height="30" rx="4" ry="4" 
-        fill="#ced4da" 
+  <rect x="214" y="15" width="6" height="36" rx="6" ry="6" 
+        fill="#a0a8ff" 
         opacity="0.8"/>
   
-  <!-- Text label -->
-  <text x="100" y="35" text-anchor="middle" 
+  <!-- Child-friendly text label with better contrast -->
+  <text x="120" y="39" text-anchor="middle" 
         font-family="Arial, sans-serif" 
-        font-size="12" 
+        font-size="16" 
         font-weight="bold" 
-        fill="#495057">SPACE</text>
+        fill="#4050c0">SPACE</text>
+        
+  <!-- Decorative arrows on both sides to indicate function -->
+  <path d="M50,30 L60,30 M55,26 L60,30 L55,34" 
+        stroke="#6070dd" 
+        stroke-width="2.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        fill="none"/>
+        
+  <path d="M190,30 L180,30 M185,26 L180,30 L185,34" 
+        stroke="#6070dd" 
+        stroke-width="2.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        fill="none"/>
 </svg>

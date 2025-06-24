@@ -128,8 +128,8 @@
 
 /* --- Draggable Fruit Styling --- */
 .fruitDraggable {
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   cursor: grab;
   transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s;
   display: flex; /* For centering SVG if needed */

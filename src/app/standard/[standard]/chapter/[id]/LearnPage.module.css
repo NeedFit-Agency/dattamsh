@@ -198,7 +198,8 @@
   position: relative;
   width: 100%;
   padding-bottom: 30px;
-  min-height: 700px;
+  min-height: 900px; /* Increased from 800px to accommodate larger items and chapter names */
+  overflow: visible; /* Ensure chapter names that extend beyond container are visible */
 }
 
 /* Add floating decorative elements */
@@ -284,9 +285,7 @@
   position: relative; /* Needed if children use absolute positioning */
 }
 /* Add extra margin to all sections except the last one */
-.sectionContainer:not(:last-child) {
-    /* margin-bottom: 50px; */ /* Example: More space between sections */
-}
+/* Removed empty rule */
 
 /* Style Links/Divs wrapping path items (LessonLink) */
 .lessonLink {
@@ -294,10 +293,12 @@
   position: absolute;
   display: block; /* Ensure it takes space */
   text-decoration: none;
-  width: fit-content; /* Size to the item inside */
+  width: 110px; /* Match the exact width of the badge */
+  height: 110px; /* Match the exact height of the badge */
   /* Remove margin-bottom - spacing controlled by 'top' */
   /* Remove transform transition if not desired for absolute positioning */
   transition: transform 0.1s ease-in-out, filter 0.2s ease, box-shadow 0.15s ease-in-out; /* Keep item transitions */
+  z-index: 5; /* Ensure it stays above other elements */
 }
 /* Ensure last item in a section doesn't have extra margin */
 .sectionContainer .lessonLink:last-child {

@@ -11,9 +11,11 @@ interface LessonPathItemProps {
   level?: number; // For level-badge
   completed?: boolean; // For checkmark styling
   onClick?: () => void; // Optional click handler
+  chapterName?: string; // Chapter name to display below the item
+  position?: 'left' | 'right'; // Position of chapter name (left or right)
 }
 
-export default function LessonPathItem({ type, level, completed, onClick }: LessonPathItemProps) {
+export default function LessonPathItem({ type, level, completed, onClick, chapterName, position = 'right' }: LessonPathItemProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
 
@@ -100,11 +102,18 @@ export default function LessonPathItem({ type, level, completed, onClick }: Less
       default:
         return null;
     }
-  };
-
-  return (
-    <div className={itemClass} onClick={handleMascotClick}>
-      {renderContent()}
+  };  return (
+    <div className={styles.itemWithLabel}>
+      <div className={itemClass} onClick={handleMascotClick}>
+        {renderContent()}
+      </div>
+      {chapterName && (
+        <div 
+          className={`${styles.chapterName} ${position === 'left' ? styles.leftPosition : styles.rightPosition}`}
+        >
+          {chapterName}
+        </div>
+      )}
     </div>
   );
 }
