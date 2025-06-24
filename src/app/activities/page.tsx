@@ -3,7 +3,6 @@ import React from 'react'
 import StepByStep  from '@/components/learning/StepbyStep/page';
 import TextContent from '@/components/learning/Text/Text';
 import CodeExample from '@/components/learning/Code/Code';
-import Video from '@/components/learning/Video/Video';
 import Flashcard from '@/components/learning/Flashcard/Flashcard';
 import { DragDrop } from '@/components/learning/DragDrop/DragDrop';
 import Puzzle from '@/components/learning/Puzzle/Puzzle';

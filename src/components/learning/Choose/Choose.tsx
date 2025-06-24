@@ -177,7 +177,9 @@ const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack, onComplete,
 
   useEffect(() => {
     if (isAllCorrect && onComplete) {
-      onComplete();
+      if (typeof onComplete === 'function') {
+        onComplete();
+      }
     }
   }, [isAllCorrect, onComplete]);
 
