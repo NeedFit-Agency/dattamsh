@@ -50,7 +50,12 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   // Store item id and its target bucket id for items placed in buckets
   const [placedItems, setPlacedItems] = useState<{[itemId: string]: string}>({});
-  const [feedback, setFeedback] = useState<{ type: 'correct' | 'incorrect' | null, bucketId?: string }>({ type: null });
+  const [feedback, setFeedback] = useState<{ 
+    type: 'correct' | 'incorrect' | null, 
+    bucketId?: string,
+    itemName?: string,
+    bucketName?: string
+  }>({ type: null });
   const [showCongratulations, setShowCongratulations] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -125,12 +130,31 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       }
 
     } else {
-      setFeedback({ type: 'incorrect', bucketId: targetBucket.id });
+      // Enhanced error feedback with specific guidance
+      const itemName = draggedItem.text || draggedItem.type.charAt(0).toUpperCase() + draggedItem.type.slice(1);
+      const bucketName = targetBucket.title || targetBucket.type.charAt(0).toUpperCase() + targetBucket.type.slice(1);
+      
+      setFeedback({ 
+        type: 'incorrect', 
+        bucketId: targetBucket.id,
+        itemName,
+        bucketName
+      });
       targetBucketElement.classList.add(styles.incorrect);
+      
+      // Add shake animation to the dragged item
+      const draggedElement = document.getElementById(`fruit-${draggedItemId}`);
+      if (draggedElement) {
+        draggedElement.classList.add(styles.shake);
+        setTimeout(() => {
+          draggedElement.classList.remove(styles.shake);
+        }, 600);
+      }
+      
       setTimeout(() => {
         targetBucketElement.classList.remove(styles.incorrect);
         setFeedback({ type: null });
-      }, 1000);
+      }, 2500); // Increased duration for better readability
     }
     // Dragged item ID is cleared in handleDragEnd
   };
@@ -172,8 +196,9 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         audioRef.current.play().catch(e => console.log("Success audio play failed:", e));
       }
       
-      // Show congratulations screen after a short delay
+      // Clear feedback and show congratulations screen after a short delay
       setTimeout(() => {
+        setFeedback({ type: null }); // Clear feedback before showing congratulations
         setShowCongratulations(true);
       }, 2000);
     }
@@ -183,6 +208,12 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     setPlacedItems({});
     setFeedback({ type: null });
     setShowCongratulations(false);
+    
+    // Clear any remaining visual feedback from buckets
+    const bucketElements = document.querySelectorAll('[data-bucket-id]');
+    bucketElements.forEach(element => {
+      element.classList.remove(styles.correct, styles.incorrect);
+    });
   };
 
   const playAudio = () => {
@@ -302,24 +333,29 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
               );
             })}
           </div>
-        </div><div 
-            id="feedback-message" 
-            className={`${styles.feedbackMessage} ${
-              feedback.type === 'correct' && !allItemsMatched
-                ? styles.correctText
-                : feedback.type === 'incorrect'
-                ? styles.incorrectText
-                : ''
-            }`}
-        >
-          {allItemsMatched
-            ? successMessage
-            : feedback.type === 'correct'
-            ? correctMessage
-            : feedback.type === 'incorrect'
-            ? tryAgainMessage
-            : ''}
-        </div>
+        </div>        {/* Feedback message - positioned as a center screen popup */}
+        {feedback.type && !showCongratulations && (
+          <div 
+              id="feedback-message" 
+              className={`${styles.feedbackMessage} ${
+                feedback.type === 'correct' && !allItemsMatched
+                  ? styles.correctText
+                  : feedback.type === 'incorrect'
+                  ? styles.incorrectText
+                  : allItemsMatched
+                  ? styles.correctText
+                  : ''
+              }`}
+          >
+            {allItemsMatched
+              ? successMessage
+              : feedback.type === 'correct'
+              ? correctMessage
+              : feedback.type === 'incorrect'
+              ? `Oops! ${feedback.itemName || 'This item'} doesn't belong in ${feedback.bucketName || 'this bucket'}. Try a different bucket! 🤔`
+              : ''}
+          </div>
+        )}
       </div>
     </div>
   );

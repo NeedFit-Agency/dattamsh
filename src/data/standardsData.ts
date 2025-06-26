@@ -268,7 +268,7 @@ export const standards: Standard = {
           questionText: "Which key am I?",          options: [
             { id: "option-2", text: "Enter Key", isCorrect: false, imageUrl: "/images/enter.png" },
             { id: "option-3", text: "Caps Lock Key", isCorrect: false, imageUrl: "/images/capslock.png" },
-            { id: "option-1", text: "Space Bar Key", isCorrect: true, imageUrl: "/images/spacebar.svg" },
+            { id: "option-1", text: "Space Bar Key", isCorrect: true, imageUrl: "/images/spacebar.png" },
             { id: "option-4", text: "Backspace Key", isCorrect: false, imageUrl: "/images/backspace.png" },
           ],
           audioSrc: "/audio/spacebar_riddle.mp3",

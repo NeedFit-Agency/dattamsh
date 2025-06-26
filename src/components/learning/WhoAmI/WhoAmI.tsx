@@ -62,9 +62,22 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       setLessonCompleted(true); // Mark lesson as completed
       setWinScreenMessage("YOU DID IT!");
       setButtonText(isLastLesson ? "Finish" : buttonTextWhenCorrect);
-      setTimeout(() => {
-        setShowCongratulations(true);
-      }, 2000);
+      
+      if (isLastLesson) {
+        // Show congratulations screen only for the last question
+        setTimeout(() => {
+          setShowCongratulations(true);
+        }, 2000);
+      } else {
+        // For middle questions, proceed to next question directly after a short delay
+        setTimeout(() => {
+          if (onComplete && typeof onComplete === 'function') {
+            onComplete();
+          } else if (onComplete && typeof onComplete === 'object' && onComplete.href) {
+            window.location.href = onComplete.href;
+          }
+        }, 1500);
+      }
     } else {
       incorrectSoundRef.current?.play().catch(console.error);
       setIsCorrectAnswer(false);
