@@ -113,7 +113,7 @@ export default function ChapterPage({
       transform: 'translateX(-50%)',
     },
     6: {
-      top: '300px', // Adjusted
+      top: '200px', // Moved higher from 300px
       left: '75%', // Further right
       transform: 'translateX(-50%)',
     },
@@ -140,10 +140,6 @@ export default function ChapterPage({
         <button className={styles.guidebookButton}>
           <FontAwesomeIcon icon={faBookOpen} className={styles.icon} /> 
         </button>
-      </div>
-
-      <div className={styles.lessonTitleDivider}>
-        <span>{chapterData.standardTitle} - {chapterData.chapterTitle}</span>
       </div>
 
       <div className={styles.lessonPath}>

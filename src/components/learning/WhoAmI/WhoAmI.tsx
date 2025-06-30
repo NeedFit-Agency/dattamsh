@@ -135,7 +135,10 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       />
       <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
         <span className={styles.gearIcon}>⚙️</span>
-        
+
+        <h3 className={styles.chooseHeading}>Choose the correct option</h3>
+        <img src="/mascot.png" alt="Mascot" className={styles.mascotImage} />
+
         {showWinScreen && (
           <div className={`${styles.winScreen} ${styles.visible}`}>
             <div className={styles.winText}>{winScreenMessage}</div>
@@ -147,17 +150,13 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
               <div className={`${styles.star} ${styles.s5}`}>⭐</div>
             </div>
             <div className={styles.winMascot}>
-              {mascot}
+              <img src="/mascot.png" alt="Mascot" className={styles.mascotImage} />
             </div>
             <button className={styles.playAgainBtn} onClick={resetGame}>
               {buttonText}
             </button>
           </div>
         )}
-
-        <div className={styles.mascotContainer}>
-          {mascot}
-        </div>
 
         <div className={styles.promptContainer}>
           <p className={styles.promptText}>{riddleText}</p>

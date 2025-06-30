@@ -31,7 +31,7 @@ const ConfettiPiece: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
 
 const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   isVisible,
-  message = "You've completed the activity!",
+  message = "Congratulations! You have completed the activity!",
   buttonText = "Finish",
   onButtonClick,
   mascot = <DefaultMascot />,

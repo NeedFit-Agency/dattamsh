@@ -22,7 +22,6 @@ export default function HomePage() {
       subtitle: "Basic Computer Education",
       title: "1st Standard",
       status: "active",
-      progress: "0/4 completed",
       units: "4 Chapters",
       message: "Start your journey into the world of computers!",
       icon: faLaptopCode,
@@ -34,7 +33,6 @@ export default function HomePage() {
       title: "2nd Standard",
       status: "active",
       units: "4 Chapters",
-      progress: "0/4 completed",
       icon: faCode,
       description: "Explore different types of computers, smartphones, and learn to use Notepad"
     },
@@ -43,7 +41,6 @@ export default function HomePage() {
       subtitle: "Intermediate Computer Education",
       title: "3rd Standard",
       status: "active",
-      progress: "0/4 completed",
       units: "4 Chapters",
       icon: faMicrochip,
       description: "Surfing the internet, understanding the email, google maps, Microsoft Word"
@@ -53,7 +50,6 @@ export default function HomePage() {
       subtitle: "Expert Level",
       title: "4th Standard",
       status: "active",
-      progress: "0/4 completed",
       units: "4 Chapters",
       icon: faRobot,
       description: "Operating Systems, Introduction to Windows, Different File Types, Introduction to Microsoft Excel"
@@ -64,7 +60,6 @@ export default function HomePage() {
       subtitle: "Advanced Computing",
       title: "5th Standard",
       status: "active",
-      progress: "0/4 completed",
       units: "4 Chapters",
       icon: faCode,
       description: "Advanced Microsoft Office, Introduction to PowerPoint, Basic Internet Safety"
@@ -74,7 +69,6 @@ export default function HomePage() {
       subtitle: "Digital Literacy",
       title: "6th Standard",
       status: "active",
-      progress: "0/4 completed",
       units: "4 Chapters",
       icon: faBrain,
       description: "Digital Citizenship, Online Research Skills, Introduction to Coding Concepts"
@@ -84,7 +78,6 @@ export default function HomePage() {
       subtitle: "Programming Fundamentals",
       title: "7th Standard",
       status: "active",
-      progress: "0/4 completed",
       units: "4 Chapters",
       icon: faLaptopCode,
       description: "Basic Programming Concepts, Introduction to Scratch, Problem-Solving with Algorithms"
@@ -94,7 +87,6 @@ export default function HomePage() {
       subtitle: "Computer Science Principles",
       title: "8th Standard",
       status: "active",
-      progress: "0/4 completed",
       units: "4 Chapters",
       icon: faMicrochip,
       description: "Web Development Basics, Data Analysis with Spreadsheets, Introduction to Cybersecurity"
@@ -174,7 +166,6 @@ export default function HomePage() {
                             style={{ width: Standard.status === 'active' ? '0%' : '0%' }}
                           />
                         </div>
-                        <span className={styles.progressText}>{Standard.progress}</span>
                       </div>
                       <span className={styles.units}>{Standard.units}</span>
                       {Standard.message && (
