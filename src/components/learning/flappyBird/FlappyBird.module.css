@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap');
+
 .gameContainer {
   display: flex;
   justify-content: center;
@@ -5,9 +7,211 @@
   width: 100%;
   min-height: 100vh;
   background-color: #f0f0f0;
+  position: relative;
 }
 
 .gameCanvas {
   border: 2px solid #333;
   background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+/* Overlay for start/gameover/complete screens */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #b3e5fc 0%, #81d4fa 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  font-family: 'Inter', 'Futura', Arial, sans-serif;
+}
+
+.logoCircle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #b3e0ff 60%, #4fc3f7 100%);
+  border: 6px solid #222;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+
+.logoBird {
+  font-size: 72px;
+  margin-bottom: 12px;
+}
+
+.logoText {
+  font-family: 'Futura', 'Arial Black', sans-serif;
+  font-size: 40px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 #222;
+}
+
+.button {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 15px 30px;
+  background-color: #4fc3f7;
+  color: white;
+  border: 3px solid #222;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: background 0.2s;
+}
+.button:hover, .button:focus {
+  background-color: #009be5;
+}
+
+.title {
+  font-size: 52px;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+  margin: 20px;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+
+.instruction {
+  font-size: 18px;
+  color: #222;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 20px;
+}
+
+.selectTitle {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.charGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.charButton {
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  border: 3px solid #bbb;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  cursor: pointer;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.charButton:focus {
+  outline: 3px solid #222;
+  border-color: #222;
+}
+
+.topRightButtons {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  display: flex;
+  gap: 16px;
+  z-index: 2;
+}
+
+.iconButton {
+  background: #fff;
+  border: 2px solid #bbb;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border 0.2s, background 0.2s;
+}
+.iconButton:hover, .iconButton:focus {
+  border-color: #222;
+  background: #f0f0f0;
+}
+
+.gameOverTitle {
+  font-size: 64px;
+  font-weight: 900;
+  color: #e04848;
+  text-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 1px 0 #fff;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.gameOverIcon {
+  font-size: 56px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));
+}
+
+.gameOverStats {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 6px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.gameOverDistance {
+  font-size: 22px;
+  color: #444;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.gameOverButton {
+  font-size: 26px;
+  font-weight: 800;
+  padding: 18px 48px;
+  background: linear-gradient(90deg, #4fc3f7 60%, #009be5 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  margin-top: 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  transition: background 0.2s, transform 0.1s;
+  outline: none;
+}
+.gameOverButton:hover, .gameOverButton:focus {
+  background: linear-gradient(90deg, #009be5 60%, #4fc3f7 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.scoreText {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 32px;
+  font-weight: bold;
 }
