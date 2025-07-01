@@ -43,14 +43,23 @@ export default function Header() {
           
           <div className={styles.companyBadge}>
             <div className={styles.badgeContent}>
-              <Image 
-                src="/images/dattamsh-logo.png" 
-                alt="DATTAMSH" 
-                width={90} 
-                height={20}
-                className={styles.badgeLogo}
-              />
-              <span className={styles.badgeText}>DATTAMSH Software</span>
+              <div className={styles.logoGroup}>
+                <Image 
+                  src="/images/periwinkle-logo.png" 
+                  alt="Periwinkle" 
+                  width={60} 
+                  height={40}
+                  className={styles.badgeLogo}
+                />
+                <span className={styles.logoSeparator}>×</span>
+                <Image 
+                  src="/images/dattamsh-logo.png" 
+                  alt="DATTAMSH" 
+                  width={60} 
+                  height={24}
+                  className={styles.badgeLogo}
+                />
+              </div>
             </div>
           </div>
         </nav>

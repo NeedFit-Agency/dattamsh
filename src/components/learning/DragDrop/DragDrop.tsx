@@ -210,7 +210,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
         onButtonClick={onComplete ? onComplete : handleReset}
         onTryAgainClick={handleReset}
         showTryAgain={true}
-        buttonText={isLastLesson ? 'Finish Course' : 'Next Chapter'}
+        buttonText={isLastLesson ? 'Next Course' : 'Next Chapter'}
         tryAgainText="Play Again"
       />
       {/* Progress indicator */}

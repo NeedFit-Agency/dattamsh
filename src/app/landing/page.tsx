@@ -369,13 +369,23 @@ export default function LandingPage() {
               &copy; {new Date().getFullYear()} Binary Brains. All rights reserved.
               <div className={styles.poweredBy}>
                 <span>Powered by</span>
-                <Image 
-                  src="/images/dattamsh-logo.png" 
-                  alt="DATTAMSH" 
-                  width={100} 
-                  height={20}
-                  className={styles.dattamshLogo}
-                />
+                <div className={styles.footerLogoGroup}>
+                  <Image 
+                    src="/images/periwinkle-logo.png" 
+                    alt="Periwinkle" 
+                    width={90} 
+                    height={36}
+                    className={styles.footerCompanyLogo}
+                  />
+                  <span className={styles.footerLogoSeparator}>×</span>
+                  <Image 
+                    src="/images/dattamsh-logo.png" 
+                    alt="DATTAMSH" 
+                    width={90} 
+                    height={36}
+                    className={styles.footerCompanyLogo}
+                  />
+                </div>
               </div>
               <div className={styles.madeBy}>
                 <span>Made by</span>
