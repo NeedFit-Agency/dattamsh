@@ -468,7 +468,7 @@
 }
 
 .footerLogo {
-  background: linear-gradient(135deg, #FFB300, #34C759, #1AA2FF, #A259FF);
+  background: linear-gradient(#1AA2FF, #1CA2FF);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -477,6 +477,48 @@
 .footerCopyright {
   color: #9ca3af;
   font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.poweredBy {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.madeBy {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 0.3rem;
+}
+
+.needfitLink {
+  color: #1AA2FF;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.needfitLink:hover {
+  color: #0d8ce8;
+  text-decoration: underline;
+}
+
+.dattamshLogo {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.dattamshLogo:hover {
+  opacity: 1;
 }
 
 .footerSocial {
@@ -680,10 +722,27 @@
   .footerBottom {
     flex-direction: column;
     text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .footerCopyright {
+    order: 2;
+  }
+  
+  .poweredBy {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .madeBy {
+    flex-direction: row;
+    gap: 0.3rem;
+    justify-content: center;
   }
   
   .footerSocial {
     justify-content: center;
+    order: 3;
   }
 }
 

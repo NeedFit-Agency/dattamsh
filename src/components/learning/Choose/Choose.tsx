@@ -216,7 +216,7 @@ const KidsMatchingGame: React.FC<KidsMatchingGameProps> = ({ onBack, onComplete,
         onButtonClick={onComplete ? onComplete : handleReset}
         onTryAgainClick={handleReset}
         showTryAgain={true}
-        buttonText={isLastLesson ? 'Finish Course' : 'Next Lesson'}
+        buttonText={isLastLesson ? 'Finish Course' : 'Next Chapter'}
         tryAgainText="Play Again"
       />
       <div 

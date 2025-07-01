@@ -367,6 +367,27 @@ export default function LandingPage() {
             <div className={styles.footerLogo}>Binary Brains</div>
             <div className={styles.footerCopyright}>
               &copy; {new Date().getFullYear()} Binary Brains. All rights reserved.
+              <div className={styles.poweredBy}>
+                <span>Powered by</span>
+                <Image 
+                  src="/images/dattamsh-logo.png" 
+                  alt="DATTAMSH" 
+                  width={100} 
+                  height={20}
+                  className={styles.dattamshLogo}
+                />
+              </div>
+              <div className={styles.madeBy}>
+                <span>Made by</span>
+                <Link 
+                  href="https://needfit.agency" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.needfitLink}
+                >
+                  Needfit Agency
+                </Link>
+              </div>
             </div>            <div className={styles.footerSocial}>
               <Link href="#" className={styles.socialIcon}>
                 <FontAwesomeIcon icon={faEnvelope} />

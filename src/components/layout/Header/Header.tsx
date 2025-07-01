@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -39,6 +40,19 @@ export default function Header() {
               <span>Learn</span>
             </Link>
           </div> */}
+          
+          <div className={styles.companyBadge}>
+            <div className={styles.badgeContent}>
+              <Image 
+                src="/images/dattamsh-logo.png" 
+                alt="DATTAMSH" 
+                width={90} 
+                height={20}
+                className={styles.badgeLogo}
+              />
+              <span className={styles.badgeText}>DATTAMSH Software</span>
+            </div>
+          </div>
         </nav>
 
         <button 

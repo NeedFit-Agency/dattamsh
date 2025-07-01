@@ -104,6 +104,46 @@
   margin-left: auto;
 }
 
+.companyBadge {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  background: rgba(28, 162, 255, 0.2);
+  border: 1px solid rgba(28, 162, 255, 0.3);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.companyBadge:hover {
+  background: rgba(28, 162, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.badgeContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.badgeLogo {
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.companyBadge:hover .badgeLogo {
+  opacity: 1;
+}
+
+.badgeText {
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: #1CA2FF;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
 .statsWrapper {
   display: flex;
   align-items: center;
@@ -278,6 +318,10 @@
     display: none;
   }
 
+  .companyBadge {
+    display: none;
+  }
+
   .mobileMenuButton {
     display: flex;
     align-items: center;
@@ -316,4 +360,4 @@
 
 .header {
   animation: headerSlideDown 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-} 
+}

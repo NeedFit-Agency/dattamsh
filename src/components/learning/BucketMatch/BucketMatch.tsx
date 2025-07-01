@@ -154,7 +154,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       setTimeout(() => {
         targetBucketElement.classList.remove(styles.incorrect);
         setFeedback({ type: null });
-      }, 2500); // Increased duration for better readability
+      }, 8000); // Extended duration so kids can read the message slowly
     }
     // Dragged item ID is cleared in handleDragEnd
   };
@@ -229,7 +229,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         onButtonClick={onComplete ? onComplete : handleReset}
         onTryAgainClick={handleReset}
         showTryAgain={true}
-        buttonText={isLastLesson ? 'Finish Course' : 'Next Lesson'}
+        buttonText={isLastLesson ? 'Finish Course' : 'Next Chapter'}
         tryAgainText="Play Again"
       />
 

@@ -257,7 +257,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         onTryAgainClick={resetGame}
         showTryAgain={true}
         message="Amazing! You've arranged everything correctly!"
-        buttonText={isLastLesson ? 'Finish Course' : 'Next Lesson'}
+        buttonText={isLastLesson ? 'Finish Course' : 'Next Chapter'}
         tryAgainText="Play Again"
       />
       <div className={styles.worksheetCard}>

@@ -313,6 +313,7 @@ function LearningPageContent() {
             onBack={handleBackClick}
             onComplete={onCompleteProp}
             progress={progress}
+            isLastLesson={isLastSlide}
           />        </main>
       </div>
 

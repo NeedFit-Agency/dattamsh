@@ -40,13 +40,15 @@ interface ContentRendererProps {
   onBack?: () => void;
   onComplete?: (() => void) | { href: string };
   progress?: number;
+  isLastLesson?: boolean; // Whether this is the last lesson in the chapter
 }
 
 const ContentRenderer: React.FC<ContentRendererProps> = ({
   content,
   onBack,
   onComplete,
-  progress = 0
+  progress = 0,
+  isLastLesson = false
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [prevContentFormat, setPrevContentFormat] = useState<string | null>(null);
@@ -134,6 +136,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             progress={progress}
             onBack={onBack}
             onComplete={onComplete}
+            isLastLesson={isLastLesson}
           />
         </ContentWrapper>
       );
@@ -147,6 +150,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             dropZoneCount={sequenceMatchContent.dropZoneCount}
             correctOrder={sequenceMatchContent.correctOrder}
             onComplete={onComplete}
+            isLastLesson={isLastLesson}
           />
         </ContentWrapper>
       );
@@ -168,6 +172,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             options={adaptedOptions}
             correctAnswerId={correctOption?.id || whoAmIContent.options[0]?.id}
             onComplete={onComplete}
+            isLastLesson={isLastLesson}
             // No useFinishButton for WhoAmI - will use "Next" instead
           />
         </ContentWrapper>
@@ -189,6 +194,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             tryAgainMessage={bucketMatchContent.tryAgainMessage}
             resetLabel={bucketMatchContent.resetLabel}
             playAgainLabel={bucketMatchContent.playAgainLabel}
+            isLastLesson={isLastLesson}
           />
         </ContentWrapper>
       );

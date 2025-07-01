@@ -295,7 +295,7 @@ export const standards: Standard = {
           format: "who-am-i",
           title: "Guess the Mouse Part",
           riddleText: "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
-          questionText: "Which mouse part am I?",          options: [
+          questionText: "",          options: [
             { id: "option-2", text: "Left Button", isCorrect: false, imageUrl: "/images/left-button.svg" },
             { id: "option-3", text: "Right Button", isCorrect: false, imageUrl: "/images/right-button.svg" },
             { id: "option-4", text: "Body", isCorrect: false, imageUrl: "/images/mouse-body.svg" },
