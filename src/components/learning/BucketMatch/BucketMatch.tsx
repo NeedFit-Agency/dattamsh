@@ -5,7 +5,7 @@ import { BucketMatchProps, Item, Bucket } from './types';
 import styles from './bucketmatch.module.css';
 import { itemSvgMap } from './ItemSvgs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faHeadphones, faUndo } from '@fortawesome/free-solid-svg-icons';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
 import TTS from '../../shared/TTS';
 
@@ -44,8 +44,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   successMessage = 'Great Job! You matched them all!',
   correctMessage = 'Correct!',
   tryAgainMessage = 'Try Again!',
-  resetLabel = 'Reset Game',
-  playAgainLabel = 'Play Again',
   isLastLesson = false
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
@@ -202,7 +200,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       setTimeout(() => {
         setFeedback({ type: null }); // Clear feedback before showing congratulations
         setShowCongratulations(true);
-      }, 2000);
+      }, 5000);
     }
   }, [allItemsMatched]);
 
@@ -235,6 +233,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     if (instruction && typeof window !== 'undefined' && window.speechSynthesis) {
       try {
         const utterance = new SpeechSynthesisUtterance(instruction);
+        utterance.rate = 0.5;
         utterance.onstart = () => setIsAudioPlaying(true);
         utterance.onend = () => setIsAudioPlaying(false);
 
@@ -340,7 +339,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
               className={styles.resetButton}
               onClick={handleReset}
             >
-              {allItemsMatched ? playAgainLabel : resetLabel}
+              <FontAwesomeIcon icon={faUndo} />
+              <span>Reset</span>
             </button>
           )}
 
@@ -384,7 +384,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                       excitement="low"
                       naturalPauses={true}
                       humanLike={true}
-                      rate={0.8}
+                      rate={0.5}
                       pitch={1.0}
                     />
                   </div>

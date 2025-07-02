@@ -9,6 +9,7 @@ import styles from './dragdrop.module.css';
 import Image from 'next/image';
 import Confetti from '../../shared/Confetti/Confetti';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
+import TTS from '../../shared/TTS';
 
 interface DragItem {
   id: string;
@@ -31,7 +32,6 @@ export const DragDrop: React.FC<DragDropProps> = ({
   onComplete,
   isLastLesson = false
 }) => {
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [dragItems, setDragItems] = useState<DragItem[]>(
     items.map((item) => ({
       ...item,
@@ -46,6 +46,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
   const [allCompleted, setAllCompleted] = useState(false);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
   useEffect(() => {
     const initialDropped: Record<string, DragItem[]> = {};
@@ -54,6 +55,8 @@ export const DragDrop: React.FC<DragDropProps> = ({
     });
     setDroppedItems(initialDropped);
   }, [targets]);
+  
+  // Component initialization
 
   useEffect(() => {
     if (feedback.show) {
@@ -66,32 +69,54 @@ export const DragDrop: React.FC<DragDropProps> = ({
     }
   }, [feedback]);
 
-  const playAudio = () => {
-    window.speechSynthesis?.cancel();
+  // Audio playing functionality matching BucketMatch
+  const playInstructionAudio = () => {
+    // Check if speech synthesis is available
+    if (typeof window === 'undefined' || !window.speechSynthesis) {
+      console.error('Speech synthesis not available');
+      return;
+    }
+
+    window.speechSynthesis.cancel();
 
     if (isAudioPlaying) {
       setIsAudioPlaying(false);
       return;
     }
 
-    const textToSpeak = speakText || instruction;
+    // Try different text sources in order of preference
+    const textToSpeak = speakText || instruction || title || 'Welcome to the drag and drop activity';
 
-    if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
-      try {
-        const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.onstart = () => setIsAudioPlaying(true);
-        utterance.onend = () => setIsAudioPlaying(false);
+    if (!textToSpeak) {
+      return;
+    }
 
-        utterance.onerror = (e) => {
-          console.error("SpeechSynthesis Error:", e);
-          setIsAudioPlaying(false);
-        };
-        window.speechSynthesis.speak(utterance);
-      } catch (e) {
-        console.error("SpeechSynthesis failed:", e);
+    try {
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = 0.5; // Slower for kids
+      utterance.pitch = 1.1;
+      utterance.volume = 1;
+      
+      utterance.onstart = () => {
+        setIsAudioPlaying(true);
+      };
+      
+      utterance.onend = () => {
         setIsAudioPlaying(false);
-      }
-    } else {
+      };
+
+      utterance.onerror = (e) => {
+        console.error("SpeechSynthesis Error:", e);
+        setIsAudioPlaying(false);
+      };
+      
+      // Small delay to ensure proper initialization
+      setTimeout(() => {
+        window.speechSynthesis.speak(utterance);
+      }, 100);
+      
+    } catch (e) {
+      console.error("SpeechSynthesis failed:", e);
       setIsAudioPlaying(false);
     }
   };
@@ -139,15 +164,22 @@ export const DragDrop: React.FC<DragDropProps> = ({
       }
 
       if (allCorrect) {
-        setFeedback({ show: true, correct: true, message: 'Great job! All items are correctly sorted!' });
+        const successMessage = 'Great job! All items are correctly sorted!';
+        setFeedback({ show: true, correct: true, message: successMessage });
         setAllCompleted(true);
+        
+        // Success message is displayed visually and will be read by screen readers
+        
         // Show congratulations screen after a short delay
         setTimeout(() => {
           setShowCongratulations(true);
         }, 2000);
       } else {
-        setFeedback({ show: true, correct: false, message: 'Some items are in the wrong category. Try again!' });
-        // Reset after a short delay
+        const errorMessage = 'Some items are in the wrong category. Try again!';
+        setFeedback({ show: true, correct: false, message: errorMessage });
+        
+        // Error message is displayed visually and will be read by screen readers
+        // Reset after a 5 second delay
         setTimeout(() => {
           setDragItems(items.map((item) => ({
             ...item,
@@ -162,7 +194,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
           setDroppedItems(resetDropped);
           setFeedback({ show: false, correct: false, message: '' });
           setAllCompleted(false);
-        }, 1500);
+        }, 5000);
       }
     }
   };
@@ -187,6 +219,12 @@ export const DragDrop: React.FC<DragDropProps> = ({
 
   // Reset function for Try Again button
   const handleReset = () => {
+    // Stop any ongoing speech synthesis
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    
+    setIsAudioPlaying(false);
     setShowCongratulations(false);
     setAllCompleted(false);
     setDragItems(items.map((item) => ({
@@ -202,6 +240,15 @@ export const DragDrop: React.FC<DragDropProps> = ({
     setDroppedItems(resetDropped);
     setFeedback({ show: false, correct: false, message: '' });
   };
+
+  // Clean up speech synthesis when component unmounts
+  useEffect(() => {
+    return () => {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -228,15 +275,19 @@ export const DragDrop: React.FC<DragDropProps> = ({
         <p className={styles.instruction}>{instruction}</p>
         <div className={styles.buttonGroup}>
           <div className={styles.leftButtons}>
-            {(audioSrc || speakText) && (
-              <button
-                className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-                onClick={playAudio}
-              >
-                <FontAwesomeIcon icon={faHeadphones} />
-                <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-              </button>
-            )}
+            <button
+              className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Button clicked!');
+                playInstructionAudio();
+              }}
+              type="button"
+            >
+              <FontAwesomeIcon icon={faHeadphones} />
+              <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+            </button>
           </div>
           <button
             className={styles.resetButton}

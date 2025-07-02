@@ -160,7 +160,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
       // Show congratulations screen after a shorter delay for better feedback
       setTimeout(() => {
         setShowCongratulations(true);
-      }, 1200);
+      }, 5000);
     } else {
       setFeedback({ type: 'incorrect', message: 'Some steps are not in the right order. Try again!' });
       setShowTryAgain(true);
@@ -272,7 +272,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
       try {
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.rate = 0.9;
+        utterance.rate = 0.5;
         utterance.pitch = 1.0;
         
         utterance.onstart = () => setIsAudioPlaying(true);
@@ -404,7 +404,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                       excitement="medium"
                       naturalPauses={true}
                       humanLike={true}
-                      rate={0.7}
+                      rate={0.5}
                       pitch={1.0}
                     />
                   </div>

@@ -70,7 +70,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
       try {
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.rate = 0.9;
+        utterance.rate = 0.5;
         utterance.pitch = 1.0;
         
         utterance.onstart = () => setIsAudioPlaying(true);

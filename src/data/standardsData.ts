@@ -265,7 +265,7 @@ export const standards: Standard = {
           format: "who-am-i",
           title: "Guess the Keyboard Key",
           riddleText: "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
-          questionText: "Which key am I?",          options: [
+          questionText: "",          options: [
             { id: "option-2", text: "Enter Key", isCorrect: false, imageUrl: "/images/enter.png" },
             { id: "option-3", text: "Caps Lock Key", isCorrect: false, imageUrl: "/images/capslock.png" },
             { id: "option-1", text: "Space Bar Key", isCorrect: true, imageUrl: "/images/spacebar.png" },
@@ -279,7 +279,7 @@ export const standards: Standard = {
           format: "who-am-i",
           title: "Guess the Computer Part",
           riddleText: "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
-          questionText: "Which computer part am I?",
+          questionText: "",
           options: [
             { id: "option-2", text: "Monitor", isCorrect: false, imageUrl: "/images/monitor.png" },
                         { id: "option-1", text: "Keyboard", isCorrect: true, imageUrl: "/images/keyboard.png" },
@@ -407,7 +407,7 @@ export const standards: Standard = {
             { id: "cutting-bucket", title: "Cutting Tools", type: "cutting" },
             { id: "sticking-bucket", title: "Sticking Tools", type: "sticking" }
           ],
-          successMessage: "Amazing! You've sorted all the school supplies!",
+          successMessage: "Amazing! You have sorted all the school supplies!",
           correctMessage: "Perfect match!",
           tryAgainMessage: "Not quite right, try again!",
           resetLabel: "Clear All",

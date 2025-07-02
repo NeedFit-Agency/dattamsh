@@ -133,6 +133,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             items={dndContent.items}
             targets={dndContent.targets}
             audioSrc={dndContent.audioSrc}
+            speakText={dndContent.speakText}
             progress={progress}
             onBack={onBack}
             onComplete={onComplete}

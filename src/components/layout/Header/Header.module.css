@@ -109,15 +109,13 @@
   display: flex;
   align-items: flex-start;
   padding: 0.04rem 1.2rem 0.04rem 1.2rem;
-  background: rgba(28, 162, 255, 0.2);
-  border: 1px solid rgba(28, 162, 255, 0.3);
-  border-radius: 20px;
+  background: transparent;
+  border: none;
   transition: all 0.3s ease;
   transform: translateY(-8px);
 }
 
 .companyBadge:hover {
-  background: rgba(28, 162, 255, 0.25);
   transform: translateY(-9px);
 }
 
