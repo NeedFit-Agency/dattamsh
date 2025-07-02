@@ -84,8 +84,8 @@ export const DragDrop: React.FC<DragDropProps> = ({
       return;
     }
 
-    // Try different text sources in order of preference
-    const textToSpeak = speakText || instruction || title || 'Welcome to the drag and drop activity';
+    // Try different text sources in order of preference - only instruction or title
+    const textToSpeak =  speakText ;
 
     if (!textToSpeak) {
       return;

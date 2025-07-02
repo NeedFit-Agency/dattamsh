@@ -173,7 +173,7 @@ export const standards: Standard = {
           ],
           audioSrc: "/audio/natural_manmade.mp3",
           speakText:
-            "Help me sort these pictures. Drag them into the correct box: Natural Things or Man-made Things.",
+            "Help me sort natural things or man made things",
         },
       ],
     },
