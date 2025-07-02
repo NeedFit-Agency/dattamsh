@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -62,6 +62,22 @@ function LearningPageContent() {
   const totalSlides = chapterContent.length;
   const currentContent = chapterContent[currentSlideIndex] || null;
   const isLastSlide = totalSlides > 0 && currentSlideIndex === totalSlides - 1;
+  
+  // Check if this is the last chapter in the standard
+  const isLastChapterInStandard = useMemo(() => {
+    const standardParam = searchParams.get('standard') || '1';
+    const lessonParam = searchParams.get('lesson') || '1';
+    const standardData = standards[standardParam as keyof typeof standards];
+    
+    if (standardData) {
+      const lastChapter = standardData[standardData.length - 1];
+      return lastChapter && lastChapter.id.toString() === lessonParam;
+    }
+    return false;
+  }, [searchParams]);
+  
+  // isLastLesson should be true only when it's the last slide of the last chapter in the standard
+  const isLastLesson = isLastSlide && isLastChapterInStandard;
 
   const areAllItemsPlaced = useCallback(() => {
     return (dndState.sourceItems?.length || 0) === 0;
@@ -313,7 +329,7 @@ function LearningPageContent() {
             onBack={handleBackClick}
             onComplete={onCompleteProp}
             progress={progress}
-            isLastLesson={isLastSlide}
+            isLastLesson={isLastLesson}
           />        </main>
       </div>
 

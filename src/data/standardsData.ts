@@ -114,9 +114,9 @@ export const standards: Standard = {
         {
           type: "drag-drop",
           format: "drag-drop",
-          title: "Sort Natural and Man-made Things",
+          title: "Help me sort natural things or man made things",
           instruction:
-            'Help me sort these pictures',
+            '',
           items: [
             {
               id: "dnd-item-1",
@@ -239,7 +239,7 @@ export const standards: Standard = {
         {
           type: "sequence-match",
           format: "sequence-match",
-          title: "Shutting Down the Computer",
+          title: "The steps to turn off the computer are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
           instruction: "Put these steps in the correct order to properly shut down a computer!",
           items: [
             { id: "step-6", content: "Switch off the power supply" },

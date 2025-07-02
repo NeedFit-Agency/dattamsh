@@ -79,8 +79,12 @@
   border-radius: 8px;
   padding: 8px 16px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  height: 44px;
+  justify-content: center;
 }
 
 .audioButton:hover {
@@ -89,6 +93,44 @@
 
 .audioButtonPlaying {
   background-color: var(--success-green, #28a745);
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.leftButtons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.resetButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--warning, #ffc107);
+  color: #212529;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  min-width: 120px;
+  height: 44px;
+  justify-content: center;
+}
+
+.resetButton:hover {
+  background-color: #e0a800;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .activityArea {

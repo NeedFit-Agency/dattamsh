@@ -11,7 +11,7 @@
     height: 100vh;
     max-height: 100vh;
     left: 0;
-    top: 0;
+    top: 35px;
     position: absolute;
     padding: 1rem;
     margin: 0;
@@ -43,7 +43,7 @@
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
     border-radius: clamp(20px, 3vw, 30px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(135, 206, 250, 0.2);
-    padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
+    padding: clamp(20px, 2.5vw, 35px) clamp(20px, 3vw, 40px);
     width: 95%; /* Use more screen space */
     max-width: 1400px;
     height: 90vh; /* Use viewport height */
@@ -165,38 +165,65 @@
 }
 
 /* --- Title --- */
-.title {
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 700;
-    margin-top: 0;
-    margin-bottom: clamp(15px, 2.5vh, 25px);
+.titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 2vw, 20px);
+    margin-top: 30px;
+    margin-bottom: 16px;
     padding: 0 20px;
-    color: #333;
-    font-family: "Comic Sans MS", "Comic Sans", 'Nunito', 'Quicksand', cursive, sans-serif;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 2;
-    background: linear-gradient(45deg, #353535, #8f94fb);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    animation: titlePop 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    flex-shrink: 0; /* Prevent title from shrinking */
+    flex-shrink: 0;
+    flex-wrap: wrap;
 }
 
-@keyframes titlePop {
-    0% {
-        transform: translateY(-10px) scale(0.95);
-        opacity: 0;
-    }
-    50% {
-        transform: translateY(5px) scale(1.02);
-    }
-    100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-dark, #343a40);
+    text-align: center;
+    margin: 0;
+    flex: 1;
+    min-width: 0; /* Allow text to shrink if needed */
+}
+
+.titleTTSContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.titleTTS {
+    margin: 0;
+}
+
+.titleHeadphones {
+    background-color: #1db0f6 !important;
+    box-shadow: 0 3px 8px rgba(29, 176, 246, 0.3) !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    padding: 8px !important;
+    border-radius: 50% !important;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+.titleHeadphones:hover {
+    background-color: #0ea5e9 !important;
+    box-shadow: 0 4px 12px rgba(29, 176, 246, 0.4) !important;
+    opacity: 1;
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 1) !important;
+}
+
+.titleHeadphones svg {
+    width: 20px !important;
+    height: 20px !important;
+    color: white !important;
 }
 
 /* --- Main Content Container --- */
@@ -576,92 +603,210 @@
 }
 
 /* --- Buttons & Feedback --- */
-.actionButton {
-    width: 100%;
-    padding: clamp(12px, 2vh, 18px);
+.actionButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(12px, 2vw, 18px);
+    margin-top: clamp(4px, 0.6vh, 8px);
+    padding: 0;
+    background-color: transparent;
     border: none;
-    border-radius: clamp(20px, 3vw, 30px);
-    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    box-shadow: none;
+    backdrop-filter: none;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.actionButton {
+    border-radius: clamp(10px, 1.8vw, 14px);
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
     font-weight: 700;
-    font-family: "Comic Sans MS", "Comic Sans", 'Quicksand', sans-serif;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(8px, 1.2vw, 15px);
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s, box-shadow 0.3s;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    min-width: clamp(160px, 22vw, 220px);
+    min-height: clamp(44px, 5.5vh, 52px);
     position: relative;
     overflow: hidden;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
-    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: clamp(10px, 1.8vh, 14px) clamp(18px, 2.8vw, 24px);
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    max-width: 300px;
+    font-family: 'Nunito', 'Quicksand', sans-serif;
+    box-shadow: 0 5px 0 transparent, 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
-.actionButton::after {
+.checkAnswerBtn {
+    background: linear-gradient(135deg, #1db0f6 0%, #0ea5e9 50%, #0284c7 100%);
+    color: white;
+    box-shadow: 0 5px 0 #0369a1, 0 3px 10px rgba(29, 176, 246, 0.3);
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.checkAnswerBtn::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 50%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
-    pointer-events: none;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.actionButton:hover {
-    transform: translateY(-4px) scale(1.01);
+.checkAnswerBtn:hover:not(:disabled)::before {
+    opacity: 1;
 }
 
-.actionButton:active {
+.checkAnswerBtn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #0369a1, 0 5px 14px rgba(29, 176, 246, 0.4);
+}
+
+.checkAnswerBtn:active:not(:disabled) {
     transform: translateY(2px);
+    box-shadow: 0 3px 0 #0369a1, 0 2px 6px rgba(29, 176, 246, 0.3);
 }
 
-.checkAnswerBtn {
-    background-color: #34d399;
-    background-image: linear-gradient(135deg, #6ee7b7, #10b981);
+.checkAnswerBtn:disabled {
+    background: linear-gradient(135deg, #e5e5e5 0%, #d1d5db 100%);
+    color: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: 0 5px 0 #9ca3af, 0 3px 10px rgba(0, 0, 0, 0.1);
+    transform: none;
+}
+
+.checkAnswerBtn:disabled::before {
+    display: none;
+}
+
+.resetBtn {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+    color: #1db0f6;
+    border: 2px solid #1db0f6;
+    box-shadow: 0 5px 0 #0369a1, 0 3px 10px rgba(29, 176, 246, 0.2);
+    position: relative;
+}
+
+.resetBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(29, 176, 246, 0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.resetBtn:hover::before {
+    opacity: 1;
+}
+
+.resetBtn:hover {
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+    color: #0369a1;
+    border-color: #0369a1;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #0369a1, 0 5px 14px rgba(29, 176, 246, 0.3);
+}
+
+.resetBtn:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 #0369a1, 0 2px 6px rgba(29, 176, 246, 0.2);
+}
+
+/* Removed buttonPop animation and tryAgainBtn styles as they are no longer needed */
+
+/* --- Audio Button Styling --- */
+.audioButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--primary, #1aa2ff);
     color: white;
-    box-shadow: 0 6px 20px rgba(52, 211, 153, 0.4), 0 4px 0 #0e9f6e;
-    animation: buttonPop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    flex-shrink: 0;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    height: 44px;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(26, 162, 255, 0.3);
+    margin-left: 15px;
 }
 
-.checkAnswerBtn:hover {
-    background-image: linear-gradient(135deg, #7eebc2, #15c28a);
-    box-shadow: 0 8px 25px rgba(52, 211, 153, 0.5), 0 5px 0 #0e9f6e;
+.audioButton:hover {
+    background-color: var(--primary-dark, #0080e6);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 162, 255, 0.4);
 }
 
-.checkAnswerBtn:active {
-    box-shadow: 0 3px 15px rgba(52, 211, 153, 0.3), 0 2px 0 #0e9f6e;
+.audioButtonPlaying {
+    background-color: var(--success-green, #28a745);
 }
 
-@keyframes buttonPop {
-    0% {
-        transform: scale(0.95);
-        opacity: 0;
+.audioButtonPlaying:hover {
+    background-color: #218838;
+}
+
+/* Mobile responsiveness for the audio button */
+@media (max-width: 576px) {
+    .audioButton {
+        min-width: 100px;
+        padding: 8px 12px;
+        font-size: 14px;
     }
-    70% {
-        transform: scale(1.05);
+}
+
+/* Responsive Button Styling */
+@media (max-width: 768px) {
+    .actionButtonsContainer {
+        flex-direction: column;
+        gap: clamp(10px, 1.8vh, 14px);
+        padding: 0;
+        margin-top: clamp(6px, 1vh, 10px);
     }
-    100% {
-        transform: scale(1);
-        opacity: 1;
+    
+    .actionButton {
+        width: 100%;
+        max-width: none;
+        min-height: clamp(42px, 4.8vh, 50px);
+        font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+        padding: clamp(8px, 1.5vh, 12px) clamp(16px, 2.5vw, 20px);
     }
 }
 
-.tryAgainBtn {
-    background-color: #575757;
-    background-image: linear-gradient(135deg, #7c6657, #4a3c33);
-    color: white;
-    box-shadow: 0 6px 20px rgba(92, 75, 64, 0.4), 0 4px 0 #3d3228;
-    animation: buttonPop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.tryAgainBtn:hover {
-    background-image: linear-gradient(135deg, #8a7362, #574639);
-    box-shadow: 0 8px 25px rgba(92, 75, 64, 0.5), 0 5px 0 #3d3228;
-}
-
-.tryAgainBtn:active {
-    box-shadow: 0 3px 15px rgba(92, 75, 64, 0.3), 0 2px 0 #3d3228;
+@media (max-width: 480px) {
+    .actionButtonsContainer {
+        gap: 8px;
+        padding: 0;
+        margin-top: 4px;
+    }
+    
+    .actionButton {
+        min-height: 40px;
+        font-size: 0.9rem;
+        padding: 8px 14px;
+        letter-spacing: 0.5px;
+    }
 }
 
 .feedbackMessage {
@@ -872,6 +1017,28 @@
 
 /* --- Responsive Layout --- */
 @media (max-width: 1024px) {
+    .titleContainer {
+        margin-top: 5px;
+        margin-bottom: 12px;
+        padding: 0 15px;
+        gap: clamp(10px, 1.5vw, 16px);
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .titleHeadphones {
+        min-width: 36px !important;
+        min-height: 36px !important;
+        padding: 6px !important;
+    }
+    
+    .titleHeadphones svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
     .mainContent {
         flex-direction: column;
         gap: 15px;
@@ -904,6 +1071,54 @@
         border: 1.5px solid #bbddff;
         position: relative;
         z-index: 10;
+    }
+}
+
+@media (max-width: 768px) {
+    .titleContainer {
+        gap: clamp(8px, 1.2vw, 12px);
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .title {
+        font-size: 22px;
+        margin-bottom: 8px;
+    }
+    
+    .titleHeadphones {
+        min-width: 32px !important;
+        min-height: 32px !important;
+        padding: 5px !important;
+    }
+    
+    .titleHeadphones svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .titleContainer {
+        gap: 6px;
+        margin-top: 10px;
+        margin-bottom: 8px;
+        padding: 0 10px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .titleHeadphones {
+        min-width: 28px !important;
+        min-height: 28px !important;
+        padding: 4px !important;
+    }
+    
+    .titleHeadphones svg {
+        width: 14px !important;
+        height: 14px !important;
     }
 }
 
@@ -958,23 +1173,115 @@
     background: #93c5fd;
 }
 
-.actionButtonsContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: auto;
-  padding-top: 1rem;
-  width: 100%;
+/* Individual Item TTS Styling */
+.stepItem {
+    position: relative; /* Enable absolute positioning for TTS button */
 }
 
-.dropZone .stepItem {
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.stepText {
+    flex-grow: 1;
+    margin-left: 12px; /* Add margin to prevent text from going too close to the icon */
 }
 
-.dropZone .stepItem:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15), 0 5px 0 rgba(0,0,0,0.06);
+.itemTTSContainer {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    z-index: 10;
+}
+
+.itemHeadphones {
+    background-color: #6c5ce7 !important;
+    box-shadow: 0 2px 6px rgba(108, 92, 231, 0.3) !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    padding: 4px !important;
+    opacity: 0.8;
+    transition: all 0.2s ease;
+}
+
+.itemHeadphones:hover {
+    background-color: #5a4fcf !important;
+    box-shadow: 0 3px 8px rgba(108, 92, 231, 0.4) !important;
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.itemHeadphones svg {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* Ensure TTS button doesn't interfere with drag operations */
+.stepItem:hover .itemTTSContainer {
+    opacity: 1;
+}
+
+.stepItem .itemTTSContainer {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+/* Prevent TTS button from being dragged */
+.itemTTSContainer * {
+    pointer-events: auto;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-select: none;
+}
+
+/* Make sure the step item content area doesn't overlap with TTS button */
+.stepItem .stepIcon {
+    margin-right: 12px;
+}
+
+.stepItem:not(.dragging) .itemTTSContainer:hover {
+    z-index: 20;
+}
+
+/* Responsive styling for item TTS */
+@media (max-width: 768px) {
+    .itemTTSContainer {
+        bottom: 6px;
+        right: 6px;
+    }
+    
+    .itemHeadphones {
+        min-width: 20px !important;
+        min-height: 20px !important;
+        padding: 3px !important;
+    }
+    
+    .itemHeadphones svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+    
+    .stepText {
+        margin-left: 10px; /* Adjust margin for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .itemTTSContainer {
+        bottom: 4px;
+        right: 4px;
+    }
+    
+    .itemHeadphones {
+        min-width: 18px !important;
+        min-height: 18px !important;
+        padding: 2px !important;
+    }
+    
+    .itemHeadphones svg {
+        width: 12px !important;
+        height: 12px !important;
+    }
+    
+    .stepText {
+        margin-left: 8px;
+    }
 }

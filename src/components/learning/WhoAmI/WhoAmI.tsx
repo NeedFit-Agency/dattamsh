@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './WhoAmI.module.css';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
+import TTS from '../../shared/TTS';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
 
 interface Option {
   id: string;
@@ -37,7 +40,9 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   buttonTextWhenIncorrect = "Try Again",
   isLastLesson = false,
 }) => {  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [isAnswered, setIsAnswered] = useState(false);  const [showWinScreen, setShowWinScreen] = useState(false);
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [showWinScreen, setShowWinScreen] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [winScreenMessage, setWinScreenMessage] = useState("YOU DID IT!");
   const [buttonText, setButtonText] = useState(buttonTextWhenCorrect);
@@ -50,7 +55,40 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   useEffect(() => {
     // Preload audio - consider moving audio to public folder and using paths
  
-  }, []);  const handleOptionClick = (optionId: string) => {
+  }, []);
+
+  const playQuestionAudio = () => {
+    window.speechSynthesis?.cancel();
+
+    if (isAudioPlaying) {
+      setIsAudioPlaying(false);
+      return;
+    }
+
+    const textToSpeak = `${riddleText} ${questionText}`;
+
+    if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
+      try {
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.rate = 0.9;
+        utterance.pitch = 1.0;
+        
+        utterance.onstart = () => setIsAudioPlaying(true);
+        utterance.onend = () => setIsAudioPlaying(false);
+        utterance.onerror = (e) => {
+          console.error("SpeechSynthesis Error:", e);
+          setIsAudioPlaying(false);
+        };
+        
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        console.error("SpeechSynthesis failed:", e);
+        setIsAudioPlaying(false);
+      }
+    } else {
+      setIsAudioPlaying(false);
+    }
+  };  const handleOptionClick = (optionId: string) => {
     if (isAnswered) return;
 
     setIsAnswered(true);
@@ -136,7 +174,9 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
         <span className={styles.gearIcon}>⚙️</span>
 
-        <h3 className={styles.chooseHeading}>Choose the correct option</h3>
+        <div className={styles.titleContainer}>
+          <h3 className={styles.title}>Choose the correct option</h3>
+        </div>
         <img src="/mascot.png" alt="Mascot" className={styles.mascotImage} />
 
         {showWinScreen && (
@@ -158,11 +198,24 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
           </div>
         )}
 
-        <div className={styles.promptContainer}>
-          <p className={styles.promptText}>{riddleText}</p>
-          <h2 className={styles.promptQuestion}>{questionText}</h2>
+        <div className={styles.promptWrapper}>
+          <div className={styles.promptContainer}>
+            <p className={styles.promptText}>{riddleText}</p>
+            <div className={styles.questionContainer}>
+              <div className={styles.questionRow}>
+              </div>
+            </div>
+          </div>
+          <button
+            className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+            onClick={playQuestionAudio}
+            aria-label={isAudioPlaying ? "Stop reading" : "Listen to the question"}
+            title={isAudioPlaying ? "Stop reading" : "Listen to the question"}
+          >
+            <FontAwesomeIcon icon={faHeadphones} />
+            <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+          </button>
         </div>
-
         <div className={styles.optionsContainer}>
           {options.map((option) => (
             <button

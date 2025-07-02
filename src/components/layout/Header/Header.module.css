@@ -4,6 +4,7 @@
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   position: sticky;
   top: 0;
+  height: 70px;
   z-index: 100;
   border-bottom: 1px solid rgba(88, 204, 2, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -106,30 +107,33 @@
 
 .companyBadge {
   display: flex;
-  align-items: center;
-  padding: 0.6rem 1rem;
+  align-items: flex-start;
+  padding: 0.04rem 1.2rem 0.04rem 1.2rem;
   background: rgba(28, 162, 255, 0.2);
   border: 1px solid rgba(28, 162, 255, 0.3);
   border-radius: 20px;
   transition: all 0.3s ease;
+  transform: translateY(-8px);
 }
 
 .companyBadge:hover {
   background: rgba(28, 162, 255, 0.25);
-  transform: translateY(-1px);
+  transform: translateY(-9px);
 }
 
 .badgeContent {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.1rem;
+  margin-top: -6px;
 }
 
 .logoGroup {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.8rem;
+  justify-content: center;
 }
 
 .logoSeparator {

@@ -377,7 +377,6 @@ export default function LandingPage() {
                     height={36}
                     className={styles.footerCompanyLogo}
                   />
-                  <span className={styles.footerLogoSeparator}>×</span>
                   <Image 
                     src="/images/dattamsh-logo.png" 
                     alt="DATTAMSH" 

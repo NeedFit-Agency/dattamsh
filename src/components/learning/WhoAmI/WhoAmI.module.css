@@ -11,7 +11,7 @@
     height: 100vh;
     max-height: 100vh;
     left: 0;
-    top: 0;
+    top: 30px;
     position: absolute;
     padding: 1rem;
     margin: 0;
@@ -24,6 +24,66 @@
     box-sizing: border-box;
     overflow: hidden;
     animation: fadeInBackground 0.5s ease-in;
+}
+
+/* Title styling consistent with DragDrop component */
+.titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 2vw, 20px);
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-dark, #343a40);
+    text-align: center;
+    margin: 0;
+    flex: 1;
+    min-width: 0; /* Allow text to shrink if needed */
+}
+
+.titleTTSContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.titleTTS {
+    margin: 0;
+}
+
+.titleHeadphones {
+    background-color: #1db0f6 !important;
+    box-shadow: 0 3px 8px rgba(29, 176, 246, 0.3) !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    padding: 8px !important;
+    border-radius: 50% !important;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+.titleHeadphones:hover {
+    background-color: #0ea5e9 !important;
+    box-shadow: 0 4px 12px rgba(29, 176, 246, 0.4) !important;
+    opacity: 1;
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 1) !important;
+}
+
+.titleHeadphones svg {
+    width: 20px !important;
+    height: 20px !important;
+    color: white !important;
 }
 
 @keyframes fadeInBackground {
@@ -153,16 +213,25 @@
     }
 }
 
+/* --- Riddle/Prompt Wrapper --- */
+.promptWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: clamp(20px, 3vh, 30px);
+    width: 100%;
+    position: relative;
+}
+
 /* --- Riddle/Prompt Area --- */
 .promptContainer {
     background: linear-gradient(135deg, #fef7cd, #fef3c7);
     border-radius: clamp(15px, 2.5vw, 20px);
     box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
     padding: clamp(15px, 2.5vh, 25px) clamp(12px, 2vw, 20px);
-    margin-bottom: clamp(20px, 3vh, 30px);
+    flex: 1;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
     border: 2px solid #fbbf24;
     position: relative;
     overflow: hidden;
@@ -189,14 +258,72 @@
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-.promptQuestion {
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 700;
-    color: var(--char-blue);
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+
+.questionRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(10px, 1.5vw, 16px);
+    width: 100%;
     margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+}
+
+.promptQuestion {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-dark, #343a40);
+    margin: 0;
+    font-family: var(--font-family, 'Nunito', sans-serif);
     animation: bounce 2s ease-in-out infinite;
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+    padding-right: 10px;
+}
+
+.questionTTSContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.questionTTS {
+    margin: 0;
+}
+
+.questionHeadphones {
+    background-color: #fbbf24 !important;
+    box-shadow: 0 3px 8px rgba(251, 191, 36, 0.3) !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    padding: 6px !important;
+    border-radius: 50% !important;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.9) !important;
+}
+
+.questionHeadphones:hover {
+    background-color: #f59e0b !important;
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4) !important;
+    opacity: 1;
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 1) !important;
+}
+
+.questionHeadphones svg {
+    width: 18px !important;
+    height: 18px !important;
+    color: white !important;
 }
 
 @keyframes bounce {
@@ -211,15 +338,39 @@
     }
 }
 
+/* Responsive rules for titles */
+@media (max-width: 768px) {
+    .title, .chooseHeading, .promptQuestion {
+        font-size: 24px;
+        margin-top: 10px;
+    }
+    
+    .promptWrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .audioButton {
+        margin-top: 10px;
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title, .chooseHeading, .promptQuestion {
+        font-size: 20px;
+        margin-top: 8px;
+    }
+}
+
 .chooseHeading {
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-size: 28px;
     font-weight: 700;
-    color: #2563eb;
-    margin: clamp(10px, 2vh, 18px) 0 clamp(18px, 2vh, 24px) 0;
+    color: var(--text-dark, #343a40);
+    margin: clamp(10px, 2vh, 20px) 0 clamp(18px, 2vh, 24px) 0;
     text-align: center;
-    font-family: 'Nunito', 'Quicksand', sans-serif;
-    letter-spacing: 0.01em;
-    text-shadow: 0 1px 2px rgba(30, 99, 235, 0.08);
+    font-family: var(--font-family, 'Nunito', sans-serif);
 }
 
 /* --- Answer Options --- */
@@ -626,6 +777,74 @@
     100% { 
         transform: scale(1) rotate(0deg); 
         opacity: 1; 
+    }
+}
+
+/* --- Question Listen Button Styles --- */
+.questionListenContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: clamp(15px, 3vh, 25px) 0;
+    z-index: 2;
+}
+
+.audioButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--primary, #1aa2ff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    height: 44px;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(26, 162, 255, 0.3);
+    margin-top: 15px; /* To align with the orange container */
+    align-self: flex-start;
+}
+
+.audioButton:hover {
+    background-color: var(--primary-dark, #0080e6);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 162, 255, 0.4);
+}
+
+.audioButtonPlaying {
+    background-color: var(--success-green, #28a745);
+}
+
+.audioButtonPlaying:hover {
+    background-color: #218838;
+}
+
+/* Mobile responsiveness for the audio button */
+@media (max-width: 576px) {
+    .questionRow {
+        flex-direction: row;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .promptQuestion {
+        font-size: 20px;
+        flex-basis: calc(100% - 110px);
+        text-align: left;
+    }
+    
+    .audioButton {
+        min-width: 100px;
+        font-size: 14px;
+        padding: 6px 12px;
+        height: 38px;
+        flex-shrink: 0;
     }
 }
 

@@ -5,8 +5,9 @@ import { BucketMatchProps, Item, Bucket } from './types';
 import styles from './bucketmatch.module.css';
 import { itemSvgMap } from './ItemSvgs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faHeadphones } from '@fortawesome/free-solid-svg-icons';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
+import TTS from '../../shared/TTS';
 
 // Helper to get the SVG for a fruit based on its type/color
 const getFruitSvg = (itemType: string, imageUrl?: string) => {
@@ -48,6 +49,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   isLastLesson = false
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   // Store item id and its target bucket id for items placed in buckets
   const [placedItems, setPlacedItems] = useState<{[itemId: string]: string}>({});
   const [feedback, setFeedback] = useState<{ 
@@ -222,6 +224,34 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     }
   };
 
+  const playInstructionAudio = () => {
+    window.speechSynthesis?.cancel();
+
+    if (isAudioPlaying) {
+      setIsAudioPlaying(false);
+      return;
+    }
+
+    if (instruction && typeof window !== 'undefined' && window.speechSynthesis) {
+      try {
+        const utterance = new SpeechSynthesisUtterance(instruction);
+        utterance.onstart = () => setIsAudioPlaying(true);
+        utterance.onend = () => setIsAudioPlaying(false);
+
+        utterance.onerror = (e) => {
+          console.error("SpeechSynthesis Error:", e);
+          setIsAudioPlaying(false);
+        };
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        console.error("SpeechSynthesis failed:", e);
+        setIsAudioPlaying(false);
+      }
+    } else {
+      setIsAudioPlaying(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <CongratulationsScreen
@@ -235,7 +265,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
 
       {onBack && (
         <div className={styles.header}>
-          {title && <h2 className={styles.mainTitle}>{title}</h2>}
+          {title && <h2 className={styles.title}>{title}</h2>}
           {audioSrc && (
             <>
               <button
@@ -262,7 +292,23 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       )} */}
       
       <div className={styles.worksheetCard}>
-        {instruction && <p className={styles.instruction}>{instruction}</p>}        <div className={styles.matchArea}>
+        {instruction && (
+          <div className={styles.instructionBox}>
+            <p className={styles.instruction}>{instruction}</p>
+            <div className={styles.buttonGroup}>
+              <div className={styles.leftButtons}>
+                <button
+                  className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+                  onClick={playInstructionAudio}
+                >
+                  <FontAwesomeIcon icon={faHeadphones} />
+                  <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        <div className={styles.matchArea}>
           {/* Fruits Section - Top */}
           <div className={styles.fruitsContainer}>
             {items.map((item) => (
@@ -329,6 +375,19 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                     )}
                   </div>
                   <p className={styles.bucketLabel}>{bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}</p>
+                  <div className={styles.bucketTTSContainer}>
+                    <TTS
+                      text={bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}
+                      className={styles.bucketTTS}
+                      iconClassName={styles.bucketHeadphones}
+                      showText={false}
+                      excitement="low"
+                      naturalPauses={true}
+                      humanLike={true}
+                      rate={0.8}
+                      pitch={1.0}
+                    />
+                  </div>
                 </div>
               );
             })}

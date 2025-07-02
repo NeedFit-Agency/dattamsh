@@ -2,6 +2,9 @@ import React, { useState, useRef } from 'react';
 import styles from './SequenceMatcher.module.css';
 import { SequenceMatcherProps, DraggableItem } from './types';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
+import TTS from '../../shared/TTS';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeadphones, faUndo } from '@fortawesome/free-solid-svg-icons';
 
 const SequenceMatcher: React.FC<SequenceMatcherProps> = ({ 
   title = 'Arrange the Steps in the Correct Order!',
@@ -17,6 +20,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   const [feedback, setFeedback] = useState<{ type: 'correct' | 'incorrect' | null, message: string }>({ type: null, message: '' });
   const [showTryAgain, setShowTryAgain] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const draggedElementRef = useRef<HTMLElement | null>(null);
   const dropZonesContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -190,6 +194,12 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     setFeedback({ type: null, message: '' });
     setShowTryAgain(false);
     setShowCongratulations(false);
+    setIsAudioPlaying(false);
+    
+    // Stop any ongoing speech
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
     
     // Clear visual feedback
     const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
@@ -248,6 +258,40 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     }
   };
 
+  // Function to handle audio playback
+  const playQuestionAudio = () => {
+    window.speechSynthesis?.cancel();
+
+    if (isAudioPlaying) {
+      setIsAudioPlaying(false);
+      return;
+    }
+
+    const textToSpeak = title;
+
+    if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
+      try {
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.rate = 0.9;
+        utterance.pitch = 1.0;
+        
+        utterance.onstart = () => setIsAudioPlaying(true);
+        utterance.onend = () => setIsAudioPlaying(false);
+        utterance.onerror = (e) => {
+          console.error("SpeechSynthesis Error:", e);
+          setIsAudioPlaying(false);
+        };
+        
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        console.error("SpeechSynthesis failed:", e);
+        setIsAudioPlaying(false);
+      }
+    } else {
+      setIsAudioPlaying(false);
+    }
+  };
+
     return (
     <div className={styles.container}>
       {/* Position congratulations screen at the top level for proper z-index */}
@@ -262,14 +306,24 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
       />
       <div className={styles.worksheetCard}>
         <span className={styles.gearIcon}>⚙️</span>
-        <h1 className={styles.title}>{title}</h1>
+        
+        <div className={styles.titleContainer}>
+          <h1 className={styles.title}>{title}</h1>
+          <button
+            className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+            onClick={playQuestionAudio}
+            aria-label={isAudioPlaying ? "Stop reading" : "Listen to the question"}
+            title={isAudioPlaying ? "Stop reading" : "Listen to the question"}
+          >
+            <FontAwesomeIcon icon={faHeadphones} />
+            <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+          </button>
+        </div>
 
         <div className={styles.mainContent}>
           <div className={styles.dropTargets}>
             <h3>Column A</h3>
-            <p className={styles.description}>
-              Drag and drop the steps in the correct format, from 1 to {dropZoneCount}.
-            </p>
+
             <div ref={dropZonesContainerRef} className={styles.dropZonesContainer}>
               {Array.from({ length: dropZoneCount }, (_, index) => (
                 <div 
@@ -334,7 +388,26 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                   <span className={`${styles.stepIcon} ${styles.imageIcon}`}>
                     {getItemIcon(item)}
                   </span>
-                  <span>{item.content}</span>
+                  <span className={styles.stepText}>{item.content}</span>
+                  
+                  {/* Small TTS button in bottom left corner */}
+                  <div 
+                    className={styles.itemTTSContainer}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <TTS
+                      text={item.content}
+                      className={styles.itemTTS}
+                      iconClassName={styles.itemHeadphones}
+                      showText={false}
+                      excitement="medium"
+                      naturalPauses={true}
+                      humanLike={true}
+                      rate={0.7}
+                      pitch={1.0}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -348,19 +421,20 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         )}
 
         <div className={styles.actionButtonsContainer}>
-          {!showTryAgain ? (
-            <button
-              className={`${styles.actionButton} ${styles.checkAnswerBtn}`}
-              onClick={checkAnswer}
-              disabled={Object.keys(placedItems).length < correctOrder.length}
-            >
-              Check My Answer
-            </button>
-          ) : (
-            <button className={`${styles.actionButton} ${styles.tryAgainBtn}`} onClick={resetGame}>
-              Play Again
-            </button>
-          )}
+          <button
+            className={`${styles.actionButton} ${styles.checkAnswerBtn}`}
+            onClick={checkAnswer}
+            disabled={Object.keys(placedItems).length < correctOrder.length}
+          >
+            Check My Answer
+          </button>
+          <button 
+            className={`${styles.actionButton} ${styles.resetBtn}`} 
+            onClick={resetGame}
+          >
+            <FontAwesomeIcon icon={faUndo} />
+            <span>Reset</span>
+          </button>
         </div>
       </div>
     </div>

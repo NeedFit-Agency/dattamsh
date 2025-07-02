@@ -41,6 +41,15 @@
   box-sizing: border-box;
 }
 
+/* Title styling matching DragDrop component */
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark, #343a40);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
 /* --- Main Card (Adapted from worksheet-card) --- */
 .worksheetCard {
   background-color: rgba(255, 255, 255, 0.85);
@@ -58,12 +67,13 @@
   align-items: center;
 }
 
-.gameTitle { /* Mapped from h1 in test.html */
-  font-size: 2.5rem;
-  margin-top: 0;
-  margin-bottom: 30px;
-  color: #444;
-  font-family: "Comic Sans MS", "Comic Sans", Nunito, Quicksand, cursive, sans-serif;
+.gameTitle { /* Match styling with DragDrop component */
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark, #343a40);
+  margin-bottom: 16px;
+  text-align: center;
+  font-family: var(--font-family, 'Nunito', sans-serif);
 }
 
 /* --- Matching Area Layout --- */
@@ -437,12 +447,14 @@
 }
 
 .mainTitle {
-  font-size: 2.2rem; /* Larger title */
-  color: #333;
-  margin: 0;
-  font-family: "Comic Sans MS", "Comic Sans", Nunito, Quicksand, cursive, sans-serif;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark, #343a40);
+  margin-bottom: 16px;
+  text-align: center;
+  font-family: var(--font-family, 'Nunito', sans-serif);
 }
+
 
 .audioButton {
   display: flex;
@@ -451,12 +463,23 @@
   background-color: var(--primary, #1aa2ff);
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 10px 16px;
+  border-radius: 8px;
+  padding: 8px 16px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  min-width: 120px;
+  height: 44px;
+  justify-content: center;
+}
+
+.audioButton:hover {
+  background-color: var(--primary-dark, #0080e6);
+}
+
+.audioButtonPlaying {
+  background-color: var(--success-green, #28a745);
 }
 
 .audioButton:hover {
@@ -524,18 +547,156 @@
   color: var(--primary, #1aa2ff);
 }
 
-.instruction {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 30px;
-  max-width: 1400px; /* Match worksheetCard width */
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+.instructionBox {
+  background-color: #f8f9fa;
   border: 1px solid #bbddff;
-  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1400px; /* Match worksheetCard width */
+}
+
+.instruction {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark, #343a40);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* --- Button Group and Audio Button Styles (matching DragDrop) --- */
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.leftButtons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.audioButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--primary, #1aa2ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  height: 44px;
+  justify-content: center;
+}
+
+.audioButton:hover {
+  background-color: var(--primary-dark, #0080e6);
+}
+
+.audioButtonPlaying {
+  background-color: var(--success-green, #28a745);
+}
+
+.audioButtonIcon {
+  width: 18px;
+  height: 18px;
+  color: white;
+}
+
+.audioButtonIcon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+/* --- TTS Styles for Buckets --- */
+.bucketTTSContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.bucketTTS {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bucketTTS:hover {
+  background: rgba(76, 175, 80, 0.1);
+  transform: scale(1.1);
+}
+
+.bucketHeadphones {
+  width: 20px;
+  height: 20px;
+  color: #4CAF50;
+  transition: color 0.3s ease;
+}
+
+.bucketHeadphones:hover {
+  color: #45a049;
+}
+
+.bucketHeadphones svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+/* Responsive adjustments for TTS */
+@media (max-width: 768px) {
+  .instructionTTS {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  
+  .instructionHeadphones {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .bucketHeadphones {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .instructionTTS {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+  
+  .instructionHeadphones {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .bucketHeadphones {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* --- Responsive Adjustments --- */
@@ -560,8 +721,10 @@
     gap: 20px;
   }
   
-  .gameTitle {
-    font-size: 2rem;
+  .gameTitle,
+  .mainTitle,
+  .title {
+    font-size: 24px;
   }
   
   .fruitDraggable {
@@ -578,10 +741,6 @@
     width: 60px;
     height: 60px;
     top: -10px;
-  }
-  
-  .mainTitle {
-    font-size: 1.8rem;
   }
 }
 
@@ -612,7 +771,10 @@
     gap: 10px;
   }
   
-  .mainTitle {
-    font-size: 1.5rem;
+  .mainTitle,
+  .gameTitle,
+  .title {
+    font-size: 20px;
+    margin-bottom: 12px;
   }
 }

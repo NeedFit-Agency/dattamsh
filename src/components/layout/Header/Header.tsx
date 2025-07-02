@@ -47,16 +47,15 @@ export default function Header() {
                 <Image 
                   src="/images/periwinkle-logo.png" 
                   alt="Periwinkle" 
-                  width={60} 
-                  height={40}
+                  width={75} 
+                  height={65}
                   className={styles.badgeLogo}
                 />
-                <span className={styles.logoSeparator}>×</span>
                 <Image 
                   src="/images/dattamsh-logo.png" 
                   alt="DATTAMSH" 
-                  width={60} 
-                  height={24}
+                  width={116.36} 
+                  height={30}
                   className={styles.badgeLogo}
                 />
               </div>
