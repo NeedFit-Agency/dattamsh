@@ -300,7 +300,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         onButtonClick={onComplete ? onComplete : resetGame}
         onTryAgainClick={resetGame}
         showTryAgain={true}
-        message="Amazing! You've arranged everything correctly!"
+        message="Amazing! You have arranged everything correctly!"
         buttonText={isLastLesson ? 'Next Course' : 'Next Chapter'}
         tryAgainText="Play Again"
       />
