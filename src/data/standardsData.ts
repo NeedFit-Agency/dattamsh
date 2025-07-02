@@ -318,7 +318,7 @@ export const standards: Standard = {
           format: "drag-drop",
           title: "Sort Computer Items",
           instruction:
-            'Help me sort these computer items. Drag them into the correct box: "Hardware" or "Software".',
+            'Help me sort natural things or man made things',
           items: [
             {
               id: "dnd-item-1",
@@ -363,7 +363,7 @@ export const standards: Standard = {
           ],
           audioSrc: "/audio/hardware_software.mp3",
           speakText:
-            "Help me sort these computer items. Drag them into the correct box: Hardware or Software.",
+            "Help me sort natural things or man made things",
         },
       ],
     },
