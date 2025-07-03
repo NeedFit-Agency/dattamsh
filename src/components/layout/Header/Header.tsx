@@ -51,7 +51,6 @@ export default function Header() {
                   height={40}
                   className={styles.badgeLogo}
                 />
-                <span className={styles.logoSeparator}>×</span>
                 <Image 
                   src="/images/dattamsh-logo.png" 
                   alt="DATTAMSH" 
