@@ -1,0 +1,48 @@
+.audioButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--primary, #1aa2ff);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.10);
+  outline: none;
+  position: relative;
+}
+
+.audioButton:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px #bbddff;
+}
+
+.audioButton:hover:not(:disabled) {
+  background-color: var(--primary-dark, #0080e6);
+  transform: translateY(-2px);
+}
+
+.audioButton:active:not(:disabled) {
+  background-color: #2563eb;
+  transform: translateY(1px);
+}
+
+.audioButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.audioButtonPlaying {
+  background: linear-gradient(90deg, #1aa2ff 60%, #60a5fa 100%);
+  box-shadow: 0 0 0 4px #bbddff, 0 4px 12px rgba(26,162,255,0.15);
+}
+
+.audioButton svg {
+  width: 1.2em;
+  height: 1.2em;
+} 

@@ -8,8 +8,7 @@
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
+    min-height: 100vh;
     left: 0;
     top: 0;
     position: absolute;
@@ -22,7 +21,6 @@
     background-repeat: no-repeat;
     color: #5c4b40;
     box-sizing: border-box;
-    overflow: hidden;
     animation: fadeInBackground 0.5s ease-in;
 }
 
@@ -62,7 +60,7 @@
     padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
     width: 95%;
     max-width: min(90vw, 1200px);
-    max-height: calc(90vh - 80px);
+    min-height: 600px;
     text-align: center;
     position: relative;
     margin: 0 auto;
@@ -71,7 +69,6 @@
     box-sizing: border-box;
     backdrop-filter: blur(5px);
     border: 3px solid #bbddff;
-    overflow: auto;
     display: flex;
     flex-direction: column;
     animation: cardEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -154,29 +151,49 @@
 }
 
 /* --- Riddle/Prompt Area --- */
+.mascotPromptRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 100px;
+    padding-top: 50px;
+}
+
+.mascotImage {
+    display: block;
+    margin-right: 70px;
+    width: clamp(80px, 12vw, 120px);
+    height: auto;
+    max-height: clamp(80px, 12vh, 120px);
+    object-fit: contain;
+    animation: mascotBounce 2.5s infinite cubic-bezier(0.4,0,0.2,1);
+}
+
 .promptContainer {
+    flex: 1 1 0%;
     background: linear-gradient(135deg, #fef7cd, #fef3c7);
     border-radius: clamp(15px, 2.5vw, 20px);
     box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
     padding: clamp(15px, 2.5vh, 25px) clamp(12px, 2vw, 20px);
     margin-bottom: clamp(20px, 3vh, 30px);
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
     border: 2px solid #fbbf24;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
 }
 
-.promptContainer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 30%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
-    pointer-events: none;
+.promptTextRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 }
 
 .promptText {
@@ -185,8 +202,16 @@
     margin: 0 0 clamp(10px, 2vh, 15px) 0;
     font-weight: 500;
     color: #92400e;
-    font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+    font-family: 'Nunito', 'Quicksand', sans-serif;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    word-break: break-word;
+    text-align: left;
+    flex: 1 1 0%;
+}
+
+.promptContainer .audioButton {
+    margin-left: 12px;
+    align-self: flex-start;
 }
 
 .promptQuestion {
@@ -195,7 +220,7 @@
     color: var(--char-blue);
     margin: 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+    font-family: 'Nunito', 'Quicksand', sans-serif;
     animation: bounce 2s ease-in-out infinite;
 }
 
@@ -214,8 +239,6 @@
 .chooseHeading {
     font-size: clamp(1.2rem, 2.5vw, 1.6rem);
     font-weight: 700;
-    color: #2563eb;
-    margin: clamp(10px, 2vh, 18px) 0 clamp(18px, 2vh, 24px) 0;
     text-align: center;
     font-family: 'Nunito', 'Quicksand', sans-serif;
     letter-spacing: 0.01em;
@@ -254,7 +277,7 @@
     font-weight: 700; /* Bolder text */
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-    font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+    font-family: 'Nunito', 'Quicksand', sans-serif;
     color: var(--text-dark);
     position: relative;
     overflow: hidden;
@@ -462,7 +485,7 @@
     color: var(--win-green);
     text-shadow: 3px 3px 0 #fff, 6px 6px 0 var(--text-dark), 0 0 20px rgba(52, 211, 153, 0.5);
     margin-bottom: clamp(15px, 3vh, 25px);
-    font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+    font-family: 'Nunito', 'Quicksand', sans-serif;
     font-weight: 700;
     animation: winTextPulse 2s ease-in-out infinite alternate;
     text-align: center;
@@ -544,7 +567,7 @@
 }
 
 .playAgainBtn {
-    font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+    font-family: 'Nunito', 'Quicksand', sans-serif;
     font-size: clamp(1.1rem, 2.2vw, 1.4rem);
     font-weight: 600;
     padding: clamp(10px, 2vh, 15px) clamp(20px, 3vw, 30px);
@@ -700,12 +723,18 @@
     }
 }
 
-.mascotImage {
-    display: block;
-    margin: 0 auto clamp(15px, 2.5vh, 25px) auto;
-    width: clamp(80px, 12vw, 120px);
-    height: auto;
-    max-height: clamp(80px, 12vh, 120px);
-    object-fit: contain;
-    animation: mascotBounce 2.5s infinite cubic-bezier(0.4,0,0.2,1);
+.audioButtonWrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+.mascotAndAudioRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 18px;
+    min-height: 80px;
 }

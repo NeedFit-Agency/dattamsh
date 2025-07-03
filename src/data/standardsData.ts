@@ -225,7 +225,7 @@ export const standards: Standard = {
           successMessage: "Great job! You matched all computer parts!",
           correctMessage: "That's right!",
           tryAgainMessage: "Try a different match!",
-          resetLabel: "Start Over",
+          resetLabel: "Reset",
           playAgainLabel: "Play Again",
           audioSrc: "/audio/computer_parts.mp3",
           speakText: "Match each computer part to what it does!",
@@ -377,12 +377,6 @@ export const standards: Standard = {
           title: "Sort School Supplies",
           instruction: "Put each school supply in the correct category bucket!",
           items: [
-            {
-              id: "pencil",
-              text: "Pencil",
-              type: "writing",
-              imageUrl: "/images/pencil.png",
-            },
             {
               id: "scissors",
               text: "Scissors",

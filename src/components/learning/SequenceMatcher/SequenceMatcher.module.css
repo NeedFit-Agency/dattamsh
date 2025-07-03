@@ -978,3 +978,32 @@
   transform: scale(1.03);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15), 0 5px 0 rgba(0,0,0,0.06);
 }
+
+.audioButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.instructionBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  border: 1px solid #bbddff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  padding: 20px 32px;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.titleText {
+  font-size: 1.2rem;
+  color: #333;
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+  font-weight: 700;
+  flex: 1;
+}

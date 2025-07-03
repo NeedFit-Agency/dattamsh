@@ -225,7 +225,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
       <div className={styles.instructionBox}>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.instruction}>{instruction}</p>
-        {/* {(audioSrc || speakText) && (
+        {(audioSrc || speakText) && (
           <button
             className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
             onClick={playAudio}
@@ -233,7 +233,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
             <FontAwesomeIcon icon={faHeadphones} />
             <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
           </button>
-        )} */}
+        )}
         {feedback.show && (
           <div
             className={

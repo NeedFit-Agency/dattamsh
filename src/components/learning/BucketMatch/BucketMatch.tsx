@@ -7,6 +7,7 @@ import { itemSvgMap } from './ItemSvgs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
+import AudioButton from '../../ui/AudioButton/AudioButton';
 
 // Helper to get the SVG for a fruit based on its type/color
 const getFruitSvg = (itemType: string, imageUrl?: string) => {
@@ -233,36 +234,23 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         tryAgainText="Play Again"
       />
 
-      {onBack && (
-        <div className={styles.header}>
-          {title && <h2 className={styles.mainTitle}>{title}</h2>}
-          {audioSrc && (
-            <>
-              <button
-                className={styles.audioButton}
-                onClick={playAudio}
-                aria-label="Play audio"
-              >
-                <img src="/images/sound.png" alt="Play sound" style={{ width: 24, height: 24 }} />
-              </button>
-              <audio ref={audioRef} src={audioSrc} />
-            </>
-          )}
-        </div>
-      )}
-      {/* {typeof progress !== 'undefined' && (
-        // <div className={styles.progressContainer}>
-        //   <div className={styles.progressBar}>
-        //     <div
-        //       className={styles.progressFill}
-        //       style={{ width: `${progress}%` }}
-        //     />
-        //   </div>
-        // </div>
-      )} */}
+      <div className={styles.header}>
+        {title && <h2 className={styles.mainTitle}>{title}</h2>}
+      </div>
+
       
       <div className={styles.worksheetCard}>
-        {instruction && <p className={styles.instruction}>{instruction}</p>}        <div className={styles.matchArea}>
+        {instruction && (
+          <div className={styles.instructionBox}>
+            <span className={styles.instructionText}>{instruction}</span>
+            <AudioButton
+              textToSpeak={instruction}
+              ariaLabel="Play instruction audio"
+              buttonText="Listen"
+            />
+          </div>
+        )}
+        <div className={styles.matchArea}>
           {/* Fruits Section - Top */}
           <div className={styles.fruitsContainer}>
             {items.map((item) => (

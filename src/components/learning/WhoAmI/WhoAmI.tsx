@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './WhoAmI.module.css';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
+import AudioButton from '../../ui/AudioButton/AudioButton';
 
 interface Option {
   id: string;
@@ -135,9 +136,21 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       />
       <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
         <span className={styles.gearIcon}>⚙️</span>
-
         <h3 className={styles.chooseHeading}>Choose the correct option</h3>
-        <img src="/mascot.png" alt="Mascot" className={styles.mascotImage} />
+        <div className={styles.mascotPromptRow}>
+          <img src="/mascot.png" alt="Mascot" className={styles.mascotImage} />
+          <div className={styles.promptContainer}>
+            <div className={styles.promptTextRow}>
+              <p className={styles.promptText}>{riddleText}</p>
+              <AudioButton
+                textToSpeak={riddleText || questionText || ''}
+                ariaLabel="Play riddle audio"
+                buttonText="Listen"
+              />
+            </div>
+            <h2 className={styles.promptQuestion}>{questionText}</h2>
+          </div>
+        </div>
 
         {showWinScreen && (
           <div className={`${styles.winScreen} ${styles.visible}`}>
@@ -157,11 +170,6 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
             </button>
           </div>
         )}
-
-        <div className={styles.promptContainer}>
-          <p className={styles.promptText}>{riddleText}</p>
-          <h2 className={styles.promptQuestion}>{questionText}</h2>
-        </div>
 
         <div className={styles.optionsContainer}>
           {options.map((option) => (

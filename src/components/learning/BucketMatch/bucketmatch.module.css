@@ -24,21 +24,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  width: 100vw;
-  min-height: 100vh;
-  left: 0;
-  top: 0;
-  position: absolute;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: var(--font-family, 'Nunito', sans-serif);
+  justify-content: center;
+  padding: 1rem;
+  margin: 0;
+  font-family: 'Nunito', 'Quicksand', sans-serif;
   background-image: url('/images/background/image-1.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: var(--text-color, #333);
+  color: #5c4b40;
   box-sizing: border-box;
+  overflow: hidden;
+  animation: fadeInBackground 0.5s ease-in;
 }
 
 /* --- Main Card (Adapted from worksheet-card) --- */
@@ -470,6 +467,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.audioButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  margin-bottom: 0;
+}
+
 .progressContainer {
   width: 100%;
   max-width: 1400px; /* Match worksheetCard width */
@@ -524,18 +529,47 @@
   color: var(--primary, #1aa2ff);
 }
 
-.instruction {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 30px;
-  max-width: 1400px; /* Match worksheetCard width */
-  text-align: center;
+.instructionRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.instructionBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   border: 1px solid #bbddff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  padding: 20px 32px;
+  margin-bottom: 30px;
+  margin-top: 0;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.instructionText {
+  font-size: 1.2rem;
+  color: #333;
   font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+  font-weight: 700;
+  flex: 1;
+}
+
+.instruction {
+  /* Remove box styling, keep only text-specific styles if needed */
+  font-size: 1.2rem;
+  color: #333;
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+  font-weight: 700;
+  margin: 0;
+  text-align: left;
 }
 
 /* --- Responsive Adjustments --- */

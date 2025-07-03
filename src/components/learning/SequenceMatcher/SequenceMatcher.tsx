@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styles from './SequenceMatcher.module.css';
 import { SequenceMatcherProps, DraggableItem } from './types';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
+import AudioButton from '../../ui/AudioButton/AudioButton';
 
 const SequenceMatcher: React.FC<SequenceMatcherProps> = ({ 
   title = 'Arrange the Steps in the Correct Order!',
@@ -261,7 +262,14 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         tryAgainText="Play Again"
       />
       <div className={styles.worksheetCard}>
-        <span className={styles.gearIcon}>⚙️</span>
+        <div className={styles.instructionBox}>
+          <span className={styles.titleText}>{title}</span>
+          <AudioButton
+            textToSpeak={title}
+            ariaLabel="Play activity title audio"
+            buttonText="Listen"
+          />
+        </div>
         <h1 className={styles.title}>{title}</h1>
 
         <div className={styles.mainContent}>
