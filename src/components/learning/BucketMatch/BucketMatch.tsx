@@ -234,15 +234,11 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         tryAgainText="Play Again"
       />
 
-      <div className={styles.header}>
-        {title && <h2 className={styles.mainTitle}>{title}</h2>}
-      </div>
-
-      
       <div className={styles.worksheetCard}>
+        <h2 className={styles.mainTitle}>Match Computer Parts to Their Functions</h2>
         {instruction && (
           <div className={styles.instructionBox}>
-            <span className={styles.instructionText}>{instruction}</span>
+            <h3 className={styles.subTitle}>{instruction}</h3>
             <AudioButton
               textToSpeak={instruction}
               ariaLabel="Play instruction audio"

@@ -436,7 +436,7 @@
 .mainTitle {
   font-size: 2.2rem; /* Larger title */
   color: #333;
-  margin: 0;
+  margin-bottom: 20px;
   font-family: "Comic Sans MS", "Comic Sans", Nunito, Quicksand, cursive, sans-serif;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -572,6 +572,14 @@
   text-align: left;
 }
 
+.subTitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #555;
+  margin: 0.5rem 0 0.5rem 0;
+  line-height: 1.4;
+}
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
   .container {
@@ -579,8 +587,9 @@
   }
   
   .worksheetCard {
-    padding: 20px;
-    max-width: 95%;
+    padding: 12px 8px;
+    max-width: 98vw;
+    margin: 8px auto;
   }
   
   .matchArea {
@@ -648,5 +657,13 @@
   
   .mainTitle {
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .worksheetCard {
+    padding: 6px 2px;
+    max-width: 100vw;
+    margin: 2px auto;
   }
 }
