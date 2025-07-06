@@ -155,7 +155,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       setTimeout(() => {
         targetBucketElement.classList.remove(styles.incorrect);
         setFeedback({ type: null });
-      }, 8000); // Extended duration so kids can read the message slowly
+      }, 3000); // Extended duration so kids can read the message slowly
     }
     // Dragged item ID is cleared in handleDragEnd
   };
@@ -336,7 +336,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
               : feedback.type === 'correct'
               ? correctMessage
               : feedback.type === 'incorrect'
-              ? `Oops! ${feedback.itemName || 'This item'} doesn't belong in ${feedback.bucketName || 'this bucket'}. Try a different bucket! 🤔`
+              ? "Oops! That is not the right answer. Try again!"
               : ''}
           </div>
         )}

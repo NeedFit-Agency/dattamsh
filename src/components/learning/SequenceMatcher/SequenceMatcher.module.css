@@ -47,7 +47,7 @@
     width: 95%; /* Use more screen space */
     max-width: 1400px;
     height: 90vh; /* Use viewport height */
-    max-height: 900px;
+    max-height: 700px;
     text-align: center;
     position: relative;
     margin: 0 auto;
@@ -212,8 +212,8 @@
     overflow: hidden;
     width: 100%;
     position: relative;
-    padding: 0;
     animation: contentFadeIn 0.8s ease-in-out;
+    margin-top: 20px;
 }
 
 @keyframes contentFadeIn {

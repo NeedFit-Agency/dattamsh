@@ -185,7 +185,7 @@ export const standards: Standard = {
           type: "bucket-match",
           format: "bucket-match",
           title: "Match Computer Parts to Their Functions",
-          instruction: "Match each computer part to what it does!",
+          instruction: "Drag each computer part to its matching description bucket!",
           items: [
             {
               id: "monitor-item",
