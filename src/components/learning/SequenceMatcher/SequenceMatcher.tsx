@@ -265,18 +265,16 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         <div className={styles.instructionBox}>
           <span className={styles.titleText}>{title}</span>
           <AudioButton
-            textToSpeak={title}
-            ariaLabel="Play activity title audio"
+            textToSpeak={"Shutting Down the Computer, Drag and drop the steps in the correct order, from 1 to 6. Move from Column B to Column A."}
+            ariaLabel="Play activity instruction audio"
             buttonText="Listen"
           />
         </div>
-        <h1 className={styles.title}>{title}</h1>
-
         <div className={styles.mainContent}>
           <div className={styles.dropTargets}>
             <h3>Column A</h3>
             <p className={styles.description}>
-              Drag and drop the steps in the correct format, from 1 to {dropZoneCount}.
+              Drag and drop the steps in the correct order, from 1 to 6. Move from Column B to Column A.
             </p>
             <div ref={dropZonesContainerRef} className={styles.dropZonesContainer}>
               {Array.from({ length: dropZoneCount }, (_, index) => (
