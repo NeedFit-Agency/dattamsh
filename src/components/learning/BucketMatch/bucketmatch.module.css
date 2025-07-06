@@ -539,7 +539,6 @@
 }
 
 .instructionBox {
-  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -549,17 +548,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   padding: 20px 32px;
   margin-bottom: 30px;
-  margin-top: 0;
-  width: 100%;
-  max-width: 500px;
-}
-
-.instructionText {
-  font-size: 1.2rem;
-  color: #333;
-  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
-  font-weight: 700;
-  flex: 1;
 }
 
 .instruction {

@@ -996,14 +996,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   padding: 20px 32px;
   margin-bottom: 30px;
+  margin-left: 300px;
   width: 100%;
-  max-width: 1400px;
+  max-width: 700px;
 }
 
 .titleText {
-  font-size: 1.2rem;
+  font-size: 2rem;
   color: #333;
-  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
   font-weight: 700;
   flex: 1;
 }
