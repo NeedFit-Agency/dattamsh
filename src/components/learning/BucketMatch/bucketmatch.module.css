@@ -102,7 +102,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(3px);
   justify-items: center;
-  align-items: start;
+  align-items: center;
 }
 
 .bucketDescriptionBox {
@@ -174,9 +174,12 @@
 
 /* --- Basket Dropzone Styling --- */
 .bucketContainer {
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -204,8 +207,13 @@
 }
 
 .basketDropzone {
-  width: 180px;
-  height: 150px;
+  width: 90%;
+  height: 90%;
+  max-width: 220px;
+  max-height: 160px;
+  min-width: 120px;
+  min-height: 80px;
+  aspect-ratio: 6/5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,13 +226,17 @@
 }
 
 .basketDropzone .droppedFruit {
-  width: 80px; /* Slightly larger fruit inside basket */
-  height: 80px;
+  width: 60%;
+  height: 60%;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 80px;
+  max-height: 80px;
   z-index: 2;
   position: relative;
-  top: -15px; /* Position it nicely in the basket */
+  top: -8px;
   cursor: default;
-  display: flex; /* For centering SVG if needed */
+  display: flex;
   justify-content: center;
   align-items: center;
   animation: dropIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -622,8 +634,11 @@
   }
   
   .basketDropzone {
-    width: 140px;
-    height: 120px;
+    max-width: 140px;
+    max-height: 100px;
+    min-width: 80px;
+    min-height: 60px;
+    aspect-ratio: 6/5;
   }
   
   .basketDropzone .droppedFruit {
@@ -649,8 +664,11 @@
   }
   
   .basketDropzone {
-    width: 120px;
-    height: 100px;
+    max-width: 100px;
+    max-height: 70px;
+    min-width: 60px;
+    min-height: 40px;
+    aspect-ratio: 6/5;
   }
   
   .basketDropzone .droppedFruit {
@@ -680,8 +698,9 @@
 @media (max-width: 900px) {
   .basketsContainer {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows: repeat(4, 1fr);
     gap: 24px;
+    padding: 10px;
   }
   .bucketDescriptionBox {
     max-width: 98vw;

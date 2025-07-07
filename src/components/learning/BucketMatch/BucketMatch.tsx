@@ -60,6 +60,10 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   const [showCongratulations, setShowCongratulations] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  // --- Auto-scroll state ---
+  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const isDraggingRef = useRef(false);
+
   const allItemsCount = items.length;
   const matchedItemsCount = Object.keys(placedItems).length;
   const allItemsMatched = allItemsCount > 0 && matchedItemsCount === allItemsCount;
@@ -222,6 +226,71 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       audioRef.current.play();
     }
   };
+
+  // --- Auto-scroll on drag ---
+  useEffect(() => {
+    if (!draggedItemId) return;
+    isDraggingRef.current = true;
+    let lastDirection: 'up' | 'down' | null = null;
+
+    const EDGE_THRESHOLD = 60; // px from top/bottom
+    const SCROLL_SPEED = 24; // px per interval
+    const INTERVAL = 16; // ms
+
+    function onDragOver(e: DragEvent) {
+      if (!isDraggingRef.current) return;
+      const y = e.clientY;
+      const winHeight = window.innerHeight;
+      let direction: 'up' | 'down' | null = null;
+      if (y < EDGE_THRESHOLD) direction = 'up';
+      else if (y > winHeight - EDGE_THRESHOLD) direction = 'down';
+      else direction = null;
+
+      if (direction !== lastDirection) {
+        if (scrollIntervalRef.current) {
+          clearInterval(scrollIntervalRef.current);
+          scrollIntervalRef.current = null;
+        }
+        if (direction) {
+          scrollIntervalRef.current = setInterval(() => {
+            if (direction === 'up') {
+              window.scrollBy({ top: -SCROLL_SPEED, behavior: 'auto' });
+            } else if (direction === 'down') {
+              window.scrollBy({ top: SCROLL_SPEED, behavior: 'auto' });
+            }
+          }, INTERVAL);
+        }
+        lastDirection = direction;
+      }
+    }
+
+    function onDragEndOrLeave() {
+      isDraggingRef.current = false;
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+        scrollIntervalRef.current = null;
+      }
+      lastDirection = null;
+    }
+
+    window.addEventListener('dragover', onDragOver);
+    window.addEventListener('drop', onDragEndOrLeave);
+    window.addEventListener('dragend', onDragEndOrLeave);
+    window.addEventListener('dragleave', onDragEndOrLeave);
+
+    return () => {
+      window.removeEventListener('dragover', onDragOver);
+      window.removeEventListener('drop', onDragEndOrLeave);
+      window.removeEventListener('dragend', onDragEndOrLeave);
+      window.removeEventListener('dragleave', onDragEndOrLeave);
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+        scrollIntervalRef.current = null;
+      }
+      isDraggingRef.current = false;
+      lastDirection = null;
+    };
+  }, [draggedItemId]);
 
   return (
     <div className={styles.container}>
