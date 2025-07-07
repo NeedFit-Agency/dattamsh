@@ -12,7 +12,7 @@ const fadeTransitionStyles = {
 };
 
 const DragDrop = dynamic(() => import('./DragDrop'), { 
-  loading: () => <LoadingSpinner message="Loading drag-drop content..." /> 
+  loading: () => <LoadingSpinner message="Loading sort content..." /> 
 });
 
 const BucketMatch = dynamic(() => import('./BucketMatch'), { 
@@ -123,7 +123,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
   const { format } = content;
 
   // Map content format to corresponding component
-  switch (format) {   case 'drag-drop': {
+  switch (format) {   case 'sort': {
       const dndContent = content as import('../../data/standardsData').DragDropSlide;
       return (
         <ContentWrapper>

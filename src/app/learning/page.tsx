@@ -110,7 +110,7 @@ function LearningPageContent() {
     window.speechSynthesis?.cancel();
 
     const currentSlideData = chapterContent[currentSlideIndex];
-    if (currentSlideData && currentSlideData.type === 'drag-drop') {
+    if (currentSlideData && currentSlideData.type === 'sort') {
       setDndState({
         sourceItems: currentSlideData.items ? [...currentSlideData.items] : [],
         naturalTarget: [],
@@ -186,7 +186,7 @@ function LearningPageContent() {
     : handleActivityComplete;
 
   const checkDragDrop = () => {
-    if (!currentContent || currentContent.type !== 'drag-drop') return;
+    if (!currentContent || currentContent.type !== 'sort') return;
 
     let incorrectCount = 0;
     const newCorrectnessMap: { [itemId: string]: boolean } = {};
@@ -242,7 +242,7 @@ function LearningPageContent() {
   const handleContinue = () => {
     if (!currentContent) return;
 
-    if (currentContent.type === 'drag-drop') {
+    if (currentContent.type === 'sort') {
         if (!dndChecked) {
             checkDragDrop();
             return;
@@ -269,7 +269,7 @@ function LearningPageContent() {
   let continueButtonDisabled = false;
   let continueButtonClass = `${styles.continueButton}`;
 
-  if (currentContent && currentContent.type === 'drag-drop') {
+  if (currentContent && currentContent.type === 'sort') {
     const totalPlaced = (dndState.naturalTarget?.length || 0) + (dndState.manMadeTarget?.length || 0);
     const allPlaced = areAllItemsPlaced();
     const anyIncorrect = Object.values(itemCorrectness).some(correct => !correct);
@@ -293,8 +293,8 @@ function LearningPageContent() {
   } else {
       continueButtonClass += ` ${styles.continueButtonCorrect}`;
   }
-  if (currentSlideIndex === totalSlides - 1 && (!currentContent || currentContent.type !== 'drag-drop' || dndChecked)) {
-    const allowFinish = currentContent.type !== 'drag-drop' || (dndChecked && !(hearts <= 0 && Object.values(itemCorrectness).some(c => !c) && areAllItemsPlaced()));
+  if (currentSlideIndex === totalSlides - 1 && (!currentContent || currentContent.type !== 'sort' || dndChecked)) {
+    const allowFinish = currentContent.type !== 'sort' || (dndChecked && !(hearts <= 0 && Object.values(itemCorrectness).some(c => !c) && areAllItemsPlaced()));
     if (allowFinish) {
         continueButtonText = "Finish Lesson";
     }

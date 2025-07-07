@@ -1,5 +1,5 @@
 export type FormatType =
-  | "drag-drop"
+  | "sort"
   | "bucket-match"
   | "sequence-match"
   | "who-am-i";
@@ -26,7 +26,7 @@ export interface DropTargetData {
 }
 
 export interface DragDropSlide extends BaseContentProps {
-  type: "drag-drop";
+  type: "sort";
   instruction: string;
   items: DraggableItemData[];
   targets: DropTargetData[];
@@ -112,8 +112,8 @@ export const standards: Standard = {
       title: "Introduction to Machines",
       lessonContent: [
         {
-          type: "drag-drop",
-          format: "drag-drop",
+          type: "sort",
+          format: "sort",
           title: "Sort Natural and Man-made Things",
           instruction: "Help me sort these pictures",
           items: [
@@ -479,8 +479,8 @@ export const standards: Standard = {
       title: "Help me sort the tasks a smartphone can do?",
       lessonContent: [
         {
-          type: "drag-drop",
-          format: "drag-drop",
+          type: "sort",
+          format: "sort",
           title: "Help me sort the tasks a smartphone can do?",
           instruction:
             "Help me sort these computer items. Drag them into the correct box: Tasks smartphones can do or Tasks smartphones can not do.",
@@ -634,8 +634,8 @@ export const standards: Standard = {
       title: "Chapter 1: Surfing the Internet",
       lessonContent: [
         {
-          type: "drag-drop",
-          format: "drag-drop",
+          type: "sort",
+          format: "sort",
           title: "Help Rina stay safe while using the internet!",
           instruction:
             "Read each situation and help her decide if it is Safe or Unsafe.",
@@ -984,8 +984,8 @@ export const standards: Standard = {
       title: "Windows Components",
       lessonContent: [
         {
-          type: "drag-drop",
-          format: "drag-drop",
+          type: "sort",
+          format: "sort",
           title: "Chapter 3: Different File Types",
           instruction:
             "Drag each file extension into the correct category based on the type of file it represents.",
