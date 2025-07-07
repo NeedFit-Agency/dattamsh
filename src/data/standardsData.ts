@@ -184,7 +184,7 @@ export const standards: Standard = {
         {
           type: "bucket-match",
           format: "bucket-match",
-          title: "Match Computer Parts to Their Functions",
+          title: "Match each computer part to what it does!",
           instruction: "Drag each computer part to its matching description bucket!",
           items: [
             {
@@ -311,14 +311,65 @@ export const standards: Standard = {
   "2": [
     {
       id: 1,
-      title: "Hardware vs Software",
+      title: "School Supplies Sorting",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Sort School Supplies",
+          instruction: "Put each school supply in the correct category bucket!",
+          items: [
+            {
+              id: "Scanner",
+              text: "Scanner",
+              type: "Scanner",
+              imageUrl: "/images/Scanner.png",
+            },
+            {
+              id: "Microphone",
+              text: "Microphone",
+              type: "Microphone",
+              imageUrl: "/images/Microphone.png",
+            },
+            {
+              id: "Speakers",
+              text: "Speakers",
+              type: "Speakers",
+              imageUrl: "/images/speaker.png",
+            },
+            {
+              id: "Printer",
+              text: "Printer",
+              type: "Printer",
+              imageUrl: "/images/Printer.png",
+            },
+          ],
+          buckets: [
+            { id: "scanner-bucket", title: "turn pictures and papers into digital files so you can see them on the computer.", type: "Scanner" },
+            { id: "microphone-bucket", title: "used for talking, giving voice instructions, singing, and recording music.", type: "Microphone" },
+            { id: "speakers-bucket", title: "Listen to a variety of sounds.", type: "Speakers" },
+            { id: "printer-bucket", title: "prints what you see on the monitor on to paper.", type: "Printer" }
+          ],
+          successMessage: "Amazing! You have sorted all the school supplies!",
+          correctMessage: "Perfect match!",
+          tryAgainMessage: "Not quite right, try again!",
+          resetLabel: "Clear All",
+          playAgainLabel: "Play Again",
+          audioSrc: "/audio/school_supplies.mp3",
+          speakText: "Put each school supply in the correct category bucket!",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Help me sort the tasks a smartphone can do?",
       lessonContent: [
         {
           type: "drag-drop",
           format: "drag-drop",
-          title: "Sort Computer Items",
+          title: "Help me sort the tasks a smartphone can do?",
           instruction:
-            'Help me sort these computer items. Drag them into the correct box: "Hardware" or "Software".',
+            'Help me sort these computer items. Drag them into the correct box: Tasks smartphones can do or Tasks smartphones can not do.',
           items: [
             {
               id: "dnd-item-1",
@@ -336,7 +387,7 @@ export const standards: Standard = {
               id: "dnd-item-3",
               text: "Keyboard",
               type: "option-1",
-              imageUrl: "/images/keyboard.png",
+              imageUrl: "/images/1st_standard/keyboard.png",
             },
             {
               id: "dnd-item-4",
@@ -358,78 +409,35 @@ export const standards: Standard = {
             },
           ],
           targets: [
-            { id: "hardwareTarget", title: "Hardware", type: "option-1" },
-            { id: "softwareTarget", title: "Software", type: "option-2" },
+            { id: "hardwareTarget", title: "Tasks smartphones can do ", type: "option-1" },
+            { id: "softwareTarget", title: "Tasks smartphones can not do", type: "option-2" },
           ],
-          audioSrc: "/audio/hardware_software.mp3",
+          audioSrc: "/audio/smartphone_tasks.mp3",
           speakText:
-            "Help me sort these computer items. Drag them into the correct box: Hardware or Software.",
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "School Supplies Sorting",
-      lessonContent: [
-        {
-          type: "bucket-match",
-          format: "bucket-match",
-          title: "Sort School Supplies",
-          instruction: "Put each school supply in the correct category bucket!",
-          items: [
-            {
-              id: "scissors",
-              text: "Scissors",
-              type: "cutting",
-              imageUrl: "/images/scissors.png",
-            },
-            {
-              id: "pen",
-              text: "Pen",
-              type: "writing",
-              imageUrl: "/images/pen.png",
-            },
-            {
-              id: "glue",
-              text: "Glue",
-              type: "sticking",
-              imageUrl: "/images/glue.png",
-            }
-          ],
-          buckets: [
-            { id: "writing-bucket", title: "Writing Tools", type: "writing" },
-            { id: "cutting-bucket", title: "Cutting Tools", type: "cutting" },
-            { id: "sticking-bucket", title: "Sticking Tools", type: "sticking" }
-          ],
-          successMessage: "Amazing! You've sorted all the school supplies!",
-          correctMessage: "Perfect match!",
-          tryAgainMessage: "Not quite right, try again!",
-          resetLabel: "Clear All",
-          playAgainLabel: "Play Again",
-          audioSrc: "/audio/school_supplies.mp3",
-          speakText: "Put each school supply in the correct category bucket!",
+            "Help me sort these computer items. Drag them into the correct box: Tasks smartphones can do or Tasks smartphones can not do.",
         },
       ],
     },
     {
       id: 3,
-      title: "Daily School Routine",
+      title: "Type and Save a File in Notepad",
       lessonContent: [
         {
           type: "sequence-match",
           format: "sequence-match",
-          title: "Daily School Routine",
-          instruction: "Put these daily school activities in the correct order!",
+          title: "Type and Save a File in Notepad",
+          instruction: "The steps to type and save a file in Notepad are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
           items: [
-            { id: "school-1", content: "Wake up in the morning" },
-            { id: "school-2", content: "Get ready for school" },
-            { id: "school-3", content: "Go to school" },
-            { id: "school-4", content: "Come back home" },
+            { id: "step-2", content: "Click on the \"File\" menu at the top." },
+            { id: "step-4", content: "Give your file a name, like \"MyStory\"." },
+            { id: "step-1", content: "Type the content." },
+            { id: "step-3", content: "Choose \"Save As\"." },
+            { id: "step-5", content: "Click \"Save\"." },
           ],
-          correctOrder: ["school-1", "school-2", "school-3", "school-4"],
-          dropZoneCount: 4,
-          audioSrc: "/audio/school_routine.mp3",
-          speakText: "Put these daily school activities in the correct order!",
+          correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5"],
+          dropZoneCount: 5,
+          audioSrc: "/audio/notepad_save_steps.mp3",
+          speakText: "The steps to type and save a file in Notepad are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
         },
       ],
     },
@@ -440,17 +448,54 @@ export const standards: Standard = {
         {
           type: "who-am-i",
           format: "who-am-i",
-          title: "Guess the School Place",
-          riddleText: "I am a place where children come to learn every day. I have many classrooms, teachers, and students. You can find books, blackboards, and desks here. Children make friends and play games in my playground. What am I?",
-          questionText: "Which place am I?",
+          title: "Guess the Computer Tool",
+          riddleText: "I help you draw shapes like squares, circles and many more. Which tool am I?",
+          questionText: "Which tool am I?",
           options: [
-            { id: "option-1", text: "School", isCorrect: true },
-            { id: "option-2", text: "Hospital", isCorrect: false },
-            { id: "option-3", text: "Market", isCorrect: false },
-            { id: "option-4", text: "Park", isCorrect: false },
+            { id: "option-1", text: "Shape Tools", isCorrect: true },
+            { id: "option-2", text: "Brushes", isCorrect: false },
+            { id: "option-3", text: "Eraser", isCorrect: false },
+            { id: "option-4", text: "Curve Tool", isCorrect: false },
           ],
-          audioSrc: "/audio/school_riddle.mp3",
-          speakText: "I am a place where children come to learn every day. I have many classrooms, teachers, and students. You can find books, blackboards, and desks here. Children make friends and play games in my playground. What am I?",
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Guess the Computer Tool",
+          riddleText: "I am a tool that can draw curved and wavy lines. Which tool am I?",
+          questionText: "Which tool am I?",
+          options: [
+            { id: "option-1", text: "Shape Tools", isCorrect: false },
+            { id: "option-2", text: "Brushes", isCorrect: false },
+            { id: "option-3", text: "Eraser", isCorrect: false },
+            { id: "option-4", text: "Curve Tool", isCorrect: true },
+          ],
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Guess the Computer Tool",
+          riddleText: "I have different strokes and styles and can help you apply colour to an image. Which tool am I?",
+          questionText: "Which tool am I?",
+          options: [
+            { id: "option-1", text: "Shape Tools", isCorrect: false },
+            { id: "option-2", text: "Brushes", isCorrect: true },
+            { id: "option-3", text: "Eraser", isCorrect: false },
+            { id: "option-4", text: "Curve Tool", isCorrect: false },
+          ],
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Guess the Computer Tool",
+          riddleText: "I help you fix your mistakes, and you can adjust my size with the help of a scroll. Who am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "option-1", text: "Shape Tools", isCorrect: false },
+            { id: "option-2", text: "Brushes", isCorrect: false },
+            { id: "option-3", text: "Eraser", isCorrect: true },
+            { id: "option-4", text: "Curve Tool", isCorrect: false },
+          ],
         },
       ],
     },
@@ -458,163 +503,185 @@ export const standards: Standard = {
   "3": [
     {
       id: 1,
-      title: "Internet Tools",
+      title: "Chapter 1: Surfing the Internet",
       lessonContent: [
         {
           type: "drag-drop",
           format: "drag-drop",
-          title: "Internet vs Non-Internet",
-          instruction:
-            'Sort these items. Drag them into the correct box: "Internet Tools" or "Non-Internet Tools".',
+          title: "Help Rina stay safe while using the internet!",
+          instruction: "Read each situation and help her decide if it is Safe or Unsafe.",
           items: [
             {
-              id: "dnd-item-1",
-              text: "Web Browser",
-              type: "option-1",
-              imageUrl: "/images/standard3/chapter1/chrome_logo.png",
+              id: "situation-1",
+              text: "Rina tells her best friend her email password so they can play a game together.",
+              type: "unsafe",
             },
             {
-              id: "dnd-item-2",
-              text: "Compass",
-              type: "option-2",
-              imageUrl: "/images/standard3/compass.png",
+              id: "situation-2",
+              text: "Rina asks her parents before downloading a fun drawing app from the internet.",
+              type: "safe",
             },
             {
-              id: "dnd-item-3",
-              text: "Email",
-              type: "option-1",
-              imageUrl: "/images/standard3/chapter2/email_concept.png",
+              id: "situation-3",
+              text: "Rina clicks on a flashy advertisement that says 'Win a Free Phone!!!! Click Here!'",
+              type: "unsafe",
             },
             {
-              id: "dnd-item-4",
-              text: "Calculator",
-              type: "option-2",
-              imageUrl: "/images/standard3/calculator.png",
+              id: "situation-4",
+              text: "A stranger messages Rina online, and she replies with her name and school name.",
+              type: "unsafe",
             },
             {
-              id: "dnd-item-5",
-              text: "Search Engine",
-              type: "option-1",
-              imageUrl: "/images/standard3/chapter1/browser_search_box.png",
+              id: "situation-5",
+              text: "Rina feels scared after visiting a website and immediately tells her parents.",
+              type: "safe",
             },
             {
-              id: "dnd-item-6",
-              text: "Ruler",
-              type: "option-2",
-              imageUrl: "/images/standard3/ruler.png",
+              id: "situation-6",
+              text: "Rina shares a kind comment on her friend's artwork in an online classroom.",
+              type: "safe",
+            },
+            {
+              id: "situation-7",
+              text: "Rina sees a pop-up asking her to download a file, and she clicks on it without asking.",
+              type: "unsafe",
+            },
+            {
+              id: "situation-8",
+              text: "Rina wants a new game and tells her parents before installing it from the internet.",
+              type: "safe",
             },
           ],
           targets: [
-            { id: "internetTarget", title: "Internet Tools", type: "option-1" },
-            { id: "nonInternetTarget", title: "Non-Internet Tools", type: "option-2" },
+            { id: "safeTarget", title: "Safe", type: "safe" },
+            { id: "unsafeTarget", title: "Unsafe", type: "unsafe" },
           ],
-          audioSrc: "/audio/internet_tools.mp3",
-          speakText:
-            "Sort these items. Drag them into the correct box: Internet Tools or Non-Internet Tools.",
+          audioSrc: "/audio/internet_safety.mp3",
+          speakText: "Read each situation and help Rina decide if it is Safe or Unsafe.",
         },
       ],
     },
     {
       id: 2,
-      title: "Email Components",
+      title: "Understanding Emails",
       lessonContent: [
         {
           type: "bucket-match",
           format: "bucket-match",
-          title: "Match Email Components",
-          instruction: "Drag each email component to its matching description bucket!",
+          title: "Match the Email Component with Its Description",
+          instruction: "Drag each email component to its correct description bucket!",
           items: [
             {
-              id: "subject",
+              id: "to",
+              text: "To",
+              type: "to",
+              color: "#2196f3"
+            },
+            {
+              id: "subject-line",
               text: "Subject Line",
-              type: "subject",
-              imageUrl: "/images/standard3/chapter2/subject.png",
-              color: "#ff5252"
+              type: "subject-line",
+              color: "#4caf50"
             },
             {
-              id: "attachment",
-              text: "Attachment",
-              type: "attachment",
-              imageUrl: "/images/standard3/chapter2/attachment.png",
-              color: "#ffeb3b"
-            },
-            {
-              id: "recipient",
-              text: "To Field",
-              type: "recipient",
-              imageUrl: "/images/standard3/chapter2/recipient.png",
+              id: "body",
+              text: "Body",
+              type: "body",
               color: "#ff9800"
             },
             {
-              id: "cc",
-              text: "CC",
-              type: "cc",
-              imageUrl: "/images/standard3/chapter2/cc.png",
+              id: "attachments",
+              text: "Attachments",
+              type: "attachments",
               color: "#9c27b0"
+            },
+            {
+              id: "send-button",
+              text: "Send Button",
+              type: "send-button",
+              color: "#ff5252"
             }
           ],
           buckets: [
             {
-              id: "subject-bucket",
-              title: "Title of your email",
-              type: "subject",
-              color: "#ff5252"
+              id: "to-bucket",
+              title: "The email ID of the person you are sending the email to.",
+              type: "to",
+              color: "#2196f3"
             },
             {
-              id: "attachment-bucket",
-              title: "Files you send with email",
-              type: "attachment",
-              color: "#ffeb3b"
+              id: "subject-line-bucket",
+              title: "A short line that tells what the email is about.",
+              type: "subject-line",
+              color: "#4caf50"
             },
             {
-              id: "recipient-bucket",
-              title: "Main person you're writing to",
-              type: "recipient",
+              id: "body-bucket",
+              title: "The area that contains the text or information you want to send.",
+              type: "body",
               color: "#ff9800"
             },
             {
-              id: "cc-bucket",
-              title: "People who get copies",
-              type: "cc",
+              id: "attachments-bucket",
+              title: "Files like photos or documents sent with your email using a paper clip icon.",
+              type: "attachments",
               color: "#9c27b0"
+            },
+            {
+              id: "send-button-bucket",
+              title: "Click this to deliver your email.",
+              type: "send-button",
+              color: "#ff5252"
             }
           ],
           audioSrc: "/audio/email_components.mp3",
-          speakText: "Drag each email component to its matching description bucket.",
+          speakText: "Drag each email component to its correct description bucket!"
         }
       ]
     },
     {
       id: 3,
-      title: "Online Safety Steps",
+      title: "Chapter 3: Google Maps",
       lessonContent: [
         {
           type: "sequence-match",
           format: "sequence-match",
-          title: "Steps for Online Safety",
-          instruction: "Put these online safety steps in the correct order!",
+          title: "Help Srujan Find a Medical Shop Using Google Maps",
+          instruction: "Arrange the steps in the correct order to help Srujan find medical shops near him using Google Maps!",
           items: [
             {
-              id: "step1",
-              content: "Ask an adult before sharing any information online"
+              id: "step-1",
+              content: "Open Google Maps."
             },
             {
-              id: "step2",
-              content: "Create a strong password using letters, numbers, and symbols"
+              id: "step-2",
+              content: "In the search bar, enter 'Medical shops near me' and click on the search icon (🔍)."
             },
             {
-              id: "step3",
-              content: "Only visit websites approved by your parents or teachers"
+              id: "step-3",
+              content: "Choose the shop based on reviews, distance from his current location."
             },
             {
-              id: "step4",
-              content: "Tell an adult if something makes you uncomfortable online"
+              id: "step-4",
+              content: "Check if the shop is open."
+            },
+            {
+              id: "step-5",
+              content: "Click on the 'Directions' option."
+            },
+            {
+              id: "step-6",
+              content: "Choose the 'Your location' option to get directions from his current location."
+            },
+            {
+              id: "step-7",
+              content: "Choose the mode of transport."
             }
           ],
-          correctOrder: ["step1", "step3", "step2", "step4"],
-          dropZoneCount: 4,
-          audioSrc: "/audio/online_safety.mp3",
-          speakText: "Put these online safety steps in the correct order!",
+          correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5", "step-6", "step-7"],
+          dropZoneCount: 7,
+          audioSrc: "/audio/google_maps_steps.mp3",
+          speakText: "Arrange the steps in the correct order to help Srujan find medical shops near him using Google Maps!"
         }
       ]
     },
@@ -780,37 +847,74 @@ export const standards: Standard = {
     },
     {
       id: 4,
-      title: "MS Word Elements",
+      title: "Chapter 4: Microsoft Word (Part 1)",
       lessonContent: [
         {
-          type: "sequence-match",
-          format: "sequence-match",
-          title: "Steps to Insert a Table in MS Word",
-          instruction: "Put these steps in the correct order to insert a table in Microsoft Word!",
-          items: [
-            {
-              id: "step1",
-              content: "Click on the Insert tab in the ribbon"
-            },
-            {
-              id: "step2",
-              content: "Click the Table button"
-            },
-            {
-              id: "step3",
-              content: "Select the number of rows and columns you need"
-            },
-            {
-              id: "step4",
-              content: "Click to insert the table into your document"
-            }
-          ],
-          correctOrder: ["step1", "step2", "step3", "step4"],
-          dropZoneCount: 4,
-          audioSrc: "/audio/word_table_steps.mp3",
-          speakText: "Put these steps in the correct order to insert a table in Microsoft Word!",
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText: "I am present on the top of the window and show the name of the document.\nWho am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "option-1", text: "Title bar", isCorrect: true },
+            { id: "option-2", text: "Status bar", isCorrect: false },
+            { id: "option-3", text: "Quick Access Toolbar", isCorrect: false },
+            { id: "option-4", text: "Insert tab", isCorrect: false }
+          ]
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText: "I contain commonly used buttons like Redo, Undo, and Save.\nWho am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "option-1", text: "Quick Access Toolbar", isCorrect: true },
+            { id: "option-2", text: "Status bar", isCorrect: false },
+            { id: "option-3", text: "Title bar", isCorrect: false },
+            { id: "option-4", text: "File tab", isCorrect: false }
+          ]
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText: "I am a rectangular box at the bottom of the screen that shows the page number and word count.\nWho am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "option-1", text: "Status bar", isCorrect: true },
+            { id: "option-2", text: "Title bar", isCorrect: false },
+            { id: "option-3", text: "Insert tab", isCorrect: false },
+            { id: "option-4", text: "Quick Access Toolbar", isCorrect: false }
+          ]
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText: "I let you add pictures, shapes, tables, etc.\nWho am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "option-1", text: "Insert tab", isCorrect: true },
+            { id: "option-2", text: "File tab", isCorrect: false },
+            { id: "option-3", text: "Status bar", isCorrect: false },
+            { id: "option-4", text: "Title bar", isCorrect: false }
+          ]
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText: "I help you open, save, print, or close your document.\nWho am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "option-1", text: "File tab", isCorrect: true },
+            { id: "option-2", text: "Insert tab", isCorrect: false },
+            { id: "option-3", text: "Status bar", isCorrect: false },
+            { id: "option-4", text: "Quick Access Toolbar", isCorrect: false }
+          ]
         }
       ]
-    }
+    },
   ],
 };
