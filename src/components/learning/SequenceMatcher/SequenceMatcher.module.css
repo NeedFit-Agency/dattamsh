@@ -8,13 +8,9 @@
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    left: 0;
-    top: 0;
-    position: absolute;
+    height: 100dvh;
     padding: 1rem;
-    margin: 0;
+    margin-top: -30px;
     font-family: 'Nunito', 'Quicksand', sans-serif;
     background-image: url('/images/background/image-1.png');
     background-size: cover;
@@ -24,8 +20,6 @@
     box-sizing: border-box;
     overflow: hidden;
     animation: fadeInBackground 0.5s ease-in;
-    /* Ensure congratulations screen appears above everything */
-    z-index: 1;
 }
 
 @keyframes fadeInBackground {
