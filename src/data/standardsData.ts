@@ -115,8 +115,7 @@ export const standards: Standard = {
           type: "drag-drop",
           format: "drag-drop",
           title: "Sort Natural and Man-made Things",
-          instruction:
-            'Help me sort these pictures',
+          instruction: "Help me sort these pictures",
           items: [
             {
               id: "dnd-item-1",
@@ -185,42 +184,63 @@ export const standards: Standard = {
           type: "bucket-match",
           format: "bucket-match",
           title: "Match each computer part to what it does!",
-          instruction: "Drag each computer part to its matching description bucket!",
+          instruction:
+            "Drag each computer part to its matching description bucket!",
           items: [
             {
               id: "monitor-item",
               text: "Monitor",
               type: "shows",
               imageUrl: "/images/monitor.png",
-              color: "#2196f3"
+              color: "#2196f3",
             },
             {
               id: "keyboard-item",
               text: "Keyboard",
               type: "typing",
               imageUrl: "/images/keyboard.png",
-              color: "#4caf50"
+              color: "#4caf50",
             },
             {
               id: "cpu-item",
               text: "CPU",
               type: "brain",
               imageUrl: "/images/cpu.png",
-              color: "#9c27b0"
-            },            {
+              color: "#9c27b0",
+            },
+            {
               id: "mouse-item",
               text: "Mouse",
               type: "pointing",
               imageUrl: "/images/mouse.png",
-              color: "#ff9800"
+              color: "#ff9800",
             },
           ],
           buckets: [
-            { id: "typing-bucket", title: "set of buttons called keys", type: "typing", color: "#4caf50" },
-            { id: "pointing-bucket", title: "moves the pointer on the screen", type: "pointing", color: "#ff9800" },
-            { id: "brain-bucket", title: "brain of the computer", type: "brain", color: "#9c27b0" },
-                        { id: "shows-bucket", title: "shows everything the computer is doing", type: "shows", color: "#2196f3" },
-
+            {
+              id: "typing-bucket",
+              title: "set of buttons called keys",
+              type: "typing",
+              color: "#4caf50",
+            },
+            {
+              id: "pointing-bucket",
+              title: "moves the pointer on the screen",
+              type: "pointing",
+              color: "#ff9800",
+            },
+            {
+              id: "brain-bucket",
+              title: "brain of the computer",
+              type: "brain",
+              color: "#9c27b0",
+            },
+            {
+              id: "shows-bucket",
+              title: "shows everything the computer is doing",
+              type: "shows",
+              color: "#2196f3",
+            },
           ],
           successMessage: "Great job! You matched all computer parts!",
           correctMessage: "That's right!",
@@ -240,19 +260,28 @@ export const standards: Standard = {
           type: "sequence-match",
           format: "sequence-match",
           title: "Shutting Down the Computer",
-          instruction: "Put these steps in the correct order to properly shut down a computer!",
+          instruction:
+            "Put these steps in the correct order to properly shut down a computer!",
           items: [
             { id: "step-6", content: "Switch off the power supply" },
             { id: "step-1", content: "Save your work" },
             { id: "step-2", content: "Open the Start menu" },
-            { id: "step-4", content: "Select \"Shut down\"" },
+            { id: "step-4", content: 'Select "Shut down"' },
             { id: "step-3", content: "Click on the power button" },
             { id: "step-5", content: "Wait for the computer to turn off" },
           ],
-          correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5", "step-6"],
+          correctOrder: [
+            "step-1",
+            "step-2",
+            "step-3",
+            "step-4",
+            "step-5",
+            "step-6",
+          ],
           dropZoneCount: 6,
           audioSrc: "/audio/computer_shutdown.mp3",
-          speakText: "Put these steps in the correct order to properly shut down a computer!",
+          speakText:
+            "Put these steps in the correct order to properly shut down a computer!",
         },
       ],
     },
@@ -264,47 +293,114 @@ export const standards: Standard = {
           type: "who-am-i",
           format: "who-am-i",
           title: "Guess the Keyboard Key",
-          riddleText: "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
-          questionText: "Which key am I?",          options: [
-            { id: "option-2", text: "Enter Key", isCorrect: false, imageUrl: "/images/enter.png" },
-            { id: "option-3", text: "Caps Lock Key", isCorrect: false, imageUrl: "/images/capslock.png" },
-            { id: "option-1", text: "Space Bar Key", isCorrect: true, imageUrl: "/images/spacebar.png" },
-            { id: "option-4", text: "Backspace Key", isCorrect: false, imageUrl: "/images/backspace.png" },
+          riddleText:
+            "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
+          questionText: "Which key am I?",
+          options: [
+            {
+              id: "option-2",
+              text: "Enter Key",
+              isCorrect: false,
+              imageUrl: "/images/enter.png",
+            },
+            {
+              id: "option-3",
+              text: "Caps Lock Key",
+              isCorrect: false,
+              imageUrl: "/images/capslock.png",
+            },
+            {
+              id: "option-1",
+              text: "Space Bar Key",
+              isCorrect: true,
+              imageUrl: "/images/spacebar.png",
+            },
+            {
+              id: "option-4",
+              text: "Backspace Key",
+              isCorrect: false,
+              imageUrl: "/images/backspace.png",
+            },
           ],
           audioSrc: "/audio/spacebar_riddle.mp3",
-          speakText: "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
+          speakText:
+            "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
         },
         {
           type: "who-am-i",
           format: "who-am-i",
           title: "Guess the Computer Part",
-          riddleText: "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
+          riddleText:
+            "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
           questionText: "Which computer part am I?",
           options: [
-            { id: "option-2", text: "Monitor", isCorrect: false, imageUrl: "/images/monitor.png" },
-                        { id: "option-1", text: "Keyboard", isCorrect: true, imageUrl: "/images/keyboard.png" },
+            {
+              id: "option-2",
+              text: "Monitor",
+              isCorrect: false,
+              imageUrl: "/images/monitor.png",
+            },
+            {
+              id: "option-1",
+              text: "Keyboard",
+              isCorrect: true,
+              imageUrl: "/images/keyboard.png",
+            },
 
-            { id: "option-3", text: "Mouse", isCorrect: false, imageUrl: "/images/mouse.png" },
-            { id: "option-4", text: "Speaker", isCorrect: false, imageUrl: "/images/speaker.png" },
+            {
+              id: "option-3",
+              text: "Mouse",
+              isCorrect: false,
+              imageUrl: "/images/mouse.png",
+            },
+            {
+              id: "option-4",
+              text: "Speaker",
+              isCorrect: false,
+              imageUrl: "/images/speaker.png",
+            },
           ],
           audioSrc: "/audio/keyboard_riddle.mp3",
-          speakText: "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
+          speakText:
+            "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
         },
         {
           type: "who-am-i",
           format: "who-am-i",
           title: "Guess the Mouse Part",
-          riddleText: "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
-          questionText: "",          options: [
-            { id: "option-2", text: "Left Button", isCorrect: false, imageUrl: "/images/left-button.svg" },
-            { id: "option-3", text: "Right Button", isCorrect: false, imageUrl: "/images/right-button.svg" },
-            { id: "option-4", text: "Body", isCorrect: false, imageUrl: "/images/mouse-body.svg" },
-                      { id: "option-1", text: "Scroll Wheel", isCorrect: true, imageUrl: "/images/scroll-wheel.svg" },
-
+          riddleText:
+            "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
+          questionText: "",
+          options: [
+            {
+              id: "option-2",
+              text: "Left Button",
+              isCorrect: false,
+              imageUrl: "/images/left-button.svg",
+            },
+            {
+              id: "option-3",
+              text: "Right Button",
+              isCorrect: false,
+              imageUrl: "/images/right-button.svg",
+            },
+            {
+              id: "option-4",
+              text: "Body",
+              isCorrect: false,
+              imageUrl: "/images/mouse-body.svg",
+            },
+            {
+              id: "option-1",
+              text: "Scroll Wheel",
+              isCorrect: true,
+              imageUrl: "/images/scroll-wheel.svg",
+            },
           ],
           audioSrc: "/audio/scroll_wheel_riddle.mp3",
-          speakText: "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
-        }
+          speakText:
+            "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
+        },
       ],
     },
   ],
@@ -345,10 +441,28 @@ export const standards: Standard = {
             },
           ],
           buckets: [
-            { id: "scanner-bucket", title: "turn pictures and papers into digital files so you can see them on the computer.", type: "Scanner" },
-            { id: "microphone-bucket", title: "used for talking, giving voice instructions, singing, and recording music.", type: "Microphone" },
-            { id: "speakers-bucket", title: "Listen to a variety of sounds.", type: "Speakers" },
-            { id: "printer-bucket", title: "prints what you see on the monitor on to paper.", type: "Printer" }
+            {
+              id: "scanner-bucket",
+              title:
+                "Turn pictures and papers into digital files so you can see them on the computer.",
+              type: "Scanner",
+            },
+            {
+              id: "microphone-bucket",
+              title:
+                "Used for talking, giving voice instructions, singing, and recording music.",
+              type: "Microphone",
+            },
+            {
+              id: "speakers-bucket",
+              title: "Listen to a variety of sounds.",
+              type: "Speakers",
+            },
+            {
+              id: "printer-bucket",
+              title: "Prints what you see on the monitor on to paper.",
+              type: "Printer",
+            },
           ],
           successMessage: "Amazing! You have sorted all the school supplies!",
           correctMessage: "Perfect match!",
@@ -369,7 +483,7 @@ export const standards: Standard = {
           format: "drag-drop",
           title: "Help me sort the tasks a smartphone can do?",
           instruction:
-            'Help me sort these computer items. Drag them into the correct box: Tasks smartphones can do or Tasks smartphones can not do.',
+            "Help me sort these computer items. Drag them into the correct box: Tasks smartphones can do or Tasks smartphones can not do.",
           items: [
             {
               id: "dnd-item-1",
@@ -409,8 +523,16 @@ export const standards: Standard = {
             },
           ],
           targets: [
-            { id: "hardwareTarget", title: "Tasks smartphones can do ", type: "option-1" },
-            { id: "softwareTarget", title: "Tasks smartphones can not do", type: "option-2" },
+            {
+              id: "hardwareTarget",
+              title: "Tasks smartphones can do ",
+              type: "option-1",
+            },
+            {
+              id: "softwareTarget",
+              title: "Tasks smartphones can not do",
+              type: "option-2",
+            },
           ],
           audioSrc: "/audio/smartphone_tasks.mp3",
           speakText:
@@ -426,18 +548,20 @@ export const standards: Standard = {
           type: "sequence-match",
           format: "sequence-match",
           title: "Type and Save a File in Notepad",
-          instruction: "The steps to type and save a file in Notepad are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
+          instruction:
+            "The steps to type and save a file in Notepad are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
           items: [
-            { id: "step-2", content: "Click on the \"File\" menu at the top." },
-            { id: "step-4", content: "Give your file a name, like \"MyStory\"." },
+            { id: "step-2", content: 'Click on the "File" menu at the top.' },
+            { id: "step-4", content: 'Give your file a name, like "MyStory".' },
             { id: "step-1", content: "Type the content." },
-            { id: "step-3", content: "Choose \"Save As\"." },
-            { id: "step-5", content: "Click \"Save\"." },
+            { id: "step-3", content: 'Choose "Save As".' },
+            { id: "step-5", content: 'Click "Save".' },
           ],
           correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5"],
           dropZoneCount: 5,
           audioSrc: "/audio/notepad_save_steps.mp3",
-          speakText: "The steps to type and save a file in Notepad are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
+          speakText:
+            "The steps to type and save a file in Notepad are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
         },
       ],
     },
@@ -449,7 +573,8 @@ export const standards: Standard = {
           type: "who-am-i",
           format: "who-am-i",
           title: "Guess the Computer Tool",
-          riddleText: "I help you draw shapes like squares, circles and many more. Which tool am I?",
+          riddleText:
+            "I help you draw shapes like squares, circles and many more. Which tool am I?",
           questionText: "Which tool am I?",
           options: [
             { id: "option-1", text: "Shape Tools", isCorrect: true },
@@ -462,7 +587,8 @@ export const standards: Standard = {
           type: "who-am-i",
           format: "who-am-i",
           title: "Guess the Computer Tool",
-          riddleText: "I am a tool that can draw curved and wavy lines. Which tool am I?",
+          riddleText:
+            "I am a tool that can draw curved and wavy lines. Which tool am I?",
           questionText: "Which tool am I?",
           options: [
             { id: "option-1", text: "Shape Tools", isCorrect: false },
@@ -475,7 +601,8 @@ export const standards: Standard = {
           type: "who-am-i",
           format: "who-am-i",
           title: "Guess the Computer Tool",
-          riddleText: "I have different strokes and styles and can help you apply colour to an image. Which tool am I?",
+          riddleText:
+            "I have different strokes and styles and can help you apply colour to an image. Which tool am I?",
           questionText: "Which tool am I?",
           options: [
             { id: "option-1", text: "Shape Tools", isCorrect: false },
@@ -488,7 +615,8 @@ export const standards: Standard = {
           type: "who-am-i",
           format: "who-am-i",
           title: "Guess the Computer Tool",
-          riddleText: "I help you fix your mistakes, and you can adjust my size with the help of a scroll. Who am I?",
+          riddleText:
+            "I help you fix your mistakes, and you can adjust my size with the help of a scroll. Who am I?",
           questionText: "Who am I?",
           options: [
             { id: "option-1", text: "Shape Tools", isCorrect: false },
@@ -509,7 +637,8 @@ export const standards: Standard = {
           type: "drag-drop",
           format: "drag-drop",
           title: "Help Rina stay safe while using the internet!",
-          instruction: "Read each situation and help her decide if it is Safe or Unsafe.",
+          instruction:
+            "Read each situation and help her decide if it is Safe or Unsafe.",
           items: [
             {
               id: "situation-1",
@@ -557,7 +686,8 @@ export const standards: Standard = {
             { id: "unsafeTarget", title: "Unsafe", type: "unsafe" },
           ],
           audioSrc: "/audio/internet_safety.mp3",
-          speakText: "Read each situation and help Rina decide if it is Safe or Unsafe.",
+          speakText:
+            "Read each situation and help Rina decide if it is Safe or Unsafe.",
         },
       ],
     },
@@ -569,75 +699,79 @@ export const standards: Standard = {
           type: "bucket-match",
           format: "bucket-match",
           title: "Match the Email Component with Its Description",
-          instruction: "Drag each email component to its correct description bucket!",
+          instruction:
+            "Drag each email component to its correct description bucket!",
           items: [
             {
               id: "to",
               text: "To",
               type: "to",
-              color: "#2196f3"
+              color: "#2196f3",
             },
             {
               id: "subject-line",
               text: "Subject Line",
               type: "subject-line",
-              color: "#4caf50"
+              color: "#4caf50",
             },
             {
               id: "body",
               text: "Body",
               type: "body",
-              color: "#ff9800"
+              color: "#ff9800",
             },
             {
               id: "attachments",
               text: "Attachments",
               type: "attachments",
-              color: "#9c27b0"
+              color: "#9c27b0",
             },
             {
               id: "send-button",
               text: "Send Button",
               type: "send-button",
-              color: "#ff5252"
-            }
+              color: "#ff5252",
+            },
           ],
           buckets: [
             {
               id: "to-bucket",
               title: "The email ID of the person you are sending the email to.",
               type: "to",
-              color: "#2196f3"
+              color: "#2196f3",
             },
             {
               id: "subject-line-bucket",
               title: "A short line that tells what the email is about.",
               type: "subject-line",
-              color: "#4caf50"
+              color: "#4caf50",
             },
             {
               id: "body-bucket",
-              title: "The area that contains the text or information you want to send.",
+              title:
+                "The area that contains the text or information you want to send.",
               type: "body",
-              color: "#ff9800"
+              color: "#ff9800",
             },
             {
               id: "attachments-bucket",
-              title: "Files like photos or documents sent with your email using a paper clip icon.",
+              title:
+                "Files like photos or documents sent with your email using a paper clip icon.",
               type: "attachments",
-              color: "#9c27b0"
+              color: "#9c27b0",
             },
             {
               id: "send-button-bucket",
               title: "Click this to deliver your email.",
               type: "send-button",
-              color: "#ff5252"
-            }
+              color: "#ff5252",
+            },
           ],
           audioSrc: "/audio/email_components.mp3",
-          speakText: "Drag each email component to its correct description bucket!"
-        }
-      ]
+          speakText:
+            "Drag each email component to its correct description bucket!",
+        },
+      ],
     },
     {
       id: 3,
@@ -647,43 +781,56 @@ export const standards: Standard = {
           type: "sequence-match",
           format: "sequence-match",
           title: "Help Srujan Find a Medical Shop Using Google Maps",
-          instruction: "Arrange the steps in the correct order to help Srujan find medical shops near him using Google Maps!",
+          instruction:
+            "Arrange the steps in the correct order to help Srujan find medical shops near him using Google Maps!",
           items: [
             {
               id: "step-1",
-              content: "Open Google Maps."
+              content: "Open Google Maps.",
             },
             {
               id: "step-2",
-              content: "In the search bar, enter 'Medical shops near me' and click on the search icon (🔍)."
+              content:
+                "In the search bar, enter 'Medical shops near me' and click on the search icon (🔍).",
             },
             {
               id: "step-3",
-              content: "Choose the shop based on reviews, distance from his current location."
+              content:
+                "Choose the shop based on reviews, distance from his current location.",
             },
             {
               id: "step-4",
-              content: "Check if the shop is open."
+              content: "Check if the shop is open.",
             },
             {
               id: "step-5",
-              content: "Click on the 'Directions' option."
+              content: "Click on the 'Directions' option.",
             },
             {
               id: "step-6",
-              content: "Choose the 'Your location' option to get directions from his current location."
+              content:
+                "Choose the 'Your location' option to get directions from his current location.",
             },
             {
               id: "step-7",
-              content: "Choose the mode of transport."
-            }
+              content: "Choose the mode of transport.",
+            },
           ],
-          correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5", "step-6", "step-7"],
+          correctOrder: [
+            "step-1",
+            "step-2",
+            "step-3",
+            "step-4",
+            "step-5",
+            "step-6",
+            "step-7",
+          ],
           dropZoneCount: 7,
           audioSrc: "/audio/google_maps_steps.mp3",
-          speakText: "Arrange the steps in the correct order to help Srujan find medical shops near him using Google Maps!"
-        }
-      ]
+          speakText:
+            "Arrange the steps in the correct order to help Srujan find medical shops near him using Google Maps!",
+        },
+      ],
     },
     {
       id: 4,
@@ -693,19 +840,21 @@ export const standards: Standard = {
           type: "who-am-i",
           format: "who-am-i",
           title: "Guess the Web Browser",
-          riddleText: "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
+          riddleText:
+            "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
           questionText: "Which web browser am I?",
           options: [
             { id: "chrome", text: "Google Chrome", isCorrect: true },
             { id: "edge", text: "Microsoft Edge", isCorrect: false },
             { id: "firefox", text: "Mozilla Firefox", isCorrect: false },
-            { id: "safari", text: "Safari", isCorrect: false }
+            { id: "safari", text: "Safari", isCorrect: false },
           ],
           audioSrc: "/audio/browser_riddle.mp3",
-          speakText: "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
-        }
-      ]
-    }
+          speakText:
+            "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
+        },
+      ],
+    },
   ],
   "4": [
     {
@@ -713,208 +862,213 @@ export const standards: Standard = {
       title: "Operating Systems",
       lessonContent: [
         {
-          type: "bucket-match",
-          format: "bucket-match",
-          title: "Match OS to Device",
-          instruction: "Drag each operating system to its matching device type!",
-          items: [
-            {
-              id: "android",
-              text: "Android",
-              type: "mobile",
-              imageUrl: "/images/standard4/chapter1/android_logo.png",
-              color: "#a4c639"
-            },
-            {
-              id: "windows",
-              text: "Windows",
-              type: "desktop",
-              imageUrl: "/images/standard4/chapter1/windows_logo.png",
-              color: "#0078d4"
-            },
-            {
-              id: "ios",
-              text: "iOS",
-              type: "mobile",
-              imageUrl: "/images/standard4/chapter1/ios_logo.png",
-              color: "#000000"
-            },
-            {
-              id: "macos",
-              text: "macOS",
-              type: "desktop",
-              imageUrl: "/images/standard4/chapter1/macos_logo.png",
-              color: "#999999"
-            }
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText:
+            "I run on many mobile devices, like smartphones and tablets. I am made by Google. Which Operating system am I?",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: true },
+            { id: "ios", text: "iOS", isCorrect: false },
+            { id: "linux", text: "Linux", isCorrect: false },
+            { id: "windows", text: "Windows", isCorrect: false },
           ],
-          buckets: [
-            {
-              id: "mobile-bucket",
-              title: "Mobile Devices",
-              type: "mobile",
-              color: "#e91e63"
-            },
-            {
-              id: "desktop-bucket",
-              title: "Desktop Computers",
-              type: "desktop",
-              color: "#3f51b5"
-            }
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText:
+            "I run on Apple's mobile devices, like iPhones and iPads. Which Operating system am I?",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: false },
+            { id: "ios", text: "iOS", isCorrect: true },
+            { id: "linux", text: "Linux", isCorrect: false },
+            { id: "windows", text: "Windows", isCorrect: false },
           ],
-          audioSrc: "/audio/match_os_device.mp3",
-          speakText: "Drag each operating system to its matching device type!",
-        }
-      ]
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText:
+            "I am a free operating system used by computer experts and known for being stable and secure. Which Operating system am I?",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: false },
+            { id: "ios", text: "iOS", isCorrect: false },
+            { id: "linux", text: "Linux", isCorrect: true },
+            { id: "windows", text: "Windows", isCorrect: false },
+          ],
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText:
+            "I am known for being stylish, easy to use and good for graphic design, video editing and music production. Which Operating system am I?",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: false },
+            { id: "linux", text: "Linux", isCorrect: false },
+            { id: "macos", text: "macOS", isCorrect: true },
+            { id: "windows", text: "Windows", isCorrect: false },
+          ],
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option.",
+          riddleText:
+            "I am made by Microsoft, run on various desktops and laptops. Which Operating system am I?",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: false },
+            { id: "ios", text: "iOS", isCorrect: false },
+            { id: "linux", text: "Linux", isCorrect: false },
+            { id: "windows", text: "Windows", isCorrect: true },
+          ],
+        },
+      ],
     },
     {
       id: 2,
+      title: "Chapter 2: Introduction to Windows",
+      lessonContent: [
+        {
+          type: "sequence-match",
+          format: "sequence-match",
+          title: "Sequence the steps",
+          instruction:
+            'Sourabh wants to create a Word document named "Lesson 1 Homework" and keep it safely in a new folder on his desktop. Help him by arranging the steps in the correct order.',
+          items: [
+            {
+              id: "step-1",
+              content: "Right-click on the desktop, select New and choose the Folder option.",
+            },
+            {
+              id: "step-2",
+              content: "Type a name for the new folder and press Enter.",
+            },
+            {
+              id: "step-3",
+              content: "Double-click on the folder to open it.",
+            },
+            {
+              id: "step-4",
+              content: "Right-click on an empty area inside the folder. From the menu, select New and then click on Microsoft Word Document.",
+            },
+            {
+              id: "step-5",
+              content: "Name the document as \"Lesson 1 Homework\" and press enter.",
+            },
+          ],
+          correctOrder: [
+            "step-1",
+            "step-2",
+            "step-3",
+            "step-4",
+            "step-5",
+          ],
+          dropZoneCount: 5,
+          audioSrc: undefined,
+          speakText:
+            'Sourabh wants to create a Word document named "Lesson 1 Homework" and keep it safely in a new folder on his desktop. Help him by arranging the steps in the correct order.',
+        },
+      ],
+    },
+    {
+      id: 3,
       title: "Windows Components",
       lessonContent: [
         {
           type: "drag-drop",
           format: "drag-drop",
-          title: "Identify Windows Components",
+          title: "Chapter 3: Different File Types",
           instruction:
-            'Drag these Windows components to their correct category: "User Interface" or "System Utility".',
+            "Drag each file extension into the correct category based on the type of file it represents.",
           items: [
-            {
-              id: "dnd-item-1",
-              text: "Taskbar",
-              type: "option-1",
-              imageUrl: "/images/standard4/chapter2/windows_desktop_overview.png",
-            },
-            {
-              id: "dnd-item-2",
-              text: "Disk Cleanup",
-              type: "option-2",
-              imageUrl: "/images/standard4/chapter2/disk_cleanup.png",
-            },
-            {
-              id: "dnd-item-3",
-              text: "Desktop Icons",
-              type: "option-1",
-              imageUrl: "/images/standard4/chapter2/this_pc_icon.png",
-            },
-            {
-              id: "dnd-item-4",
-              text: "Task Manager",
-              type: "option-2",
-              imageUrl: "/images/standard4/chapter2/task_manager.png",
-            },
-            {
-              id: "dnd-item-5",
-              text: "Start Menu",
-              type: "option-1",
-              imageUrl: "/images/standard4/chapter2/start_button.png",
-            },
-            {
-              id: "dnd-item-6",
-              text: "Antivirus",
-              type: "option-2",
-              imageUrl: "/images/standard4/chapter2/antivirus.png",
-            },
+            { id: "file-txt", text: ".txt", type: "text" },
+            { id: "file-docx", text: ".docx", type: "text" },
+            { id: "file-pdf", text: ".pdf", type: "text" },
+            { id: "file-jpg", text: ".jpg", type: "image" },
+            { id: "file-png", text: ".png", type: "image" },
+            { id: "file-gif", text: ".gif", type: "image" },
+            { id: "file-mp4", text: ".mp4", type: "video" },
+            { id: "file-avi", text: ".avi", type: "video" },
+            { id: "file-mkv", text: ".mkv", type: "video" },
           ],
           targets: [
-            { id: "uiTarget", title: "User Interface", type: "option-1" },
-            { id: "utilityTarget", title: "System Utility", type: "option-2" },
+            { id: "text-files", title: "Text files", type: "text" },
+            { id: "image-files", title: "Image files", type: "image" },
+            { id: "video-files", title: "Video files", type: "video" },
           ],
-          audioSrc: "/audio/windows_components.mp3",
-          speakText:
-            "Drag these Windows components to their correct category: User Interface or System Utility.",
         },
-      ]
-    },
-    {
-      id: 3,
-      title: "File Types",
-      lessonContent: [
-        {
-          type: "who-am-i",
-          format: "who-am-i",
-          title: "Guess the File Type",
-          riddleText: "I store photos and pictures. My name starts with 'J' and I'm very common on the internet. Who am I?",
-          questionText: "Which file type am I?",
-          options: [
-            { id: "jpg", text: ".jpg / .jpeg", isCorrect: true },
-            { id: "txt", text: ".txt", isCorrect: false },
-            { id: "mp3", text: ".mp3", isCorrect: false },
-            { id: "doc", text: ".doc", isCorrect: false }
-          ],
-          audioSrc: "/audio/file_type_riddle.mp3",
-          speakText: "I store photos and pictures. My name starts with 'J' and I'm very common on the internet. Who am I?",
-        }
-      ]
+      ],
     },
     {
       id: 4,
-      title: "Chapter 4: Microsoft Word (Part 1)",
+      title: "Chapter 4: Microsoft Word (Part 2)",
       lessonContent: [
         {
-          type: "who-am-i",
-          format: "who-am-i",
-          title: "Choose the correct option.",
-          riddleText: "I am present on the top of the window and show the name of the document.\nWho am I?",
-          questionText: "Who am I?",
-          options: [
-            { id: "option-1", text: "Title bar", isCorrect: true },
-            { id: "option-2", text: "Status bar", isCorrect: false },
-            { id: "option-3", text: "Quick Access Toolbar", isCorrect: false },
-            { id: "option-4", text: "Insert tab", isCorrect: false }
-          ]
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match the term related to Microsoft Word with its correct description.",
+          instruction: "Match the term related to Microsoft Word with its correct description.",
+          items: [
+            {
+              id: "header",
+              text: "Header",
+              type: "header",
+              imageUrl: "/images/header.png",
+            },
+            {
+              id: "footer",
+              text: "Footer",
+              type: "footer",
+              imageUrl: "/images/footer.png",
+            },
+            {
+              id: "watermark",
+              text: "Watermark",
+              type: "watermark",
+              imageUrl: "/images/watermark.png",
+            },
+            {
+              id: "chart",
+              text: "Chart",
+              type: "chart",
+              imageUrl: "/images/chart.png",
+            },
+          ],
+          buckets: [
+            {
+              id: "header-bucket",
+              title: "Space at the top of each page where you can add your name or the document title.",
+              type: "header",
+            },
+            {
+              id: "footer-bucket",
+              title: "Space at the bottom of each page where you can add page numbers or notes.",
+              type: "footer",
+            },
+            {
+              id: "watermark-bucket",
+              title: "A light image or text that appears behind the main text in a document.",
+              type: "watermark",
+            },
+            {
+              id: "chart-bucket",
+              title: "Insert various charts to visualise data.",
+              type: "chart",
+            },
+          ],
+          audioSrc: undefined,
+          speakText: "Match the term related to Microsoft Word with its correct description.",
         },
-        {
-          type: "who-am-i",
-          format: "who-am-i",
-          title: "Choose the correct option.",
-          riddleText: "I contain commonly used buttons like Redo, Undo, and Save.\nWho am I?",
-          questionText: "Who am I?",
-          options: [
-            { id: "option-1", text: "Quick Access Toolbar", isCorrect: true },
-            { id: "option-2", text: "Status bar", isCorrect: false },
-            { id: "option-3", text: "Title bar", isCorrect: false },
-            { id: "option-4", text: "File tab", isCorrect: false }
-          ]
-        },
-        {
-          type: "who-am-i",
-          format: "who-am-i",
-          title: "Choose the correct option.",
-          riddleText: "I am a rectangular box at the bottom of the screen that shows the page number and word count.\nWho am I?",
-          questionText: "Who am I?",
-          options: [
-            { id: "option-1", text: "Status bar", isCorrect: true },
-            { id: "option-2", text: "Title bar", isCorrect: false },
-            { id: "option-3", text: "Insert tab", isCorrect: false },
-            { id: "option-4", text: "Quick Access Toolbar", isCorrect: false }
-          ]
-        },
-        {
-          type: "who-am-i",
-          format: "who-am-i",
-          title: "Choose the correct option.",
-          riddleText: "I let you add pictures, shapes, tables, etc.\nWho am I?",
-          questionText: "Who am I?",
-          options: [
-            { id: "option-1", text: "Insert tab", isCorrect: true },
-            { id: "option-2", text: "File tab", isCorrect: false },
-            { id: "option-3", text: "Status bar", isCorrect: false },
-            { id: "option-4", text: "Title bar", isCorrect: false }
-          ]
-        },
-        {
-          type: "who-am-i",
-          format: "who-am-i",
-          title: "Choose the correct option.",
-          riddleText: "I help you open, save, print, or close your document.\nWho am I?",
-          questionText: "Who am I?",
-          options: [
-            { id: "option-1", text: "File tab", isCorrect: true },
-            { id: "option-2", text: "Insert tab", isCorrect: false },
-            { id: "option-3", text: "Status bar", isCorrect: false },
-            { id: "option-4", text: "Quick Access Toolbar", isCorrect: false }
-          ]
-        }
-      ]
+      ],
     },
   ],
 };

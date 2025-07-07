@@ -107,13 +107,13 @@
 
 .bucketDescriptionBox {
   margin-top: 12px;
-  padding: 14px 18px;
+  margin-left: 20px;
+  padding: 30px 18px;
   background: #f5faff;
   border: 2px solid #bbddff;
   border-radius: 14px;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   color: #333;
-  font-weight: 600;
   max-width: 260px;
   min-height: 60px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
