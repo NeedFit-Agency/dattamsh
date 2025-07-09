@@ -167,6 +167,11 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
       if (onIncorrectAttempt) {
         onIncorrectAttempt();
       }
+      
+      // Auto-reset feature: Reset the sequence state after showing feedback for 3 seconds
+      setTimeout(() => {
+        autoResetSequence();
+      }, 3000);
     }
   };
 
@@ -200,6 +205,19 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
     }
+    
+    // Clear visual feedback
+    const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
+    dropZones.forEach(zone => {
+      zone.classList.remove(styles.slotCorrect, styles.slotIncorrect, styles.dragOver);
+    });
+  };
+
+  // Auto-reset function that triggers after incorrect answers
+  const autoResetSequence = () => {
+    setPlacedItems({});
+    setFeedback({ type: null, message: '' });
+    setShowTryAgain(false);
     
     // Clear visual feedback
     const dropZones = document.querySelectorAll(`.${styles.dropZone}`);

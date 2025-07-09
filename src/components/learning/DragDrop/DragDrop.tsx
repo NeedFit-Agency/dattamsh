@@ -175,7 +175,20 @@ export const DragDrop: React.FC<DragDropProps> = ({
           setShowCongratulations(true);
         }, 2000);
       } else {
-        const errorMessage = 'Some items are in the wrong category. Try again!';
+        // Enhanced error feedback with specific guidance like BucketMatch
+        let errorMessage = 'Some items are in the wrong category. ';
+        
+        // Find the first incorrectly placed item to give specific feedback
+        for (const item of updatedDragItems) {
+          const target = targets.find((t) => t.id === item.targetId);
+          if (target && item.type !== target.type) {
+            const itemName = item.text || item.type.charAt(0).toUpperCase() + item.type.slice(1);
+            const targetName = target.title || target.type.charAt(0).toUpperCase() + target.type.slice(1);
+            errorMessage = `Oops! ${itemName} doesn't belong in ${targetName}. Try a different category! 🤔`;
+            break;
+          }
+        }
+        
         setFeedback({ show: true, correct: false, message: errorMessage });
         
         // Error message is displayed visually and will be read by screen readers

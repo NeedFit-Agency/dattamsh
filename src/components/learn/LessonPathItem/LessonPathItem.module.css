@@ -7,13 +7,21 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-sizing: border-box;
-    box-shadow: 
-        inset 0 -6px 0 rgba(0, 0, 0, 0.2), /* Enhanced shadow */
-        0 6px 12px rgba(0, 0, 0, 0.15),
-        0 0 0 6px rgba(255, 255, 255, 0.5);
-    z-index: 10; /* Ensure it stays above the chapter name */
+    transition: all 0.3s cubic
+}
+
+.leftPosition {
+    right: auto;
+    left: -250px; /* Adjusted for smaller chapter name width */
+    top: 25px; /* Adjusted vertical position */
+    text-align: right;
+}
+
+.rightPosition {
+    right: -250px; /* Adjusted for smaller chapter name width */
+    left: auto;
+    top: 25px; /* Adjusted vertical position */
+    text-align: left;
 }
 
 .pathItem::before {
@@ -258,10 +266,10 @@
     text-align: center;
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 15px; /* Slightly increased for better proportion */
-    padding: 12px 20px; /* Increased padding for better visual balance */
-    min-width: 200px; /* Increased for single line display */
-    max-width: 400px; /* Fixed maximum width for consistent appearance */
-    width: 300px; /* Fixed width to ensure consistent sizing */
+    padding: 12px 16px; /* Reduced horizontal padding to minimize spacing */
+    min-width: auto; /* Remove fixed minimum width */
+    max-width: 400px; /* Keep maximum width for very long names */
+    width: auto; /* Auto width to fit content */
     white-space: normal; /* Allow wrapping when needed */
     overflow: hidden; /* Hide overflow */
     display: -webkit-box; /* Use flexbox for line clamping */
