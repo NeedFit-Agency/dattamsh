@@ -411,7 +411,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
               : feedback.type === 'correct'
               ? correctMessage
               : feedback.type === 'incorrect'
-              ? `Oops! ${feedback.itemName || 'This item'} doesn't belong in ${feedback.bucketName || 'this bucket'}. Try a different bucket! 🤔`
+              ?`Oops! That is not the right answer. Try again!`
               : ''}
           </div>
         )}
