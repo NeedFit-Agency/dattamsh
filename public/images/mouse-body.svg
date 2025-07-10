@@ -1,4 +1,4 @@
-<svg width="80" height="60" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+<svg width="60" height="95" viewBox="0 0 60 95" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <!-- Mouse body gradient -->
     <radialGradient id="mouseBodyGrad" cx="0.3" cy="0.3" r="0.9">
@@ -80,12 +80,12 @@
         opacity="0.8"/>
   
   <!-- Optical sensor indicator -->
-  <circle cx="40" cy="38" r="3" fill="#dc3545" opacity="0.8">
+  <circle cx="30" cy="45" r="3" fill="#dc3545" opacity="0.8">
     <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.5s" repeatCount="indefinite"/>
   </circle>
   
   <!-- Body glow animation -->
-  <path d="M 15 30 Q 15 15 25 12 Q 40 8 55 12 Q 65 15 65 30 Q 65 42 55 45 Q 40 48 25 45 Q 15 42 15 30 Z" 
+  <path d="M 12 35 Q 12 15 30 12 Q 48 15 48 35 L 48 60 Q 48 80 30 83 Q 12 80 12 60 Z" 
         fill="none" 
         stroke="#ced4da" 
         stroke-width="1" 

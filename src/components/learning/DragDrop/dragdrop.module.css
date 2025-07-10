@@ -390,26 +390,45 @@
 }
 
 .feedbackMessage {
-  padding: 8px 12px;
-  border-radius: 8px;
-  margin-top: 10px;
-  margin-bottom: 0;
+  position: fixed; /* Changed to fixed positioning for center screen display */
+  top: 40%; /* Positioned slightly higher than center for better visibility */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Perfect centering - this stays consistent */
+  min-height: 50px; /* Increased for longer error messages */
+  max-width: 90vw; /* Responsive width */
+  width: auto; /* Auto width based on content */
+  font-size: 1.2rem; /* Slightly smaller for longer text */
+  font-weight: 700;
+  transition: none; /* Remove transition to prevent conflicts with animation */
+  padding: 16px 24px; /* Increased padding for better visibility */
+  border-radius: 15px; /* More rounded for modern look */
+  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  animation: fadeIn 0.3s ease;
-  font-size: 15px;
-  font-weight: 500;
+  line-height: 1.3; /* Better line spacing */
+  z-index: 999; /* Lower than congratulations screen but higher than game content */
+  margin: 0; /* Remove margin since we're using fixed positioning */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Enhanced shadow for popup effect */
+  opacity: 1;
+  visibility: visible;
 }
 
 .correctFeedback {
-  background-color: #e6f9ed;
-  border: 1px solid var(--success-green, #28a745);
   color: #218838;
+  background-color: #e6f9ed;
+  border: 3px solid var(--success-color, #4CAF50); /* Thicker border for visibility */
+  animation: smoothPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3); /* Green shadow */
 }
 
 .incorrectFeedback {
-  background-color: #fff0f0;
-  border: 1px solid var(--error-red, #dc3545);
-  color: #d32f2f;
+  color: #c62828; /* Darker red for better readability */
+  background-color: #ffebee; /* Softer background */
+  border: 3px solid #ef5350; /* Thicker, softer border color */
+  animation: smoothPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  box-shadow: 0 8px 32px rgba(239, 83, 80, 0.3); /* Red shadow for popup effect */
 }
 
 .navigationFooter {
@@ -498,6 +517,17 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes smoothPopIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
   }
 }
 

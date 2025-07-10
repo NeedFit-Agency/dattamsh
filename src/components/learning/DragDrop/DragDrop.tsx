@@ -182,17 +182,16 @@ export const DragDrop: React.FC<DragDropProps> = ({
         for (const item of updatedDragItems) {
           const target = targets.find((t) => t.id === item.targetId);
           if (target && item.type !== target.type) {
-            const itemName = item.text || item.type.charAt(0).toUpperCase() + item.type.slice(1);
-            const targetName = target.title || target.type.charAt(0).toUpperCase() + target.type.slice(1);
-            errorMessage = `Oops! ${itemName} doesn't belong in ${targetName}. Try a different category! 🤔`;
+            errorMessage = "Oops, something went wrong.";
             break;
           }
         }
-        
+
         setFeedback({ show: true, correct: false, message: errorMessage });
         
+        
         // Error message is displayed visually and will be read by screen readers
-        // Reset after a 5 second delay
+        // Reset after an 8 second delay to match BucketMatch timing
         setTimeout(() => {
           setDragItems(items.map((item) => ({
             ...item,
@@ -207,7 +206,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
           setDroppedItems(resetDropped);
           setFeedback({ show: false, correct: false, message: '' });
           setAllCompleted(false);
-        }, 5000);
+        }, 8000);
       }
     }
   };
@@ -318,7 +317,6 @@ export const DragDrop: React.FC<DragDropProps> = ({
             }
             role="alert"
             aria-live="assertive"
-            style={{ marginTop: 16 }}
           >
             {feedback.message}
             {feedback.correct && <Confetti count={40} />}

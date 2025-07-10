@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70" height="90" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="mouseBodyGrad" cx="0.3" cy="0.3" r="0.9">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="80%" style="stop-color:#e9ecef;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dee2e6;stop-opacity:1" />
+    </radialGradient>
+    
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#00000025"/>
+    </filter>
+  </defs>
+
+  <!-- Main mouse body (slimmer and taller) -->
+  <path d="M 15 25 Q 15 10 35 8 Q 55 10 55 25 L 55 65 Q 55 80 35 82 Q 15 80 15 65 Z" 
+        fill="url(#mouseBodyGrad)"
+        filter="url(#shadow)"
+        stroke="#dee2e6"
+        stroke-width="1"/>
+
+  <!-- Connection point at top -->
+  <circle cx="35" cy="8" r="2" fill="#dee2e6"/>
+</svg>
