@@ -299,7 +299,7 @@ export const standards: Standard = {
             { id: "option-2", text: "Left Button", isCorrect: false, imageUrl: "/images/left-button.svg" },
             { id: "option-3", text: "Right Button", isCorrect: false, imageUrl: "/images/right-button.svg" },
             { id: "option-4", text: "Body", isCorrect: false, imageUrl: "/images/mouse-body.svg" },
-                      { id: "option-1", text: "Scroll Wheel", isCorrect: true, imageUrl: "/images/scroll-wheel.svg" },
+            { id: "option-1", text: "Scroll Wheel", isCorrect: true, imageUrl: "/images/scroll-wheel.svg" },
 
           ],
           audioSrc: "/audio/scroll_wheel_riddle.mp3",

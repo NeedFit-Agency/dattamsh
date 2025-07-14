@@ -36,8 +36,8 @@
         stroke-width="0.5" 
         opacity="0.3"/>
   
-  <!-- Right button area - HIGHLIGHTED - Full coverage -->
-  <path d="M 30 10 Q 45 8 52 18 Q 55 25 55 35 L 55 70 Q 55 85 45 92 Q 35 98 30 98 L 30 70 L 30 35 L 30 10 Z" 
+  <!-- Right button area - HIGHLIGHTED - Only upper button region -->
+  <path d="M 30 10 Q 45 8 52 18 Q 55 25 55 35 L 30 35 L 30 10 Z" 
         fill="url(#rightButtonGrad)" 
         stroke="#f44336" 
         stroke-width="2">
@@ -67,12 +67,12 @@
     <animate attributeName="opacity" values="0.6;0.3;0.6" dur="4s" repeatCount="indefinite"/>
   </ellipse>
   
-  <!-- Right button click animation -->
-  <circle cx="40" cy="40" r="2" fill="#f44336" opacity="0">
+  <!-- Right button click animation (dot centered in red area) -->
+  <circle cx="40" cy="22" r="2" fill="#f44336" opacity="0">
     <animate attributeName="r" values="0;6;0" dur="2s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="0;0.8;0" dur="2s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="40" cy="40" r="1" fill="#ffffff">
+  <circle cx="40" cy="22" r="1" fill="#ffffff">
     <animate attributeName="r" values="1;3;1" dur="2s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
   </circle>
@@ -96,9 +96,7 @@
         opacity="0.8"/>
   
   <!-- Optical sensor indicator -->
-  <circle cx="30" cy="88" r="4" fill="#dc3545" opacity="0.7">
-    <animate attributeName="opacity" values="0.7;0.2;0.7" dur="3s" repeatCount="indefinite"/>
-  </circle>
+  <!-- Removed for right button icon -->
   
 
 </svg>
