@@ -88,12 +88,12 @@
     <animate attributeName="opacity" values="0.6;0.3;0.6" dur="4s" repeatCount="indefinite"/>
   </ellipse>
   
-  <!-- Scroll direction indicators (yellow triangles, gently blinking) -->
-  <path d="M30 12 L27 18 L33 18 Z" fill="#FFD600" opacity="0.8">
-    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/>
+  <!-- Scroll direction indicators (large, bold, fully opaque yellow triangles) -->
+  <path d="M30 10 L24 20 L36 20 Z" fill="#FFD600" opacity="1">
+    <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
   </path>
-  <path d="M30 41 L27 35 L33 35 Z" fill="#FFD600" opacity="0.8">
-    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite" begin="1s"/>
+  <path d="M30 44 L24 34 L36 34 Z" fill="#FFD600" opacity="1">
+    <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" begin="1s"/>
   </path>
   
   <!-- Mouse cable/cord -->
