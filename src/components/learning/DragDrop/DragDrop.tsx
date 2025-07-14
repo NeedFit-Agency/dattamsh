@@ -58,16 +58,42 @@ export const DragDrop: React.FC<DragDropProps> = ({
   
   // Component initialization
 
-  useEffect(() => {
-    if (feedback.show) {
-      setShowSnackbar(true);
-      const timer = setTimeout(() => {
-        setShowSnackbar(false);
-        setFeedback(f => ({ ...f, show: false }));
-      }, 2500); // Snackbar visible for 2.5 seconds
-      return () => clearTimeout(timer);
-    }
-  }, [feedback]);
+    useEffect(() => {
+      if (feedback.show) {
+        setShowSnackbar(true);
+        const timer = setTimeout(() => {
+          setShowSnackbar(false);
+          setFeedback(f => ({ ...f, show: false }));
+        }, 2000); // Snackbar visible for 0.8 seconds
+        return () => clearTimeout(timer);
+      }
+    }, [feedback]);
+
+    // Reset game immediately after error feedback disappears
+    const prevFeedbackShow = useRef(false);
+    useEffect(() => {
+      if (
+        prevFeedbackShow.current &&
+        !feedback.show &&
+        feedback.correct === false
+      ) {
+        // Reset the game state
+        setDragItems(items.map((item) => ({
+          ...item,
+          placed: false,
+          targetId: '',
+          text: item.text || item.content || '',
+        })));
+        const resetDropped: Record<string, DragItem[]> = {};
+        targets.forEach((target) => {
+          resetDropped[target.id] = [];
+        });
+        setDroppedItems(resetDropped);
+        setFeedback({ show: false, correct: false, message: '' });
+        setAllCompleted(false);
+      }
+      prevFeedbackShow.current = feedback.show;
+    }, [feedback.show, feedback.correct, items, targets]);
 
   // Audio playing functionality matching BucketMatch
   const playInstructionAudio = () => {
@@ -176,37 +202,9 @@ export const DragDrop: React.FC<DragDropProps> = ({
         }, 2000);
       } else {
         // Enhanced error feedback with specific guidance like BucketMatch
-        let errorMessage = 'Some items are in the wrong category. ';
-        
-        // Find the first incorrectly placed item to give specific feedback
-        for (const item of updatedDragItems) {
-          const target = targets.find((t) => t.id === item.targetId);
-          if (target && item.type !== target.type) {
-            errorMessage = "Oops, something went wrong.";
-            break;
-          }
-        }
-
+        let errorMessage = 'Oops, something went wrong. Try again';
         setFeedback({ show: true, correct: false, message: errorMessage });
-        
-        
-        // Error message is displayed visually and will be read by screen readers
-        // Reset after an 8 second delay to match BucketMatch timing
-        setTimeout(() => {
-          setDragItems(items.map((item) => ({
-            ...item,
-            placed: false,
-            targetId: '',
-            text: item.text || item.content || '',
-          })));
-          const resetDropped: Record<string, DragItem[]> = {};
-          targets.forEach((target) => {
-            resetDropped[target.id] = [];
-          });
-          setDroppedItems(resetDropped);
-          setFeedback({ show: false, correct: false, message: '' });
-          setAllCompleted(false);
-        }, 8000);
+        // No reset here; reset will be handled after snackbar hides
       }
     }
   };
