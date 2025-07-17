@@ -54,8 +54,8 @@
   background-color:#f8f9fa;
   border: 1px solid #bbddff;
   border-radius: 12px;
-  padding: 16px;
-  margin-top: 20px;
+  padding: 30px;
+  margin-top: 120px;
   margin-bottom: 24px;
   display: flex;
   flex-direction: column;
@@ -531,7 +531,16 @@
   }
 }
 
-/* Responsive adjustments */
+/* Prevent overflow on medium screens while keeping original design */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .activityArea {
+    overflow-x: auto;
+  }
+  .dropTarget {
+    min-width: 300px;
+  }
+}
+
 @media (max-width: 900px) {
   .activityArea {
     flex-direction: column;
@@ -551,6 +560,1120 @@
     min-height: 120px;
     max-height: 220px;
     height: 140px;
+  }
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 6px;
+    padding-top: 80px; /* Increased top padding to clear header */
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    top: 0;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .instructionBox {
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+  }
+
+  .instruction {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .buttonGroup {
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .leftButtons {
+    width: auto;
+  }
+
+  .audioButton,
+  .resetButton {
+    width: auto;
+    min-width: 100px;
+    height: 40px;
+    font-size: 13px;
+    padding: 8px 12px;
+    touch-action: manipulation;
+  }
+
+  .activityArea {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    min-height: calc(100vh - 280px); /* Adjusted for header space */
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+
+  /* Enhanced Items Container - Now positioned prominently at top */
+  .itemsContainer {
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 16px;
+    min-height: 140px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #bbddff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    order: 1; /* Ensure items appear first */
+  }
+
+  .itemsTitle {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #2c3e50;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .dragItems {
+    margin-top: 12px;
+    gap: 16px;
+    justify-content: center;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .dragItem {
+    min-width: 140px;
+    padding: 20px 16px;
+    gap: 12px;
+    touch-action: manipulation;
+    cursor: grab;
+    flex-direction: column;
+    text-align: center;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border: 3px solid #bbddff;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dragItem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1aa2ff, #28a745);
+    border-radius: 16px 16px 0 0;
+  }
+
+  .dragItem:active {
+    cursor: grabbing;
+    transform: scale(0.92) translateY(2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .dragItemImage {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 8px;
+  }
+
+  .dragItemText {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  /* Enhanced Targets Grid - Now positioned below items */
+  .targetsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    flex: 1;
+    order: 2; /* Ensure targets appear after items */
+  }
+
+  .targetContainer {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border: 2px solid #e9ecef;
+  }
+
+  .targetTitle {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #2c3e50;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .dropTarget {
+    min-width: auto;
+    max-width: 100%;
+    width: 100%;
+    min-height: 140px;
+    max-height: 220px;
+    height: 160px;
+    padding: 16px;
+    gap: 12px;
+    touch-action: manipulation;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+    border: 3px dashed #bbddff;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+  }
+
+  .dropTarget:hover {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-color: #1aa2ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 162, 255, 0.2);
+  }
+
+  .dropTarget.touchActive {
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+    border-color: #28a745;
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(40, 167, 69, 0.3);
+  }
+
+  .droppedItem {
+    padding: 12px 16px;
+    gap: 10px;
+    touch-action: manipulation;
+    min-height: 50px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #bbddff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .droppedItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .droppedItem:active {
+    transform: scale(0.95);
+  }
+
+  .droppedItemImage {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+  }
+
+  .droppedItemText {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .feedbackMessage {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 50px;
+    max-width: 85vw;
+    width: auto;
+    font-size: 15px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .progressContainer {
+    margin-bottom: 6px;
+  }
+
+  .progressText {
+    font-size: 12px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .container {
+    padding: 4px;
+    padding-top: 70px; /* Adjusted for smaller screens */
+  }
+
+  .title {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .instruction {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .instructionBox {
+    padding: 10px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+
+  .buttonGroup {
+    gap: 8px;
+  }
+
+  .audioButton,
+  .resetButton {
+    min-width: 90px;
+    height: 36px;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .activityArea {
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    min-height: calc(100vh - 240px); /* Adjusted for header space */
+  }
+
+  .itemsContainer {
+    margin-bottom: 8px;
+    padding: 12px;
+    min-height: 100px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #bbddff;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  }
+
+  .itemsTitle {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .dragItems {
+    margin-top: 8px;
+    gap: 10px;
+    min-height: 60px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .dragItem {
+    min-width: 120px;
+    padding: 16px 12px;
+    gap: 8px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #bbddff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .dragItem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1aa2ff, #28a745);
+    border-radius: 12px 12px 0 0;
+  }
+
+  .dragItem:active {
+    transform: scale(0.92) translateY(2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .dragItemImage {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 6px;
+  }
+
+  .dragItemText {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  .targetsGrid {
+    gap: 10px;
+  }
+
+  .targetContainer {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border: 2px solid #e9ecef;
+  }
+
+  .targetTitle {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .dropTarget {
+    min-height: 120px;
+    max-height: 180px;
+    height: 140px;
+    padding: 12px;
+    gap: 8px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+    border: 2px dashed #bbddff;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+  }
+
+  .dropTarget:hover {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-color: #1aa2ff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(26, 162, 255, 0.2);
+  }
+
+  .dropTarget.touchActive {
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+    border-color: #28a745;
+    transform: scale(1.01);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+  }
+
+  .droppedItem {
+    padding: 8px 12px;
+    gap: 6px;
+    min-height: 44px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #bbddff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .droppedItem:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+
+  .droppedItem:active {
+    transform: scale(0.95);
+  }
+
+  .droppedItemImage {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 3px;
+  }
+
+  .droppedItemText {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .feedbackMessage {
+    font-size: 14px;
+    padding: 12px;
+    min-height: 45px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .container {
+    padding: 3px;
+    padding-top: 60px; /* Adjusted for very small screens */
+  }
+
+  .title {
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+
+  .instruction {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .instructionBox {
+    padding: 8px;
+    margin-top: 3px;
+    margin-bottom: 6px;
+  }
+
+  .buttonGroup {
+    gap: 6px;
+  }
+
+  .audioButton,
+  .resetButton {
+    min-width: 80px;
+    height: 32px;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .activityArea {
+    gap: 6px;
+    padding: 6px;
+    margin-bottom: 6px;
+    min-height: calc(100vh - 200px); /* Adjusted for header space */
+  }
+
+  .itemsContainer {
+    margin-bottom: 6px;
+    padding: 8px;
+    min-height: 80px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #bbddff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .itemsTitle {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #2c3e50;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+  }
+
+  .dragItems {
+    margin-top: 6px;
+    gap: 8px;
+    min-height: 50px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .dragItem {
+    min-width: 100px;
+    padding: 12px 8px;
+    gap: 6px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #bbddff;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .dragItem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #1aa2ff, #28a745);
+    border-radius: 10px 10px 0 0;
+  }
+
+  .dragItem:active {
+    transform: scale(0.92) translateY(1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .dragItemImage {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 4px;
+  }
+
+  .dragItemText {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  .targetsGrid {
+    gap: 8px;
+  }
+
+  .targetContainer {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 2px solid #e9ecef;
+  }
+
+  .targetTitle {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #2c3e50;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+  }
+
+  .dropTarget {
+    min-height: 100px;
+    max-height: 140px;
+    height: 120px;
+    padding: 8px;
+    gap: 6px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+    border: 2px dashed #bbddff;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+  }
+
+  .dropTarget:hover {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-color: #1aa2ff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(26, 162, 255, 0.2);
+  }
+
+  .dropTarget.touchActive {
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+    border-color: #28a745;
+    transform: scale(1.01);
+    box-shadow: 0 4px 16px rgba(40, 167, 69, 0.3);
+  }
+
+  .droppedItem {
+    padding: 6px 8px;
+    gap: 4px;
+    min-height: 40px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #bbddff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .droppedItem:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  }
+
+  .droppedItem:active {
+    transform: scale(0.95);
+  }
+
+  .droppedItemImage {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 2px;
+  }
+
+  .droppedItemText {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .feedbackMessage {
+    font-size: 13px;
+    padding: 10px;
+    min-height: 40px;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .container {
+    padding: 4px;
+    padding-top: 50px; /* Adjusted for landscape header */
+  }
+
+  .title {
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+
+  .instructionBox {
+    padding: 6px;
+    margin-top: 3px;
+    margin-bottom: 4px;
+  }
+
+  .instruction {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .buttonGroup {
+    gap: 6px;
+  }
+
+  .audioButton,
+  .resetButton {
+    min-width: 70px;
+    height: 28px;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .activityArea {
+    flex-direction: row;
+    gap: 6px;
+    padding: 6px;
+    margin-bottom: 4px;
+    min-height: calc(100vh - 140px); /* Adjusted for landscape header */
+  }
+
+  .itemsContainer {
+    flex: 0 0 30%;
+    margin-right: 6px;
+    margin-bottom: 0;
+    padding: 4px;
+    min-height: 60px;
+  }
+
+  .itemsTitle {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .dragItems {
+    margin-top: 4px;
+    gap: 6px;
+    min-height: 40px;
+  }
+
+  .dragItem {
+    min-width: 60px;
+    padding: 6px;
+    gap: 4px;
+    flex-direction: column;
+  }
+
+  .dragItemImage {
+    width: 40px;
+    height: 40px;
+  }
+
+  .dragItemText {
+    font-size: 10px;
+  }
+
+  .targetsGrid {
+    flex: 0 0 70%;
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .targetTitle {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .dropTarget {
+    min-height: 60px;
+    max-height: 80px;
+    height: 70px;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .droppedItem {
+    padding: 3px 4px;
+    gap: 3px;
+    min-height: 28px;
+  }
+
+  .droppedItemImage {
+    width: 20px;
+    height: 20px;
+  }
+
+  .droppedItemText {
+    font-size: 10px;
+  }
+
+  .feedbackMessage {
+    font-size: 12px;
+    padding: 8px;
+    min-height: 30px;
+  }
+}
+
+/* Touch-friendly improvements for all mobile devices */
+@media (hover: none) and (pointer: coarse) {
+  .dragItem {
+    cursor: grab;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .dragItem:active {
+    cursor: grabbing;
+    transform: scale(0.98);
+  }
+
+  .droppedItem {
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .droppedItem:active {
+    transform: scale(0.95);
+  }
+
+  .audioButton,
+  .resetButton {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .audioButton:active,
+  .resetButton:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Touch feedback and visual indicators */
+.dragItem {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dragItem:active {
+  transform: scale(0.98);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.droppedItem {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.droppedItem:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Touch feedback for buttons */
+.audioButton:active,
+.resetButton:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+/* Visual feedback for touch interactions */
+.dropTarget {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.dropTarget.touchActive {
+  background-color: rgba(26, 162, 255, 0.1);
+  border-color: var(--primary, #1aa2ff);
+  transform: scale(1.02);
+}
+
+/* Touch drag visual feedback */
+.dragItem.touchDragging {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0.8;
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile-specific touch improvements */
+@media (max-width: 768px) {
+  .dragItem {
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  .droppedItem {
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  .audioButton,
+  .resetButton {
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  /* Prevent text selection during touch */
+  .dragItem,
+  .droppedItem,
+  .audioButton,
+  .resetButton {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Improved touch feedback */
+  .dragItem:active {
+    background-color: rgba(26, 162, 255, 0.1);
+    border-color: var(--primary, #1aa2ff);
+  }
+  
+  .droppedItem:active {
+    background-color: rgba(239, 83, 80, 0.1);
+    border-color: #ef5350;
+  }
+  
+  /* Prevent scrolling during drag */
+  .container {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  /* Ensure proper touch handling */
+  .activityArea {
+    touch-action: pan-y;
+  }
+  
+  .dragItems {
+    touch-action: manipulation;
+  }
+  
+  .dropTarget {
+    touch-action: manipulation;
+  }
+}
+
+/* Extra mobile optimizations for very small screens */
+@media (max-width: 360px) {
+  .dragItem {
+    min-height: 48px; /* Larger touch target for very small screens */
+    padding: 12px 8px;
+  }
+  
+  .droppedItem {
+    min-height: 48px;
+    padding: 8px 6px;
+  }
+  
+  .audioButton,
+  .resetButton {
+    min-height: 48px;
+    padding: 12px 8px;
+  }
+  
+  /* Reduce spacing for very small screens */
+  .dragItems {
+    gap: 12px;
+  }
+  
+  .dropTarget {
+    gap: 8px;
+    padding: 8px;
+  }
+}
+
+/* Prevent zoom on double tap for iOS */
+@media (max-width: 768px) {
+  .dragItem,
+  .droppedItem,
+  .audioButton,
+  .resetButton {
+    touch-action: manipulation;
+  }
+}
+
+/* Ensure proper viewport handling */
+@media (max-width: 768px) {
+  .container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .activityArea {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .itemsContainer {
+    flex-shrink: 0;
+  }
+
+  .targetsGrid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .targetContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dropTarget {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+
+/* Optimize for very small screens */
+@media (max-width: 360px) {
+  .container {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .activityArea {
+    min-height: calc(100vh - 220px); /* Adjusted for smaller header space */
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .dragItemImage img,
+  .droppedItemImage img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .dragItem,
+  .droppedItem,
+  .audioButton,
+  .resetButton {
+    transition: none;
+  }
+
+  .dragItem:hover,
+  .droppedItem:hover,
+  .audioButton:hover,
+  .resetButton:hover {
+    transform: none;
+  }
+
+  .feedbackMessage {
+    animation: none;
+  }
+}
+
+/* Dark mode support for mobile */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .instructionBox {
+    background-color: #2d2d2d;
+    border-color: #4a4a4a;
+  }
+
+  .dragItem,
+  .droppedItem {
+    background-color: #3d3d3d;
+    border-color: #5a5a5a;
+    color: #ffffff;
+  }
+
+  .dropTarget {
+    background-color: #2a2a2a;
+    border-color: #4a4a4a;
   }
 }
 
@@ -584,13 +1707,11 @@
 @media (min-width: 640px) {
   .backText { display: inline; }
 }
-
 .dragItemDisabled {
   opacity: 0.5;
   pointer-events: none;
   filter: grayscale(0.7);
 }
-
 .emptyMessage {
   text-align: center;
   color: #888;
