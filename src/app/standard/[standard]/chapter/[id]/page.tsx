@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faBookOpen, faArrowDown, faLaptopCode, faRobot, faMicrochip } from '@fortawesome/free-solid-svg-icons';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import LessonPathItem from '@/components/learn/LessonPathItem/LessonPathItem';
 import styles from './LearnPage.module.css';
 import { chapters } from '@/data/chaptersData';
@@ -80,51 +80,136 @@ export default function ChapterPage({
   params: Promise<PageParams>
 }) {
   const { standard, id } = React.use(params);
+  const [isMobile, setIsMobile] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(0);
   
   const chapterData = getChapterData(standard, id);
 
+  // Detect mobile device and screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      const width = window.innerWidth;
+      setScreenWidth(width);
+      setIsMobile(width <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const handleScrollDown = () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  };  // Positioning Configuration - adjusted to accommodate larger items and alternating chapter names
-  const positions: { [key: number]: React.CSSProperties } = {
-    1: {
-      top: '50px',
-      left: '45%', // Centered but slightly left to make space for right label
-      transform: 'translateX(-50%)',
-    },
-    2: {
-      top: '220px', // More space between items
-      left: '25%', // Further left to make space for right label
-      transform: 'translateX(-50%)',
-    },
-    3: {
-      top: '390px', // More space between items
-      left: '60%', // Further right
-      transform: 'translateX(-50%)',
-    },
-    4: {
-      top: '560px', // More space between items
-      left: '35%', // Back to left side
-      transform: 'translateX(-50%)',
-    },
-    5: {
-      top: '730px', // More space between items
-      left: '65%', // Right side
-      transform: 'translateX(-50%)',
-    },
-    6: {
-      top: '200px', // Moved higher from 300px
-      left: '75%', // Further right
-      transform: 'translateX(-50%)',
-    },
   };
 
-  // Add tech-themed decorative elements
-  const decorativeIcons = [
-    { icon: faLaptopCode, style: { top: '10%', left: '10%' } },
-    { icon: faRobot, style: { top: '30%', right: '15%' } },
-    { icon: faMicrochip, style: { bottom: '25%', left: '15%' } },
-  ];
+  // Responsive positioning configuration
+  const getPositions = (): { [key: number]: React.CSSProperties } => {
+    if (isMobile) {
+      // Mobile zigzag positioning - alternating left and right
+      return {
+        1: {
+          top: '40px',
+          left: '30%',
+          transform: 'translateX(-50%)',
+        },
+        2: {
+          top: '180px',
+          left: '70%',
+          transform: 'translateX(-50%)',
+        },
+        3: {
+          top: '360px',
+          left: '30%',
+          transform: 'translateX(-50%)',
+        },
+        4: {
+          top: '520px',
+          left: '70%',
+          transform: 'translateX(-50%)',
+        },
+        5: {
+          top: '680px',
+          left: '30%',
+          transform: 'translateX(-50%)',
+        },
+        6: {
+          top: '280px',
+          left: '70%',
+          transform: 'translateX(-50%)',
+        },
+      };
+    } else {
+      // Desktop positioning - alternating layout
+      return {
+        1: {
+          top: '50px',
+          left: '45%',
+          transform: 'translateX(-50%)',
+        },
+        2: {
+          top: '220px',
+          left: '25%',
+          transform: 'translateX(-50%)',
+        },
+        3: {
+          top: '390px',
+          left: '60%',
+          transform: 'translateX(-50%)',
+        },
+        4: {
+          top: '560px',
+          left: '35%',
+          transform: 'translateX(-50%)',
+        },
+        5: {
+          top: '730px',
+          left: '65%',
+          transform: 'translateX(-50%)',
+        },
+        6: {
+          top: '200px',
+          left: '75%',
+          transform: 'translateX(-50%)',
+        },
+      };
+    }
+  };
+
+  const positions = getPositions();
+
+  // Responsive decorative elements
+  const getDecorativeIcons = () => {
+    if (isMobile) {
+      // Simplified decorative elements for mobile
+      return [
+        { icon: faLaptopCode, style: { top: '5%', left: '5%', fontSize: '1.5rem' } },
+        { icon: faRobot, style: { top: '15%', right: '5%', fontSize: '1.5rem' } },
+      ];
+    } else {
+      // Full decorative elements for desktop
+      return [
+        { icon: faLaptopCode, style: { top: '10%', left: '10%' } },
+        { icon: faRobot, style: { top: '30%', right: '15%' } },
+        { icon: faMicrochip, style: { bottom: '25%', left: '15%' } },
+      ];
+    }
+  };
+
+  const decorativeIcons = getDecorativeIcons();
+
+  // Enhanced touch handling for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    // Add touch feedback
+    const target = e.currentTarget as HTMLElement;
+    target.style.transform = 'scale(0.95)';
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    // Remove touch feedback
+    const target = e.currentTarget as HTMLElement;
+    target.style.transform = '';
+  };
 
   return (
     <main className={styles.contentArea}>
@@ -137,42 +222,67 @@ export default function ChapterPage({
             <h2>STANDARD {standard} </h2>
           </div>
         </div>
-        <button className={styles.guidebookButton}>
+        <button 
+          className={styles.guidebookButton}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          aria-label="Open guidebook"
+        >
           <FontAwesomeIcon icon={faBookOpen} className={styles.icon} /> 
         </button>
       </div>
 
       <div className={styles.lessonPath}>
-        {/* Add decorative tech icons */}
+        {/* Add responsive decorative tech icons */}
         {decorativeIcons.map((item, index) => (
           <div 
             key={index}
             className={styles.decorativeIcon}
             style={item.style as React.CSSProperties}
+            aria-hidden="true"
           >
             <FontAwesomeIcon icon={item.icon} />
           </div>
-        ))}        {(() => {
+        ))}
+        
+        {(() => {
           const nodes: React.ReactNode[] = [];
           chapterData.content.forEach((item, idx) => {
             // Only 'robo' should never be clickable
             const isrobo = item.type === 'robo';
             const isClickable = !isrobo && !(item.type === 'checkmark' && item.completed);
             const itemStyle = positions[item.id] || {};
-              // Get chapter name for the lesson based on level number
+            
+            // Get chapter name for the lesson based on level number
             const chapterName = item.type === 'level-badge' && item.level 
               ? chapterData.lessonChapterNames[item.level] 
               : undefined;
               
-            // Determine left or right position (alternating)
-            const position = item.level && item.level % 2 === 0 ? 'left' : 'right';
+            // Determine position for chapter name based on zigzag layout
+            const getChapterPosition = () => {
+              if (isMobile) {
+                // For mobile zigzag: left items show names on right, right items show names on left
+                const isLeftItem = item.id === 1 || item.id === 3 || item.id === 5;
+                // Special handling for mascot (item 6) - always show name on left since it's on the right side
+                if (item.id === 6) return 'left';
+                return isLeftItem ? 'right' : 'left';
+              } else {
+                // For desktop: alternating based on level
+                return item.level && item.level % 2 === 0 ? 'left' : 'right';
+              }
+            };
+            
+            const position = getChapterPosition();
 
-            const lessonNode = isClickable ? (              <Link
+            const lessonNode = isClickable ? (
+              <Link
                 key={item.id}
                 href={`/learning?standard=${standard}&chapter=${id}&lesson=${item.id}`}
                 className={styles.lessonLink}
                 style={itemStyle}
-                aria-label={`Start or practice lesson ${item.id}`}
+                aria-label={`Start or practice lesson ${item.id}${chapterName ? `: ${chapterName}` : ''}`}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
               >
                 <LessonPathItem
                   type={item.type}
@@ -182,11 +292,14 @@ export default function ChapterPage({
                   position={position}
                 />
               </Link>
-            ) : (              <div
+            ) : (
+              <div
                 key={item.id}
                 className={styles.lessonLink}
                 style={itemStyle}
-                aria-label={`Lesson ${item.id} completed`}
+                aria-label={`Lesson ${item.id} completed${chapterName ? `: ${chapterName}` : ''}`}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
               >
                 <LessonPathItem
                   type={item.type}

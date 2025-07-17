@@ -7,7 +7,10 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s cubic
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Enhanced touch target for mobile */
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .leftPosition {
@@ -75,6 +78,13 @@
     /* border-radius: 50% 50% 45% 45%; */
     transform-origin: bottom;
     animation: bounce 2s ease-in-out infinite;
+    /* Enhanced mascot styling for better visibility */
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 0 0 6px rgba(255, 255, 255, 0.8),
+        0 0 0 8px rgba(26, 162, 255, 0.3);
+    /* Ensure mascot doesn't interfere with chapter names */
+    z-index: 10;
 }
 
 @keyframes bounce {
@@ -280,7 +290,7 @@
     border: 3px solid rgba(77, 185, 255, 0.3); /* Added blue border */
     transition: all 0.3s ease;
     position: absolute;
-    z-index: 5;
+    z-index: 15; /* Higher than mascot to ensure visibility */
     pointer-events: none; /* Ensure it doesn't interfere with clicking the badge */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Added text shadow for better readability */
     line-height: 1.2; /* Better line spacing for wrapped text */
@@ -307,4 +317,384 @@
     border-color: rgba(77, 185, 255, 0.8); /* More prominent blue border on hover */
     opacity: 1;
     transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* ===== MOBILE RESPONSIVE DESIGN ===== */
+
+/* --- Large Tablets (768px - 1024px) --- */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .pathItem {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .level-badge {
+    font-size: 36px;
+  }
+  
+  .checkmark .icon {
+    font-size: 28px;
+  }
+  
+  .chapterName {
+    font-size: 18px;
+    padding: 10px 14px;
+    max-width: 350px;
+  }
+  
+  .leftPosition {
+    left: -280px;
+  }
+  
+  .rightPosition {
+    right: -280px;
+  }
+}
+
+/* --- Tablets (481px - 768px) --- */
+@media (max-width: 768px) and (min-width: 482px) {
+  .pathItem {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .level-badge {
+    font-size: 32px;
+  }
+  
+  .checkmark .icon {
+    font-size: 24px;
+  }
+  
+  .chapterName {
+    font-size: 16px;
+    padding: 8px 12px;
+    max-width: 280px;
+    min-height: 40px;
+    max-height: 60px;
+  }
+  
+  .leftPosition {
+    left: -220px;
+    top: 20px;
+  }
+  
+  .rightPosition {
+    right: -220px;
+    top: 20px;
+  }
+  
+  /* Reduce animations on tablets for better performance */
+  .pathItem::before {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+  
+  .level-badge::after {
+    animation: shine 4s infinite;
+  }
+}
+
+/* --- Mobile Portrait (360px - 480px) --- */
+@media (max-width: 480px) and (min-width: 361px) {
+  .pathItem {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .level-badge {
+    font-size: 28px;
+  }
+  
+  .checkmark .icon {
+    font-size: 20px;
+  }
+  
+  .chapterName {
+    font-size: 14px;
+    padding: 6px 10px;
+    max-width: 200px;
+    min-height: 36px;
+    max-height: 52px;
+    border-radius: 10px;
+    border-width: 2px;
+  }
+  
+  .leftPosition {
+    left: -180px;
+    top: 15px;
+  }
+  
+  .rightPosition {
+    right: -180px;
+    top: 15px;
+  }
+  
+  /* Optimize shadows for mobile */
+  .level-badge {
+    box-shadow: 
+      inset 0 -4px 0 rgba(0, 0, 0, 0.2),
+      0 6px 12px rgba(0, 0, 0, 0.15),
+      0 0 0 4px rgba(255, 255, 255, 0.5);
+  }
+  
+  .checkmark.completed {
+    box-shadow: 
+      inset 0 2px 2px rgba(255, 255, 255, 0.25),
+      0 4px 0 0 #58a700,
+      0 6px 8px -2px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Enhanced mascot styling for mobile */
+  .robo {
+    box-shadow: 
+      0 6px 12px rgba(0, 0, 0, 0.15),
+      0 0 0 4px rgba(255, 255, 255, 0.8),
+      0 0 0 6px rgba(26, 162, 255, 0.3);
+    z-index: 10;
+  }
+  
+  /* Ensure chapter names are always visible and properly aligned */
+  .chapterName {
+    z-index: 20 !important; /* Highest priority for visibility */
+    background-color: rgba(255, 255, 255, 0.98) !important; /* More opaque background */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25) !important; /* Stronger shadow for better visibility */
+  }
+}
+
+/* --- Small Mobile (320px - 360px) --- */
+@media (max-width: 360px) {
+  .pathItem {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .level-badge {
+    font-size: 24px;
+  }
+  
+  .checkmark .icon {
+    font-size: 18px;
+  }
+  
+  .chapterName {
+    font-size: 12px;
+    padding: 5px 8px;
+    max-width: 160px;
+    min-height: 32px;
+    max-height: 44px;
+    border-radius: 8px;
+    border-width: 1px;
+  }
+  
+  .leftPosition {
+    left: -140px;
+    top: 12px;
+  }
+  
+  .rightPosition {
+    right: -140px;
+    top: 12px;
+  }
+  
+  /* Further optimize for very small screens */
+  .level-badge {
+    box-shadow: 
+      inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      0 0 0 3px rgba(255, 255, 255, 0.4);
+  }
+  
+  .checkmark.completed {
+    box-shadow: 
+      inset 0 2px 1px rgba(255, 255, 255, 0.25),
+      0 3px 0 0 #58a700,
+      0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* --- Extra Small Mobile (below 320px) --- */
+@media (max-width: 319px) {
+  .pathItem {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .level-badge {
+    font-size: 20px;
+  }
+  
+  .checkmark .icon {
+    font-size: 16px;
+  }
+  
+  .chapterName {
+    font-size: 10px;
+    padding: 4px 6px;
+    max-width: 120px;
+    min-height: 28px;
+    max-height: 36px;
+    border-radius: 6px;
+  }
+  
+  .leftPosition {
+    left: -100px;
+    top: 10px;
+  }
+  
+  .rightPosition {
+    right: -100px;
+    top: 10px;
+  }
+}
+
+/* --- Touch Device Optimizations --- */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .pathItem:hover {
+    transform: none;
+  }
+  
+  .itemWithLabel:hover .chapterName {
+    transform: none;
+  }
+  
+  /* Enhanced touch feedback */
+  .pathItem:active {
+    transform: scale(0.9);
+    transition: transform 0.1s ease;
+  }
+  
+  /* Ensure minimum touch target size */
+  .pathItem {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* --- Landscape Orientation Adjustments --- */
+@media (orientation: landscape) and (max-height: 500px) {
+  .pathItem {
+    width: 75px;
+    height: 75px;
+  }
+  
+  .level-badge {
+    font-size: 26px;
+  }
+  
+  .checkmark .icon {
+    font-size: 18px;
+  }
+  
+  .chapterName {
+    font-size: 12px;
+    padding: 4px 8px;
+    max-width: 150px;
+  }
+  
+  .leftPosition {
+    left: -120px;
+    top: 10px;
+  }
+  
+  .rightPosition {
+    right: -120px;
+    top: 10px;
+  }
+}
+
+/* --- High DPI Display Optimizations --- */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .pathItem {
+    border-radius: 50%; /* Ensure crisp circles */
+  }
+  
+  .chapterName {
+    border-radius: 16px; /* Slightly larger for crisp rendering */
+  }
+}
+
+/* --- Accessibility Improvements --- */
+@media (prefers-reduced-motion: reduce) {
+  .pathItem,
+  .pathItem::before,
+  .level-badge::after,
+  .robo,
+  .chest,
+  .mascotContainer,
+  .sparkle {
+    animation: none;
+    transition: none;
+  }
+  
+  .pathItem:hover {
+    transform: none;
+  }
+  
+  .itemWithLabel:hover .chapterName {
+    transform: none;
+  }
+}
+
+/* --- High Contrast Mode Support --- */
+@media (prefers-contrast: high) {
+  .pathItem {
+    border: 2px solid #000;
+  }
+  
+  .level-badge {
+    background: #000;
+    color: #fff;
+    box-shadow: 
+      inset 0 -4px 0 #000,
+      0 4px 8px rgba(0, 0, 0, 0.5),
+      0 0 0 4px #fff;
+  }
+  
+  .checkmark.completed {
+    background: #000;
+    color: #fff;
+    box-shadow: 
+      inset 0 2px 2px #fff,
+      0 4px 0 0 #000,
+      0 4px 6px rgba(0, 0, 0, 0.5);
+  }
+  
+  .chapterName {
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* --- Focus States for Accessibility --- */
+.pathItem:focus {
+  outline: 3px solid #1AA2FF;
+  outline-offset: 2px;
+}
+
+.pathItem:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* --- Print Styles --- */
+@media print {
+  .pathItem {
+    border: 1px solid #000;
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+  
+  .chapterName {
+    border: 1px solid #000;
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+  
+  .mascotContainer {
+    display: none;
+  }
 }
