@@ -465,18 +465,24 @@ export const DragDrop: React.FC<DragDropProps> = ({
           <div className={styles.dragItems}>
             <AnimatePresence mode="wait">
               {(() => {
-                const nextItem = dragItems.find((item) => !item.placed);
-                if (nextItem) {
-                  return (
+                const unplacedItems = dragItems.filter((item) => !item.placed);
+                
+                if (unplacedItems.length > 0) {
+                  // Show exactly 3 items on mobile, 1 on desktop
+                  const itemsToShow = isTouchDevice ? 
+                    unplacedItems.slice(0, 3) : 
+                    unplacedItems.slice(0, 1);
+                  
+                  return itemsToShow.map((item) => (
                     <motion.div
-                      key={nextItem.id}
+                      key={item.id}
                       className={styles.dragItem}
                       draggable={!isTouchDevice}
                       onDragStart={!isTouchDevice ? (e: MouseEvent | TouchEvent | PointerEvent) => {
                         const dragEvent = e as unknown as React.DragEvent<HTMLDivElement>;
-                        handleDragStart(dragEvent, nextItem);
+                        handleDragStart(dragEvent, item);
                       } : undefined}
-                      onTouchStart={isTouchDevice ? (e: React.TouchEvent) => handleTouchStart(e, nextItem) : undefined}
+                      onTouchStart={isTouchDevice ? (e: React.TouchEvent) => handleTouchStart(e, item) : undefined}
                       onTouchMove={isTouchDevice ? handleTouchMove : undefined}
                       onTouchEnd={isTouchDevice ? handleTouchEnd : undefined}
                       onTouchCancel={isTouchDevice ? handleTouchCancel : undefined}
@@ -485,14 +491,14 @@ export const DragDrop: React.FC<DragDropProps> = ({
                       exit={{ opacity: 0, scale: 0.5 }}
                       transition={{ duration: 0.3 }}
                     >
-                      {nextItem.imageUrl && (
+                      {item.imageUrl && (
                         <div className={styles.dragItemImage}>
-                          <Image src={nextItem.imageUrl} alt={nextItem.text} width={50} height={50} />
+                          <Image src={item.imageUrl} alt={item.text} width={50} height={50} />
                         </div>
                       )}
-                      <span className={styles.dragItemText}>{nextItem.text}</span>
+                      <span className={styles.dragItemText}>{item.text}</span>
                     </motion.div>
-                  );
+                  ));
                 } else {
                   return (
                     <div className={styles.emptyMessage}>

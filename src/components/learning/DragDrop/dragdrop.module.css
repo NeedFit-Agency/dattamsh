@@ -647,12 +647,13 @@
 
   .dragItems {
     margin-top: 12px;
-    gap: 16px;
+    gap: 12px;
     justify-content: center;
-    min-height: 80px;
+    min-height: 120px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
+    padding: 8px;
   }
 
   .dragItem {
