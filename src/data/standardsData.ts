@@ -45,6 +45,7 @@ export interface BucketData {
   title: string;
   type: string;
   color?: string;
+  audioSrc?: string;
 }
 
 export interface BucketMatchSlide extends BaseContentProps {
@@ -216,10 +217,10 @@ export const standards: Standard = {
             },
           ],
           buckets: [
-            { id: "typing-bucket", title: "set of buttons called keys", type: "typing", color: "#4caf50" },
-            { id: "pointing-bucket", title: "moves the pointer on the screen", type: "pointing", color: "#ff9800" },
-            { id: "brain-bucket", title: "brain of the computer", type: "brain", color: "#9c27b0" },
-            { id: "shows-bucket", title: "shows everything the computer is doing", type: "shows", color: "#2196f3" },
+            { id: "typing-bucket", title: "set of buttons called keys", type: "typing", color: "#4caf50", audioSrc: "/voice/2.2.m4a" },
+            { id: "pointing-bucket", title: "moves the pointer on the screen", type: "pointing", color: "#ff9800", audioSrc: "/voice/2.3.m4a" },
+            { id: "brain-bucket", title: "brain of the computer", type: "brain", color: "#9c27b0", audioSrc: "/voice/2.4.m4a" },
+            { id: "shows-bucket", title: "shows everything the computer is doing", type: "shows", color: "#2196f3", audioSrc: "/voice/2.5.m4a" },
           ],
           successMessage: "Great job! You matched all computer parts!",
           correctMessage: "That's right!",
@@ -513,7 +514,7 @@ export const standards: Standard = {
             { id: "internetTarget", title: "Internet Tools", type: "option-1" },
             { id: "nonInternetTarget", title: "Non-Internet Tools", type: "option-2" },
           ],
-          audioSrc: "/audio/internet_tools.mp3",
+          audioSrc: "/voice/3.1.m4a",
           speakText:
             "Sort these items. Drag them into the correct box: Internet Tools or Non-Internet Tools.",
         },
@@ -584,7 +585,7 @@ export const standards: Standard = {
               color: "#9c27b0"
             }
           ],
-          audioSrc: "/audio/email_components.mp3",
+          audioSrc: "/voice/3.2.m4a",
           speakText: "Drag each email component to its matching description bucket.",
         }
       ]
@@ -618,7 +619,7 @@ export const standards: Standard = {
           ],
           correctOrder: ["step1", "step3", "step2", "step4"],
           dropZoneCount: 4,
-          audioSrc: "/audio/online_safety.mp3",
+          audioSrc: "/voice/3.3.m4a",
           speakText: "Put these online safety steps in the correct order!",
         }
       ]
@@ -639,7 +640,7 @@ export const standards: Standard = {
             { id: "firefox", text: "Mozilla Firefox", isCorrect: false },
             { id: "safari", text: "Safari", isCorrect: false }
           ],
-          audioSrc: "/audio/browser_riddle.mp3",
+          audioSrc: "/voice/3.4.m4a",
           speakText: "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
         }
       ]
@@ -699,7 +700,7 @@ export const standards: Standard = {
               color: "#3f51b5"
             }
           ],
-          audioSrc: "/audio/match_os_device.mp3",
+          audioSrc: "/voice/4.1.m4a",
           speakText: "Drag each operating system to its matching device type!",
         }
       ]
@@ -756,7 +757,7 @@ export const standards: Standard = {
             { id: "uiTarget", title: "User Interface", type: "option-1" },
             { id: "utilityTarget", title: "System Utility", type: "option-2" },
           ],
-          audioSrc: "/audio/windows_components.mp3",
+          audioSrc: "/voice/4.2.m4a",
           speakText:
             "Drag these Windows components to their correct category: User Interface or System Utility.",
         },
@@ -778,7 +779,7 @@ export const standards: Standard = {
             { id: "mp3", text: ".mp3", isCorrect: false },
             { id: "doc", text: ".doc", isCorrect: false }
           ],
-          audioSrc: "/audio/file_type_riddle.mp3",
+          audioSrc: "/voice/4.3.m4a",
           speakText: "I store photos and pictures. My name starts with 'J' and I'm very common on the internet. Who am I?",
         }
       ]
@@ -812,7 +813,7 @@ export const standards: Standard = {
           ],
           correctOrder: ["step1", "step2", "step3", "step4"],
           dropZoneCount: 4,
-          audioSrc: "/audio/word_table_steps.mp3",
+          audioSrc: "/voice/4.4.m4a",
           speakText: "Put these steps in the correct order to insert a table in Microsoft Word!",
         }
       ]

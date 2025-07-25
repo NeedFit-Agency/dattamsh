@@ -282,8 +282,8 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   // Audio ref for .m4a files
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Check if audio should be shown (only for grades 1, 2, 3)
-  const shouldShowAudio = standard && ['1', '2', '3'].includes(standard);
+  // Check if audio should be shown (for grades 1, 2, 3, 4)
+  const shouldShowAudio = standard && ['1', '2', '3', '4'].includes(standard);
 
   // Monitor audio state changes
   useEffect(() => {

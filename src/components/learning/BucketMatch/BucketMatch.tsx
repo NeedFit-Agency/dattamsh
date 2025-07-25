@@ -60,8 +60,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   const [showCongratulations, setShowCongratulations] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Check if audio should be shown (only for grades 1, 2, 3)
-  const shouldShowAudio = standard && ['1', '2', '3'].includes(standard);
+  // Check if audio should be shown (for grades 1, 2, 3, 4)
+  const shouldShowAudio = standard && ['1', '2', '3', '4'].includes(standard);
 
   // Monitor audio state changes
   useEffect(() => {
@@ -430,17 +430,30 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                   </div>
                   <p className={styles.bucketLabel}>{bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}</p>
                   <div className={styles.bucketTTSContainer}>
-                    <TTS
-                      text={bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}
-                      className={styles.bucketTTS}
-                      iconClassName={styles.bucketHeadphones}
-                      showText={false}
-                      excitement="low"
-                      naturalPauses={true}
-                      humanLike={true}
-                      rate={0.5}
-                      pitch={1.0}
-                    />
+                    {bucket.audioSrc ? (
+                      <button
+                        className={styles.bucketAudioButton}
+                        onClick={() => {
+                          const audio = new Audio(bucket.audioSrc);
+                          audio.play().catch(e => console.log("Bucket audio play failed:", e));
+                        }}
+                        aria-label={`Play audio for ${bucket.title}`}
+                      >
+                        <FontAwesomeIcon icon={faHeadphones} />
+                      </button>
+                    ) : (
+                      <TTS
+                        text={bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}
+                        className={styles.bucketTTS}
+                        iconClassName={styles.bucketHeadphones}
+                        showText={false}
+                        excitement="low"
+                        naturalPauses={true}
+                        humanLike={true}
+                        rate={0.5}
+                        pitch={1.0}
+                      />
+                    )}
                   </div>
                 </div>
               );

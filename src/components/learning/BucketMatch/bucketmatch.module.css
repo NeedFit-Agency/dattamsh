@@ -670,6 +670,36 @@
   fill: currentColor;
 }
 
+.bucketAudioButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #ff9800;
+  color: white;
+}
+
+.bucketAudioButton:hover {
+  background-color: #f57c00;
+  transform: scale(1.1);
+}
+
+.bucketAudioButton:active {
+  transform: scale(0.95);
+}
+
+.bucketAudioButton svg {
+  width: 16px;
+  height: 16px;
+}
+
 /* Responsive adjustments for TTS */
 @media (max-width: 768px) {
   .instructionTTS {
