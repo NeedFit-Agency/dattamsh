@@ -355,28 +355,28 @@ export const standards: Standard = {
               title: "Turn pictures and papers into digital files so you can see them on the computer", 
               type: "scanner", 
               color: "#2196f3", 
-              audioSrc: "/voice/grade2/1.1.m4a" 
+              audioSrc: "/voice/grade2/1.2.m4a" 
             },
             { 
               id: "microphone-bucket", 
               title: "Used for talking, giving voice instructions, singing, and recording music", 
               type: "microphone", 
               color: "#4caf50", 
-              audioSrc: "/voice/grade2/1.2.m4a" 
+              audioSrc: "/voice/grade2/1.3.m4a" 
             },
             { 
               id: "speakers-bucket", 
               title: "Listen to a variety of sounds", 
               type: "speakers", 
               color: "#9c27b0", 
-              audioSrc: "/voice/grade2/1.3.m4a" 
+              audioSrc: "/voice/grade2/1.4.m4a" 
             },
             { 
               id: "printer-bucket", 
               title: "Prints what you see on the monitor on to paper", 
               type: "printer", 
               color: "#ff9800", 
-              audioSrc: "/voice/grade2/1.4.m4a" 
+              audioSrc: "/voice/grade2/1.5.m4a" 
             }
           ],
           successMessage: "Excellent! You matched all computer parts correctly!",
