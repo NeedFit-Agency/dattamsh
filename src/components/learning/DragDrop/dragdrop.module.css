@@ -1653,30 +1653,7 @@
   }
 }
 
-/* Dark mode support for mobile */
-@media (prefers-color-scheme: dark) {
-  .container {
-    background-color: #1a1a1a;
-    color: #ffffff;
-  }
 
-  .instructionBox {
-    background-color: #2d2d2d;
-    border-color: #4a4a4a;
-  }
-
-  .dragItem,
-  .droppedItem {
-    background-color: #3d3d3d;
-    border-color: #5a5a5a;
-    color: #ffffff;
-  }
-
-  .dropTarget {
-    background-color: #2a2a2a;
-    border-color: #4a4a4a;
-  }
-}
 
 .chooseBackButton {
   background: none;
