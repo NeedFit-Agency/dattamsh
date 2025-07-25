@@ -20,6 +20,7 @@ export interface Bucket {
   id: string;        // Unique identifier for the bucket
   type: ItemType;    // Type of items this bucket accepts
   title?: string;    // Optional title or label for the bucket
+  audioSrc?: string; // Optional audio source for bucket description
   // color?: string; // Optional background color for the bucket (can be handled by CSS based on type)
 }
 
@@ -39,6 +40,7 @@ export interface BucketMatchProps {
   resetLabel?: string;               // Label for the reset button
   playAgainLabel?: string;           // Label for the play again button
   isLastLesson?: boolean;            // Whether this is the last lesson in the chapter
+  standard?: string;                 // The current standard/grade level
 }
 
 // Defines the structure for feedback messages (if needed separately from component state).

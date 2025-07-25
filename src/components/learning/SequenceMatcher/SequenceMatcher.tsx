@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './SequenceMatcher.module.css';
 import { SequenceMatcherProps, DraggableItem } from './types';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
@@ -13,7 +13,10 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   correctOrder = [],
   onComplete,
   onIncorrectAttempt,
-  isLastLesson = false
+  isLastLesson = false,
+  audioSrc,
+  speakText,
+  standard
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [placedItems, setPlacedItems] = useState<{[zoneIndex: number]: DraggableItem}>({});
@@ -276,8 +279,64 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     }
   };
 
+  // Audio ref for .m4a files
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Check if audio should be shown (for grades 1, 2, 3, 4)
+  const shouldShowAudio = standard && ['1', '2', '3', '4'].includes(standard);
+
+  // Monitor audio state changes
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      console.log('Audio ended');
+      setIsAudioPlaying(false);
+    };
+
+    const handlePause = () => {
+      console.log('Audio paused');
+      setIsAudioPlaying(false);
+    };
+
+    const handlePlay = () => {
+      console.log('Audio started playing');
+      setIsAudioPlaying(true);
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('play', handlePlay);
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('play', handlePlay);
+    };
+  }, [audioSrc]);
+
   // Function to handle audio playback
   const playQuestionAudio = () => {
+    if (audioRef.current) {
+      if (isAudioPlaying) {
+        audioRef.current.pause();
+        setIsAudioPlaying(false);
+      } else {
+        audioRef.current.play().catch((error) => {
+          console.error('Audio play failed:', error);
+          // Fallback to TTS if audio file fails
+          playTTSFallback();
+        });
+        setIsAudioPlaying(true);
+      }
+    } else {
+      // Fallback to TTS if no audio file
+      playTTSFallback();
+    }
+  };
+
+  const playTTSFallback = () => {
     window.speechSynthesis?.cancel();
 
     if (isAudioPlaying) {
@@ -312,6 +371,18 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
 
     return (
     <div className={styles.container}>
+      {/* Audio element for .m4a files */}
+      {shouldShowAudio && audioSrc && (
+        <audio 
+          ref={audioRef} 
+          src={audioSrc}
+          onError={() => {
+            console.error('Audio file failed to load');
+            setIsAudioPlaying(false);
+          }}
+        />
+      )}
+      
       {/* Position congratulations screen at the top level for proper z-index */}
       <CongratulationsScreen
         isVisible={showCongratulations}
@@ -327,15 +398,17 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{title}</h1>
-          <button
-            className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-            onClick={playQuestionAudio}
-            aria-label={isAudioPlaying ? "Stop reading" : "Listen to the question"}
-            title={isAudioPlaying ? "Stop reading" : "Listen to the question"}
-          >
-            <FontAwesomeIcon icon={faHeadphones} />
-            <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-          </button>
+          {shouldShowAudio && (
+            <button
+              className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+              onClick={playQuestionAudio}
+              aria-label={isAudioPlaying ? "Stop reading" : "Listen to the question"}
+              title={isAudioPlaying ? "Stop reading" : "Listen to the question"}
+            >
+              <FontAwesomeIcon icon={faHeadphones} />
+              <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+            </button>
+          )}
         </div>
 
         <div className={styles.mainContent}>
@@ -408,23 +481,36 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                   </span>
                   <span className={styles.stepText}>{item.content}</span>
                   
-                  {/* Small TTS button in bottom left corner */}
+                  {/* Audio button for individual items */}
                   <div 
                     className={styles.itemTTSContainer}
                     onMouseDown={(e) => e.stopPropagation()}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <TTS
-                      text={item.content}
-                      className={styles.itemTTS}
-                      iconClassName={styles.itemHeadphones}
-                      showText={false}
-                      excitement="medium"
-                      naturalPauses={true}
-                      humanLike={true}
-                      rate={0.5}
-                      pitch={1.0}
-                    />
+                    {item.audioSrc ? (
+                      <button
+                        className={styles.itemAudioButton}
+                        onClick={() => {
+                          const audio = new Audio(item.audioSrc);
+                          audio.play().catch(e => console.log("Item audio play failed:", e));
+                        }}
+                        aria-label={`Play audio for ${item.content}`}
+                      >
+                        <FontAwesomeIcon icon={faHeadphones} />
+                      </button>
+                    ) : (
+                      <TTS
+                        text={item.content}
+                        className={styles.itemTTS}
+                        iconClassName={styles.itemHeadphones}
+                        showText={false}
+                        excitement="medium"
+                        naturalPauses={true}
+                        humanLike={true}
+                        rate={0.5}
+                        pitch={1.0}
+                      />
+                    )}
                   </div>
                 </div>
               ))}

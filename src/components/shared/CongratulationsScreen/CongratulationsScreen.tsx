@@ -22,6 +22,7 @@ const DefaultMascot = () => (
     width={120}
     height={120}
     className={styles.mascotImage}
+    priority
   />
 );
 
@@ -41,11 +42,18 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   onTryAgainClick,
 }) => {
   const router = useRouter();
+  
+  // Optimize confetti count for mobile devices
   const confettiPieces = useMemo(() => {
     if (!isVisible) return [];
     const pieces = [];
     const colors = ['#f1c40f', '#e67e22', '#3498db', '#2ecc71', '#9b59b6', '#1abc9c'];
-    for (let i = 0; i < 80; i++) {
+    
+    // Reduce confetti count on mobile for better performance
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    const confettiCount = isMobile ? 40 : 80;
+    
+    for (let i = 0; i < confettiCount; i++) {
       pieces.push({
         left: `${Math.random() * 100}%`,
         animationDelay: `${Math.random() * 4}s`,
@@ -90,11 +98,16 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
           <button
             className={`${styles.playAgainBtn} ${styles.tryAgainBtn}`}
             onClick={onTryAgainClick}
+            aria-label={tryAgainText}
           >
             {tryAgainText}
           </button>
         )}
-        <button className={styles.playAgainBtn} onClick={handleButtonClick}>
+        <button 
+          className={styles.playAgainBtn} 
+          onClick={handleButtonClick}
+          aria-label={buttonText}
+        >
           {buttonText}
         </button>
       </div>

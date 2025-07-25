@@ -11,8 +11,8 @@
   
   .confetti {
     position: absolute;
-    width: 8px;
-    height: 12px;
+    width: clamp(4px, 1vw, 8px);
+    height: clamp(6px, 1.5vw, 12px);
     background-color: hsl(var(--hue, 270), 90%, 60%);
     border-radius: 2px;
     opacity: 0;
@@ -33,3 +33,33 @@
       opacity: 0;
     }
   }
+
+/* Mobile Responsive Breakpoints */
+@media (max-width: 768px) {
+  .confetti {
+    width: clamp(3px, 0.8vw, 6px);
+    height: clamp(4px, 1vw, 8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .confetti {
+    width: clamp(2px, 0.6vw, 4px);
+    height: clamp(3px, 0.8vw, 6px);
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+  .confetti {
+    width: clamp(2px, 0.5vw, 4px);
+    height: clamp(3px, 0.7vw, 6px);
+  }
+}
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .confetti {
+    animation: none;
+  }
+}

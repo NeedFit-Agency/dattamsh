@@ -330,6 +330,7 @@ function LearningPageContent() {
             onComplete={onCompleteProp}
             progress={progress}
             isLastLesson={isLastLesson}
+            standard={standard}
           />        </main>
       </div>
 

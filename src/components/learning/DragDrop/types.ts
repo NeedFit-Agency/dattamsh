@@ -19,4 +19,5 @@ export interface DragDropProps {
   onBack?: () => void;
   onComplete?: (() => void) | { href: string };
   isLastLesson?: boolean;
+  standard?: string; // The current standard/grade level
 }

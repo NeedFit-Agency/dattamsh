@@ -8,20 +8,23 @@ import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
 interface Option {
   id: string;
   text: string;
-  icon: React.ReactNode;
+  isCorrect: boolean;
+  imageUrl?: string;
 }
 
 export interface WhoAmIProps {
   riddleText: string;
   questionText?: string;
   options: Option[];
-  correctAnswerId: string;
   onComplete?: (() => void) | { href: string };
   onIncorrectAttempt?: () => void;
   mascot?: React.ReactNode; // Optional custom mascot
   buttonTextWhenCorrect?: string; // Text to display on the button when answer is correct
   buttonTextWhenIncorrect?: string; // Text to display on the button when answer is incorrect
   isLastLesson?: boolean; // Whether this is the last lesson in the chapter
+  audioSrc?: string; // Audio file path for .m4a files
+  speakText?: string; // Fallback text for TTS
+  standard?: string; // The current standard/grade level
 }
 
 const DefaultMascot = () => (
@@ -32,14 +35,17 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   riddleText,
   questionText = "WHO AM I?",
   options = [],
-  correctAnswerId,
   onComplete,
   onIncorrectAttempt,
   mascot = <DefaultMascot />,
   buttonTextWhenCorrect = "Next",
   buttonTextWhenIncorrect = "Try Again",
   isLastLesson = false,
-}) => {  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  audioSrc,
+  speakText,
+  standard
+}) => {
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [showWinScreen, setShowWinScreen] = useState(false);
@@ -51,13 +57,65 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
 
   const correctSoundRef = useRef<HTMLAudioElement>(null);
   const incorrectSoundRef = useRef<HTMLAudioElement>(null);
+  const questionAudioRef = useRef<HTMLAudioElement>(null);
 
+  // Find the correct answer ID
+  const correctAnswerId = options.find(option => option.isCorrect)?.id || '';
+
+  // Check if audio should be shown (for grades 1, 2, 3, 4)
+  const shouldShowAudio = standard && ['1', '2', '3', '4'].includes(standard);
+
+  // Monitor audio state changes
   useEffect(() => {
-    // Preload audio - consider moving audio to public folder and using paths
- 
-  }, []);
+    const audio = questionAudioRef.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      console.log('Audio ended');
+      setIsAudioPlaying(false);
+    };
+
+    const handlePause = () => {
+      console.log('Audio paused');
+      setIsAudioPlaying(false);
+    };
+
+    const handlePlay = () => {
+      console.log('Audio started playing');
+      setIsAudioPlaying(true);
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('play', handlePlay);
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('play', handlePlay);
+    };
+  }, [audioSrc]);
 
   const playQuestionAudio = () => {
+    if (questionAudioRef.current) {
+      if (isAudioPlaying) {
+        questionAudioRef.current.pause();
+        setIsAudioPlaying(false);
+      } else {
+        questionAudioRef.current.play().catch((error) => {
+          console.error('Audio play failed:', error);
+          // Fallback to TTS if audio file fails
+          playTTSFallback();
+        });
+        setIsAudioPlaying(true);
+      }
+    } else {
+      // Fallback to TTS if no audio file
+      playTTSFallback();
+    }
+  };
+
+  const playTTSFallback = () => {
     window.speechSynthesis?.cancel();
 
     if (isAudioPlaying) {
@@ -65,7 +123,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       return;
     }
 
-    const textToSpeak = `${riddleText} ${questionText}`;
+    const textToSpeak = speakText || `${riddleText} ${questionText}`;
 
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
       try {
@@ -88,7 +146,9 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     } else {
       setIsAudioPlaying(false);
     }
-  };  const handleOptionClick = (optionId: string) => {
+  };
+
+  const handleOptionClick = (optionId: string) => {
     if (isAnswered) return;
 
     setIsAnswered(true);
@@ -126,7 +186,9 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         if (onIncorrectAttempt) onIncorrectAttempt();
       }, 1200);
     }
-  };  const resetGame = () => {
+  };
+
+  const resetGame = () => {
     setIsAnswered(false);
     setSelectedAnswer(null);
     setShowWinScreen(false);
@@ -159,8 +221,22 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (optionId === correctAnswerId) return `${styles.optionButton} ${styles.correct}`;
     if (optionId === selectedAnswer && optionId !== correctAnswerId) return `${styles.optionButton} ${styles.incorrect}`;
     return styles.optionButton;
-  };  return (
+  };
+
+  return (
     <div className={styles.container}>
+      {/* Audio element for .m4a files */}
+      {shouldShowAudio && audioSrc && (
+        <audio 
+          ref={questionAudioRef} 
+          src={audioSrc}
+          onError={() => {
+            console.error('Audio file failed to load');
+            setIsAudioPlaying(false);
+          }}
+        />
+      )}
+      
       <CongratulationsScreen
         isVisible={showCongratulations}
         onButtonClick={onComplete ? onComplete : handleReset}
@@ -206,15 +282,17 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
               </div>
             </div>
           </div>
-          <button
-            className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-            onClick={playQuestionAudio}
-            aria-label={isAudioPlaying ? "Stop reading" : "Listen to the question"}
-            title={isAudioPlaying ? "Stop reading" : "Listen to the question"}
-          >
-            <FontAwesomeIcon icon={faHeadphones} />
-            <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-          </button>
+          {shouldShowAudio && (
+            <button
+              className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+              onClick={playQuestionAudio}
+              aria-label={isAudioPlaying ? "Stop reading" : "Listen to the question"}
+              title={isAudioPlaying ? "Stop reading" : "Listen to the question"}
+            >
+              <FontAwesomeIcon icon={faHeadphones} />
+              <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+            </button>
+          )}
         </div>
         <div className={styles.optionsContainer}>
           {options.map((option) => (
@@ -224,9 +302,14 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
               onClick={() => handleOptionClick(option.id)}
               disabled={isAnswered}
             >
-              <div className={styles.optionIcon}>{option.icon}</div>
+              {option.imageUrl && (
+                <div className={styles.optionIcon}>
+                  <img src={option.imageUrl} alt={option.text} className={styles.optionImage} />
+                </div>
+              )}
               <span>{option.text}</span>
-            </button>          ))}
+            </button>
+          ))}
         </div>
       </div>
     </div>

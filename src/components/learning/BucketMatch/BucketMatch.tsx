@@ -44,7 +44,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   successMessage = 'Great Job! You matched them all!',
   correctMessage = 'Correct!',
   tryAgainMessage = 'Try Again!',
-  isLastLesson = false
+  isLastLesson = false,
+  standard
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -58,6 +59,40 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   }>({ type: null });
   const [showCongratulations, setShowCongratulations] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Check if audio should be shown (for grades 1, 2, 3, 4)
+  const shouldShowAudio = standard && ['1', '2', '3', '4'].includes(standard);
+
+  // Monitor audio state changes
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      console.log('Audio ended');
+      setIsAudioPlaying(false);
+    };
+
+    const handlePause = () => {
+      console.log('Audio paused');
+      setIsAudioPlaying(false);
+    };
+
+    const handlePlay = () => {
+      console.log('Audio started playing');
+      setIsAudioPlaying(true);
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('play', handlePlay);
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('play', handlePlay);
+    };
+  }, [audioSrc]);
 
   const allItemsCount = items.length;
   const matchedItemsCount = Object.keys(placedItems).length;
@@ -223,6 +258,25 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   };
 
   const playInstructionAudio = () => {
+    if (audioRef.current) {
+      if (isAudioPlaying) {
+        audioRef.current.pause();
+        setIsAudioPlaying(false);
+      } else {
+        audioRef.current.play().catch((error) => {
+          console.error('Audio play failed:', error);
+          // Fallback to TTS if audio file fails
+          playTTSFallback();
+        });
+        setIsAudioPlaying(true);
+      }
+    } else {
+      // Fallback to TTS if no audio file
+      playTTSFallback();
+    }
+  };
+
+  const playTTSFallback = () => {
     window.speechSynthesis?.cancel();
 
     if (isAudioPlaying) {
@@ -265,17 +319,15 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       {onBack && (
         <div className={styles.header}>
           {title && <h2 className={styles.title}>{title}</h2>}
-          {audioSrc && (
-            <>
-              <button
-                className={styles.audioButton}
-                onClick={playAudio}
-                aria-label="Play audio"
-              >
-                <img src="/images/sound.png" alt="Play sound" style={{ width: 24, height: 24 }} />
-              </button>
-              <audio ref={audioRef} src={audioSrc} />
-            </>
+          {shouldShowAudio && audioSrc && (
+            <audio 
+              ref={audioRef} 
+              src={audioSrc}
+              onError={() => {
+                console.error('Audio file failed to load');
+                setIsAudioPlaying(false);
+              }}
+            />
           )}
         </div>
       )}
@@ -296,13 +348,15 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
             <p className={styles.instruction}>{instruction}</p>
             <div className={styles.buttonGroup}>
               <div className={styles.leftButtons}>
-                <button
-                  className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-                  onClick={playInstructionAudio}
-                >
-                  <FontAwesomeIcon icon={faHeadphones} />
-                  <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-                </button>
+                {shouldShowAudio && (
+                  <button
+                    className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+                    onClick={playInstructionAudio}
+                  >
+                    <FontAwesomeIcon icon={faHeadphones} />
+                    <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -376,17 +430,30 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                   </div>
                   <p className={styles.bucketLabel}>{bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}</p>
                   <div className={styles.bucketTTSContainer}>
-                    <TTS
-                      text={bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}
-                      className={styles.bucketTTS}
-                      iconClassName={styles.bucketHeadphones}
-                      showText={false}
-                      excitement="low"
-                      naturalPauses={true}
-                      humanLike={true}
-                      rate={0.5}
-                      pitch={1.0}
-                    />
+                    {bucket.audioSrc ? (
+                      <button
+                        className={styles.bucketAudioButton}
+                        onClick={() => {
+                          const audio = new Audio(bucket.audioSrc);
+                          audio.play().catch(e => console.log("Bucket audio play failed:", e));
+                        }}
+                        aria-label={`Play audio for ${bucket.title}`}
+                      >
+                        <FontAwesomeIcon icon={faHeadphones} />
+                      </button>
+                    ) : (
+                      <TTS
+                        text={bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}
+                        className={styles.bucketTTS}
+                        iconClassName={styles.bucketHeadphones}
+                        showText={false}
+                        excitement="low"
+                        naturalPauses={true}
+                        humanLike={true}
+                        rate={0.5}
+                        pitch={1.0}
+                      />
+                    )}
                   </div>
                 </div>
               );

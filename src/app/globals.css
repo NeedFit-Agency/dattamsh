@@ -3,6 +3,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* Remove mobile tap highlights globally */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection for specific elements that need it */
+input, textarea, [contenteditable="true"], .selectable-text {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 :root {
