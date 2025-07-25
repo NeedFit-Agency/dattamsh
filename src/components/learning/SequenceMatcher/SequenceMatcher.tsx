@@ -481,23 +481,36 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                   </span>
                   <span className={styles.stepText}>{item.content}</span>
                   
-                  {/* Small TTS button in bottom left corner */}
+                  {/* Audio button for individual items */}
                   <div 
                     className={styles.itemTTSContainer}
                     onMouseDown={(e) => e.stopPropagation()}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <TTS
-                      text={item.content}
-                      className={styles.itemTTS}
-                      iconClassName={styles.itemHeadphones}
-                      showText={false}
-                      excitement="medium"
-                      naturalPauses={true}
-                      humanLike={true}
-                      rate={0.5}
-                      pitch={1.0}
-                    />
+                    {item.audioSrc ? (
+                      <button
+                        className={styles.itemAudioButton}
+                        onClick={() => {
+                          const audio = new Audio(item.audioSrc);
+                          audio.play().catch(e => console.log("Item audio play failed:", e));
+                        }}
+                        aria-label={`Play audio for ${item.content}`}
+                      >
+                        <FontAwesomeIcon icon={faHeadphones} />
+                      </button>
+                    ) : (
+                      <TTS
+                        text={item.content}
+                        className={styles.itemTTS}
+                        iconClassName={styles.itemHeadphones}
+                        showText={false}
+                        excitement="medium"
+                        naturalPauses={true}
+                        humanLike={true}
+                        rate={0.5}
+                        pitch={1.0}
+                      />
+                    )}
                   </div>
                 </div>
               ))}

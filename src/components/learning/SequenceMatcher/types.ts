@@ -4,6 +4,7 @@
 export interface DraggableItem {
   id: string;
   content: string; // Text to display
+  audioSrc?: string; // Optional audio source for individual items
   // Add any other properties specific to an item, e.g., icon, correct order index
 }
 
