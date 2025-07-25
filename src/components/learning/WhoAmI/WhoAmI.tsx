@@ -8,14 +8,14 @@ import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
 interface Option {
   id: string;
   text: string;
-  icon: React.ReactNode;
+  isCorrect: boolean;
+  imageUrl?: string;
 }
 
 export interface WhoAmIProps {
   riddleText: string;
   questionText?: string;
   options: Option[];
-  correctAnswerId: string;
   onComplete?: (() => void) | { href: string };
   onIncorrectAttempt?: () => void;
   mascot?: React.ReactNode; // Optional custom mascot
@@ -35,7 +35,6 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   riddleText,
   questionText = "WHO AM I?",
   options = [],
-  correctAnswerId,
   onComplete,
   onIncorrectAttempt,
   mascot = <DefaultMascot />,
@@ -45,7 +44,8 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   audioSrc,
   speakText,
   standard
-}) => {  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+}) => {
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [showWinScreen, setShowWinScreen] = useState(false);
@@ -58,6 +58,9 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   const correctSoundRef = useRef<HTMLAudioElement>(null);
   const incorrectSoundRef = useRef<HTMLAudioElement>(null);
   const questionAudioRef = useRef<HTMLAudioElement>(null);
+
+  // Find the correct answer ID
+  const correctAnswerId = options.find(option => option.isCorrect)?.id || '';
 
   // Check if audio should be shown (for grades 1, 2, 3, 4)
   const shouldShowAudio = standard && ['1', '2', '3', '4'].includes(standard);
@@ -92,11 +95,6 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       audio.removeEventListener('play', handlePlay);
     };
   }, [audioSrc]);
-
-  useEffect(() => {
-    // Preload audio - consider moving audio to public folder and using paths
- 
-  }, []);
 
   const playQuestionAudio = () => {
     if (questionAudioRef.current) {
@@ -148,7 +146,9 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     } else {
       setIsAudioPlaying(false);
     }
-  };  const handleOptionClick = (optionId: string) => {
+  };
+
+  const handleOptionClick = (optionId: string) => {
     if (isAnswered) return;
 
     setIsAnswered(true);
@@ -186,7 +186,9 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         if (onIncorrectAttempt) onIncorrectAttempt();
       }, 1200);
     }
-  };  const resetGame = () => {
+  };
+
+  const resetGame = () => {
     setIsAnswered(false);
     setSelectedAnswer(null);
     setShowWinScreen(false);
@@ -219,7 +221,9 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (optionId === correctAnswerId) return `${styles.optionButton} ${styles.correct}`;
     if (optionId === selectedAnswer && optionId !== correctAnswerId) return `${styles.optionButton} ${styles.incorrect}`;
     return styles.optionButton;
-  };  return (
+  };
+
+  return (
     <div className={styles.container}>
       {/* Audio element for .m4a files */}
       {shouldShowAudio && audioSrc && (
@@ -298,9 +302,14 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
               onClick={() => handleOptionClick(option.id)}
               disabled={isAnswered}
             >
-              <div className={styles.optionIcon}>{option.icon}</div>
+              {option.imageUrl && (
+                <div className={styles.optionIcon}>
+                  <img src={option.imageUrl} alt={option.text} className={styles.optionImage} />
+                </div>
+              )}
               <span>{option.text}</span>
-            </button>          ))}
+            </button>
+          ))}
         </div>
       </div>
     </div>

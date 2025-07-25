@@ -162,25 +162,17 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
       );
     }    case 'who-am-i': {
       const whoAmIContent = content as import('../../data/standardsData').WhoAmISlide;
-      const correctOption = whoAmIContent.options.find(opt => opt.isCorrect);
-      const adaptedOptions = whoAmIContent.options.map(option => ({
-        id: option.id,
-        text: option.text,
-        icon: option.imageUrl
-          ? <img src={option.imageUrl} alt={option.text} style={{ width: 40, height: 40, objectFit: 'contain' }} />
-          : <span>💡</span>
-      }));
-        return (
+      return (
         <ContentWrapper>
           <WhoAmI
             riddleText={whoAmIContent.riddleText}
             questionText={whoAmIContent.questionText}
-            options={adaptedOptions}
-            correctAnswerId={correctOption?.id || whoAmIContent.options[0]?.id}
+            options={whoAmIContent.options}
             audioSrc={whoAmIContent.audioSrc}
             speakText={whoAmIContent.speakText}
             onComplete={onComplete}
             isLastLesson={isLastLesson}
+            standard={standard}
             // No useFinishButton for WhoAmI - will use "Next" instead
           />
         </ContentWrapper>

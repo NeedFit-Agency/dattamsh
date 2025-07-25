@@ -272,7 +272,7 @@ export const standards: Standard = {
             { id: "option-1", text: "Space Bar Key", isCorrect: true, imageUrl: "/images/spacebar.png" },
             { id: "option-4", text: "Backspace Key", isCorrect: false, imageUrl: "/images/backspace.png" },
           ],
-          audioSrc: "/voice/2.2.m4a",
+          audioSrc: "/voice/4.2.m4a",
           speakText: "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
         },
         {
@@ -288,7 +288,7 @@ export const standards: Standard = {
             { id: "option-3", text: "Mouse", isCorrect: false, imageUrl: "/images/mouse.png" },
             { id: "option-4", text: "Speaker", isCorrect: false, imageUrl: "/images/speaker.png" },
           ],
-          audioSrc: "/voice/2.3.m4a",
+          audioSrc: "/voice/4.3.m4a",
           speakText: "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
         },
         {
@@ -303,7 +303,7 @@ export const standards: Standard = {
             { id: "option-1", text: "Scroll Wheel", isCorrect: true, imageUrl: "/images/scroll-wheel.svg" },
 
           ],
-          audioSrc: "/voice/2.4.m4a",
+          audioSrc: "/voice/4.4.m4a",
           speakText: "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
         }
       ],
@@ -467,11 +467,11 @@ export const standards: Standard = {
           title: "The steps to type and save a file in Notepad are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
           instruction: "Put these steps in the correct order to type and save a file in Notepad!",
           items: [
-            { id: "step-1", content: "Type the content", audioSrc: "/voice/grade2/3.1.m4a" },
-            { id: "step-2", content: "Click on the \"File\" menu at the top", audioSrc: "/voice/grade2/3.2.m4a" },
-            { id: "step-3", content: "Choose \"Save As\"", audioSrc: "/voice/grade2/3.3.m4a" },
-            { id: "step-4", content: "Give your file a name, like \"MyStory\"", audioSrc: "/voice/grade2/3.4.m4a" },
-            { id: "step-5", content: "Click \"Save\"", audioSrc: "/voice/grade2/3.5.m4a" },
+            { id: "step-1", content: "Type the content", audioSrc: "/voice/grade2/3.2.m4a" },
+            { id: "step-2", content: "Click on the \"File\" menu at the top", audioSrc: "/voice/grade2/3.3.m4a" },
+            { id: "step-3", content: "Choose \"Save As\"", audioSrc: "/voice/grade2/3.4.m4a" },
+            { id: "step-4", content: "Give your file a name, like \"MyStory\"", audioSrc: "/voice/grade2/3.5.m4a" },
+            { id: "step-5", content: "Click \"Save\"", audioSrc: "/voice/grade2/3.6.m4a" },
           ],
           correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5"],
           dropZoneCount: 5,
@@ -496,7 +496,7 @@ export const standards: Standard = {
             { id: "option-3", text: "Eraser Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/eraser-tool.png" },
             { id: "option-4", text: "Curve Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/curve-tool.png" },
           ],
-          audioSrc: "/voice/grade2/4.1.m4a",
+          audioSrc: "/voice/grade2/4.2.m4a",
           speakText: "I help you draw shapes like squares, circles and many more. Which tool am I?",
         },
         {
@@ -511,7 +511,7 @@ export const standards: Standard = {
             { id: "option-3", text: "Eraser Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/eraser-tool.png" },
             { id: "option-4", text: "Curve Tool", isCorrect: true, imageUrl: "/images/standard2/chapter4/curve-tool.png" },
           ],
-          audioSrc: "/voice/grade2/4.2.m4a",
+          audioSrc: "/voice/grade2/4.3.m4a",
           speakText: "I am a tool that can draw curved and wavy lines. Which tool am I?",
         },
         {
@@ -526,7 +526,7 @@ export const standards: Standard = {
             { id: "option-3", text: "Eraser Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/eraser-tool.png" },
             { id: "option-4", text: "Curve Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/curve-tool.png" },
           ],
-          audioSrc: "/voice/grade2/4.3.m4a",
+          audioSrc: "/voice/grade2/4.4.m4a",
           speakText: "I have different strokes and styles and can help you apply colour to an image. Which tool am I?",
         },
         {
@@ -541,7 +541,7 @@ export const standards: Standard = {
             { id: "option-3", text: "Eraser Tool", isCorrect: true, imageUrl: "/images/standard2/chapter4/eraser-tool.png" },
             { id: "option-4", text: "Curve Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/curve-tool.png" },
           ],
-          audioSrc: "/voice/grade2/4.4.m4a",
+          audioSrc: "/voice/grade2/4.5.m4a",
           speakText: "I help you fix your mistakes, and you can adjust my size with the help of a scroll. Which tool am I?",
         }
       ],
