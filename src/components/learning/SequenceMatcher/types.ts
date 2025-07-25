@@ -20,5 +20,8 @@ export interface SequenceMatcherProps {
   onComplete?: (() => void) | { href: string };
   onIncorrectAttempt?: () => void;
   isLastLesson?: boolean;
+  audioSrc?: string; // Audio file path for .m4a files
+  speakText?: string; // Fallback text for TTS
+  standard?: string; // The current standard/grade level
   // Potentially props for audio, progress, back button like in BucketMatch
 }

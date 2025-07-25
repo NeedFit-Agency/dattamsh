@@ -41,6 +41,7 @@ interface ContentRendererProps {
   onComplete?: (() => void) | { href: string };
   progress?: number;
   isLastLesson?: boolean; // Whether this is the last lesson in the chapter
+  standard?: string; // The current standard/grade level
 }
 
 const ContentRenderer: React.FC<ContentRendererProps> = ({
@@ -48,7 +49,8 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
   onBack,
   onComplete,
   progress = 0,
-  isLastLesson = false
+  isLastLesson = false,
+  standard
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [prevContentFormat, setPrevContentFormat] = useState<string | null>(null);
@@ -138,6 +140,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             onBack={onBack}
             onComplete={onComplete}
             isLastLesson={isLastLesson}
+            standard={standard}
           />
         </ContentWrapper>
       );
@@ -150,6 +153,8 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             items={sequenceMatchContent.items}
             dropZoneCount={sequenceMatchContent.dropZoneCount}
             correctOrder={sequenceMatchContent.correctOrder}
+            audioSrc={sequenceMatchContent.audioSrc}
+            speakText={sequenceMatchContent.speakText}
             onComplete={onComplete}
             isLastLesson={isLastLesson}
           />
@@ -172,6 +177,8 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             questionText={whoAmIContent.questionText}
             options={adaptedOptions}
             correctAnswerId={correctOption?.id || whoAmIContent.options[0]?.id}
+            audioSrc={whoAmIContent.audioSrc}
+            speakText={whoAmIContent.speakText}
             onComplete={onComplete}
             isLastLesson={isLastLesson}
             // No useFinishButton for WhoAmI - will use "Next" instead
@@ -196,6 +203,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             resetLabel={bucketMatchContent.resetLabel}
             playAgainLabel={bucketMatchContent.playAgainLabel}
             isLastLesson={isLastLesson}
+            standard={standard}
           />
         </ContentWrapper>
       );

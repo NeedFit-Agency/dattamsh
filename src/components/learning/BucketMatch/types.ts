@@ -39,6 +39,7 @@ export interface BucketMatchProps {
   resetLabel?: string;               // Label for the reset button
   playAgainLabel?: string;           // Label for the play again button
   isLastLesson?: boolean;            // Whether this is the last lesson in the chapter
+  standard?: string;                 // The current standard/grade level
 }
 
 // Defines the structure for feedback messages (if needed separately from component state).

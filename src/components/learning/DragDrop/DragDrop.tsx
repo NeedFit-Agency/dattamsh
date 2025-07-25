@@ -39,7 +39,8 @@ export const DragDrop: React.FC<DragDropProps> = ({
   progress = 0,
   onBack,
   onComplete,
-  isLastLesson = false
+  isLastLesson = false,
+  standard
 }) => {
   const [dragItems, setDragItems] = useState<DragItem[]>(
     items.map((item) => ({
@@ -121,9 +122,63 @@ export const DragDrop: React.FC<DragDropProps> = ({
       prevFeedbackShow.current = feedback.show;
     }, [feedback.show, feedback.correct, items, targets]);
 
-  // Audio playing functionality matching BucketMatch
+  // Audio playing functionality for .m4a files
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Check if audio should be shown (only for grades 1, 2, 3)
+  const shouldShowAudio = standard && ['1', '2', '3'].includes(standard);
+
+  // Monitor audio state changes
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      console.log('Audio ended');
+      setIsAudioPlaying(false);
+    };
+
+    const handlePause = () => {
+      console.log('Audio paused');
+      setIsAudioPlaying(false);
+    };
+
+    const handlePlay = () => {
+      console.log('Audio started playing');
+      setIsAudioPlaying(true);
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('play', handlePlay);
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('play', handlePlay);
+    };
+  }, [audioSrc]);
+
   const playInstructionAudio = () => {
-    // Check if speech synthesis is available
+    if (audioRef.current) {
+      if (isAudioPlaying) {
+        audioRef.current.pause();
+        setIsAudioPlaying(false);
+      } else {
+        audioRef.current.play().catch((error) => {
+          console.error('Audio play failed:', error);
+          // Fallback to TTS if audio file fails
+          playTTSFallback();
+        });
+        setIsAudioPlaying(true);
+      }
+    } else {
+      // Fallback to TTS if no audio file
+      playTTSFallback();
+    }
+  };
+
+  const playTTSFallback = () => {
     if (typeof window === 'undefined' || !window.speechSynthesis) {
       console.error('Speech synthesis not available');
       return;
@@ -136,8 +191,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
       return;
     }
 
-    // Try different text sources in order of preference - only instruction or title
-    const textToSpeak =  speakText ;
+    const textToSpeak = speakText;
 
     if (!textToSpeak) {
       return;
@@ -145,7 +199,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
 
     try {
       const utterance = new SpeechSynthesisUtterance(textToSpeak);
-      utterance.rate = 0.5; // Slower for kids
+      utterance.rate = 0.5;
       utterance.pitch = 1.1;
       utterance.volume = 1;
       
@@ -162,7 +216,6 @@ export const DragDrop: React.FC<DragDropProps> = ({
         setIsAudioPlaying(false);
       };
       
-      // Small delay to ensure proper initialization
       setTimeout(() => {
         window.speechSynthesis.speak(utterance);
       }, 100);
@@ -409,6 +462,18 @@ export const DragDrop: React.FC<DragDropProps> = ({
 
   return (
     <div className={styles.container} ref={containerRef}>
+      {/* Audio element for .m4a files */}
+      {shouldShowAudio && audioSrc && (
+        <audio 
+          ref={audioRef} 
+          src={audioSrc}
+          onError={() => {
+            console.error('Audio file failed to load');
+            setIsAudioPlaying(false);
+          }}
+        />
+      )}
+      
       <CongratulationsScreen
         isVisible={showCongratulations}
         onButtonClick={onComplete ? onComplete : handleReset}
@@ -423,19 +488,21 @@ export const DragDrop: React.FC<DragDropProps> = ({
         <p className={styles.instruction}>{instruction}</p>
         <div className={styles.buttonGroup}>
           <div className={styles.leftButtons}>
-            <button
-              className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('Button clicked!');
-                playInstructionAudio();
-              }}
-              type="button"
-            >
-              <FontAwesomeIcon icon={faHeadphones} />
-              <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-            </button>
+            {shouldShowAudio && (
+              <button
+                className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('Button clicked!');
+                  playInstructionAudio();
+                }}
+                type="button"
+              >
+                <FontAwesomeIcon icon={faHeadphones} />
+                <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+              </button>
+            )}
           </div>
           <button
             className={styles.resetButton}
