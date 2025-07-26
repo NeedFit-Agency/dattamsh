@@ -58,28 +58,28 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     bucketName?: string
   }>({ type: null });
   const [showCongratulations, setShowCongratulations] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const instructionAudioRef = useRef<HTMLAudioElement>(null);
 
   // Check if audio should be shown (for grades 1, 2, 3, 4)
   const shouldShowAudio = standard && ['1', '2', '3', '4'].includes(standard);
 
-  // Monitor audio state changes
+  // Monitor instruction audio state changes
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = instructionAudioRef.current;
     if (!audio) return;
 
     const handleEnded = () => {
-      console.log('Audio ended');
+      console.log('Instruction audio ended');
       setIsAudioPlaying(false);
     };
 
     const handlePause = () => {
-      console.log('Audio paused');
+      console.log('Instruction audio paused');
       setIsAudioPlaying(false);
     };
 
     const handlePlay = () => {
-      console.log('Audio started playing');
+      console.log('Instruction audio started playing');
       setIsAudioPlaying(true);
     };
 
@@ -152,11 +152,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       setFeedback({ type: 'correct', bucketId: targetBucket.id });
       targetBucketElement.classList.add(styles.correct);
       
-      // Play success audio if available
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().catch(e => console.log("Audio play failed:", e));
-      }
+      // Note: No separate success audio file available, so we don't play any audio
+      // The instruction audio should only play when the user clicks the "Listen" button
       
       // Remove feedback message after a delay, unless all items are matched
       const updatedItemCount = Object.keys(placedItems).length + 1;
@@ -225,11 +222,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       setFeedback({ type: 'correct' }); // General success feedback
       createConfetti(); // Create confetti celebration
       
-      // Play success audio if available
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().catch(e => console.log("Success audio play failed:", e));
-      }
+      // Note: No separate success audio file available, so we don't play any audio
+      // The instruction audio should only play when the user clicks the "Listen" button
       
       // Clear feedback and show congratulations screen after a short delay
       setTimeout(() => {
@@ -252,19 +246,19 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   };
 
   const playAudio = () => {
-    if (audioRef.current) {
-      audioRef.current.play();
+    if (instructionAudioRef.current) {
+      instructionAudioRef.current.play();
     }
   };
 
   const playInstructionAudio = () => {
-    if (audioRef.current) {
+    if (instructionAudioRef.current) {
       if (isAudioPlaying) {
-        audioRef.current.pause();
+        instructionAudioRef.current.pause();
         setIsAudioPlaying(false);
       } else {
-        audioRef.current.play().catch((error) => {
-          console.error('Audio play failed:', error);
+        instructionAudioRef.current.play().catch((error: any) => {
+          console.error('Instruction audio play failed:', error);
           // Fallback to TTS if audio file fails
           playTTSFallback();
         });
@@ -321,10 +315,10 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
           {title && <h2 className={styles.title}>{title}</h2>}
           {shouldShowAudio && audioSrc && (
             <audio 
-              ref={audioRef} 
+              ref={instructionAudioRef} 
               src={audioSrc}
               onError={() => {
-                console.error('Audio file failed to load');
+                console.error('Instruction audio file failed to load');
                 setIsAudioPlaying(false);
               }}
             />
