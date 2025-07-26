@@ -161,11 +161,7 @@ input, textarea, [contenteditable="true"], .selectable-text {
   --duo-text-light: #ffffff;
   --duo-border: #e5e5e5;
 
-  /* --- Dark Theme (Legendary) --- */
-  --dark-bg: #1a1a1a;
-  --dark-text-medium: #b0b0b0;
-  --dark-footer-border: #333333;
-  --dark-button-outline: #cccccc;
+
 
   /* --- Fonts --- */
   --font-family: 'Nunito', sans-serif; /* Ensure you import Nunito in layout.tsx */

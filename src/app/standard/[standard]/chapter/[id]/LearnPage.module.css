@@ -875,10 +875,7 @@
   }
 }
 
-/* --- Dark Mode Support (if needed in future) --- */
-@media (prefers-color-scheme: dark) {
-  /* Dark mode styles can be added here */
-}
+
 
 /* --- Print Styles --- */
 @media print {
