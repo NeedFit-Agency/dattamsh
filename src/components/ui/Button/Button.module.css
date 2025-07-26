@@ -59,8 +59,8 @@
   
   .white {
     background-color: var(--text-light);
-    color: var(--dark-bg); /* Assuming dark text on white */
-    border: 2px solid var(--text-light); /* For consistent height in dark theme */
+    color: #333; /* Dark text on white */
+    border: 2px solid var(--text-light); /* For consistent height */
     box-shadow: 0 2px 0 #c0c0c0;
     border-bottom-style: none; /* Use box-shadow instead */
   }
@@ -75,14 +75,14 @@
   
   .darkOutline {
     background-color: transparent;
-    color: var(--dark-button-outline);
-    border: 2px solid var(--dark-button-outline);
+    color: #666;
+    border: 2px solid #666;
     border-bottom-style: none; /* No 3D effect */
   }
   .darkOutline:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-light);
-    border-color: var(--text-light);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #333;
+    border-color: #333;
   }
   .darkOutline:active {
       transform: none; /* No press effect */
