@@ -187,7 +187,7 @@ export const standards: Standard = {
           type: "bucket-match",
           format: "bucket-match",
           title: "Match Computer Parts to Their Functions",
-          instruction: "Match each computer part to what it does!",
+          instruction: "Match each computer part to what it does.",
           items: [
             {
               id: "monitor-item",
@@ -229,7 +229,7 @@ export const standards: Standard = {
           resetLabel: "Start Over",
           playAgainLabel: "Play Again",
           audioSrc: "/voice/2.1.m4a",
-          speakText: "Match each computer part to what it does!",
+          speakText: "Match each computer part to what it does.",
         },
       ],
     },
@@ -317,8 +317,8 @@ export const standards: Standard = {
         {
           type: "bucket-match",
           format: "bucket-match",
-          title: "Match each computer part to what it does!",
-          instruction: "Match each computer part to what it does!",
+          title: "Match each computer part to what it does.",
+          instruction: "Match each computer part to what it does.",
           items: [
             {
               id: "scanner",
@@ -385,7 +385,7 @@ export const standards: Standard = {
           resetLabel: "Start Over",
           playAgainLabel: "Play Again",
           audioSrc: "/voice/grade2/1.1.m4a",
-          speakText: "Match each computer part to what it does!",
+          speakText: "Match each computer part to what it does.",
         },
       ],
     },
