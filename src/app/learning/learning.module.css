@@ -6,7 +6,6 @@
   overflow: hidden;
   min-height: calc(100vh - 3rem); /* Adjusted to match container padding */
   background-color: #f5f4ed;
-  padding-bottom: 90px; /* or whatever your footer height is + a little extra */
 }
 
 .backButton {

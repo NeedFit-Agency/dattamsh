@@ -8,8 +8,8 @@
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
+    min-height: 100vh;
+    height: auto;
     left: 0;
     top: 30px;
     position: absolute;
@@ -22,7 +22,7 @@
     background-repeat: no-repeat;
     color: #5c4b40;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: visible;
     animation: fadeInBackground 0.5s ease-in;
 }
 
@@ -157,7 +157,8 @@
     padding: clamp(15px, 2vw, 30px) clamp(20px, 3vw, 40px);
     width: 95%;
     max-width: min(90vw, 1200px);
-    max-height: calc(90vh - 80px);
+    min-height: calc(90vh - 80px);
+    height: auto;
     text-align: center;
     position: relative;
     margin: 0 auto;
@@ -166,7 +167,7 @@
     box-sizing: border-box;
     backdrop-filter: blur(5px);
     border: 3px solid #bbddff;
-    overflow: auto;
+    overflow: visible;
     display: flex;
     flex-direction: column;
     animation: cardEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -393,6 +394,19 @@
 }
 
 @media (max-width: 480px) {
+    .container {
+        min-height: 100vh;
+        height: auto;
+        padding: 0.25rem;
+        top: 15px;
+    }
+    
+    .gameCard {
+        min-height: calc(98vh - 30px);
+        height: auto;
+        padding: clamp(10px, 1.5vh, 20px) clamp(10px, 1.5vw, 20px);
+    }
+    
     .title, .chooseHeading, .promptQuestion {
         font-size: 20px;
         margin-top: 8px;
@@ -885,6 +899,19 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    .container {
+        min-height: 100vh;
+        height: auto;
+        padding: 0.5rem;
+        top: 20px;
+    }
+    
+    .gameCard {
+        min-height: calc(95vh - 40px);
+        height: auto;
+        padding: clamp(15px, 2vh, 25px) clamp(15px, 2vw, 25px);
+    }
+    
     .optionsContainer { 
         grid-template-columns: 1fr;
         gap: clamp(20px, 3vh, 28px);
@@ -928,7 +955,8 @@
 
 @media (max-height: 700px) {
     .gameCard {
-        max-height: calc(95vh - 60px);
+        min-height: calc(95vh - 60px);
+        height: auto;
         padding: clamp(10px, 1.5vh, 20px) clamp(15px, 2vw, 30px);
     }
     
@@ -962,4 +990,28 @@
     max-height: clamp(80px, 12vh, 120px);
     object-fit: contain;
     animation: mascotBounce 2.5s infinite cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Extra small screen adjustments */
+@media (max-width: 360px) {
+    .container {
+        min-height: 100vh;
+        height: auto;
+        padding: 0.15rem;
+        top: 10px;
+    }
+    
+    .gameCard {
+        min-height: calc(99vh - 20px);
+        height: auto;
+        padding: clamp(8px, 1vh, 15px) clamp(8px, 1vw, 15px);
+    }
+    
+    .title {
+        font-size: 18px;
+    }
+    
+    .promptText {
+        font-size: 16px;
+    }
 }

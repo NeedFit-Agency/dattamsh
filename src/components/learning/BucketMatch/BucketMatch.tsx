@@ -310,20 +310,16 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         tryAgainText="Play Again"
       />
 
-      {onBack && (
-        <div className={styles.header}>
-          {title && <h2 className={styles.title}>{title}</h2>}
-          {shouldShowAudio && audioSrc && (
-            <audio 
-              ref={instructionAudioRef} 
-              src={audioSrc}
-              onError={() => {
-                console.error('Instruction audio file failed to load');
-                setIsAudioPlaying(false);
-              }}
-            />
-          )}
-        </div>
+      {/* Audio element for instruction playback */}
+      {shouldShowAudio && audioSrc && (
+        <audio 
+          ref={instructionAudioRef} 
+          src={audioSrc}
+          onError={() => {
+            console.error('Instruction audio file failed to load');
+            setIsAudioPlaying(false);
+          }}
+        />
       )}
       {/* {typeof progress !== 'undefined' && (
         // <div className={styles.progressContainer}>
@@ -337,24 +333,30 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       )} */}
       
       <div className={styles.worksheetCard}>
-        {instruction && (
-          <div className={styles.instructionBox}>
-            <p className={styles.instruction}>{instruction}</p>
-            <div className={styles.buttonGroup}>
-              <div className={styles.leftButtons}>
-                {shouldShowAudio && (
-                  <button
-                    className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-                    onClick={playInstructionAudio}
-                  >
-                    <FontAwesomeIcon icon={faHeadphones} />
-                    <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-                  </button>
-                )}
-              </div>
+        {/* Instruction Box with Title and Audio Button */}
+        <div className={styles.instructionBox}>
+          <h2 className={styles.title}>{title}</h2>
+          <div className={styles.buttonGroup}>
+            <div className={styles.leftButtons}>
+              {shouldShowAudio && (
+                <button
+                  className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+                  onClick={playInstructionAudio}
+                >
+                  <FontAwesomeIcon icon={faHeadphones} />
+                  <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+                </button>
+              )}
             </div>
+            <button
+              className={styles.resetButton}
+              onClick={handleReset}
+            >
+              <FontAwesomeIcon icon={faUndo} />
+              <span>Reset</span>
+            </button>
           </div>
-        )}
+        </div>
         <div className={styles.matchArea}>
           {/* Fruits Section - Top */}
           <div className={styles.fruitsContainer}>
@@ -381,17 +383,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
             ))}
           </div>
           
-          {(matchedItemsCount > 0 || allItemsMatched) && !showCongratulations && (
-            <button
-              id="reset-button"
-              className={styles.resetButton}
-              onClick={handleReset}
-            >
-              <FontAwesomeIcon icon={faUndo} />
-              <span>Reset</span>
-            </button>
-          )}
-
           {/* Buckets Section - Bottom */}
           <div className={styles.basketsContainer}>
             {buckets.map((bucket) => {
