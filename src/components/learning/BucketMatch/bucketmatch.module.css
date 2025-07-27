@@ -1,154 +1,78 @@
-/* ==========================================================================
-   BucketMatch Component Styles
-   High-fidelity drag-and-drop matching game interface
-   ========================================================================== */
-
-/* ==========================================================================
-   CSS Variables & Imports
-   ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-
-/* ==========================================================================
-   Layout & Container Styles
-   ========================================================================== */
+/* Main Container */
 .container {
+  min-height: 100dvh;
+  background: linear-gradient(135deg, #87CEEB 0%, #98D8E8 100%);
+  background-image: 
+    url('/images/background/image-1.png'),
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100vw;
-  min-height: 100vh;
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: var(--font-family, 'Nunito', sans-serif);
-  background-image: url('/images/background/image-1.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: var(--text-color, #333);
-  box-sizing: border-box;
-}
-
-/* ==========================================================================
-   Header & Navigation Styles
-   ========================================================================== */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1400px;
-  margin-bottom: 20px;
-}
-
-.chooseBackButton {
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid #bbddff;
-  color: var(--text-medium, #666);
-  cursor: pointer;
-  padding: 10px 16px;
-  border-radius: 12px;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1.25em;
   position: relative;
-  z-index: 2;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden;
 }
 
-.chooseBackButton:hover {
-  background-color: #f0f7ff;
-  color: var(--text-dark, #222);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+/* Header Section */
+.header {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.chooseBackButton:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.backText {
-  font-size: 1em;
-  font-weight: 600;
-  margin-left: 2px;
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .backText { 
-    display: inline; 
-  }
-}
-
-/* ==========================================================================
-   Typography & Title Styles
-   ========================================================================== */
-.title,
-.gameTitle,
-.mainTitle {
+.title {
   font-size: 28px;
   font-weight: 700;
   color: var(--text-dark, #343a40);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   text-align: center;
-  font-family: var(--font-family, 'Nunito', sans-serif);
 }
 
-/* ==========================================================================
-   Main Card & Worksheet Styles
-   ========================================================================== */
+/* Main Worksheet Card */
 .worksheetCard {
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  padding: 30px 40px;
-  width: 95%;
-  max-width: 1400px;
-  text-align: center;
-  margin: 20px auto;
-  backdrop-filter: blur(5px);
-  border: 2px solid #bbddff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ==========================================================================
-   Instruction & Audio Controls
-   ========================================================================== */
+/* Instruction Box */
 .instructionBox {
   background-color: #f8f9fa;
   border: 1px solid #bbddff;
   border-radius: 12px;
-  padding: 16px;
+  padding: 20px;
   margin-top: 20px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1400px;
 }
 
 .instruction {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 18px;
   color: var(--text-dark, #343a40);
-  margin-bottom: 16px;
   text-align: center;
+  margin-bottom: 12px;
 }
 
 .buttonGroup {
   display: flex;
   align-items: center;
   gap: 12px;
-  justify-content: space-between;
-  margin-top: 12px;
+  justify-content: center;
+  width: 100%;
 }
 
 .leftButtons {
@@ -157,6 +81,7 @@
   gap: 12px;
 }
 
+/* Audio Button */
 .audioButton {
   display: flex;
   align-items: center;
@@ -181,599 +106,443 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.audioButtonPlaying {
-  background-color: var(--success-green, #28a745);
-}
-
 .audioButton:active {
   transform: translateY(1px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.audioButtonIcon {
-  width: 18px;
-  height: 18px;
-  color: white;
+.audioButtonPlaying {
+  background-color: var(--success-green, #28a745);
 }
 
-.audioButtonIcon svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
+.audioButtonPlaying:hover {
+  background-color: #218838;
 }
 
-/* ==========================================================================
-   Progress Bar Styles
-   ========================================================================== */
-.progressContainer {
-  width: 100%;
-  max-width: 1400px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 16px;
-  padding: 10px 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
-.progressBar {
-  flex-grow: 1;
-  height: 12px;
-  background-color: #e0e0e0;
-  border-radius: 6px;
-  overflow: hidden;
-  margin-right: 15px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.progressFill {
-  height: 100%;
-  background-color: var(--primary, #1aa2ff);
-  transition: width 0.5s ease;
-  border-radius: 6px;
-  background-image: linear-gradient(45deg, 
-                    rgba(255, 255, 255, 0.15) 25%, 
-                    transparent 25%, 
-                    transparent 50%, 
-                    rgba(255, 255, 255, 0.15) 50%, 
-                    rgba(255, 255, 255, 0.15) 75%, 
-                    transparent 75%, 
-                    transparent);
-  background-size: 20px 20px;
-  animation: progressStripes 1s linear infinite;
-}
-
-.progressText {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--primary, #1aa2ff);
-}
-
-/* ==========================================================================
-   Game Area Layout
-   ========================================================================== */
+/* Match Area */
 .matchArea {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  margin-bottom: 24px;
-  padding: 20px;
-  align-items: center;
-  width: 100%;
-  max-width: 1300px;
+  gap: 20px;
 }
 
-/* ==========================================================================
-   Draggable Items Container
-   ========================================================================== */
+/* Fruits Container (Top Row - Computer Parts) */
 .fruitsContainer {
-  background-color: rgba(248, 249, 250, 0.9);
-  border: 2px solid #bbddff;
-  border-radius: 20px;
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  width: 100%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(3px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .fruitItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  margin: 10px;
+  gap: 12px;
+  transition: all 0.3s ease;
 }
 
 .fruitItem.placed {
-  opacity: 0;
-  visibility: hidden;
+  opacity: 0.6;
+  transform: scale(0.95);
 }
 
-.colorName {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-top: 15px;
-  color: #343a40;
-}
-
-/* ==========================================================================
-   Draggable Item Styles
-   ========================================================================== */
 .fruitDraggable {
-  width: 180px;
-  height: 180px;
-  cursor: grab;
-  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
+  width: 140px;
+  height: 140px;
+  background: white;
   border: 2px solid #bbddff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(187, 221, 255, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
 .fruitDraggable:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(187, 221, 255, 0.3);
+  border-color: #1aa2ff;
 }
 
-.fruitDraggable.dragging {
+.fruitDraggable:active {
   cursor: grabbing;
-  opacity: 0.8;
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
 }
 
-/* ==========================================================================
-   Buckets & Drop Zones
-   ========================================================================== */
-.basketsContainer {
+.fruitDraggable img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.colorName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  margin: 0;
+}
+
+/* Reset Button */
+.resetButton {
   display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--warning, #ffc107);
+  color: #212529;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  min-width: 120px;
+  height: 44px;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 40px;
-  width: 100%;
-  padding: 30px;
-  background-color: rgba(248, 249, 250, 0.9);
-  border: 2px solid #bbddff;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(3px);
+}
+
+.resetButton:hover {
+  background-color: #e0a800;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Buckets Container (Bottom Section) */
+.basketsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 
 .bucketContainer {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 25px;
-  max-width: 550px;
-  min-width: 450px;
-  padding: 25px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
-}
-
-.bucketContent {
-  display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.bucketLabel {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #343a40;
-  margin: 0;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 12px;
 }
 
 .basketDropzone {
-  width: 140px !important;
-  height: 140px !important;
-  min-width: 140px !important;
-  min-height: 140px !important;
-  max-width: 140px !important;
-  max-height: 140px !important;
+  width: 160px;
+  height: 160px;
+  background: white;
+  border: 2px dashed #adb5bd;
+  border-radius: 16px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  position: relative;
-  border: 3px dashed #adb5bd;
-  border-radius: 15px;
+  justify-content: center;
+  cursor: pointer;
   transition: all 0.3s ease;
-  background-color: transparent;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  flex-shrink: 0;
-  box-sizing: border-box;
-}
-
-.bucketInstructionText {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.8rem;
-  color: #666;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 4px 8px;
-  border-radius: 8px;
-  z-index: 3;
-  pointer-events: none;
-  font-weight: 600;
-}
-
-.basketDropzone .droppedFruit {
-  width: 80px;
-  height: 80px;
-  z-index: 2;
   position: relative;
-  top: -15px;
-  cursor: default;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: dropIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
 }
 
-.bucketDescription {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-
-.bucketDescriptionText {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: #333;
-  margin: 0;
-  word-wrap: break-word;
-  hyphens: auto;
-  max-width: 320px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  min-height: 2.8rem;
-}
-
-/* ==========================================================================
-   Drag & Drop States
-   ========================================================================== */
-.basketDropzone.dragOver {
-  background-color: rgba(26, 162, 255, 0.15);
+.basketDropzone:hover {
   border-color: #1aa2ff;
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  background: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(26, 162, 255, 0.15);
 }
 
 .basketDropzone.correct {
-  background-color: #bbddff;
-  border-color: var(--success-color, #4CAF50);
+  border-color: #28a745;
   border-style: solid;
-  border-width: 3px;
-  box-shadow: 0 0 20px rgba(76, 175, 80, 0.7);
-  animation: correctPulse 1.5s infinite alternate;
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  animation: correctPulse 0.6s ease-in-out;
 }
 
 .basketDropzone.incorrect {
-  animation: shake 0.5s ease;
-  border-color: var(--error-color, #f44336);
+  border-color: #dc3545;
   border-style: solid;
-  border-width: 3px;
-  box-shadow: 0 0 20px rgba(244, 67, 54, 0.7);
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  animation: shake 0.6s ease-in-out;
 }
 
-/* ==========================================================================
-   TTS & Audio Controls for Buckets
-   ========================================================================== */
+.bucketInstructionText {
+  font-size: 1rem;
+  color: #6c757d;
+  font-weight: 500;
+  text-align: center;
+}
+
+.droppedFruit {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.droppedFruit img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.bucketLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
 .bucketTTSContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
   margin-top: 8px;
-  margin-bottom: 4px;
 }
 
+.bucketAudioButton,
 .bucketTTS {
-  background: transparent;
+  background: #5cb2e7;
   border: none;
-  padding: 4px;
-  border-radius: 50%;
+  border-radius: 8px;
+  padding: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  color: white;
+  box-shadow: 0 2px 6px rgba(108, 92, 231, 0.3);
+  min-width: 24px;
+  min-height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.bucketAudioButton:hover,
 .bucketTTS:hover {
-  background: rgba(76, 175, 80, 0.1);
+  background: #5a4fcf;
   transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(108, 92, 231, 0.4);
 }
 
 .bucketHeadphones {
-  width: 20px;
-  height: 20px;
-  color: #4CAF50;
-  transition: color 0.3s ease;
-}
-
-.bucketHeadphones:hover {
-  color: #45a049;
-}
-
-.bucketHeadphones svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
-}
-
-.bucketAudioButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background-color: #ff9800;
+  font-size: 0.9rem;
   color: white;
 }
 
-.bucketAudioButton:hover {
-  background-color: #f57c00;
-  transform: scale(1.1);
+/* Drag and Drop States */
+.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg) scale(1.1);
+  z-index: 1000;
 }
 
-.bucketAudioButton:active {
-  transform: scale(0.95);
+.dragOver {
+  border-color: #1aa2ff !important;
+  border-style: solid !important;
+  background: #e3f2fd !important;
+  transform: scale(1.05);
 }
 
-.bucketAudioButton svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* ==========================================================================
-   Feedback & Reset Controls
-   ========================================================================== */
-.feedbackMessage {
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-height: 50px;
-  max-width: 90vw;
-  width: auto;
-  font-size: 1.2rem;
-  font-weight: 700;
-  transition: none;
-  padding: 16px 24px;
-  border-radius: 15px;
-  font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  line-height: 1.3;
-  z-index: 999;
-  margin: 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  opacity: 1;
-  visibility: visible;
-  /* Prevent screen reader from announcing this element */
-  -webkit-speak: none;
-  speak: none;
-  /* Additional accessibility attributes */
-  aria-hidden: true;
-}
-
-.feedbackMessage.correctText {
-  color: #218838;
-  background-color: #e6f9ed;
-  border: 3px solid var(--success-color, #4CAF50);
-  animation: smoothPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
-}
-
-.feedbackMessage.incorrectText {
-  color: #c62828;
-  background-color: #ffebee;
-  border: 3px solid #ef5350;
-  animation: smoothPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  box-shadow: 0 8px 32px rgba(239, 83, 80, 0.3);
-}
-
-.resetButton {
-  background-color: #fff;
-  color: #3b82f6;
-  border: 2px solid #3b82f6;
-  border-radius: 12px;
-  padding: 15px 35px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: all 0.2s;
-  box-shadow: 0 4px 0 #2563eb;
-}
-
-.resetButton:hover {
-  background-color: #e5eeff;
-  color: #2563eb;
-  border-color: #2563eb;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 0 #2563eb;
-}
-
-.resetButton:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #2563eb;
-}
-
-/* ==========================================================================
-   Animations
-   ========================================================================== */
-@keyframes dropIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Animations */
+@keyframes correctPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 @keyframes shake {
-  0%, 100% { 
-    transform: translateX(0); 
-  }
-  20% { 
-    transform: translateX(-10px); 
-  }
-  40% { 
-    transform: translateX(10px); 
-  }
-  60% { 
-    transform: translateX(-7px); 
-  }
-  80% { 
-    transform: translateX(7px); 
-  }
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }
 
 .shake {
   animation: shake 0.6s ease-in-out;
 }
 
-@keyframes correctPulse {
-  0% {
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
-  }
+/* Feedback Message */
+.feedbackMessage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 16px;
+  padding: 24px 32px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: feedbackSlideIn 0.3s ease-out;
 }
 
-@keyframes popIn {
-  0% {
+.correctText {
+  color: #28a745;
+  border: 3px solid #28a745;
+}
+
+.incorrectText {
+  color: #dc3545;
+  border: 3px solid #dc3545;
+}
+
+@keyframes feedbackSlideIn {
+  from {
+    opacity: 0;
     transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0;
   }
-  50% {
-    transform: translate(-50%, -50%) scale(1.05);
-    opacity: 0.8;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
+  to {
     opacity: 1;
-  }
-}
-
-@keyframes smoothPopIn {
-  0% {
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: 0;
-  }
-  100% {
     transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
   }
 }
 
-@keyframes progressStripes {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 20px 0;
-  }
-}
-
-/* ==========================================================================
-   Confetti Animation
-   ========================================================================== */
+/* Confetti Animation */
 .confetti {
   position: fixed;
-  top: -10px;
   width: 10px;
   height: 10px;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 1000;
-  animation-name: fall;
-  animation-timing-function: linear;
-  animation-iteration-count: 1;
+  background: #ff6b35;
+  animation: confettiFall 5s linear forwards;
+  z-index: 999;
 }
 
-@keyframes fall {
+@keyframes confettiFall {
   0% {
-    transform: translateY(0vh) rotateZ(0deg);
+    transform: translateY(-100vh) rotate(0deg);
     opacity: 1;
   }
   100% {
-    transform: translateY(105vh) rotateZ(720deg);
+    transform: translateY(100vh) rotate(720deg);
     opacity: 0;
   }
 }
 
-/* ==========================================================================
-   Responsive Design
-   ========================================================================== */
+/* Back Button */
+.chooseBackButton {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
 
-/* Tablet & Small Desktop */
+.chooseBackButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(108, 117, 125, 0.4);
+}
+
+.backText {
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .worksheetCard {
+    padding: 24px;
+    margin: 8px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .fruitsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+  }
+  
+  .basketsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+  }
+  
+  .fruitDraggable {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .basketDropzone {
+    width: 140px;
+    height: 140px;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
-    padding: 15px;
+    padding: 4px;
+    padding-top: 60px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    top: 0;
   }
   
   .worksheetCard {
-    padding: 20px;
-    max-width: 95%;
+    padding: 16px;
   }
   
-  .matchArea {
-    gap: 30px;
-    padding: 15px;
-  }
-  
-  .fruitsContainer,
-  .basketsContainer {
-    padding: 15px;
-    gap: 20px;
-  }
-  
-  .gameTitle,
-  .mainTitle,
   .title {
-    font-size: 24px;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  
+  .instruction {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  
+  .instructionBox {
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .buttonGroup {
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .leftButtons {
+    width: auto;
+  }
+  
+  .audioButton,
+  .resetButton {
+    width: auto;
+    min-width: 100px;
+    height: 40px;
+    font-size: 13px;
+    padding: 8px 12px;
+    touch-action: manipulation;
+  }
+  
+  .fruitsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .basketsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
   
   .fruitDraggable {
@@ -781,129 +550,180 @@
     height: 100px;
   }
   
-  .bucketContainer {
-    flex-direction: column;
-    align-items: center;
-    max-width: 400px;
-    min-width: 350px;
-    padding: 20px;
+  .basketDropzone {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .colorName,
+  .bucketLabel {
+    font-size: 0.9rem;
+  }
+  
+  .feedbackMessage {
+    padding: 20px 24px;
+    font-size: 1rem;
+    margin: 0 20px;
+  }
+  
+  .bucketAudioButton,
+  .bucketTTS {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 6px;
+  }
+  
+  .bucketHeadphones {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fruitsContainer {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .basketsContainer {
+    grid-template-columns: 1fr;
     gap: 20px;
   }
   
-  .bucketContent {
-    order: 1;
-  }
-  
-  .bucketDescription {
-    order: 2;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .bucketDescriptionText {
-    text-align: center;
-    max-width: 100%;
-    min-height: 2.4rem;
+  .fruitDraggable {
+    width: 140px;
+    height: 140px;
   }
   
   .basketDropzone {
-    width: 120px !important;
-    height: 120px !important;
-    min-width: 120px !important;
-    min-height: 120px !important;
-    max-width: 120px !important;
-    max-height: 120px !important;
+    width: 160px;
+    height: 160px;
   }
   
-  .basketDropzone .droppedFruit {
-    width: 70px;
-    height: 70px;
-    top: -12px;
+  .instructionBox {
+    padding: 16px;
   }
   
-  .instructionTTS {
-    font-size: 12px;
-    padding: 6px 12px;
+  .buttonGroup {
+    flex-direction: column;
+    gap: 12px;
   }
   
-  .instructionHeadphones {
-    width: 16px;
-    height: 16px;
-  }
-  
-  .bucketHeadphones {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .fruitsContainer,
-  .basketsContainer {
+  .leftButtons {
     justify-content: center;
   }
   
-  .fruitDraggable {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .bucketContainer {
-    max-width: 320px;
-    min-width: 280px;
-    padding: 15px;
-    gap: 15px;
-  }
-  
-  .bucketDescriptionText {
-    font-size: 0.85rem;
-    line-height: 1.3;
-    min-height: 2.2rem;
-  }
-  
-  .basketDropzone {
-    width: 100px !important;
-    height: 100px !important;
-    min-width: 100px !important;
-    min-height: 100px !important;
-    max-width: 100px !important;
-    max-height: 100px !important;
-  }
-  
-  .basketDropzone .droppedFruit {
-    width: 60px;
-    height: 60px;
-    top: -10px;
-  }
-  
-  .header {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .mainTitle,
-  .gameTitle,
-  .title {
-    font-size: 20px;
-    margin-bottom: 12px;
-  }
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-  .instructionTTS {
-    font-size: 11px;
-    padding: 5px 10px;
-  }
-  
-  .instructionHeadphones {
-    width: 14px;
-    height: 14px;
+  .bucketAudioButton,
+  .bucketTTS {
+    min-width: 18px;
+    min-height: 18px;
+    padding: 4px;
   }
   
   .bucketHeadphones {
-    width: 16px;
-    height: 16px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.fruitDraggable:focus,
+.basketDropzone:focus,
+.audioButton:focus,
+.resetButton:focus,
+.chooseBackButton:focus {
+  outline: 3px solid #1aa2ff;
+  outline-offset: 2px;
+}
+
+/* Reduced motion support for animations */
+@media (prefers-reduced-motion: reduce) {
+  .fruitDraggable,
+  .basketDropzone,
+  .audioButton,
+  .resetButton,
+  .chooseBackButton,
+  .feedbackMessage,
+  .confetti {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .worksheetCard {
+    border: 2px solid #000;
+  }
+  
+  .fruitDraggable,
+  .basketDropzone {
+    border-width: 2px;
+  }
+  
+  .audioButton,
+  .resetButton,
+  .chooseBackButton {
+    border: 2px solid #000;
+  }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .fruitDraggable {
+    cursor: grab;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .fruitDraggable:active {
+    cursor: grabbing;
+    transform: scale(0.98);
+  }
+
+  .bucketAudioButton,
+  .bucketTTS {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .bucketAudioButton:active,
+  .bucketTTS:active {
+    transform: scale(0.95);
+  }
+
+  .audioButton,
+  .resetButton {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .audioButton:active,
+  .resetButton:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Prevent text selection during touch */
+.fruitDraggable,
+.bucketAudioButton,
+.bucketTTS,
+.audioButton,
+.resetButton {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Prevent zoom on double tap for iOS */
+@media (max-width: 768px) {
+  .fruitDraggable,
+  .bucketAudioButton,
+  .bucketTTS,
+  .audioButton,
+  .resetButton {
+    touch-action: manipulation;
   }
 }

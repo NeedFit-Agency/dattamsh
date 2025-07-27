@@ -347,12 +347,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         <div className={styles.promptWrapper}>
           <div className={styles.promptContainer}>
             <p className={styles.promptText}>{riddleText}</p>
-            <div className={styles.questionContainer}>
-              <div className={styles.questionRow}>
-              </div>
-            </div>
-          </div>
-          {shouldShowAudio && (
+            {shouldShowAudio && (
             <button
               className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
               onClick={playQuestionAudio}
@@ -363,6 +358,12 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
               <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
             </button>
           )}
+            <div className={styles.questionContainer}>
+              <div className={styles.questionRow}>
+              </div>
+            </div>
+          </div>
+
         </div>
         <div className={styles.optionsContainer}>
           {options.map((option) => (
