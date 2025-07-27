@@ -8,6 +8,7 @@ import { faHeadphones, faUndo } from '@fortawesome/free-solid-svg-icons';
 
 const SequenceMatcher: React.FC<SequenceMatcherProps> = ({ 
   title = 'Arrange the Steps in the Correct Order!',
+  instruction,
   items = [],
   dropZoneCount = 4,
   correctOrder = [],
@@ -344,7 +345,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
       return;
     }
 
-    const textToSpeak = title;
+    const textToSpeak = instruction || speakText || title;
 
     if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
       try {
@@ -402,8 +403,8 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             <button
               className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
               onClick={playQuestionAudio}
-              aria-label={isAudioPlaying ? "Stop reading" : "Listen to the question"}
-              title={isAudioPlaying ? "Stop reading" : "Listen to the question"}
+              aria-label={isAudioPlaying ? "Stop reading" : "Listen to the instruction"}
+              title={isAudioPlaying ? "Stop reading" : "Listen to the instruction"}
             >
               <FontAwesomeIcon icon={faHeadphones} />
               <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
