@@ -1,10 +1,7 @@
 'use client';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faChevronRight, 
-  faLock, 
   faLaptopCode, 
   faRobot, 
   faMicrochip, 
@@ -101,8 +98,22 @@ export default function HomePage() {
     { icon: faCode, style: { bottom: '25%', right: '5%' } },
   ];
 
+  // Accent colors for cards (cycle through for variety)
+  const accentColors = [
+    '#4FC3F7', // Sky Blue
+    '#FFD54F', // Sunny Yellow
+    '#81C784', // Mint Green
+    '#FF8A65', // Coral Orange
+    '#BA68C8', // Lavender
+    '#EF5350', // Tomato Red
+    '#FFB74D', // Tangerine
+    '#4DD0E1', // Aqua
+  ];
+
   return (
     <div className={styles.pageWrapper}>
+      {/* Mascot or background illustration */}
+      <img src="/images/mascot.png" alt="" className={styles.pageMascot} aria-hidden="true" />
       <main className={styles.main}>
         {/* Add decorative icons */}
         {decorativeIcons.map((item, index) => (
@@ -118,65 +129,36 @@ export default function HomePage() {
           </motion.div>
         ))}
         
-        <div className={styles.standardsContainer}>
-          <motion.div 
-            className={styles.sectionHeader}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <h3>Choose Your Learning Path</h3>
-            <p>Select your grade level and start exploring the world of technology!</p>
-          </motion.div>
-          
-          <div className={styles.standardList}>
-            {Standards.map((Standard, index) => (
-              <motion.div 
-                key={Standard.id} 
-                className={styles.standardCard}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-              >
-                <Link 
-                  href={Standard.status === 'active' ? `/standard/${Standard.id}/chapter/1` : '#'} 
-                  className={`${styles.standardLink} ${Standard.status === 'locked' ? styles.locked : ''}`}
-                >
-                  <div className={styles.standardContent}>
-                    <div className={styles.standardHeader}>
-                      <FontAwesomeIcon icon={Standard.icon} className={styles.standardIcon} />
-                      <div className={styles.standardInfo}>
-                        <span className={styles.subtitle}>{Standard.subtitle}</span>
-                        <h2 className={styles.title}>{Standard.title}</h2>
-                      </div>
-                      {Standard.status === 'locked' ? (
-                        <FontAwesomeIcon icon={faLock} className={styles.lockIcon} />
-                      ) : (
-                        <FontAwesomeIcon icon={faChevronRight} className={styles.arrowIcon} />
-                      )}
-                    </div>
-                    
-                    <p className={styles.standardDescription}>{Standard.description}</p>
-                    
-                    <div className={styles.standardDetails}>
-                      <div className={styles.progress}>
-                        <div className={styles.progressBar}>
-                          <div 
-                            className={styles.progressFill} 
-                            style={{ width: Standard.status === 'active' ? '0%' : '0%' }}
-                          />
-                        </div>
-                      </div>
-                      <span className={styles.units}>{Standard.units}</span>
-                      {Standard.message && (
-                        <p className={styles.message}>{Standard.message}</p>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+        <div className={styles.sectionHeader}>
+          <h1 className={styles.mainHeading}>
+            Choose Your Standard
+          </h1>
+          <p className={styles.headingSubtitle}>
+            Select your learning level and begin your computer education journey
+          </p>
+        </div>
+        <div className={styles.ticketGrid}>
+          {Standards.map((Standard, index) => (
+            <a
+              key={Standard.id}
+              href={Standard.status === 'active' ? `/standard/${Standard.id}/chapter/1` : '#'}
+              className={styles.ticketCard}
+              style={{
+                '--accent': accentColors[index % accentColors.length],
+              } as React.CSSProperties}
+              tabIndex={Standard.status === 'active' ? 0 : -1}
+              aria-disabled={Standard.status !== 'active'}
+              role="button"
+            >
+              <div className={styles.ticketIconWrapper}>
+                <span className={styles.ticketIconBg} />
+                <span className={styles.ticketIcon}>
+                  <FontAwesomeIcon icon={Standard.icon} />
+                </span>
+              </div>
+              <div className={styles.ticketLabel}>{Standard.title}</div>
+            </a>
+          ))}
         </div>
       </main>
     </div>
