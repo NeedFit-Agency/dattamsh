@@ -15,6 +15,7 @@ export interface DropZoneTarget {
 
 export interface SequenceMatcherProps {
   title?: string;
+  instruction?: string; // Instruction text for the voice button
   items?: DraggableItem[]; // Made optional with default
   dropZoneCount?: number; // Made optional with default
   correctOrder?: string[]; // Made optional with default

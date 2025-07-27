@@ -48,6 +48,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isTitleAudioPlaying, setIsTitleAudioPlaying] = useState(false);
   const [showWinScreen, setShowWinScreen] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [winScreenMessage, setWinScreenMessage] = useState("YOU DID IT!");
@@ -58,6 +59,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   const correctSoundRef = useRef<HTMLAudioElement>(null);
   const incorrectSoundRef = useRef<HTMLAudioElement>(null);
   const questionAudioRef = useRef<HTMLAudioElement>(null);
+  const titleAudioRef = useRef<HTMLAudioElement>(null);
 
   // Find the correct answer ID
   const correctAnswerId = options.find(option => option.isCorrect)?.id || '';
@@ -96,6 +98,37 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     };
   }, [audioSrc]);
 
+  // Monitor title audio state changes
+  useEffect(() => {
+    const audio = titleAudioRef.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      console.log('Title audio ended');
+      setIsTitleAudioPlaying(false);
+    };
+
+    const handlePause = () => {
+      console.log('Title audio paused');
+      setIsTitleAudioPlaying(false);
+    };
+
+    const handlePlay = () => {
+      console.log('Title audio started playing');
+      setIsTitleAudioPlaying(true);
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('play', handlePlay);
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('play', handlePlay);
+    };
+  }, []);
+
   const playQuestionAudio = () => {
     if (questionAudioRef.current) {
       if (isAudioPlaying) {
@@ -112,6 +145,20 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     } else {
       // Fallback to TTS if no audio file
       playTTSFallback();
+    }
+  };
+
+  const playTitleAudio = () => {
+    if (titleAudioRef.current) {
+      if (isTitleAudioPlaying) {
+        titleAudioRef.current.pause();
+        setIsTitleAudioPlaying(false);
+      } else {
+        titleAudioRef.current.play().catch((error) => {
+          console.error('Title audio play failed:', error);
+        });
+        setIsTitleAudioPlaying(true);
+      }
     }
   };
 
@@ -237,6 +284,18 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         />
       )}
       
+      {/* Audio element for title */}
+      {shouldShowAudio && (
+        <audio 
+          ref={titleAudioRef} 
+          src="/voice/4.1.m4a"
+          onError={() => {
+            console.error('Title audio file failed to load');
+            setIsTitleAudioPlaying(false);
+          }}
+        />
+      )}
+      
       <CongratulationsScreen
         isVisible={showCongratulations}
         onButtonClick={onComplete ? onComplete : handleReset}
@@ -252,6 +311,17 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
 
         <div className={styles.titleContainer}>
           <h3 className={styles.title}>Choose the correct option</h3>
+          {shouldShowAudio && (
+            <button
+              className={`${styles.titleAudioButton} ${isTitleAudioPlaying ? styles.titleAudioButtonPlaying : ''}`}
+              onClick={playTitleAudio}
+              aria-label={isTitleAudioPlaying ? "Stop reading" : "Listen to the heading"}
+              title={isTitleAudioPlaying ? "Stop reading" : "Listen to the heading"}
+            >
+              <FontAwesomeIcon icon={faHeadphones} />
+              <span>{isTitleAudioPlaying ? "Listening..." : "Listen"}</span>
+            </button>
+          )}
         </div>
         <img src="/mascot.png" alt="Mascot" className={styles.mascotImage} />
 

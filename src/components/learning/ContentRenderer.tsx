@@ -150,6 +150,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
         <ContentWrapper>
           <SequenceMatcher
             title={sequenceMatchContent.title}
+            instruction={sequenceMatchContent.instruction}
             items={sequenceMatchContent.items}
             dropZoneCount={sequenceMatchContent.dropZoneCount}
             correctOrder={sequenceMatchContent.correctOrder}
@@ -157,6 +158,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             speakText={sequenceMatchContent.speakText}
             onComplete={onComplete}
             isLastLesson={isLastLesson}
+            standard={standard}
           />
         </ContentWrapper>
       );
