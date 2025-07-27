@@ -105,17 +105,6 @@
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
-.gearIcon { /* Gear Icon */
-    position: absolute;
-    top: clamp(25px, 4vh, 38px);
-    right: clamp(20px, 3vw, 28px);
-    font-size: clamp(22px, 3vw, 30px);
-    opacity: 0.8;
-    animation: spin 8s linear infinite;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    z-index: 1;
-}
-
 @keyframes float {
     0% {
         transform: translateY(0) rotate(-15deg);

@@ -394,9 +394,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         buttonText={isLastLesson ? 'Next Course' : 'Next Chapter'}
         tryAgainText="Play Again"
       />
-      <div className={styles.worksheetCard}>
-        <span className={styles.gearIcon}>⚙️</span>
-        
+      <div className={styles.worksheetCard}>        
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{title}</h1>
           <div className={styles.buttonGroup}>
