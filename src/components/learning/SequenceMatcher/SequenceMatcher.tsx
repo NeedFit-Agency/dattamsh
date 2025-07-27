@@ -399,17 +399,28 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{title}</h1>
-          {shouldShowAudio && (
-            <button
-              className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-              onClick={playQuestionAudio}
-              aria-label={isAudioPlaying ? "Stop reading" : "Listen to the instruction"}
-              title={isAudioPlaying ? "Stop reading" : "Listen to the instruction"}
+          <div className={styles.buttonGroup}>
+            <div className={styles.leftButtons}>
+              {shouldShowAudio && (
+                <button
+                  className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+                  onClick={playQuestionAudio}
+                  aria-label={isAudioPlaying ? "Stop reading" : "Listen to the instruction"}
+                  title={isAudioPlaying ? "Stop reading" : "Listen to the instruction"}
+                >
+                  <FontAwesomeIcon icon={faHeadphones} />
+                  <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+                </button>
+              )}
+            </div>
+            <button 
+              className={styles.resetButton} 
+              onClick={resetGame}
             >
-              <FontAwesomeIcon icon={faHeadphones} />
-              <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+              <FontAwesomeIcon icon={faUndo} />
+              <span>Reset</span>
             </button>
-          )}
+          </div>
         </div>
 
         <div className={styles.mainContent}>
@@ -532,13 +543,6 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             disabled={Object.keys(placedItems).length < correctOrder.length}
           >
             Check My Answer
-          </button>
-          <button 
-            className={`${styles.actionButton} ${styles.resetBtn}`} 
-            onClick={resetGame}
-          >
-            <FontAwesomeIcon icon={faUndo} />
-            <span>Reset</span>
           </button>
         </div>
       </div>

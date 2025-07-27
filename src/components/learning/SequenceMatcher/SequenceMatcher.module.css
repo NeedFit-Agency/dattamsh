@@ -167,16 +167,32 @@
 /* --- Title --- */
 .titleContainer {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: clamp(12px, 2vw, 20px);
+    gap: clamp(16px, 2.5vw, 24px);
     margin-top: 30px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     padding: 0 20px;
     position: relative;
     z-index: 2;
     flex-shrink: 0;
-    flex-wrap: wrap;
+    width: 100%;
+}
+
+.buttonGroup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+}
+
+.leftButtons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .title {
@@ -767,6 +783,36 @@
     background-color: #218838;
 }
 
+.resetButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--warning, #ffc107);
+    color: #212529;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-width: 120px;
+    height: 44px;
+    justify-content: center;
+}
+
+.resetButton:hover {
+    background-color: #e0a800;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.resetButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 /* Mobile responsiveness for the audio button */
 @media (max-width: 576px) {
     .audioButton {
@@ -1021,11 +1067,16 @@
         margin-top: 5px;
         margin-bottom: 12px;
         padding: 0 15px;
-        gap: clamp(10px, 1.5vw, 16px);
+        gap: clamp(12px, 2vw, 18px);
     }
     
     .title {
         font-size: 24px;
+    }
+    
+    .buttonGroup {
+        max-width: 350px;
+        gap: 10px;
     }
     
     .titleHeadphones {
@@ -1076,7 +1127,7 @@
 
 @media (max-width: 768px) {
     .titleContainer {
-        gap: clamp(8px, 1.2vw, 12px);
+        gap: clamp(10px, 1.5vw, 14px);
         flex-direction: column;
         align-items: center;
     }
@@ -1084,6 +1135,17 @@
     .title {
         font-size: 22px;
         margin-bottom: 8px;
+    }
+    
+    .buttonGroup {
+        max-width: 320px;
+        gap: 8px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .leftButtons {
+        justify-content: center;
     }
     
     .titleHeadphones {
@@ -1100,7 +1162,7 @@
 
 @media (max-width: 480px) {
     .titleContainer {
-        gap: 6px;
+        gap: 8px;
         margin-top: 10px;
         margin-bottom: 8px;
         padding: 0 10px;
@@ -1108,6 +1170,19 @@
     
     .title {
         font-size: 20px;
+    }
+    
+    .buttonGroup {
+        max-width: 280px;
+        gap: 6px;
+    }
+    
+    .audioButton,
+    .resetButton {
+        min-width: 100px;
+        padding: 6px 12px;
+        font-size: 14px;
+        height: 40px;
     }
     
     .titleHeadphones {

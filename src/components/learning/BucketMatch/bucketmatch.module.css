@@ -71,8 +71,9 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
+  max-width: 400px;
 }
 
 .leftButtons {
@@ -515,10 +516,11 @@
   }
   
   .buttonGroup {
-    flex-direction: row;
-    gap: 10px;
+    flex-direction: column;
+    gap: 8px;
     width: 100%;
     justify-content: center;
+    max-width: 320px;
   }
   
   .leftButtons {
@@ -605,7 +607,8 @@
   
   .buttonGroup {
     flex-direction: column;
-    gap: 12px;
+    gap: 6px;
+    max-width: 280px;
   }
   
   .leftButtons {
