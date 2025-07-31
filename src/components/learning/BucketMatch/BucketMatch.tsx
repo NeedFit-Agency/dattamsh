@@ -60,6 +60,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   }>({ type: null });
   const [showCongratulations, setShowCongratulations] = useState(false);
   const instructionAudioRef = useRef<HTMLAudioElement>(null);
+  const [playingBucketAudio, setPlayingBucketAudio] = useState<string | null>(null);
+  const [isAnyAudioPlaying, setIsAnyAudioPlaying] = useState(false);
 
   // Check if audio should be shown (for grades 1, 2, 3, 4)
   const shouldShowAudio = standard && ['1', '2', '3', '4'].includes(standard);
@@ -72,16 +74,19 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     const handleEnded = () => {
       console.log('Instruction audio ended');
       setIsAudioPlaying(false);
+      setIsAnyAudioPlaying(false);
     };
 
     const handlePause = () => {
       console.log('Instruction audio paused');
       setIsAudioPlaying(false);
+      setIsAnyAudioPlaying(false);
     };
 
     const handlePlay = () => {
       console.log('Instruction audio started playing');
       setIsAudioPlaying(true);
+      setIsAnyAudioPlaying(true);
     };
 
     audio.addEventListener('ended', handleEnded);
@@ -239,6 +244,20 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     setFeedback({ type: null });
     setShowCongratulations(false);
     
+    // Stop any playing audio
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    
+    if (instructionAudioRef.current) {
+      instructionAudioRef.current.pause();
+      instructionAudioRef.current.currentTime = 0;
+    }
+    
+    setIsAudioPlaying(false);
+    setIsAnyAudioPlaying(false);
+    setPlayingBucketAudio(null);
+    
     // Clear any remaining visual feedback from buckets
     const bucketElements = document.querySelectorAll('[data-bucket-id]');
     bucketElements.forEach(element => {
@@ -253,17 +272,37 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   };
 
   const playInstructionAudio = () => {
+    // Stop any currently playing audio first
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    
     if (instructionAudioRef.current) {
       if (isAudioPlaying) {
         instructionAudioRef.current.pause();
         setIsAudioPlaying(false);
+        setIsAnyAudioPlaying(false);
       } else {
+        // Stop any other audio elements that might be playing
+        const allAudioElements = document.querySelectorAll('audio');
+        allAudioElements.forEach(audio => {
+          if (audio !== instructionAudioRef.current) {
+            audio.pause();
+            audio.currentTime = 0;
+          }
+        });
+        
+        // Stop any bucket audio that might be playing
+        setPlayingBucketAudio(null);
+        
         instructionAudioRef.current.play().catch((error: any) => {
           console.error('Instruction audio play failed:', error);
+          setIsAnyAudioPlaying(false);
           // Fallback to TTS if audio file fails
           playTTSFallback();
         });
         setIsAudioPlaying(true);
+        setIsAnyAudioPlaying(true);
       }
     } else {
       // Fallback to TTS if no audio file
@@ -276,6 +315,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
 
     if (isAudioPlaying) {
       setIsAudioPlaying(false);
+      setIsAnyAudioPlaying(false);
       return;
     }
 
@@ -283,20 +323,29 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       try {
         const utterance = new SpeechSynthesisUtterance(instruction);
         utterance.rate = 0.5;
-        utterance.onstart = () => setIsAudioPlaying(true);
-        utterance.onend = () => setIsAudioPlaying(false);
+        utterance.onstart = () => {
+          setIsAudioPlaying(true);
+          setIsAnyAudioPlaying(true);
+        };
+        utterance.onend = () => {
+          setIsAudioPlaying(false);
+          setIsAnyAudioPlaying(false);
+        };
 
         utterance.onerror = (e) => {
           console.error("SpeechSynthesis Error:", e);
           setIsAudioPlaying(false);
+          setIsAnyAudioPlaying(false);
         };
         window.speechSynthesis.speak(utterance);
       } catch (e) {
         console.error("SpeechSynthesis failed:", e);
         setIsAudioPlaying(false);
+        setIsAnyAudioPlaying(false);
       }
     } else {
       setIsAudioPlaying(false);
+      setIsAnyAudioPlaying(false);
     }
   };
 
@@ -341,13 +390,14 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
           <div className={styles.buttonGroup}>
             <div className={styles.leftButtons}>
               {shouldShowAudio && (
-                <button
-                  className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-                  onClick={playInstructionAudio}
-                >
-                  <FontAwesomeIcon icon={faHeadphones} />
-                  <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-                </button>
+                              <button
+                className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
+                onClick={playInstructionAudio}
+                disabled={isAnyAudioPlaying && !isAudioPlaying}
+              >
+                <FontAwesomeIcon icon={faHeadphones} />
+                <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+              </button>
               )}
             </div>
             <button
@@ -418,12 +468,58 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                   <div className={styles.bucketLabelContainer}>
                     {bucket.audioSrc ? (
                       <button
-                        className={styles.bucketAudioButton}
+                        className={`${styles.bucketAudioButton} ${playingBucketAudio === bucket.id ? styles.bucketAudioButtonPlaying : ''}`}
                         onClick={() => {
+                          // If this bucket audio is already playing, stop it
+                          if (playingBucketAudio === bucket.id) {
+                            setPlayingBucketAudio(null);
+                            setIsAnyAudioPlaying(false);
+                            return;
+                          }
+                          
+                          // Stop any currently playing audio first
+                          if (typeof window !== 'undefined' && window.speechSynthesis) {
+                            window.speechSynthesis.cancel();
+                          }
+                          
+                          // Stop any other audio elements
+                          const allAudioElements = document.querySelectorAll('audio');
+                          allAudioElements.forEach(audio => {
+                            audio.pause();
+                            audio.currentTime = 0;
+                          });
+                          
+                          // Stop instruction audio if playing
+                          if (instructionAudioRef.current && isAudioPlaying) {
+                            instructionAudioRef.current.pause();
+                            setIsAudioPlaying(false);
+                          }
+                          
+                          // Stop any currently playing bucket audio
+                          setPlayingBucketAudio(null);
+                          
                           const audio = new Audio(bucket.audioSrc);
-                          audio.play().catch(e => console.log("Bucket audio play failed:", e));
+                          setPlayingBucketAudio(bucket.id);
+                          setIsAnyAudioPlaying(true);
+                          
+                          audio.addEventListener('ended', () => {
+                            setPlayingBucketAudio(null);
+                            setIsAnyAudioPlaying(false);
+                          });
+                          
+                          audio.addEventListener('error', () => {
+                            setPlayingBucketAudio(null);
+                            setIsAnyAudioPlaying(false);
+                          });
+                          
+                          audio.play().catch(e => {
+                            console.log("Bucket audio play failed:", e);
+                            setPlayingBucketAudio(null);
+                            setIsAnyAudioPlaying(false);
+                          });
                         }}
                         aria-label={`Play audio for ${bucket.title}`}
+                        disabled={isAnyAudioPlaying && playingBucketAudio !== bucket.id}
                       >
                         <FontAwesomeIcon icon={faHeadphones} />
                       </button>

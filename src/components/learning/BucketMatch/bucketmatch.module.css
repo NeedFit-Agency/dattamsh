@@ -119,6 +119,23 @@
   background-color: #218838;
 }
 
+.bucketAudioButtonPlaying {
+  background-color: #4a90e2 !important;
+  color: white !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4) !important;
+}
+
+.bucketAudioButtonPlaying svg {
+  color: white !important;
+}
+
+.bucketAudioButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }

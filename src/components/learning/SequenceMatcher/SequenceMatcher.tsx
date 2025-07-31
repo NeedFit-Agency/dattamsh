@@ -29,6 +29,8 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   const [resetCounter, setResetCounter] = useState(0);
   const draggedElementRef = useRef<HTMLElement | null>(null);
   const dropZonesContainerRef = useRef<HTMLDivElement | null>(null);
+  const [playingItemAudio, setPlayingItemAudio] = useState<string | null>(null);
+  const [isAnyAudioPlaying, setIsAnyAudioPlaying] = useState(false);
 
   // Get items that are not yet placed in drop zones
   const availableItems = items.filter(item => 
@@ -207,10 +209,19 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     setShowCongratulations(false);
     setIsAudioPlaying(false);
     setResetCounter(prev => prev + 1); // Force re-render of drop zones
+
+    setIsAnyAudioPlaying(false);
+    setPlayingItemAudio(null);
     
     // Stop any ongoing speech
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
+    }
+    
+    // Stop any audio elements
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
     }
     
     // Clear visual feedback
@@ -231,6 +242,9 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     setFeedback({ type: null, message: '' });
     setShowTryAgain(false);
     setResetCounter(prev => prev + 1); // Force re-render of drop zones
+    setIsAnyAudioPlaying(false);
+    setPlayingItemAudio(null);
+
     
     // Clear visual feedback
     const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
@@ -308,16 +322,19 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     const handleEnded = () => {
       console.log('Audio ended');
       setIsAudioPlaying(false);
+      setIsAnyAudioPlaying(false);
     };
 
     const handlePause = () => {
       console.log('Audio paused');
       setIsAudioPlaying(false);
+      setIsAnyAudioPlaying(false);
     };
 
     const handlePlay = () => {
       console.log('Audio started playing');
       setIsAudioPlaying(true);
+      setIsAnyAudioPlaying(true);
     };
 
     audio.addEventListener('ended', handleEnded);
@@ -333,17 +350,37 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
 
   // Function to handle audio playback
   const playQuestionAudio = () => {
+    // Stop any currently playing audio first
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    
     if (audioRef.current) {
       if (isAudioPlaying) {
         audioRef.current.pause();
         setIsAudioPlaying(false);
+        setIsAnyAudioPlaying(false);
       } else {
+        // Stop any other audio elements that might be playing
+        const allAudioElements = document.querySelectorAll('audio');
+        allAudioElements.forEach(audio => {
+          if (audio !== audioRef.current) {
+            audio.pause();
+            audio.currentTime = 0;
+          }
+        });
+        
+        // Stop any item audio that might be playing
+        setPlayingItemAudio(null);
+        
         audioRef.current.play().catch((error) => {
           console.error('Audio play failed:', error);
+          setIsAnyAudioPlaying(false);
           // Fallback to TTS if audio file fails
           playTTSFallback();
         });
         setIsAudioPlaying(true);
+        setIsAnyAudioPlaying(true);
       }
     } else {
       // Fallback to TTS if no audio file
@@ -356,6 +393,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
 
     if (isAudioPlaying) {
       setIsAudioPlaying(false);
+      setIsAnyAudioPlaying(false);
       return;
     }
 
@@ -367,20 +405,29 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         utterance.rate = 0.5;
         utterance.pitch = 1.0;
         
-        utterance.onstart = () => setIsAudioPlaying(true);
-        utterance.onend = () => setIsAudioPlaying(false);
+        utterance.onstart = () => {
+          setIsAudioPlaying(true);
+          setIsAnyAudioPlaying(true);
+        };
+        utterance.onend = () => {
+          setIsAudioPlaying(false);
+          setIsAnyAudioPlaying(false);
+        };
         utterance.onerror = (e) => {
           console.error("SpeechSynthesis Error:", e);
           setIsAudioPlaying(false);
+          setIsAnyAudioPlaying(false);
         };
         
         window.speechSynthesis.speak(utterance);
       } catch (e) {
         console.error("SpeechSynthesis failed:", e);
         setIsAudioPlaying(false);
+        setIsAnyAudioPlaying(false);
       }
     } else {
       setIsAudioPlaying(false);
+      setIsAnyAudioPlaying(false);
     }
   };
 
@@ -417,6 +464,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
               onClick={playQuestionAudio}
               aria-label={isAudioPlaying ? "Stop reading" : "Listen to the instruction"}
               title={isAudioPlaying ? "Stop reading" : "Listen to the instruction"}
+              disabled={isAnyAudioPlaying && !isAudioPlaying}
             >
               <FontAwesomeIcon icon={faHeadphones} />
               <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
@@ -506,12 +554,58 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                   >
                     {item.audioSrc ? (
                       <button
-                        className={styles.itemAudioButton}
+                        className={`${styles.itemAudioButton} ${playingItemAudio === item.id ? styles.itemAudioButtonPlaying : ''}`}
                         onClick={() => {
+                          // If this item audio is already playing, stop it
+                          if (playingItemAudio === item.id) {
+                            setPlayingItemAudio(null);
+                            setIsAnyAudioPlaying(false);
+                            return;
+                          }
+                          
+                          // Stop any currently playing audio first
+                          if (typeof window !== 'undefined' && window.speechSynthesis) {
+                            window.speechSynthesis.cancel();
+                          }
+                          
+                          // Stop any other audio elements
+                          const allAudioElements = document.querySelectorAll('audio');
+                          allAudioElements.forEach(audio => {
+                            audio.pause();
+                            audio.currentTime = 0;
+                          });
+                          
+                          // Stop instruction audio if playing
+                          if (audioRef.current && isAudioPlaying) {
+                            audioRef.current.pause();
+                            setIsAudioPlaying(false);
+                          }
+                          
+                          // Stop any currently playing item audio
+                          setPlayingItemAudio(null);
+                          
                           const audio = new Audio(item.audioSrc);
-                          audio.play().catch(e => console.log("Item audio play failed:", e));
+                          setPlayingItemAudio(item.id);
+                          setIsAnyAudioPlaying(true);
+                          
+                          audio.addEventListener('ended', () => {
+                            setPlayingItemAudio(null);
+                            setIsAnyAudioPlaying(false);
+                          });
+                          
+                          audio.addEventListener('error', () => {
+                            setPlayingItemAudio(null);
+                            setIsAnyAudioPlaying(false);
+                          });
+                          
+                          audio.play().catch(e => {
+                            console.log("Item audio play failed:", e);
+                            setPlayingItemAudio(null);
+                            setIsAnyAudioPlaying(false);
+                          });
                         }}
                         aria-label={`Play audio for ${item.content}`}
+                        disabled={isAnyAudioPlaying && playingItemAudio !== item.id}
                       >
                         <FontAwesomeIcon icon={faHeadphones} />
                       </button>
