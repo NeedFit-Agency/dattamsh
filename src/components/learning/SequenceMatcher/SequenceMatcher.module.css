@@ -305,8 +305,7 @@
     width: 100%;
 }
 
-.dropZone::after {
-    content: attr(data-number);
+.numberBadge {
     position: absolute;
     left: 20px;
     top: 50%;
@@ -324,6 +323,7 @@
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.3);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    z-index: 2;
 }
 
 .dropZone.dragOver {
