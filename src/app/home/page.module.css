@@ -642,7 +642,6 @@
   outline: none;
   margin-bottom: 0.5rem;
   overflow: visible;
-  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.10) 0 2px, transparent 2px 12px);
 }
 
 .ticketCard:before, .ticketCard:after {
