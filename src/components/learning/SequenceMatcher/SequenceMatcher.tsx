@@ -26,6 +26,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   const [showTryAgain, setShowTryAgain] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [resetCounter, setResetCounter] = useState(0);
   const draggedElementRef = useRef<HTMLElement | null>(null);
   const dropZonesContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -205,6 +206,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     setShowTryAgain(false);
     setShowCongratulations(false);
     setIsAudioPlaying(false);
+    setResetCounter(prev => prev + 1); // Force re-render of drop zones
     
     // Stop any ongoing speech
     if (typeof window !== 'undefined' && window.speechSynthesis) {
@@ -216,6 +218,11 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     dropZones.forEach(zone => {
       zone.classList.remove(styles.slotCorrect, styles.slotIncorrect, styles.dragOver);
     });
+    
+    // Scroll to top of Column A
+    if (dropZonesContainerRef.current) {
+      dropZonesContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   // Auto-reset function that triggers after incorrect answers
@@ -223,12 +230,18 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     setPlacedItems({});
     setFeedback({ type: null, message: '' });
     setShowTryAgain(false);
+    setResetCounter(prev => prev + 1); // Force re-render of drop zones
     
     // Clear visual feedback
     const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
     dropZones.forEach(zone => {
       zone.classList.remove(styles.slotCorrect, styles.slotIncorrect, styles.dragOver);
     });
+    
+    // Scroll to top of Column A
+    if (dropZonesContainerRef.current) {
+      dropZonesContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   // Helper functions to get styling and icons for items
@@ -418,14 +431,18 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             <div ref={dropZonesContainerRef} className={styles.dropZonesContainer}>
               {Array.from({ length: dropZoneCount }, (_, index) => (
                 <div 
-                  key={index}
+                  key={`${index}-${resetCounter}`}
                   className={styles.dropZone} 
                   data-index={index}
-                  data-number={index + 1} /* Add sequence number (1-based) */
                   onDragOver={(e) => handleDragOver(e, index)}
                   onDragLeave={handleDragLeave}
                   onDrop={(e) => handleDrop(e, index)}
                 >
+                  {/* Number badge as React element instead of CSS pseudo-element */}
+                  <div className={styles.numberBadge}>
+                    {index + 1}
+                  </div>
+                  
                   {placedItems[index] && (
                     <div 
                       className={`${styles.stepItem} ${getItemStyleClass(placedItems[index])}`}
