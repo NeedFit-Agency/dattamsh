@@ -17,7 +17,8 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   isLastLesson = false,
   audioSrc,
   speakText,
-  standard
+  standard,
+  isFourthChapter = false
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [placedItems, setPlacedItems] = useState<{[zoneIndex: number]: DraggableItem}>({});
@@ -391,12 +392,10 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         onTryAgainClick={resetGame}
         showTryAgain={true}
         message="Amazing! You have arranged everything correctly!"
-        buttonText={isLastLesson ? 'Next Course' : 'Next Chapter'}
+        buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
       />
-      <div className={styles.worksheetCard}>
-        <span className={styles.gearIcon}>⚙️</span>
-        
+      <div className={styles.worksheetCard}>        
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{title}</h1>
           {shouldShowAudio && (

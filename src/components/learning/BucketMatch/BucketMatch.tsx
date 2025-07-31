@@ -45,7 +45,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   correctMessage = 'Correct!',
   tryAgainMessage = 'Try Again!',
   isLastLesson = false,
-  standard
+  standard,
+  isFourthChapter = false
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -306,7 +307,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         onButtonClick={onComplete ? onComplete : handleReset}
         onTryAgainClick={handleReset}
         showTryAgain={true}
-        buttonText={isLastLesson ? 'Next Course' : 'Next Chapter'}
+
+        buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
       />
 

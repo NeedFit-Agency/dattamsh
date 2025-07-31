@@ -42,6 +42,7 @@ interface ContentRendererProps {
   progress?: number;
   isLastLesson?: boolean; // Whether this is the last lesson in the chapter
   standard?: string; // The current standard/grade level
+  isFourthChapter?: boolean; // Whether this is the 4th chapter (last chapter) of the grade
 }
 
 const ContentRenderer: React.FC<ContentRendererProps> = ({
@@ -50,7 +51,8 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
   onComplete,
   progress = 0,
   isLastLesson = false,
-  standard
+  standard,
+  isFourthChapter
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [prevContentFormat, setPrevContentFormat] = useState<string | null>(null);
@@ -141,6 +143,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             onComplete={onComplete}
             isLastLesson={isLastLesson}
             standard={standard}
+            isFourthChapter={isFourthChapter}
           />
         </ContentWrapper>
       );
@@ -159,6 +162,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             onComplete={onComplete}
             isLastLesson={isLastLesson}
             standard={standard}
+            isFourthChapter={isFourthChapter}
           />
         </ContentWrapper>
       );
@@ -175,6 +179,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             onComplete={onComplete}
             isLastLesson={isLastLesson}
             standard={standard}
+            isFourthChapter={isFourthChapter}
             // No useFinishButton for WhoAmI - will use "Next" instead
           />
         </ContentWrapper>
@@ -198,6 +203,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             playAgainLabel={bucketMatchContent.playAgainLabel}
             isLastLesson={isLastLesson}
             standard={standard}
+            isFourthChapter={isFourthChapter}
           />
         </ContentWrapper>
       );

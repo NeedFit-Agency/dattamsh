@@ -25,6 +25,7 @@ export interface WhoAmIProps {
   audioSrc?: string; // Audio file path for .m4a files
   speakText?: string; // Fallback text for TTS
   standard?: string; // The current standard/grade level
+  isFourthChapter?: boolean; // Whether this is the 4th chapter (last chapter) of the grade
 }
 
 const DefaultMascot = () => (
@@ -43,7 +44,8 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   isLastLesson = false,
   audioSrc,
   speakText,
-  standard
+  standard,
+  isFourthChapter = false
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -301,7 +303,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         onButtonClick={onComplete ? onComplete : handleReset}
         onTryAgainClick={handleReset}
         showTryAgain={!isCorrectAnswer}
-        buttonText={isLastLesson ? 'Next Course' : 'Next Chapter'}
+        buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
         message={isCorrectAnswer ? "Great job! You got it right!" : "Not quite! Give it another shot."}
         mascot={mascot}

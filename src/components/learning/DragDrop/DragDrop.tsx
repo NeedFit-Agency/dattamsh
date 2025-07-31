@@ -40,7 +40,8 @@ export const DragDrop: React.FC<DragDropProps> = ({
   onBack,
   onComplete,
   isLastLesson = false,
-  standard
+  standard,
+  isFourthChapter = false
 }) => {
   const [dragItems, setDragItems] = useState<DragItem[]>(
     items.map((item) => ({
@@ -479,7 +480,8 @@ export const DragDrop: React.FC<DragDropProps> = ({
         onButtonClick={onComplete ? onComplete : handleReset}
         onTryAgainClick={handleReset}
         showTryAgain={true}
-        buttonText={isLastLesson ? 'Next Course' : 'Next Chapter'}
+
+        buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
       />
 

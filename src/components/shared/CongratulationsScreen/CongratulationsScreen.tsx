@@ -17,7 +17,7 @@ interface CongratulationsScreenProps {
 
 const DefaultMascot = () => (
   <Image
-    src="/images/mascot.png"
+    src="/mascot.png"
     alt="Mascot"
     width={120}
     height={120}
@@ -67,7 +67,10 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   if (!isVisible) return null;
 
   const handleButtonClick = () => {
-    if (typeof onButtonClick === 'object' && onButtonClick.href) {
+    // Check if this is a grade completion button
+    if (buttonText.includes('Congratulations! You have completed grade')) {
+      router.push('/home');
+    } else if (typeof onButtonClick === 'object' && onButtonClick.href) {
       router.push(onButtonClick.href);
     } else if (typeof onButtonClick === 'function') {
       onButtonClick();
@@ -91,8 +94,6 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
       )}
 
       <div className={styles.winText}>{message}</div>
-      <div className={styles.winMascot}>{mascot}</div>
-
       <div className={styles.buttonContainer}>
         {showTryAgain && onTryAgainClick && (
           <button
@@ -104,7 +105,7 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
           </button>
         )}
         <button 
-          className={styles.playAgainBtn} 
+          className={`${styles.playAgainBtn} ${buttonText.includes('Congratulations! You have completed grade') ? styles.gradeCompletionBtn : ''}`}
           onClick={handleButtonClick}
           aria-label={buttonText}
         >

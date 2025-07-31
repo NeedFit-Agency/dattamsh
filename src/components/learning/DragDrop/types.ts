@@ -20,4 +20,5 @@ export interface DragDropProps {
   onComplete?: (() => void) | { href: string };
   isLastLesson?: boolean;
   standard?: string; // The current standard/grade level
+  isFourthChapter?: boolean; // Whether this is the 4th chapter (last chapter) of the grade
 }
