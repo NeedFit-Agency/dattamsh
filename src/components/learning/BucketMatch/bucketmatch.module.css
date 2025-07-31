@@ -134,7 +134,7 @@
 /* Fruits Container (Top Row - Computer Parts) */
 .fruitsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -153,8 +153,8 @@
 }
 
 .fruitDraggable {
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   background: white;
   border: 2px solid #bbddff;
   border-radius: 16px;
@@ -222,7 +222,7 @@
 /* Buckets Container (Bottom Section) */
 .basketsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
 
@@ -231,11 +231,12 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  padding: 10px;
 }
 
 .basketDropzone {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   background: white;
   border: 2px dashed #adb5bd;
   border-radius: 16px;
@@ -290,18 +291,33 @@
   object-fit: contain;
 }
 
+.bucketLabelContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 12px;
+  min-height: 48px;
+  box-sizing: border-box;
+}
+
 .bucketLabel {
   font-size: 1rem;
   font-weight: 600;
-  color: #2c3e50;
-  text-align: center;
+  text-align: left;
   margin: 0;
   line-height: 1.4;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  min-height: 48px;
+  padding-top: 4px;
 }
 
 .bucketTTSContainer {
   display: flex;
-  justify-content: center;
+  justify-content: top;
   margin-top: 8px;
 }
 
@@ -312,26 +328,32 @@
   border-radius: 8px;
   padding: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   color: white;
   box-shadow: 0 2px 6px rgba(108, 92, 231, 0.3);
-  min-width: 24px;
-  min-height: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  margin-top: 4px;
 }
 
 .bucketAudioButton:hover,
 .bucketTTS:hover {
-  background: #5a4fcf;
+  background: #4fa2d5;
   transform: scale(1.1);
-  box-shadow: 0 3px 8px rgba(108, 92, 231, 0.4);
+  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.4);
 }
 
 .bucketHeadphones {
   font-size: 0.9rem;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Drag and Drop States */
@@ -464,23 +486,23 @@
   }
   
   .fruitsContainer {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 14px;
   }
   
   .basketsContainer {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 18px;
   }
   
   .fruitDraggable {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
   }
   
   .basketDropzone {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
   }
 }
 
@@ -546,18 +568,25 @@
   }
   
   .fruitDraggable {
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
   }
   
   .basketDropzone {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
   }
   
   .colorName,
   .bucketLabel {
     font-size: 0.9rem;
+    min-height: 28px;
+  }
+  
+  .bucketLabelContainer {
+    gap: 8px;
+    padding: 6px 8px;
+    min-height: 40px;
   }
   
   .feedbackMessage {
@@ -568,8 +597,8 @@
   
   .bucketAudioButton,
   .bucketTTS {
-    min-width: 20px;
-    min-height: 20px;
+    width: 28px;
+    height: 28px;
     padding: 6px;
   }
   
@@ -590,13 +619,13 @@
   }
   
   .fruitDraggable {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
   }
   
   .basketDropzone {
-    width: 160px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
   }
   
   .instructionBox {
@@ -614,13 +643,24 @@
   
   .bucketAudioButton,
   .bucketTTS {
-    min-width: 18px;
-    min-height: 18px;
+    width: 24px;
+    height: 24px;
     padding: 4px;
   }
   
   .bucketHeadphones {
     font-size: 0.7rem;
+  }
+  
+  .bucketLabel {
+    font-size: 0.85rem;
+    min-height: 24px;
+  }
+  
+  .bucketLabelContainer {
+    gap: 6px;
+    padding: 4px 6px;
+    min-height: 36px;
   }
 }
 

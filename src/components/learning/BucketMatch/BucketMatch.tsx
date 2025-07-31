@@ -415,8 +415,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                       </div>
                     )}
                   </div>
-                  <p className={styles.bucketLabel}>{bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}</p>
-                  <div className={styles.bucketTTSContainer}>
+                  <div className={styles.bucketLabelContainer}>
                     {bucket.audioSrc ? (
                       <button
                         className={styles.bucketAudioButton}
@@ -441,6 +440,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                         pitch={1.0}
                       />
                     )}
+                    <p className={styles.bucketLabel}>{bucket.title || bucket.type.charAt(0).toUpperCase() + bucket.type.slice(1)}</p>
                   </div>
                 </div>
               );
