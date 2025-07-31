@@ -41,6 +41,7 @@ export interface BucketMatchProps {
   playAgainLabel?: string;           // Label for the play again button
   isLastLesson?: boolean;            // Whether this is the last lesson in the chapter
   standard?: string;                 // The current standard/grade level
+  isFourthChapter?: boolean;         // Whether this is the 4th chapter (last chapter) of the grade
 }
 
 // Defines the structure for feedback messages (if needed separately from component state).

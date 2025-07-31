@@ -25,5 +25,6 @@ export interface SequenceMatcherProps {
   audioSrc?: string; // Audio file path for .m4a files
   speakText?: string; // Fallback text for TTS
   standard?: string; // The current standard/grade level
+  isFourthChapter?: boolean; // Whether this is the 4th chapter (last chapter) of the grade
   // Potentially props for audio, progress, back button like in BucketMatch
 }

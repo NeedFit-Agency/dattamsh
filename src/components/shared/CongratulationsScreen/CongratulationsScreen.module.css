@@ -109,23 +109,25 @@
 }
 
 .playAgainBtn {
-    padding: clamp(12px, 2.5vh, 14px) clamp(24px, 5vw, 32px);
-    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-    font-weight: 600;
-    border-radius: clamp(20px, 4vw, 25px);
+    padding: clamp(14px, 3vh, 16px) clamp(28px, 6vw, 36px);
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    font-weight: 700;
+    border-radius: clamp(25px, 5vw, 30px);
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     color: white;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     text-transform: capitalize;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     /* Mobile touch target optimization */
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 48px;
+    min-width: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
     /* Prevent text selection on mobile */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -133,25 +135,115 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    /* Modern gradient background */
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    box-shadow: 
+        0 4px 15px rgba(52, 152, 219, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.playAgainBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.playAgainBtn:hover::before {
+    left: 100%;
 }
 
 .playAgainBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 8px 25px rgba(52, 152, 219, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #2980b9 0%, #1f5f8b 100%);
 }
 
 .playAgainBtn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 
+        0 2px 8px rgba(52, 152, 219, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Finish Button Style */
-.playAgainBtn {
-    background-color: #3498db;
+/* Try Again Button Style */
+.tryAgainBtn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    box-shadow: 
+        0 4px 15px rgba(240, 147, 251, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.playAgainBtn:hover {
-    background-color: #2980b9;
+.tryAgainBtn:hover {
+    background: linear-gradient(135deg, #e685f0 0%, #e54b5f 100%);
+    box-shadow: 
+        0 8px 25px rgba(240, 147, 251, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.tryAgainBtn:active {
+    box-shadow: 
+        0 2px 8px rgba(240, 147, 251, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Special style for grade completion button */
+.gradeCompletionBtn {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    box-shadow: 
+        0 6px 20px rgba(52, 152, 219, 0.4),
+        0 3px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: pulse 2s infinite;
+}
+
+.gradeCompletionBtn:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #1f5f8b 100%);
+    box-shadow: 
+        0 10px 30px rgba(52, 152, 219, 0.6),
+        0 5px 10px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    animation: none;
+}
+
+.gradeCompletionBtn:active {
+    box-shadow: 
+        0 3px 10px rgba(52, 152, 219, 0.4),
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 
+            0 6px 20px rgba(52, 152, 219, 0.4),
+            0 3px 6px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 
+            0 8px 25px rgba(52, 152, 219, 0.6),
+            0 4px 8px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+    100% {
+        box-shadow: 
+            0 6px 20px rgba(52, 152, 219, 0.4),
+            0 3px 6px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
 }
 
 /* Try Again Button Style */

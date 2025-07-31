@@ -76,6 +76,12 @@ function LearningPageContent() {
     return false;
   }, [searchParams]);
   
+  // Check if this is the 4th chapter (last chapter) of any grade
+  const isFourthChapter = useMemo(() => {
+    const lessonParam = searchParams.get('lesson') || '1';
+    return lessonParam === '4'; // Chapter 4 is the last chapter in each grade
+  }, [searchParams]);
+  
   // isLastLesson should be true only when it's the last slide of the last chapter in the standard
   const isLastLesson = isLastSlide && isLastChapterInStandard;
 
@@ -331,6 +337,7 @@ function LearningPageContent() {
             progress={progress}
             isLastLesson={isLastLesson}
             standard={standard}
+            isFourthChapter={isFourthChapter}
           />        </main>
       </div>
 
