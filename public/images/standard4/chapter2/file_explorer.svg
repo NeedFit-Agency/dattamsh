@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+  <!-- Window Background -->
+  <rect x="0" y="0" width="300" height="200" fill="#f0f0f0" rx="3"/>
+  
+  <!-- Title Bar -->
+  <rect x="0" y="0" width="300" height="30" fill="#e0e0e0" rx="3 3 0 0"/>
+  <text x="10" y="20" fill="#333333" font-family="Arial" font-size="12">File Explorer</text>
+  
+  <!-- Window Controls -->
+  <rect x="250" y="5" width="20" height="20" fill="#cccccc" rx="2"/>
+  <text x="257" y="20" fill="#333333" font-family="Arial" font-size="14">-</text>
+  <rect x="275" y="5" width="20" height="20" fill="#cccccc" rx="2"/>
+  <text x="282" y="20" fill="#333333" font-family="Arial" font-size="14">×</text>
+  
+  <!-- Ribbon -->
+  <rect x="0" y="30" width="300" height="40" fill="#ffffff"/>
+  <text x="10" y="50" fill="#333333" font-family="Arial" font-size="10">Home</text>
+  <text x="50" y="50" fill="#333333" font-family="Arial" font-size="10">Share</text>
+  <text x="90" y="50" fill="#333333" font-family="Arial" font-size="10">View</text>
+  
+  <!-- Address Bar -->
+  <rect x="10" y="75" width="280" height="25" fill="#ffffff" stroke="#cccccc" stroke-width="1" rx="2"/>
+  <text x="15" y="90" fill="#333333" font-family="Arial" font-size="10">This PC > Documents</text>
+  
+  <!-- Navigation Pane -->
+  <rect x="0" y="105" width="80" height="95" fill="#f8f8f8"/>
+  <text x="10" y="120" fill="#333333" font-family="Arial" font-size="10">Quick access</text>
+  <text x="15" y="135" fill="#333333" font-family="Arial" font-size="8">Desktop</text>
+  <text x="15" y="150" fill="#333333" font-family="Arial" font-size="8">Downloads</text>
+  <text x="15" y="165" fill="#333333" font-family="Arial" font-size="8">Documents</text>
+  <text x="15" y="180" fill="#333333" font-family="Arial" font-size="8">Pictures</text>
+  
+  <!-- File View -->
+  <rect x="85" y="105" width="215" height="95" fill="#ffffff"/>
+  
+  <!-- Files -->
+  <rect x="95" y="115" width="40" height="40" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <rect x="105" y="120" width="20" height="25" fill="#f0f0f0" rx="1"/>
+  <text x="95" y="165" fill="#333333" font-family="Arial" font-size="8">Document 1</text>
+  
+  <rect x="145" y="115" width="40" height="40" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <rect x="155" y="120" width="20" height="25" fill="#f0f0f0" rx="1"/>
+  <text x="145" y="165" fill="#333333" font-family="Arial" font-size="8">Document 2</text>
+  
+  <rect x="195" y="115" width="40" height="40" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <rect x="205" y="120" width="20" height="25" fill="#f0f0f0" rx="1"/>
+  <text x="195" y="165" fill="#333333" font-family="Arial" font-size="8">Document 3</text>
+</svg>

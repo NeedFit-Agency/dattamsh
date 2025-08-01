@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 250" width="350" height="250">
+  <!-- Window Background -->
+  <rect x="0" y="0" width="350" height="250" fill="#f0f0f0" rx="3"/>
+  
+  <!-- Title Bar -->
+  <rect x="0" y="0" width="350" height="30" fill="#e0e0e0" rx="3 3 0 0"/>
+  <text x="10" y="20" fill="#333333" font-family="Arial" font-size="12">Task Manager</text>
+  
+  <!-- Window Controls -->
+  <rect x="300" y="5" width="20" height="20" fill="#cccccc" rx="2"/>
+  <text x="307" y="20" fill="#333333" font-family="Arial" font-size="14">-</text>
+  <rect x="325" y="5" width="20" height="20" fill="#cccccc" rx="2"/>
+  <text x="332" y="20" fill="#333333" font-family="Arial" font-size="14">×</text>
+  
+  <!-- Tabs -->
+  <rect x="10" y="35" width="60" height="25" fill="#ffffff" stroke="#cccccc" stroke-width="1"/>
+  <text x="25" y="50" fill="#333333" font-family="Arial" font-size="10">Processes</text>
+  
+  <rect x="70" y="35" width="80" height="25" fill="#f8f8f8" stroke="#cccccc" stroke-width="1"/>
+  <text x="95" y="50" fill="#666666" font-family="Arial" font-size="10">Performance</text>
+  
+  <rect x="150" y="35" width="60" height="25" fill="#f8f8f8" stroke="#cccccc" stroke-width="1"/>
+  <text x="170" y="50" fill="#666666" font-family="Arial" font-size="10">Details</text>
+  
+  <!-- Column Headers -->
+  <rect x="10" y="65" width="330" height="20" fill="#e8e8e8"/>
+  <text x="15" y="78" fill="#333333" font-family="Arial" font-size="9">Name</text>
+  <text x="150" y="78" fill="#333333" font-family="Arial" font-size="9">CPU</text>
+  <text x="200" y="78" fill="#333333" font-family="Arial" font-size="9">Memory</text>
+  <text x="270" y="78" fill="#333333" font-family="Arial" font-size="9">Disk</text>
+  
+  <!-- Process List -->
+  <rect x="10" y="85" width="330" height="20" fill="#ffffff"/>
+  <text x="15" y="98" fill="#333333" font-family="Arial" font-size="9">Google Chrome</text>
+  <text x="150" y="98" fill="#333333" font-family="Arial" font-size="9">15.2%</text>
+  <text x="200" y="98" fill="#333333" font-family="Arial" font-size="9">512 MB</text>
+  <text x="270" y="98" fill="#333333" font-family="Arial" font-size="9">0.1 MB/s</text>
+  
+  <rect x="10" y="105" width="330" height="20" fill="#f8f8f8"/>
+  <text x="15" y="118" fill="#333333" font-family="Arial" font-size="9">Windows Explorer</text>
+  <text x="150" y="118" fill="#333333" font-family="Arial" font-size="9">2.1%</text>
+  <text x="200" y="118" fill="#333333" font-family="Arial" font-size="9">128 MB</text>
+  <text x="270" y="118" fill="#333333" font-family="Arial" font-size="9">0.0 MB/s</text>
+  
+  <rect x="10" y="125" width="330" height="20" fill="#ffffff"/>
+  <text x="15" y="138" fill="#333333" font-family="Arial" font-size="9">System</text>
+  <text x="150" y="138" fill="#333333" font-family="Arial" font-size="9">0.8%</text>
+  <text x="200" y="138" fill="#333333" font-family="Arial" font-size="9">64 MB</text>
+  <text x="270" y="138" fill="#333333" font-family="Arial" font-size="9">0.0 MB/s</text>
+  
+  <rect x="10" y="145" width="330" height="20" fill="#f8f8f8"/>
+  <text x="15" y="158" fill="#333333" font-family="Arial" font-size="9">Microsoft Word</text>
+  <text x="150" y="158" fill="#333333" font-family="Arial" font-size="9">1.5%</text>
+  <text x="200" y="158" fill="#333333" font-family="Arial" font-size="9">256 MB</text>
+  <text x="270" y="158" fill="#333333" font-family="Arial" font-size="9">0.0 MB/s</text>
+  
+  <!-- Bottom Status -->
+  <rect x="10" y="200" width="330" height="40" fill="#f0f0f0" stroke="#cccccc" stroke-width="1"/>
+  <text x="15" y="215" fill="#333333" font-family="Arial" font-size="9">Processes: 156</text>
+  <text x="15" y="230" fill="#333333" font-family="Arial" font-size="9">CPU usage: 19.6%</text>
+  <text x="150" y="215" fill="#333333" font-family="Arial" font-size="9">Memory usage: 4.2/8.0 GB (52%)</text>
+  <text x="150" y="230" fill="#333333" font-family="Arial" font-size="9">Disk usage: 0%</text>
+</svg>

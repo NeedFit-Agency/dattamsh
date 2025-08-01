@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Tux the Penguin - Linux Mascot -->
+  <!-- Head -->
+  <ellipse cx="50" cy="35" rx="20" ry="25" fill="#000000"/>
+  
+  <!-- White belly -->
+  <ellipse cx="50" cy="40" rx="15" ry="20" fill="#ffffff"/>
+  
+  <!-- Body -->
+  <ellipse cx="50" cy="65" rx="18" ry="20" fill="#000000"/>
+  
+  <!-- White chest -->
+  <ellipse cx="50" cy="65" rx="12" ry="15" fill="#ffffff"/>
+  
+  <!-- Eyes -->
+  <circle cx="45" cy="30" r="3" fill="#ffffff"/>
+  <circle cx="55" cy="30" r="3" fill="#ffffff"/>
+  <circle cx="45" cy="30" r="1.5" fill="#000000"/>
+  <circle cx="55" cy="30" r="1.5" fill="#000000"/>
+  
+  <!-- Beak -->
+  <polygon points="50,35 47,40 53,40" fill="#ffa500"/>
+  
+  <!-- Wings -->
+  <ellipse cx="35" cy="55" rx="8" ry="15" fill="#000000"/>
+  <ellipse cx="65" cy="55" rx="8" ry="15" fill="#000000"/>
+  
+  <!-- Feet -->
+  <ellipse cx="45" cy="85" rx="6" ry="4" fill="#ffa500"/>
+  <ellipse cx="55" cy="85" rx="6" ry="4" fill="#ffa500"/>
+</svg>

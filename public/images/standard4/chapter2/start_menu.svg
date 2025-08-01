@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" width="200" height="150">
+  <!-- Start Menu Background -->
+  <rect x="0" y="0" width="200" height="150" fill="#1f1f1f" rx="5"/>
+  
+  <!-- User Profile Section -->
+  <rect x="10" y="10" width="180" height="30" fill="#2d2d2d" rx="3"/>
+  <circle cx="25" cy="25" r="8" fill="#0078d4"/>
+  <text x="40" y="30" fill="white" font-family="Arial" font-size="12">User</text>
+  
+  <!-- Apps Section -->
+  <text x="15" y="60" fill="#cccccc" font-family="Arial" font-size="10">Recently added</text>
+  
+  <!-- App Icons -->
+  <rect x="15" y="70" width="25" height="25" fill="#0078d4" rx="2"/>
+  <rect x="50" y="70" width="25" height="25" fill="#ff4500" rx="2"/>
+  <rect x="85" y="70" width="25" height="25" fill="#00aa00" rx="2"/>
+  
+  <!-- Power Button -->
+  <rect x="160" y="120" width="25" height="20" fill="#404040" rx="2"/>
+  <circle cx="172" cy="130" r="5" fill="white"/>
+  
+  <!-- Windows Logo -->
+  <rect x="15" y="120" width="8" height="8" fill="#0078d4"/>
+  <rect x="25" y="120" width="8" height="8" fill="#0078d4"/>
+  <rect x="15" y="130" width="8" height="8" fill="#0078d4"/>
+  <rect x="25" y="130" width="8" height="8" fill="#0078d4"/>
+</svg>

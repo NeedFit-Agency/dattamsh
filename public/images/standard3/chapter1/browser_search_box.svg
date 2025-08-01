@@ -1,0 +1,9 @@
+<svg width="250" height="40" viewBox="0 0 250 40" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <rect x="1" y="1" width="248" height="38" rx="19" ry="19" fill="#f1f3f4" stroke="#dfe1e5" stroke-width="1"/>
+    <g transform="translate(15, 12)">
+      <path d="M9.5,8.2C9.5,11.6,6.8,14.2,3.5,14.2C0.2,14.2,-2.5,11.6,-2.5,8.2C-2.5,4.8,0.2,2.2,3.5,2.2C6.8,2.2,9.5,4.8,9.5,8.2ZM14.5,15.2L11,11.8" stroke="#5f6368" stroke-width="2" fill="none" transform="translate(0,-2)"/>
+    </g>
+    <text x="45" y="26" font-family="Arial, sans-serif" font-size="14" fill="#5f6368">Search or type a URL</text>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 40" width="300" height="40">
+  <!-- Taskbar Background -->
+  <rect x="0" y="0" width="300" height="40" fill="#1f1f1f"/>
+  
+  <!-- Start Button -->
+  <rect x="5" y="5" width="30" height="30" fill="#2d2d2d" rx="3"/>
+  <rect x="10" y="10" width="8" height="8" fill="#0078d4"/>
+  <rect x="20" y="10" width="8" height="8" fill="#0078d4"/>
+  <rect x="10" y="20" width="8" height="8" fill="#0078d4"/>
+  <rect x="20" y="20" width="8" height="8" fill="#0078d4"/>
+  
+  <!-- Search Box -->
+  <rect x="45" y="8" width="100" height="24" fill="#2d2d2d" rx="12"/>
+  <text x="55" y="23" fill="#888888" font-family="Arial" font-size="10">Type here to search</text>
+  <circle cx="135" cy="20" r="6" fill="#404040"/>
+  
+  <!-- App Icons in Taskbar -->
+  <rect x="160" y="8" width="24" height="24" fill="#0078d4" rx="2"/>
+  <rect x="190" y="8" width="24" height="24" fill="#ff4500" rx="2"/>
+  <rect x="220" y="8" width="24" height="24" fill="#00aa00" rx="2"/>
+  
+  <!-- System Tray -->
+  <rect x="260" y="8" width="15" height="24" fill="#2d2d2d" rx="2"/>
+  <text x="265" y="23" fill="white" font-family="Arial" font-size="8">^</text>
+  
+  <!-- Clock -->
+  <text x="280" y="15" fill="white" font-family="Arial" font-size="8">12:00</text>
+  <text x="280" y="25" fill="white" font-family="Arial" font-size="8">1/1/24</text>
+</svg>
