@@ -352,6 +352,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         onTryAgainClick={handleReset}
         showTryAgain={true}
 
+
         buttonText={isFourthChapter ? `Congratulations. You have completed grade ${standard}` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         // Debug logging
         // console.log('BucketMatch props:', { isFourthChapter, standard, isLastLesson, buttonText: isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter') });
