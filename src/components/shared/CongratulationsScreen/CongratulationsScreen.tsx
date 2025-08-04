@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import styles from './CongratulationsScreen.module.css';
 
 interface CongratulationsScreenProps {
@@ -8,23 +8,11 @@ interface CongratulationsScreenProps {
   message?: string;
   buttonText?: string;
   onButtonClick: (() => void) | { href: string };
-  mascot?: React.ReactNode;
   showStars?: boolean;
   showTryAgain?: boolean;
   tryAgainText?: string;
   onTryAgainClick?: () => void;
 }
-
-const DefaultMascot = () => (
-  <Image
-    src="/mascot.png"
-    alt="Mascot"
-    width={120}
-    height={120}
-    className={styles.mascotImage}
-    priority
-  />
-);
 
 const ConfettiPiece: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
   <div className={styles.confetti} style={style} />
@@ -32,10 +20,9 @@ const ConfettiPiece: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
 
 const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   isVisible,
-  message = "Congratulations! You have completed the activity!",
+  message = "You have completed the activity!",
   buttonText = "Finish",
   onButtonClick,
-  mascot = <DefaultMascot />,
   showStars = true,
   showTryAgain = false,
   tryAgainText = "Try Again",
@@ -79,12 +66,55 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
 
   return (
     <div className={`${styles.winScreen} ${styles.visible}`}>
+      {/* Confetti Background */}
       <div className={styles.confettiContainer}>
         {confettiPieces.map((style, index) => (
           <ConfettiPiece key={index} style={style} />
         ))}
       </div>
 
+      {/* Main Content Container */}
+      <div className={styles.contentContainer}>
+        {/* Message Section */}
+        <div className={styles.messageSection}>
+          <h1 className={styles.winText}>{message}</h1>
+          <div className={styles.subtitleText}>
+            Great job! You've successfully completed this challenge.
+          </div>
+        </div>
+
+        {/* Lottie Animation Section */}
+        <div className={styles.lottieSection}>
+          <DotLottieReact
+            src="https://lottie.host/9c6ebd15-be72-4e2f-9b07-37b0f1613072/CBVyvMFBIi.lottie"
+            loop
+            autoplay
+            className={styles.lottieAnimation}
+          />
+        </div>
+
+        {/* Button Section */}
+        <div className={styles.buttonContainer}>
+          {showTryAgain && onTryAgainClick && (
+            <button
+              className={`${styles.playAgainBtn} ${styles.tryAgainBtn}`}
+              onClick={onTryAgainClick}
+              aria-label={tryAgainText}
+            >
+              {tryAgainText}
+            </button>
+          )}
+          <button 
+            className={`${styles.playAgainBtn} ${buttonText.includes('Congratulations! You have completed grade') ? styles.gradeCompletionBtn : ''}`}
+            onClick={handleButtonClick}
+            aria-label={buttonText}
+          >
+            {buttonText}
+          </button>
+        </div>
+      </div>
+
+      {/* Stars Animation */}
       {showStars && (
         <div className={styles.starContainer}>
           {[...Array(5)].map((_, i) => (
@@ -92,26 +122,6 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
           ))}
         </div>
       )}
-
-      <div className={styles.winText}>{message}</div>
-      <div className={styles.buttonContainer}>
-        {showTryAgain && onTryAgainClick && (
-          <button
-            className={`${styles.playAgainBtn} ${styles.tryAgainBtn}`}
-            onClick={onTryAgainClick}
-            aria-label={tryAgainText}
-          >
-            {tryAgainText}
-          </button>
-        )}
-        <button 
-          className={`${styles.playAgainBtn} ${buttonText.includes('Congratulations! You have completed grade') ? styles.gradeCompletionBtn : ''}`}
-          onClick={handleButtonClick}
-          aria-label={buttonText}
-        >
-          {buttonText}
-        </button>
-      </div>
     </div>
   );
 };
