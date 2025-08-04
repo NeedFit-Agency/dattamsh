@@ -481,7 +481,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
         onTryAgainClick={handleReset}
         showTryAgain={true}
 
-        buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
+        buttonText={isFourthChapter ? `Congratulations. You have completed grade ${standard}` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
         isLastActivity={isFourthChapter}
       />

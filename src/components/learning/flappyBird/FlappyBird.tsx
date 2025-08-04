@@ -463,7 +463,7 @@ const FlappyBird = () => {
     return (
       <div className={styles.overlay}>
         <div className={styles.title} style={{ color: '#4fc3f7' }}>
-          🎉 Congratulations!
+          🎉 Congratulations
         </div>
         <div style={{ fontSize: '28px', color: '#222', margin: '10px' }}>
           You cleared {nextMilestone} pipes!

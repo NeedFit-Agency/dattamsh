@@ -452,7 +452,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         onTryAgainClick={resetGame}
         showTryAgain={true}
         message="Amazing! You have arranged everything correctly!"
-        buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
+        buttonText={isFourthChapter ? `Congratulations. You have completed grade ${standard}` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
         isLastActivity={isFourthChapter}
       />

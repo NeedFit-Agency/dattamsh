@@ -6,6 +6,7 @@ import styles from './CongratulationsScreen.module.css';
 interface CongratulationsScreenProps {
   isVisible: boolean;
   message?: string;
+  subtitle?: string; // New prop for customizable subtitle
   buttonText?: string;
   onButtonClick?: (() => void) | { href: string };
   showStars?: boolean;
@@ -22,6 +23,7 @@ const ConfettiPiece: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
 const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   isVisible,
   message = "You have completed the activity",
+  subtitle, // New subtitle prop
   buttonText = "Finish",
   onButtonClick,
   showStars = true,
@@ -32,6 +34,76 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
 }) => {
   const router = useRouter();
   
+  // Smart subtitle generation based on context
+  const getDefaultSubtitle = () => {
+    // If custom subtitle is provided, use it
+    if (subtitle) return subtitle;
+    
+    // Grade completion context - most significant achievement
+    if (message?.includes('completed grade')) {
+      const gradeSubtitles = [
+        "You finished the whole grade",
+        "Great job completing this grade",
+        "You did it. Grade complete",
+        "You finished all the lessons in this grade",
+        "Well done. You completed the grade"
+      ];
+      return gradeSubtitles[Math.floor(Math.random() * gradeSubtitles.length)];
+    }
+    
+    // Chapter completion context
+    if (message?.includes('chapter') || isLastActivity) {
+      const chapterSubtitles = [
+        "You finished this chapter",
+        "Great job completing this chapter",
+        "You learned a lot in this chapter",
+        "Chapter done. Well done",
+        "You finished all the lessons in this chapter"
+      ];
+      return chapterSubtitles[Math.floor(Math.random() * chapterSubtitles.length)];
+    }
+    
+    // Activity completion context
+    if (message?.includes('activity') || message?.includes('challenge')) {
+      const activitySubtitles = [
+        "You finished this activity",
+        "Great job completing this task",
+        "You did this activity well",
+        "Activity complete. Good work",
+        "You finished this learning task"
+      ];
+      return activitySubtitles[Math.floor(Math.random() * activitySubtitles.length)];
+    }
+    
+    // General success context (WhoAmI, correct answers)
+    if (message?.includes('Great job') || message?.includes('got it right')) {
+      const successSubtitles = [
+        "You got the right answer",
+        "Well done. You did it",
+        "Great thinking. You're right",
+        "You answered correctly",
+        "Good job. You know this",
+        "You got it. Well done",
+        "You answered the question right"
+      ];
+      return successSubtitles[Math.floor(Math.random() * successSubtitles.length)];
+    }
+    
+    // Default encouraging subtitle with variety
+    const defaultSubtitles = [
+      "You did a great job",
+      "Well done",
+      "You did it",
+      "Great work",
+      "You did well",
+      "Good job",
+      "You're doing great"
+    ];
+    return defaultSubtitles[Math.floor(Math.random() * defaultSubtitles.length)];
+  };
+
+  const finalSubtitle = getDefaultSubtitle();
+
   // Optimize confetti count for mobile devices
   const confettiPieces = useMemo(() => {
     if (!isVisible) return [];
@@ -66,7 +138,7 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   const handleButtonClick = () => {
     
     // Check if this is a grade completion button - this should take priority
-    if (buttonText.includes('Congratulations! You have completed grade')) {
+    if (buttonText.includes('Congratulations. You have completed grade')) {
       // Extract the current grade number from the button text
       const gradeMatch = buttonText.match(/grade (\d+)/);
       if (gradeMatch) {
@@ -122,7 +194,7 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
         <div className={styles.messageSection}>
           <h1 className={styles.winText}>{message}</h1>
           <div className={styles.subtitleText}>
-            Great job! You've successfully completed this challenge.
+            {finalSubtitle}
           </div>
         </div>
 

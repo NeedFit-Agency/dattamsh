@@ -26,6 +26,7 @@ export interface WhoAmIProps {
   speakText?: string; // Fallback text for TTS
   standard?: string; // The current standard/grade level
   isFourthChapter?: boolean; // Whether this is the 4th chapter (last chapter) of the grade
+  subtitle?: string; // Custom subtitle for the congratulations screen
 }
 
 const DefaultMascot = () => (
@@ -45,7 +46,8 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   audioSrc,
   speakText,
   standard,
-  isFourthChapter = false
+  isFourthChapter = false,
+  subtitle
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -305,7 +307,8 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         showTryAgain={!isCorrectAnswer}
         buttonText={isFourthChapter ? 'Next grade' : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
-        message={isCorrectAnswer ? (isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : "Great job! You got it right!") : "Not quite! Give it another shot."}
+        message={isCorrectAnswer ? (isFourthChapter ? `Congratulations. You have completed grade ${standard}` : "Great job. You got it right") : "Not quite. Give it another shot"}
+        subtitle={subtitle || (isCorrectAnswer ? (isFourthChapter ? "You finished the whole grade" : "You got the right answer") : undefined)}
         isLastActivity={isFourthChapter}
       />
       <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
