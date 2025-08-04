@@ -214,7 +214,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         // Show congratulations screen only for the last question
         setTimeout(() => {
           setShowCongratulations(true);
-        }, 2000);
+        }, 1800); // Reduced from 2000ms to 1800ms for faster response
       } else {
         // For middle questions, proceed to next question directly after a short delay
         setTimeout(() => {

@@ -161,14 +161,14 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         zone.classList.add(styles.slotIncorrect);
         isAllCorrect = false;
       }
-    });  if (isAllCorrect) {
+    });      if (isAllCorrect) {
       setFeedback({ type: 'correct', message: 'Well done! You arranged everything correctly!' });
       setShowTryAgain(true);
       
       // Show congratulations screen after a shorter delay for better feedback
       setTimeout(() => {
         setShowCongratulations(true);
-      }, 5000);
+      }, 1800); // Reduced from 5000ms to 1800ms for faster response
     } else {
       setFeedback({ type: 'incorrect', message: 'Some steps are not in the right order. Try again!' });
       setShowTryAgain(true);
