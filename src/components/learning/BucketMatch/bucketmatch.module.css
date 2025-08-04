@@ -864,15 +864,7 @@
   }
 }
 
-/* Focus styles for keyboard navigation */
-.fruitDraggable:focus,
-.basketDropzone:focus,
-.audioButton:focus,
-.resetButton:focus,
-.chooseBackButton:focus {
-  outline: 3px solid #1aa2ff;
-  outline-offset: 2px;
-}
+
 
 /* Reduced motion support for animations */
 @media (prefers-reduced-motion: reduce) {
