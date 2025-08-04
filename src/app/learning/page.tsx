@@ -66,20 +66,20 @@ function LearningPageContent() {
   // Check if this is the last chapter in the standard
   const isLastChapterInStandard = useMemo(() => {
     const standardParam = searchParams.get('standard') || '1';
-    const lessonParam = searchParams.get('lesson') || '1';
+    const chapterParam = searchParams.get('chapter') || '1';
     const standardData = standards[standardParam as keyof typeof standards];
     
     if (standardData) {
       const lastChapter = standardData[standardData.length - 1];
-      return lastChapter && lastChapter.id.toString() === lessonParam;
+      return lastChapter && lastChapter.id.toString() === chapterParam;
     }
     return false;
   }, [searchParams]);
   
   // Check if this is the 4th chapter (last chapter) of any grade
   const isFourthChapter = useMemo(() => {
-    const lessonParam = searchParams.get('lesson') || '1';
-    return lessonParam === '4'; // Chapter 4 is the last chapter in each grade
+    const chapterParam = searchParams.get('chapter') || '1';
+    return chapterParam === '4'; // Chapter 4 is the last chapter in each grade
   }, [searchParams]);
   
   // isLastLesson should be true only when it's the last slide of the last chapter in the standard
@@ -92,7 +92,6 @@ function LearningPageContent() {
   useEffect(() => {
     const standardParam = searchParams.get('standard') || '1';
     const chapterParam = searchParams.get('chapter') || '1';
-    const lessonParam = searchParams.get('lesson') || '1';
 
     setStandard(standardParam);
     setChapter(chapterParam);
@@ -101,9 +100,9 @@ function LearningPageContent() {
     const standardData = standards[standardParam as keyof typeof standards];
     
     if (standardData) {
-      // The `lesson` param from the URL corresponds to the chapter `id` in our data.
+      // The `chapter` param from the URL corresponds to the chapter `id` in our data.
       const chapterData = standardData.find(
-        (ch) => ch.id.toString() === lessonParam
+        (ch) => ch.id.toString() === chapterParam
       );
 
       if (chapterData && chapterData.lessonContent) {
@@ -112,7 +111,7 @@ function LearningPageContent() {
     }
 
     if (!selectedContent.length) {
-      console.warn(`Content not found for Standard ${standardParam}, Chapter ${chapterParam}, Lesson ${lessonParam}.`);
+      console.warn(`Content not found for Standard ${standardParam}, Chapter ${chapterParam}.`);
       // Fallback logic
       const fallbackStandard = standards['1'];
       const fallbackChapter = fallbackStandard ? fallbackStandard[0] : null;
@@ -203,8 +202,12 @@ function LearningPageContent() {
     // If it is the last slide, the onComplete prop with href will handle navigation.
   };
 
-  const onCompleteProp = isLastSlide
+  // For grade completion (4th chapter), let the CongratulationsScreen handle navigation
+  // For other cases, use the normal completion logic
+  const onCompleteProp = isLastSlide && !isFourthChapter
     ? { href: `/standard/${standard}/chapter/${chapter}` }
+    : isLastSlide && isFourthChapter
+    ? undefined // Let CongratulationsScreen handle grade completion navigation
     : handleActivityComplete;
 
   const checkDragDrop = () => {

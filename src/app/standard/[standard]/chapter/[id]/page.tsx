@@ -277,7 +277,7 @@ export default function ChapterPage({
             const lessonNode = isClickable ? (
               <Link
                 key={item.id}
-                href={`/learning?standard=${standard}&chapter=${id}&lesson=${item.id}`}
+                href={`/learning?standard=${standard}&chapter=${item.id}`}
                 className={styles.lessonLink}
                 style={itemStyle}
                 aria-label={`Start or practice lesson ${item.id}${chapterName ? `: ${chapterName}` : ''}`}
