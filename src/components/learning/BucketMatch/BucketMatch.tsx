@@ -227,15 +227,10 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     if (allItemsMatched) {
       setFeedback({ type: 'correct' }); // General success feedback
       createConfetti(); // Create confetti celebration
-      
-      // Note: No separate success audio file available, so we don't play any audio
-      // The instruction audio should only play when the user clicks the "Listen" button
-      
-      // Clear feedback and show congratulations screen after a short delay
       setTimeout(() => {
         setFeedback({ type: null }); // Clear feedback before showing congratulations
         setShowCongratulations(true);
-      }, 5000);
+      }, 1800); // Reduced from 5000ms to 1800ms for faster response
     }
   }, [allItemsMatched]);
 
