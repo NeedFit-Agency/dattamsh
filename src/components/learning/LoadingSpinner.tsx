@@ -24,15 +24,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ message, fullScreen }) 
         <div className={styles.spinner} />
       </div>
 
-      {message && <div className={styles.message}>{message}</div>}
-
-      <div className={styles.subText}>Get ready for fun learning!</div>
-
-      {fullScreen && (
-        <div className={styles.footerText}>
-          Preparing your awesome learning adventure...
-        </div>
-      )}
+      <div className={styles.message}>Loading</div>
     </div>
   );
 };

@@ -303,10 +303,10 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         onButtonClick={onComplete ? onComplete : handleReset}
         onTryAgainClick={handleReset}
         showTryAgain={!isCorrectAnswer}
-        buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
+        buttonText={isFourthChapter ? 'Next grade' : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
-        message={isCorrectAnswer ? "Great job! You got it right!" : "Not quite! Give it another shot."}
-        mascot={mascot}
+        message={isCorrectAnswer ? (isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : "Great job! You got it right!") : "Not quite! Give it another shot."}
+
       />
       <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
         <span className={styles.gearIcon}>⚙️</span>
