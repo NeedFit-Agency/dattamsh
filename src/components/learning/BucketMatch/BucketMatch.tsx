@@ -227,15 +227,10 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     if (allItemsMatched) {
       setFeedback({ type: 'correct' }); // General success feedback
       createConfetti(); // Create confetti celebration
-      
-      // Note: No separate success audio file available, so we don't play any audio
-      // The instruction audio should only play when the user clicks the "Listen" button
-      
-      // Clear feedback and show congratulations screen after a short delay
       setTimeout(() => {
         setFeedback({ type: null }); // Clear feedback before showing congratulations
         setShowCongratulations(true);
-      }, 5000);
+      }, 1800); // Reduced from 5000ms to 1800ms for faster response
     }
   }, [allItemsMatched]);
 
@@ -358,7 +353,10 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         showTryAgain={true}
 
         buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
+        // Debug logging
+        // console.log('BucketMatch props:', { isFourthChapter, standard, isLastLesson, buttonText: isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter') });
         tryAgainText="Play Again"
+        isLastActivity={isFourthChapter}
       />
 
       {/* Audio element for instruction playback */}
