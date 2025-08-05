@@ -306,7 +306,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         buttonText={isFourthChapter ? 'Next grade' : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
         message={isCorrectAnswer ? (isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : "Great job! You got it right!") : "Not quite! Give it another shot."}
-
+        isLastActivity={isFourthChapter}
       />
       <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
         <span className={styles.gearIcon}>⚙️</span>

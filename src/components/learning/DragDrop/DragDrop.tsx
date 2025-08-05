@@ -483,6 +483,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
 
         buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
+        isLastActivity={isFourthChapter}
       />
 
       <div className={styles.instructionBox}>

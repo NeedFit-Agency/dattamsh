@@ -7,11 +7,12 @@ interface CongratulationsScreenProps {
   isVisible: boolean;
   message?: string;
   buttonText?: string;
-  onButtonClick: (() => void) | { href: string };
+  onButtonClick?: (() => void) | { href: string };
   showStars?: boolean;
   showTryAgain?: boolean;
   tryAgainText?: string;
   onTryAgainClick?: () => void;
+  isLastActivity?: boolean; // New prop to indicate if this is the last activity
 }
 
 const ConfettiPiece: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
@@ -27,6 +28,7 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   showTryAgain = false,
   tryAgainText = "Try Again",
   onTryAgainClick,
+  isLastActivity = false, // Default to false
 }) => {
   const router = useRouter();
   
@@ -51,16 +53,57 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
     return pieces;
   }, [isVisible]);
 
+  // Determine the final button text based on isLastActivity prop
+  const finalButtonText = useMemo(() => {
+    if (isLastActivity) {
+      return "Next Grade";
+    }
+    return buttonText;
+  }, [isLastActivity, buttonText]);
+
   if (!isVisible) return null;
 
   const handleButtonClick = () => {
-    // Check if this is a grade completion button
+    
+    // Check if this is a grade completion button - this should take priority
     if (buttonText.includes('Congratulations! You have completed grade')) {
-      router.push('/home');
-    } else if (typeof onButtonClick === 'object' && onButtonClick.href) {
+      // Extract the current grade number from the button text
+      const gradeMatch = buttonText.match(/grade (\d+)/);
+      if (gradeMatch) {
+        const currentGrade = parseInt(gradeMatch[1]);
+        const nextGrade = currentGrade + 1;
+        router.replace(`/standard/${nextGrade}/chapter/1`);
+        return; // Exit early to prevent other navigation
+      } else {
+        router.replace('/home');
+        return; // Exit early to prevent other navigation
+      }
+    }
+    
+    // Handle last activity navigation (Next Grade button)
+    if (isLastActivity) {
+      // Extract the current grade number from the URL or message
+      const gradeMatch = message?.match(/grade (\d+)/) || window.location.pathname.match(/\/standard\/(\d+)/);
+      if (gradeMatch) {
+        const currentGrade = parseInt(gradeMatch[1]);
+        const nextGrade = currentGrade + 1;
+        router.replace(`/standard/${nextGrade}/chapter/1`);
+        return; // Exit early to prevent other navigation
+      } else {
+        // Fallback: navigate to home if we can't determine the grade
+        router.replace('/home');
+        return;
+      }
+    }
+    
+    // Handle other button clicks (non-grade completion)
+    if (onButtonClick && typeof onButtonClick === 'object' && onButtonClick.href) {
       router.push(onButtonClick.href);
-    } else if (typeof onButtonClick === 'function') {
+    } else if (onButtonClick && typeof onButtonClick === 'function') {
       onButtonClick();
+    } else {
+      // Fallback for when no onButtonClick is provided
+      console.log('No onButtonClick provided, staying on current page');
     }
   };
 
@@ -105,11 +148,11 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
             </button>
           )}
           <button 
-            className={`${styles.playAgainBtn} ${buttonText.includes('Congratulations! You have completed grade') ? styles.gradeCompletionBtn : ''}`}
+            className={`${styles.playAgainBtn} ${(buttonText.includes('Next Grade') || isLastActivity) ? styles.gradeCompletionBtn : ''}`}
             onClick={handleButtonClick}
-            aria-label={buttonText}
+            aria-label={finalButtonText}
           >
-            {buttonText}
+            {finalButtonText}
           </button>
         </div>
       </div>
