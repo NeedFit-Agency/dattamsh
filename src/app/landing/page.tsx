@@ -14,7 +14,8 @@ import {
   faAward,
   faChalkboardTeacher,
   faGamepad,
-  faPuzzlePiece,  faBook,
+  faPuzzlePiece,  
+  faBook,
   faEnvelope,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -23,6 +24,7 @@ import {
   faInstagram,
   faLinkedin
 } from '@fortawesome/free-brands-svg-icons';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import styles from './landing.module.css';
 
 export default function LandingPage() {
@@ -33,77 +35,93 @@ export default function LandingPage() {
   });
   
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  
+  const features = [
+    {
+      icon: faLaptopCode,
+      title: "Progressive Learning Path",
+      description: "Step-by-step lessons organized by grade level, ensuring students build a solid foundation before advancing to more complex topics."
+    },
+    {
+      icon: faGamepad,
+      title: "Interactive Exercises",
+      description: "Learn by doing with hands-on activities that reinforce concepts and make learning engaging and fun."
+    },
+    {
+      icon: faPuzzlePiece,
+      title: "Skill-Building Quizzes",
+      description: "Test your knowledge with our adaptive quizzes that help identify areas for improvement."
+    },
+    {
+      icon: faChalkboardTeacher,
+      title: "Visual Learning",
+      description: "Colorful illustrations and animations help visualize complex concepts for better understanding and retention."
+    },
+    {
+      icon: faRobot,
+      title: "Technology Fundamentals",
+      description: "From basic computer operations to more advanced concepts, we cover all aspects of modern technology education."
+    },
+    {
+      icon: faBook,
+      title: "Curriculum Aligned",
+      description: "Our content is carefully crafted to align with standard educational requirements and learning objectives."
+    }
+  ];
+
+  const testimonials = [
+    {
+      quote: "Binary Brains made learning about computers fun! I used to find computer classes boring, but now I look forward to completing new lessons every day.",
+      name: "Mia P.",
+      role: "3rd Grade Student"
+    },
+    {
+      quote: "The interactive lessons helped me understand complex concepts much better than my textbooks. The quizzes are challenging but rewarding!",
+      name: "Samuel K.",
+      role: "5th Grade Student"
+    },
+    {
+      quote: "As a parent, I appreciate how the platform makes technology education accessible and engaging. My child's confidence with computers has improved tremendously.",
+      name: "Priya M.",
+      role: "Parent"
+    },
+    {
+      quote: "The curriculum aligns perfectly with our school standards. It's an excellent resource that supplements our classroom teaching.",
+      name: "Robert J.",
+      role: "Elementary School Teacher"
+    }
+  ];
   
   return (
     <div className={styles.landingWrapper} ref={ref}>
-      <header className={styles.landingHeader}>
+      {/* Header */}
+      <header className={styles.landingHeader} role="banner">
         <div className={styles.headerContent}>
-          <div className={styles.logo}>Binary Brains</div>
-          <nav className={styles.headerNav}>
+          <Link href="/" className={styles.logo} aria-label="Binary Brains Home">
+            Binary Brains
+          </Link>
+          <nav className={styles.headerNav} role="navigation" aria-label="Main navigation">
             <Link href="#features" className={styles.headerLink}>Features</Link>
             <Link href="#testimonials" className={styles.headerLink}>Testimonials</Link>
             <Link href="#about" className={styles.headerLink}>About Us</Link>
-            <Link href="/home" className={styles.ctaButton}>Get Started</Link>
+            <Link href="/home" className={styles.ctaButton} aria-label="Get started with learning">
+              Get Started
+            </Link>
           </nav>
         </div>
       </header>
       
-      <section className={styles.hero}>
-        <div className={styles.parallaxContainer}>
+      {/* Hero Section */}
+      <section className={styles.hero} role="banner" aria-labelledby="hero-title">
+        {/* Parallax Background */}
+        <div className={styles.parallaxContainer} aria-hidden="true">
           <motion.div 
             className={styles.parallaxLayer}
             style={{ y: y1 }}
           >
             <div className={styles.parallaxShape1}></div>
           </motion.div>
-          <motion.div 
-            className={styles.parallaxLayer}
-            style={{ y: y2 }}
-          >
-            <div className={styles.parallaxShape2}></div>
-          </motion.div>
-          <motion.div 
-            className={styles.parallaxLayer}
-            style={{ y: y3 }}
-          >
-            <div className={styles.parallaxShape3}></div>
-          </motion.div>
         </div>
-        
-        <motion.div 
-          className={`${styles.decorationIcon} ${styles.decorationIcon1}`}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <FontAwesomeIcon icon={faBrain} />
-        </motion.div>
-        <motion.div 
-          className={`${styles.decorationIcon} ${styles.decorationIcon2}`}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-        >
-          <FontAwesomeIcon icon={faGraduationCap} />
-        </motion.div>
-        <motion.div 
-          className={`${styles.decorationIcon} ${styles.decorationIcon3}`}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-        >
-          <FontAwesomeIcon icon={faAward} />
-        </motion.div>
-        <motion.div 
-          className={`${styles.decorationIcon} ${styles.decorationIcon4}`}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-        >
-          <FontAwesomeIcon icon={faCode} />
-        </motion.div>
         
         <div className={styles.heroInner}>
           <motion.div 
@@ -112,46 +130,48 @@ export default function LandingPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <h1 className={styles.heroTitle}>Begin Your Digital Learning Adventure</h1>
+            <h1 id="hero-title" className={styles.heroTitle}>
+              Begin Your Digital Learning Adventure
+            </h1>
             <p className={styles.heroSubtitle}>
               A fun, interactive platform that transforms standard computer education into an 
               engaging journey for students of all ages. Master essential digital skills with 
               our step-by-step approach.
             </p>
             <div className={styles.heroCta}>
-              <Link href="/home" className={styles.ctaButton}>
+              <Link href="/home" className={styles.ctaButton} aria-label="Start learning now">
                 Start Learning Now
               </Link>
-              <Link href="#features" className={styles.secondaryCta}>
+              <Link href="#features" className={styles.secondaryCta} aria-label="Learn more about features">
                 Learn More
               </Link>
             </div>
           </motion.div>
-          
           <motion.div 
             className={styles.heroImage}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
+            aria-hidden="true"
           >
             <div className={styles.splineFullHero}>
-              <iframe 
-                src="https://my.spline.design/genkubgreetingrobot-g9XhUJ4JKrYmgSia0lfFllkT/" 
-                width="100%" 
-                height="100%" 
-                style={{ display: 'block', width: '100%', height: '100%', border: 'none', background: 'transparent' }}
-                allowFullScreen
-                title="robot"
-              ></iframe>
+              <DotLottieReact
+                src="https://lottie.host/69da7b5e-d8bd-417f-a60a-62a7756c44b0/X3FZYhFXwX.lottie"
+                loop
+                autoplay
+                style={{ width: '100%', height: '100%' }}
+              />
             </div>
           </motion.div>
         </div>
       </section>
       
-      <section id="features" className={styles.features}>
-        <div className={styles.shapeWaveTop}></div>
+      {/* Features Section */}
+      <section id="features" className={styles.features} aria-labelledby="features-title">
+        <div className={styles.shapeWaveTop} aria-hidden="true"></div>
         <div className={styles.featuresInner}>
           <motion.h2 
+            id="features-title"
             className={styles.sectionTitle}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -170,62 +190,34 @@ export default function LandingPage() {
             Our comprehensive platform provides a complete educational journey with features designed to engage and educate students of all levels.
           </motion.p>
           
-          <div className={styles.featureGrid}>
-            {[
-              {
-                icon: faLaptopCode,
-                title: "Progressive Learning Path",
-                description: "Step-by-step lessons organized by grade level, ensuring students build a solid foundation before advancing to more complex topics."
-              },
-              {
-                icon: faGamepad,
-                title: "Interactive Exercises",
-                description: "Learn by doing with hands-on activities that reinforce concepts and make learning engaging and fun."
-              },
-              {
-                icon: faPuzzlePiece,
-                title: "Skill-Building Quizzes",
-                description: "Test your knowledge with our adaptive quizzes that help identify areas for improvement."
-              },
-              {
-                icon: faChalkboardTeacher,
-                title: "Visual Learning",
-                description: "Colorful illustrations and animations help visualize complex concepts for better understanding and retention."
-              },
-              {
-                icon: faRobot,
-                title: "Technology Fundamentals",
-                description: "From basic computer operations to more advanced concepts, we cover all aspects of modern technology education."
-              },
-              {
-                icon: faBook,
-                title: "Curriculum Aligned",
-                description: "Our content is carefully crafted to align with standard educational requirements and learning objectives."
-              }
-            ].map((feature, index) => (
-              <motion.div 
+          <div className={styles.featureGrid} role="list">
+            {features.map((feature, index) => (
+              <motion.article 
                 key={index} 
                 className={styles.featureCard}
+                role="listitem"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 viewport={{ once: true, margin: "-50px" }}
               >
-                <div className={styles.featureIcon}>
+                <div className={styles.featureIcon} aria-hidden="true">
                   <FontAwesomeIcon icon={feature.icon} />
                 </div>
                 <h3 className={styles.featureTitle}>{feature.title}</h3>
                 <p className={styles.featureDescription}>{feature.description}</p>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
       
-      <section id="testimonials" className={styles.testimonials}>
-        <div className={styles.shapeWaveBottom}></div>
+      {/* Testimonials Section */}
+      <section id="testimonials" className={styles.testimonials} aria-labelledby="testimonials-title">
+        <div className={styles.shapeWaveBottom} aria-hidden="true"></div>
         <div className={styles.testimonialsInner}>
           <motion.h2 
+            id="testimonials-title"
             className={styles.sectionTitle}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -244,57 +236,39 @@ export default function LandingPage() {
             Don&apos;t just take our word for it. Hear from students who have experienced the Binary Brains difference.
           </motion.p>
           
-          <div className={styles.testimonialCards}>
-            {[
-              {
-                quote: "Binary Brains made learning about computers fun! I used to find computer classes boring, but now I look forward to completing new lessons every day.",
-                name: "Mia P.",
-                role: "3rd Grade Student"
-              },
-              {
-                quote: "The interactive lessons helped me understand complex concepts much better than my textbooks. The quizzes are challenging but rewarding!",
-                name: "Samuel K.",
-                role: "5th Grade Student"
-              },
-              {
-                quote: "As a parent, I appreciate how the platform makes technology education accessible and engaging. My child&apos;s confidence with computers has improved tremendously.",
-                name: "Priya M.",
-                role: "Parent"
-              },
-              {
-                quote: "The curriculum aligns perfectly with our school standards. It&apos;s an excellent resource that supplements our classroom teaching.",
-                name: "Robert J.",
-                role: "Elementary School Teacher"
-              }
-            ].map((testimonial, index) => (
-              <motion.div 
+          <div className={styles.testimonialCards} role="list">
+            {testimonials.map((testimonial, index) => (
+              <motion.blockquote 
                 key={index} 
                 className={styles.testimonialCard}
+                role="listitem"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 viewport={{ once: true, margin: "-50px" }}
               >
                 <p className={styles.testimonialQuote}>&quot;{testimonial.quote}&quot;</p>
-                <div className={styles.testimonialAuthor}>
-                  <div className={styles.testimonialAvatar}>
+                <footer className={styles.testimonialAuthor}>
+                  <div className={styles.testimonialAvatar} aria-hidden="true">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div className={styles.testimonialInfo}>
-                    <h4>{testimonial.name}</h4>
+                    <cite>{testimonial.name}</cite>
                     <p>{testimonial.role}</p>
                   </div>
-                </div>
-              </motion.div>
+                </footer>
+              </motion.blockquote>
             ))}
           </div>
         </div>
-        <div className={styles.shapeWaveTop}></div>
+        <div className={styles.shapeWaveTop} aria-hidden="true"></div>
       </section>
       
-      <section id="cta" className={styles.callToAction}>
+      {/* Call to Action Section */}
+      <section id="cta" className={styles.callToAction} aria-labelledby="cta-title">
         <div className={styles.ctaInner}>
           <motion.h2 
+            id="cta-title"
             className={styles.ctaTitle}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -318,14 +292,15 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <Link href="/home" className={styles.ctaBigButton}>
+            <Link href="/home" className={styles.ctaBigButton} aria-label="Begin learning now">
               Begin Learning Now
             </Link>
           </motion.div>
         </div>
       </section>
       
-      <footer className={styles.footer}>
+      {/* Footer */}
+      <footer className={styles.footer} role="contentinfo">
         <div className={styles.footerInner}>
           <div className={styles.footerGrid}>
             <div className={styles.footerColumn}>
@@ -366,7 +341,7 @@ export default function LandingPage() {
           <div className={styles.footerBottom}>
             <div className={styles.footerLogo}>Binary Brains</div>
             <div className={styles.footerCopyright}>
-              &copy; {new Date().getFullYear()} Binary Brains. All rights reserved.
+              <p>&copy; {new Date().getFullYear()} Binary Brains. All rights reserved.</p>
               <div className={styles.poweredBy}>
                 <span>Powered by</span>
                 <div className={styles.footerLogoGroup}>
@@ -397,23 +372,24 @@ export default function LandingPage() {
                   Needfit Agency
                 </Link>
               </div>
-            </div>            <div className={styles.footerSocial}>
-              <Link href="#" className={styles.socialIcon}>
+            </div>
+            <nav className={styles.footerSocial} aria-label="Social media links">
+              <Link href="#" className={styles.socialIcon} aria-label="Email us">
                 <FontAwesomeIcon icon={faEnvelope} />
               </Link>
-              <Link href="#" className={styles.socialIcon}>
+              <Link href="#" className={styles.socialIcon} aria-label="Follow us on Twitter">
                 <FontAwesomeIcon icon={faTwitter} />
               </Link>
-              <Link href="#" className={styles.socialIcon}>
+              <Link href="#" className={styles.socialIcon} aria-label="Follow us on Facebook">
                 <FontAwesomeIcon icon={faFacebook} />
               </Link>
-              <Link href="#" className={styles.socialIcon}>
+              <Link href="#" className={styles.socialIcon} aria-label="Follow us on Instagram">
                 <FontAwesomeIcon icon={faInstagram} />
               </Link>
-              <Link href="#" className={styles.socialIcon}>
+              <Link href="#" className={styles.socialIcon} aria-label="Follow us on LinkedIn">
                 <FontAwesomeIcon icon={faLinkedin} />
               </Link>
-            </div>
+            </nav>
           </div>
         </div>
       </footer>
