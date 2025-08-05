@@ -919,4 +919,136 @@ export const standards: Standard = {
       ]
     }
   ],
+  "5": [
+    {
+      id: 1,
+      title: "Data Storage",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match the Storage Units with Their Descriptions",
+          instruction: "Drag each storage unit to its correct description! (Hint: Use the byte clues)",
+          items: [
+            { id: "byte", text: "Byte (B)", type: "unit" },
+            { id: "kilobyte", text: "Kilobyte (KB)", type: "unit" },
+            { id: "megabyte", text: "Megabyte (MB)", type: "unit" },
+            { id: "gigabyte", text: "Gigabyte (GB)", type: "unit" },
+            { id: "terabyte", text: "Terabyte (TB)", type: "unit" }
+          ],
+          buckets: [
+            {
+              id: "desc-byte",
+              title: "A tiny unit of data that can store a single letter or symbol, made up of 8 smaller parts called bits.",
+              type: "desc"
+            },
+            {
+              id: "desc-kilobyte",
+              title: "Used to store simple text files, small pictures, made up of about 1024 bytes.",
+              type: "desc"
+            },
+            {
+              id: "desc-megabyte",
+              title: "Commonly used for documents, images, or emails, holds about 1024 kilobytes.",
+              type: "desc"
+            },
+            {
+              id: "desc-gigabyte",
+              title: "Stores long videos, around 500 photos, and games.",
+              type: "desc"
+            },
+            {
+              id: "desc-terabyte",
+              title: "Huge storage used in hard drives or cloud, holds around 1000 gigabytes.",
+              type: "desc"
+            }
+          ],
+          audioSrc: undefined,
+          speakText: "Drag each storage unit to its correct description! (Hint: Use the byte clues)"
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "Cyber Security",
+      lessonContent: [
+        {
+          type: "drag-drop",
+          format: "drag-drop",
+          title: "Cyber Security Threats",
+          instruction: "Read each situation. Drag and drop it into the correct category: 'Cyber Security Threat' or 'Not a Threat'.",
+          items: [
+            { id: "s1", text: "While streaming cartoons, a message leaps onto the screen: ‘Congratulations, you’ve won a brand‑new phone! Click here to claim your prize.’", type: "threat" },
+            { id: "s2", text: "You open an email that looks like it’s from your bank teacher and asks you to ‘confirm your password’ on a strange link.", type: "threat" },
+            { id: "s3", text: "Your friend shares a USB stick with ‘cool free games.’ After you install one, your computer slows down and files vanish.", type: "threat" },
+            { id: "s4", text: "A full‑screen warning suddenly appears: ‘All your files are locked. Pay 50 coins to get them back.’", type: "threat" },
+            { id: "s5", text: "You find a ‘FREE wallpaper changer’ on an unknown website. After installing it, the computer starts deleting photos.", type: "threat" },
+            { id: "s6", text: "You visit your school’s official website to download this week’s homework PDF, and it opens normally.", type: "not-threat" },
+            { id: "s7", text: "You click the Update button inside your trusted antivirus program to get the latest protection.", type: "not-threat" },
+            { id: "s8", text: "In class, you log into Google Classroom through the teacher’s bookmarked link to submit an assignment.", type: "not-threat" },
+            { id: "s9", text: "A science video plays from the verified YouTube Kids channel with comments turned off.", type: "not-threat" },
+            { id: "s10", text: "You right‑click the desktop and choose Change Background to set a new picture already saved on your computer.", type: "not-threat" }
+          ],
+          targets: [
+            { id: "threat", title: "Cyber Security Threat", type: "threat" },
+            { id: "not-threat", title: "Not a Threat", type: "not-threat" }
+          ],
+          audioSrc: undefined,
+          speakText: "Read each situation. Drag and drop it into the correct category: 'Cyber Security Threat' or 'Not a Threat'."
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Online shopping made easy",
+      lessonContent: [
+        {
+          type: "sequence-match",
+          format: "sequence-match",
+          title: "Steps to Buy a Book Online",
+          instruction: "Arrange the steps Ria follows to buy Harry Potter books online in the correct order!",
+          items: [
+            { id: "A", content: "Once you place the order, wait for the delivery person to bring the product to your doorstep." },
+            { id: "B", content: "Click on a product to view its details, images, and description." },
+            { id: "C", content: "After adding items to cart, click on the 'Proceed to Buy' button. Enter delivery address, and then choose a payment method (Example: credit card, UPI, or cash on delivery). Click on 'Place your order.'" },
+            { id: "D", content: "If you like the product, click the 'Add to Cart' button. After adding, you can view your selected items by clicking on the shopping cart icon." },
+            { id: "E", content: "Use the Search Bar to find the product that is, 'Harry Potter books.'" },
+            { id: "F", content: "Open a shopping website like www.amazon.in" }
+          ],
+          correctOrder: ["F", "E", "B", "D", "C", "A"],
+          dropZoneCount: 6,
+          audioSrc: undefined,
+          speakText: "Arrange the steps Ria follows to buy Harry Potter books online in the correct order!"
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "MS Excel and spreadsheets (part 2)",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Identify the Excel Function",
+          instruction: "Match each description to the correct Excel function name!",
+          items: [
+            { id: "min", text: "Finds the smallest number in a range.", type: "desc" },
+            { id: "count", text: "Counts how many numbers are in a range.", type: "desc" },
+            { id: "round", text: "Rounds a number to a specified number of decimal places.", type: "desc" },
+            { id: "average", text: "Finds the average of numbers in a range.", type: "desc" },
+            { id: "len", text: "Counts how many characters are in a text string.", type: "desc" }
+          ],
+          buckets: [
+            { id: "bucket-min", title: "MIN", type: "func" },
+            { id: "bucket-count", title: "COUNT", type: "func" },
+            { id: "bucket-round", title: "ROUND", type: "func" },
+            { id: "bucket-average", title: "AVERAGE", type: "func" },
+            { id: "bucket-len", title: "LEN", type: "func" }
+          ],
+          audioSrc: undefined,
+          speakText: "Match each description to the correct Excel function name!"
+        }
+      ]
+    }
+  ],
 };
