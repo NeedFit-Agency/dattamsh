@@ -214,7 +214,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         // Show congratulations screen only for the last question
         setTimeout(() => {
           setShowCongratulations(true);
-        }, 2000);
+        }, 1800); // Reduced from 2000ms to 1800ms for faster response
       } else {
         // For middle questions, proceed to next question directly after a short delay
         setTimeout(() => {
@@ -307,6 +307,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         tryAgainText="Play Again"
         message={isCorrectAnswer ? "Great job! You got it right!" : "Not quite! Give it another shot."}
         mascot={mascot}
+
       />
       <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
         <span className={styles.gearIcon}>⚙️</span>

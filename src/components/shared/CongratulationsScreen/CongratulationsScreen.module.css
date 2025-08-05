@@ -135,10 +135,10 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    /* Modern gradient background */
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    /* Modern gradient background - changed to green */
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
     box-shadow: 
-        0 4px 15px rgba(52, 152, 219, 0.4),
+        0 4px 15px rgba(46, 204, 113, 0.4),
         0 2px 4px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
@@ -161,16 +161,16 @@
 .playAgainBtn:hover {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 
-        0 8px 25px rgba(52, 152, 219, 0.5),
+c        0 8px 25px rgba(46, 204, 113, 0.5),
         0 4px 8px rgba(0, 0, 0, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    background: linear-gradient(135deg, #2980b9 0%, #1f5f8b 100%);
+    background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
 }
 
 .playAgainBtn:active {
     transform: translateY(-1px) scale(0.98);
     box-shadow: 
-        0 2px 8px rgba(52, 152, 219, 0.3),
+        0 2px 8px rgba(46, 204, 113, 0.3),
         0 1px 3px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }

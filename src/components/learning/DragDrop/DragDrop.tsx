@@ -373,10 +373,10 @@ export const DragDrop: React.FC<DragDropProps> = ({
         setFeedback({ show: true, correct: true, message: successMessage });
         setAllCompleted(true);
         
-        // Show congratulations screen after a short delay
+        // Show congratulations screen after a shorter delay
         setTimeout(() => {
           setShowCongratulations(true);
-        }, 2000);
+        }, 1800); // Reduced from 2000ms to 1800ms for faster response
       } else {
         let errorMessage = 'Oops, something went wrong. Try again';
         setFeedback({ show: true, correct: false, message: errorMessage });
@@ -483,6 +483,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
 
         buttonText={isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter')}
         tryAgainText="Play Again"
+        isLastActivity={isFourthChapter}
       />
 
       <div className={styles.instructionBox}>

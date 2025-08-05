@@ -27,12 +27,124 @@
   text-align: center;
 }
 
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  position: relative;
+  width: 100%;
+}
+
 .title {
   font-size: 28px;
   font-weight: 700;
   color: var(--text-dark, #343a40);
-  margin-bottom: 12px;
+  margin: 0;
   text-align: center;
+  flex: 1;
+}
+
+.backButton {
+  position: absolute;
+  top: clamp(20px, 3vh, 30px);
+  left: clamp(20px, 3vw, 30px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  color: #1db0f6;
+  border: 2px solid #1db0f6;
+  border-radius: clamp(10px, 1.5vw, 14px);
+  padding: clamp(8px, 1.5vh, 12px) clamp(12px, 2vw, 16px);
+  font-size: clamp(14px, 1.8vw, 16px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 0 #0369a1, 0 3px 10px rgba(29, 176, 246, 0.2);
+  font-family: 'Nunito', 'Quicksand', sans-serif;
+  z-index: 10;
+  text-decoration: none;
+  min-width: clamp(80px, 12vw, 100px);
+  justify-content: center;
+}
+
+.backButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(29, 176, 246, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.backButton:hover::before {
+  opacity: 1;
+}
+
+.backButton:hover {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+  color: #0369a1;
+  border-color: #0369a1;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #0369a1, 0 5px 14px rgba(29, 176, 246, 0.3);
+}
+
+.backButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #0369a1, 0 2px 6px rgba(29, 176, 246, 0.2);
+}
+
+.backButton svg {
+  width: clamp(14px, 1.8vw, 16px);
+  height: clamp(14px, 1.8vw, 16px);
+  transition: transform 0.3s ease;
+}
+
+.backButton:hover svg {
+  transform: translateX(-2px);
+}
+
+.backButton span {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Responsive back button */
+@media (max-width: 768px) {
+  .backButton {
+    top: clamp(15px, 2vh, 25px);
+    left: clamp(15px, 2vw, 25px);
+    padding: clamp(6px, 1.2vh, 10px) clamp(10px, 1.5vw, 14px);
+    font-size: clamp(12px, 1.5vw, 14px);
+    min-width: clamp(70px, 10vw, 90px);
+  }
+  
+  .backButton svg {
+    width: clamp(12px, 1.5vw, 14px);
+    height: clamp(12px, 1.5vw, 14px);
+  }
+}
+
+@media (max-width: 480px) {
+  .backButton {
+    top: clamp(10px, 1.5vh, 20px);
+    left: clamp(10px, 1.5vw, 20px);
+    padding: clamp(5px, 1vh, 8px) clamp(8px, 1.2vw, 12px);
+    font-size: clamp(11px, 1.3vw, 13px);
+    min-width: clamp(60px, 8vw, 80px);
+    gap: 6px;
+  }
+  
+  .backButton svg {
+    width: clamp(11px, 1.3vw, 13px);
+    height: clamp(11px, 1.3vw, 13px);
+  }
 }
 
 /* Main Worksheet Card */
@@ -215,25 +327,96 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--warning, #ffc107);
-  color: #212529;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  color: #1db0f6;
+  border: 2px solid #1db0f6;
+  border-radius: clamp(10px, 1.5vw, 14px);
+  padding: clamp(8px, 1.5vh, 12px) clamp(12px, 2vw, 16px);
+  font-size: clamp(14px, 1.8vw, 16px);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  min-width: 120px;
-  height: 44px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 5px 0 #0369a1, 0 3px 10px rgba(29, 176, 246, 0.2);
+  font-family: 'Nunito', 'Quicksand', sans-serif;
+  min-width: clamp(80px, 12vw, 100px);
+  height: clamp(44px, 5.5vh, 52px);
   justify-content: center;
+  position: relative;
+}
+
+.resetButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(29, 176, 246, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.resetButton:hover::before {
+  opacity: 1;
 }
 
 .resetButton:hover {
-  background-color: #e0a800;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+  color: #0369a1;
+  border-color: #0369a1;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #0369a1, 0 5px 14px rgba(29, 176, 246, 0.3);
+}
+
+.resetButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #0369a1, 0 2px 6px rgba(29, 176, 246, 0.2);
+}
+
+.resetButton svg {
+  width: clamp(14px, 1.8vw, 16px);
+  height: clamp(14px, 1.8vw, 16px);
+  transition: transform 0.3s ease;
+}
+
+.resetButton:hover svg {
+  transform: scale(1.1);
+}
+
+.resetButton span {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Responsive reset button */
+@media (max-width: 768px) {
+  .resetButton {
+    padding: clamp(6px, 1.2vh, 10px) clamp(10px, 1.5vw, 14px);
+    font-size: clamp(12px, 1.5vw, 14px);
+    min-width: clamp(70px, 10vw, 90px);
+    height: clamp(42px, 4.8vh, 50px);
+  }
+  
+  .resetButton svg {
+    width: clamp(12px, 1.5vw, 14px);
+    height: clamp(12px, 1.5vw, 14px);
+  }
+}
+
+@media (max-width: 480px) {
+  .resetButton {
+    padding: clamp(5px, 1vh, 8px) clamp(8px, 1.2vw, 12px);
+    font-size: clamp(11px, 1.3vw, 13px);
+    min-width: clamp(60px, 8vw, 80px);
+    height: clamp(40px, 4.5vh, 48px);
+    gap: 6px;
+  }
+  
+  .resetButton svg {
+    width: clamp(11px, 1.3vw, 13px);
+    height: clamp(11px, 1.3vw, 13px);
+  }
 }
 
 /* Buckets Container (Bottom Section) */
@@ -681,15 +864,7 @@
   }
 }
 
-/* Focus styles for keyboard navigation */
-.fruitDraggable:focus,
-.basketDropzone:focus,
-.audioButton:focus,
-.resetButton:focus,
-.chooseBackButton:focus {
-  outline: 3px solid #1aa2ff;
-  outline-offset: 2px;
-}
+
 
 /* Reduced motion support for animations */
 @media (prefers-reduced-motion: reduce) {
