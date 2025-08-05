@@ -1051,4 +1051,172 @@ export const standards: Standard = {
       ]
     }
   ],
+  "6": [
+    {
+      id: 1,
+      title: "Programming Language Fundamentals",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match Programming Terms to Their Explanations",
+          instruction: "Drag each programming term to its correct explanation!",
+          items: [
+            { id: "syntax", text: "Syntax", type: "term" },
+            { id: "keywords", text: "Keywords", type: "term" },
+            { id: "operators", text: "Operators", type: "term" },
+            { id: "control-structures", text: "Control structures", type: "term" }
+          ],
+          buckets: [
+            {
+              id: "explanation-syntax",
+              title: "Python has specific syntax rules that dictate how code must be written. If these rules are not followed, the computer won’t understand the instructions and will raise an error.",
+              type: "explanation"
+            },
+            {
+              id: "explanation-keywords",
+              title: "Python reserves specific words like if, while, def, and import for particular purposes. These guide the computer in understanding what actions to perform.",
+              type: "explanation"
+            },
+            {
+              id: "explanation-operators",
+              title: "Python uses symbols like +, -, *, /, and others to perform calculations and operations on data.",
+              type: "explanation"
+            },
+            {
+              id: "explanation-control-structures",
+              title: "Python includes tools like loops (for, while) and conditional statements (if, elif, else) to control the flow of the program. These structures allow you to make decisions and repeat actions based on conditions.",
+              type: "explanation"
+            }
+          ],
+          audioSrc: undefined,
+          speakText: "Drag each programming term to its correct explanation!"
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "PowerPoint Features (Who am I?)",
+      lessonContent: [
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Who am I? (PowerPoint Feature)",
+          riddleText: "I help add and format text and images to support content and make slides more engaging.",
+          questionText: "Which PowerPoint feature am I?",
+          options: [
+            { id: "text-image-insertion", text: "Text and Image Insertion", isCorrect: true },
+            { id: "smartart", text: "SmartArt and Charts", isCorrect: false },
+            { id: "presenter-view", text: "Presenter View", isCorrect: false },
+            { id: "transitions", text: "Transitions and Animations", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "I help add and format text and images to support content and make slides more engaging."
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Who am I? (PowerPoint Feature)",
+          riddleText: "I visually represent data and relationships, making complex information easier to understand, thus enhancing the presentation.",
+          questionText: "Which feature of PowerPoint am I?",
+          options: [
+            { id: "text-image-insertion", text: "Text and Image Insertion", isCorrect: false },
+            { id: "smartart", text: "SmartArt and Charts", isCorrect: true },
+            { id: "presenter-view", text: "Presenter View", isCorrect: false },
+            { id: "transitions", text: "Transitions and Animations", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "I visually represent data and relationships, making complex information easier to understand, thus enhancing the presentation."
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Who am I? (PowerPoint Feature)",
+          riddleText: "I let presenters view notes and upcoming slides privately, while the audience sees only the current slide. Found under 'Use Presenter View' in the Slide Show tab.",
+          questionText: "Which PowerPoint feature am I?",
+          options: [
+            { id: "text-image-insertion", text: "Text and Image Insertion", isCorrect: false },
+            { id: "smartart", text: "SmartArt and Charts", isCorrect: false },
+            { id: "presenter-view", text: "Presenter View", isCorrect: true },
+            { id: "transitions", text: "Transitions and Animations", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "I let presenters view notes and upcoming slides privately, while the audience sees only the current slide. Found under 'Use Presenter View' in the Slide Show tab."
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Who am I? (PowerPoint Feature)",
+          riddleText: "I create smooth changes between slides and control how elements appear to keep the audience interested.",
+          questionText: "Which PowerPoint feature am I?",
+          options: [
+            { id: "text-image-insertion", text: "Text and Image Insertion", isCorrect: false },
+            { id: "smartart", text: "SmartArt and Charts", isCorrect: false },
+            { id: "presenter-view", text: "Presenter View", isCorrect: false },
+            { id: "transitions", text: "Transitions and Animations", isCorrect: true }
+          ],
+          audioSrc: undefined,
+          speakText: "I create smooth changes between slides and control how elements appear to keep the audience interested."
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Flowchart Sequence",
+      lessonContent: [
+        {
+          type: "sequence-match",
+          format: "sequence-match",
+          title: "Arrange the Flowchart Steps (Even/Odd)",
+          instruction: "Arrange the flowchart symbols in the correct order to check if a number is even or odd.",
+          items: [
+            { id: "start", content: "Start" },
+            { id: "input", content: "Input Number" },
+            { id: "decision", content: "Is Number % 2 == 0?" },
+            { id: "even", content: "Print 'Number is Even'" },
+            { id: "odd", content: "Print 'Number is Odd'" },
+            { id: "end", content: "End" }
+          ],
+          correctOrder: ["start", "input", "decision", "even", "odd", "end"],
+          dropZoneCount: 6,
+          audioSrc: undefined,
+          speakText: "Arrange the flowchart symbols in the correct order to check if a number is even or odd."
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "Operator Sorting",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Sort the Operators by Type",
+          instruction: "Drag each operator to its correct type bucket!",
+          items: [
+            { id: "plus", text: "+ Addition", type: "arithmetic" },
+            { id: "modulus", text: "% Modulus", type: "arithmetic" },
+            { id: "exponential", text: "** Exponential", type: "arithmetic" },
+            { id: "assign", text: "= Assignment", type: "assignment" },
+            { id: "mul-assign", text: "*= Multiplication assignment", type: "assignment" },
+            { id: "floordiv-assign", text: "//= Floor division assignment", type: "assignment" },
+            { id: "equal", text: "== Equal", type: "relational" },
+            { id: "greater", text: "> Greater than", type: "relational" },
+            { id: "less-equal", text: "<= Less than or equal to", type: "relational" },
+            { id: "and", text: "and: And", type: "logical" },
+            { id: "or", text: "or: Or", type: "logical" },
+            { id: "not", text: "not: Not", type: "logical" }
+          ],
+          buckets: [
+            { id: "bucket-arithmetic", title: "Arithmetic operators", type: "arithmetic" },
+            { id: "bucket-assignment", title: "Assignment operators", type: "assignment" },
+            { id: "bucket-relational", title: "Relational operators", type: "relational" },
+            { id: "bucket-logical", title: "Logical operators", type: "logical" }
+          ],
+          audioSrc: undefined,
+          speakText: "Drag each operator to its correct type bucket!"
+        }
+      ]
+    }
+  ],
 };
