@@ -18,6 +18,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   audioSrc,
   speakText,
   standard,
+  isFourthChapter = false,
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [placedItems, setPlacedItems] = useState<{
@@ -35,7 +36,6 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   const dropZonesContainerRef = useRef<HTMLDivElement | null>(null);
   const [playingItemAudio, setPlayingItemAudio] = useState<string | null>(null);
   const [isAnyAudioPlaying, setIsAnyAudioPlaying] = useState(false);
-  const itemAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // Get items that are not yet placed in drop zones
   const availableItems = items.filter(
@@ -106,194 +106,86 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     if (container && nextZoneIndex < dropZoneCount) {
       // There are direct children, so we can use the index
       const nextDropZone = container.children[nextZoneIndex] as HTMLElement;
-
       if (nextDropZone) {
-        // Use a timeout to allow React to render the new item before we scroll.
-        setTimeout(() => {
-          const containerRect = container.getBoundingClientRect();
-          const nextZoneRect = nextDropZone.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        const nextZoneRect = nextDropZone.getBoundingClientRect();
 
-          // If the next drop zone is outside the visible area of the container, scroll to it.
-          if (
-            nextZoneRect.bottom > containerRect.bottom ||
-            nextZoneRect.top < containerRect.top
-          ) {
-            nextDropZone.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-            });
-          }
-        }, 100);
+        // Check if the next drop zone is fully visible
+        if (
+          nextZoneRect.bottom > containerRect.bottom ||
+          nextZoneRect.top < containerRect.top
+        ) {
+          nextDropZone.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+          });
+        }
       }
     }
   };
 
-  // Handle dropping back to the draggable items area
   const handleDropToDraggableArea = (e: React.DragEvent) => {
     e.preventDefault();
-    const target = e.currentTarget as HTMLElement;
-    target.classList.remove(styles.dragOver);
+    e.currentTarget.classList.remove(styles.dragOver);
 
     if (!draggedItemId) return;
 
-    // Remove item from any drop zone it was in
-    const newPlacedItems = { ...placedItems };
-    Object.keys(newPlacedItems).forEach((key) => {
-      if (newPlacedItems[parseInt(key)].id === draggedItemId) {
-        delete newPlacedItems[parseInt(key)];
-      }
-    });
-    setPlacedItems(newPlacedItems);
+    const itemToReturn = Object.values(placedItems).find(
+      (item) => item.id === draggedItemId
+    );
+    if (itemToReturn) {
+      returnItemToSteps(itemToReturn);
+    }
   };
 
-  // Check Answer Logic
-  const checkAnswer = () => {
-    const placedCount = Object.keys(placedItems).length;
-
-    if (placedCount < correctOrder.length) {
-      setFeedback({
-        type: "incorrect",
-        message: "Please place all items before checking!",
-      });
-      return;
-    }
-
-    let isAllCorrect = true;
-    const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
-
-    // Clear previous feedback classes
-    dropZones.forEach((zone) => {
-      zone.classList.remove(styles.slotCorrect, styles.slotIncorrect);
-    });
-
-    // Check each placed item against correct order
-    Object.entries(placedItems).forEach(([zoneIndexStr, item]) => {
-      const zoneIndex = parseInt(zoneIndexStr);
-      const expectedItemId = correctOrder[zoneIndex];
-      const zone = dropZones[zoneIndex] as HTMLElement;
-
-      if (item.id === expectedItemId) {
-        zone.classList.add(styles.slotCorrect);
-      } else {
-        zone.classList.add(styles.slotIncorrect);
-        isAllCorrect = false;
+  const returnItemToSteps = (itemToReturn: DraggableItem) => {
+    setPlacedItems((prev) => {
+      const newPlacedItems = { ...prev };
+      for (const key in newPlacedItems) {
+        if (newPlacedItems[key].id === itemToReturn.id) {
+          delete newPlacedItems[key];
+          break;
+        }
       }
+      return newPlacedItems;
     });
-    if (isAllCorrect) {
+  };
+
+  const checkAnswer = () => {
+    const placedOrder = Array.from(
+      { length: dropZoneCount },
+      (_, i) => placedItems[i]?.id
+    );
+    const isCorrect =
+      JSON.stringify(placedOrder) === JSON.stringify(correctOrder);
+
+    if (isCorrect) {
       setFeedback({
         type: "correct",
-        message: "Well done! You arranged everything correctly!",
+        message: "Amazing! You have arranged everything correctly!",
       });
-      setShowTryAgain(true);
-
-      // Show congratulations screen after a shorter delay for better feedback
-      setTimeout(() => {
-        setShowCongratulations(true);
-      }, 1800); // Reduced from 5000ms to 1800ms for faster response
+      setShowCongratulations(true);
     } else {
       setFeedback({
         type: "incorrect",
-        message: "Some steps are not in the right order. Try again!",
+        message: "Not quite right. Give it another try!",
       });
       setShowTryAgain(true);
       if (onIncorrectAttempt) {
         onIncorrectAttempt();
       }
-
-      // Auto-reset feature: Reset the sequence state after showing feedback for 3 seconds
-      setTimeout(() => {
-        autoResetSequence();
-      }, 3000);
     }
   };
 
-  const returnItemToSteps = (itemToReturn: DraggableItem) => {
-    const newPlacedItems = { ...placedItems };
-    const zoneIndexToRemove = Object.keys(newPlacedItems).find(
-      (key) => newPlacedItems[parseInt(key)].id === itemToReturn.id
-    );
-
-    if (zoneIndexToRemove) {
-      delete newPlacedItems[parseInt(zoneIndexToRemove)];
-      setPlacedItems(newPlacedItems);
-
-      setFeedback({ type: null, message: "" });
-      const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
-      dropZones.forEach((zone) => {
-        zone.classList.remove(styles.slotCorrect, styles.slotIncorrect);
-      });
-    }
-  };
-
-  // Reset Game Logic
   const resetGame = () => {
     setPlacedItems({});
     setFeedback({ type: null, message: "" });
     setShowTryAgain(false);
     setShowCongratulations(false);
-    setIsAudioPlaying(false);
-    setResetCounter((prev) => prev + 1); // Force re-render of drop zones
-
-    setIsAnyAudioPlaying(false);
-    setPlayingItemAudio(null);
-
-    // Stop any ongoing speech
-    if (typeof window !== "undefined" && window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-    }
-
-    // Stop any audio elements
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    if (itemAudioRef.current) {
-      itemAudioRef.current.pause();
-      itemAudioRef.current.currentTime = 0;
-    }
-
-    // Clear visual feedback
-    const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
-    dropZones.forEach((zone) => {
-      zone.classList.remove(
-        styles.slotCorrect,
-        styles.slotIncorrect,
-        styles.dragOver
-      );
-    });
-
-    // Scroll to top of Column A
-    if (dropZonesContainerRef.current) {
-      dropZonesContainerRef.current.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    setResetCounter((prev) => prev + 1);
   };
 
-  // Auto-reset function that triggers after incorrect answers
-  const autoResetSequence = () => {
-    setPlacedItems({});
-    setFeedback({ type: null, message: "" });
-    setShowTryAgain(false);
-    setResetCounter((prev) => prev + 1); // Force re-render of drop zones
-    setIsAnyAudioPlaying(false);
-    setPlayingItemAudio(null);
-
-    // Clear visual feedback
-    const dropZones = document.querySelectorAll(`.${styles.dropZone}`);
-    dropZones.forEach((zone) => {
-      zone.classList.remove(
-        styles.slotCorrect,
-        styles.slotIncorrect,
-        styles.dragOver
-      );
-    });
-
-    // Scroll to top of Column A
-    if (dropZonesContainerRef.current) {
-      dropZonesContainerRef.current.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
-  // Helper functions to get styling and icons for items
   const getItemStyleClass = (item: DraggableItem) => {
     switch (item.id) {
       case "step-open":
@@ -312,6 +204,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         return styles.stepOpen; // Default style
     }
   };
+
   const getItemIcon = (item: DraggableItem) => {
     switch (item.id) {
       case "step-1": // Save your work
@@ -437,10 +330,6 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         });
 
         // Stop any item audio that might be playing
-        if (itemAudioRef.current) {
-          itemAudioRef.current.pause();
-          itemAudioRef.current.currentTime = 0;
-        }
         setPlayingItemAudio(null);
 
         audioRef.current.play().catch((error) => {
@@ -526,8 +415,15 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         onTryAgainClick={resetGame}
         showTryAgain={true}
         message="Amazing! You have arranged everything correctly!"
-        buttonText={isLastLesson ? "Next Course" : "Next Chapter"}
+        buttonText={
+          isFourthChapter
+            ? `Congratulations! You have completed grade ${standard}!`
+            : isLastLesson
+            ? "Next Course"
+            : "Next Chapter"
+        }
         tryAgainText="Play Again"
+        isLastActivity={isFourthChapter}
       />
       <div className={styles.worksheetCard}>
         <div className={styles.titleContainer}>
@@ -551,6 +447,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             </button>
           )}
         </div>
+
         <div className={styles.mainContent}>
           <div className={styles.dropTargets}>
             <h3>Column A</h3>
@@ -646,10 +543,6 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                         onClick={() => {
                           // If this item audio is already playing, stop it
                           if (playingItemAudio === item.id) {
-                            if (itemAudioRef.current) {
-                              itemAudioRef.current.pause();
-                              itemAudioRef.current.currentTime = 0;
-                            }
                             setPlayingItemAudio(null);
                             setIsAnyAudioPlaying(false);
                             return;
@@ -672,20 +565,15 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                           });
 
                           // Stop instruction audio if playing
-                          if (audioRef.current && !audioRef.current.paused) {
+                          if (audioRef.current && isAudioPlaying) {
                             audioRef.current.pause();
-                            audioRef.current.currentTime = 0;
                             setIsAudioPlaying(false);
                           }
 
                           // Stop any currently playing item audio
-                          if (itemAudioRef.current) {
-                            itemAudioRef.current.pause();
-                            itemAudioRef.current.currentTime = 0;
-                          }
+                          setPlayingItemAudio(null);
 
                           const audio = new Audio(item.audioSrc);
-                          itemAudioRef.current = audio;
                           setPlayingItemAudio(item.id);
                           setIsAnyAudioPlaying(true);
 
@@ -695,7 +583,6 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                           });
 
                           audio.addEventListener("error", () => {
-                            console.error("Item audio play failed");
                             setPlayingItemAudio(null);
                             setIsAnyAudioPlaying(false);
                           });
@@ -731,7 +618,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
               ))}
             </div>
           </div>
-        </div>{" "}
+        </div>
         {feedback.type && (
           <div
             className={`${styles.feedbackMessage} ${
@@ -743,6 +630,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             {feedback.message}
           </div>
         )}
+
         <div className={styles.actionButtonsContainer}>
           <button
             className={`${styles.actionButton} ${styles.checkAnswerBtn}`}

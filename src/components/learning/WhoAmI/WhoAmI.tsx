@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import styles from './WhoAmI.module.css';
-import CongratulationsScreen from '../../shared/CongratulationsScreen';
-import TTS from '../../shared/TTS';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect, useRef } from "react";
+import styles from "./WhoAmI.module.css";
+import CongratulationsScreen from "../../shared/CongratulationsScreen";
+import TTS from "../../shared/TTS";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeadphones } from "@fortawesome/free-solid-svg-icons";
 
 interface Option {
   id: string;
@@ -26,11 +26,23 @@ export interface WhoAmIProps {
   speakText?: string; // Fallback text for TTS
   standard?: string; // The current standard/grade level
   isFourthChapter?: boolean; // Whether this is the 4th chapter (last chapter) of the grade
-  subtitle?: string; // Custom subtitle for the congratulations screen
 }
 
 const DefaultMascot = () => (
-  <svg viewBox="0 0 100 80" width="100" height="80"><path fill="#38bdf8" d="M10,80 C10,46.86 36.86,20 70,20 L75,20 C75,30 70,40 60,40 C50,40 45,30 45,20 L50,20 C83.14,20 110,46.86 110,80 L10,80 Z"></path><path fill="#7dd3fc" d="M50,20 C50,9 60,0 70,0 C80,0 90,9 90,20 L50,20 Z"></path><circle fill="#fff" cx="55" cy="55" r="12"></circle><circle fill="#475569" cx="52" cy="58" r="5"></circle><circle fill="#fff" cx="85" cy="55" r="12"></circle><circle fill="#475569" cx="88" cy="58" r="5"></circle></svg>
+  <svg viewBox="0 0 100 80" width="100" height="80">
+    <path
+      fill="#38bdf8"
+      d="M10,80 C10,46.86 36.86,20 70,20 L75,20 C75,30 70,40 60,40 C50,40 45,30 45,20 L50,20 C83.14,20 110,46.86 110,80 L10,80 Z"
+    ></path>
+    <path
+      fill="#7dd3fc"
+      d="M50,20 C50,9 60,0 70,0 C80,0 90,9 90,20 L50,20 Z"
+    ></path>
+    <circle fill="#fff" cx="55" cy="55" r="12"></circle>
+    <circle fill="#475569" cx="52" cy="58" r="5"></circle>
+    <circle fill="#fff" cx="85" cy="55" r="12"></circle>
+    <circle fill="#475569" cx="88" cy="58" r="5"></circle>
+  </svg>
 );
 
 const WhoAmI: React.FC<WhoAmIProps> = ({
@@ -47,7 +59,6 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   speakText,
   standard,
   isFourthChapter = false,
-  subtitle
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -66,10 +77,10 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
   const titleAudioRef = useRef<HTMLAudioElement>(null);
 
   // Find the correct answer ID
-  const correctAnswerId = options.find(option => option.isCorrect)?.id || '';
+  const correctAnswerId = options.find((option) => option.isCorrect)?.id || "";
 
   // Check if audio should be shown (for grades 1, 2, 3, 4)
-  const shouldShowAudio = standard && ['1', '2', '3', '4'].includes(standard);
+  const shouldShowAudio = standard && ["1", "2", "3", "4"].includes(standard);
 
   // Monitor audio state changes
   useEffect(() => {
@@ -77,28 +88,28 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (!audio) return;
 
     const handleEnded = () => {
-      console.log('Audio ended');
+      console.log("Audio ended");
       setIsAudioPlaying(false);
     };
 
     const handlePause = () => {
-      console.log('Audio paused');
+      console.log("Audio paused");
       setIsAudioPlaying(false);
     };
 
     const handlePlay = () => {
-      console.log('Audio started playing');
+      console.log("Audio started playing");
       setIsAudioPlaying(true);
     };
 
-    audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('pause', handlePause);
-    audio.addEventListener('play', handlePlay);
+    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("play", handlePlay);
 
     return () => {
-      audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('pause', handlePause);
-      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("play", handlePlay);
     };
   }, [audioSrc]);
 
@@ -108,28 +119,28 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     if (!audio) return;
 
     const handleEnded = () => {
-      console.log('Title audio ended');
+      console.log("Title audio ended");
       setIsTitleAudioPlaying(false);
     };
 
     const handlePause = () => {
-      console.log('Title audio paused');
+      console.log("Title audio paused");
       setIsTitleAudioPlaying(false);
     };
 
     const handlePlay = () => {
-      console.log('Title audio started playing');
+      console.log("Title audio started playing");
       setIsTitleAudioPlaying(true);
     };
 
-    audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('pause', handlePause);
-    audio.addEventListener('play', handlePlay);
+    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("play", handlePlay);
 
     return () => {
-      audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('pause', handlePause);
-      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("play", handlePlay);
     };
   }, []);
 
@@ -140,7 +151,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         setIsAudioPlaying(false);
       } else {
         questionAudioRef.current.play().catch((error) => {
-          console.error('Audio play failed:', error);
+          console.error("Audio play failed:", error);
           // Fallback to TTS if audio file fails
           playTTSFallback();
         });
@@ -159,7 +170,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         setIsTitleAudioPlaying(false);
       } else {
         titleAudioRef.current.play().catch((error) => {
-          console.error('Title audio play failed:', error);
+          console.error("Title audio play failed:", error);
         });
         setIsTitleAudioPlaying(true);
       }
@@ -176,19 +187,23 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
 
     const textToSpeak = speakText || `${riddleText} ${questionText}`;
 
-    if (textToSpeak && typeof window !== 'undefined' && window.speechSynthesis) {
+    if (
+      textToSpeak &&
+      typeof window !== "undefined" &&
+      window.speechSynthesis
+    ) {
       try {
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
         utterance.rate = 0.5;
         utterance.pitch = 1.0;
-        
+
         utterance.onstart = () => setIsAudioPlaying(true);
         utterance.onend = () => setIsAudioPlaying(false);
         utterance.onerror = (e) => {
           console.error("SpeechSynthesis Error:", e);
           setIsAudioPlaying(false);
         };
-        
+
         window.speechSynthesis.speak(utterance);
       } catch (e) {
         console.error("SpeechSynthesis failed:", e);
@@ -211,7 +226,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       setLessonCompleted(true); // Mark lesson as completed
       setWinScreenMessage("YOU DID IT!");
       setButtonText(isLastLesson ? "Finish" : buttonTextWhenCorrect);
-      
+
       if (isLastLesson) {
         // Show congratulations screen only for the last question
         setTimeout(() => {
@@ -220,9 +235,13 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       } else {
         // For middle questions, proceed to next question directly after a short delay
         setTimeout(() => {
-          if (onComplete && typeof onComplete === 'function') {
+          if (onComplete && typeof onComplete === "function") {
             onComplete();
-          } else if (onComplete && typeof onComplete === 'object' && onComplete.href) {
+          } else if (
+            onComplete &&
+            typeof onComplete === "object" &&
+            onComplete.href
+          ) {
             window.location.href = onComplete.href;
           }
         }, 1500);
@@ -266,11 +285,13 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     setIsCorrectAnswer(false);
     setLessonCompleted(false);
   }, [correctAnswerId, riddleText]);
-  
+
   const getButtonClass = (optionId: string) => {
     if (!isAnswered) return styles.optionButton;
-    if (optionId === correctAnswerId) return `${styles.optionButton} ${styles.correct}`;
-    if (optionId === selectedAnswer && optionId !== correctAnswerId) return `${styles.optionButton} ${styles.incorrect}`;
+    if (optionId === correctAnswerId)
+      return `${styles.optionButton} ${styles.correct}`;
+    if (optionId === selectedAnswer && optionId !== correctAnswerId)
+      return `${styles.optionButton} ${styles.incorrect}`;
     return styles.optionButton;
   };
 
@@ -278,50 +299,69 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     <div className={styles.container}>
       {/* Audio element for .m4a files */}
       {shouldShowAudio && audioSrc && (
-        <audio 
-          ref={questionAudioRef} 
+        <audio
+          ref={questionAudioRef}
           src={audioSrc}
           onError={() => {
-            console.error('Audio file failed to load');
+            console.error("Audio file failed to load");
             setIsAudioPlaying(false);
           }}
         />
       )}
-      
+
       {/* Audio element for title */}
       {shouldShowAudio && (
-        <audio 
-          ref={titleAudioRef} 
+        <audio
+          ref={titleAudioRef}
           src="/voice/4.1.m4a"
           onError={() => {
-            console.error('Title audio file failed to load');
+            console.error("Title audio file failed to load");
             setIsTitleAudioPlaying(false);
           }}
         />
       )}
-      
+
       <CongratulationsScreen
         isVisible={showCongratulations}
         onButtonClick={onComplete ? onComplete : handleReset}
         onTryAgainClick={handleReset}
         showTryAgain={!isCorrectAnswer}
-        buttonText={isFourthChapter ? 'Next grade' : (isLastLesson ? 'Next Course' : 'Next Chapter')}
+        buttonText={
+          isFourthChapter
+            ? "Next grade"
+            : isLastLesson
+            ? "Next Course"
+            : "Next Chapter"
+        }
         tryAgainText="Play Again"
-        message={isCorrectAnswer ? (isFourthChapter ? `Congratulations. You have completed grade ${standard}` : "Great job. You got it right") : "Not quite. Give it another shot"}
-        subtitle={subtitle || (isCorrectAnswer ? (isFourthChapter ? "You finished the whole grade" : "You got the right answer") : undefined)}
+        message={
+          isCorrectAnswer
+            ? isFourthChapter
+              ? `Congratulations! You have completed grade ${standard}!`
+              : "Great job! You got it right!"
+            : "Not quite! Give it another shot."
+        }
         isLastActivity={isFourthChapter}
       />
-      <div className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ''}`}>
+      <div
+        className={`${styles.gameCard} ${showWinScreen ? styles.gameOver : ""}`}
+      >
         <span className={styles.gearIcon}>⚙️</span>
 
         <div className={styles.titleContainer}>
           <h3 className={styles.title}>Choose the correct option</h3>
           {shouldShowAudio && (
             <button
-              className={`${styles.titleAudioButton} ${isTitleAudioPlaying ? styles.titleAudioButtonPlaying : ''}`}
+              className={`${styles.titleAudioButton} ${
+                isTitleAudioPlaying ? styles.titleAudioButtonPlaying : ""
+              }`}
               onClick={playTitleAudio}
-              aria-label={isTitleAudioPlaying ? "Stop reading" : "Listen to the heading"}
-              title={isTitleAudioPlaying ? "Stop reading" : "Listen to the heading"}
+              aria-label={
+                isTitleAudioPlaying ? "Stop reading" : "Listen to the heading"
+              }
+              title={
+                isTitleAudioPlaying ? "Stop reading" : "Listen to the heading"
+              }
             >
               <FontAwesomeIcon icon={faHeadphones} />
               <span>{isTitleAudioPlaying ? "Listening..." : "Listen"}</span>
@@ -341,7 +381,11 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
               <div className={`${styles.star} ${styles.s5}`}>⭐</div>
             </div>
             <div className={styles.winMascot}>
-              <img src="/mascot.png" alt="Mascot" className={styles.mascotImage} />
+              <img
+                src="/mascot.png"
+                alt="Mascot"
+                className={styles.mascotImage}
+              />
             </div>
             <button className={styles.playAgainBtn} onClick={resetGame}>
               {buttonText}
@@ -353,22 +397,26 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
           <div className={styles.promptContainer}>
             <p className={styles.promptText}>{riddleText}</p>
             {shouldShowAudio && (
-            <button
-              className={`${styles.audioButton} ${isAudioPlaying ? styles.audioButtonPlaying : ''}`}
-              onClick={playQuestionAudio}
-              aria-label={isAudioPlaying ? "Stop reading" : "Listen to the question"}
-              title={isAudioPlaying ? "Stop reading" : "Listen to the question"}
-            >
-              <FontAwesomeIcon icon={faHeadphones} />
-              <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-            </button>
-          )}
+              <button
+                className={`${styles.audioButton} ${
+                  isAudioPlaying ? styles.audioButtonPlaying : ""
+                }`}
+                onClick={playQuestionAudio}
+                aria-label={
+                  isAudioPlaying ? "Stop reading" : "Listen to the question"
+                }
+                title={
+                  isAudioPlaying ? "Stop reading" : "Listen to the question"
+                }
+              >
+                <FontAwesomeIcon icon={faHeadphones} />
+                <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
+              </button>
+            )}
             <div className={styles.questionContainer}>
-              <div className={styles.questionRow}>
-              </div>
+              <div className={styles.questionRow}></div>
             </div>
           </div>
-
         </div>
         <div className={styles.optionsContainer}>
           {options.map((option) => (
@@ -380,7 +428,11 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
             >
               {option.imageUrl && (
                 <div className={styles.optionIcon}>
-                  <img src={option.imageUrl} alt={option.text} className={styles.optionImage} />
+                  <img
+                    src={option.imageUrl}
+                    alt={option.text}
+                    className={styles.optionImage}
+                  />
                 </div>
               )}
               <span>{option.text}</span>
@@ -393,4 +445,3 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
 };
 
 export default WhoAmI;
-
