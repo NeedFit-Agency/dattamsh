@@ -59,7 +59,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   tryAgainMessage = "Try Again!",
   isLastLesson = false,
   standard,
-  isFourthChapter = false,
 }) => {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -402,17 +401,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
         onButtonClick={onComplete ? onComplete : handleReset}
         onTryAgainClick={handleReset}
         showTryAgain={true}
-        buttonText={
-          isFourthChapter
-            ? `Congratulations. You have completed grade ${standard}`
-            : isLastLesson
-            ? "Next Course"
-            : "Next Chapter"
-        }
-        // Debug logging
-        // console.log('BucketMatch props:', { isFourthChapter, standard, isLastLesson, buttonText: isFourthChapter ? `Congratulations! You have completed grade ${standard}!` : (isLastLesson ? 'Next Course' : 'Next Chapter') });
+        buttonText={isLastLesson ? "Next Course" : "Next Chapter"}
         tryAgainText="Play Again"
-        isLastActivity={isFourthChapter}
       />
 
       {/* Audio element for instruction playback */}
