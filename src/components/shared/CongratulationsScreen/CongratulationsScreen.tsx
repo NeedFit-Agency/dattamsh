@@ -63,7 +63,7 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
   // Determine the final button text based on isLastActivity prop
   const finalButtonText = useMemo(() => {
     if (isLastActivity) {
-      return "Next Grade";
+      return "Home";
     }
     return buttonText;
   }, [isLastActivity, buttonText]);
@@ -88,20 +88,8 @@ const CongratulationsScreen: React.FC<CongratulationsScreenProps> = ({
 
     // Handle last activity navigation (Next Grade button)
     if (isLastActivity) {
-      // Extract the current grade number from the URL or message
-      const gradeMatch =
-        message?.match(/grade (\d+)/) ||
-        window.location.pathname.match(/\/standard\/(\d+)/);
-      if (gradeMatch) {
-        const currentGrade = parseInt(gradeMatch[1]);
-        const nextGrade = currentGrade + 1;
-        router.replace(`/standard/${nextGrade}/chapter/1`);
-        return; // Exit early to prevent other navigation
-      } else {
-        // Fallback: navigate to home if we can't determine the grade
-        router.replace("/home");
-        return;
-      }
+      router.replace("/home");
+      return;
     }
 
     // Handle other button clicks (non-grade completion)
