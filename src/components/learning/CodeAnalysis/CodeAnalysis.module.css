@@ -100,8 +100,10 @@
   padding: 16px;
   border: 1px solid #e9ecef;
   max-height: 100%;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .sectionTitle {
@@ -117,37 +119,14 @@
   border: 1px solid #e9ecef;
   border-radius: 8px;
   overflow: hidden;
-  max-height: 500px;
+  max-height: 350px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   width: 100%;
-}
-
-.lineNumbers {
-  background: #f8f9fa;
-  padding: 12px 6px 12px 12px;
-  border-right: 1px solid #e9ecef;
-  text-align: right;
-  min-width: 32px;
-  max-width: 32px;
-  user-select: none;
   flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
 }
 
-.lineNumber {
-  color: #6c757d;
-  font-size: 10px;
-  line-height: 16px;
-  font-weight: 500;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
+
 
 .codeContent {
   flex: 1;
@@ -159,8 +138,8 @@
   flex-direction: column;
   gap: 0;
   min-width: 0;
+  width: 100%;
 }
-
 .codeLine {
   min-height: 16px;
   height: 16px;
@@ -229,15 +208,15 @@
   overflow: hidden;
   width: 100%;
 }
-
 /* Draggable Items */
 .draggableItems {
   background: #f8f9fa;
   border-radius: 12px;
   padding: 16px;
   border: 1px solid #e9ecef;
-  max-height: 180px;
+  max-height: 200px;
   overflow-y: auto;
+  margin-top: 20px;
 }
 
 .itemsGrid {
@@ -308,9 +287,10 @@
   padding: 16px;
   border: 1px solid #e9ecef;
   flex: 1;
-  min-height: 180px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
 .bucketsGrid {
@@ -319,44 +299,64 @@
   gap: 12px;
   margin-top: 12px;
   flex: 1;
+  margin-bottom: 8px;
 }
 
 .bucket {
-  background: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border: 3px dashed var(--bucket-color);
-  border-radius: 10px;
-  padding: 16px;
-  min-height: 70px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 150px;
+  transition: border-width 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
   flex: 1;
+  overflow: hidden;
+  animation: bucketGlow 4s ease-in-out infinite;
 
   &:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    box-shadow: 
+      0 10px 36px rgba(0, 0, 0, 0.12),
+      0 5px 18px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 
+      0 6px 24px rgba(0, 0, 0, 0.1),
+      0 3px 12px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.1s ease;
   }
 }
 
 
 .bucket.dragOver {
-  transform: scale(1.02);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  border-width: 4px;
+  transform: scale(1.01);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: all 0.15s ease;
 }
 
 .bucket.dragOver[data-correct-drop="false"] {
-  border-color: #dc3545 !important;
-  background-color: rgba(220, 53, 69, 0.1);
-  transform: scale(1.02);
-  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.3);
+  border-color: #ef4444 !important;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.15) 100%);
+  transform: scale(1.01);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2);
+  transition: all 0.15s ease;
 }
 
 .bucket.dragOver[data-correct-drop="true"] {
-  border-color: #28a745 !important;
-  background-color: rgba(40, 167, 69, 0.1);
-  transform: scale(1.02);
-  box-shadow: 0 6px 16px rgba(40, 167, 69, 0.3);
+  border-color: #10b981 !important;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.15) 100%);
+  transform: scale(1.01);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+  transition: all 0.15s ease;
 }
 
 .bucket.correctDrop {
@@ -369,47 +369,100 @@
 
 .bucketTitle {
   color: var(--bucket-color);
-  margin: 0 0 12px 0;
-  font-size: 14px;
-  font-weight: 700;
+  margin: 0 0 16px 0;
+  font-size: 17px;
+  font-weight: 800;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  border-radius: 12px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .bucketItems {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-height: 30px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 100px;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.8) 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .bucketItem {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  padding: 6px 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11px;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  animation: bucketFloat 3s ease-in-out infinite;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.06);
+    border-color: #4ECDC4;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.06),
+      0 1px 4px rgba(0, 0, 0, 0.04);
+    transition: all 0.1s ease;
+  }
 }
 
 .bucketItemIcon {
-  font-size: 14px;
+  font-size: 16px;
   flex-shrink: 0;
+  color: #64748b;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .bucketItemText {
-  color: #2c3e50;
-  font-weight: 500;
+  color: #1e293b;
+  font-weight: 600;
   flex: 1;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+  transition: color 0.3s ease;
 }
 
 /* Reset Button */
 .resetButton {
   background: linear-gradient(135deg, #1db0f6 0%, #0ea5e9 50%, #0284c7 100%);
   color: white;
-  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 14px 25px;
   font-size: 15px;
@@ -417,7 +470,7 @@
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow: 0 5px 0 #0369a1, 0 3px 10px rgba(29, 176, 246, 0.3);
-  margin-top: 16px;
+  margin-top: 20px;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   min-height: 52px;
@@ -426,12 +479,14 @@
   justify-content: center;
   gap: 8px;
   min-width: 80px;
+  width: 100%;
 
 
   &:hover {
     background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
     transform: translateY(-2px);
     box-shadow: 0 7px 0 #0369a1, 0 5px 14px rgba(29, 176, 246, 0.4);
+    border-color: rgba(255, 255, 255, 0.4);
   }
   
   &:active {
@@ -576,6 +631,26 @@
   60% { transform: translateY(-5px); }
 }
 
+@keyframes bucketGlow {
+  0%, 100% { 
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 4px 16px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  50% { 
+    box-shadow: 
+      0 10px 36px rgba(0, 0, 0, 0.12),
+      0 5px 18px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+}
+
+@keyframes bucketFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+
 /* Touch-friendly improvements for all mobile devices */
 @media (hover: none) and (pointer: coarse) {
   .draggableItem {
@@ -695,27 +770,28 @@
   }
   
   .codeSection {
-    max-height: 350px;
+    max-height: none;
   }
   
   .codeBlock {
-    max-height: 200px;
+    max-height: 250px;
   }
   
   .codeContent {
-    max-height: 200px;
+    max-height: 250px;
   }
   
   .draggableItems {
-    max-height: 150px;
+    max-height: 180px;
+    margin-top: 16px;
   }
   
   .dropZones {
-    min-height: 150px;
+    min-height: 300px;
   }
   
   .bucket {
-    min-height: 60px;
+    min-height: 150px;
   }
   
   .resetButton {
@@ -788,7 +864,7 @@
   }
   
   .bucket {
-    min-height: 60px;
+    min-height: 150px;
   }
 }
 
@@ -823,11 +899,24 @@
   }
   
   .codeSection {
+    max-height: none;
+  }
+  
+  .codeBlock {
+    max-height: 200px;
+  }
+  
+  .codeContent {
     max-height: 200px;
   }
   
   .sectionTitle {
     font-size: 16px;
+  }
+  
+  .draggableItems {
+    max-height: 160px;
+    margin-top: 12px;
   }
   
   .draggableItem {
@@ -851,6 +940,10 @@
     font-size: 13px;
   }
   
+  .dropZones {
+    min-height: 250px;
+  }
+  
   .resetButton {
     min-width: 90px;
     height: 36px;
@@ -858,3 +951,5 @@
     padding: 6px 10px;
   }
 }
+
+

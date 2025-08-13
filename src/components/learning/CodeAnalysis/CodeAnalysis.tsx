@@ -49,14 +49,14 @@ export const CodeAnalysis: React.FC<CodeAnalysisProps> = ({
       id: 'bucket-highlight-class',
       title: 'Elements inside class highlight',
       type: 'highlight-class',
-      color: '#FF6B6B',
+      color: '#EF4444',
       items: []
     },
     {
       id: 'bucket-inside-div',
       title: 'Elements inside div',
       type: 'inside-div',
-      color: '#4ECDC4',
+      color: '#06B6D4',
       items: []
     }
   ], [initialBuckets]);
@@ -234,11 +234,6 @@ export const CodeAnalysis: React.FC<CodeAnalysisProps> = ({
         <article className={styles.codeSection}>
           <h2 className={styles.sectionTitle}>Code Analysis</h2>
           <div className={styles.codeBlock}>
-            <div className={styles.lineNumbers}>
-              {Array.from({ length: 25 }, (_, i) => (
-                <div key={i} className={styles.lineNumber}>{i + 1}</div>
-              ))}
-            </div>
             <div className={styles.codeContent}>
               <div className={styles.codeLine}>
                 <span className={styles.doctype}>&lt;!DOCTYPE html&gt;</span>
@@ -311,11 +306,8 @@ export const CodeAnalysis: React.FC<CodeAnalysisProps> = ({
               </div>
             </div>
           </div>
-        </article>
-
-        {/* Right Column - Interactive Elements */}
-        <aside className={styles.rightSection}>
-          {/* Draggable Items */}
+          
+          {/* Elements to Categorize - Moved to bottom of code section */}
           <section className={styles.draggableItems}>
             <h3 className={styles.sectionTitle}>Elements to Categorize</h3>
             <div className={styles.itemsGrid}>
@@ -345,7 +337,10 @@ export const CodeAnalysis: React.FC<CodeAnalysisProps> = ({
               ))}
             </div>
           </section>
+        </article>
 
+        {/* Right Column - Interactive Elements */}
+        <aside className={styles.rightSection}>
           {/* Drop Zone Buckets */}
           <section className={styles.dropZones}>
             <h3 className={styles.sectionTitle}>Categorize Here</h3>
@@ -374,16 +369,16 @@ export const CodeAnalysis: React.FC<CodeAnalysisProps> = ({
                 </div>
               ))}
             </div>
+            
+            {/* Reset Button */}
+            <button 
+              className={styles.resetButton}
+              onClick={handleReset}
+              aria-label="Reset the categorization game"
+            >
+              Reset
+            </button>
           </section>
-
-          {/* Reset Button */}
-          <button 
-            className={styles.resetButton}
-            onClick={handleReset}
-            aria-label="Reset the categorization game"
-          >
-            Reset Game
-          </button>
         </aside>
       </section>
 
