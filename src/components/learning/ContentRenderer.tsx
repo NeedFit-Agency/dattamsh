@@ -27,6 +27,10 @@ const WhoAmI = dynamic(() => import('./WhoAmI'), {
   loading: () => <LoadingSpinner message="Loading who am I game..." /> 
 });
 
+const CodeAnalysis = dynamic(() => import('./CodeAnalysis/CodeAnalysis'), { 
+  loading: () => <LoadingSpinner message="Loading code analysis..." /> 
+});
+
 // Fallback component when a format doesn't have a corresponding component
 const UnsupportedFormat: React.FC<{format: string}> = ({ format }) => (
   <div style={{ padding: '20px', border: '1px solid #ff6b6b', borderRadius: '8px', color: '#ff6b6b' }}>
@@ -205,6 +209,19 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             standard={standard}
             isFourthChapter={isFourthChapter}
           />
+        </ContentWrapper>
+      );
+    }    case 'code-analysis': {
+      const codeAnalysisContent = content as import('../../data/standardsData').CodeAnalysisSlide;
+      return (
+        <ContentWrapper>
+          <div style={{ padding: '12px' }}>
+
+            <CodeAnalysis 
+              title={codeAnalysisContent.title}
+              instruction={codeAnalysisContent.instruction}
+            />
+          </div>
         </ContentWrapper>
       );
     }    default:

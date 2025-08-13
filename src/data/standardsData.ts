@@ -2,7 +2,8 @@ export type FormatType =
   | "drag-drop"
   | "bucket-match"
   | "sequence-match"
-  | "who-am-i";
+  | "who-am-i"
+  | "code-analysis";
 
 export interface BaseContentProps {
   type: string;
@@ -91,11 +92,21 @@ export interface WhoAmISlide extends BaseContentProps {
   options: WhoAmIOption[];
 }
 
+export interface CodeAnalysisSlide extends BaseContentProps {
+  type: "code-analysis";
+  format: "code-analysis";
+  instruction: string;
+  codeComponent: string;
+  items: BucketMatchItem[];
+  buckets: BucketData[];
+}
+
 export type LessonContent =
   | DragDropSlide
   | BucketMatchSlide
   | SequenceMatchSlide
-  | WhoAmISlide;
+  | WhoAmISlide
+  | CodeAnalysisSlide;
 
 export interface Chapter {
   id: number;
@@ -1219,4 +1230,151 @@ export const standards: Standard = {
       ]
     }
   ],
+  "7": [
+    {
+      id: 1,
+      title: "Computer Networks - I",
+      lessonContent: [
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Types of Computer Networks",
+          riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
+          questionText: "Which type of network is best for this scenario?",
+          options: [
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: true },
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false },
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false },
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "You and your friend are preparing for a science project in your room. You need to transfer a video from your phone to your friend's tablet, and also connect your wireless headphones to check the sound quality."
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Types of Computer Networks",
+          riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
+          questionText: "Which type of network is best for this scenario?",
+          options: [
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: true },
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false },
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false },
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "Your school computer lab has 20 computers that need to exchange files quickly, share the same internet connection and printer."
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Types of Computer Networks",
+          riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
+          questionText: "Which type of network is best for this scenario?",
+          options: [
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: true },
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false },
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false },
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "A city library wants all its branches across different parts of the city to have access to the same e-book database. The buildings are far apart but still within the city, and fast data sharing is required."
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Types of Computer Networks",
+          riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
+          questionText: "Which type of network is best for this scenario?",
+          options: [
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: true },
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false },
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false },
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "Your cousin in another country is helping you build a coding project. You both need to work on the same files in real-time using cloud storage, even though you're thousands of kilometers apart."
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "Digital Marketing Concepts",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match Digital Marketing Concepts",
+          instruction: "XYZ Marketing Company has been hired to promote ChocoBlast, a new chocolate milkshake brand. Here's what their team did to make the campaign a success. You need to match each task to the correct key concept of digital marketing.",
+          items: [
+            { id: "hashtag", text: "Posted on social media with tags like #ChocoBlastLove, #BestMilkshake, and #SweetTreats so people could find them easily.", type: "hashtag" },
+            { id: "ab-testing", text: "Made two online ads, one with a blue 'Order Now' button and another with a green 'Get Yours Today' button, to see which got more clicks.", type: "ab-testing" },
+            { id: "keyword-optimization", text: "Researched searches like 'best chocolate milkshake near me' and used them in the website and ads.", type: "keyword-optimization" },
+            { id: "seo", text: "Improved the website with clear headings, tasty photos, and faster loading, so it ranks higher on search engines.", type: "seo" },
+            { id: "ctr", text: "Measured how many saw the ad versus how many clicked it, then calculated the percentage.", type: "ctr" }
+          ],
+          buckets: [
+            { id: "bucket-hashtag", title: "Hashtag", type: "hashtag", color: "#FF6B6B" },
+            { id: "bucket-ab-testing", title: "A/B Testing (Split Testing)", type: "ab-testing", color: "#4ECDC4" },
+            { id: "bucket-keyword-optimization", title: "Keyword Optimization", type: "keyword-optimization", color: "#45B7D1" },
+            { id: "bucket-seo", title: "SEO (Search Engine Optimization)", type: "seo", color: "#96CEB4" },
+            { id: "bucket-ctr", title: "CTR (Click-through Rate)", type: "ctr", color: "#FFEAA7" }
+          ],
+          audioSrc: undefined,
+          speakText: "Match each digital marketing task to its correct concept."
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "PowerPoint Transitions",
+      lessonContent: [
+        {
+          type: "sequence-match",
+          format: "sequence-match",
+          title: "Arrange PowerPoint Transition Steps",
+          instruction: "You are creating a school project in Microsoft PowerPoint. You want to add transitions to your slides so your presentation flows smoothly. Below are the steps you followed, but they are in the wrong order. Arrange them in the correct order.",
+          items: [
+            { id: "step1", content: "Open Microsoft PowerPoint on your computer." },
+            { id: "step2", content: "Create a presentation with a sufficient number of slides." },
+            { id: "step3", content: "Select the slide you want to apply the transition to." },
+            { id: "step4", content: "Choose a transition effect from the Transitions tab." },
+            { id: "step5", content: "Adjust the transition's speed or direction." },
+            { id: "step6", content: "Preview the transition to check how it looks." },
+            { id: "step7", content: "Apply the same transition to all slides for consistency (optional)." }
+          ],
+          correctOrder: ["step1", "step2", "step3", "step4", "step5", "step6", "step7"],
+          dropZoneCount: 7,
+          audioSrc: undefined,
+          speakText: "Arrange the PowerPoint transition steps in the correct order."
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "HTML and CSS Analysis",
+      lessonContent: [
+        {
+          type: "code-analysis",
+          format: "code-analysis",
+          title: "Categorize HTML and CSS Elements",
+          instruction: "Observe the code below and categorize the elements based on whether they are inside the <div> element and whether they have the highlight class applied.",
+          codeComponent: "CodeAnalysis",
+          items: [
+            { id: "color", text: "color: red", type: "highlight-class" },
+            { id: "background-color", text: "background-color: yellow", type: "highlight-class" },
+            { id: "font-size", text: "font-size: 20px", type: "highlight-class" },
+            { id: "paragraph", text: "<p> – Paragraph", type: "inside-div" },
+            { id: "heading", text: "<h3> – Heading level 3", type: "inside-div" },
+            { id: "ordered-list", text: "<ol> – Ordered list (with <li>)", type: "inside-div" }
+          ],
+          buckets: [
+            { id: "bucket-highlight-class", title: "Elements inside class highlight", type: "highlight-class", color: "#FF6B6B" },
+            { id: "bucket-inside-div", title: "Elements inside div", type: "inside-div", color: "#4ECDC4" }
+          ],
+          speakText: "Categorize the HTML and CSS elements based on their location and class."
+        }
+      ]
+    }
+  ]
 };
