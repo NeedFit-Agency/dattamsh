@@ -1,94 +1,261 @@
+/* Base Button Styles */
 .button {
-    padding: 14px 25px;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    text-transform: uppercase;
-    border: none;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    line-height: 1.2;
-    border-bottom-width: 4px; /* Default shadow */
-    border-bottom-style: solid;
-    border-bottom-color: transparent; /* Set per variant */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Nunito', 'Quicksand', sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* Button Variants */
+.button--primary {
+  background-color: var(--primary, #1aa2ff);
+  color: white;
+}
+
+.button--primary:hover {
+  background-color: var(--primary-dark, #0080e6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button--primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button--secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.button--secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button--secondary:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Listen Button Variant (based on current audio button styles) */
+.button--listen {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  color: #1db0f6;
+  border: 2px solid #1db0f6;
+  box-shadow: 0 5px 0 #0369a1, 0 3px 10px rgba(29, 176, 246, 0.2);
+  position: relative;
+  min-width: 120px;
+}
+
+.button--listen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(29, 176, 246, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.button--listen:hover::before {
+  opacity: 1;
+}
+
+.button--listen:hover {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+  color: #0369a1;
+  border-color: #0369a1;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #0369a1, 0 5px 14px rgba(29, 176, 246, 0.3);
+}
+
+.button--listen:active {
+  transform: translateY(2px);
+  border: 2px solid #0369a1;
+  box-shadow: 0 3px 0 #0369a1, 0 2px 6px rgba(29, 176, 246, 0.2);
+}
+
+/* Playing state for listen buttons */
+.button--listen.playing {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%) !important;
+  color: #065f46 !important;
+  border-color: #28a745 !important;
+  box-shadow: 0 5px 0 #1e7e34, 0 3px 10px rgba(40, 167, 69, 0.2) !important;
+}
+
+.button--listen.playing:hover {
+  background: linear-gradient(135deg, #c3e6cb 0%, #b1dfbb 100%) !important;
+  color: #054d37 !important;
+  border-color: #1e7e34 !important;
+  box-shadow: 0 7px 0 #1e7e34, 0 5px 14px rgba(40, 167, 69, 0.3) !important;
+}
+
+/* Reset Button Variant (based on current reset button styles) */
+.button--reset {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  color: #1db0f6;
+  border: 2px solid #1db0f6;
+  box-shadow: 0 5px 0 #0369a1, 0 3px 10px rgba(29, 176, 246, 0.2);
+  position: relative;
+}
+
+.button--reset::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(29, 176, 246, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.button--reset:hover::before {
+  opacity: 1;
+}
+
+.button--reset:hover {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+  color: #0369a1;
+  border-color: #0369a1;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #0369a1, 0 5px 14px rgba(29, 176, 246, 0.3);
+}
+
+.button--reset:active {
+  transform: translateY(2px);
+  border: 2px solid #0369a1;
+  box-shadow: 0 2px 6px rgba(29, 176, 246, 0.2);
+}
+
+/* Button Sizes */
+.button--small {
+  padding: 6px 12px;
+  font-size: 12px;
+  height: 32px;
+  min-width: 80px;
+}
+
+/* Special styling for very small circular buttons (like bucket audio) */
+.button--small.button--primary {
+  padding: 6px;
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Playing state for audio buttons */
+.button--small.button--primary.playing {
+  background-color: #4a90e2 !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4) !important;
+}
+
+.button--medium {
+  padding: 8px 16px;
+  font-size: 14px;
+  height: 40px;
+  min-width: 100px;
+}
+
+.button--large {
+  padding: 12px 20px;
+  font-size: 16px;
+  height: 48px;
+  min-width: 120px;
+}
+
+/* Disabled State */
+.button--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.button--disabled:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .button--medium {
+    padding: 6px 12px;
+    font-size: 13px;
+    height: 36px;
+    min-width: 90px;
   }
   
+  .button--large {
+    padding: 10px 16px;
+    font-size: 14px;
+    height: 42px;
+    min-width: 110px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button--medium {
+    padding: 5px 10px;
+    font-size: 12px;
+    height: 32px;
+    min-width: 80px;
+  }
+  
+  .button--large {
+    padding: 8px 14px;
+    font-size: 13px;
+    height: 38px;
+    min-width: 100px;
+  }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .button:active {
-    transform: translateY(2px);
-    border-bottom-width: 2px;
+    transform: scale(0.95);
   }
-  
-  /* Variants */
-  .primaryBlue {
-    background-color: var(--robo-blue-primary);
-    color: white;
-    border-bottom-color: var(--robo-blue-dark);
+}
+
+/* Prevent text selection */
+.button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Prevent zoom on double tap for iOS */
+@media (max-width: 768px) {
+  .button {
+    touch-action: manipulation;
   }
-  .primaryBlue:hover {
-     background-color: #1aa3e6;
-  }
-  
-  .secondaryGray {
-    background-color: white;
-    color: var(--robo-gray-medium);
-    border: 2px solid var(--robo-border);
-    border-bottom-width: 4px; /* Ensure consistent sizing */
-  }
-  .secondaryGray:hover {
-    background-color: #f7f7f7;
-    color: var(--robo-gray-dark);
-  }
-  .secondaryGray:active {
-      transform: translateY(1px); /* Less travel for bordered */
-      border-bottom-width: 3px;
-  }
-  
-  
-  .yellow {
-    background: linear-gradient(to bottom, #ffdd40, var(--robo-yellow));
-    color: var(--robo-yellow-dark);
-    border-bottom-color: var(--robo-yellow-dark);
-  }
-  .yellow:hover {
-    background: linear-gradient(to bottom, #ffe460, #ffcf20);
-  }
-  
-  .white {
-    background-color: var(--text-light);
-    color: #333; /* Dark text on white */
-    border: 2px solid var(--text-light); /* For consistent height */
-    box-shadow: 0 2px 0 #c0c0c0;
-    border-bottom-style: none; /* Use box-shadow instead */
-  }
-  .white:hover {
-     background-color: #f0f0f0;
-     border-color: #f0f0f0;
-  }
-  .white:active {
-      transform: translateY(1px);
-      box-shadow: 0 1px 0 #c0c0c0;
-  }
-  
-  .darkOutline {
-    background-color: transparent;
-    color: #666;
-    border: 2px solid #666;
-    border-bottom-style: none; /* No 3D effect */
-  }
-  .darkOutline:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #333;
-    border-color: #333;
-  }
-  .darkOutline:active {
-      transform: none; /* No press effect */
-  }
-  
-  
-  .fullWidth {
-      width: 100%;
-  }
+}

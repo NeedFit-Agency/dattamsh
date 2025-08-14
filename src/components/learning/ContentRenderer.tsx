@@ -31,6 +31,10 @@ const CodeAnalysis = dynamic(() => import('./CodeAnalysis/CodeAnalysis'), {
   loading: () => <LoadingSpinner message="Loading code analysis..." /> 
 });
 
+const SQLQueryBuilder = dynamic(() => import('./SQLQueryBuilder'), { 
+  loading: () => <LoadingSpinner message="Loading SQL Query Builder..." /> 
+});
+
 // Fallback component when a format doesn't have a corresponding component
 const UnsupportedFormat: React.FC<{format: string}> = ({ format }) => (
   <div style={{ padding: '20px', border: '1px solid #ff6b6b', borderRadius: '8px', color: '#ff6b6b' }}>
@@ -222,6 +226,26 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
               instruction={codeAnalysisContent.instruction}
             />
           </div>
+        </ContentWrapper>
+      );
+    }
+    
+    case 'sql-query-builder': {
+      const sqlQueryBuilderContent = content as import('../../data/standardsData').SQLQueryBuilderSlide;
+      return (
+        <ContentWrapper>
+          <SQLQueryBuilder
+            title={sqlQueryBuilderContent.title}
+            instruction={sqlQueryBuilderContent.instruction}
+            items={sqlQueryBuilderContent.items}
+            correctOrder={sqlQueryBuilderContent.correctOrder}
+            audioSrc={sqlQueryBuilderContent.audioSrc}
+            speakText={sqlQueryBuilderContent.speakText}
+            onComplete={onComplete}
+            isLastLesson={isLastLesson}
+            standard={standard}
+            isFourthChapter={isFourthChapter}
+          />
         </ContentWrapper>
       );
     }    default:

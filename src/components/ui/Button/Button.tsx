@@ -1,30 +1,77 @@
 import React from 'react';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Button.module.css';
 
-type ButtonVariant = 'primaryBlue' | 'secondaryGray' | 'yellow' | 'white' | 'darkOutline';
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-  fullWidth?: boolean;
-  children: React.ReactNode;
+export interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'reset' | 'listen';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+  onClick?: () => void;
+  children?: React.ReactNode;
+  icon?: IconDefinition;
+  text?: string;
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
+  'aria-label'?: string;
 }
 
-export default function Button({
-  variant = 'primaryBlue', // Default variant
-  fullWidth = false,
+const Button: React.FC<ButtonProps> = ({
+  variant = 'primary',
+  size = 'medium',
+  disabled = false,
+  onClick,
   children,
-  className,
-  ...props
-}: ButtonProps) {
-  const variantClass = styles[variant] || styles.primaryBlue;
-  const fullWidthClass = fullWidth ? styles.fullWidth : '';
+  icon,
+  text,
+  className = '',
+  type = 'button',
+  'aria-label': ariaLabel,
+}) => {
+  const buttonClasses = [
+    styles.button,
+    styles[`button--${variant}`],
+    styles[`button--${size}`],
+    disabled ? styles['button--disabled'] : '',
+    className,
+  ].filter(Boolean).join(' ');
+
+  const renderContent = () => {
+    if (children) {
+      return children;
+    }
+    
+    if (icon && text) {
+      return (
+        <>
+          <FontAwesomeIcon icon={icon} />
+          <span>{text}</span>
+        </>
+      );
+    }
+    
+    if (icon) {
+      return <FontAwesomeIcon icon={icon} />;
+    }
+    
+    if (text) {
+      return <span>{text}</span>;
+    }
+    
+    return null;
+  };
 
   return (
     <button
-      className={`${styles.button} ${variantClass} ${fullWidthClass} ${className || ''}`}
-      {...props}
+      type={type}
+      className={buttonClasses}
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={ariaLabel}
     >
-      {children}
+      {renderContent()}
     </button>
   );
-}
+};
+
+export default Button;

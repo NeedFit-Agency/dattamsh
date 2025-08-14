@@ -4,6 +4,7 @@ import CongratulationsScreen from "../../shared/CongratulationsScreen";
 import TTS from "../../shared/TTS";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeadphones } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../ui/Button/Button";
 
 interface Option {
   id: string;
@@ -351,21 +352,15 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
         <div className={styles.titleContainer}>
           <h3 className={styles.title}>Choose the correct option</h3>
           {shouldShowAudio && (
-            <button
-              className={`${styles.titleAudioButton} ${
-                isTitleAudioPlaying ? styles.titleAudioButtonPlaying : ""
-              }`}
+            <Button
+              variant="listen"
+              size="medium"
               onClick={playTitleAudio}
-              aria-label={
-                isTitleAudioPlaying ? "Stop reading" : "Listen to the heading"
-              }
-              title={
-                isTitleAudioPlaying ? "Stop reading" : "Listen to the heading"
-              }
-            >
-              <FontAwesomeIcon icon={faHeadphones} />
-              <span>{isTitleAudioPlaying ? "Listening..." : "Listen"}</span>
-            </button>
+              disabled={false}
+              icon={faHeadphones}
+              text={isTitleAudioPlaying ? "Listening..." : "Listen"}
+              className={isTitleAudioPlaying ? styles.titleAudioButtonPlaying : ""}
+            />
           )}
         </div>
         <img src="/mascot.png" alt="Mascot" className={styles.mascotImage} />
@@ -397,21 +392,15 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
           <div className={styles.promptContainer}>
             <p className={styles.promptText}>{riddleText}</p>
             {shouldShowAudio && (
-              <button
-                className={`${styles.audioButton} ${
-                  isAudioPlaying ? styles.audioButtonPlaying : ""
-                }`}
+              <Button
+                variant="listen"
+                size="medium"
                 onClick={playQuestionAudio}
-                aria-label={
-                  isAudioPlaying ? "Stop reading" : "Listen to the question"
-                }
-                title={
-                  isAudioPlaying ? "Stop reading" : "Listen to the question"
-                }
-              >
-                <FontAwesomeIcon icon={faHeadphones} />
-                <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-              </button>
+                disabled={false}
+                icon={faHeadphones}
+                text={isAudioPlaying ? "Listening..." : "Listen"}
+                className={isAudioPlaying ? styles.audioButtonPlaying : ""}
+              />
             )}
             <div className={styles.questionContainer}>
               <div className={styles.questionRow}></div>
