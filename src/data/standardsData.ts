@@ -3,7 +3,8 @@ export type FormatType =
   | "bucket-match"
   | "sequence-match"
   | "who-am-i"
-  | "code-analysis";
+  | "code-analysis"
+  | "sql-query-builder";
 
 export interface BaseContentProps {
   type: string;
@@ -101,12 +102,28 @@ export interface CodeAnalysisSlide extends BaseContentProps {
   buckets: BucketData[];
 }
 
+export interface SQLQueryBuilderItem {
+  id: string;
+  content: string;
+  category?: 'DDL' | 'DML' | 'DQL' | 'DCL' | 'TCL';
+  audioSrc?: string;
+}
+
+export interface SQLQueryBuilderSlide extends BaseContentProps {
+  type: "sql-query-builder";
+  format: "sql-query-builder";
+  instruction: string;
+  items: SQLQueryBuilderItem[];
+  correctOrder: string[];
+}
+
 export type LessonContent =
   | DragDropSlide
   | BucketMatchSlide
   | SequenceMatchSlide
   | WhoAmISlide
-  | CodeAnalysisSlide;
+  | CodeAnalysisSlide
+  | SQLQueryBuilderSlide;
 
 export interface Chapter {
   id: number;
@@ -1307,14 +1324,12 @@ export const standards: Standard = {
           title: "Match Digital Marketing Concepts",
           instruction: "XYZ Marketing Company has been hired to promote ChocoBlast, a new chocolate milkshake brand. Here's what their team did to make the campaign a success. You need to match each task to the correct key concept of digital marketing.",
           items: [
-            { id: "hashtag", text: "Posted on social media with tags like #ChocoBlastLove, #BestMilkshake, and #SweetTreats so people could find them easily.", type: "hashtag" },
             { id: "ab-testing", text: "Made two online ads, one with a blue 'Order Now' button and another with a green 'Get Yours Today' button, to see which got more clicks.", type: "ab-testing" },
             { id: "keyword-optimization", text: "Researched searches like 'best chocolate milkshake near me' and used them in the website and ads.", type: "keyword-optimization" },
             { id: "seo", text: "Improved the website with clear headings, tasty photos, and faster loading, so it ranks higher on search engines.", type: "seo" },
             { id: "ctr", text: "Measured how many saw the ad versus how many clicked it, then calculated the percentage.", type: "ctr" }
           ],
           buckets: [
-            { id: "bucket-hashtag", title: "Hashtag", type: "hashtag", color: "#FF6B6B" },
             { id: "bucket-ab-testing", title: "A/B Testing (Split Testing)", type: "ab-testing", color: "#4ECDC4" },
             { id: "bucket-keyword-optimization", title: "Keyword Optimization", type: "keyword-optimization", color: "#45B7D1" },
             { id: "bucket-seo", title: "SEO (Search Engine Optimization)", type: "seo", color: "#96CEB4" },
@@ -1373,6 +1388,154 @@ export const standards: Standard = {
             { id: "bucket-inside-div", title: "Elements inside div", type: "inside-div", color: "#4ECDC4" }
           ],
           speakText: "Categorize the HTML and CSS elements based on their location and class."
+        }
+      ]
+    }
+  ],
+  "8": [
+    {
+      id: 1,
+      title: "Computer Network Components",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match Network Components",
+          instruction: "Your school is setting up a new computer lab that needs to be connected to the internet and to the school's central database. The school technician explains how all the parts of the network will work together. Match each component to its correct description.",
+          items: [
+            { id: "switches", text: "Switches", type: "switches", imageUrl: "/images/hardware.png" },
+            { id: "routers", text: "Routers", type: "routers", imageUrl: "/images/hardware.png" },
+            { id: "protocols", text: "Protocols", type: "protocols", imageUrl: "/images/hardware.png" },
+            { id: "server", text: "Server", type: "server", imageUrl: "/images/computer.png" }
+          ],
+          buckets: [
+            { 
+              id: "bucket-switches", 
+              title: "B: Connect multiple devices to the same network and ensure data is sent to the correct destination", 
+              type: "switches", 
+              color: "#4ECDC4",
+              audioSrc: "/voice/grade2/1.2.m4a"
+            },
+            { 
+              id: "bucket-routers", 
+              title: "C: Connect different networks together and manage data traffic between them", 
+              type: "routers", 
+              color: "#45B7D1",
+              audioSrc: "/voice/grade2/1.3.m4a"
+            },
+            { 
+              id: "bucket-protocols", 
+              title: "D: Agreed-upon rules for communication to ensure every device speaks the same digital language", 
+              type: "protocols", 
+              color: "#96CEB4",
+              audioSrc: "/voice/grade2/1.4.m4a"
+            },
+            { 
+              id: "bucket-server", 
+              title: "E: A powerful computer that provides data and services to other devices", 
+              type: "server", 
+              color: "#FFEAA7",
+              audioSrc: "/voice/grade2/1.5.m4a"
+            }
+          ],
+          audioSrc: "/voice/grade2/1.1.m4a",
+          speakText: "Match each network component to its correct description."
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "Ethical vs Unethical Data Use",
+      lessonContent: [
+        {
+          type: "drag-drop",
+          format: "drag-drop",
+          title: "Sort Data Use Scenarios",
+          instruction: "Read each scenario and decide if it shows Ethical Use or Unethical Use of data. Sort them into the correct category.",
+          items: [
+            { id: "scenario1", text: "A school collects students' test scores after asking for permission from parents and explains how the data will be used to improve teaching methods.", type: "ethical" },
+            { id: "scenario2", text: "A company sells customer email addresses to another business without informing the customers.", type: "unethical" },
+            { id: "scenario3", text: "Police officers collect data about crime patterns in a city to decide where to increase patrols, ensuring the data is collected legally and respects people's rights.", type: "ethical" },
+            { id: "scenario4", text: "A social media platform changes your news feed so you only see posts that match your political views, without telling you.", type: "unethical" },
+            { id: "scenario5", text: "A hospital asks patients before collecting health data, removes personal identifiers like their names, and uses it to develop better treatments.", type: "ethical" },
+            { id: "scenario6", text: "A bank uses an algorithm for loan approvals that unfairly rejects people based on their gender.", type: "unethical" },
+            { id: "scenario7", text: "A clothing store sends a survey to customers but only uses the results from those who agreed to participate, removing personal information before analysis.", type: "ethical" },
+            { id: "scenario8", text: "Hackers steal someone's personal information to open bank accounts in their name.", type: "unethical" }
+          ],
+          targets: [
+            { id: "ethical", title: "Ethical Use", type: "ethical" },
+            { id: "unethical", title: "Unethical Use", type: "unethical" }
+          ],
+          audioSrc: "/voice/grade2/2.1.m4a",
+          speakText: "Sort each scenario into the correct category: Ethical Use or Unethical Use of data."
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Types of Applications",
+      lessonContent: [
+        {
+          type: "drag-drop",
+          format: "drag-drop",
+          title: "Match App Types",
+          instruction: "Read the descriptions and examples carefully and choose the correct app type.",
+          items: [
+            { id: "native", text: "Built for a specific platform (Android/iOS), it offers high performance and full access to the device's built-in features. Example: WhatsApp, Google Maps", type: "native" },
+            { id: "web", text: "Runs in a web browser without installation, works on any device with internet access. Example: Google Docs, Gmail", type: "web" },
+            { id: "hybrid", text: "Combines native and web elements, runs on both Android and iOS from the same codebase. Example: Instagram, Uber", type: "hybrid" },
+            { id: "pwa", text: "A web app that looks and feels like a native app can work offline or in low internet connectivity. Example: Pinterest, Starbucks app", type: "pwa" }
+          ],
+          targets: [
+            { id: "native", title: "Native Apps", type: "native" },
+            { id: "web", title: "Web Apps", type: "web" },
+            { id: "hybrid", title: "Hybrid Apps", type: "hybrid" },
+            { id: "pwa", title: "Progressive Web Apps", type: "pwa" }
+          ],
+          audioSrc: "/voice/grade2/3.1.m4a",
+          speakText: "Match each app description to its correct type."
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "Advanced SQL Database Operations",
+      lessonContent: [
+        {
+          type: "sql-query-builder",
+          format: "sql-query-builder",
+          title: "Professional SQL Query Builder",
+          instruction: "You are a database administrator tasked with building a comprehensive Student Management System. Your school needs to create a database, populate it with student data, perform updates after grade corrections, remove records for transferred students, and generate reports. Use the SQL Query Builder to construct the proper sequence of database operations. Each command type is color-coded: Blue for DDL (Data Definition), Green for DML (Data Manipulation), and Purple for DQL (Data Query Language).",
+          items: [
+            { 
+              id: "step1", 
+              content: "CREATE TABLE students (Id INT PRIMARY KEY, Name VARCHAR(50) NOT NULL, Marks INT CHECK (Marks >= 0 AND Marks <= 100), Class VARCHAR(10), AdmissionDate DATE);",
+              category: "DDL"
+            },
+            { 
+              id: "step2", 
+              content: "INSERT INTO students (Id, Name, Marks, Class, AdmissionDate) VALUES (1, 'John Smith', 85, '8A', '2024-01-15'), (2, 'Omkar Patel', 42, '8B', '2024-01-15'), (3, 'Jiya Sharma', 57, '8A', '2024-01-15'), (4, 'Vikram Singh', 41, '8B', '2024-01-15'), (5, 'Sofia Rodriguez', 68, '8A', '2024-01-15');",
+              category: "DML"
+            },
+            { 
+              id: "step3", 
+              content: "UPDATE students SET Marks = 86 WHERE Name = 'Omkar Patel'; UPDATE students SET Marks = 77 WHERE Name = 'Jiya Sharma'; UPDATE students SET Class = '8A' WHERE Name = 'Omkar Patel';",
+              category: "DML"
+            },
+            { 
+              id: "step4", 
+              content: "DELETE FROM students WHERE Name = 'Vikram Singh'; DELETE FROM students WHERE Name = 'Sofia Rodriguez';",
+              category: "DML"
+            },
+            { 
+              id: "step5", 
+              content: "SELECT Name, Class, Marks FROM students WHERE Marks < 65 ORDER BY Marks ASC; SELECT COUNT(*) as TotalStudents, AVG(Marks) as AverageMarks FROM students;",
+              category: "DQL"
+            }
+          ],
+          correctOrder: ["step1", "step2", "step3", "step4", "step5"],
+          audioSrc: "/voice/grade2/4.1.m4a",
+          speakText: "Build a professional SQL database management system using the Query Builder. Understand DDL, DML, and DQL operations for comprehensive database administration."
         }
       ]
     }
