@@ -41,7 +41,7 @@
 .worksheetCard {
     background-color: rgba(255, 255, 255, 0.9);
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
-    border-radius: clamp(20px, 3vw, 30px);
+    border-radius: clamp(24px, 3.5vw, 32px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(135, 206, 250, 0.2);
     padding: clamp(20px, 2.5vw, 35px) clamp(20px, 3vw, 40px);
     width: 95%; /* Use more screen space */
@@ -289,7 +289,7 @@
     min-height: clamp(160px, 18vh, 200px); /* Responsive height for better content distribution */
     background-color: rgba(255, 255, 255, 0.95);
     border: 3px dashed #bbddff;
-    border-radius: clamp(18px, 2.5vw, 26px);
+    border-radius: clamp(22px, 3vw, 30px);
     transition: all 0.3s ease;
     display: flex;
     align-items: flex-start; /* Changed from center to flex-start for better text flow */
@@ -420,7 +420,7 @@
     padding: clamp(18px, 2.5vh, 28px);
     background-color: #f0f8ff;
     background-image: linear-gradient(to bottom, rgba(240, 248, 255, 0.9), rgba(230, 240, 250, 0.8));
-    border-radius: clamp(16px, 2.5vw, 24px);
+    border-radius: clamp(20px, 3vw, 28px);
     border: 2px dashed #bbddff;
     transition: all 0.3s ease;
     box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.08);
@@ -456,7 +456,7 @@
     font-family: "Comic Sans MS", "Comic Sans", 'Nunito', sans-serif;
     background-color: #e6f2ff;
     padding: clamp(8px, 1.2vh, 12px) clamp(14px, 1.8vw, 22px);
-    border-radius: clamp(12px, 1.8vw, 18px);
+    border-radius: clamp(16px, 2.2vw, 22px);
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9);
     position: relative;
@@ -467,7 +467,7 @@
     display: flex;
     align-items: flex-start; /* Changed from center to flex-start for better text flow */
     padding: clamp(20px, 3vh, 28px); /* Responsive padding */
-    border-radius: clamp(16px, 2.5vw, 24px);
+    border-radius: clamp(20px, 3vw, 28px);
     font-weight: 700;
     font-size: clamp(1.2rem, 2vw, 1.6rem);
     cursor: grab;
@@ -536,7 +536,7 @@
 .stepIcon {
     width: clamp(80px, 10vw, 120px);
     height: clamp(80px, 10vw, 120px);
-    border-radius: clamp(16px, 2vw, 20px);
+    border-radius: clamp(20px, 2.5vw, 24px);
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -556,7 +556,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 16px;
+    border-radius: clamp(18px, 2.2vw, 22px);
     stroke-width: 2.5px;
     filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
 }
@@ -581,7 +581,7 @@
 }
 
 .stepIcon.imageIcon img {
-    border-radius: 16px;
+    border-radius: clamp(18px, 2.2vw, 22px);
     object-fit: cover;
     width: 100%;
     height: 100%;
@@ -1569,8 +1569,7 @@
     margin-bottom: clamp(12px, 1.5vh, 16px);
     /* Ensure proper spacing for number badge */
     padding-left: clamp(60px, 7vw, 70px);
-    /* Debug: temporary background to see wrapper boundaries */
-    background-color: rgba(255, 0, 0, 0.1);
+
 }
 
 /* Ensure number badges in drop zones are properly sized and positioned outside */
@@ -1586,10 +1585,8 @@
     z-index: 999; /* Very high z-index to ensure visibility */
     /* Enhanced styling for outside positioning */
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4), 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.3);
     border: 2px solid #ffffff;
-    /* Debug: make badge more visible */
-    background-color: #ff0000 !important;
     /* Ensure proper display and centering */
     display: flex !important;
     align-items: center;
@@ -1610,7 +1607,7 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: clamp(12px, 1.5vw, 16px);
+    border-radius: clamp(16px, 2vw, 20px);
     /* Ensure content is visible */
     display: block;
     visibility: visible;
