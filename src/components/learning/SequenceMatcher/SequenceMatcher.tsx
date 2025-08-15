@@ -468,41 +468,48 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
               {Array.from({ length: dropZoneCount }, (_, index) => (
                 <div
                   key={`${index}-${resetCounter}`}
-                  className={styles.dropZone}
+                  className={styles.dropZoneWrapper}
                   data-index={index}
-                  data-text-length={
-                    placedItems[index] 
-                      ? getTextLengthCategory(placedItems[index].content)
-                      : "short"
-                  }
-                  onDragOver={(e) => handleDragOver(e, index)}
-                  onDragLeave={handleDragLeave}
-                  onDrop={(e) => handleDrop(e, index)}
                 >
-                  {/* Number badge as React element instead of CSS pseudo-element */}
+                  {/* Number badge positioned outside */}
                   <div className={styles.numberBadge}>{index + 1}</div>
-
-                  {placedItems[index] && (
-                    <div
-                      className={`${styles.stepItem} ${getItemStyleClass(
-                        placedItems[index]
-                      )}`}
-                      draggable="false"
-                      data-id={placedItems[index].id}
-                      data-text-length={getTextLengthCategory(
-                        placedItems[index].content
-                      )}
-                      style={{ "--item-index": index } as React.CSSProperties}
-                      onClick={() => returnItemToSteps(placedItems[index])}
-                    >
-                      <span
-                        className={`${styles.stepIcon} ${styles.imageIcon}`}
+                  
+                  {/* Drop zone container */}
+                  <div
+                    className={styles.dropZone}
+                    data-text-length={
+                      placedItems[index] 
+                        ? getTextLengthCategory(placedItems[index].content)
+                        : "short"
+                    }
+                    onDragOver={(e) => handleDragOver(e, index)}
+                    onDragLeave={handleDragLeave}
+                    onDrop={(e) => handleDrop(e, index)}
+                  >
+                    {placedItems[index] && (
+                      <div
+                        className={`${styles.stepItem} ${getItemStyleClass(
+                          placedItems[index]
+                        )}`}
+                        draggable="false"
+                        data-id={placedItems[index].id}
+                        data-text-length={getTextLengthCategory(
+                          placedItems[index].content
+                        )}
+                        style={{ "--item-index": index } as React.CSSProperties}
+                        onClick={() => returnItemToSteps(placedItems[index])}
                       >
-                        {getItemIcon(placedItems[index])}
-                      </span>
-                      <span>{placedItems[index].content}</span>
-                    </div>
-                  )}
+                        {/* Show icon in drop zones */}
+                        <span
+                          className={`${styles.stepIcon} ${styles.imageIcon}`}
+                        >
+                          {getItemIcon(placedItems[index])}
+                        </span>
+                        {/* Display text directly without stepText class for drop zones */}
+                        <span className={styles.stepText}>{placedItems[index].content}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
