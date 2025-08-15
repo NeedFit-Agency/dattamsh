@@ -226,7 +226,6 @@
     margin-bottom: clamp(20px, 3vh, 30px);
     flex: 1;
     min-height: 0;
-    overflow: hidden;
     width: 100%;
     position: relative;
     padding: 0;
@@ -258,7 +257,6 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     position: relative;
     transition: box-shadow 0.3s ease;
-    overflow: hidden; /* Hide overflow */
 }
 
 .dropTargets:hover {
@@ -288,37 +286,104 @@
 }
 
 .dropZone {
-    min-height: 140px; /* Adjust height to fit items snugly */
+    min-height: clamp(160px, 18vh, 200px); /* Responsive height for better content distribution */
     background-color: rgba(255, 255, 255, 0.95);
     border: 3px dashed #bbddff;
-    border-radius: clamp(20px, 3vw, 28px);
+    border-radius: clamp(18px, 2.5vw, 26px);
     transition: all 0.3s ease;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Changed from center to flex-start for better text flow */
     justify-content: flex-start;
-    padding: clamp(12px, 1.5vh, 18px);
-    padding-left: 85px;
-    padding-right: clamp(18px, 2.5vh, 28px);
+    padding: clamp(14px, 1.8vh, 22px); /* Responsive padding */
+    padding-left: clamp(20px, 2.5vw, 30px); /* Reduced left padding since badge is outside */
+    padding-right: clamp(16px, 2.2vh, 26px);
     box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.04);
     position: relative;
-    overflow: hidden;
+    /* Remove overflow: hidden to allow text to be fully visible */
+    /* overflow: hidden; - REMOVED */
     width: 100%;
+    /* Ensure drop zones can expand for longer text */
+    align-items: flex-start;
+    padding-top: clamp(20px, 3vh, 28px); /* Increased top padding */
+    padding-bottom: clamp(20px, 3vh, 28px); /* Added bottom padding */
+    /* Allow height to grow based on content */
+    height: auto;
+    /* Ensure proper text layout */
+    flex-direction: column;
+    align-items: stretch;
+
+}
+
+/* Adjust drop zone height based on text length */
+.dropZone[data-text-length="long"],
+.dropZone[data-text-length="very-long"] {
+    min-height: clamp(180px, 20vh, 240px); /* Responsive minimum height */
+    /* Allow height to grow based on content */
+    height: auto;
+    padding-top: clamp(20px, 3vh, 28px); /* Responsive padding for longer text */
+    padding-bottom: clamp(20px, 3vh, 28px);
+}
+
+@media (max-width: 768px) {
+    .dropZone {
+        min-height: clamp(180px, 16vh, 200px); /* Responsive base height for mobile */
+    }
+    
+    .dropZone[data-text-length="long"],
+    .dropZone[data-text-length="very-long"] {
+        min-height: clamp(200px, 18vh, 240px); /* Responsive minimum height for mobile */
+        /* Allow height to grow based on content */
+        height: auto;
+        padding-top: clamp(18px, 2vh, 24px);
+        padding-bottom: clamp(18px, 2vh, 24px);
+    }
+    
+    /* Adjust number badge positioning for mobile */
+    .dropZoneWrapper .numberBadge {
+        left: clamp(8px, 1.2vw, 12px);
+        width: clamp(36px, 4vw, 44px);
+        height: clamp(36px, 4vw, 44px);
+        font-size: clamp(18px, 1.8vw, 22px);
+    }
+}
+
+@media (max-width: 480px) {
+    .dropZone {
+        min-height: clamp(200px, 14vh, 220px); /* Responsive base height for small mobile */
+    }
+    
+    .dropZone[data-text-length="long"],
+    .dropZone[data-text-length="very-long"] {
+        min-height: clamp(220px, 16vh, 260px); /* Responsive minimum height for small mobile */
+        /* Allow height to grow based on content */
+        height: auto;
+        padding-top: clamp(16px, 1.8vh, 22px);
+        padding-bottom: clamp(16px, 1.8vh, 22px);
+    }
+    
+    /* Adjust number badge positioning for small mobile */
+    .dropZoneWrapper .numberBadge {
+        left: clamp(6px, 1vw, 10px);
+        width: clamp(32px, 3.5vw, 40px);
+        height: clamp(32px, 3.5vw, 40px);
+        font-size: clamp(16px, 1.6vw, 20px);
+    }
 }
 
 .numberBadge {
     position: absolute;
-    left: 20px;
+    left: clamp(16px, 1.5vw, 20px);
     top: 50%;
     transform: translateY(-50%);
-    width: 52px;
-    height: 52px;
+    width: clamp(44px, 4vw, 52px);
+    height: clamp(44px, 4vw, 52px);
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #60a5fa, #1d4ed8);
     color: white;
     font-weight: 900;
-    font-size: 26px;
+    font-size: clamp(22px, 2.2vw, 26px);
     border-radius: 50%;
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.3);
@@ -360,7 +425,6 @@
     transition: all 0.3s ease;
     box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.08);
     position: relative;
-    overflow: hidden; /* Hide overflow */
 }
 
 .draggableItems:hover {
@@ -401,24 +465,35 @@
 
 .stepItem {
     display: flex;
-    align-items: center;
-    padding: clamp(20px, 3vh, 28px);
-    border-radius: clamp(18px, 3vw, 26px);
+    align-items: flex-start; /* Changed from center to flex-start for better text flow */
+    padding: clamp(20px, 3vh, 28px); /* Responsive padding */
+    border-radius: clamp(16px, 2.5vw, 24px);
     font-weight: 700;
-    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
     cursor: grab;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 clamp(6px, 1.5vh, 12px) clamp(12px, 2vh, 16px) rgba(0,0,0,0.1), 0 clamp(3px, 1vh, 4px) 0 rgba(0,0,0,0.08);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
     background-color: white;
     border: 3px solid transparent;
     position: relative;
-    overflow: hidden;
+    /* Removed overflow: hidden to allow text to be fully visible */
     animation: itemBounce 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     animation-fill-mode: both;
     animation-delay: calc(var(--item-index, 0) * 0.1s);
-    min-width: clamp(250px, 40vw, 350px);
-    min-height: clamp(90px, 12vh, 120px);
+    min-width: clamp(280px, 40vw, 380px); /* Responsive width for better content distribution */
+    min-height: clamp(100px, 12vh, 140px); /* Responsive height for better content distribution */
+    /* Allow height to grow based on content */
+    height: auto;
     line-height: 1.4;
+    /* Text overflow handling - prevent hyphenation but allow proper wrapping */
+    word-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    /* Allow items to grow vertically based on content */
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    /* Allow height to grow based on content */
+    height: auto;
 }
 
 @keyframes itemBounce {
@@ -446,26 +521,26 @@
 }
 
 .stepItem:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18), 0 5px 0 rgba(0,0,0,0.08);
+    transform: translateY(clamp(-3px, -0.8vh, -4px)); /* Responsive hover effect */
+    box-shadow: 0 clamp(8px, 1.8vh, 12px) clamp(14px, 2.2vh, 18px) rgba(0, 0, 0, 0.15), 0 clamp(3px, 1vh, 4px) 0 rgba(0,0,0,0.08); /* Responsive shadow */
 }
 
 .stepItem.dragging {
     opacity: 0.9;
-    box-shadow: 0 16px 28px rgba(0,0,0,0.2);
-    transform: scale(1.1);
+    box-shadow: 0 clamp(12px, 2.5vh, 20px) clamp(20px, 3.5vh, 28px) rgba(0,0,0,0.2);
+    transform: scale(1.05);
     cursor: grabbing;
     z-index: 10;
 }
 
 .stepIcon {
-    width: clamp(100px, 12vw, 130px);
-    height: clamp(100px, 12vw, 130px);
-    border-radius: 20px;
+    width: clamp(80px, 10vw, 120px);
+    height: clamp(80px, 10vw, 120px);
+    border-radius: clamp(16px, 2vw, 20px);
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-right: clamp(20px, 3vw, 30px);
+    margin-right: clamp(16px, 2.5vw, 28px);
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     transition: transform 0.3s;
     position: relative;
@@ -487,17 +562,17 @@
 }
 
 .stepItem:hover .stepIcon.imageIcon {
-    transform: rotate(5deg) scale(1.3);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.35), 0 0 15px rgba(255, 215, 0, 0.4);
-    animation: bounce-rotate 1s infinite alternate;
+    transform: rotate(clamp(1deg, 0.3vw, 2deg)) scale(1.05); /* Responsive hover effect */
+    box-shadow: 0 clamp(6px, 1.5vh, 12px) clamp(16px, 2.5vh, 20px) rgba(0,0,0,0.25), 0 0 clamp(8px, 1.5vh, 10px) rgba(255, 215, 0, 0.3); /* Responsive shadow */
+    animation: bounce-rotate-subtle 1.2s infinite alternate; /* Changed animation */
 }
 
-@keyframes bounce-rotate {
-    0% { transform: rotate(5deg) scale(1.3); }
-    25% { transform: rotate(0deg) scale(1.35) translateY(-5px); }
-    50% { transform: rotate(-5deg) scale(1.3); }
-    75% { transform: rotate(0deg) scale(1.35) translateY(-5px); }
-    100% { transform: rotate(5deg) scale(1.3); }
+@keyframes bounce-rotate-subtle {
+    0% { transform: rotate(clamp(1deg, 0.3vw, 2deg)) scale(1.05); }
+    25% { transform: rotate(0deg) scale(1.08) translateY(clamp(-1px, -0.2vh, -2px)); } /* Responsive movement */
+    50% { transform: rotate(clamp(-1deg, -0.3vw, -2deg)) scale(1.05); }
+    75% { transform: rotate(0deg) scale(1.08) translateY(clamp(-1px, -0.2vh, -2px)); } /* Responsive movement */
+    100% { transform: rotate(clamp(1deg, 0.3vw, 2deg)) scale(1.05); }
 }
 
 .stepIcon.imageIcon {
@@ -1124,12 +1199,12 @@
 .stepsContainer {
     display: flex;
     flex-direction: column;
-    gap: clamp(12px, 2vh, 18px);
+    gap: clamp(10px, 1.5vh, 16px);
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #bbddff #f0f0f0;
-    padding: 8px 8px 8px 0;
-    margin-top: 10px;
+    padding: clamp(6px, 1vh, 10px) clamp(6px, 1vh, 10px) clamp(6px, 1vh, 10px) 0;
+    margin-top: clamp(8px, 1.5vh, 12px);
     flex-grow: 1;
     min-height: 0;
 }
@@ -1166,11 +1241,127 @@
 /* Individual Item TTS Styling */
 .stepItem {
     position: relative; /* Enable absolute positioning for TTS button */
+    /* Ensure proper text container sizing */
+    flex-wrap: nowrap;
+    align-items: flex-start; /* Align items to top for better text flow */
+    /* Allow height to grow based on content */
+    height: auto;
+    /* Ensure proper text flow */
+    align-items: flex-start;
+    /* Allow content to determine height */
+    flex-shrink: 0;
+    /* Ensure container can expand with content */
+    flex-grow: 1;
 }
 
+/* Ensure text has enough space and doesn't overlap with audio buttons */
 .stepText {
     flex-grow: 1;
-    margin-left: 12px; /* Add margin to prevent text from going too close to the icon */
+    margin-left: clamp(10px, 1.5vw, 14px);
+    margin-right: clamp(50px, 4vw, 60px); /* Responsive space for audio button */
+    /* Text overflow handling - allow text to wrap naturally without hyphenation */
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    /* Responsive font sizing for long text */
+    font-size: clamp(1rem, 1.9vw, 1.6rem);
+    line-height: 1.4; /* Increased for better readability */
+    max-width: none; /* Remove width restriction */
+    width: auto; /* Allow natural width */
+    /* Remove overflow restrictions to show all text */
+    overflow: visible; /* Ensure text is fully visible */
+    /* Allow text to wrap to multiple lines naturally */
+    white-space: normal;
+    word-wrap: break-word;
+    /* Ensure proper text wrapping without hyphenation */
+    overflow-wrap: break-word;
+    /* Ensure proper text spacing */
+    padding-bottom: 12px;
+    /* Allow text to expand naturally */
+    flex-shrink: 1;
+    /* Ensure text container can grow */
+    flex-grow: 1;
+    /* Prevent text from being cut off */
+    max-height: none;
+}
+
+/* Ensure drop zones can accommodate any text length */
+.dropZone {
+    /* Allow height to grow based on content */
+    height: auto;
+    /* Ensure proper content flow */
+    align-items: flex-start;
+    /* Remove any width constraints */
+    max-width: none;
+    width: 100%;
+}
+
+/* Responsive font sizing for different text lengths */
+.stepItem[data-text-length="short"] .stepText {
+    font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+    line-height: 1.3;
+    padding-bottom: 10px;
+}
+
+.stepItem[data-text-length="medium"] .stepText {
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    line-height: 1.35;
+    padding-bottom: 12px;
+}
+
+.stepItem[data-text-length="long"] .stepText {
+    font-size: clamp(0.9rem, 1.7vw, 1.4rem);
+    line-height: 1.4;
+    /* Ensure long text has adequate spacing */
+    padding-bottom: 14px;
+}
+
+.stepItem[data-text-length="very-long"] .stepText {
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+    line-height: 1.3;
+    /* Ensure very long text has adequate spacing */
+    padding-bottom: 16px;
+}
+
+/* Mobile responsive text sizing */
+@media (max-width: 768px) {
+    .stepItem[data-text-length="short"] .stepText {
+        font-size: clamp(1rem, 1.8vw, 1.4rem);
+    }
+    
+    .stepItem[data-text-length="medium"] .stepText {
+        font-size: clamp(0.95rem, 1.7vw, 1.3rem);
+    }
+    
+    .stepItem[data-text-length="long"] .stepText {
+        font-size: clamp(0.85rem, 1.6vw, 1.2rem);
+        line-height: 1.4;
+    }
+    
+    .stepItem[data-text-length="very-long"] .stepText {
+        font-size: clamp(0.75rem, 1.4vw, 1.1rem);
+        line-height: 1.3;
+    }
+}
+
+@media (max-width: 480px) {
+    .stepItem[data-text-length="short"] .stepText {
+        font-size: clamp(0.9rem, 1.6vw, 1.3rem);
+    }
+    
+    .stepItem[data-text-length="medium"] .stepText {
+        font-size: clamp(0.85rem, 1.5vw, 1.2rem);
+    }
+    
+    .stepItem[data-text-length="long"] .stepText {
+        font-size: clamp(0.8rem, 1.4vw, 1.1rem);
+        line-height: 1.4;
+    }
+    
+    .stepItem[data-text-length="very-long"] .stepText {
+        font-size: clamp(0.7rem, 1.3vw, 1rem);
+        line-height: 1.3;
+    }
 }
 
 .itemTTSContainer {
@@ -1225,6 +1416,7 @@
 /* Make sure the step item content area doesn't overlap with TTS button */
 .stepItem .stepIcon {
     margin-right: 12px;
+    flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
 .stepItem:not(.dragging) .itemTTSContainer:hover {
@@ -1248,10 +1440,6 @@
         width: 14px !important;
         height: 14px !important;
     }
-    
-    .stepText {
-        margin-left: 10px; /* Adjust margin for mobile */
-    }
 }
 
 @media (max-width: 480px) {
@@ -1269,10 +1457,6 @@
     .itemHeadphones svg {
         width: 12px !important;
         height: 12px !important;
-    }
-    
-    .stepText {
-        margin-left: 8px;
     }
 }
 
@@ -1341,4 +1525,153 @@
         width: 11px;
         height: 11px;
     }
+}
+
+/* Style for placed items in drop zones - remove box styling */
+.dropZone .stepItem {
+    /* Remove all box styling to show content directly */
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    min-height: auto;
+    min-width: auto;
+    /* Allow text to flow naturally */
+    display: flex;
+    width: 100%;
+    height: auto;
+    /* Remove animations and hover effects */
+    animation: none;
+    transform: none;
+    cursor: default;
+    /* Ensure proper icon and text layout */
+    align-items: flex-start;
+}
+
+.dropZone .stepItem .stepIcon {
+    /* Show icons in drop zones but with appropriate sizing */
+    display: flex;
+    width: clamp(60px, 8vw, 80px);
+    height: clamp(60px, 8vw, 80px);
+    margin-right: clamp(12px, 1.5vw, 16px);
+    margin-left: 0; /* No left margin since badge is outside */
+    /* Ensure icon content is visible */
+    position: relative;
+    z-index: 1;
+}
+
+/* Drop zone wrapper for proper number badge positioning */
+.dropZoneWrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: clamp(12px, 1.5vh, 16px);
+    /* Ensure proper spacing for number badge */
+    padding-left: clamp(60px, 7vw, 70px);
+    /* Debug: temporary background to see wrapper boundaries */
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Ensure number badges in drop zones are properly sized and positioned outside */
+.dropZoneWrapper .numberBadge {
+    position: absolute;
+    left: clamp(10px, 1.5vw, 15px); /* Position inside the left padding area */
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(40px, 4.5vw, 48px);
+    height: clamp(40px, 4.5vw, 48px);
+    font-size: clamp(20px, 2vw, 24px);
+    /* Ensure badge is visible and properly positioned */
+    z-index: 999; /* Very high z-index to ensure visibility */
+    /* Enhanced styling for outside positioning */
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ffffff;
+    /* Debug: make badge more visible */
+    background-color: #ff0000 !important;
+    /* Ensure proper display and centering */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    font-weight: 900;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    /* Force visibility */
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Ensure icons in drop zones display properly */
+.dropZone .stepItem .stepIcon svg,
+.dropZone .stepItem .stepIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: clamp(12px, 1.5vw, 16px);
+    /* Ensure content is visible */
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropZone .stepText {
+    /* Style text directly in drop zones */
+    margin: 0;
+    padding: 0;
+    margin-left: clamp(8px, 1vw, 12px); /* Proper spacing from icon */
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    line-height: 1.3;
+    color: #333;
+    font-weight: 600;
+    /* Ensure text fits and wraps properly without hyphenation */
+    word-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    /* Remove all constraints */
+    max-width: none;
+    width: 100%;
+    overflow: visible;
+    white-space: normal;
+}
+
+/* Additional text display improvements for drop zones */
+.dropZone .stepItem {
+    /* Ensure text has enough space */
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    /* Allow text to expand naturally */
+    flex: 1;
+    /* Ensure text is visible */
+    overflow: visible;
+    /* Remove any remaining constraints */
+    max-width: none;
+    width: 100%;
+}
+
+/* Ensure text in drop zones is fully visible */
+.dropZone .stepText {
+    /* Give text plenty of space */
+    padding: 8px 12px;
+    margin: 0;
+    margin-left: clamp(8px, 1vw, 12px); /* Proper spacing from icon */
+    /* Ensure text wraps properly without hyphenation */
+    word-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    /* Remove all width constraints */
+    max-width: none;
+    width: 100%;
+    /* Ensure text is visible */
+    overflow: visible;
+    white-space: normal;
+    /* Make text readable */
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    line-height: 1.4;
+    color: #333;
+    font-weight: 600;
 }
