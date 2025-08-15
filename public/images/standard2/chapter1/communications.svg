@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+  
+  <!-- Computer monitor -->
+  <rect x="60" y="60" width="80" height="50" rx="5" fill="#424242" stroke="#212121" stroke-width="2"/>
+  <rect x="65" y="65" width="70" height="40" fill="#81c784"/>
+  
+  <!-- Monitor stand -->
+  <rect x="95" y="110" width="10" height="15" fill="#424242"/>
+  <rect x="85" y="125" width="30" height="5" rx="2" fill="#424242"/>
+  
+  <!-- Communication waves -->
+  <path d="M 40 80 Q 50 70 40 60" stroke="#ff9800" stroke-width="3" fill="none"/>
+  <path d="M 35 85 Q 50 70 35 55" stroke="#ff9800" stroke-width="2" fill="none"/>
+  <path d="M 30 90 Q 50 70 30 50" stroke="#ff9800" stroke-width="1" fill="none"/>
+  
+  <path d="M 160 80 Q 150 70 160 60" stroke="#ff9800" stroke-width="3" fill="none"/>
+  <path d="M 165 85 Q 150 70 165 55" stroke="#ff9800" stroke-width="2" fill="none"/>
+  <path d="M 170 90 Q 150 70 170 50" stroke="#ff9800" stroke-width="1" fill="none"/>
+  
+  <!-- Speech bubbles -->
+  <ellipse cx="45" cy="140" rx="20" ry="12" fill="#fff" stroke="#1976d2" stroke-width="2"/>
+  <text x="45" y="145" text-anchor="middle" font-family="Arial" font-size="10" fill="#1976d2">Hi!</text>
+  
+  <ellipse cx="155" cy="140" rx="25" ry="12" fill="#fff" stroke="#1976d2" stroke-width="2"/>
+  <text x="155" y="145" text-anchor="middle" font-family="Arial" font-size="10" fill="#1976d2">Hello!</text>
+  
+  <!-- Network connection lines -->
+  <line x1="100" y1="60" x2="100" y2="30" stroke="#4caf50" stroke-width="3"/>
+  <circle cx="100" cy="25" r="8" fill="#4caf50"/>
+  <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="white">NET</text>
+</svg>

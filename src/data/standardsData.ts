@@ -978,16 +978,16 @@ export const standards: Standard = {
           title: "Cyber Security Threats",
           instruction: "Read each situation. Drag and drop it into the correct category: 'Cyber Security Threat' or 'Not a Threat'.",
           items: [
-            { id: "s1", text: "While streaming cartoons, a message leaps onto the screen: ‘Congratulations, you’ve won a brand‑new phone! Click here to claim your prize.’", type: "threat" },
-            { id: "s2", text: "You open an email that looks like it’s from your bank teacher and asks you to ‘confirm your password’ on a strange link.", type: "threat" },
-            { id: "s3", text: "Your friend shares a USB stick with ‘cool free games.’ After you install one, your computer slows down and files vanish.", type: "threat" },
-            { id: "s4", text: "A full‑screen warning suddenly appears: ‘All your files are locked. Pay 50 coins to get them back.’", type: "threat" },
-            { id: "s5", text: "You find a ‘FREE wallpaper changer’ on an unknown website. After installing it, the computer starts deleting photos.", type: "threat" },
-            { id: "s6", text: "You visit your school’s official website to download this week’s homework PDF, and it opens normally.", type: "not-threat" },
-            { id: "s7", text: "You click the Update button inside your trusted antivirus program to get the latest protection.", type: "not-threat" },
-            { id: "s8", text: "In class, you log into Google Classroom through the teacher’s bookmarked link to submit an assignment.", type: "not-threat" },
-            { id: "s9", text: "A science video plays from the verified YouTube Kids channel with comments turned off.", type: "not-threat" },
-            { id: "s10", text: "You right‑click the desktop and choose Change Background to set a new picture already saved on your computer.", type: "not-threat" }
+            { id: "s1", text: "While streaming cartoons, a message leaps onto the screen: 'Congratulations, you've won a brand‑new phone! Click here to claim your prize.'", type: "threat", imageUrl: "/images/standard5/fake_prize_popup.png" },
+            { id: "s2", text: "You open an email that looks like it's from your bank teacher and asks you to 'confirm your password' on a strange link.", type: "threat", imageUrl: "/images/standard5/phishing_email.png" },
+            { id: "s3", text: "Your friend shares a USB stick with 'cool free games.' After you install one, your computer slows down and files vanish.", type: "threat", imageUrl: "/images/standard5/malicious_usb.png" },
+            { id: "s4", text: "A full‑screen warning suddenly appears: 'All your files are locked. Pay 50 coins to get them back.'", type: "threat", imageUrl: "/images/standard5/ransomware_warning.png" },
+            { id: "s5", text: "You find a 'FREE wallpaper changer' on an unknown website. After installing it, the computer starts deleting photos.", type: "threat", imageUrl: "/images/standard5/malicious_software.png" },
+            { id: "s6", text: "You visit your school's official website to download this week's homework PDF, and it opens normally.", type: "not-threat", imageUrl: "/images/standard5/safe_school_website.png" },
+            { id: "s7", text: "You click the Update button inside your trusted antivirus program to get the latest protection.", type: "not-threat", imageUrl: "/images/standard5/antivirus_update.png" },
+            { id: "s8", text: "In class, you log into Google Classroom through the teacher's bookmarked link to submit an assignment.", type: "not-threat", imageUrl: "/images/standard5/google_classroom.png" },
+            { id: "s9", text: "A science video plays from the verified YouTube Kids channel with comments turned off.", type: "not-threat", imageUrl: "/images/standard5/youtube_kids.png" },
+            { id: "s10", text: "You right‑click the desktop and choose Change Background to set a new picture already saved on your computer.", type: "not-threat", imageUrl: "/images/standard5/desktop_background.png" }
           ],
           targets: [
             { id: "threat", title: "Cyber Security Threat", type: "threat" },
