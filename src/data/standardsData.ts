@@ -1060,11 +1060,11 @@ export const standards: Standard = {
           title: "Identify the Excel Function",
           instruction: "Match each description to the correct Excel function name!",
           items: [
-            { id: "min", text: "Finds the smallest number in a range.", type: "desc" },
-            { id: "count", text: "Counts how many numbers are in a range.", type: "desc" },
-            { id: "round", text: "Rounds a number to a specified number of decimal places.", type: "desc" },
-            { id: "average", text: "Finds the average of numbers in a range.", type: "desc" },
-            { id: "len", text: "Counts how many characters are in a text string.", type: "desc" }
+            { id: "min", text: "Finds the smallest number in a range.", type: "desc", imageUrl: "/images/standard5/min_function.png" },
+            { id: "count", text: "Counts how many numbers are in a range.", type: "desc", imageUrl: "/images/standard5/count_function.png" },
+            { id: "round", text: "Rounds a number to a specified number of decimal places.", type: "desc", imageUrl: "/images/standard5/round_function.png" },
+            { id: "average", text: "Finds the average of numbers in a range.", type: "desc", imageUrl: "/images/standard5/average_function.png" },
+            { id: "len", text: "Counts how many characters are in a text string.", type: "desc", imageUrl: "/images/standard5/len_function.png" }
           ],
           buckets: [
             { id: "bucket-min", title: "MIN", type: "func" },
@@ -1090,10 +1090,10 @@ export const standards: Standard = {
           title: "Match Programming Terms to Their Explanations",
           instruction: "Drag each programming term to its correct explanation!",
           items: [
-            { id: "syntax", text: "Syntax", type: "term" },
-            { id: "keywords", text: "Keywords", type: "term" },
-            { id: "operators", text: "Operators", type: "term" },
-            { id: "control-structures", text: "Control structures", type: "term" }
+            { id: "syntax", text: "Syntax", type: "term", imageUrl: "/images/standard6/syntax_programming.png" },
+            { id: "keywords", text: "Keywords", type: "term", imageUrl: "/images/standard6/keywords_programming.png" },
+            { id: "operators", text: "Operators", type: "term", imageUrl: "/images/standard6/operators_programming.png" },
+            { id: "control-structures", text: "Control structures", type: "term", imageUrl: "/images/standard6/control_structures_programming.png" }
           ],
           buckets: [
             {
@@ -1222,18 +1222,18 @@ export const standards: Standard = {
           title: "Sort the Operators by Type",
           instruction: "Drag each operator to its correct type bucket!",
           items: [
-            { id: "plus", text: "+ Addition", type: "arithmetic" },
-            { id: "modulus", text: "% Modulus", type: "arithmetic" },
-            { id: "exponential", text: "** Exponential", type: "arithmetic" },
-            { id: "assign", text: "= Assignment", type: "assignment" },
-            { id: "mul-assign", text: "*= Multiplication assignment", type: "assignment" },
-            { id: "floordiv-assign", text: "//= Floor division assignment", type: "assignment" },
-            { id: "equal", text: "== Equal", type: "relational" },
-            { id: "greater", text: "> Greater than", type: "relational" },
-            { id: "less-equal", text: "<= Less than or equal to", type: "relational" },
-            { id: "and", text: "and: And", type: "logical" },
-            { id: "or", text: "or: Or", type: "logical" },
-            { id: "not", text: "not: Not", type: "logical" }
+            { id: "plus", text: "+ Addition", type: "arithmetic", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "modulus", text: "% Modulus", type: "arithmetic", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "exponential", text: "** Exponential", type: "arithmetic", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "assign", text: "= Assignment", type: "assignment", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "mul-assign", text: "*= Multiplication assignment", type: "assignment", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "floordiv-assign", text: "//= Floor division assignment", type: "assignment", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "equal", text: "== Equal", type: "relational", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "greater", text: "> Greater than", type: "relational", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "less-equal", text: "<= Less than or equal to", type: "relational", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "and", text: "and: And", type: "logical", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "or", text: "or: Or", type: "logical", imageUrl: "/images/standard6/data_types_programming.png" },
+            { id: "not", text: "not: Not", type: "logical", imageUrl: "/images/standard6/data_types_programming.png" }
           ],
           buckets: [
             { id: "bucket-arithmetic", title: "Arithmetic operators", type: "arithmetic" },
@@ -1259,10 +1259,10 @@ export const standards: Standard = {
           riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
           questionText: "Which type of network is best for this scenario?",
           options: [
-            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: true },
-            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false },
-            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false },
-            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false }
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: true, imageUrl: "/images/standard7/pan_network.png" },
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false, imageUrl: "/images/standard7/lan_network.png" },
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false, imageUrl: "/images/standard7/man_network.png" },
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false, imageUrl: "/images/standard7/wan_network.png" }
           ],
           audioSrc: undefined,
           speakText: "You and your friend are preparing for a science project in your room. You need to transfer a video from your phone to your friend's tablet, and also connect your wireless headphones to check the sound quality."
@@ -1274,10 +1274,10 @@ export const standards: Standard = {
           riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
           questionText: "Which type of network is best for this scenario?",
           options: [
-            { id: "lan", text: "LAN (Local Area Network)", isCorrect: true },
-            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false },
-            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false },
-            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false }
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: true, imageUrl: "/images/standard7/lan_network.png" },
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false, imageUrl: "/images/standard7/pan_network.png" },
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false, imageUrl: "/images/standard7/wan_network.png" },
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false, imageUrl: "/images/standard7/man_network.png" }
           ],
           audioSrc: undefined,
           speakText: "Your school computer lab has 20 computers that need to exchange files quickly, share the same internet connection and printer."
@@ -1289,10 +1289,10 @@ export const standards: Standard = {
           riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
           questionText: "Which type of network is best for this scenario?",
           options: [
-            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: true },
-            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false },
-            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false },
-            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false }
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: true, imageUrl: "/images/standard7/man_network.png" },
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false, imageUrl: "/images/standard7/wan_network.png" },
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false, imageUrl: "/images/standard7/pan_network.png" },
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false, imageUrl: "/images/standard7/lan_network.png" }
           ],
           audioSrc: undefined,
           speakText: "A city library wants all its branches across different parts of the city to have access to the same e-book database. The buildings are far apart but still within the city, and fast data sharing is required."
@@ -1304,10 +1304,10 @@ export const standards: Standard = {
           riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
           questionText: "Which type of network is best for this scenario?",
           options: [
-            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: true },
-            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false },
-            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false },
-            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false }
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: true, imageUrl: "/images/standard7/wan_network.png" },
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false, imageUrl: "/images/standard7/man_network.png" },
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false, imageUrl: "/images/standard7/lan_network.png" },
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false, imageUrl: "/images/standard7/pan_network.png" }
           ],
           audioSrc: undefined,
           speakText: "Your cousin in another country is helping you build a coding project. You both need to work on the same files in real-time using cloud storage, even though you're thousands of kilometers apart."
@@ -1324,10 +1324,10 @@ export const standards: Standard = {
           title: "Match Digital Marketing Concepts",
           instruction: "XYZ Marketing Company has been hired to promote ChocoBlast, a new chocolate milkshake brand. Here's what their team did to make the campaign a success. You need to match each task to the correct key concept of digital marketing.",
           items: [
-            { id: "ab-testing", text: "Made two online ads, one with a blue 'Order Now' button and another with a green 'Get Yours Today' button, to see which got more clicks.", type: "ab-testing" },
-            { id: "keyword-optimization", text: "Researched searches like 'best chocolate milkshake near me' and used them in the website and ads.", type: "keyword-optimization" },
-            { id: "seo", text: "Improved the website with clear headings, tasty photos, and faster loading, so it ranks higher on search engines.", type: "seo" },
-            { id: "ctr", text: "Measured how many saw the ad versus how many clicked it, then calculated the percentage.", type: "ctr" }
+            { id: "ab-testing", text: "Made two online ads, one with a blue 'Order Now' button and another with a green 'Get Yours Today' button, to see which got more clicks.", type: "ab-testing", imageUrl: "/images/standard7/ab_testing.png" },
+            { id: "keyword-optimization", text: "Researched searches like 'best chocolate milkshake near me' and used them in the website and ads.", type: "keyword-optimization", imageUrl: "/images/standard7/keyword_optimization.png" },
+            { id: "seo", text: "Improved the website with clear headings, tasty photos, and faster loading, so it ranks higher on search engines.", type: "seo", imageUrl: "/images/standard7/seo_marketing.png" },
+            { id: "ctr", text: "Measured how many saw the ad versus how many clicked it, then calculated the percentage.", type: "ctr", imageUrl: "/images/standard7/ctr_analysis.png" }
           ],
           buckets: [
             { id: "bucket-ab-testing", title: "A/B Testing (Split Testing)", type: "ab-testing", color: "#4ECDC4" },
@@ -1403,10 +1403,10 @@ export const standards: Standard = {
           title: "Match Network Components",
           instruction: "Your school is setting up a new computer lab that needs to be connected to the internet and to the school's central database. The school technician explains how all the parts of the network will work together. Match each component to its correct description.",
           items: [
-            { id: "switches", text: "Switches", type: "switches", imageUrl: "/images/hardware.png" },
-            { id: "routers", text: "Routers", type: "routers", imageUrl: "/images/hardware.png" },
-            { id: "protocols", text: "Protocols", type: "protocols", imageUrl: "/images/hardware.png" },
-            { id: "server", text: "Server", type: "server", imageUrl: "/images/computer.png" }
+            { id: "switches", text: "Switches", type: "switches", imageUrl: "/images/standard8/switches.png" },
+            { id: "routers", text: "Routers", type: "routers", imageUrl: "/images/standard8/routers.png" },
+            { id: "protocols", text: "Protocols", type: "protocols", imageUrl: "/images/standard8/protocols.png" },
+            { id: "server", text: "Server", type: "server", imageUrl: "/images/standard8/server.png" }
           ],
           buckets: [
             { 
