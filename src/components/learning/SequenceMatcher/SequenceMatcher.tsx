@@ -205,6 +205,15 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     }
   };
 
+  // Function to determine text length category for responsive font sizing
+  const getTextLengthCategory = (text: string): string => {
+    const length = text.length;
+    if (length <= 30) return "short";
+    if (length <= 60) return "medium";
+    if (length <= 100) return "long";
+    return "very-long";
+  };
+
   const getItemIcon = (item: DraggableItem) => {
     switch (item.id) {
       case "step-1": // Save your work
@@ -461,6 +470,11 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                   key={`${index}-${resetCounter}`}
                   className={styles.dropZone}
                   data-index={index}
+                  data-text-length={
+                    placedItems[index] 
+                      ? getTextLengthCategory(placedItems[index].content)
+                      : "short"
+                  }
                   onDragOver={(e) => handleDragOver(e, index)}
                   onDragLeave={handleDragLeave}
                   onDrop={(e) => handleDrop(e, index)}
@@ -475,6 +489,9 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                       )}`}
                       draggable="false"
                       data-id={placedItems[index].id}
+                      data-text-length={getTextLengthCategory(
+                        placedItems[index].content
+                      )}
                       style={{ "--item-index": index } as React.CSSProperties}
                       onClick={() => returnItemToSteps(placedItems[index])}
                     >
@@ -518,6 +535,9 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                   className={`${styles.stepItem} ${getItemStyleClass(item)}`}
                   draggable="true"
                   data-id={item.id}
+                  data-text-length={getTextLengthCategory(
+                    item.content
+                  )}
                   onDragStart={(e) => handleDragStart(e, item)}
                   onDragEnd={handleDragEnd}
                   style={{ "--item-index": index } as React.CSSProperties}
