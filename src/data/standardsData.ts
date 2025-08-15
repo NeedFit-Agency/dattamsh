@@ -2,7 +2,9 @@ export type FormatType =
   | "drag-drop"
   | "bucket-match"
   | "sequence-match"
-  | "who-am-i";
+  | "who-am-i"
+  | "code-analysis"
+  | "sql-query-builder";
 
 export interface BaseContentProps {
   type: string;
@@ -91,11 +93,37 @@ export interface WhoAmISlide extends BaseContentProps {
   options: WhoAmIOption[];
 }
 
+export interface CodeAnalysisSlide extends BaseContentProps {
+  type: "code-analysis";
+  format: "code-analysis";
+  instruction: string;
+  codeComponent: string;
+  items: BucketMatchItem[];
+  buckets: BucketData[];
+}
+
+export interface SQLQueryBuilderItem {
+  id: string;
+  content: string;
+  category?: 'DDL' | 'DML' | 'DQL' | 'DCL' | 'TCL';
+  audioSrc?: string;
+}
+
+export interface SQLQueryBuilderSlide extends BaseContentProps {
+  type: "sql-query-builder";
+  format: "sql-query-builder";
+  instruction: string;
+  items: SQLQueryBuilderItem[];
+  correctOrder: string[];
+}
+
 export type LessonContent =
   | DragDropSlide
   | BucketMatchSlide
   | SequenceMatchSlide
-  | WhoAmISlide;
+  | WhoAmISlide
+  | CodeAnalysisSlide
+  | SQLQueryBuilderSlide;
 
 export interface Chapter {
   id: number;
@@ -1219,4 +1247,297 @@ export const standards: Standard = {
       ]
     }
   ],
+  "7": [
+    {
+      id: 1,
+      title: "Computer Networks - I",
+      lessonContent: [
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Types of Computer Networks",
+          riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
+          questionText: "Which type of network is best for this scenario?",
+          options: [
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: true },
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false },
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false },
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "You and your friend are preparing for a science project in your room. You need to transfer a video from your phone to your friend's tablet, and also connect your wireless headphones to check the sound quality."
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Types of Computer Networks",
+          riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
+          questionText: "Which type of network is best for this scenario?",
+          options: [
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: true },
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false },
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false },
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "Your school computer lab has 20 computers that need to exchange files quickly, share the same internet connection and printer."
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Types of Computer Networks",
+          riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
+          questionText: "Which type of network is best for this scenario?",
+          options: [
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: true },
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: false },
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false },
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "A city library wants all its branches across different parts of the city to have access to the same e-book database. The buildings are far apart but still within the city, and fast data sharing is required."
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Types of Computer Networks",
+          riddleText: "Read the situation carefully. If you were in this situation, which type of network would you choose?",
+          questionText: "Which type of network is best for this scenario?",
+          options: [
+            { id: "wan", text: "WAN (Wide Area Network)", isCorrect: true },
+            { id: "man", text: "MAN (Metropolitan Area Network)", isCorrect: false },
+            { id: "lan", text: "LAN (Local Area Network)", isCorrect: false },
+            { id: "pan", text: "PAN (Personal Area Network)", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "Your cousin in another country is helping you build a coding project. You both need to work on the same files in real-time using cloud storage, even though you're thousands of kilometers apart."
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "Digital Marketing Concepts",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match Digital Marketing Concepts",
+          instruction: "XYZ Marketing Company has been hired to promote ChocoBlast, a new chocolate milkshake brand. Here's what their team did to make the campaign a success. You need to match each task to the correct key concept of digital marketing.",
+          items: [
+            { id: "ab-testing", text: "Made two online ads, one with a blue 'Order Now' button and another with a green 'Get Yours Today' button, to see which got more clicks.", type: "ab-testing" },
+            { id: "keyword-optimization", text: "Researched searches like 'best chocolate milkshake near me' and used them in the website and ads.", type: "keyword-optimization" },
+            { id: "seo", text: "Improved the website with clear headings, tasty photos, and faster loading, so it ranks higher on search engines.", type: "seo" },
+            { id: "ctr", text: "Measured how many saw the ad versus how many clicked it, then calculated the percentage.", type: "ctr" }
+          ],
+          buckets: [
+            { id: "bucket-ab-testing", title: "A/B Testing (Split Testing)", type: "ab-testing", color: "#4ECDC4" },
+            { id: "bucket-keyword-optimization", title: "Keyword Optimization", type: "keyword-optimization", color: "#45B7D1" },
+            { id: "bucket-seo", title: "SEO (Search Engine Optimization)", type: "seo", color: "#96CEB4" },
+            { id: "bucket-ctr", title: "CTR (Click-through Rate)", type: "ctr", color: "#FFEAA7" }
+          ],
+          audioSrc: undefined,
+          speakText: "Match each digital marketing task to its correct concept."
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "PowerPoint Transitions",
+      lessonContent: [
+        {
+          type: "sequence-match",
+          format: "sequence-match",
+          title: "Arrange PowerPoint Transition Steps",
+          instruction: "You are creating a school project in Microsoft PowerPoint. You want to add transitions to your slides so your presentation flows smoothly. Below are the steps you followed, but they are in the wrong order. Arrange them in the correct order.",
+          items: [
+            { id: "step1", content: "Open Microsoft PowerPoint on your computer." },
+            { id: "step2", content: "Create a presentation with a sufficient number of slides." },
+            { id: "step3", content: "Select the slide you want to apply the transition to." },
+            { id: "step4", content: "Choose a transition effect from the Transitions tab." },
+            { id: "step5", content: "Adjust the transition's speed or direction." },
+            { id: "step6", content: "Preview the transition to check how it looks." },
+            { id: "step7", content: "Apply the same transition to all slides for consistency (optional)." }
+          ],
+          correctOrder: ["step1", "step2", "step3", "step4", "step5", "step6", "step7"],
+          dropZoneCount: 7,
+          audioSrc: undefined,
+          speakText: "Arrange the PowerPoint transition steps in the correct order."
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "HTML and CSS Analysis",
+      lessonContent: [
+        {
+          type: "code-analysis",
+          format: "code-analysis",
+          title: "Categorize HTML and CSS Elements",
+          instruction: "Observe the code below and categorize the elements based on whether they are inside the <div> element and whether they have the highlight class applied.",
+          codeComponent: "CodeAnalysis",
+          items: [
+            { id: "color", text: "color: red", type: "highlight-class" },
+            { id: "background-color", text: "background-color: yellow", type: "highlight-class" },
+            { id: "font-size", text: "font-size: 20px", type: "highlight-class" },
+            { id: "paragraph", text: "<p> – Paragraph", type: "inside-div" },
+            { id: "heading", text: "<h3> – Heading level 3", type: "inside-div" },
+            { id: "ordered-list", text: "<ol> – Ordered list (with <li>)", type: "inside-div" }
+          ],
+          buckets: [
+            { id: "bucket-highlight-class", title: "Elements inside class highlight", type: "highlight-class", color: "#FF6B6B" },
+            { id: "bucket-inside-div", title: "Elements inside div", type: "inside-div", color: "#4ECDC4" }
+          ],
+          speakText: "Categorize the HTML and CSS elements based on their location and class."
+        }
+      ]
+    }
+  ],
+  "8": [
+    {
+      id: 1,
+      title: "Computer Network Components",
+      lessonContent: [
+        {
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match Network Components",
+          instruction: "Your school is setting up a new computer lab that needs to be connected to the internet and to the school's central database. The school technician explains how all the parts of the network will work together. Match each component to its correct description.",
+          items: [
+            { id: "switches", text: "Switches", type: "switches", imageUrl: "/images/hardware.png" },
+            { id: "routers", text: "Routers", type: "routers", imageUrl: "/images/hardware.png" },
+            { id: "protocols", text: "Protocols", type: "protocols", imageUrl: "/images/hardware.png" },
+            { id: "server", text: "Server", type: "server", imageUrl: "/images/computer.png" }
+          ],
+          buckets: [
+            { 
+              id: "bucket-switches", 
+              title: "B: Connect multiple devices to the same network and ensure data is sent to the correct destination", 
+              type: "switches", 
+              color: "#4ECDC4",
+              audioSrc: "/voice/grade2/1.2.m4a"
+            },
+            { 
+              id: "bucket-routers", 
+              title: "C: Connect different networks together and manage data traffic between them", 
+              type: "routers", 
+              color: "#45B7D1",
+              audioSrc: "/voice/grade2/1.3.m4a"
+            },
+            { 
+              id: "bucket-protocols", 
+              title: "D: Agreed-upon rules for communication to ensure every device speaks the same digital language", 
+              type: "protocols", 
+              color: "#96CEB4",
+              audioSrc: "/voice/grade2/1.4.m4a"
+            },
+            { 
+              id: "bucket-server", 
+              title: "E: A powerful computer that provides data and services to other devices", 
+              type: "server", 
+              color: "#FFEAA7",
+              audioSrc: "/voice/grade2/1.5.m4a"
+            }
+          ],
+          audioSrc: "/voice/grade2/1.1.m4a",
+          speakText: "Match each network component to its correct description."
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "Ethical vs Unethical Data Use",
+      lessonContent: [
+        {
+          type: "drag-drop",
+          format: "drag-drop",
+          title: "Sort Data Use Scenarios",
+          instruction: "Read each scenario and decide if it shows Ethical Use or Unethical Use of data. Sort them into the correct category.",
+          items: [
+            { id: "scenario1", text: "A school collects students' test scores after asking for permission from parents and explains how the data will be used to improve teaching methods.", type: "ethical" },
+            { id: "scenario2", text: "A company sells customer email addresses to another business without informing the customers.", type: "unethical" },
+            { id: "scenario3", text: "Police officers collect data about crime patterns in a city to decide where to increase patrols, ensuring the data is collected legally and respects people's rights.", type: "ethical" },
+            { id: "scenario4", text: "A social media platform changes your news feed so you only see posts that match your political views, without telling you.", type: "unethical" },
+            { id: "scenario5", text: "A hospital asks patients before collecting health data, removes personal identifiers like their names, and uses it to develop better treatments.", type: "ethical" },
+            { id: "scenario6", text: "A bank uses an algorithm for loan approvals that unfairly rejects people based on their gender.", type: "unethical" },
+            { id: "scenario7", text: "A clothing store sends a survey to customers but only uses the results from those who agreed to participate, removing personal information before analysis.", type: "ethical" },
+            { id: "scenario8", text: "Hackers steal someone's personal information to open bank accounts in their name.", type: "unethical" }
+          ],
+          targets: [
+            { id: "ethical", title: "Ethical Use", type: "ethical" },
+            { id: "unethical", title: "Unethical Use", type: "unethical" }
+          ],
+          audioSrc: "/voice/grade2/2.1.m4a",
+          speakText: "Sort each scenario into the correct category: Ethical Use or Unethical Use of data."
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Types of Applications",
+      lessonContent: [
+        {
+          type: "drag-drop",
+          format: "drag-drop",
+          title: "Match App Types",
+          instruction: "Read the descriptions and examples carefully and choose the correct app type.",
+          items: [
+            { id: "native", text: "Built for a specific platform (Android/iOS), it offers high performance and full access to the device's built-in features. Example: WhatsApp, Google Maps", type: "native" },
+            { id: "web", text: "Runs in a web browser without installation, works on any device with internet access. Example: Google Docs, Gmail", type: "web" },
+            { id: "hybrid", text: "Combines native and web elements, runs on both Android and iOS from the same codebase. Example: Instagram, Uber", type: "hybrid" },
+            { id: "pwa", text: "A web app that looks and feels like a native app can work offline or in low internet connectivity. Example: Pinterest, Starbucks app", type: "pwa" }
+          ],
+          targets: [
+            { id: "native", title: "Native Apps", type: "native" },
+            { id: "web", title: "Web Apps", type: "web" },
+            { id: "hybrid", title: "Hybrid Apps", type: "hybrid" },
+            { id: "pwa", title: "Progressive Web Apps", type: "pwa" }
+          ],
+          audioSrc: "/voice/grade2/3.1.m4a",
+          speakText: "Match each app description to its correct type."
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "Advanced SQL Database Operations",
+      lessonContent: [
+        {
+          type: "sql-query-builder",
+          format: "sql-query-builder",
+          title: "Professional SQL Query Builder",
+          instruction: "You are a database administrator tasked with building a comprehensive Student Management System. Your school needs to create a database, populate it with student data, perform updates after grade corrections, remove records for transferred students, and generate reports. Use the SQL Query Builder to construct the proper sequence of database operations. Each command type is color-coded: Blue for DDL (Data Definition), Green for DML (Data Manipulation), and Purple for DQL (Data Query Language).",
+          items: [
+            { 
+              id: "step1", 
+              content: "CREATE TABLE students (Id INT PRIMARY KEY, Name VARCHAR(50) NOT NULL, Marks INT CHECK (Marks >= 0 AND Marks <= 100), Class VARCHAR(10), AdmissionDate DATE);",
+              category: "DDL"
+            },
+            { 
+              id: "step2", 
+              content: "INSERT INTO students (Id, Name, Marks, Class, AdmissionDate) VALUES (1, 'John Smith', 85, '8A', '2024-01-15'), (2, 'Omkar Patel', 42, '8B', '2024-01-15'), (3, 'Jiya Sharma', 57, '8A', '2024-01-15'), (4, 'Vikram Singh', 41, '8B', '2024-01-15'), (5, 'Sofia Rodriguez', 68, '8A', '2024-01-15');",
+              category: "DML"
+            },
+            { 
+              id: "step3", 
+              content: "UPDATE students SET Marks = 86 WHERE Name = 'Omkar Patel'; UPDATE students SET Marks = 77 WHERE Name = 'Jiya Sharma'; UPDATE students SET Class = '8A' WHERE Name = 'Omkar Patel';",
+              category: "DML"
+            },
+            { 
+              id: "step4", 
+              content: "DELETE FROM students WHERE Name = 'Vikram Singh'; DELETE FROM students WHERE Name = 'Sofia Rodriguez';",
+              category: "DML"
+            },
+            { 
+              id: "step5", 
+              content: "SELECT Name, Class, Marks FROM students WHERE Marks < 65 ORDER BY Marks ASC; SELECT COUNT(*) as TotalStudents, AVG(Marks) as AverageMarks FROM students;",
+              category: "DQL"
+            }
+          ],
+          correctOrder: ["step1", "step2", "step3", "step4", "step5"],
+          audioSrc: "/voice/grade2/4.1.m4a",
+          speakText: "Build a professional SQL database management system using the Query Builder. Understand DDL, DML, and DQL operations for comprehensive database administration."
+        }
+      ]
+    }
+  ]
 };

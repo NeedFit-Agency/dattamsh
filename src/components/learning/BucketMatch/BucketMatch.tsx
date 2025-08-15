@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CongratulationsScreen from "../../shared/CongratulationsScreen";
 import TTS from "../../shared/TTS";
+import Button from "../../ui/Button/Button";
 
 // Helper to get the SVG for a fruit based on its type/color
 const getFruitSvg = (itemType: string, imageUrl?: string) => {
@@ -81,8 +82,8 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   );
   const [isAnyAudioPlaying, setIsAnyAudioPlaying] = useState(false);
 
-  // Check if audio should be shown (for grades 1, 2, 3, 4)
-  const shouldShowAudio = standard && ["1", "2", "3", "4"].includes(standard);
+  // Check if audio should be shown (for grades 1, 2, 3)
+  const shouldShowAudio = standard && ["1", "2", "3"].includes(standard);
 
   // Monitor instruction audio state changes
   useEffect(() => {
@@ -440,26 +441,27 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
       <div className={styles.worksheetCard}>
         {/* Instruction Box with Title and Audio Button */}
         <div className={styles.instructionBox}>
-          <h2 className={styles.title}>{title}</h2>
-          <div className={styles.buttonGroup}>
-            <div className={styles.leftButtons}>
+          <div className={styles.titleRow}>
+            <h2 className={styles.title}>{title}</h2>
+            <div className={styles.titleButtons}>
               {shouldShowAudio && (
-                <button
-                  className={`${styles.audioButton} ${
-                    isAudioPlaying ? styles.audioButtonPlaying : ""
-                  }`}
+                <Button
+                  variant="listen"
+                  size="medium"
                   onClick={playInstructionAudio}
                   disabled={isAnyAudioPlaying && !isAudioPlaying}
-                >
-                  <FontAwesomeIcon icon={faHeadphones} />
-                  <span>{isAudioPlaying ? "Listening..." : "Listen"}</span>
-                </button>
+                  icon={faHeadphones}
+                  text={isAudioPlaying ? "Listening..." : "Listen"}
+                />
               )}
+              <Button 
+                variant="reset" 
+                size="medium" 
+                onClick={handleReset} 
+                icon={faUndo} 
+                text="Reset" 
+              />
             </div>
-            <button className={styles.resetButton} onClick={handleReset}>
-              <FontAwesomeIcon icon={faUndo} />
-              <span>Reset</span>
-            </button>
           </div>
         </div>
         <div className={styles.matchArea}>
@@ -541,12 +543,9 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                   </div>
                   <div className={styles.bucketLabelContainer}>
                     {bucket.audioSrc ? (
-                      <button
-                        className={`${styles.bucketAudioButton} ${
-                          playingBucketAudio === bucket.id
-                            ? styles.bucketAudioButtonPlaying
-                            : ""
-                        }`}
+                      <Button
+                        variant="primary"
+                        size="small"
                         onClick={() => {
                           // If this bucket audio is already playing, stop it
                           if (playingBucketAudio === bucket.id) {
@@ -617,9 +616,10 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                         disabled={
                           isAnyAudioPlaying && playingBucketAudio !== bucket.id
                         }
-                      >
-                        <FontAwesomeIcon icon={faHeadphones} />
-                      </button>
+                        icon={faHeadphones}
+                        text=""
+                        className={playingBucketAudio === bucket.id ? 'playing' : ''}
+                      />
                     ) : (
                       <TTS
                         text={

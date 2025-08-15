@@ -172,6 +172,22 @@
   align-items: center;
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.titleButtons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
 .instruction {
   font-size: 18px;
   color: var(--text-dark, #343a40);
@@ -193,65 +209,7 @@
   gap: 12px;
 }
 
-/* Audio Button */
-.audioButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: var(--primary, #1aa2ff);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  min-width: 120px;
-  height: 44px;
-  justify-content: center;
-}
-
-.audioButton:hover {
-  background-color: var(--primary-dark, #0080e6);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.audioButton:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.audioButtonPlaying {
-  background-color: var(--success-green, #28a745);
-}
-
-.audioButtonPlaying:hover {
-  background-color: #218838;
-}
-
-.bucketAudioButtonPlaying {
-  background-color: #4a90e2 !important;
-  color: white !important;
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4) !important;
-}
-
-.bucketAudioButtonPlaying svg {
-  color: white !important;
-}
-
-.bucketAudioButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
+/* Remove old button styles since we're using the Button component now */
 
 /* Match Area */
 .matchArea {
@@ -322,102 +280,7 @@
   margin: 0;
 }
 
-/* Reset Button */
-.resetButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
-  color: #1db0f6;
-  border: 2px solid #1db0f6;
-  border-radius: clamp(10px, 1.5vw, 14px);
-  padding: clamp(8px, 1.5vh, 12px) clamp(12px, 2vw, 16px);
-  font-size: clamp(14px, 1.8vw, 16px);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 5px 0 #0369a1, 0 3px 10px rgba(29, 176, 246, 0.2);
-  font-family: 'Nunito', 'Quicksand', sans-serif;
-  min-width: clamp(80px, 12vw, 100px);
-  height: clamp(44px, 5.5vh, 52px);
-  justify-content: center;
-  position: relative;
-}
-
-.resetButton::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(29, 176, 246, 0.1) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: inherit;
-}
-
-.resetButton:hover::before {
-  opacity: 1;
-}
-
-.resetButton:hover {
-  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
-  color: #0369a1;
-  border-color: #0369a1;
-  transform: translateY(-2px);
-  box-shadow: 0 7px 0 #0369a1, 0 5px 14px rgba(29, 176, 246, 0.3);
-}
-
-.resetButton:active {
-  transform: translateY(2px);
-  box-shadow: 0 3px 0 #0369a1, 0 2px 6px rgba(29, 176, 246, 0.2);
-}
-
-.resetButton svg {
-  width: clamp(14px, 1.8vw, 16px);
-  height: clamp(14px, 1.8vw, 16px);
-  transition: transform 0.3s ease;
-}
-
-.resetButton:hover svg {
-  transform: scale(1.1);
-}
-
-.resetButton span {
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-/* Responsive reset button */
-@media (max-width: 768px) {
-  .resetButton {
-    padding: clamp(6px, 1.2vh, 10px) clamp(10px, 1.5vw, 14px);
-    font-size: clamp(12px, 1.5vw, 14px);
-    min-width: clamp(70px, 10vw, 90px);
-    height: clamp(42px, 4.8vh, 50px);
-  }
-  
-  .resetButton svg {
-    width: clamp(12px, 1.5vw, 14px);
-    height: clamp(12px, 1.5vw, 14px);
-  }
-}
-
-@media (max-width: 480px) {
-  .resetButton {
-    padding: clamp(5px, 1vh, 8px) clamp(8px, 1.2vw, 12px);
-    font-size: clamp(11px, 1.3vw, 13px);
-    min-width: clamp(60px, 8vw, 80px);
-    height: clamp(40px, 4.5vh, 48px);
-    gap: 6px;
-  }
-  
-  .resetButton svg {
-    width: clamp(11px, 1.3vw, 13px);
-    height: clamp(11px, 1.3vw, 13px);
-  }
-}
+/* Remove old reset button styles since we're using the Button component now */
 
 /* Buckets Container (Bottom Section) */
 .basketsContainer {
@@ -521,40 +384,7 @@
   margin-top: 8px;
 }
 
-.bucketAudioButton,
-.bucketTTS {
-  background: #5cb2e7;
-  border: none;
-  border-radius: 8px;
-  padding: 8px;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  color: white;
-  box-shadow: 0 2px 6px rgba(108, 92, 231, 0.3);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  box-sizing: border-box;
-  margin-top: 4px;
-}
-
-.bucketAudioButton:hover,
-.bucketTTS:hover {
-  background: #4fa2d5;
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.4);
-}
-
-.bucketHeadphones {
-  font-size: 0.9rem;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* Remove old bucket button styles since we're using the Button component now */
 
 /* Drag and Drop States */
 .dragging {
@@ -725,6 +555,16 @@
     margin-bottom: 6px;
   }
   
+  .titleRow {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .titleButtons {
+    gap: 10px;
+  }
+  
   .instruction {
     font-size: 15px;
     margin-bottom: 8px;
@@ -734,27 +574,6 @@
     padding: 12px;
     margin-top: 6px;
     margin-bottom: 12px;
-  }
-  
-  .buttonGroup {
-    flex-direction: row;
-    gap: 10px;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .leftButtons {
-    width: auto;
-  }
-  
-  .audioButton,
-  .resetButton {
-    width: auto;
-    min-width: 100px;
-    height: 40px;
-    font-size: 13px;
-    padding: 8px 12px;
-    touch-action: manipulation;
   }
   
   .fruitsContainer {
@@ -795,16 +614,7 @@
     margin: 0 20px;
   }
   
-  .bucketAudioButton,
-  .bucketTTS {
-    width: 28px;
-    height: 28px;
-    padding: 6px;
-  }
-  
-  .bucketHeadphones {
-    font-size: 0.8rem;
-  }
+  /* Remove old bucket button responsive styles since we're using the Button component now */
 }
 
 @media (max-width: 480px) {
@@ -832,24 +642,14 @@
     padding: 16px;
   }
   
-  .buttonGroup {
+  .titleRow {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .titleButtons {
     flex-direction: column;
-    gap: 12px;
-  }
-  
-  .leftButtons {
-    justify-content: center;
-  }
-  
-  .bucketAudioButton,
-  .bucketTTS {
-    width: 24px;
-    height: 24px;
-    padding: 4px;
-  }
-  
-  .bucketHeadphones {
-    font-size: 0.7rem;
+    gap: 8px;
   }
   
   .bucketLabel {

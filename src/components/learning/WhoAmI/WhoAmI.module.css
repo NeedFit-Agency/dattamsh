@@ -50,6 +50,12 @@
     min-width: 0; /* Allow text to shrink if needed */
 }
 
+/* Button component spacing in title container */
+.titleContainer .button {
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
 .titleTTSContainer {
     display: flex;
     align-items: center;
@@ -85,40 +91,6 @@
     width: 20px !important;
     height: 20px !important;
     color: white !important;
-}
-
-.titleAudioButton {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: #1db0f6;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-width: 120px;
-    height: 44px;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(29, 176, 246, 0.3);
-    margin-left: 8px;
-}
-
-.titleAudioButton:hover {
-    background-color: #0ea5e9;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(29, 176, 246, 0.4);
-}
-
-.titleAudioButtonPlaying {
-    background-color: #28a745;
-}
-
-.titleAudioButtonPlaying:hover {
-    background-color: #218838;
 }
 
 @keyframes fadeInBackground {
@@ -292,6 +264,12 @@
     color: #92400e;
     font-family: "Comic Sans MS", "Comic Sans", Nunito, cursive, sans-serif;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Button component spacing in prompt container */
+.promptContainer .button {
+    margin-top: 15px;
+    align-self: flex-start;
 }
 
 .questionContainer {
@@ -838,64 +816,7 @@
     z-index: 2;
 }
 
-.audioButton {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: var(--primary, #1aa2ff);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-width: 120px;
-    height: 44px;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(26, 162, 255, 0.3);
-    margin-top: 15px; /* To align with the orange container */
-    align-self: flex-start;
-}
-
-.audioButton:hover {
-    background-color: var(--primary-dark, #0080e6);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(26, 162, 255, 0.4);
-}
-
-.audioButtonPlaying {
-    background-color: var(--success-green, #28a745);
-}
-
-.audioButtonPlaying:hover {
-    background-color: #218838;
-}
-
-/* Mobile responsiveness for the audio button */
-@media (max-width: 576px) {
-    .questionRow {
-        flex-direction: row;
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    
-    .promptQuestion {
-        font-size: 20px;
-        flex-basis: calc(100% - 110px);
-        text-align: left;
-    }
-    
-    .audioButton {
-        min-width: 100px;
-        font-size: 14px;
-        padding: 6px 12px;
-        height: 38px;
-        flex-shrink: 0;
-    }
-}
+/* Remove old audio button styles since we're using the Button component now */
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -910,6 +831,15 @@
         min-height: calc(95vh - 40px);
         height: auto;
         padding: clamp(15px, 2vh, 25px) clamp(15px, 2vw, 25px);
+    }
+    
+    .titleContainer {
+        gap: clamp(6px, 1vw, 12px);
+        padding: 0 15px;
+    }
+    
+    .titleContainer .button {
+        margin-left: 6px;
     }
     
     .optionsContainer { 
@@ -950,6 +880,11 @@
     .promptContainer {
         padding: clamp(15px, 2.5vh, 22px) clamp(12px, 2vw, 18px);
         margin-bottom: clamp(18px, 3vh, 25px);
+    }
+    
+    .promptContainer .button {
+        margin-top: 12px;
+        align-self: center;
     }
 }
 
@@ -1011,7 +946,21 @@
         font-size: 18px;
     }
     
+    .titleContainer {
+        gap: 4px;
+        padding: 0 10px;
+    }
+    
+    .titleContainer .button {
+        margin-left: 4px;
+    }
+    
     .promptText {
         font-size: 16px;
+    }
+    
+    .promptContainer .button {
+        margin-top: 10px;
+        align-self: center;
     }
 }
