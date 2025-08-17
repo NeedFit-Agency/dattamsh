@@ -38,12 +38,16 @@
 }
 
 .title {
-  font-size: 28px;
+  font-size: clamp(18px, 3vw, 28px);
   font-weight: 700;
   color: var(--text-dark, #343a40);
   margin: 0;
   text-align: center;
   flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .backButton {
@@ -150,26 +154,29 @@
 /* Main Worksheet Card */
 .worksheetCard {
   background: white;
-  border-radius: 24px;
+  border-radius: clamp(16px, 3vw, 24px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  padding: 24px;
-  max-width: 1200px;
+  padding: clamp(16px, 3vw, 24px);
+  max-width: min(95vw, 1200px);
   width: 100%;
+  min-height: calc(100dvh - 40px);
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Instruction Box */
 .instructionBox {
   background-color: #f8f9fa;
   border: 1px solid #bbddff;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 16px;
+  border-radius: clamp(8px, 2vw, 12px);
+  padding: clamp(20px, 3vw, 24px);
+  margin-top: clamp(20px, 3vh, 24px);
+  margin-bottom: clamp(16px, 2.5vh, 20px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .titleRow {
@@ -179,6 +186,7 @@
   width: 100%;
   margin-bottom: 16px;
   gap: 16px;
+  flex-wrap: nowrap;
 }
 
 .titleButtons {
@@ -215,23 +223,29 @@
 .matchArea {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: clamp(32px, 4vh, 40px);
+  width: 100%;
 }
 
 /* Fruits Container (Top Row - Computer Parts) */
 .fruitsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(12px, 1.5vw, 16px);
+  margin-bottom: clamp(32px, 4vh, 40px);
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .fruitItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
   transition: all 0.3s ease;
+  padding: 8px;
 }
 
 .fruitItem.placed {
@@ -240,11 +254,11 @@
 }
 
 .fruitDraggable {
-  width: 180px;
-  height: 180px;
+  width: clamp(120px, 11vw, 150px);
+  height: clamp(120px, 11vw, 150px);
   background: white;
   border: 2px solid #bbddff;
-  border-radius: 16px;
+  border-radius: clamp(12px, 2vw, 16px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,24 +299,29 @@
 /* Buckets Container (Bottom Section) */
 .basketsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(12px, 1.5vw, 16px);
+  width: 100%;
+  margin-top: clamp(16px, 2vh, 20px);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .bucketContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 10px;
+  gap: 20px;
+  padding: 16px;
 }
 
 .basketDropzone {
-  width: 200px;
-  height: 200px;
+  width: clamp(140px, 13vw, 170px);
+  height: clamp(140px, 13vw, 170px);
   background: white;
   border: 2px dashed #adb5bd;
-  border-radius: 16px;
+  border-radius: clamp(12px, 2vw, 16px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -556,9 +575,10 @@
   }
   
   .titleRow {
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;
+    gap: clamp(8px, 2vw, 12px);
     margin-bottom: 12px;
+    align-items: center;
   }
   
   .titleButtons {
@@ -576,24 +596,30 @@
     margin-bottom: 12px;
   }
   
+  .matchArea {
+    gap: clamp(24px, 3vh, 32px);
+  }
+  
   .fruitsContainer {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 12px;
+    margin-bottom: clamp(24px, 3vh, 32px);
   }
   
   .basketsContainer {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-top: clamp(12px, 1.5vh, 16px);
   }
   
   .fruitDraggable {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
   }
   
   .basketDropzone {
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
   }
   
   .colorName,
@@ -618,24 +644,30 @@
 }
 
 @media (max-width: 480px) {
+  .matchArea {
+    gap: clamp(20px, 2.5vh, 28px);
+  }
+  
   .fruitsContainer {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 16px;
+    margin-bottom: clamp(20px, 2.5vh, 28px);
   }
   
   .basketsContainer {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 16px;
+    margin-top: clamp(16px, 2vh, 20px);
   }
   
   .fruitDraggable {
-    width: 180px;
-    height: 180px;
+    width: 100px;
+    height: 100px;
   }
   
   .basketDropzone {
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
   }
   
   .instructionBox {
@@ -648,8 +680,8 @@
   }
   
   .titleButtons {
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: row;
+    gap: clamp(4px, 1.5vw, 8px);
   }
   
   .bucketLabel {
