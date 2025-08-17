@@ -1,819 +1,935 @@
-/* --- SQL Query Builder Styles --- */
-/* Using global CSS variables defined in globals.css */
+/* --- SQL Puzzle Builder Styles --- */
+/* Creating a cohesive design that matches BucketMatch theme */
 
-/* --- Container --- */
 .container {
+  min-height: 100dvh;
+  background: linear-gradient(135deg, #87CEEB 0%, #98D8E8 100%);
+  background-image: 
+    url('/images/background/image-2.png'),
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  min-height: 100vh;
-  background: #f8fafc;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: #1e293b;
-  overflow-y: auto;
-  padding-top: 80px;
-  padding-bottom: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* --- Header --- */
+/* Header Section */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--spacing-lg) var(--spacing-xl);
-  background: var(--sql-bg-primary);
-  box-shadow: var(--sql-shadow-md);
-  border-bottom: 1px solid var(--sql-border-color);
-  z-index: 10;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.titleSection {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.titleIcon {
-  font-size: 1.5rem;
-  color: var(--sql-primary-color);
-}
-
-.titleSection h1 {
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: var(--sql-text-primary);
-  margin: 0;
-  background: linear-gradient(135deg, var(--sql-primary-color), var(--sql-primary-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.hintButton {
+.titleContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: none;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--sql-warning-color), #fbbf24);
+  gap: 16px;
+  margin-bottom: 12px;
+  position: relative;
+  width: 100%;
+}
+
+.title {
+  font-size: clamp(18px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--text-dark, #343a40);
+  margin: 0;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Main Worksheet Card */
+.worksheetCard {
+  background: white;
+  border-radius: clamp(16px, 3vw, 24px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: clamp(16px, 3vw, 24px);
+  max-width: min(95vw, 1200px);
+  width: 100%;
+  min-height: calc(100dvh - 40px);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Instruction Box */
+.instructionBox {
+  background-color: #f8f9fa;
+  border: 1px solid #bbddff;
+  border-radius: clamp(8px, 2vw, 12px);
+  padding: clamp(20px, 3vw, 24px);
+  margin-top: clamp(20px, 3vh, 24px);
+  margin-bottom: clamp(16px, 2.5vh, 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.instruction {
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--text-dark, #343a40);
+  text-align: center;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.hintButton {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: white;
+  border: none;
+  border-radius: clamp(10px, 1.5vw, 14px);
+  padding: clamp(8px, 1.5vh, 12px) clamp(12px, 2vw, 16px);
+  font-size: clamp(12px, 1.5vw, 14px);
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: var(--sql-shadow-sm);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 0 #1e40af, 0 3px 10px rgba(59, 130, 246, 0.2);
+  font-family: 'Nunito', 'Quicksand', sans-serif;
+  min-width: clamp(100px, 15vw, 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hintButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.hintButton:hover::before {
+  left: 100%;
 }
 
 .hintButton:hover {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
   transform: translateY(-2px);
-  box-shadow: var(--sql-shadow-md);
+  box-shadow: 0 6px 0 #1e40af, 0 5px 14px rgba(59, 130, 246, 0.3);
 }
 
-/* --- Hint Panel --- */
+.hintButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #1e40af, 0 2px 6px rgba(59, 130, 246, 0.2);
+}
+
 .hintPanel {
-  background: #ffffff;
-  margin: 0 var(--sql-spacing-xl) var(--sql-spacing-lg) var(--sql-spacing-xl);
-  padding: var(--sql-spacing-md);
-  border-radius: var(--sql-radius-lg);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #3b82f6;
-  animation: slideDown 0.3s ease-out;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  padding: clamp(16px, 2.5vw, 20px);
+  border-radius: clamp(8px, 1.5vw, 12px);
+  border: 2px solid #f59e0b;
+  margin-top: 16px;
+  width: 100%;
 }
 
 .hintPanel h3 {
-  margin: 0 0 var(--sql-spacing-sm) 0;
-  color: #1e40af;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.2;
+  color: #92400e;
+  margin: 0 0 16px 0;
+  font-size: clamp(14px, 2vw, 16px);
+  font-weight: 700;
+  text-align: center;
 }
 
 .hintPanel ul {
   margin: 0;
-  padding-left: var(--sql-spacing-md);
+  padding-left: 20px;
 }
 
 .hintPanel li {
-  margin-bottom: var(--sql-spacing-xs);
-  color: #475569;
+  color: #78350f;
+  margin-bottom: 8px;
+  font-weight: 600;
   line-height: 1.4;
-  font-size: 0.875rem;
+  font-size: clamp(12px, 1.8vw, 14px);
 }
 
 .hintPanel strong {
-  color: #1e293b;
-  font-weight: 600;
+  color: #451a03;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --- Main Content --- */
-.mainContent {
-  flex: 1;
+/* Match Area */
+.matchArea {
   display: flex;
   flex-direction: column;
-  padding: 0 var(--sql-spacing-xl) var(--sql-spacing-lg) var(--sql-spacing-xl);
-  min-height: 0;
-  max-height: 80vh;
+  gap: clamp(32px, 4vh, 40px);
+  width: 100%;
 }
 
-/* --- Tab Navigation --- */
-.tabNavigation {
-  display: flex;
-  background: #ffffff;
-  border-radius: var(--sql-radius-lg);
-  padding: var(--sql-spacing-sm);
-  margin-bottom: var(--sql-spacing-md);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-}
-
-.tabButton {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--sql-spacing-sm);
-  padding: var(--sql-spacing-sm) var(--sql-spacing-md);
-  border: none;
-  background: transparent;
-  color: #64748b;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border-radius: var(--sql-radius-md);
-  font-size: 0.875rem;
-}
-
-.tabButton:hover {
-  color: #1e293b;
-  background: #f1f5f9;
-}
-
-.tabButton.active {
-  background: #3b82f6;
-  color: white;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-}
-
-.tabButton svg {
-  font-size: 0.875rem;
-}
-
-/* --- Tab Content --- */
-.tabContent {
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
-}
-
-.builderTab, .previewTab {
-  height: 100%;
-  overflow-y: auto;
-  min-height: 400px;
-}
-
-/* --- Builder Tab --- */
-.instruction {
-  background: #ffffff;
-  padding: var(--sql-spacing-md);
-  border-radius: var(--sql-radius-lg);
-  margin-bottom: var(--sql-spacing-md);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #3b82f6;
-}
-
-.instruction p {
-  margin: 0;
-  color: #475569;
-  line-height: 1.5;
-  font-size: 0.875rem;
-}
-
-.workspace {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--sql-spacing-xl);
-  align-items: start;
-  max-height: 70vh;
-}
-
-/* --- Drop Zones Container --- */
-.dropZonesContainer {
-  background: #ffffff;
-  border-radius: var(--sql-radius-lg);
-  padding: var(--sql-spacing-lg);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  overflow-y: auto;
-  max-height: 100%;
-}
-
-.dropZonesContainer h3 {
-  margin: 0 0 var(--sql-spacing-lg) 0;
-  color: #1e293b;
-  font-size: 1.25rem;
-  font-weight: 600;
+/* Sequence Area */
+.sequenceArea {
   text-align: center;
+  margin-bottom: clamp(24px, 3vh, 32px);
+  margin-top: clamp(32px, 4vh, 40px);
 }
 
-.dropZones {
+.sequenceArea h3 {
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 clamp(20px, 2.5vh, 24px) 0;
+}
+
+.sequenceSlots {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--sql-spacing-md);
-  max-height: calc(70vh - 120px);
-  overflow-y: auto;
-}
-
-.dropZone {
-  min-height: 80px;
-  max-height: 100px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(12px, 1.5vw, 16px);
+  padding: clamp(16px, 2vw, 20px);
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  border-radius: clamp(12px, 2vw, 16px);
   border: 2px dashed #cbd5e1;
-  border-radius: var(--sql-radius-md);
-  padding: var(--sql-spacing-sm);
-  transition: all 0.2s ease;
-  background: #f8fafc;
-  position: relative;
+  min-height: 120px;
+  align-items: center;
+}
+
+.sequenceSlot {
+  width: clamp(120px, 11vw, 150px);
+  height: clamp(100px, 10vw, 120px);
+  border: 2px dashed #94a3b8;
+  border-radius: clamp(10px, 1.5vw, 14px);
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+  margin: 0 auto;
 }
 
-.dropZone:hover {
+.sequenceSlot:hover {
   border-color: #3b82f6;
-  background: #f1f5f9;
-  transform: translateY(-1px);
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.15);
 }
 
-.dropZone.dragOver {
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.05);
-  transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-  border-style: solid;
-}
-
-.dropZone.nextZone {
-  border-color: #10b981;
-  background: rgba(16, 185, 129, 0.05);
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
-  animation: pulse 1s ease-in-out;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-  100% { transform: scale(1); }
-}
-
-.dropZone.filled {
+.sequenceSlot.filled {
   border-style: solid;
   border-color: #10b981;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
-  min-height: 100px;
+  background: linear-gradient(135deg, #ffffff, #f0fdf4);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
-/* --- Empty Zone --- */
-.emptyZone {
+.emptySlot {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: #64748b;
   text-align: center;
-  padding: var(--sql-spacing-sm);
+  color: #64748b;
+  padding: 8px;
 }
 
 .stepNumber {
   font-weight: 600;
   color: #3b82f6;
-  margin-bottom: var(--sql-spacing-xs);
-  font-size: 0.875rem;
+  font-size: clamp(10px, 1.5vw, 12px);
+  margin-bottom: 4px;
 }
 
 .dropHint {
-  font-size: 0.75rem;
+  font-size: clamp(8px, 1.2vw, 10px);
   color: #94a3b8;
+  font-weight: 500;
 }
 
-/* --- Placed Command --- */
-.placedCommand {
+/* Placed Piece */
+.placedPiece {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-.commandHeader {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--sql-spacing-xs);
+  justify-content: center;
+  position: relative;
+  padding: 8px;
 }
 
-.stepNumber {
+.pieceContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pieceIcon {
+  font-size: clamp(16px, 2.5vw, 20px);
+  margin-bottom: 4px;
+}
+
+.pieceText {
+  font-size: clamp(8px, 1.2vw, 10px);
   font-weight: 600;
-  color: #3b82f6;
-  font-size: 0.75rem;
+  color: #1e293b;
+  line-height: 1.2;
+  word-break: break-word;
 }
 
 .removeButton {
+  position: absolute;
+  top: 4px;
+  right: 4px;
   background: none;
   border: none;
   color: #ef4444;
   cursor: pointer;
-  padding: var(--sql-spacing-xs);
-  border-radius: var(--sql-radius-sm);
+  font-size: clamp(10px, 1.5vw, 12px);
+  padding: 2px;
+  border-radius: 50%;
   transition: all 0.2s ease;
-  font-size: 0.875rem;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .removeButton:hover {
   background: rgba(239, 68, 68, 0.1);
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
-.commandContent {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--sql-spacing-xs);
-  flex: 1;
-  margin-bottom: var(--sql-spacing-xs);
-}
-
-.commandContent svg {
-  margin-top: 2px;
-  font-size: 0.875rem;
-  flex-shrink: 0;
-}
-
-.commandText {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.7rem;
-  line-height: 1.3;
-  color: #1e293b;
-  word-break: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.commandType {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #64748b;
-  text-align: center;
-  padding: var(--sql-spacing-xs);
-  background: #f1f5f9;
-  border-radius: var(--sql-radius-sm);
-  align-self: flex-start;
-}
-
-/* --- Commands Panel --- */
-.commandsPanel {
-  background: #ffffff;
-  border-radius: var(--sql-radius-lg);
-  padding: var(--sql-spacing-lg);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  overflow-y: auto;
-  height: fit-content;
-  max-height: 100%;
-}
-
-.commandsPanel h3 {
-  margin: 0 0 var(--sql-spacing-lg) 0;
-  color: #1e293b;
-  font-size: 1.25rem;
-  font-weight: 600;
+/* Available Pieces */
+.availablePieces {
   text-align: center;
 }
 
-.availableCommands {
+.availablePieces h3 {
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 clamp(20px, 2.5vh, 24px) 0;
+}
+
+.piecesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(20px, 2.5vw, 25px);
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: clamp(12px, 2vw, 16px);
+  border: 2px solid #e2e8f0;
+  padding: clamp(25px, 3vw, 30px);
+  min-height: 300px;
+}
+
+/* Puzzle Piece */
+.puzzlePiece {
+  width: clamp(180px, 18vw, 200px);
+  height: clamp(150px, 15vw, 170px);
+  background: var(--piece-color);
+  border-radius: clamp(15px, 2vw, 18px);
+  cursor: grab;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  gap: var(--sql-spacing-md);
-  min-height: 0;
-}
-
-.commandItem {
-  background: var(--sql-bg-secondary);
-  border: 2px solid var(--sql-border-color);
-  border-radius: var(--sql-radius-md);
-  padding: var(--sql-spacing-md);
-  cursor: grab;
-  transition: all 0.2s ease;
-  border-left: 4px solid var(--command-color, var(--sql-primary-color));
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 1.5vw, 16px);
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  user-select: none;
+  border: 3px solid rgba(255, 255, 255, 0.3);
   position: relative;
-  overflow: hidden;
+  margin: 0 auto;
 }
 
-.commandItem::before {
-  content: '';
+.puzzlePiece:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  z-index: 10;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.puzzlePiece:active {
+  cursor: grabbing;
+  transform: scale(0.95);
+}
+
+/* Placed puzzle piece state */
+.puzzlePiece.placed {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: scale(0.9);
+  filter: grayscale(0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.puzzlePiece.placed:hover {
+  transform: scale(0.9);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+.pieceHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pieceIcon {
+  font-size: clamp(18px, 2.5vw, 22px);
+}
+
+.pieceCategory {
+  font-size: clamp(10px, 1.5vw, 12px);
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.pieceBody {
+  margin-bottom: 6px;
+}
+
+.pieceContent {
+  font-size: clamp(12px, 1.8vw, 14px);
+  line-height: 1.3;
+  word-break: break-word;
+  font-weight: 700;
+}
+
+.pieceDescription {
+  font-size: clamp(9px, 1.3vw, 11px);
+  opacity: 0.9;
+  line-height: 1.2;
+}
+
+/* Puzzle Piece Connectors */
+.pieceConnectors {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  pointer-events: none;
 }
 
-.commandItem:hover::before {
-  transform: translateX(100%);
+.connectorTop, .connectorBottom, .connectorLeft, .connectorRight {
+  position: absolute;
+  background: var(--piece-color);
+  border: 3px solid white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-.commandItem:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--sql-shadow-md);
-  border-color: var(--sql-primary-color);
+.connectorTop, .connectorBottom {
+  width: 20px;
+  height: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.commandItem:active {
-  cursor: grabbing;
-  transform: translateY(0) scale(0.98);
+.connectorTop {
+  top: -5px;
+  border-radius: 0 0 10px 10px;
 }
 
-.commandItem.placed {
-  opacity: 0.6;
-  cursor: not-allowed;
-  background: var(--sql-bg-tertiary);
-  border-color: var(--sql-success-color);
-  transform: none;
+.connectorBottom {
+  bottom: -5px;
+  border-radius: 10px 10px 0 0;
 }
 
-.commandItem.placed:hover {
-  transform: none;
-  box-shadow: var(--sql-shadow-sm);
+.connectorLeft, .connectorRight {
+  width: 10px;
+  height: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.commandItem.placed::before {
-  display: none;
+.connectorLeft {
+  left: -5px;
+  border-radius: 0 10px 10px 0;
 }
 
-.commandItem .commandHeader {
+.connectorRight {
+  right: -5px;
+  border-radius: 10px 0 0 10px;
+}
+
+/* Button Group */
+.buttonGroup {
   display: flex;
   align-items: center;
-  gap: var(--sql-spacing-sm);
-  margin-bottom: var(--sql-spacing-sm);
-}
-
-.commandIcon {
-  color: var(--command-color, var(--sql-primary-color));
-  font-size: 1rem;
-}
-
-.commandType {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--sql-text-muted);
-  padding: var(--sql-spacing-xs) var(--sql-spacing-sm);
-  background: var(--sql-bg-tertiary);
-  border-radius: var(--sql-radius-sm);
-}
-
-.commandContent {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.75rem;
-  line-height: 1.4;
-  color: var(--sql-text-primary);
-  word-break: break-word;
-}
-
-/* --- Preview Tab --- */
-.queryPreview {
-  background: var(--sql-bg-primary);
-  border-radius: var(--sql-radius-lg);
-  padding: var(--sql-spacing-lg);
-  box-shadow: var(--sql-shadow-lg);
-  height: 100%;
-}
-
-.queryPreview h3 {
-  margin: 0 0 var(--sql-spacing-lg) 0;
-  color: var(--sql-text-primary);
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.queryCode {
-  background: var(--sql-bg-dark);
-  border-radius: var(--sql-radius-md);
-  padding: var(--sql-spacing-lg);
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  color: #e2e8f0;
-  height: calc(100% - 80px);
-  overflow-y: auto;
-}
-
-.emptyQuery {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: clamp(12px, 2vw, 16px);
   justify-content: center;
-  height: 100%;
-  color: var(--sql-text-muted);
-  text-align: center;
-}
-
-.emptyQuery svg {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-md);
-  color: var(--text-muted);
-}
-
-.queryLine {
-  display: flex;
-  margin-bottom: var(--sql-spacing-sm);
-  line-height: 1.6;
-}
-
-.lineNumber {
-  color: var(--sql-text-muted);
-  margin-right: var(--sql-spacing-md);
-  min-width: 2rem;
-  text-align: right;
-  user-select: none;
-}
-
-.queryText {
-  color: #e2e8f0;
-  flex: 1;
-}
-
-
-
-/* --- Footer --- */
-.footer {
-  background: #ffffff;
-  padding: var(--sql-spacing-lg) var(--sql-spacing-xl);
-  border-top: 1px solid #e2e8f0;
-  box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.1);
-  margin: 0 var(--sql-spacing-xl);
-  border-radius: var(--sql-radius-lg);
-}
-
-.actionButtons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.resetButton, .checkButton {
-  display: flex;
-  align-items: center;
-  gap: var(--sql-spacing-sm);
-  padding: var(--sql-spacing-md) var(--sql-spacing-lg);
-  border: none;
-  border-radius: var(--sql-radius-md);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 1rem;
-}
-
-.resetButton {
-  background: #f1f5f9;
-  color: #475569;
-  border: 2px solid #cbd5e1;
-}
-
-.resetButton:hover {
-  background: #e2e8f0;
-  color: #1e293b;
-  border-color: #94a3b8;
+  width: 100%;
+  margin-top: clamp(24px, 3vh, 32px);
 }
 
 .checkButton {
-  background: #f1f5f9;
-  color: #94a3b8;
-  border: 2px solid #cbd5e1;
-  cursor: not-allowed;
-}
-
-.checkButton.active {
-  background: #10b981;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: white;
-  border-color: #10b981;
+  border: none;
+  border-radius: clamp(10px, 1.5vw, 14px);
+  padding: clamp(8px, 1.5vh, 12px) clamp(12px, 2vw, 16px);
+  font-size: clamp(12px, 1.8vw, 14px);
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
-}
-
-.checkButton.active:hover {
-  background: #059669;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
-}
-
-/* --- Progress --- */
-.progress {
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 0 #1e40af, 0 3px 10px rgba(59, 130, 246, 0.2);
+  font-family: 'Nunito', 'Quicksand', sans-serif;
+  min-width: clamp(100px, 15vw, 120px);
   display: flex;
-  flex-direction: column;
-  gap: var(--sql-spacing-sm);
-}
-
-.progressText {
-  text-align: center;
-  color: var(--sql-text-secondary);
-  font-weight: 500;
-}
-
-.progressBar {
-  width: 100%;
-  height: 8px;
-  background: var(--sql-bg-tertiary);
-  border-radius: var(--sql-radius-sm);
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
   overflow: hidden;
 }
 
-.progressFill {
+.checkButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, var(--sql-success-color), var(--sql-primary-color));
-  transition: width 0.3s ease;
-  border-radius: var(--sql-radius-sm);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
-/* --- Congratulations Screen --- */
-.congratulationsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: var(--sql-spacing-xl);
-  text-align: center;
-  position: relative;
+.checkButton:hover::before {
+  left: 100%;
 }
 
-.backToBuilderButton {
-  display: flex;
-  align-items: center;
-  gap: var(--sql-spacing-sm);
-  padding: var(--sql-spacing-md) var(--sql-spacing-lg);
-  background: var(--sql-bg-secondary);
-  color: var(--sql-text-secondary);
-  border: 2px solid var(--sql-border-color);
-  border-radius: var(--sql-radius-md);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 1rem;
-  margin-top: var(--sql-spacing-lg);
-}
-
-.backToBuilderButton:hover {
-  background: var(--sql-bg-tertiary);
-  color: var(--sql-text-primary);
-  border-color: var(--sql-text-muted);
+.checkButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
   transform: translateY(-2px);
-  box-shadow: var(--sql-shadow-md);
+  box-shadow: 0 6px 0 #1e40af, 0 5px 14px rgba(59, 130, 246, 0.3);
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 1024px) {
-  .workspace {
-    grid-template-columns: 1fr;
-    gap: var(--sql-spacing-lg);
+.checkButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #1e40af, 0 2px 6px rgba(59, 130, 246, 0.2);
+}
+
+.checkButton:disabled {
+  background: #94a3b8;
+  border-color: #94a3b8;
+  color: #64748b;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 0 #475569, 0 2px 6px rgba(108, 117, 125, 0.2);
+}
+
+.checkButton:disabled:hover {
+  transform: none;
+  box-shadow: 0 2px 0 #475569, 0 2px 6px rgba(108, 117, 125, 0.2);
+}
+
+/* SQL Preview */
+.sqlPreview {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border-radius: clamp(12px, 2vw, 16px);
+  padding: clamp(16px, 2.5vw, 20px);
+  margin-top: clamp(24px, 3vh, 32px);
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border: 2px solid #475569;
+}
+
+.sqlPreview h3 {
+  font-size: clamp(14px, 2vw, 16px);
+  font-weight: 700;
+  margin: 0 0 clamp(16px, 2vh, 20px) 0;
+  text-align: center;
+  color: #e2e8f0;
+}
+
+.sqlCode {
+  background: #0f172a;
+  border-radius: clamp(8px, 1.5vw, 12px);
+  padding: clamp(12px, 2vw, 16px);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  border: 2px solid #475569;
+  margin-bottom: clamp(16px, 2vh, 20px);
+}
+
+.sqlLine {
+  display: flex;
+  margin-bottom: clamp(8px, 1vh, 10px);
+  align-items: center;
+  padding: clamp(6px, 1vh, 8px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: clamp(6px, 1vw, 8px);
+  border-left: 3px solid #3b82f6;
+  transition: all 0.3s ease;
+}
+
+.sqlLine:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(3px);
+}
+
+.lineNumber {
+  color: #64748b;
+  margin-right: clamp(12px, 1.5vw, 16px);
+  min-width: clamp(20px, 3vw, 25px);
+  text-align: right;
+  font-weight: 600;
+  user-select: none;
+  font-size: clamp(10px, 1.5vw, 12px);
+}
+
+.sqlText {
+  color: #e2e8f0;
+  flex: 1;
+  font-weight: 500;
+  font-size: clamp(10px, 1.5vw, 12px);
+}
+
+/* Drag and Drop States */
+.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg) scale(1.1);
+  z-index: 1000;
+}
+
+.dragOver {
+  border-color: #1aa2ff !important;
+  border-style: solid !important;
+  background: #e3f2fd !important;
+  transform: scale(1.05);
+}
+
+/* Feedback Message */
+.feedbackMessage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 16px;
+  padding: 24px 32px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: feedbackSlideIn 0.3s ease-out;
+}
+
+.correctText {
+  color: #28a745;
+  border: 3px solid #28a745;
+}
+
+.incorrectText {
+  color: #dc3545;
+  border: 3px solid #dc3545;
+}
+
+@keyframes feedbackSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
   }
-  
-  .header {
-    padding: var(--sql-spacing-md) var(--sql-spacing-lg);
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .worksheetCard {
+    padding: 24px;
+    margin: 8px;
   }
   
   .mainContent {
-    padding: 0 var(--sql-spacing-lg) var(--sql-spacing-lg) var(--sql-spacing-lg);
+    grid-template-columns: 1fr 250px;
+    gap: 18px;
   }
   
-  .footer {
-    padding: var(--sql-spacing-md) var(--sql-spacing-lg);
-    margin: 0 var(--sql-spacing-lg);
+  .sequenceSlots {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 14px;
   }
   
-  .hintPanel {
-    margin: 0 var(--sql-spacing-lg) var(--sql-spacing-lg) var(--sql-spacing-lg);
-    padding: var(--sql-spacing-sm);
+  .sequenceSlot {
+    width: 120px;
+    height: 100px;
   }
   
-  .hintPanel h3 {
-    font-size: 0.9rem;
+  .piecesContainer {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
   }
   
-  .hintPanel li {
-    font-size: 0.8rem;
+  .puzzlePiece {
+    width: 160px;
+    height: 140px;
   }
 }
 
 @media (max-width: 768px) {
   .container {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 4px;
+    padding-top: 60px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    top: 0;
   }
   
-  .titleSection h1 {
-    font-size: 1.5rem;
-  }
-  
-  .tabNavigation {
-    flex-direction: column;
-    gap: var(--sql-spacing-sm);
-  }
-  
-  .tabButton {
-    padding: var(--sql-spacing-sm) var(--sql-spacing-md);
-  }
-  
-  .actionButtons {
-    flex-direction: column;
-    gap: var(--sql-spacing-md);
-  }
-  
-  .resetButton, .checkButton {
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .hintPanel {
-    margin: 0 var(--sql-spacing-md) var(--sql-spacing-md) var(--sql-spacing-md);
-    padding: var(--sql-spacing-sm);
-  }
-  
-  .hintPanel h3 {
-    font-size: 0.875rem;
-    margin-bottom: var(--sql-spacing-xs);
-  }
-  
-  .hintPanel ul {
-    padding-left: var(--sql-spacing-sm);
-  }
-  
-  .hintPanel li {
-    font-size: 0.75rem;
-    margin-bottom: var(--sql-spacing-xs);
+  .worksheetCard {
+    padding: 16px;
   }
   
   .mainContent {
-    padding: 0 var(--sql-spacing-md) var(--sql-spacing-md) var(--sql-spacing-md);
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2.5vh, 28px);
   }
   
-  .footer {
-    margin: 0 var(--sql-spacing-md);
+  .sqlPreviewSidebar {
+    position: static;
+    order: -1;
+    padding: clamp(14px, 1.8vw, 18px);
+  }
+  
+  .title {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  
+  .instruction {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  
+  .instructionBox {
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .puzzleArea {
+    gap: clamp(20px, 2.5vh, 28px);
+  }
+  
+  .sequenceSlots {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .sequenceSlot {
+    width: 100px;
+    height: 80px;
+  }
+  
+  .piecesContainer {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    padding: 20px;
+  }
+  
+  .puzzlePiece {
+    width: 140px;
+    height: 120px;
+  }
+  
+  .buttonGroup {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .resetButton, .checkButton {
+    width: 200px;
   }
 }
 
-/* --- Animations --- */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@media (max-width: 480px) {
+  .mainContent {
+    gap: clamp(16px, 2vh, 24px);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .puzzleArea {
+    gap: clamp(16px, 2vh, 24px);
+  }
+  
+  .sequenceSlots {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 12px;
+    padding: 10px;
+  }
+  
+  .sequenceSlot {
+    width: 80px;
+    height: 70px;
+  }
+  
+  .piecesContainer {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .instructionBox {
+    padding: 16px;
+  }
+  
+  .puzzlePiece {
+    width: 120px;
+    height: 100px;
+  }
+  
+  .resetButton, .checkButton {
+    width: 180px;
+    font-size: 12px;
+    padding: 8px 12px;
   }
 }
 
-.commandItem, .dropZone {
-  animation: fadeIn 0.3s ease-out;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .puzzlePiece,
+  .sequenceSlot,
+  .resetButton,
+  .checkButton {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-/* --- Scrollbar Styling --- */
-.availableCommands::-webkit-scrollbar,
-.queryCode::-webkit-scrollbar {
-  width: 8px;
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .worksheetCard {
+    border: 2px solid #000;
+  }
+  
+  .sequenceSlot,
+  .puzzlePiece {
+    border-width: 2px;
+  }
+  
+  .resetButton,
+  .checkButton {
+    border: 2px solid #000;
+  }
 }
 
-.availableCommands::-webkit-scrollbar-track,
-.queryCode::-webkit-scrollbar-track {
-  background: var(--sql-bg-tertiary);
-  border-radius: var(--sql-radius-sm);
+/* Touch-friendly improvements for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .puzzlePiece {
+    cursor: grab;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .puzzlePiece:active {
+    cursor: grabbing;
+    transform: scale(0.98);
+  }
+
+  .resetButton,
+  .checkButton {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .resetButton:active,
+  .checkButton:active {
+    transform: scale(0.95);
+  }
 }
 
-.availableCommands::-webkit-scrollbar-thumb,
-.queryCode::-webkit-scrollbar-thumb {
-  background: var(--sql-border-color);
-  border-radius: var(--sql-radius-sm);
+/* Prevent text selection during touch */
+.puzzlePiece,
+.resetButton,
+.checkButton {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-.availableCommands::-webkit-scrollbar-thumb:hover,
-.queryCode::-webkit-scrollbar-thumb:hover {
-  background: var(--sql-text-muted);
+/* Prevent zoom on double tap for iOS */
+@media (max-width: 768px) {
+  .puzzlePiece,
+  .resetButton,
+  .checkButton {
+    touch-action: manipulation;
+  }
+}
+
+/* Main Content Area - Side by Side */
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: clamp(20px, 2.5vw, 28px);
+  width: 100%;
+  margin-bottom: clamp(24px, 3vh, 32px);
+}
+
+/* Left Side - Puzzle Area */
+.puzzleArea {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4vh, 40px);
+  width: 100%;
+}
+
+/* Right Side - SQL Preview Sidebar */
+.sqlPreviewSidebar {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border-radius: clamp(12px, 2vw, 16px);
+  padding: clamp(16px, 2vw, 20px);
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border: 2px solid #475569;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.sqlPreviewSidebar h3 {
+  font-size: clamp(14px, 2vw, 16px);
+  font-weight: 700;
+  margin: 0 0 clamp(16px, 2vh, 20px) 0;
+  text-align: center;
+  color: #e2e8f0;
+}
+
+.emptySqlPreview {
+  text-align: center;
+  padding: clamp(12px, 1.5vh, 16px);
+}
+
+.emptySqlPreview p {
+  color: #94a3b8;
+  font-size: clamp(11px, 1.5vw, 13px);
+  margin: 0;
+  line-height: 1.4;
 }

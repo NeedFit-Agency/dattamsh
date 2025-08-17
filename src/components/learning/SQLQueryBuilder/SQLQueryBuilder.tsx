@@ -1,24 +1,24 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './SQLQueryBuilder.module.css';
 import { SQLQueryBuilderProps, SQLCommand } from './types';
 import CongratulationsScreen from '../../shared/CongratulationsScreen';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faCode, 
-  faCheckCircle, 
-  faTimesCircle, 
-  faUndo,
-  faTable,
-  faEye,
-  faEdit,
-  faTrash,
-  faSearch
-} from '@fortawesome/free-solid-svg-icons';
+import WrongAnswerDialog from './WrongAnswerDialog';
+
+interface PuzzlePiece {
+  id: string;
+  content: string;
+  category: string;
+  color: string;
+  icon: string;
+  description: string;
+  order: number;
+  isPlaced: boolean;
+}
 
 const SQLQueryBuilder: React.FC<SQLQueryBuilderProps> = ({
-  title = "SQL Database Query Builder",
+  title = "🧩 SQL Table Puzzle Builder",
   instruction,
   items = [],
   correctOrder = [],
@@ -30,242 +30,178 @@ const SQLQueryBuilder: React.FC<SQLQueryBuilderProps> = ({
   standard,
   isFourthChapter = false,
 }) => {
-
-  const [placedCommands, setPlacedCommands] = useState<{
-    [zoneIndex: number]: SQLCommand;
-  }>({});
-  const [showHint, setShowHint] = useState<boolean>(false);
+  const [puzzlePieces, setPuzzlePieces] = useState<PuzzlePiece[]>([]);
+  const [placedPieces, setPlacedPieces] = useState<PuzzlePiece[]>([]);
   const [showCongratulations, setShowCongratulations] = useState<boolean>(false);
-  const [queryHistory, setQueryHistory] = useState<string[]>([]);
-  const [activeTab, setActiveTab] = useState<'builder' | 'preview'>('builder');
-  
-  const draggedElementRef = useRef<HTMLElement | null>(null);
-  const dropZonesContainerRef = useRef<HTMLDivElement | null>(null);
+  const [showWrongAnswer, setShowWrongAnswer] = useState<boolean>(false);
+  const [showHint, setShowHint] = useState<boolean>(false);
 
-  // Get available commands that haven't been placed
-  const availableCommands = items.filter(
-    (item) => !Object.values(placedCommands).some(
-      (placedItem) => placedItem.id === item.id
-    )
-  );
+  // Initialize puzzle pieces with CREATE TABLE steps
+  useEffect(() => {
+    const createTablePieces: PuzzlePiece[] = [
+      {
+        id: 'create',
+        content: 'CREATE TABLE',
+        category: 'START',
+        color: '#3B82F6',
+        icon: '🏗️',
+        description: 'Start building your table',
+        order: 1,
+        isPlaced: false
+      },
+      {
+        id: 'tableName',
+        content: 'students',
+        category: 'NAME',
+        color: '#10B981',
+        icon: '📝',
+        description: 'Give your table a name',
+        order: 2,
+        isPlaced: false
+      },
+      {
+        id: 'columns',
+        content: '(id, name, age)',
+        category: 'COLUMNS',
+        color: '#F59E0B',
+        icon: '📊',
+        description: 'List the columns you want',
+        order: 3,
+        isPlaced: false
+      },
+      {
+        id: 'dataTypes',
+        content: 'INT, VARCHAR(50), INT',
+        category: 'TYPES',
+        color: '#8B5CF6',
+        icon: '🔢',
+        description: 'Choose data types',
+        order: 4,
+        isPlaced: false
+      },
+      {
+        id: 'constraints',
+        content: 'PRIMARY KEY, NOT NULL',
+        category: 'RULES',
+        color: '#EF4444',
+        icon: '🔒',
+        description: 'Add special rules',
+        order: 5,
+        isPlaced: false
+      },
+      {
+        id: 'end',
+        content: ');',
+        category: 'FINISH',
+        color: '#6B7280',
+        icon: '✅',
+        description: 'Finish your table',
+        order: 6,
+        isPlaced: false
+      }
+    ];
+    setPuzzlePieces(createTablePieces);
+  }, []);
 
-  // Drag and Drop Event Handlers
-  const handleDragStart = (e: React.DragEvent, command: SQLCommand) => {
-    draggedElementRef.current = e.currentTarget as HTMLElement;
-    e.dataTransfer.setData('text/plain', command.id);
-    e.dataTransfer.effectAllowed = 'move';
+  // Check if the current order is correct
+  const checkAnswer = (): boolean => {
+    if (placedPieces.length !== 6) return false;
     
-    // Visual feedback
-    (e.currentTarget as HTMLElement).style.opacity = '0.6';
-    (e.currentTarget as HTMLElement).style.transform = 'scale(0.95)';
+    const correctOrder = ['create', 'tableName', 'columns', 'dataTypes', 'constraints', 'end'];
+    const currentOrder = placedPieces
+      .sort((a, b) => a.order - b.order)
+      .map(piece => piece.id);
     
-    // Auto-scroll to drop zones immediately
-    if (dropZonesContainerRef.current) {
-      dropZonesContainerRef.current.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start'
-      });
+    return correctOrder.every((id, index) => id === currentOrder[index]);
+  };
+
+  // Handle piece drop
+  const handlePieceDrop = (e: React.DragEvent, targetOrder: number) => {
+    e.preventDefault();
+    const pieceId = e.dataTransfer.getData('pieceId');
+    const piece = puzzlePieces.find(p => p.id === pieceId);
+    
+    if (piece && !piece.isPlaced) {
+      // Remove piece from its current position if it exists
+      setPlacedPieces(prev => prev.filter(p => p.id !== pieceId));
+      
+      // Add piece to new position
+      const updatedPiece = { ...piece, order: targetOrder + 1, isPlaced: true };
+      setPlacedPieces(prev => [...prev, updatedPiece]);
+      
+      // Update puzzle pieces to mark as placed
+      setPuzzlePieces(prev => 
+        prev.map(p => p.id === pieceId ? { ...p, isPlaced: true } : p)
+      );
     }
   };
 
-  const handleDragEnd = (e: React.DragEvent) => {
-    if (e.currentTarget) {
-      (e.currentTarget as HTMLElement).style.opacity = '1';
-      (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
-    }
-    draggedElementRef.current = null;
+  // Handle piece removal
+  const handleRemovePiece = (piece: PuzzlePiece) => {
+    setPlacedPieces(prev => prev.filter(p => p.id !== piece.id));
+    setPuzzlePieces(prev => 
+      prev.map(p => p.id === piece.id ? { ...p, isPlaced: false } : p)
+    );
+  };
+
+  // Handle drag events
+  const handlePieceDragStart = (e: React.DragEvent, piece: PuzzlePiece) => {
+    e.dataTransfer.setData('pieceId', piece.id);
+  };
+
+  const handlePieceDragEnd = (e: React.DragEvent) => {
+    e.preventDefault();
   };
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    
-    const dropZone = e.currentTarget as HTMLElement;
-    dropZone.classList.add(styles.dragOver);
-    
-    // Real-time scrolling during drag
-    if (dropZonesContainerRef.current) {
-      const container = dropZonesContainerRef.current;
-      const containerRect = container.getBoundingClientRect();
-      const dropZoneRect = dropZone.getBoundingClientRect();
-      const mouseY = e.clientY;
-      
-      // Calculate scroll speed based on mouse position
-      const scrollThreshold = 50; // pixels from edge to trigger scroll
-      const scrollSpeed = 15;
-      
-      // Scroll down if mouse is near bottom
-      if (containerRect.bottom - mouseY < scrollThreshold) {
-        container.scrollTop += scrollSpeed;
-      }
-      // Scroll up if mouse is near top
-      else if (mouseY - containerRect.top < scrollThreshold) {
-        container.scrollTop -= scrollSpeed;
-      }
-    }
   };
 
   const handleDragLeave = (e: React.DragEvent) => {
-    e.currentTarget.classList.remove(styles.dragOver);
-  };
-
-  const handleDrop = (e: React.DragEvent, zoneIndex: number) => {
     e.preventDefault();
-    e.currentTarget.classList.remove(styles.dragOver);
-    
-    const commandId = e.dataTransfer.getData('text/plain');
-    const command = items.find(item => item.id === commandId);
-    
-    if (command) {
-      setPlacedCommands(prev => ({
-        ...prev,
-        [zoneIndex]: command
-      }));
-      
-      // Add to query history
-      setQueryHistory(prev => [...prev, `Step ${zoneIndex + 1}: ${command.content}`]);
-      
-      // Enhanced auto-scroll to next empty zone with better positioning
-      setTimeout(() => {
-        if (dropZonesContainerRef.current) {
-          const nextEmptyZone = Array.from({ length: correctOrder.length }, (_, index) => index)
-            .find(index => !placedCommands[index]);
-          
-          if (nextEmptyZone !== undefined) {
-            const dropZones = dropZonesContainerRef.current.querySelectorAll(`.${styles.dropZone}`);
-            if (dropZones[nextEmptyZone]) {
-              // Scroll with better positioning
-              dropZones[nextEmptyZone].scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center',
-                inline: 'nearest'
-              });
-              
-              // Add a subtle highlight to the next zone
-              dropZones[nextEmptyZone].classList.add(styles.nextZone);
-              setTimeout(() => {
-                dropZones[nextEmptyZone].classList.remove(styles.nextZone);
-              }, 2000);
-            }
-          }
-        }
-      }, 300);
-    }
   };
 
-  const handleRemoveCommand = (zoneIndex: number) => {
-    const removedCommand = placedCommands[zoneIndex];
-    setPlacedCommands(prev => {
-      const newPlaced = { ...prev };
-      delete newPlaced[zoneIndex];
-      return newPlaced;
-    });
-    
-    // Remove from query history
-    setQueryHistory(prev => prev.filter((_, index) => index !== zoneIndex));
-  };
 
-  const handleCheckAnswer = () => {
-    // Don't check if no commands are placed
-    if (Object.keys(placedCommands).length === 0) {
-      return;
-    }
-    
-    // Check if all commands are placed and in correct order
-    const placedArray = Object.entries(placedCommands)
-      .sort(([a], [b]) => parseInt(a) - parseInt(b))
-      .map(([, command]) => command);
 
-    if (placedArray.length !== correctOrder.length) {
-      onIncorrectAttempt?.();
-      return;
-    }
-
-    const allCorrect = placedArray.every((command, index) => 
-      command.id === correctOrder[index]
-    );
+  // Handle solution check
+  const handleCheckSolution = () => {
+    if (placedPieces.length !== 6) return;
     
-    if (allCorrect) {
+    if (checkAnswer()) {
       setShowCongratulations(true);
       if (typeof onComplete === 'function') {
         onComplete();
       }
     } else {
-      onIncorrectAttempt?.();
+      setShowWrongAnswer(true);
+      if (onIncorrectAttempt) {
+        onIncorrectAttempt();
+      }
     }
   };
 
-  const handleReset = () => {
-    setPlacedCommands({});
-    setQueryHistory([]);
-    setShowCongratulations(false); // Reset congratulations screen
+  // Handle wrong answer dialog close
+  const handleWrongAnswerClose = () => {
+    setShowWrongAnswer(false);
   };
 
-  const handleBackToBuilder = () => {
-    setShowCongratulations(false);
-    setPlacedCommands({});
-    setQueryHistory([]);
+  // Handle try again from wrong answer dialog
+  const handleTryAgain = () => {
+    setShowWrongAnswer(false);
+    // Reset the puzzle state
+    setPlacedPieces([]);
+    setPuzzlePieces(prev => prev.map(p => ({ ...p, isPlaced: false })));
+    setShowHint(false);
   };
 
-  const getCommandType = (content: string): string => {
-    if (content.includes('CREATE TABLE')) return 'DDL';
-    if (content.includes('INSERT INTO')) return 'DML';
-    if (content.includes('UPDATE')) return 'DML';
-    if (content.includes('DELETE FROM')) return 'DML';
-    if (content.includes('SELECT')) return 'DQL';
-    return 'SQL';
-  };
 
-  const getCommandIcon = (content: string) => {
-    if (content.includes('CREATE TABLE')) return faTable;
-    if (content.includes('INSERT INTO')) return faEdit;
-    if (content.includes('UPDATE')) return faEdit;
-    if (content.includes('DELETE FROM')) return faTrash;
-    if (content.includes('SELECT')) return faSearch;
-    return faCode;
-  };
-
-  const getCommandColor = (content: string): string => {
-    if (content.includes('CREATE TABLE')) return '#3B82F6'; // Blue
-    if (content.includes('INSERT INTO')) return '#10B981'; // Green
-    if (content.includes('UPDATE')) return '#F59E0B'; // Yellow
-    if (content.includes('DELETE FROM')) return '#EF4444'; // Red
-    if (content.includes('SELECT')) return '#8B5CF6'; // Purple
-    return '#6B7280'; // Gray
-  };
-
-  const renderQueryPreview = () => {
-    const placedArray = Object.entries(placedCommands)
-      .sort(([a], [b]) => parseInt(a) - parseInt(b))
-      .map(([, command]) => command);
-
-    return (
-      <div className={styles.queryPreview}>
-        <h3>Generated SQL Query</h3>
-        <div className={styles.queryCode}>
-          {placedArray.length === 0 ? (
-            <div className={styles.emptyQuery}>
-              <FontAwesomeIcon icon={faCode} />
-              <p>Drag and drop SQL commands to build your query</p>
-            </div>
-          ) : (
-            placedArray.map((command, index) => (
-              <div key={index} className={styles.queryLine}>
-                <span className={styles.lineNumber}>{index + 1}</span>
-                <span className={styles.queryText}>{command.content}</span>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-    );
-  };
 
   if (showCongratulations) {
     return (
       <CongratulationsScreen
-        isVisible={true}
-        message="Great job! You've mastered SQL fundamentals."
+        isVisible={showCongratulations}
+        message="Congratulations! You've built the SQL table correctly!"
+        buttonText="Continue"
         onButtonClick={onComplete}
         isLastActivity={isLastLesson}
       />
@@ -274,172 +210,157 @@ const SQLQueryBuilder: React.FC<SQLQueryBuilderProps> = ({
 
   return (
     <div className={styles.container}>
-      {showHint && (
-        <div className={styles.hintPanel}>
-          <h3> SQL Query Building Tips</h3>
-          <ul>
-            <li>Always start with <strong>CREATE TABLE</strong> to define your database structure</li>
-            <li>Use <strong>INSERT INTO</strong> to add data to your tables</li>
-            <li><strong>UPDATE</strong> modifies existing records based on conditions</li>
-            <li><strong>DELETE FROM</strong> removes records that match specific criteria</li>
-            <li>End with <strong>SELECT</strong> to retrieve and display your results</li>
-          </ul>
-        </div>
-      )}
+      {/* Wrong Answer Dialog */}
+      <WrongAnswerDialog
+        isVisible={showWrongAnswer}
+        onClose={handleWrongAnswerClose}
+        onTryAgain={handleTryAgain}
+        message="That's not quite right! Let's review the correct order."
+        explanation="Remember the logical flow: Start with CREATE TABLE, add the table name, specify columns, define data types, add constraints, and finish with a semicolon."
+      />
 
-      <div className={styles.mainContent}>
-        <div className={styles.tabNavigation}>
-          <button 
-            className={`${styles.tabButton} ${activeTab === 'builder' ? styles.active : ''}`}
-            onClick={() => setActiveTab('builder')}
-          >
-            <FontAwesomeIcon icon={faCode} />
-            Query Builder
-          </button>
-          <button 
-            className={`${styles.tabButton} ${activeTab === 'preview' ? styles.active : ''}`}
-            onClick={() => setActiveTab('preview')}
-          >
-            <FontAwesomeIcon icon={faEye} />
-            Query Preview
-          </button>
+      {/* Puzzle Board */}
+      <div className={styles.worksheetCard}>
+        {/* Title inside the card */}
+        <div className={styles.cardHeader}>
+          <h1 className={styles.title}>{title}</h1>
         </div>
 
-        <div className={styles.tabContent}>
-          {activeTab === 'builder' && (
-            <div className={styles.builderTab}>
-              <div className={styles.instruction}>
-                <p>{instruction}</p>
+        {/* Instructions */}
+        <div className={styles.instructionBox}>
+          <div className={styles.instruction}>
+            {instruction || "Drag the puzzle pieces to build your CREATE TABLE statement in the correct order!"}
+          </div>
+        </div>
+        {/* SQL Preview at Top */}
+        <div className={styles.sqlPreviewTop}>
+          <div className={styles.sqlCode}>
+            {placedPieces.length === 0 ? (
+              <div className={styles.emptySqlPreview}>
+                <p>Start building your table by dragging pieces below!</p>
               </div>
-
-              <div className={styles.workspace}>
-                <div className={styles.dropZonesContainer} ref={dropZonesContainerRef}>
-                  <h3>Query Sequence</h3>
-                  <div className={styles.dropZones}>
-                    {Array.from({ length: correctOrder.length }, (_, index) => (
-                      <div
-                        key={index}
-                        className={`${styles.dropZone} ${
-                          placedCommands[index] ? styles.filled : ''
-                        }`}
-                        onDragOver={handleDragOver}
-                        onDragLeave={handleDragLeave}
-                        onDrop={(e) => handleDrop(e, index)}
-                      >
-                        {placedCommands[index] ? (
-                          <div className={styles.placedCommand}>
-                            <div className={styles.commandHeader}>
-                              <span className={styles.stepNumber}>Step {index + 1}</span>
-                              <button
-                                className={styles.removeButton}
-                                onClick={() => handleRemoveCommand(index)}
-                                title="Remove command"
-                              >
-                                <FontAwesomeIcon icon={faTimesCircle} />
-                              </button>
-                            </div>
-                            <div className={styles.commandContent}>
-                              <FontAwesomeIcon 
-                                icon={getCommandIcon(placedCommands[index].content)}
-                                style={{ color: getCommandColor(placedCommands[index].content) }}
-                              />
-                              <span className={styles.commandText}>
-                                {placedCommands[index].content}
-                              </span>
-                            </div>
-                            <div className={styles.commandType}>
-                              {getCommandType(placedCommands[index].content)}
-                            </div>
-                          </div>
-                        ) : (
-                          <div className={styles.emptyZone}>
-                            <span className={styles.stepNumber}>Step {index + 1}</span>
-                            <span className={styles.dropHint}>Drop SQL command here</span>
-                          </div>
-                        )}
-                      </div>
-                    ))}
+            ) : (
+              placedPieces
+                .sort((a, b) => a.order - b.order)
+                .map((piece, index) => (
+                  <div key={piece.id} className={styles.sqlLine}>
+                    <span className={styles.lineNumber}>{index + 1}</span>
+                    <span className={styles.sqlText}>{piece.content}</span>
                   </div>
-                </div>
+                ))
+            )}
+          </div>
+        </div>
 
-                <div className={styles.commandsPanel}>
-                  <h3>Available SQL Commands</h3>
-                  <div className={styles.availableCommands}>
-                    {availableCommands.map((command, index) => {
-                      const isPlaced = Object.values(placedCommands).some(
-                        (placedItem) => placedItem.id === command.id
-                      );
-                      
-                      return (
-                        <div
-                          key={command.id}
-                          className={`${styles.commandItem} ${isPlaced ? styles.placed : ''}`}
-                          draggable={!isPlaced}
-                          data-id={command.id}
-                          onDragStart={!isPlaced ? (e) => handleDragStart(e, command) : undefined}
-                          onDragEnd={!isPlaced ? handleDragEnd : undefined}
-                          style={{ 
-                            '--item-index': index,
-                            '--command-color': getCommandColor(command.content)
-                          } as React.CSSProperties}
-                        >
-                          <div className={styles.commandHeader}>
-                            <FontAwesomeIcon 
-                              icon={getCommandIcon(command.content)}
-                              className={styles.commandIcon}
-                            />
-                            <span className={styles.commandType}>
-                              {getCommandType(command.content)}
-                            </span>
-                            {isPlaced && (
-                              <span className={styles.placedIndicator}>
-                                <FontAwesomeIcon icon={faCheckCircle} />
-                                Placed
-                              </span>
-                            )}
-                          </div>
-                          <div className={styles.commandContent}>
-                            {command.content}
-                          </div>
+        {/* Main Puzzle Area - Full Width */}
+        <div className={styles.puzzleArea}>
+          {/* Sequence Area */}
+          <div className={styles.sequenceArea}>
+            <h3>🎯 Build Your SQL Table</h3>
+            <div className={styles.sequenceSlots}>
+              {Array.from({ length: 6 }, (_, index) => {
+                const placedPiece = placedPieces.find(p => p.order === index + 1);
+                return (
+                  <div 
+                    key={index}
+                    className={`${styles.sequenceSlot} ${placedPiece ? styles.filled : ''}`}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={(e) => handlePieceDrop(e, index)}
+                  >
+                    {placedPiece ? (
+                      <div className={styles.placedPiece}>
+                        <div className={styles.pieceContent}>
+                          <span className={styles.pieceIcon}>{placedPiece.icon}</span>
+                          <span className={styles.pieceText}>{placedPiece.content}</span>
                         </div>
-                      );
-                    })}
+                        <button 
+                          className={styles.removeButton}
+                          onClick={() => handleRemovePiece(placedPiece)}
+                        >
+                          x
+                        </button>
+                      </div>
+                    ) : (
+                      <div className={styles.emptySlot}>
+                        <span className={styles.stepNumber}>Step {index + 1}</span>
+                        <span className={styles.dropHint}>Drop piece here</span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Available Pieces */}
+          <div className={styles.availablePieces}>
+            <h3>🧩 Available Puzzle Pieces</h3>
+            <div className={styles.piecesContainer}>
+              {puzzlePieces.map((piece) => (
+                <div
+                  key={piece.id}
+                  className={`${styles.puzzlePiece} ${piece.isPlaced ? styles.placed : ''}`}
+                  draggable={!piece.isPlaced}
+                  onDragStart={(e) => handlePieceDragStart(e, piece)}
+                  onDragEnd={handlePieceDragEnd}
+                  style={{
+                    '--piece-color': piece.color
+                  } as React.CSSProperties}
+                >
+                  <div className={styles.pieceHeader}>
+                    <span className={styles.pieceIcon}>{piece.icon}</span>
+                    <span className={styles.pieceCategory}>{piece.category}</span>
+                  </div>
+                  <div className={styles.pieceBody}>
+                    <span className={styles.pieceContent}>{piece.content}</span>
+                  </div>
+                  <div className={styles.pieceDescription}>
+                    {piece.description}
+                  </div>
+                  <div className={styles.pieceConnectors}>
+                    <div className={styles.connectorTop}></div>
+                    <div className={styles.connectorBottom}></div>
+                    <div className={styles.connectorLeft}></div>
+                    <div className={styles.connectorRight}></div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          )}
-
-          {activeTab === 'preview' && (
-            <div className={styles.previewTab}>
-              {renderQueryPreview()}
-            </div>
-          )}
+          </div>
         </div>
-      </div>
 
-      <div className={styles.footer}>
-        <div className={styles.actionButtons}>
-          <button
-            className={styles.resetButton}
-            onClick={handleReset}
-            title="Reset all commands"
+        {/* Controls */}
+        <div className={styles.buttonGroup}>
+          <button 
+            className={styles.hintButton}
+            onClick={() => setShowHint(!showHint)}
           >
-            <FontAwesomeIcon icon={faUndo} />
-            Reset Query
+            💡 Show Hint
           </button>
-          <button
-            className={`${styles.checkButton} ${
-              Object.keys(placedCommands).length === correctOrder.length ? styles.active : ''
-            }`}
-            onClick={handleCheckAnswer}
-            disabled={Object.keys(placedCommands).length !== correctOrder.length}
-            title="Validate your SQL query sequence"
+          <button 
+            className={styles.checkButton}
+            disabled={placedPieces.length !== 6}
+            onClick={handleCheckSolution}
           >
-            <FontAwesomeIcon icon={faCheckCircle} />
-            Check Answer
+            Check Solution
           </button>
         </div>
+        
+        {/* Hint Panel */}
+        {showHint && (
+          <div className={styles.hintPanel}>
+            <h3>💡 Puzzle Tips</h3>
+            <ul>
+              <li>Start with <strong>CREATE TABLE</strong> 🏗️</li>
+              <li>Add the table name <strong>students</strong> 📝</li>
+              <li>List the columns <strong>(id, name, age)</strong> 📊</li>
+              <li>Choose data types <strong>INT, VARCHAR(50), INT</strong> 🔢</li>
+              <li>Add constraints <strong>PRIMARY KEY, NOT NULL</strong> 🔒</li>
+              <li>Finish with <strong>);</strong> ✅</li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
