@@ -540,13 +540,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
           </div>
         </div>
 
-        <div
-          className={styles.targetsGrid}
-          style={{
-            flex: 2,
-            gridTemplateColumns: `repeat(${Math.min(targets.length, 2)}, 1fr)`,
-          }}
-        >
+        <div className={styles.targetsGrid}>
           {targets.map((target) => (
             <div key={target.id} className={styles.targetContainer}>
               <h4 className={styles.targetTitle}>{target.title}</h4>

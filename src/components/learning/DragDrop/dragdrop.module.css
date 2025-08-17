@@ -227,8 +227,23 @@
 .targetsGrid {
   display: grid;
   flex: 2;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  align-items: start;
+  width: 100%;
+}
+
+/* Ensure targets don't get too wide on large screens */
+.targetsGrid:has(.targetContainer:nth-child(3)) {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.targetsGrid:has(.targetContainer:nth-child(4)) {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.targetsGrid:has(.targetContainer:nth-child(5)) {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .targetContainer {
@@ -531,13 +546,35 @@
   }
 }
 
+/* Large screens - optimize for multiple columns */
+@media (min-width: 1200px) {
+  .targetsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .dropTarget {
+    min-width: 320px;
+  }
+  
+  /* Special handling for 4 targets - ensure 2x2 grid */
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
 /* Prevent overflow on medium screens while keeping original design */
 @media (max-width: 1100px) and (min-width: 901px) {
   .activityArea {
     overflow-x: auto;
   }
+  .targetsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
   .dropTarget {
-    min-width: 300px;
+    min-width: 280px;
   }
 }
 
@@ -551,7 +588,8 @@
     margin-bottom: 16px;
   }
   .targetsGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
   }
   .dropTarget {
     min-width: 180px;
@@ -705,7 +743,7 @@
 
   /* Enhanced Targets Grid - Now positioned below items */
   .targetsGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 16px;
     flex: 1;
     order: 2; /* Ensure targets appear after items */

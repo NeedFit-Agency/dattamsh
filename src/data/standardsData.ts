@@ -774,175 +774,259 @@ export const standards: Standard = {
       title: "Operating Systems",
       lessonContent: [
         {
-          type: "bucket-match",
-          format: "bucket-match",
-          title: "Match OS to Device",
-          instruction: "Drag each operating system to its matching device type!",
-          items: [
-            {
-              id: "android",
-              text: "Android",
-              type: "mobile",
-              imageUrl: "/images/standard4/chapter1/android_logo.png",
-              color: "#a4c639"
-            },
-            {
-              id: "windows",
-              text: "Windows",
-              type: "desktop",
-              imageUrl: "/images/standard4/chapter1/windows_logo.png",
-              color: "#0078d4"
-            },
-            {
-              id: "ios",
-              text: "iOS",
-              type: "mobile",
-              imageUrl: "/images/standard4/chapter1/ios_logo.png",
-              color: "#000000"
-            },
-            {
-              id: "macos",
-              text: "macOS",
-              type: "desktop",
-              imageUrl: "/images/standard4/chapter1/macos_logo.png",
-              color: "#999999"
-            }
-          ],
-          buckets: [
-            {
-              id: "mobile-bucket",
-              title: "Mobile Devices",
-              type: "mobile",
-              color: "#e91e63",
-              audioSrc: "/voice/4.2.m4a"
-            },
-            {
-              id: "desktop-bucket",
-              title: "Desktop Computers",
-              type: "desktop",
-              color: "#3f51b5",
-              audioSrc: "/voice/4.3.m4a"
-            }
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option",
+          riddleText: "I run on many mobile devices, like smartphones and tablets. I am made by Google. Which Operating system am I?",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: true },
+            { id: "ios", text: "iOS", isCorrect: false },
+            { id: "linux", text: "Linux", isCorrect: false },
+            { id: "windows", text: "Windows", isCorrect: false }
           ],
           audioSrc: "/voice/4.1.m4a",
-          speakText: "Drag each operating system to its matching device type!",
+          speakText: "I run on many mobile devices, like smartphones and tablets. I am made by Google. Which Operating system am I?",
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option",
+          riddleText: "I run on Apple's mobile devices, like iPhones and iPads. Which Operating system am I?",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: false },
+            { id: "ios", text: "iOS", isCorrect: true },
+            { id: "linux", text: "Linux", isCorrect: false },
+            { id: "windows", text: "Windows", isCorrect: false }
+          ],
+          audioSrc: "/voice/4.2.m4a",
+          speakText: "I run on Apple's mobile devices, like iPhones and iPads. Which Operating system am I?",
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option",
+          riddleText: "I am a free operating system used by computer experts and known for being stable and secure.",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: false },
+            { id: "ios", text: "iOS", isCorrect: false },
+            { id: "linux", text: "Linux", isCorrect: true },
+            { id: "windows", text: "Windows", isCorrect: false }
+          ],
+          audioSrc: "/voice/4.3.m4a",
+          speakText: "I am a free operating system used by computer experts and known for being stable and secure.",
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option",
+          riddleText: "I am known for being stylish, easy to use and good for graphic design, video editing and music production. Which Operating system am I?",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: false },
+            { id: "ios", text: "iOS", isCorrect: false },
+            { id: "linux", text: "Linux", isCorrect: false },
+            { id: "macos", text: "macOS", isCorrect: true }
+          ],
+          audioSrc: "/voice/4.4.m4a",
+          speakText: "I am known for being stylish, easy to use and good for graphic design, video editing and music production. Which Operating system am I?",
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option",
+          riddleText: "I am made by Microsoft, run on various desktops and laptops. Which Operating system am I?",
+          questionText: "Which Operating system am I?",
+          options: [
+            { id: "android", text: "Android", isCorrect: false },
+            { id: "ios", text: "iOS", isCorrect: false },
+            { id: "linux", text: "Linux", isCorrect: false },
+            { id: "windows", text: "Windows", isCorrect: true }
+          ],
+          audioSrc: "/voice/4.5.m4a",
+          speakText: "I am made by Microsoft, run on various desktops and laptops. Which Operating system am I?",
         }
       ]
     },
     {
       id: 2,
-      title: "Windows Components",
+      title: "Introduction to Windows",
       lessonContent: [
         {
-          type: "drag-drop",
-          format: "drag-drop",
-          title: "Identify Windows Components",
-          instruction:
-            'Drag these Windows components to their correct category: "User Interface" or "System Utility".',
+          type: "sequence-match",
+          format: "sequence-match",
+          title: "Sequence the steps",
+          instruction: "Sourabh wants to create a Word document named 'Lesson 1 Homework' and keep it safely in a new folder on his desktop. Help him by arranging the steps in the correct order.",
           items: [
             {
-              id: "dnd-item-1",
-              text: "Taskbar",
-              type: "option-1",
-              imageUrl: "/images/standard4/chapter2/windows_desktop_overview.png",
+              id: "step1",
+              content: "Right-click on the desktop, select New and choose the Folder option.",
+              audioSrc: "/voice/4.1.m4a"
             },
             {
-              id: "dnd-item-2",
-              text: "Disk Cleanup",
-              type: "option-2",
-              imageUrl: "/images/standard4/chapter2/disk_cleanup.png",
+              id: "step2",
+              content: "Type a name for the new folder and press Enter.",
+              audioSrc: "/voice/4.2.m4a"
             },
             {
-              id: "dnd-item-3",
-              text: "Desktop Icons",
-              type: "option-1",
-              imageUrl: "/images/standard4/chapter2/this_pc_icon.png",
+              id: "step3",
+              content: "Double-click on the folder to open it.",
+              audioSrc: "/voice/4.3.m4a"
             },
             {
-              id: "dnd-item-4",
-              text: "Task Manager",
-              type: "option-2",
-              imageUrl: "/images/standard4/chapter2/task_manager.png",
+              id: "step4",
+              content: "Right-click on an empty area inside the folder. From the menu, select New and then click on Microsoft Word Document.",
+              audioSrc: "/voice/4.4.m4a"
             },
             {
-              id: "dnd-item-5",
-              text: "Start Menu",
-              type: "option-1",
-              imageUrl: "/images/standard4/chapter2/start_button.png",
-            },
-            {
-              id: "dnd-item-6",
-              text: "Antivirus",
-              type: "option-2",
-              imageUrl: "/images/standard4/chapter2/antivirus.png",
-            },
+              id: "step5",
+              content: "Name the document as 'Lesson 1 Homework' and press enter.",
+              audioSrc: "/voice/4.5.m4a"
+            }
           ],
-          targets: [
-            { id: "uiTarget", title: "User Interface", type: "option-1" },
-            { id: "utilityTarget", title: "System Utility", type: "option-2" },
-          ],
+          correctOrder: ["step1", "step2", "step3", "step4", "step5"],
+          dropZoneCount: 5,
           audioSrc: "/voice/4.2.m4a",
-          speakText:
-            "Drag these Windows components to their correct category: User Interface or System Utility.",
-        },
+          speakText: "Sourabh wants to create a Word document named 'Lesson 1 Homework' and keep it safely in a new folder on his desktop. Help him by arranging the steps in the correct order.",
+        }
       ]
     },
     {
       id: 3,
-      title: "File Types",
+      title: "Different File Types",
       lessonContent: [
         {
-          type: "who-am-i",
-          format: "who-am-i",
-          title: "Guess the File Type",
-          riddleText: "I store photos and pictures. My name starts with 'J' and I'm very common on the internet. Who am I?",
-          questionText: "Which file type am I?",
-          options: [
-            { id: "jpg", text: ".jpg / .jpeg", isCorrect: true },
-            { id: "txt", text: ".txt", isCorrect: false },
-            { id: "mp3", text: ".mp3", isCorrect: false },
-            { id: "doc", text: ".doc", isCorrect: false }
+          type: "drag-drop",
+          format: "drag-drop",
+          title: "Drag and drop",
+          instruction: "Drag each file extension into the correct category based on the type of file it represents.",
+          items: [
+            {
+              id: "txt",
+              text: ".txt",
+              type: "text",
+              imageUrl: "/images/standard4/chapter3/text_file.png",
+            },
+            {
+              id: "docx",
+              text: ".docx",
+              type: "text",
+              imageUrl: "/images/standard4/chapter3/word_document.png",
+            },
+            {
+              id: "pdf",
+              text: ".pdf",
+              type: "text",
+              imageUrl: "/images/standard4/chapter3/pdf_document.png",
+            },
+            {
+              id: "jpg",
+              text: ".jpg",
+              type: "image",
+              imageUrl: "/images/standard4/chapter3/image_file.png",
+            },
+            {
+              id: "png",
+              text: ".png",
+              type: "image",
+              imageUrl: "/images/standard4/chapter3/image_file.png",
+            },
+            {
+              id: "gif",
+              text: ".gif",
+              type: "image",
+              imageUrl: "/images/standard4/chapter3/image_file.png",
+            },
+            {
+              id: "mp4",
+              text: ".mp4",
+              type: "video",
+              imageUrl: "/images/standard4/chapter3/video_file.png",
+            },
+            {
+              id: "avi",
+              text: ".avi",
+              type: "video",
+              imageUrl: "/images/standard4/chapter3/video_file.png",
+            },
+            {
+              id: "mkv",
+              text: ".mkv",
+              type: "video",
+              imageUrl: "/images/standard4/chapter3/video_file.png",
+            }
+          ],
+          targets: [
+            { id: "textTarget", title: "Text files", type: "text" },
+            { id: "imageTarget", title: "Image files", type: "image" },
+            { id: "videoTarget", title: "Video files", type: "video" },
           ],
           audioSrc: "/voice/4.3.m4a",
-          speakText: "I store photos and pictures. My name starts with 'J' and I'm very common on the internet. Who am I?",
+          speakText: "Drag each file extension into the correct category based on the type of file it represents.",
         }
       ]
     },
     {
       id: 4,
-      title: "MS Word Elements",
+      title: "Microsoft Word (Part 2)",
       lessonContent: [
         {
-          type: "sequence-match",
-          format: "sequence-match",
-          title: "Steps to Insert a Table in MS Word",
-          instruction: "Put these steps in the correct order to insert a table in Microsoft Word!",
+          type: "bucket-match",
+          format: "bucket-match",
+          title: "Match the term related to Microsoft Word with its correct description",
+          instruction: "Match the term related to Microsoft Word with its correct description.",
           items: [
             {
-              id: "step1",
-              content: "Click on the Insert tab in the ribbon",
-              audioSrc: "/voice/grade2/4.1.m4a"
+              id: "header",
+              text: "Header",
+              type: "header",
+              imageUrl: "/images/standard4/chapter4/header_icon.png",
             },
             {
-              id: "step2",
-              content: "Click the Table button",
-              audioSrc: "/voice/grade2/4.2.m4a"
+              id: "footer",
+              text: "Footer",
+              type: "footer",
+              imageUrl: "/images/standard4/chapter4/footer_icon.png",
             },
             {
-              id: "step3",
-              content: "Select the number of rows and columns you need",
-              audioSrc: "/voice/grade2/4.3.m4a"
+              id: "watermark",
+              text: "Watermark",
+              type: "watermark",
+              imageUrl: "/images/standard4/chapter4/watermark_icon.png",
             },
             {
-              id: "step4",
-              content: "Click to insert the table into your document",
-              audioSrc: "/voice/grade2/4.4.m4a"
+              id: "chart",
+              text: "Chart",
+              type: "chart",
+              imageUrl: "/images/standard4/chapter4/chart_icon.png",
             }
           ],
-          correctOrder: ["step1", "step2", "step3", "step4"],
-          dropZoneCount: 4,
+          buckets: [
+            { 
+              id: "headerTarget", 
+              title: "Space at the top of each page where you can add your name or the document title.", 
+              type: "header"
+            },
+            { 
+              id: "footerTarget", 
+              title: "Space at the bottom of each page where you can add page numbers or notes.", 
+              type: "footer"
+            },
+            { 
+              id: "watermarkTarget", 
+              title: "A light image or text that appears behind the main text in a document.", 
+              type: "watermark"
+            },
+            { 
+              id: "chartTarget", 
+              title: "Insert various charts to visualise data.", 
+              type: "chart"
+            }
+          ],
           audioSrc: "/voice/4.4.m4a",
-          speakText: "Put these steps in the correct order to insert a table in Microsoft Word!",
+          speakText: "Match the term related to Microsoft Word with its correct description.",
         }
       ]
     }
