@@ -206,17 +206,25 @@ const Text: React.FC<TextProps> = ({
                           className={styles.cardFront}
                           style={{ display: flippedIndex === index ? 'none' : 'block' }}
                         >
-                          <motion.img
-                            src={img.src}
-                            alt={img.alt}
-                            title={img.alt}
+                          <motion.div
                             className={styles.exampleImage}
                             whileHover={{
                               scale: 1.08,
                               rotate: Math.random() * 4 - 2,
                               boxShadow: '0px 5px 15px rgba(0,0,0,0.13)',
                             }}
-                          />
+                          >
+                            <Image
+                              src={img.src}
+                              alt={img.alt}
+                              title={img.alt}
+                              width={200}
+                              height={160}
+                              quality={95}
+                              priority
+                              style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                            />
+                          </motion.div>
                           {img.alt && <p className={styles.imageCaption}>{img.alt}</p>}
                         </div>
                         {/* Back of card (fun fact) */}

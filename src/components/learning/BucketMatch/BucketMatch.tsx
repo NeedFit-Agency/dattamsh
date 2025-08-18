@@ -13,15 +13,20 @@ import {
 import CongratulationsScreen from "../../shared/CongratulationsScreen";
 import TTS from "../../shared/TTS";
 import Button from "../../ui/Button/Button";
+import Image from "next/image";
 
 // Helper to get the SVG for a fruit based on its type/color
 const getFruitSvg = (itemType: string, imageUrl?: string) => {
   if (imageUrl) {
     return (
-      <img
+      <Image
         src={imageUrl}
         alt={itemType}
-        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+        width={120}
+        height={120}
+        quality={95}
+        priority
+        style={{ objectFit: 'contain' }}
       />
     );
   }

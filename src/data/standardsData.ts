@@ -431,7 +431,7 @@ export const standards: Standard = {
               id: "dnd-item-1",
               text: "Listen to music",
               type: "option-1",
-              imageUrl: "/images/standard2/chapter2/listen-music.svg",
+              imageUrl: "/images/standard2/chapter2/listen-music.png",
             },
             {
               id: "dnd-item-2",

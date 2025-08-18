@@ -522,8 +522,11 @@ export const DragDrop: React.FC<DragDropProps> = ({
                           <Image
                             src={item.imageUrl}
                             alt={item.text}
-                            width={50}
-                            height={50}
+                            width={180}
+                            height={180}
+                            quality={95}
+                            priority
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       )}
@@ -569,8 +572,10 @@ export const DragDrop: React.FC<DragDropProps> = ({
                         <Image
                           src={item.imageUrl}
                           alt={item.text}
-                          width={50}
-                          height={50}
+                          width={40}
+                          height={40}
+                          quality={95}
+                          style={{ objectFit: 'contain' }}
                         />
                       </div>
                     )}

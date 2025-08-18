@@ -120,9 +120,11 @@
   height: 180px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  object-fit: contain;
   background-color: #fff;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imageCaption {

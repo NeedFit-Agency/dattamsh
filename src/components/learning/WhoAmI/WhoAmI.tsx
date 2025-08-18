@@ -5,6 +5,7 @@ import TTS from "../../shared/TTS";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeadphones } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../ui/Button/Button";
+import Image from "next/image";
 
 interface Option {
   id: string;
@@ -417,10 +418,13 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
             >
               {option.imageUrl && (
                 <div className={styles.optionIcon}>
-                  <img
+                  <Image
                     src={option.imageUrl}
                     alt={option.text}
-                    className={styles.optionImage}
+                    width={80}
+                    height={80}
+                    quality={95}
+                    style={{ objectFit: 'contain' }}
                   />
                 </div>
               )}
