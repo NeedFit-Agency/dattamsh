@@ -299,8 +299,8 @@
   display: flex;
   flex-direction: row; /* Horizontal layout: image left, text right */
   align-items: center; /* Center items vertically */
-  justify-content: flex-start; /* Start content from left */
-  gap: 8px; /* Reduced gap for tighter fit */
+  justify-content: center; /* Changed from flex-start to center for horizontal centering */
+  gap: 16px; /* Increased gap from 8px to 16px for better spacing */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   position: relative;
@@ -318,7 +318,7 @@
   /* Ensure content stays within boundaries */
   overflow: hidden; /* Hide overflow content */
   box-sizing: border-box; /* Include padding in size calculations */
-  text-align: left; /* Left-align text */
+  text-align: center; /* Changed from left to center for text alignment */
   /* Enable wrapping when needed */
   flex-basis: auto; /* Allow natural sizing */
 }
@@ -346,7 +346,7 @@
   overflow: hidden; /* Hide overflow text */
   text-overflow: ellipsis; /* Show ellipsis for long text */
   line-height: 1.2; /* Tighter line height */
-  text-align: left; /* Left-align text */
+  text-align: center; /* Changed from left to center for text alignment */
   max-width: 100%; /* Ensure text doesn't exceed container */
 }
 
@@ -915,7 +915,7 @@
     overflow: hidden; /* Hide overflow text */
     text-overflow: ellipsis; /* Show ellipsis for long text */
     line-height: 1.2; /* Tighter line height */
-    text-align: left; /* Left-align text */
+    text-align: center; /* Changed from left to center for text alignment */
     max-width: 100%; /* Ensure text doesn't exceed container */
   }
 
@@ -1156,7 +1156,7 @@
     overflow: hidden; /* Hide overflow text */
     text-overflow: ellipsis; /* Show ellipsis for long text */
     line-height: 1.2; /* Tighter line height */
-    text-align: left; /* Left-align text */
+    text-align: center; /* Changed from left to center for text alignment */
     max-width: 100%; /* Ensure text doesn't exceed container */
   }
 
@@ -1382,7 +1382,7 @@
     overflow: hidden; /* Hide overflow text */
     text-overflow: ellipsis; /* Show ellipsis for long text */
     line-height: 1.2; /* Tighter line height */
-    text-align: left; /* Left-align text */
+    text-align: center; /* Changed from left to center for text alignment */
     max-width: 100%; /* Ensure text doesn't exceed container */
   }
 
@@ -1548,7 +1548,7 @@
     overflow: hidden; /* Hide overflow text */
     text-overflow: ellipsis; /* Show ellipsis for long text */
     line-height: 1.2; /* Tighter line height */
-    text-align: left; /* Left-align text */
+    text-align: center; /* Changed from left to center for text alignment */
     max-width: 100%; /* Ensure text doesn't exceed container */
   }
 
@@ -2497,11 +2497,11 @@
   min-height: 60px; /* Reduced height for smaller items */
   max-height: 60px; /* Reduced maximum height */
   padding: 10px 12px; /* Reduced padding for smaller items */
-  gap: 8px; /* Reduced gap for smaller items */
+  gap: 14px; /* Increased gap from 8px to 14px for better spacing */
   flex-direction: row; /* Horizontal layout: image left, text right */
   align-items: center; /* Center items vertically */
-  justify-content: flex-start; /* Start content from left */
-  text-align: left; /* Left-align text */
+  justify-content: center; /* Changed from flex-start to center for horizontal centering */
+  text-align: center; /* Changed from left to center for text alignment */
   border-radius: 10px; /* Reduced border radius */
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   /* Ensure content stays within boundaries */
@@ -2516,11 +2516,11 @@
   min-height: 60px; /* Reduced height for smaller items */
   max-height: 60px; /* Reduced maximum height */
   padding: 10px 12px; /* Reduced padding for smaller items */
-  gap: 8px; /* Reduced gap for smaller items */
+  gap: 14px; /* Increased gap from 8px to 14px for better spacing */
   flex-direction: row; /* Horizontal layout: image left, text right */
   align-items: center; /* Center items vertically */
-  justify-content: flex-start; /* Start content from left */
-  text-align: left; /* Left-align text */
+  justify-content: center; /* Changed from flex-start to center for horizontal centering */
+  text-align: center; /* Changed from left to center for text alignment */
   border-radius: 10px; /* Reduced border radius */
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   /* Ensure content stays within boundaries */
