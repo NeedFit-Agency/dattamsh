@@ -1042,11 +1042,11 @@ export const standards: Standard = {
           title: "Match the Storage Units with Their Descriptions",
           instruction: "Drag each storage unit to its correct description! (Hint: Use the byte clues)",
           items: [
-            { id: "byte", text: "Byte (B)", type: "unit" },
-            { id: "kilobyte", text: "Kilobyte (KB)", type: "unit" },
-            { id: "megabyte", text: "Megabyte (MB)", type: "unit" },
-            { id: "gigabyte", text: "Gigabyte (GB)", type: "unit" },
-            { id: "terabyte", text: "Terabyte (TB)", type: "unit" }
+            { id: "byte", text: "Byte (B)", type: "unit",imageUrl: "/images/standard5/chapter1/byte_storage.png" },
+            { id: "kilobyte", text: "Kilobyte (KB)", type: "unit",imageUrl: "/images/standard5/chapter1/kilobyte_storage.png" },
+            { id: "megabyte", text: "Megabyte (MB)", type: "unit",imageUrl: "/images/standard5/chapter1/megabyte_storage.png" },
+            { id: "gigabyte", text: "Gigabyte (GB)", type: "unit",imageUrl: "/images/standard5/chapter1/gigabyte_storage.png" },
+            { id: "terabyte", text: "Terabyte (TB)", type: "unit",imageUrl: "/images/standard5/chapter1/terabyte_storage.png" }
           ],
           buckets: [
             {
