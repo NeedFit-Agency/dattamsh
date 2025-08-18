@@ -543,7 +543,7 @@ export const DragDrop: React.FC<DragDropProps> = ({
           </div>
         </div>
 
-        <div className={styles.targetsGrid}>
+        <div className={`${styles.targetsGrid} ${targets.length === 4 ? styles['targetsGrid--four-targets'] : ''} ${targets.length === 2 ? styles['targetsGrid--two-targets'] : ''}`}>
           {targets.map((target) => (
             <div key={target.id} className={styles.targetContainer}>
               <h4 className={styles.targetTitle}>{target.title}</h4>
