@@ -196,7 +196,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
     ) {
       try {
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.rate = 0.5;
+        utterance.rate = 1.0;
         utterance.pitch = 1.0;
 
         utterance.onstart = () => setIsAudioPlaying(true);

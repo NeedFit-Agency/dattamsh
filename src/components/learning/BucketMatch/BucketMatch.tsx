@@ -374,7 +374,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     ) {
       try {
         const utterance = new SpeechSynthesisUtterance(instruction);
-        utterance.rate = 0.5;
+        utterance.rate = 1.0;
         utterance.onstart = () => {
           setIsAudioPlaying(true);
           setIsAnyAudioPlaying(true);
@@ -638,7 +638,7 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
                         excitement="low"
                         naturalPauses={true}
                         humanLike={true}
-                        rate={0.5}
+                        rate={1.0}
                         pitch={1.0}
                       />
                     )}

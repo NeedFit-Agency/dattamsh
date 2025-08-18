@@ -186,11 +186,12 @@
   border: 2px solid #bbddff;
   border-radius: 10px; /* Increased border radius */
   padding: 24px 24px; /* Increased padding */
-  min-width: 140px; /* Increased minimum width */
+  min-width: 200px; /* Increased minimum width for vertical layout */
   cursor: grab;
   display: flex;
+  flex-direction: column; /* Changed to column layout */
   align-items: center;
-  gap: 10px; /* Increased gap */
+  gap: 16px; /* Increased gap between image and text */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s;
   touch-action: none;
@@ -203,13 +204,15 @@
 }
 
 .dragItemImage {
-  width: 180px; /* Increased from 150px */
-  height: 180px; /* Increased from 150px */
+  width: 220px; /* Increased to 220px for bigger images */
+  height: 220px; /* Increased to 220px for bigger images */
   overflow: hidden;
-  border-radius: 6px; /* Slightly increased border radius */
+  border-radius: 8px; /* Increased border radius */
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 8px; /* Add margin below image */
+  transition: width 0.3s ease, height 0.3s ease; /* Smooth transitions for responsive changes */
 }
 
 .dragItemImage img {
@@ -219,9 +222,12 @@
 }
 
 .dragItemText {
-  font-size: 18px; /* Increased from 16px */
+  font-size: 16px; /* Adjusted for better fit in vertical layout */
   font-weight: 600; /* Increased font weight */
   color: var(--text-dark, #343a40);
+  text-align: center; /* Center align text */
+  line-height: 1.4; /* Better line height for readability */
+  max-width: 200px; /* Limit text width for better layout */
 }
 
 .targetsGrid {
@@ -627,6 +633,17 @@
     margin-right: 0;
     margin-bottom: 16px;
   }
+  
+  .dragItem {
+    min-width: 180px; /* Adjusted for medium screens */
+    padding: 20px 20px;
+  }
+  
+  .dragItemImage {
+    width: 160px; /* Medium size for tablets */
+    height: 160px;
+  }
+  
   .targetsGrid {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 16px;
@@ -781,6 +798,7 @@
     width: 90px;
     height: 90px;
     margin-bottom: 8px;
+    border-radius: 6px;
   }
 
   .dragItemText {
