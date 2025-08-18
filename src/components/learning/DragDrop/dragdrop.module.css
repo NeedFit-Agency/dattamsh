@@ -227,19 +227,23 @@
 .targetsGrid {
   display: grid;
   flex: 2;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   align-items: start;
   width: 100%;
 }
 
+/* Optimize for exactly 4 targets - ensure 2x2 grid layout */
+.targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
 /* Ensure targets don't get too wide on large screens */
 .targetsGrid:has(.targetContainer:nth-child(3)) {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.targetsGrid:has(.targetContainer:nth-child(4)) {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .targetsGrid:has(.targetContainer:nth-child(5)) {
@@ -260,23 +264,26 @@
 }
 
 .dropTarget {
-  min-width: 380px; /* Increased from 340px */
-  max-width: 580px; /* Increased from 520px */
+  min-width: 320px; /* Reduced from 380px for better fit */
+  max-width: 500px; /* Reduced from 580px for better fit */
   width: 100%;
   height: 100%;
-  min-height: 280px; /* Increased from 240px */
-  max-height: 480px; /* Increased from 420px */
-  height: 360px; /* Increased from 320px */
+  min-height: 240px; /* Reduced from 280px for better fit */
+  max-height: 400px; /* Reduced from 480px for better fit */
+  height: 300px; /* Reduced from 360px for better fit */
   background-color: #bbddff;
   border: 2px dashed #adb5bd;
   border-radius: 12px;
-  padding: 20px; /* Increased padding */
+  padding: 16px; /* Reduced from 20px for better fit */
   display: flex;
-  flex-direction: column;
-  gap: 15px; /* Increased gap */
+  flex-direction: row; /* Changed to row for horizontal layout */
+  flex-wrap: wrap; /* Enable wrapping to next line when items are too big */
+  gap: 8px; /* Reduced gap for tighter packing */
+  align-content: flex-start; /* Start from top when wrapping */
+  justify-content: flex-start; /* Start from left */
   transition: border-color 0.2s, background-color 0.2s;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: auto; /* Allow vertical scrolling if needed */
 }
 
 .dropTarget:hover {
@@ -288,16 +295,32 @@
   background-color: white;
   border: 2px solid var(--border-medium, #adb5bd);
   border-radius: 8px;
-  padding: 8px 12px;
+  padding: 6px 10px; /* Reduced padding to fit more content */
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: row; /* Horizontal layout: image left, text right */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Start content from left */
+  gap: 8px; /* Reduced gap for tighter fit */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   position: relative;
   transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s;
   touch-action: none;
   user-select: none;
+  /* Smaller sizing to fit within dropbox */
+  min-height: 40px; /* Reduced height */
+  max-height: 50px; /* Reduced maximum height */
+  width: calc(50% - 4px); /* Fit 2 items per line */
+  min-width: 100px; /* Reduced minimum width */
+  max-width: 160px; /* Reduced maximum width */
+  flex-shrink: 0; /* Prevent shrinking */
+  flex-grow: 0; /* Prevent growing */
+  /* Ensure content stays within boundaries */
+  overflow: hidden; /* Hide overflow content */
+  box-sizing: border-box; /* Include padding in size calculations */
+  text-align: left; /* Left-align text */
+  /* Enable wrapping when needed */
+  flex-basis: auto; /* Allow natural sizing */
 }
 
 .droppedItem:hover {
@@ -306,27 +329,27 @@
 }
 
 .droppedItemImage {
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.droppedItemImage img {
-  width: 100%;
-  height: 100%;
+  width: 24px; /* Reduced from 36px to fit smaller box */
+  height: 24px; /* Reduced from 36px to fit smaller box */
   object-fit: contain;
+  flex-shrink: 0; /* Prevent image from shrinking */
+  margin-right: 0; /* No right margin needed */
+  border-radius: 4px; /* Reduced border radius */
 }
 
 .droppedItemText {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text-dark, #343a40);
-  flex-grow: 1;
+  color: var(--text-primary, #212529);
+  font-size: 12px; /* Reduced from 15px to fit smaller box */
+  font-weight: 600;
+  flex-grow: 1; /* Allow text to take remaining space */
+  white-space: nowrap; /* Prevent text wrapping within item */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Show ellipsis for long text */
+  line-height: 1.2; /* Tighter line height */
+  text-align: left; /* Left-align text */
+  max-width: 100%; /* Ensure text doesn't exceed container */
 }
+
 .activityControls {
   display: flex;
   justify-content: center;
@@ -549,11 +572,11 @@
 /* Large screens - optimize for multiple columns */
 @media (min-width: 1200px) {
   .targetsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 24px;
   }
   .dropTarget {
-    min-width: 320px;
+    min-width: 300px;
   }
   
   /* Special handling for 4 targets - ensure 2x2 grid */
@@ -561,6 +584,23 @@
     grid-template-columns: repeat(2, 1fr);
     max-width: 1200px;
     margin: 0 auto;
+    gap: 32px;
+  }
+}
+
+/* Medium-large screens - optimize for 4 targets */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 20px;
+  }
+  
+  .dropTarget {
+    min-width: 280px;
+    min-height: 200px;
+    height: 250px;
   }
 }
 
@@ -570,11 +610,11 @@
     overflow-x: auto;
   }
   .targetsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 18px;
   }
   .dropTarget {
-    min-width: 280px;
+    min-width: 260px;
   }
 }
 
@@ -588,15 +628,24 @@
     margin-bottom: 16px;
   }
   .targetsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 16px;
   }
+  
+  /* Optimize 4 targets for medium screens */
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 16px;
+  }
+  
   .dropTarget {
-    min-width: 180px;
+    min-width: 160px;
     max-width: 100%;
     width: 100%;
     min-height: 120px;
-    max-height: 220px;
+    max-height: 180px;
     height: 140px;
   }
 }
@@ -743,10 +792,18 @@
 
   /* Enhanced Targets Grid - Now positioned below items */
   .targetsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 16px;
     flex: 1;
     order: 2; /* Ensure targets appear after items */
+  }
+  
+  /* Optimize 4 targets for mobile screens */
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 400px;
+    margin: 0 auto;
+    gap: 12px;
   }
 
   .targetContainer {
@@ -771,41 +828,48 @@
     min-width: auto;
     max-width: 100%;
     width: 100%;
-    min-height: 140px;
-    max-height: 220px;
-    height: 160px;
-    padding: 16px;
-    gap: 12px;
+    min-height: 120px; /* Reduced for better fit */
+    max-height: 160px; /* Reduced for better fit */
+    height: 140px; /* Reduced for better fit */
+    padding: 12px; /* Reduced padding for better fit */
+    gap: 8px; /* Reduced gap for better fit */
     touch-action: manipulation;
     background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
     border: 3px dashed #bbddff;
     border-radius: 16px;
     transition: all 0.3s ease;
     display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    justify-content: center;
+    flex-direction: row; /* Maintain horizontal layout */
+    flex-wrap: wrap; /* Enable wrapping for mobile */
+    align-content: flex-start; /* Start from top when wrapping */
+    justify-content: flex-start; /* Start from left */
+    /* Ensure content can wrap properly */
+    overflow: visible; /* Allow content to be visible */
   }
 
   .dropTarget:hover {
     background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
     border-color: #1aa2ff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(26, 162, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(26, 162, 255, 0.2);
   }
 
   .dropTarget.touchActive {
     background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
     border-color: #28a745;
-    transform: scale(1.02);
-    box-shadow: 0 8px 24px rgba(40, 167, 69, 0.3);
+    transform: scale(1.01);
+    box-shadow: 0 4px 16px rgba(40, 167, 69, 0.3);
   }
 
   .droppedItem {
-    padding: 12px 16px;
-    gap: 10px;
+    padding: 8px 12px; /* Reduced padding for better fit */
+    gap: 6px; /* Reduced gap for better fit */
     touch-action: manipulation;
-    min-height: 50px;
+    min-height: 40px; /* Reduced height for better fit */
+    max-height: 40px; /* Fixed height for consistency */
+    width: calc(50% - 4px); /* Fit 2 items per line */
+    min-width: 100px; /* Minimum width for mobile */
+    max-width: 150px; /* Maximum width for mobile */
     background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     border: 2px solid #bbddff;
     border-radius: 12px;
@@ -815,8 +879,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row; /* Horizontal layout */
     text-align: center;
+    /* Ensure items fit in one line */
+    flex-wrap: nowrap;
+    overflow: hidden;
+    flex-shrink: 0;
+    flex-grow: 0;
   }
 
   .droppedItem:hover {
@@ -829,15 +898,25 @@
   }
 
   .droppedItemImage {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 4px;
+    width: 24px; /* Reduced from 36px to fit smaller box */
+    height: 24px; /* Reduced from 36px to fit smaller box */
+    object-fit: contain;
+    flex-shrink: 0; /* Prevent image from shrinking */
+    margin-right: 0; /* No right margin needed */
+    border-radius: 4px; /* Reduced border radius */
   }
 
   .droppedItemText {
-    font-size: 14px;
+    color: var(--text-primary, #212529);
+    font-size: 12px; /* Reduced from 15px to fit smaller box */
     font-weight: 600;
-    color: #2c3e50;
+    flex-grow: 1; /* Allow text to take remaining space */
+    white-space: nowrap; /* Prevent text wrapping within item */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis for long text */
+    line-height: 1.2; /* Tighter line height */
+    text-align: left; /* Left-align text */
+    max-width: 100%; /* Ensure text doesn't exceed container */
   }
 
   .feedbackMessage {
@@ -980,6 +1059,14 @@
   .targetsGrid {
     gap: 10px;
   }
+  
+  /* Optimize 4 targets for small mobile screens */
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 320px;
+    margin: 0 auto;
+    gap: 8px;
+  }
 
   .targetContainer {
     background: rgba(255, 255, 255, 0.8);
@@ -1000,39 +1087,30 @@
   }
 
   .dropTarget {
-    min-height: 120px;
-    max-height: 180px;
-    height: 140px;
-    padding: 12px;
-    gap: 8px;
+    min-height: 100px; /* Reduced for better fit */
+    max-height: 140px; /* Reduced for better fit */
+    height: 120px; /* Reduced for better fit */
+    padding: 10px; /* Reduced padding for better fit */
+    gap: 6px; /* Reduced gap for better fit */
     background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
-    border: 2px dashed #bbddff;
+    border: 3px dashed #bbddff;
     border-radius: 12px;
     transition: all 0.3s ease;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row; /* Maintain horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping */
     align-content: flex-start;
-    justify-content: center;
-  }
-
-  .dropTarget:hover {
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-    border-color: #1aa2ff;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(26, 162, 255, 0.2);
-  }
-
-  .dropTarget.touchActive {
-    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
-    border-color: #28a745;
-    transform: scale(1.01);
-    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+    justify-content: flex-start;
   }
 
   .droppedItem {
-    padding: 8px 12px;
-    gap: 6px;
-    min-height: 44px;
+    padding: 6px 10px; /* Reduced padding for better fit */
+    gap: 4px; /* Reduced gap for better fit */
+    min-height: 36px; /* Reduced height for better fit */
+    max-height: 36px; /* Fixed height for consistency */
+    width: calc(50% - 3px); /* Fit 2 items per line with smaller gap */
+    min-width: 80px; /* Minimum width for small mobile */
+    max-width: 120px; /* Maximum width for small mobile */
     background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     border: 2px solid #bbddff;
     border-radius: 10px;
@@ -1042,8 +1120,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row; /* Horizontal layout */
     text-align: center;
+    /* Ensure items fit in one line */
+    flex-wrap: nowrap;
+    overflow: hidden;
+    flex-shrink: 0;
+    flex-grow: 0;
   }
 
   .droppedItem:hover {
@@ -1056,15 +1139,25 @@
   }
 
   .droppedItemImage {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 3px;
+    width: 24px; /* Reduced from 36px to fit smaller box */
+    height: 24px; /* Reduced from 36px to fit smaller box */
+    object-fit: contain;
+    flex-shrink: 0; /* Prevent image from shrinking */
+    margin-right: 0; /* No right margin needed */
+    border-radius: 4px; /* Reduced border radius */
   }
 
   .droppedItemText {
-    font-size: 13px;
+    color: var(--text-primary, #212529);
+    font-size: 12px; /* Reduced from 15px to fit smaller box */
     font-weight: 600;
-    color: #2c3e50;
+    flex-grow: 1; /* Allow text to take remaining space */
+    white-space: nowrap; /* Prevent text wrapping within item */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis for long text */
+    line-height: 1.2; /* Tighter line height */
+    text-align: left; /* Left-align text */
+    max-width: 100%; /* Ensure text doesn't exceed container */
   }
 
   .feedbackMessage {
@@ -1192,6 +1285,14 @@
   .targetsGrid {
     gap: 8px;
   }
+  
+  /* Optimize 4 targets for extra small screens */
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 280px;
+    margin: 0 auto;
+    gap: 6px;
+  }
 
   .targetContainer {
     background: rgba(255, 255, 255, 0.8);
@@ -1202,7 +1303,7 @@
   }
 
   .targetTitle {
-    font-size: 16px;
+    font-size: 15px;
     margin-bottom: 6px;
     color: #2c3e50;
     font-weight: 700;
@@ -1212,55 +1313,51 @@
   }
 
   .dropTarget {
-    min-height: 100px;
-    max-height: 140px;
-    height: 120px;
-    padding: 8px;
-    gap: 6px;
+    min-height: 80px; /* Reduced for better fit */
+    max-height: 120px; /* Reduced for better fit */
+    height: 100px; /* Reduced for better fit */
+    padding: 8px; /* Reduced padding for better fit */
+    gap: 4px; /* Reduced gap for better fit */
     background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
     border: 2px dashed #bbddff;
     border-radius: 10px;
     transition: all 0.3s ease;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row; /* Maintain horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping */
     align-content: flex-start;
-    justify-content: center;
-  }
-
-  .dropTarget:hover {
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-    border-color: #1aa2ff;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(26, 162, 255, 0.2);
-  }
-
-  .dropTarget.touchActive {
-    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
-    border-color: #28a745;
-    transform: scale(1.01);
-    box-shadow: 0 4px 16px rgba(40, 167, 69, 0.3);
+    justify-content: flex-start;
   }
 
   .droppedItem {
-    padding: 6px 8px;
-    gap: 4px;
-    min-height: 40px;
+    padding: 4px 8px; /* Reduced padding for better fit */
+    gap: 3px; /* Reduced gap for better fit */
+    min-height: 32px; /* Reduced height for better fit */
+    max-height: 32px; /* Fixed height for consistency */
+    width: calc(50% - 2px); /* Fit 2 items per line with minimal gap */
+    min-width: 60px; /* Minimum width for extra small mobile */
+    max-width: 100px; /* Maximum width for extra small mobile */
     background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     border: 2px solid #bbddff;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transition: all 0.2s ease;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row; /* Horizontal layout */
     text-align: center;
+    /* Ensure items fit in one line */
+    flex-wrap: nowrap;
+    overflow: hidden;
+    flex-shrink: 0;
+    flex-grow: 0;
   }
 
   .droppedItem:hover {
     transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
   }
 
   .droppedItem:active {
@@ -1268,15 +1365,25 @@
   }
 
   .droppedItemImage {
-    width: 28px;
-    height: 28px;
-    margin-bottom: 2px;
+    width: 24px; /* Reduced from 36px to fit smaller box */
+    height: 24px; /* Reduced from 36px to fit smaller box */
+    object-fit: contain;
+    flex-shrink: 0; /* Prevent image from shrinking */
+    margin-right: 0; /* No right margin needed */
+    border-radius: 4px; /* Reduced border radius */
   }
 
   .droppedItemText {
-    font-size: 12px;
+    color: var(--text-primary, #212529);
+    font-size: 12px; /* Reduced from 15px to fit smaller box */
     font-weight: 600;
-    color: #2c3e50;
+    flex-grow: 1; /* Allow text to take remaining space */
+    white-space: nowrap; /* Prevent text wrapping within item */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis for long text */
+    line-height: 1.2; /* Tighter line height */
+    text-align: left; /* Left-align text */
+    max-width: 100%; /* Ensure text doesn't exceed container */
   }
 
   .feedbackMessage {
@@ -1366,7 +1473,17 @@
 
   .targetsGrid {
     flex: 0 0 70%;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); /* Force 2x2 grid for 4 targets */
+    gap: 4px;
+    max-width: 400px; /* Limit width for better fit */
+    margin: 0 auto;
+  }
+  
+  /* Optimize 4 targets for landscape mode */
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 400px;
+    margin: 0 auto;
     gap: 4px;
   }
 
@@ -1381,21 +1498,58 @@
     height: 70px;
     padding: 4px;
     gap: 4px;
+    display: flex;
+    flex-direction: row; /* Maintain horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping */
+    align-content: flex-start;
+    justify-content: flex-start;
   }
 
   .droppedItem {
     padding: 3px 4px;
     gap: 3px;
     min-height: 28px;
+    max-height: 28px; /* Fixed height for consistency */
+    width: calc(50% - 2px); /* Fit 2 items per line */
+    min-width: 50px; /* Minimum width for landscape */
+    max-width: 80px; /* Maximum width for landscape */
+    flex-direction: row; /* Horizontal layout */
+    /* Ensure items fit in one line */
+    flex-wrap: nowrap;
+    overflow: hidden;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  .droppedItem:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+
+  .droppedItem:active {
+    transform: scale(0.95);
   }
 
   .droppedItemImage {
-    width: 20px;
-    height: 20px;
+    width: 24px; /* Reduced from 36px to fit smaller box */
+    height: 24px; /* Reduced from 36px to fit smaller box */
+    object-fit: contain;
+    flex-shrink: 0; /* Prevent image from shrinking */
+    margin-right: 0; /* No right margin needed */
+    border-radius: 4px; /* Reduced border radius */
   }
 
   .droppedItemText {
-    font-size: 10px;
+    color: var(--text-primary, #212529);
+    font-size: 12px; /* Reduced from 15px to fit smaller box */
+    font-weight: 600;
+    flex-grow: 1; /* Allow text to take remaining space */
+    white-space: nowrap; /* Prevent text wrapping within item */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis for long text */
+    line-height: 1.2; /* Tighter line height */
+    text-align: left; /* Left-align text */
+    max-width: 100%; /* Ensure text doesn't exceed container */
   }
 
   .feedbackMessage {
@@ -1570,7 +1724,7 @@
   
   .droppedItem {
     min-height: 48px;
-    padding: 8px 6px;
+    padding: 12px 8px;
   }
   
   .audioButton,
@@ -1634,6 +1788,18 @@
     flex-direction: column;
     justify-content: space-between;
   }
+  
+  /* Special handling for 4 targets on mobile */
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 400px;
+    margin: 0 auto;
+    align-items: stretch;
+  }
 
   .targetContainer {
     flex: 1;
@@ -1658,6 +1824,133 @@
 
   .activityArea {
     min-height: calc(100vh - 220px); /* Adjusted for smaller header space */
+  }
+  
+  /* Special handling for 4 targets on very small screens */
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+    max-width: 280px;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+}
+
+/* Additional optimizations for 4-target layouts */
+.targetsGrid:has(.targetContainer:nth-child(4):last-child) .dropTarget {
+  /* Ensure consistent sizing for 4-target layouts */
+  min-height: clamp(200px, 25vh, 300px);
+  max-height: clamp(250px, 30vh, 350px);
+  height: clamp(220px, 28vh, 320px);
+  /* Optimize for cube structure with wrapping */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 12px; /* Increased gap for better visibility */
+  padding: 16px; /* Increased padding for better spacing */
+  /* Ensure content can wrap properly */
+  overflow: visible; /* Allow content to be visible */
+}
+
+/* Ensure optimal spacing for 4-target layouts */
+.targetsGrid--four-targets .dropTarget {
+  min-height: clamp(200px, 25vh, 300px);
+  max-height: clamp(250px, 30vh, 350px);
+  height: clamp(220px, 28vh, 320px);
+  /* Optimize for cube structure with wrapping */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 12px; /* Increased gap for better visibility */
+  padding: 16px; /* Increased padding for better spacing */
+  /* Ensure content can wrap properly */
+  overflow: visible; /* Allow content to be visible */
+}
+
+/* Cube structure optimization for dropped items */
+.targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItem {
+  /* Perfect cube dimensions with horizontal layout */
+  width: 100%;
+  height: 100%;
+  min-width: unset;
+  max-width: unset;
+  display: flex;
+  flex-direction: row; /* Horizontal layout: image left, text right */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Start content from left */
+  text-align: left; /* Left-align text */
+  padding: 10px; /* Good padding for horizontal layout */
+  gap: 10px; /* Gap between image and text */
+  /* Ensure items are properly sized for content visibility */
+  min-height: 50px; /* Reduced height for horizontal layout */
+  max-height: 80px; /* Maximum height for horizontal layout */
+  /* Ensure content is visible */
+  overflow: visible; /* Allow content to be fully visible */
+  box-sizing: border-box; /* Include padding in size calculations */
+  /* Proper operator item styling */
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #bbddff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Cube structure optimization for dropped items with fallback class */
+.targetsGrid--four-targets .droppedItem {
+  /* Perfect cube dimensions with horizontal layout */
+  width: 100%;
+  height: 100%;
+  min-width: unset;
+  max-width: unset;
+  display: flex;
+  flex-direction: row; /* Horizontal layout: image left, text right */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Start content from left */
+  text-align: left; /* Left-align text */
+  padding: 10px; /* Good padding for horizontal layout */
+  gap: 10px; /* Gap between image and text */
+  /* Ensure items are properly sized for content visibility */
+  min-height: 50px; /* Reduced height for horizontal layout */
+  max-height: 80px; /* Maximum height for horizontal layout */
+  /* Ensure content is visible */
+  overflow: visible; /* Allow content to be fully visible */
+  box-sizing: border-box; /* Include padding in size calculations */
+  /* Proper operator item styling */
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #bbddff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Ensure dropped items don't cause layout shifts */
+.droppedItem {
+  /* Prevent dropped items from affecting drop zone height */
+  flex-shrink: 0;
+  /* Prevent text wrapping */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mobile optimizations for dropped items - ensure consistent sizing */
+@media (max-width: 768px) {
+  .droppedItem {
+    min-height: 40px;
+    max-height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .droppedItem {
+    min-height: 36px;
+    max-height: 36px;
+  }
+}
+
+@media (max-width: 360px) {
+  .droppedItem {
+    min-height: 32px;
+    max-height: 32px;
   }
 }
 
@@ -1734,4 +2027,571 @@
   margin-top: 40px;
   font-size: 18px;
   font-style: italic;
+}
+
+/* Fallback for browsers that don't support :has() selector */
+.targetsGrid--four-targets {
+  grid-template-columns: repeat(2, 1fr) !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  gap: 24px !important;
+}
+
+/* Mobile fallback for 4 targets */
+@media (max-width: 900px) {
+  .targetsGrid--four-targets {
+    max-width: 600px !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .targetsGrid--four-targets {
+    max-width: 400px !important;
+    gap: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .targetsGrid--four-targets {
+    max-width: 320px !important;
+    gap: 8px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .targetsGrid--four-targets {
+    max-width: 280px !important;
+    gap: 6px !important;
+  }
+}
+
+/* Ensure optimal spacing for 4-target layouts */
+.targetsGrid--four-targets .dropTarget {
+  min-height: clamp(200px, 25vh, 300px);
+  max-height: clamp(250px, 30vh, 350px);
+  height: clamp(220px, 28vh, 320px);
+  /* Optimize for cube structure with wrapping */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 12px; /* Increased gap for better visibility */
+  padding: 16px; /* Increased padding for better spacing */
+  /* Ensure content can wrap properly */
+  overflow: visible; /* Allow content to be visible */
+}
+
+/* Mobile cube structure optimizations */
+@media (max-width: 768px) {
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .dropTarget,
+  .targetsGrid--four-targets .dropTarget {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px; /* Maintain good spacing on mobile */
+    padding: 12px; /* Maintain good padding on mobile */
+    min-height: 140px;
+    max-height: 180px;
+    height: 160px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItem,
+  .targetsGrid--four-targets .droppedItem {
+    width: 100%;
+    height: 100%;
+    min-width: unset;
+    max-width: unset;
+    flex-direction: column;
+    padding: 8px; /* Maintain good padding on mobile */
+    gap: 6px; /* Maintain good spacing on mobile */
+    min-height: 60px; /* Ensure minimum visibility on mobile */
+    max-height: 80px;
+    /* Maintain operator styling */
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #bbddff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemImage,
+  .targetsGrid--four-targets .droppedItemImage {
+    width: 44px; /* Maintain good image size on mobile */
+    height: 44px;
+    margin-bottom: 6px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemText,
+  .targetsGrid--four-targets .droppedItemText {
+    font-size: 14px; /* Maintain good text size on mobile */
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 480px) {
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .dropTarget,
+  .targetsGrid--four-targets .dropTarget {
+    gap: 6px; /* Maintain good spacing on small mobile */
+    padding: 10px; /* Maintain good padding on small mobile */
+    min-height: 120px;
+    max-height: 160px;
+    height: 140px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItem,
+  .targetsGrid--four-targets .droppedItem {
+    padding: 6px; /* Maintain good padding on small mobile */
+    gap: 4px; /* Maintain good spacing on small mobile */
+    min-height: 50px; /* Ensure minimum visibility on small mobile */
+    max-height: 70px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemImage,
+  .targetsGrid--four-targets .droppedItemImage {
+    width: 40px; /* Maintain good image size on small mobile */
+    height: 40px;
+    margin-bottom: 4px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemText,
+  .targetsGrid--four-targets .droppedItemText {
+    font-size: 13px; /* Maintain good text size on small mobile */
+  }
+}
+
+@media (max-width: 360px) {
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .dropTarget,
+  .targetsGrid--four-targets .dropTarget {
+    gap: 4px; /* Maintain good spacing on extra small mobile */
+    padding: 8px; /* Maintain good padding on extra small mobile */
+    min-height: 100px;
+    max-height: 140px;
+    height: 120px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItem,
+  .targetsGrid--four-targets .droppedItem {
+    padding: 5px; /* Maintain good padding on extra small mobile */
+    gap: 3px; /* Maintain good spacing on extra small mobile */
+    min-height: 40px; /* Ensure minimum visibility on extra small mobile */
+    max-height: 60px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemImage,
+  .targetsGrid--four-targets .droppedItemImage {
+    width: 36px; /* Maintain good image size on extra small mobile */
+    height: 36px;
+    margin-bottom: 3px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemText,
+  .targetsGrid--four-targets .droppedItemText {
+    font-size: 12px; /* Maintain good text size on extra small mobile */
+  }
+}
+
+/* Special handling for 2 targets - make items bigger and more square */
+.targetsGrid:has(.targetContainer:nth-child(2):last-child) .dropTarget {
+  /* Use more vertical space when only 2 targets */
+  min-height: clamp(300px, 35vh, 400px);
+  max-height: clamp(350px, 40vh, 450px);
+  height: clamp(320px, 38vh, 420px);
+  /* Allow more flexible layout for fewer items */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px;
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+/* Make dropped items bigger and more square for 2-target layouts */
+.targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItem {
+  /* Larger, more square items with horizontal layout */
+  width: calc(50% - 8px); /* Fit 2 items per line with larger gap */
+  min-width: 140px;
+  max-width: 200px;
+  min-height: 70px; /* Adjusted height for horizontal layout */
+  max-height: 70px; /* Fixed height to prevent overflow */
+  padding: 12px 14px; /* Good padding for horizontal layout */
+  gap: 12px; /* Increased gap between image and text for larger items */
+  /* Horizontal layout: image left, text right */
+  display: flex;
+  flex-direction: row; /* Horizontal layout */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Start content from left */
+  text-align: left; /* Left-align text */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* Ensure content is visible */
+  overflow: visible; /* Allow content to be fully visible */
+  box-sizing: border-box; /* Include padding in size calculations */
+}
+
+.targetsGrid--two-targets .droppedItem {
+  width: calc(50% - 8px);
+  min-width: 140px;
+  max-width: 200px;
+  min-height: 70px; /* Adjusted height for horizontal layout */
+  max-height: 70px; /* Fixed height to prevent overflow */
+  padding: 12px 14px; /* Good padding for horizontal layout */
+  gap: 12px; /* Increased gap between image and text for larger items */
+  display: flex;
+  flex-direction: row; /* Horizontal layout */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Start content from left */
+  text-align: left; /* Left-align text */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* Ensure content is visible */
+  overflow: visible; /* Allow content to be fully visible */
+  box-sizing: border-box; /* Include padding in size calculations */
+}
+
+/* Larger images for 2-target layouts */
+.targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemImage {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+/* Larger text for 2-target layouts */
+.targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemText {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  /* Ensure text is clearly visible */
+  color: #2c3e50;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  /* Ensure text is fully visible */
+  overflow: visible; /* Allow text to be fully visible */
+  text-overflow: clip; /* Don't clip text */
+  white-space: normal; /* Allow text to wrap if needed for visibility */
+  /* Ensure text doesn't get cut off */
+  max-width: 100%; /* Text width cannot exceed container */
+}
+
+/* Fallback class for 2 targets */
+.targetsGrid--two-targets .dropTarget {
+  min-height: clamp(300px, 35vh, 400px);
+  max-height: clamp(350px, 40vh, 450px);
+  height: clamp(320px, 38vh, 420px);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px;
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+.targetsGrid--two-targets .droppedItem {
+  width: calc(50% - 8px);
+  min-width: 140px;
+  max-width: 200px;
+  min-height: 80px;
+  max-height: 80px; /* Fixed height to prevent overflow */
+  padding: 10px 12px; /* Reduced padding to prevent overflow */
+  gap: 6px; /* Gap between icon and text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px; /* Slightly reduced for better fit */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* Ensure content stays within bounds */
+  overflow: hidden; /* Prevent content overflow */
+  box-sizing: border-box; /* Include padding in size calculations */
+}
+
+.targetsGrid--two-targets .droppedItemImage {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.targetsGrid--two-targets .droppedItemText {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  /* Ensure text is clearly visible */
+  color: #2c3e50;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  /* Ensure text is fully visible */
+  overflow: visible; /* Allow text to be fully visible */
+  text-overflow: clip; /* Don't clip text */
+  white-space: normal; /* Allow text to wrap if needed for visibility */
+  /* Ensure text doesn't get cut off */
+  max-width: 100%; /* Text width cannot exceed container */
+}
+
+/* Mobile optimizations for 2-target layouts */
+@media (max-width: 768px) {
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .dropTarget,
+  .targetsGrid--two-targets .dropTarget {
+    min-height: 200px;
+    max-height: 280px;
+    height: 240px;
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItem,
+  .targetsGrid--two-targets .droppedItem {
+    width: calc(50% - 6px);
+    min-width: 120px;
+    max-width: 160px;
+    min-height: 70px;
+    max-height: 70px;
+    padding: 10px 12px;
+    gap: 6px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemImage,
+  .targetsGrid--two-targets .droppedItemImage {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 6px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemText,
+  .targetsGrid--two-targets .droppedItemText {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .dropTarget,
+  .targetsGrid--two-targets .dropTarget {
+    min-height: 180px;
+    max-height: 240px;
+    height: 200px;
+    gap: 10px;
+    padding: 12px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItem,
+  .targetsGrid--two-targets .droppedItem {
+    width: calc(50% - 5px);
+    min-width: 100px;
+    max-width: 140px;
+    min-height: 60px;
+    max-height: 60px;
+    padding: 8px 10px;
+    gap: 5px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemImage,
+  .targetsGrid--two-targets .droppedItemImage {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 5px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemText,
+  .targetsGrid--two-targets .droppedItemText {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .dropTarget,
+  .targetsGrid--two-targets .dropTarget {
+    min-height: 160px;
+    max-height: 200px;
+    height: 180px;
+    gap: 8px;
+    padding: 10px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItem,
+  .targetsGrid--two-targets .droppedItem {
+    width: calc(50% - 4px);
+    min-width: 80px;
+    max-width: 120px;
+    min-height: 50px;
+    max-height: 50px;
+    padding: 6px 8px;
+    gap: 4px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemImage,
+  .targetsGrid--two-targets .droppedItemImage {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 4px;
+  }
+  
+  .targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemText,
+  .targetsGrid--two-targets .droppedItemText {
+    font-size: 14px;
+  }
+}
+
+/* Larger images and text for 4-target layouts */
+.targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemImage,
+.targetsGrid--four-targets .droppedItemImage {
+  width: 56px; /* Increased from 48px for better visibility */
+  height: 56px;
+  margin-bottom: 8px;
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemText,
+.targetsGrid--four-targets .droppedItemText {
+  font-size: 16px; /* Increased from 14px for better readability */
+  font-weight: 600;
+  line-height: 1.4;
+  /* Ensure text is clearly visible */
+  color: #2c3e50;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* 4-target layout: Cube structure with smaller items */
+.targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItem {
+  width: 100%; /* Full width within grid cell */
+  height: 100%; /* Full height within grid cell */
+  flex-direction: column; /* Stack image above text */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  text-align: center; /* Center text */
+  padding: 8px; /* Reduced padding for smaller items */
+  gap: 6px; /* Reduced gap for smaller items */
+  min-height: 60px; /* Reduced height for smaller items */
+  max-height: 100px; /* Reduced maximum height */
+  /* Ensure content stays within boundaries */
+  overflow: hidden; /* Hide overflow content */
+  box-sizing: border-box; /* Include padding in size calculations */
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.targetsGrid--four-targets .droppedItem {
+  width: 100%; /* Full width within grid cell */
+  height: 100%; /* Full height within grid cell */
+  flex-direction: column; /* Stack image above text */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  text-align: center; /* Center text */
+  padding: 8px; /* Reduced padding for smaller items */
+  gap: 6px; /* Reduced gap for smaller items */
+  min-height: 60px; /* Reduced height for smaller items */
+  max-height: 100px; /* Reduced maximum height */
+  /* Ensure content stays within boundaries */
+  overflow: hidden; /* Hide overflow content */
+  box-sizing: border-box; /* Include padding in size calculations */
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 2-target layout: Bigger square items with smaller sizing */
+.targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItem {
+  width: calc(50% - 8px); /* Fit 2 items per line */
+  min-width: 120px; /* Reduced minimum width */
+  max-width: 160px; /* Reduced maximum width */
+  min-height: 60px; /* Reduced height for smaller items */
+  max-height: 60px; /* Reduced maximum height */
+  padding: 10px 12px; /* Reduced padding for smaller items */
+  gap: 8px; /* Reduced gap for smaller items */
+  flex-direction: row; /* Horizontal layout: image left, text right */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Start content from left */
+  text-align: left; /* Left-align text */
+  border-radius: 10px; /* Reduced border radius */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  /* Ensure content stays within boundaries */
+  overflow: hidden; /* Hide overflow content */
+  box-sizing: border-box; /* Include padding in size calculations */
+}
+
+.targetsGrid--two-targets .droppedItem {
+  width: calc(50% - 8px); /* Fit 2 items per line */
+  min-width: 120px; /* Reduced minimum width */
+  max-width: 160px; /* Reduced maximum width */
+  min-height: 60px; /* Reduced height for smaller items */
+  max-height: 60px; /* Reduced maximum height */
+  padding: 10px 12px; /* Reduced padding for smaller items */
+  gap: 8px; /* Reduced gap for smaller items */
+  flex-direction: row; /* Horizontal layout: image left, text right */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Start content from left */
+  text-align: left; /* Left-align text */
+  border-radius: 10px; /* Reduced border radius */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  /* Ensure content stays within boundaries */
+  overflow: hidden; /* Hide overflow content */
+  box-sizing: border-box; /* Include padding in size calculations */
+}
+
+/* 4-target layout: Smaller images and text */
+.targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemImage {
+  width: 32px; /* Smaller size for 4-target layout */
+  height: 32px; /* Smaller size for 4-target layout */
+  margin-bottom: 4px; /* Small gap below image */
+}
+
+.targetsGrid--four-targets .droppedItemImage {
+  width: 32px; /* Smaller size for 4-target layout */
+  height: 32px; /* Smaller size for 4-target layout */
+  margin-bottom: 4px; /* Small gap below image */
+}
+
+.targetsGrid:has(.targetContainer:nth-child(4):last-child) .droppedItemText {
+  font-size: 14px; /* Smaller font for 4-target layout */
+  line-height: 1.3; /* Good line height for readability */
+  color: #2c3e50;
+  /* Ensure text fits in one line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.targetsGrid--four-targets .droppedItemText {
+  font-size: 14px; /* Smaller font for 4-target layout */
+  line-height: 1.3; /* Good line height for readability */
+  color: #2c3e50;
+  /* Ensure text fits in one line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* 2-target layout: Smaller images and text */
+.targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemImage {
+  width: 28px; /* Smaller size for 2-target layout */
+  height: 28px; /* Smaller size for 2-target layout */
+  margin-bottom: 0; /* No bottom margin for horizontal layout */
+}
+
+.targetsGrid--two-targets .droppedItemImage {
+  width: 28px; /* Smaller size for 2-target layout */
+  height: 28px; /* Smaller size for 2-target layout */
+  margin-bottom: 0; /* No bottom margin for horizontal layout */
+}
+
+.targetsGrid:has(.targetContainer:nth-child(2):last-child) .droppedItemText {
+  font-size: 13px; /* Smaller font for 2-target layout */
+  line-height: 1.2; /* Tighter line height */
+  color: #2c3e50;
+  /* Ensure text fits in one line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.targetsGrid--two-targets .droppedItemText {
+  font-size: 13px; /* Smaller font for 2-target layout */
+  line-height: 1.2; /* Tighter line height */
+  color: #2c3e50;
+  /* Ensure text fits in one line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

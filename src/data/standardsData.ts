@@ -1301,8 +1301,8 @@ export const standards: Standard = {
       title: "Operator Sorting",
       lessonContent: [
         {
-          type: "bucket-match",
-          format: "bucket-match",
+          type: "drag-drop",
+          format: "drag-drop",
           title: "Sort the Operators by Type",
           instruction: "Drag each operator to its correct type bucket!",
           items: [
@@ -1319,7 +1319,7 @@ export const standards: Standard = {
             { id: "or", text: "or: Or", type: "logical", imageUrl: "/images/standard6/data_types_programming.png" },
             { id: "not", text: "not: Not", type: "logical", imageUrl: "/images/standard6/data_types_programming.png" }
           ],
-          buckets: [
+          targets: [
             { id: "bucket-arithmetic", title: "Arithmetic operators", type: "arithmetic" },
             { id: "bucket-assignment", title: "Assignment operators", type: "assignment" },
             { id: "bucket-relational", title: "Relational operators", type: "relational" },
