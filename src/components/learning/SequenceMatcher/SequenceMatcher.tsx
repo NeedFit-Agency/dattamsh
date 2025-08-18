@@ -215,65 +215,14 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
   };
 
   const getItemIcon = (item: DraggableItem) => {
-    switch (item.id) {
-      case "step-1": // Save your work
-        return (
-          <img
-            src="/images/save-work.svg"
-            alt="Save"
-            className={styles.imageIcon}
-          />
-        );
-      case "step-2": // Open the Start menu
-        return (
-          <img
-            src="/images/start-menu.svg"
-            alt="Start Menu"
-            className={styles.imageIcon}
-          />
-        );
-      case "step-3": // Click on the power button
-        return (
-          <img
-            src="/images/power-button.svg"
-            alt="Power Button"
-            className={styles.imageIcon}
-          />
-        );
-      case "step-4": // Select "Shut down"
-        return (
-          <img
-            src="/images/select-shutdown.svg"
-            alt="Shut Down"
-            className={styles.imageIcon}
-          />
-        );
-      case "step-5": // Wait for the computer to turn off
-        return (
-          <img
-            src="/images/computer-turning-off.svg"
-            alt="Computer Off"
-            className={styles.imageIcon}
-          />
-        );
-      case "step-6": // Switch off the power supply
-        return (
-          <img
-            src="/images/power-supply-switch.svg"
-            alt="Power Switch"
-            className={styles.imageIcon}
-          />
-        );
-      default:
-        // Use computer.png as a default icon for any other steps
-        return (
-          <img
-            src="/images/computer.png"
-            alt="Default"
-            className={styles.imageIcon}
-          />
-        );
-    }
+    // Use the same fun sequence puzzle icon for all items
+    return (
+      <img
+        src="/images/sequence-puzzle-icon.svg"
+        alt="Sequence Step"
+        className={styles.imageIcon}
+      />
+    );
   };
 
   // Audio ref for .m4a files

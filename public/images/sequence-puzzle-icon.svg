@@ -1,0 +1,67 @@
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="60" height="60" rx="8" fill="#E8F5E8"/>
+  
+  <!-- Robot head -->
+  <rect x="20" y="15" width="20" height="20" rx="4" fill="#4CAF50" stroke="#388E3C" stroke-width="2"/>
+  
+  <!-- Robot eyes -->
+  <circle cx="26" cy="25" r="3" fill="#FFD700">
+    <animate attributeName="r" values="3;3.5;3" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="34" cy="25" r="3" fill="#FFD700">
+    <animate attributeName="r" values="3;3.5;3" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Robot mouth -->
+  <rect x="28" y="30" width="4" height="2" rx="1" fill="#FF5722"/>
+  
+  <!-- Robot antenna -->
+  <line x1="30" y1="15" x2="30" y2="8" stroke="#388E3C" stroke-width="2"/>
+  <circle cx="30" cy="8" r="2" fill="#FFD700">
+    <animate attributeName="fill" values="#FFD700;#FF5722;#FFD700" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Robot body -->
+  <rect x="18" y="35" width="24" height="15" rx="3" fill="#2196F3" stroke="#1976D2" stroke-width="2"/>
+  
+  <!-- Robot arms -->
+  <rect x="12" y="38" width="6" height="8" rx="3" fill="#FF9800" stroke="#F57C00" stroke-width="1"/>
+  <rect x="42" y="38" width="6" height="8" rx="3" fill="#FF9800" stroke="#F57C00" stroke-width="1"/>
+  
+  <!-- Robot hands -->
+  <circle cx="15" cy="46" r="2" fill="#FF5722"/>
+  <circle cx="45" cy="46" r="2" fill="#FF5722"/>
+  
+  <!-- Sequence numbers on robot -->
+  <circle cx="22" cy="42" r="4" fill="#9C27B0" stroke="#7B1FA2" stroke-width="1"/>
+  <text x="22" y="44" font-family="Arial" font-size="6" fill="white" text-anchor="middle">1</text>
+  
+  <circle cx="30" cy="42" r="4" fill="#9C27B0" stroke="#7B1FA2" stroke-width="1"/>
+  <text x="30" y="44" font-family="Arial" font-size="6" fill="white" text-anchor="middle">2</text>
+  
+  <circle cx="38" cy="42" r="4" fill="#9C27B0" stroke="#7B1FA2" stroke-width="1"/>
+  <text x="38" y="44" font-family="Arial" font-size="6" fill="white" text-anchor="middle">3</text>
+  
+  <!-- Robot legs -->
+  <rect x="22" y="50" width="4" height="8" rx="2" fill="#FF9800" stroke="#F57C00" stroke-width="1"/>
+  <rect x="34" y="50" width="4" height="8" rx="2" fill="#FF9800" stroke="#F57C00" stroke-width="1"/>
+  
+  <!-- Robot feet -->
+  <ellipse cx="24" cy="58" rx="3" ry="2" fill="#FF5722"/>
+  <ellipse cx="36" cy="58" rx="3" ry="2" fill="#FF5722"/>
+  
+  <!-- Fun sparkles around robot -->
+  <path d="M15 20 L17 18 L15 16 L13 18 Z" fill="#FFD700">
+    <animateTransform attributeName="transform" type="rotate" values="0 15 18;360 15 18" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <path d="M45 20 L47 18 L45 16 L43 18 Z" fill="#FFD700">
+    <animateTransform attributeName="transform" type="rotate" values="0 45 18;360 45 18" dur="3s" repeatCount="indefinite"/>
+  </path>
+  
+
+  
+  <!-- Excitement lines -->
+  <path d="M10 25 L8 23 L6 25" stroke="#FF5722" stroke-width="1" fill="none"/>
+  <path d="M10 30 L8 28 L6 30" stroke="#FF5722" stroke-width="1" fill="none"/>
+</svg>
