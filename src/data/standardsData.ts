@@ -431,7 +431,7 @@ export const standards: Standard = {
               id: "dnd-item-1",
               text: "Listen to music",
               type: "option-1",
-              imageUrl: "/images/standard2/chapter2/listen-music.png",
+              imageUrl: "/images/standard2/chapter2/listen-music.svg",
             },
             {
               id: "dnd-item-2",
@@ -591,7 +591,7 @@ export const standards: Standard = {
               id: "dnd-item-1",
               text: "Web Browser",
               type: "option-1",
-              imageUrl: "/images/standard3/chapter1/chrome_logo.png",
+              imageUrl: "/images/standard3/chrome_logo.png",
             },
             {
               id: "dnd-item-2",
@@ -603,7 +603,7 @@ export const standards: Standard = {
               id: "dnd-item-3",
               text: "Email",
               type: "option-1",
-              imageUrl: "/images/standard3/chapter2/email_concept.png",
+              imageUrl: "/images/standard3/email_concept.png",
             },
             {
               id: "dnd-item-4",
@@ -615,7 +615,7 @@ export const standards: Standard = {
               id: "dnd-item-5",
               text: "Search Engine",
               type: "option-1",
-              imageUrl: "/images/standard3/chapter1/browser_search_box.png",
+              imageUrl: "/images/standard3/browser_search_box.png",
             },
             {
               id: "dnd-item-6",
@@ -648,7 +648,7 @@ export const standards: Standard = {
               id: "subject",
               text: "Subject Line",
               type: "subject",
-              imageUrl: "/images/standard3/chapter2/subject.png",
+              imageUrl: "/images/standard3/chapter2/subject.svg",
               color: "#ff5252"
             },
             {
@@ -662,14 +662,14 @@ export const standards: Standard = {
               id: "recipient",
               text: "To Field",
               type: "recipient",
-              imageUrl: "/images/standard3/chapter2/recipient.png",
+              imageUrl: "/images/standard3/recipient.png",
               color: "#ff9800"
             },
             {
               id: "cc",
               text: "CC",
               type: "cc",
-              imageUrl: "/images/standard3/chapter2/cc.png",
+              imageUrl: "/images/standard3/cc.png",
               color: "#9c27b0"
             }
           ],
