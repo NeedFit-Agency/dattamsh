@@ -1,0 +1,7 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="55" fill="#E8F5E8" stroke="#4CAF50" stroke-width="3"/>
+  
+  <!-- ROUND function formula -->
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FF9800" text-anchor="middle">=ROUND()</text>
+</svg>
