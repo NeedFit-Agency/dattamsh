@@ -982,25 +982,25 @@ export const standards: Standard = {
               id: "header",
               text: "Header",
               type: "header",
-              imageUrl: "/images/standard4/chapter4/header_icon.png",
+              imageUrl: "/images/standard4/chapter4/header.png",
             },
             {
               id: "footer",
               text: "Footer",
               type: "footer",
-              imageUrl: "/images/standard4/chapter4/footer_icon.png",
+              imageUrl: "/images/standard4/chapter4/footer.png",
             },
             {
               id: "watermark",
               text: "Watermark",
               type: "watermark",
-              imageUrl: "/images/standard4/chapter4/watermark_icon.png",
+              imageUrl: "/images/standard4/chapter4/watermark.png",
             },
             {
               id: "chart",
               text: "Chart",
               type: "chart",
-              imageUrl: "/images/standard4/chapter4/chart_icon.png",
+              imageUrl: "/images/standard4/chapter4/chart.png",
             }
           ],
           buckets: [
