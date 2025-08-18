@@ -323,7 +323,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     ) {
       try {
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.rate = 0.5;
+        utterance.rate = 1.0;
         utterance.pitch = 1.0;
 
         utterance.onstart = () => {
@@ -585,7 +585,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                         excitement="medium"
                         naturalPauses={true}
                         humanLike={true}
-                        rate={0.5}
+                        rate={1.0}
                         pitch={1.0}
                       />
                     )}
