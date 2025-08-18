@@ -519,7 +519,7 @@ export const standards: Standard = {
           riddleText: "I help you draw shapes like squares, circles and many more. Which tool am I?",
           questionText: "Which drawing tool am I?",
           options: [
-            { id: "option-1", text: "Shape Tools", isCorrect: true, imageUrl: "/images/standard2/chapter4/shape-tools.png" },
+            { id: "option-1", text: "Shape Tools", isCorrect: true, imageUrl: "/images/standard2/chapter4/shape-tool.png" },
             { id: "option-2", text: "Brush Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/brush-tool.png" },
             { id: "option-3", text: "Eraser Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/eraser-tool.png" },
             { id: "option-4", text: "Curve Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/curve-tool.png" },
