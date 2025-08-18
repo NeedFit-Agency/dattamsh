@@ -780,10 +780,10 @@ export const standards: Standard = {
           riddleText: "I run on many mobile devices, like smartphones and tablets. I am made by Google. Which Operating system am I?",
           questionText: "Which Operating system am I?",
           options: [
-            { id: "android", text: "Android", isCorrect: true },
-            { id: "ios", text: "iOS", isCorrect: false },
-            { id: "linux", text: "Linux", isCorrect: false },
-            { id: "windows", text: "Windows", isCorrect: false }
+            { id: "android", text: "Android", isCorrect: true,imageUrl: "/images/standard4/chapter1/android_logo.png" },
+            { id: "ios", text: "iOS", isCorrect: false,imageUrl: "/images/standard4/chapter1/ios_logo.png" },
+            { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
+            { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
           ],
           audioSrc: "/voice/4.1.m4a",
           speakText: "I run on many mobile devices, like smartphones and tablets. I am made by Google. Which Operating system am I?",
@@ -795,10 +795,10 @@ export const standards: Standard = {
           riddleText: "I run on Apple's mobile devices, like iPhones and iPads. Which Operating system am I?",
           questionText: "Which Operating system am I?",
           options: [
-            { id: "android", text: "Android", isCorrect: false },
-            { id: "ios", text: "iOS", isCorrect: true },
-            { id: "linux", text: "Linux", isCorrect: false },
-            { id: "windows", text: "Windows", isCorrect: false }
+            { id: "android", text: "Android", isCorrect: false,imageUrl: "/images/standard4/chapter1/android_logo.png" },
+            { id: "ios", text: "iOS", isCorrect: true,imageUrl: "/images/standard4/chapter1/ios_logo.png" },
+            { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
+            { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
           ],
           audioSrc: "/voice/4.2.m4a",
           speakText: "I run on Apple's mobile devices, like iPhones and iPads. Which Operating system am I?",
@@ -810,10 +810,10 @@ export const standards: Standard = {
           riddleText: "I am a free operating system used by computer experts and known for being stable and secure.",
           questionText: "Which Operating system am I?",
           options: [
-            { id: "android", text: "Android", isCorrect: false },
-            { id: "ios", text: "iOS", isCorrect: false },
-            { id: "linux", text: "Linux", isCorrect: true },
-            { id: "windows", text: "Windows", isCorrect: false }
+            { id: "android", text: "Android", isCorrect: false,imageUrl: "/images/standard4/chapter1/android_logo.png" },
+            { id: "ios", text: "iOS", isCorrect: false,imageUrl: "/images/standard4/chapter1/ios_logo.png" },
+            { id: "linux", text: "Linux", isCorrect: true,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
+            { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
           ],
           audioSrc: "/voice/4.3.m4a",
           speakText: "I am a free operating system used by computer experts and known for being stable and secure.",
@@ -840,10 +840,10 @@ export const standards: Standard = {
           riddleText: "I am made by Microsoft, run on various desktops and laptops. Which Operating system am I?",
           questionText: "Which Operating system am I?",
           options: [
-            { id: "android", text: "Android", isCorrect: false },
-            { id: "ios", text: "iOS", isCorrect: false },
-            { id: "linux", text: "Linux", isCorrect: false },
-            { id: "windows", text: "Windows", isCorrect: true }
+            { id: "android", text: "Android", isCorrect: false,imageUrl: "/images/standard4/chapter1/android_logo.png" },
+            { id: "ios", text: "iOS", isCorrect: false,imageUrl: "/images/standard4/chapter1/ios_logo.png" },
+            { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
+            { id: "windows", text: "Windows", isCorrect: true,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
           ],
           audioSrc: "/voice/4.5.m4a",
           speakText: "I am made by Microsoft, run on various desktops and laptops. Which Operating system am I?",
@@ -982,25 +982,25 @@ export const standards: Standard = {
               id: "header",
               text: "Header",
               type: "header",
-              imageUrl: "/images/standard4/chapter4/header_icon.png",
+              imageUrl: "/images/standard4/chapter4/header.png",
             },
             {
               id: "footer",
               text: "Footer",
               type: "footer",
-              imageUrl: "/images/standard4/chapter4/footer_icon.png",
+              imageUrl: "/images/standard4/chapter4/footer.png",
             },
             {
               id: "watermark",
               text: "Watermark",
               type: "watermark",
-              imageUrl: "/images/standard4/chapter4/watermark_icon.png",
+              imageUrl: "/images/standard4/chapter4/watermark.png",
             },
             {
               id: "chart",
               text: "Chart",
               type: "chart",
-              imageUrl: "/images/standard4/chapter4/chart_icon.png",
+              imageUrl: "/images/standard4/chapter4/chart.png",
             }
           ],
           buckets: [
@@ -1144,11 +1144,11 @@ export const standards: Standard = {
           title: "Identify the Excel Function",
           instruction: "Match each description to the correct Excel function name!",
           items: [
-            { id: "min", text: "Finds the smallest number in a range.", type: "desc", imageUrl: "/images/standard5/min_function.png" },
-            { id: "count", text: "Counts how many numbers are in a range.", type: "desc", imageUrl: "/images/standard5/count_function.png" },
-            { id: "round", text: "Rounds a number to a specified number of decimal places.", type: "desc", imageUrl: "/images/standard5/round_function.png" },
-            { id: "average", text: "Finds the average of numbers in a range.", type: "desc", imageUrl: "/images/standard5/average_function.png" },
-            { id: "len", text: "Counts how many characters are in a text string.", type: "desc", imageUrl: "/images/standard5/len_function.png" }
+            { id: "min", text: "Finds the smallest number in a range.", type: "desc", imageUrl: "/images/standard5/chapter4/min_function.svg" },
+            { id: "count", text: "Counts how many numbers are in a range.", type: "desc", imageUrl: "/images/standard5/chapter4/count_function.svg" },
+            { id: "round", text: "Rounds a number to a specified number of decimal places.", type: "desc", imageUrl: "/images/standard5/chapter4/round_function.svg" },
+            { id: "average", text: "Finds the average of numbers in a range.", type: "desc", imageUrl: "/images/standard5/chapter4/average_function.svg" },
+            { id: "len", text: "Counts how many characters are in a text string.", type: "desc", imageUrl: "/images/standard5/chapter4/len_function.svg" }
           ],
           buckets: [
             { id: "bucket-min", title: "MIN", type: "func" },

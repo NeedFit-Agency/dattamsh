@@ -177,7 +177,9 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
 
     if (!draggedItem) return;
 
-    const isCorrect = draggedItem.type === targetBucket.type;
+    // For Excel functions, match item id to bucket id
+    // item.id: "min", bucket.id: "bucket-min" -> should match
+    const isCorrect = targetBucket.id === `bucket-${draggedItem.id}`;
 
     if (isCorrect) {
       // Store the placement in state
