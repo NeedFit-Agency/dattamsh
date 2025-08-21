@@ -6,5 +6,3 @@ export default function Page() {
   // Redirect to the landing page
   redirect('/landing');
 }
-                    
-     

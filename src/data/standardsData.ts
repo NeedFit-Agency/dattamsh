@@ -359,7 +359,7 @@ export const standards: Standard = {
               id: "microphone",
               text: "Microphone",
               type: "microphone",
-              imageUrl: "/images/microphone.png",
+              imageUrl: "/images/microphone.jpg",
               color: "#4caf50"
             },
             {
