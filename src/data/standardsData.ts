@@ -352,28 +352,28 @@ export const standards: Standard = {
               id: "scanner",
               text: "Scanner",
               type: "scanner",
-              imageUrl: "/images/scanner.png",
+              imageUrl: "/images/standard2/chapter1/scanner.png",
               color: "#2196f3"
             },
             {
               id: "microphone",
               text: "Microphone",
               type: "microphone",
-              imageUrl: "/images/microphone.jpg",
+              imageUrl: "/images/standard2/chapter1/microphone.png",
               color: "#4caf50"
             },
             {
               id: "speakers",
               text: "Speakers",
               type: "speakers",
-              imageUrl: "/images/speaker.png",
+              imageUrl: "/images/standard2/chapter1/speaker.png",
               color: "#9c27b0"
             },
             {
               id: "printer",
               text: "Printer",
               type: "printer",
-              imageUrl: "/images/printer.png",
+              imageUrl: "/images/standard2/chapter1/printer.png",
               color: "#ff9800"
             }
           ],
@@ -648,7 +648,7 @@ export const standards: Standard = {
               id: "subject",
               text: "Subject Line",
               type: "subject",
-              imageUrl: "/images/standard3/chapter2/subject.svg",
+              imageUrl: "/images/standard3/chapter2/subject.png",
               color: "#ff5252"
             },
             {
@@ -662,14 +662,14 @@ export const standards: Standard = {
               id: "recipient",
               text: "To Field",
               type: "recipient",
-              imageUrl: "/images/standard3/recipient.png",
+              imageUrl: "/images/standard3/chapter2/recipient.png",
               color: "#ff9800"
             },
             {
               id: "cc",
               text: "CC",
               type: "cc",
-              imageUrl: "/images/standard3/cc.png",
+              imageUrl: "/images/standard3/chapter2/cc.png",
               color: "#9c27b0"
             }
           ],
@@ -1097,7 +1097,7 @@ export const standards: Standard = {
             { id: "s6", text: "You visit your school's official website to download this week's homework PDF, and it opens normally.", type: "not-threat", imageUrl: "/images/standard5/chapter2/safe_school_website.png" },
             { id: "s4", text: "A full‑screen warning suddenly appears: 'All your files are locked. Pay 50 coins to get them back.'", type: "threat", imageUrl: "/images/standard5/chapter2/ransomware_warning.png" },
             { id: "s10", text: "You right‑click the desktop and choose Change Background to set a new picture already saved on your computer.", type: "not-threat", imageUrl: "/images/standard5/chapter2/desktop_background.png" },
-            { id: "s2", text: "You open an email that looks like it's from your bank teacher and asks you to 'confirm your password' on a strange link.", type: "threat", imageUrl: "/images/standard5/chapter2/phishing_email.png" },
+            { id: "s2", text: "You open an email that looks like it’s from your bank, and it asks you to “confirm your password” on a strange link.", type: "threat", imageUrl: "/images/standard5/chapter2/phishing_email.png" },
             { id: "s8", text: "In class, you log into Google Classroom through the teacher's bookmarked link to submit an assignment.", type: "not-threat", imageUrl: "/images/standard5/chapter2/google_classroom.png" },
             { id: "s5", text: "You find a 'FREE wallpaper changer' on an unknown website. After installing it, the computer starts deleting photos.", type: "threat", imageUrl: "/images/standard5/chapter2/malicious_software.png" }
           ],
