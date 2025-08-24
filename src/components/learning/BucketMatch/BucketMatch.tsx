@@ -191,13 +191,6 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
     // Match item type to bucket type for correct placement
     const isCorrect = targetBucket.type === draggedItem.type;
     
-    // Debug logging
-    console.log('Drop Debug:', {
-      draggedItem: { id: draggedItem.id, type: draggedItem.type, text: draggedItem.text },
-      targetBucket: { id: targetBucket.id, type: targetBucket.type, title: targetBucket.title },
-      isCorrect,
-      placedItems
-    });
 
     if (isCorrect) {
       // Store the placement in state
