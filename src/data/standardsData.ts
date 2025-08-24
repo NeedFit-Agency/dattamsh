@@ -201,7 +201,7 @@ export const standards: Standard = {
             { id: "naturalTarget", title: "Natural Things", type: "option-1" },
             { id: "manMadeTarget", title: "Man-made Things", type: "option-2" },
           ],
-          audioSrc: "/voice/1.1.m4a",
+          audioSrc: "/voice/grade1/1.1.m4a",
           speakText:
             "Help me sort natural things or man made things",
         },
@@ -246,17 +246,17 @@ export const standards: Standard = {
             },
           ],
           buckets: [
-            { id: "typing-bucket", title: "set of buttons called keys", type: "typing", color: "#4caf50", audioSrc: "/voice/2.2.m4a" },
-            { id: "pointing-bucket", title: "moves the pointer on the screen", type: "pointing", color: "#ff9800", audioSrc: "/voice/2.3.m4a" },
-            { id: "brain-bucket", title: "brain of the computer", type: "brain", color: "#9c27b0", audioSrc: "/voice/2.4.m4a" },
-            { id: "shows-bucket", title: "shows everything the computer is doing", type: "shows", color: "#2196f3", audioSrc: "/voice/2.5.m4a" },
+            { id: "typing-bucket", title: "set of buttons called keys", type: "typing", color: "#4caf50", audioSrc: "/voice/grade1/2.2.m4a" },
+            { id: "pointing-bucket", title: "moves the pointer on the screen", type: "pointing", color: "#ff9800", audioSrc: "/voice/grade1/2.3.m4a" },
+            { id: "brain-bucket", title: "brain of the computer", type: "brain", color: "#9c27b0", audioSrc: "/voice/grade1/2.4.m4a" },
+            { id: "shows-bucket", title: "shows everything the computer is doing", type: "shows", color: "#2196f3", audioSrc: "/voice/grade1/2.5.m4a" },
           ],
           successMessage: "Great job! You matched all computer parts!",
           correctMessage: "That's right!",
           tryAgainMessage: "Try a different match!",
           resetLabel: "Start Over",
           playAgainLabel: "Play Again",
-          audioSrc: "/voice/2.1.m4a",
+          audioSrc: "/voice/grade1/2.1.m4a",
           speakText: "Match each computer part to what it does.",
         },
       ],
@@ -271,16 +271,16 @@ export const standards: Standard = {
           title: "The steps to turn off the computer are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
           instruction: "Put these steps in the correct order to properly shut down a computer!",
           items: [
-            { id: "step-6", content: "Switch off the power supply", audioSrc: "/voice/3.2.m4a" },
-            { id: "step-1", content: "Save your work", audioSrc: "/voice/3.3.m4a" },
-            { id: "step-2", content: "Open the Start menu", audioSrc: "/voice/3.4.m4a" },
-            { id: "step-4", content: "Select \"Shut down\"", audioSrc: "/voice/3.5.m4a" },
-            { id: "step-3", content: "Click on the power button", audioSrc: "/voice/3.6.m4a" },
-            { id: "step-5", content: "Wait for the computer to turn off", audioSrc: "/voice/3.7.m4a" },
+            { id: "step-6", content: "Switch off the power supply", audioSrc: "/voice/grade1/3.2.m4a" },
+            { id: "step-1", content: "Save your work", audioSrc: "/voice/grade1/3.3.m4a" },
+            { id: "step-2", content: "Open the Start menu", audioSrc: "/voice/grade1/3.4.m4a" },
+            { id: "step-4", content: "Select \"Shut down\"", audioSrc: "/voice/grade1/3.5.m4a" },
+            { id: "step-3", content: "Click on the power button", audioSrc: "/voice/grade1/3.6.m4a" },
+            { id: "step-5", content: "Wait for the computer to turn off", audioSrc: "/voice/grade1/3.7.m4a" },
           ],
           correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5", "step-6"],
           dropZoneCount: 6,
-          audioSrc: "/voice/3.1.m4a",
+          audioSrc: "/voice/grade1/3.1.m4a",
           speakText: "Put these steps in the correct order to properly shut down a computer!",
         },
       ],
@@ -300,7 +300,7 @@ export const standards: Standard = {
             { id: "option-1", text: "Space Bar Key", isCorrect: true, imageUrl: "/images/spacebar.png" },
             { id: "option-4", text: "Backspace Key", isCorrect: false, imageUrl: "/images/backspace.png" },
           ],
-          audioSrc: "/voice/4.2.m4a",
+          audioSrc: "/voice/grade1/4.2.m4a",
           speakText: "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
         },
         {
@@ -316,7 +316,7 @@ export const standards: Standard = {
             { id: "option-3", text: "Mouse", isCorrect: false, imageUrl: "/images/mouse.png" },
             { id: "option-4", text: "Speaker", isCorrect: false, imageUrl: "/images/speaker.png" },
           ],
-          audioSrc: "/voice/4.3.m4a",
+          audioSrc: "/voice/grade1/4.3.m4a",
           speakText: "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
         },
         {
@@ -331,7 +331,7 @@ export const standards: Standard = {
             { id: "option-1", text: "Scroll Wheel", isCorrect: true, imageUrl: "/images/scroll-wheel.svg" },
 
           ],
-          audioSrc: "/voice/4.4.m4a",
+          audioSrc: "/voice/grade1/4.4.m4a",
           speakText: "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
         }
       ],
@@ -425,7 +425,7 @@ export const standards: Standard = {
           type: "drag-drop",
           format: "drag-drop",
           title: "Help me sort the tasks a smartphone can do?",
-          instruction: "Sort these tasks into what smartphones can do and what they cannot do",
+          instruction: "",
           items: [
             {
               id: "dnd-item-1",
@@ -628,7 +628,7 @@ export const standards: Standard = {
             { id: "internetTarget", title: "Internet Tools", type: "option-1" },
             { id: "nonInternetTarget", title: "Non-Internet Tools", type: "option-2" },
           ],
-          audioSrc: "/voice/3.1.m4a",
+          audioSrc: undefined,
           speakText:
             "Sort these items. Drag them into the correct box: Internet Tools or Non-Internet Tools.",
         },
@@ -679,32 +679,32 @@ export const standards: Standard = {
               title: "Title of your email",
               type: "subject",
               color: "#ff5252",
-              audioSrc: "/voice/3.3.m4a"
+              audioSrc: undefined
             },
             {
               id: "attachment-bucket",
               title: "Files you send with email",
               type: "attachment",
               color: "#ffeb3b",
-              audioSrc: "/voice/3.4.m4a"
+              audioSrc: undefined
             },
             {
               id: "recipient-bucket",
               title: "Main person you're writing to",
               type: "recipient",
               color: "#ff9800",
-              audioSrc: "/voice/3.5.m4a"
+              audioSrc: undefined
             },
             {
               id: "cc-bucket",
               title: "People who get copies",
               type: "cc",
               color: "#9c27b0",
-              audioSrc: "/voice/3.6.m4a"
+              audioSrc: undefined
             }
           ],
-          audioSrc: "/voice/3.2.m4a",
-          speakText: "Drag each email component to its matching description bucket.",
+              audioSrc: undefined,
+              speakText: "Drag each email component to its matching description bucket.",
         }
       ]
     },
@@ -721,28 +721,28 @@ export const standards: Standard = {
             {
               id: "step1",
               content: "Ask an adult before sharing any information online",
-              audioSrc: "/voice/grade2/3.1.m4a"
+              audioSrc: undefined
             },
             {
               id: "step2",
               content: "Create a strong password using letters, numbers, and symbols",
-              audioSrc: "/voice/grade2/3.2.m4a"
+              audioSrc: undefined
             },
             {
               id: "step3",
               content: "Only visit websites approved by your parents or teachers",
-              audioSrc: "/voice/grade2/3.3.m4a"
+              audioSrc: undefined
             },
             {
               id: "step4",
               content: "Tell an adult if something makes you uncomfortable online",
-              audioSrc: "/voice/grade2/3.4.m4a"
+              audioSrc: undefined
             }
           ],
           correctOrder: ["step1", "step3", "step2", "step4"],
           dropZoneCount: 4,
-          audioSrc: "/voice/3.3.m4a",
-          speakText: "Put these online safety steps in the correct order!",
+                        audioSrc: undefined,
+              speakText: "Put these online safety steps in the correct order!",
         }
       ]
     },
@@ -757,12 +757,12 @@ export const standards: Standard = {
           riddleText: "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
           questionText: "Which web browser am I?",
           options: [
-            { id: "chrome", text: "Google Chrome", isCorrect: true },
-            { id: "edge", text: "Microsoft Edge", isCorrect: false },
-            { id: "firefox", text: "Mozilla Firefox", isCorrect: false },
-            { id: "safari", text: "Safari", isCorrect: false }
+            { id: "chrome", text: "Google Chrome", isCorrect: true, imageUrl: "/images/standard3/chapter4/chrome_logo.png" },
+            { id: "edge", text: "Microsoft Edge", isCorrect: false,imageUrl: "/images/standard3/chapter4/edge_logo.png" },
+            { id: "firefox", text: "Mozilla Firefox", isCorrect: false, imageUrl:  "/images/standard3/chapter4/firefox_logo.svg" },
+            { id: "safari", text: "Safari", isCorrect: false, imageUrl:  "/images/standard3/chapter4/safari_logo.png" }
           ],
-          audioSrc: "/voice/3.4.m4a",
+          audioSrc: undefined,
           speakText: "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
         }
       ]
@@ -785,7 +785,7 @@ export const standards: Standard = {
             { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
             { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
           ],
-          audioSrc: "/voice/4.1.m4a",
+          audioSrc: undefined,
           speakText: "I run on many mobile devices, like smartphones and tablets. I am made by Google. Which Operating system am I?",
         },
         {
@@ -800,7 +800,7 @@ export const standards: Standard = {
             { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
             { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
           ],
-          audioSrc: "/voice/4.2.m4a",
+          audioSrc: undefined,
           speakText: "I run on Apple's mobile devices, like iPhones and iPads. Which Operating system am I?",
         },
         {
@@ -815,7 +815,7 @@ export const standards: Standard = {
             { id: "linux", text: "Linux", isCorrect: true,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
             { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
           ],
-          audioSrc: "/voice/4.3.m4a",
+          audioSrc: undefined,
           speakText: "I am a free operating system used by computer experts and known for being stable and secure.",
         },
         {
@@ -830,7 +830,7 @@ export const standards: Standard = {
             { id: "linux", text: "Linux", isCorrect: false },
             { id: "macos", text: "macOS", isCorrect: true }
           ],
-          audioSrc: "/voice/4.4.m4a",
+          audioSrc: undefined,
           speakText: "I am known for being stylish, easy to use and good for graphic design, video editing and music production. Which Operating system am I?",
         },
         {
@@ -845,7 +845,7 @@ export const standards: Standard = {
             { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
             { id: "windows", text: "Windows", isCorrect: true,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
           ],
-          audioSrc: "/voice/4.5.m4a",
+          audioSrc: undefined,
           speakText: "I am made by Microsoft, run on various desktops and laptops. Which Operating system am I?",
         }
       ]
@@ -861,34 +861,34 @@ export const standards: Standard = {
           instruction: "Sourabh wants to create a Word document named 'Lesson 1 Homework' and keep it safely in a new folder on his desktop. Help him by arranging the steps in the correct order.",
           items: [
             {
-              id: "step1",
-              content: "Right-click on the desktop, select New and choose the Folder option.",
-              audioSrc: "/voice/4.1.m4a"
-            },
-            {
-              id: "step2",
-              content: "Type a name for the new folder and press Enter.",
-              audioSrc: "/voice/4.2.m4a"
-            },
-            {
-              id: "step3",
-              content: "Double-click on the folder to open it.",
-              audioSrc: "/voice/4.3.m4a"
-            },
-            {
-              id: "step4",
-              content: "Right-click on an empty area inside the folder. From the menu, select New and then click on Microsoft Word Document.",
-              audioSrc: "/voice/4.4.m4a"
-            },
-            {
-              id: "step5",
-              content: "Name the document as 'Lesson 1 Homework' and press enter.",
-              audioSrc: "/voice/4.5.m4a"
-            }
+                              id: "step1",
+                content: "Right-click on the desktop, select New and choose the Folder option.",
+                audioSrc: undefined
+              },
+              {
+                id: "step2",
+                content: "Type a name for the new folder and press Enter.",
+                audioSrc: undefined
+              },
+              {
+                id: "step3",
+                content: "Double-click on the folder to open it.",
+                audioSrc: undefined
+              },
+              {
+                id: "step4",
+                content: "Right-click on an empty area inside the folder. From the menu, select New and then click on Microsoft Word Document.",
+                audioSrc: undefined
+              },
+              {
+                id: "step5",
+                content: "Name the document as 'Lesson 1 Homework' and press enter.",
+                audioSrc: undefined
+              }
           ],
           correctOrder: ["step1", "step2", "step3", "step4", "step5"],
           dropZoneCount: 5,
-          audioSrc: "/voice/4.2.m4a",
+          audioSrc: undefined,
           speakText: "Sourabh wants to create a Word document named 'Lesson 1 Homework' and keep it safely in a new folder on his desktop. Help him by arranging the steps in the correct order.",
         }
       ]
@@ -963,7 +963,7 @@ export const standards: Standard = {
             { id: "imageTarget", title: "Image files", type: "image" },
             { id: "videoTarget", title: "Video files", type: "video" },
           ],
-          audioSrc: "/voice/4.3.m4a",
+          audioSrc: undefined,
           speakText: "Drag each file extension into the correct category based on the type of file it represents.",
         }
       ]
@@ -1025,7 +1025,7 @@ export const standards: Standard = {
               type: "chart"
             }
           ],
-          audioSrc: "/voice/4.4.m4a",
+          audioSrc: undefined,
           speakText: "Match the term related to Microsoft Word with its correct description.",
         }
       ]
@@ -1498,31 +1498,31 @@ export const standards: Standard = {
               title: "B: Connect multiple devices to the same network and ensure data is sent to the correct destination", 
               type: "switches", 
               color: "#4ECDC4",
-              audioSrc: "/voice/grade2/1.2.m4a"
+              audioSrc: undefined
             },
             { 
               id: "bucket-routers", 
               title: "C: Connect different networks together and manage data traffic between them", 
               type: "routers", 
               color: "#45B7D1",
-              audioSrc: "/voice/grade2/1.3.m4a"
+              audioSrc: undefined
             },
             { 
               id: "bucket-protocols", 
               title: "D: Agreed-upon rules for communication to ensure every device speaks the same digital language", 
               type: "protocols", 
               color: "#96CEB4",
-              audioSrc: "/voice/grade2/1.4.m4a"
+              audioSrc: undefined
             },
             { 
               id: "bucket-server", 
               title: "E: A powerful computer that provides data and services to other devices", 
               type: "server", 
               color: "#FFEAA7",
-              audioSrc: "/voice/grade2/1.5.m4a"
+              audioSrc: undefined
             }
           ],
-          audioSrc: "/voice/grade2/1.1.m4a",
+          audioSrc: undefined,
           speakText: "Match each network component to its correct description."
         }
       ]
@@ -1550,7 +1550,7 @@ export const standards: Standard = {
             { id: "ethical", title: "Ethical Use", type: "ethical" },
             { id: "unethical", title: "Unethical Use", type: "unethical" }
           ],
-          audioSrc: "/voice/grade2/2.1.m4a",
+          audioSrc: undefined,
           speakText: "Sort each scenario into the correct category: Ethical Use or Unethical Use of data."
         }
       ]
@@ -1576,7 +1576,7 @@ export const standards: Standard = {
             { id: "hybrid", title: "Hybrid Apps", type: "hybrid" },
             { id: "pwa", title: "Progressive Web Apps", type: "pwa" }
           ],
-          audioSrc: "/voice/grade2/3.1.m4a",
+          audioSrc: undefined,
           speakText: "Match each app description to its correct type."
         }
       ]
@@ -1618,7 +1618,7 @@ export const standards: Standard = {
             }
           ],
           correctOrder: ["step1", "step2", "step3", "step4", "step5"],
-          audioSrc: "/voice/grade2/4.1.m4a",
+          audioSrc: undefined,
           speakText: "Build a professional SQL database management system using the Query Builder. Understand DDL, DML, and DQL operations for comprehensive database administration."
         }
       ]
