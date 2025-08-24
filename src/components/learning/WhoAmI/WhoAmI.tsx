@@ -315,7 +315,7 @@ const WhoAmI: React.FC<WhoAmIProps> = ({
       {shouldShowAudio && (
         <audio
           ref={titleAudioRef}
-          src="/voice/4.1.m4a"
+          src="/voice/grade1/4.1.m4a"
           onError={() => {
             console.error("Title audio file failed to load");
             setIsTitleAudioPlaying(false);

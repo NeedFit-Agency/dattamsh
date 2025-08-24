@@ -90,6 +90,17 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
   // Check if audio should be shown (for grades 1, 2, 3)
   const shouldShowAudio = standard && ["1", "2", "3"].includes(standard);
 
+  // Debug logging for props
+  useEffect(() => {
+    console.log('BucketMatch Props Debug:', {
+      title,
+      instruction,
+      items: items.map(item => ({ id: item.id, type: item.type, text: item.text })),
+      buckets: buckets.map(bucket => ({ id: bucket.id, type: bucket.type, title: bucket.title })),
+      standard
+    });
+  }, [title, instruction, items, buckets, standard]);
+
   // Monitor instruction audio state changes
   useEffect(() => {
     const audio = instructionAudioRef.current;
@@ -177,9 +188,16 @@ export const BucketMatch: React.FC<BucketMatchProps> = ({
 
     if (!draggedItem) return;
 
-    // For Excel functions, match item id to bucket id
-    // item.id: "min", bucket.id: "bucket-min" -> should match
-    const isCorrect = targetBucket.id === `bucket-${draggedItem.id}`;
+    // Match item type to bucket type for correct placement
+    const isCorrect = targetBucket.type === draggedItem.type;
+    
+    // Debug logging
+    console.log('Drop Debug:', {
+      draggedItem: { id: draggedItem.id, type: draggedItem.type, text: draggedItem.text },
+      targetBucket: { id: targetBucket.id, type: targetBucket.type, title: targetBucket.title },
+      isCorrect,
+      placedItems
+    });
 
     if (isCorrect) {
       // Store the placement in state
