@@ -48,7 +48,7 @@
     max-width: 1400px;
     height: 90vh; /* Use viewport height */
     max-height: 900px;
-    text-align: center;
+    text-align: left;
     position: relative;
     margin: 0 auto;
     font-family: 'Nunito', 'Quicksand', sans-serif;
@@ -73,58 +73,14 @@
     }
 }
 
-/* --- Decorative Icons --- */
-.worksheetCard::before,
-.worksheetCard::after {
-    content: '';
-    position: absolute;
-    opacity: 0.75;
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: 1;
-}
-
-.worksheetCard::before { /* Book Icon */
-    content: '📖';
-    font-size: clamp(24px, 3.5vw, 32px);
-    top: clamp(20px, 3vh, 35px);
-    left: clamp(15px, 2vw, 25px);
-    transform: rotate(-15deg);
-    animation: float 3s ease-in-out infinite alternate;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-}
-
-.worksheetCard::after { /* Sparkle Icon */
-    content: '✨';
-    font-size: clamp(18px, 2.5vw, 26px);
-    top: clamp(65px, 8vh, 80px);
-    left: clamp(15px, 2vw, 25px);
-    opacity: 0.9;
-    transform: rotate(15deg);
-    animation: twinkle 2s ease-in-out infinite alternate;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
 
 
-@keyframes float {
-    0% {
-        transform: translateY(0) rotate(-15deg);
-    }
-    100% {
-        transform: translateY(-5px) rotate(-10deg);
-    }
-}
 
-@keyframes twinkle {
-    0% {
-        opacity: 0.6;
-        transform: scale(0.9) rotate(15deg);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1.1) rotate(20deg);
-    }
-}
+
+
+
+
+
 
 @keyframes spin {
     from {
@@ -159,10 +115,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(12px, 2vw, 20px);
-    margin-top: 30px;
-    margin-bottom: 16px;
-    padding: 0 20px;
+    gap: clamp(8px, 1.5vw, 16px);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 12px 15px;
     position: relative;
     z-index: 2;
     flex-shrink: 0;
@@ -175,7 +131,7 @@
     color: var(--text-dark, #343a40);
     text-align: center;
     margin: 0;
-    flex: 1;
+    flex: 0 1 auto;
     min-width: 0; /* Allow text to shrink if needed */
 }
 
@@ -184,6 +140,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin-left: clamp(4px, 1vw, 8px);
 }
 
 .titleTTS {
@@ -282,7 +239,7 @@
   font-style: italic;
   font-family: "Nunito", "Quicksand", sans-serif;
   padding: 0 clamp(16px, 1.8vw, 24px);
-  text-align: center;
+  text-align: left;
 }
 
 .dropZone {
@@ -1054,7 +1011,7 @@
   font-size: 1.08rem;
   font-family: 'Nunito', 'Quicksand', 'Comic Sans MS', cursive, sans-serif;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
   max-width: 220px;
   min-width: 120px;
   line-height: 1.4;
@@ -1132,7 +1089,7 @@
         color: #333;
         font-family: 'Nunito', 'Quicksand', 'Comic Sans MS', cursive, sans-serif;
         font-weight: 600;
-        text-align: center;
+        text-align: left;
         border: 1.5px solid #bbddff;
         position: relative;
         z-index: 10;
@@ -1265,7 +1222,7 @@
     hyphens: none;
     /* Responsive font sizing for long text */
     font-size: clamp(1rem, 1.9vw, 1.6rem);
-    line-height: 1.4; /* Increased for better readability */
+    line-height: 1.4; /* Increased for readability */
     max-width: none; /* Remove width restriction */
     width: auto; /* Allow natural width */
     /* Remove overflow restrictions to show all text */
@@ -1283,6 +1240,8 @@
     flex-grow: 1;
     /* Prevent text from being cut off */
     max-height: none;
+    /* Left align text */
+    text-align: left;
 }
 
 /* Ensure drop zones can accommodate any text length */
@@ -1632,6 +1591,8 @@
     width: 100%;
     overflow: visible;
     white-space: normal;
+    /* Left align text */
+    text-align: left;
 }
 
 /* Additional text display improvements for drop zones */
@@ -1671,4 +1632,6 @@
     line-height: 1.4;
     color: #333;
     font-weight: 600;
+    /* Left align text */
+    text-align: left;
 }
