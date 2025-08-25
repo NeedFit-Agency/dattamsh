@@ -266,7 +266,7 @@
     position: relative;
     width: auto;
     height: auto;
-    display: inline-block; /* Changed from flex to inline-block */
+    display: inline-block; /* Use inline-block for proper positioning */
 }
 
 .chapterName {
@@ -289,27 +289,35 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
     border: 3px solid rgba(77, 185, 255, 0.3); /* Added blue border */
     transition: all 0.3s ease;
-    position: absolute;
+    position: absolute; /* Use absolute positioning */
     z-index: 15; /* Higher than mascot to ensure visibility */
     pointer-events: none; /* Ensure it doesn't interfere with clicking the badge */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Added text shadow for better readability */
     line-height: 1.2; /* Better line spacing for wrapped text */
     min-height: 48px; /* Ensure consistent height for 1-2 lines */
     max-height: 72px; /* Maximum height for 2 lines */
+    /* Prevent overlapping with adjacent elements */
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
+/* Positioning classes for chapter names */
 .leftPosition {
     right: auto;
-    left: -330px; /* Adjusted for larger chapter name width */
+    left: -320px; /* Increased spacing to prevent overlap between tooltips */
     top: 25px; /* Adjusted vertical position */
     text-align: right;
+    /* Ensure no overlap with right-positioned tooltips above */
+    max-width: 300px; /* Limit width to prevent horizontal overlap */
 }
 
 .rightPosition {
-    right: -330px; /* Adjusted for larger chapter name width */
+    right: -320px; /* Increased spacing to prevent overlap between tooltips */
     left: auto;
     top: 25px; /* Adjusted vertical position */
     text-align: left;
+    /* Ensure no overlap with left-positioned tooltips above */
+    max-width: 300px; /* Limit width to prevent horizontal overlap */
 }
 
 .itemWithLabel:hover .chapterName {
@@ -344,10 +352,12 @@
   
   .leftPosition {
     left: -280px;
+    max-width: 250px;
   }
   
   .rightPosition {
     right: -280px;
+    max-width: 250px;
   }
 }
 
@@ -375,13 +385,13 @@
   }
   
   .leftPosition {
-    left: -220px;
-    top: 20px;
+    left: -240px;
+    max-width: 200px;
   }
   
   .rightPosition {
-    right: -220px;
-    top: 20px;
+    right: -240px;
+    max-width: 200px;
   }
   
   /* Reduce animations on tablets for better performance */
@@ -420,13 +430,13 @@
   }
   
   .leftPosition {
-    left: -180px;
-    top: 15px;
+    left: -200px;
+    max-width: 180px;
   }
   
   .rightPosition {
-    right: -180px;
-    top: 15px;
+    right: -200px;
+    max-width: 180px;
   }
   
   /* Optimize shadows for mobile */
@@ -486,14 +496,8 @@
     border-width: 1px;
   }
   
-  .leftPosition {
-    left: -140px;
-    top: 12px;
-  }
-  
-  .rightPosition {
-    right: -140px;
-    top: 12px;
+  .itemWithLabel {
+    gap: 12px; /* Smallest gap for very small mobile */
   }
   
   /* Further optimize for very small screens */
