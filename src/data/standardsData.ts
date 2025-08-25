@@ -149,40 +149,10 @@ export const standards: Standard = {
             '',
           items: [
             {
-              id: "dnd-item-1",
-              text: "Sun",
-              type: "option-1",
-              imageUrl: "/images/sun.svg",
-            },
-            {
-              id: "dnd-item-7",
-              text: "chair",
-              type: "option-2",
-              imageUrl: "/images/chairr.svg",
-            },
-            {
-              id: "dnd-item-3",
-              text: "tree",
-              type: "option-1",
-              imageUrl: "/images/tree.svg",
-            },
-            {
               id: "dnd-item-4",
               text: "bird",
               type: "option-1",
               imageUrl: "/images/bird.svg",
-            },
-            {
-              id: "dnd-item-5",
-              text: "school",
-              type: "option-2",
-              imageUrl: "/images/school.svg",
-            },
-            {
-              id: "dnd-item-2",
-              text: "water",
-              type: "option-1",
-              imageUrl: "/images/water.svg",
             },
             {
               id: "dnd-item-6",
@@ -191,11 +161,41 @@ export const standards: Standard = {
               imageUrl: "/images/cycle.svg",
             },
             {
+              id: "dnd-item-2",
+              text: "water",
+              type: "option-1",
+              imageUrl: "/images/water.svg",
+            },
+            {
+              id: "dnd-item-7",
+              text: "chair",
+              type: "option-2",
+              imageUrl: "/images/chairr.svg",
+            },
+            {
+              id: "dnd-item-1",
+              text: "Sun",
+              type: "option-1",
+              imageUrl: "/images/sun.svg",
+            },
+            {
               id: "dnd-item-8",
               text: "blackboard",
               type: "option-2",
               imageUrl: "/images/blackboard.svg",
             },
+            {
+              id: "dnd-item-3",
+              text: "tree",
+              type: "option-1",
+              imageUrl: "/images/tree.svg",
+            },
+            {
+              id: "dnd-item-5",
+              text: "school",
+              type: "option-2",
+              imageUrl: "/images/school.svg",
+            }
           ],
           targets: [
             { id: "naturalTarget", title: "Natural Things", type: "option-1" },
@@ -218,6 +218,20 @@ export const standards: Standard = {
           instruction: "Match each computer part to what it does.",
           items: [
             {
+              id: "cpu-item",
+              text: "CPU",
+              type: "brain",
+              imageUrl: "/images/cpu.png",
+              color: "#9c27b0"
+            },
+            {
+              id: "mouse-item",
+              text: "Mouse",
+              type: "pointing",
+              imageUrl: "/images/mouse.png",
+              color: "#ff9800"
+            },
+            {
               id: "monitor-item",
               text: "Monitor",
               type: "shows",
@@ -230,20 +244,7 @@ export const standards: Standard = {
               type: "typing",
               imageUrl: "/images/keyboard.png",
               color: "#4caf50"
-            },
-            {
-              id: "cpu-item",
-              text: "CPU",
-              type: "brain",
-              imageUrl: "/images/cpu.png",
-              color: "#9c27b0"
-            },            {
-              id: "mouse-item",
-              text: "Mouse",
-              type: "pointing",
-              imageUrl: "/images/mouse.png",
-              color: "#ff9800"
-            },
+            }
           ],
           buckets: [
             { id: "typing-bucket", title: "set of buttons called keys", type: "typing", color: "#4caf50", audioSrc: "/voice/grade1/2.2.m4a" },
@@ -271,12 +272,12 @@ export const standards: Standard = {
           title: "The steps to turn off the computer are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
           instruction: "Put these steps in the correct order to properly shut down a computer!",
           items: [
-            { id: "step-6", content: "Switch off the power supply", audioSrc: "/voice/grade1/3.2.m4a" },
-            { id: "step-1", content: "Save your work", audioSrc: "/voice/grade1/3.3.m4a" },
             { id: "step-2", content: "Open the Start menu", audioSrc: "/voice/grade1/3.4.m4a" },
-            { id: "step-4", content: "Select \"Shut down\"", audioSrc: "/voice/grade1/3.5.m4a" },
-            { id: "step-3", content: "Click on the power button", audioSrc: "/voice/grade1/3.6.m4a" },
             { id: "step-5", content: "Wait for the computer to turn off", audioSrc: "/voice/grade1/3.7.m4a" },
+            { id: "step-1", content: "Save your work", audioSrc: "/voice/grade1/3.3.m4a" },
+            { id: "step-6", content: "Switch off the power supply", audioSrc: "/voice/grade1/3.2.m4a" },
+            { id: "step-3", content: "Click on the power button", audioSrc: "/voice/grade1/3.6.m4a" },
+            { id: "step-4", content: "Select \"Shut down\"", audioSrc: "/voice/grade1/3.5.m4a" }
           ],
           correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5", "step-6"],
           dropZoneCount: 6,
@@ -295,10 +296,11 @@ export const standards: Standard = {
           title: "Guess the Keyboard Key",
           riddleText: "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
           questionText: "",          options: [
+            { id: "option-4", text: "Backspace Key", isCorrect: false, imageUrl: "/images/backspace.png" },
+            { id: "option-1", text: "Space Bar Key", isCorrect: true, imageUrl: "/images/spacebar.png" },
             { id: "option-2", text: "Enter Key", isCorrect: false, imageUrl: "/images/enter.png" },
             { id: "option-3", text: "Caps Lock Key", isCorrect: false, imageUrl: "/images/capslock.png" },
-            { id: "option-1", text: "Space Bar Key", isCorrect: true, imageUrl: "/images/spacebar.png" },
-            { id: "option-4", text: "Backspace Key", isCorrect: false, imageUrl: "/images/backspace.png" },
+
           ],
           audioSrc: "/voice/grade1/4.2.m4a",
           speakText: "I am the longest key on the keyboard, and I help you add spaces between words. Who am I?",
@@ -310,11 +312,10 @@ export const standards: Standard = {
           riddleText: "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
           questionText: "",
           options: [
-            { id: "option-2", text: "Monitor", isCorrect: false, imageUrl: "/images/monitor.png" },
-                        { id: "option-1", text: "Keyboard", isCorrect: true, imageUrl: "/images/keyboard.png" },
-
             { id: "option-3", text: "Mouse", isCorrect: false, imageUrl: "/images/mouse.png" },
+            { id: "option-1", text: "Keyboard", isCorrect: true, imageUrl: "/images/keyboard.png" },
             { id: "option-4", text: "Speaker", isCorrect: false, imageUrl: "/images/speaker.png" },
+            { id: "option-2", text: "Monitor", isCorrect: false, imageUrl: "/images/monitor.png" },
           ],
           audioSrc: "/voice/grade1/4.3.m4a",
           speakText: "I have lots of buttons with letters and numbers that help you type words on a computer. Who am I?",
@@ -325,11 +326,10 @@ export const standards: Standard = {
           title: "Guess the Mouse Part",
           riddleText: "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
           questionText: "",          options: [
-            { id: "option-2", text: "Left Button", isCorrect: false, imageUrl: "/images/left-button.svg" },
-            { id: "option-3", text: "Right Button", isCorrect: false, imageUrl: "/images/right-button.svg" },
             { id: "option-4", text: "Body", isCorrect: false, imageUrl: "/images/mouse-body.svg" },
             { id: "option-1", text: "Scroll Wheel", isCorrect: true, imageUrl: "/images/scroll-wheel.svg" },
-
+            { id: "option-2", text: "Left Button", isCorrect: false, imageUrl: "/images/left-button.svg" },
+            { id: "option-3", text: "Right Button", isCorrect: false, imageUrl: "/images/right-button.svg" },
           ],
           audioSrc: "/voice/grade1/4.4.m4a",
           speakText: "I am the small wheel on the mouse that helps you move up and down a page. Who am I?",
@@ -349,13 +349,6 @@ export const standards: Standard = {
           instruction: "Match each computer part to what it does.",
           items: [
             {
-              id: "scanner",
-              text: "Scanner",
-              type: "scanner",
-              imageUrl: "/images/standard2/chapter1/scanner.png",
-              color: "#2196f3"
-            },
-            {
               id: "microphone",
               text: "Microphone",
               type: "microphone",
@@ -363,18 +356,25 @@ export const standards: Standard = {
               color: "#4caf50"
             },
             {
-              id: "speakers",
-              text: "Speakers",
-              type: "speakers",
-              imageUrl: "/images/standard2/chapter1/speaker.png",
-              color: "#9c27b0"
-            },
-            {
               id: "printer",
               text: "Printer",
               type: "printer",
               imageUrl: "/images/standard2/chapter1/printer.png",
               color: "#ff9800"
+            },
+            {
+              id: "scanner",
+              text: "Scanner",
+              type: "scanner",
+              imageUrl: "/images/standard2/chapter1/scanner.png",
+              color: "#2196f3"
+            },
+            {
+              id: "speakers",
+              text: "Speakers",
+              type: "speakers",
+              imageUrl: "/images/standard2/chapter1/speaker.png",
+              color: "#9c27b0"
             }
           ],
           buckets: [
@@ -428,40 +428,16 @@ export const standards: Standard = {
           instruction: "",
           items: [
             {
-              id: "dnd-item-1",
-              text: "Listen to music",
-              type: "option-1",
-              imageUrl: "/images/standard2/chapter2/listen-music.png",
-            },
-            {
-              id: "dnd-item-2",
-              text: "Search for information on the internet",
-              type: "option-1",
-              imageUrl: "/images/standard2/chapter2/search-internet.png",
-            },
-            {
-              id: "dnd-item-3",
-              text: "Take pictures",
-              type: "option-1",
-              imageUrl: "/images/standard2/chapter2/take-pictures.png",
-            },
-            {
-              id: "dnd-item-4",
-              text: "Help people find their way with maps",
-              type: "option-1",
-              imageUrl: "/images/standard2/chapter2/maps.png",
-            },
-            {
               id: "dnd-item-5",
               text: "Eat food",
               type: "option-2",
               imageUrl: "/images/standard2/chapter2/eat-food.png",
             },
             {
-              id: "dnd-item-6",
-              text: "Play cricket on the ground",
-              type: "option-2",
-              imageUrl: "/images/standard2/chapter2/play-cricket.png",
+              id: "dnd-item-1",
+              text: "Listen to music",
+              type: "option-1",
+              imageUrl: "/images/standard2/chapter2/listen-music.png",
             },
             {
               id: "dnd-item-7",
@@ -470,11 +446,35 @@ export const standards: Standard = {
               imageUrl: "/images/standard2/chapter2/washing-clothes.png",
             },
             {
+              id: "dnd-item-3",
+              text: "Take pictures",
+              type: "option-1",
+              imageUrl: "/images/standard2/chapter2/take-pictures.png",
+            },
+            {
               id: "dnd-item-8",
               text: "Build houses",
               type: "option-2",
               imageUrl: "/images/standard2/chapter2/build-houses.png",
             },
+            {
+              id: "dnd-item-2",
+              text: "Search for information on the internet",
+              type: "option-1",
+              imageUrl: "/images/standard2/chapter2/search-internet.png",
+            },
+            {
+              id: "dnd-item-6",
+              text: "Play cricket on the ground",
+              type: "option-2",
+              imageUrl: "/images/standard2/chapter2/play-cricket.png",
+            },
+            {
+              id: "dnd-item-4",
+              text: "Help people find their way with maps",
+              type: "option-1",
+              imageUrl: "/images/standard2/chapter2/maps.png",
+            }
           ],
           targets: [
             { id: "canDoTarget", title: "Tasks smartphones can do", type: "option-1" },
@@ -495,11 +495,11 @@ export const standards: Standard = {
           title: "The steps to type and save a file in Notepad are all mixed up! Can you drag the steps from Column B and put them in the correct order in Column A?",
           instruction: "Put these steps in the correct order to type and save a file in Notepad!",
           items: [
-            { id: "step-1", content: "Type the content", audioSrc: "/voice/grade2/3.2.m4a" },
-            { id: "step-2", content: "Click on the \"File\" menu at the top", audioSrc: "/voice/grade2/3.3.m4a" },
             { id: "step-3", content: "Choose \"Save As\"", audioSrc: "/voice/grade2/3.4.m4a" },
-            { id: "step-4", content: "Give your file a name, like \"MyStory\"", audioSrc: "/voice/grade2/3.5.m4a" },
+            { id: "step-1", content: "Type the content", audioSrc: "/voice/grade2/3.2.m4a" },
             { id: "step-5", content: "Click \"Save\"", audioSrc: "/voice/grade2/3.6.m4a" },
+            { id: "step-2", content: "Click on the \"File\" menu at the top", audioSrc: "/voice/grade2/3.3.m4a" },
+            { id: "step-4", content: "Give your file a name, like \"MyStory\"", audioSrc: "/voice/grade2/3.5.m4a" }
           ],
           correctOrder: ["step-1", "step-2", "step-3", "step-4", "step-5"],
           dropZoneCount: 5,
@@ -519,10 +519,10 @@ export const standards: Standard = {
           riddleText: "I help you draw shapes like squares, circles and many more. Which tool am I?",
           questionText: "Which drawing tool am I?",
           options: [
-            { id: "option-1", text: "Shape Tools", isCorrect: true, imageUrl: "/images/standard2/chapter4/shape-tool.jpg" },
-            { id: "option-2", text: "Brush Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/brush-tool.jpg" },
             { id: "option-3", text: "Eraser Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/eraser-tool.jpg" },
+            { id: "option-1", text: "Shape Tools", isCorrect: true, imageUrl: "/images/standard2/chapter4/shape-tool.jpg" },
             { id: "option-4", text: "Curve Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/curve-tool.jpg" },
+            { id: "option-2", text: "Brush Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/brush-tool.jpg" },
           ],
           audioSrc: "/voice/grade2/4.2.m4a",
           speakText: "I help you draw shapes like squares, circles and many more. Which tool am I?",
@@ -534,10 +534,10 @@ export const standards: Standard = {
           riddleText: "I am a tool that can draw curved and wavy lines. Which tool am I?",
           questionText: "Which drawing tool am I?",
           options: [
-            { id: "option-1", text: "Shape Tools", isCorrect: false, imageUrl: "/images/standard2/chapter4/shape-tools.png" },
             { id: "option-2", text: "Brush Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/brush-tool.png" },
-            { id: "option-3", text: "Eraser Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/eraser-tool.png" },
             { id: "option-4", text: "Curve Tool", isCorrect: true, imageUrl: "/images/standard2/chapter4/curve-tool.png" },
+            { id: "option-1", text: "Shape Tools", isCorrect: false, imageUrl: "/images/standard2/chapter4/shape-tools.png" },
+            { id: "option-3", text: "Eraser Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/eraser-tool.png" },
           ],
           audioSrc: "/voice/grade2/4.3.m4a",
           speakText: "I am a tool that can draw curved and wavy lines. Which tool am I?",
@@ -549,10 +549,10 @@ export const standards: Standard = {
           riddleText: "I have different strokes and styles and can help you apply colour to an image. Which tool am I?",
           questionText: "Which drawing tool am I?",
           options: [
+            { id: "option-4", text: "Curve Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/curve-tool.png" },
             { id: "option-1", text: "Shape Tools", isCorrect: false, imageUrl: "/images/standard2/chapter4/shape-tools.png" },
             { id: "option-2", text: "Brush Tool", isCorrect: true, imageUrl: "/images/standard2/chapter4/brush-tool.png" },
             { id: "option-3", text: "Eraser Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/eraser-tool.png" },
-            { id: "option-4", text: "Curve Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/curve-tool.png" },
           ],
           audioSrc: "/voice/grade2/4.4.m4a",
           speakText: "I have different strokes and styles and can help you apply colour to an image. Which tool am I?",
@@ -564,9 +564,9 @@ export const standards: Standard = {
           riddleText: "I help you fix your mistakes, and you can adjust my size with the help of a scroll. Which tool am I?",
           questionText: "Which drawing tool am I?",
           options: [
-            { id: "option-1", text: "Shape Tools", isCorrect: false, imageUrl: "/images/standard2/chapter4/shape-tools.png" },
             { id: "option-2", text: "Brush Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/brush-tool.png" },
             { id: "option-3", text: "Eraser Tool", isCorrect: true, imageUrl: "/images/standard2/chapter4/eraser-tool.png" },
+            { id: "option-1", text: "Shape Tools", isCorrect: false, imageUrl: "/images/standard2/chapter4/shape-tools.png" },
             { id: "option-4", text: "Curve Tool", isCorrect: false, imageUrl: "/images/standard2/chapter4/curve-tool.png" },
           ],
           audioSrc: "/voice/grade2/4.5.m4a",
@@ -710,60 +710,135 @@ export const standards: Standard = {
     },
     {
       id: 3,
-      title: "Online Safety Steps",
+      title: "Google Maps",
       lessonContent: [
         {
           type: "sequence-match",
           format: "sequence-match",
-          title: "Steps for Online Safety",
-          instruction: "Put these online safety steps in the correct order!",
+          title: "Using Google Maps to Find Medical Shops",
+          instruction: "Help Srujan arrange the steps in the correct order to find medical shops near him using Google Maps!",
           items: [
             {
               id: "step1",
-              content: "Ask an adult before sharing any information online",
+              content: "Open Google Maps",
               audioSrc: undefined
             },
             {
               id: "step2",
-              content: "Create a strong password using letters, numbers, and symbols",
+              content: "In the search bar, enter \"Medical shops near me\" and click on the search icon 🔍",
               audioSrc: undefined
             },
             {
               id: "step3",
-              content: "Only visit websites approved by your parents or teachers",
+              content: "Choose the shop based on reviews, distance from his current location",
               audioSrc: undefined
             },
             {
               id: "step4",
-              content: "Tell an adult if something makes you uncomfortable online",
+              content: "Check if the shop is open",
+              audioSrc: undefined
+            },
+            {
+              id: "step5",
+              content: "Click on the \"Directions\" option",
+              audioSrc: undefined
+            },
+            {
+              id: "step6",
+              content: "Choose the \"Your location\" option to get directions from his current location",
+              audioSrc: undefined
+            },
+            {
+              id: "step7",
+              content: "Choose the mode of transport",
               audioSrc: undefined
             }
           ],
-          correctOrder: ["step1", "step3", "step2", "step4"],
-          dropZoneCount: 4,
-                        audioSrc: undefined,
-              speakText: "Put these online safety steps in the correct order!",
+          correctOrder: ["step1", "step2", "step3", "step4", "step5", "step6", "step7"],
+          dropZoneCount: 7,
+          audioSrc: undefined,
+          speakText: "Help Srujan arrange the steps in the correct order to find medical shops near him using Google Maps!",
         }
       ]
     },
     {
       id: 4,
-      title: "Browser Identification",
+      title: "Microsoft Word (Part 1)",
       lessonContent: [
         {
           type: "who-am-i",
           format: "who-am-i",
-          title: "Guess the Web Browser",
-          riddleText: "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
-          questionText: "Which web browser am I?",
+          title: "Choose the correct option",
+          riddleText: "I am present on the top of the window and show the name of the document. Who am I?",
+          questionText: "Who am I?",
           options: [
-            { id: "chrome", text: "Google Chrome", isCorrect: true, imageUrl: "/images/standard3/chapter4/chrome_logo.png" },
-            { id: "edge", text: "Microsoft Edge", isCorrect: false,imageUrl: "/images/standard3/chapter4/edge_logo.png" },
-            { id: "firefox", text: "Mozilla Firefox", isCorrect: false, imageUrl:  "/images/standard3/chapter4/firefox_logo.svg" },
-            { id: "safari", text: "Safari", isCorrect: false, imageUrl:  "/images/standard3/chapter4/safari_logo.png" }
+            { id: "titlebar", text: "Title bar", isCorrect: true },
+            { id: "menubar", text: "Menu bar", isCorrect: false },
+            { id: "toolbar", text: "Toolbar", isCorrect: false },
+            { id: "statusbar", text: "Status bar", isCorrect: false }
           ],
           audioSrc: undefined,
-          speakText: "I have a colorful circle logo with red, yellow, green, and blue. I'm made by Google and help you search the web. Who am I?",
+          speakText: "I am present on the top of the window and show the name of the document. Who am I?",
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option",
+          riddleText: "I contain commonly used buttons like Redo, Undo, and Save. Who am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "quickaccess", text: "Quick Access Toolbar", isCorrect: true },
+            { id: "ribbon", text: "Ribbon", isCorrect: false },
+            { id: "menubar", text: "Menu bar", isCorrect: false },
+            { id: "toolbar", text: "Toolbar", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "I contain commonly used buttons like Redo, Undo, and Save. Who am I?",
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option",
+          riddleText: "I am a rectangular box at the bottom of the screen that shows the page number and word count. Who am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "titlebar", text: "Title bar", isCorrect: false },
+            { id: "menubar", text: "Menu bar", isCorrect: false },
+            { id: "statusbar", text: "Status bar", isCorrect: true },
+            { id: "ribbon", text: "Ribbon", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "I am a rectangular box at the bottom of the screen that shows the page number and word count. Who am I?",
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option",
+          riddleText: "I let you add pictures, shapes, tables, etc. Who am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "hometab", text: "Home tab", isCorrect: false },
+            { id: "inserttab", text: "Insert tab", isCorrect: true },
+            { id: "reviewtab", text: "Review tab", isCorrect: false },
+            { id: "viewtab", text: "View tab", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "I let you add pictures, shapes, tables, etc. Who am I?",
+        },
+        {
+          type: "who-am-i",
+          format: "who-am-i",
+          title: "Choose the correct option",
+          riddleText: "I help you open, save, print, or close your document. Who am I?",
+          questionText: "Who am I?",
+          options: [
+            { id: "hometab", text: "Home tab", isCorrect: false },
+            { id: "inserttab", text: "Insert tab", isCorrect: false },
+            { id: "filetab", text: "File tab", isCorrect: true },
+            { id: "reviewtab", text: "Review tab", isCorrect: false }
+          ],
+          audioSrc: undefined,
+          speakText: "I help you open, save, print, or close your document. Who am I?",
         }
       ]
     }
@@ -780,10 +855,10 @@ export const standards: Standard = {
           riddleText: "I run on many mobile devices, like smartphones and tablets. I am made by Google. Which Operating system am I?",
           questionText: "Which Operating system am I?",
           options: [
-            { id: "android", text: "Android", isCorrect: true,imageUrl: "/images/standard4/chapter1/android_logo.png" },
-            { id: "ios", text: "iOS", isCorrect: false,imageUrl: "/images/standard4/chapter1/ios_logo.png" },
             { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
-            { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
+            { id: "android", text: "Android", isCorrect: true,imageUrl: "/images/standard4/chapter1/android_logo.png" },
+            { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" },
+            { id: "ios", text: "iOS", isCorrect: false,imageUrl: "/images/standard4/chapter1/ios_logo.png" }
           ],
           audioSrc: undefined,
           speakText: "I run on many mobile devices, like smartphones and tablets. I am made by Google. Which Operating system am I?",
@@ -795,10 +870,10 @@ export const standards: Standard = {
           riddleText: "I run on Apple's mobile devices, like iPhones and iPads. Which Operating system am I?",
           questionText: "Which Operating system am I?",
           options: [
-            { id: "android", text: "Android", isCorrect: false,imageUrl: "/images/standard4/chapter1/android_logo.png" },
+            { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" },
             { id: "ios", text: "iOS", isCorrect: true,imageUrl: "/images/standard4/chapter1/ios_logo.png" },
-            { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
-            { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
+            { id: "android", text: "Android", isCorrect: false,imageUrl: "/images/standard4/chapter1/android_logo.png" },
+            { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" }
           ],
           audioSrc: undefined,
           speakText: "I run on Apple's mobile devices, like iPhones and iPads. Which Operating system am I?",
@@ -810,10 +885,10 @@ export const standards: Standard = {
           riddleText: "I am a free operating system used by computer experts and known for being stable and secure.",
           questionText: "Which Operating system am I?",
           options: [
+            { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" },
             { id: "android", text: "Android", isCorrect: false,imageUrl: "/images/standard4/chapter1/android_logo.png" },
-            { id: "ios", text: "iOS", isCorrect: false,imageUrl: "/images/standard4/chapter1/ios_logo.png" },
             { id: "linux", text: "Linux", isCorrect: true,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
-            { id: "windows", text: "Windows", isCorrect: false,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
+            { id: "ios", text: "iOS", isCorrect: false,imageUrl: "/images/standard4/chapter1/ios_logo.png" }
           ],
           audioSrc: undefined,
           speakText: "I am a free operating system used by computer experts and known for being stable and secure.",
@@ -825,10 +900,10 @@ export const standards: Standard = {
           riddleText: "I am known for being stylish, easy to use and good for graphic design, video editing and music production. Which Operating system am I?",
           questionText: "Which Operating system am I?",
           options: [
-            { id: "android", text: "Android", isCorrect: false },
             { id: "ios", text: "iOS", isCorrect: false },
-            { id: "linux", text: "Linux", isCorrect: false },
-            { id: "macos", text: "macOS", isCorrect: true }
+            { id: "macos", text: "macOS", isCorrect: true },
+            { id: "android", text: "Android", isCorrect: false },
+            { id: "linux", text: "Linux", isCorrect: false }
           ],
           audioSrc: undefined,
           speakText: "I am known for being stylish, easy to use and good for graphic design, video editing and music production. Which Operating system am I?",
@@ -840,10 +915,10 @@ export const standards: Standard = {
           riddleText: "I am made by Microsoft, run on various desktops and laptops. Which Operating system am I?",
           questionText: "Which Operating system am I?",
           options: [
-            { id: "android", text: "Android", isCorrect: false,imageUrl: "/images/standard4/chapter1/android_logo.png" },
-            { id: "ios", text: "iOS", isCorrect: false,imageUrl: "/images/standard4/chapter1/ios_logo.png" },
             { id: "linux", text: "Linux", isCorrect: false,imageUrl: "/images/standard4/chapter1/linux_logo.png" },
-            { id: "windows", text: "Windows", isCorrect: true,imageUrl: "/images/standard4/chapter1/windows_logo.png" }
+            { id: "windows", text: "Windows", isCorrect: true,imageUrl: "/images/standard4/chapter1/windows_logo.png" },
+            { id: "android", text: "Android", isCorrect: false,imageUrl: "/images/standard4/chapter1/android_logo.png" },
+            { id: "ios", text: "iOS", isCorrect: false,imageUrl: "/images/standard4/chapter1/ios_logo.png" }
           ],
           audioSrc: undefined,
           speakText: "I am made by Microsoft, run on various desktops and laptops. Which Operating system am I?",

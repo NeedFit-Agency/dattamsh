@@ -3,6 +3,7 @@ import styles from "./SequenceMatcher.module.css";
 import { SequenceMatcherProps, DraggableItem } from "./types";
 import CongratulationsScreen from "../../shared/CongratulationsScreen";
 import TTS from "../../shared/TTS";
+import FeedbackDialog from "./FeedbackDialog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeadphones, faUndo } from "@fortawesome/free-solid-svg-icons";
 
@@ -28,6 +29,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     type: "correct" | "incorrect" | null;
     message: string;
   }>({ type: null, message: "" });
+  const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
   const [showTryAgain, setShowTryAgain] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -96,8 +98,11 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     // Place the item in the drop zone
     setPlacedItems((prev) => ({ ...prev, [zoneIndex]: draggedItem }));
 
-    // Clear any existing feedback when placing items
-    setFeedback({ type: null, message: "" });
+    // Only clear feedback if it was a correct answer
+    // Keep incorrect feedback visible until user takes action
+    if (feedback.type === "correct") {
+      setFeedback({ type: null, message: "" });
+    }
 
     // Scroll to the next drop zone if it's not visible
     const container = dropZonesContainerRef.current;
@@ -150,6 +155,10 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
       }
       return newPlacedItems;
     });
+    
+    // Clear feedback when items are returned to show user is making changes
+    setFeedback({ type: null, message: "" });
+    setShowFeedbackDialog(false);
   };
 
   const checkAnswer = () => {
@@ -161,16 +170,23 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
       JSON.stringify(placedOrder) === JSON.stringify(correctOrder);
 
     if (isCorrect) {
-      setFeedback({
-        type: "correct",
+      const correctFeedback = {
+        type: "correct" as const,
         message: "Amazing! You have arranged everything correctly!",
-      });
-      setShowCongratulations(true);
+      };
+      setFeedback(correctFeedback);
+      setShowFeedbackDialog(true);
+      // Show congratulations after 2.5 seconds to give user time to see feedback
+      setTimeout(() => {
+        setShowCongratulations(true);
+      }, 2500);
     } else {
-      setFeedback({
-        type: "incorrect",
+      const incorrectFeedback = {
+        type: "incorrect" as const,
         message: "Not quite right. Give it another try!",
-      });
+      };
+      setFeedback(incorrectFeedback);
+      setShowFeedbackDialog(true);
       setShowTryAgain(true);
       if (onIncorrectAttempt) {
         onIncorrectAttempt();
@@ -183,7 +199,43 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     setFeedback({ type: null, message: "" });
     setShowTryAgain(false);
     setShowCongratulations(false);
+    setShowFeedbackDialog(false);
     setResetCounter((prev) => prev + 1);
+    
+    // Scroll Column A to top when reset is clicked
+    if (dropZonesContainerRef.current) {
+      // Try multiple scroll methods for better compatibility
+      try {
+        dropZonesContainerRef.current.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } catch (e) {
+        dropZonesContainerRef.current.scrollTop = 0;
+      }
+    } else {
+      // dropZonesContainerRef.current is null
+    }
+    
+    // Also try scrolling the parent dropTargets container
+    const dropTargetsElement = document.querySelector(`.${styles.dropTargets}`);
+    if (dropTargetsElement) {
+      // Scrolling dropTargets container to top
+      try {
+        dropTargetsElement.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } catch (e) {
+        dropTargetsElement.scrollTop = 0;
+      }
+    }
+  };
+
+  const handleCloseFeedbackDialog = () => {
+    setShowFeedbackDialog(false);
+    // Congratulations will be shown automatically after 2.5 seconds
+    // No need to manually trigger it here
   };
 
   const getItemStyleClass = (item: DraggableItem) => {
@@ -237,19 +289,16 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
     if (!audio) return;
 
     const handleEnded = () => {
-      console.log("Audio ended");
       setIsAudioPlaying(false);
       setIsAnyAudioPlaying(false);
     };
 
     const handlePause = () => {
-      console.log("Audio paused");
       setIsAudioPlaying(false);
       setIsAnyAudioPlaying(false);
     };
 
     const handlePlay = () => {
-      console.log("Audio started playing");
       setIsAudioPlaying(true);
       setIsAnyAudioPlaying(true);
     };
@@ -291,7 +340,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
         setPlayingItemAudio(null);
 
         audioRef.current.play().catch((error) => {
-          console.error("Audio play failed:", error);
+          // console.error("Audio play failed:", error);
           setIsAnyAudioPlaying(false);
           // Fallback to TTS if audio file fails
           playTTSFallback();
@@ -335,14 +384,14 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
           setIsAnyAudioPlaying(false);
         };
         utterance.onerror = (e) => {
-          console.error("SpeechSynthesis Error:", e);
+          // console.error("SpeechSynthesis Error:", e);
           setIsAudioPlaying(false);
           setIsAnyAudioPlaying(false);
         };
 
         window.speechSynthesis.speak(utterance);
       } catch (e) {
-        console.error("SpeechSynthesis failed:", e);
+        // console.error("SpeechSynthesis failed:", e);
         setIsAudioPlaying(false);
         setIsAnyAudioPlaying(false);
       }
@@ -360,7 +409,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
           ref={audioRef}
           src={audioSrc}
           onError={() => {
-            console.error("Audio file failed to load");
+            // console.error("Audio file failed to load");
             setIsAudioPlaying(false);
           }}
         />
@@ -564,7 +613,7 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
                           });
 
                           audio.play().catch((e) => {
-                            console.log("Item audio play failed:", e);
+                            // console.log("Item audio play failed:", e);
                             setPlayingItemAudio(null);
                             setIsAnyAudioPlaying(false);
                           });
@@ -595,17 +644,14 @@ const SequenceMatcher: React.FC<SequenceMatcherProps> = ({
             </div>
           </div>
         </div>
-        {feedback.type && (
-          <div
-            className={`${styles.feedbackMessage} ${
-              feedback.type === "correct"
-                ? styles.feedbackCorrect
-                : styles.feedbackIncorrect
-            }`}
-          >
-            {feedback.message}
-          </div>
-        )}
+        
+        {/* Feedback Dialog - Clean popup design */}
+        <FeedbackDialog
+          isOpen={showFeedbackDialog}
+          type={feedback.type}
+          message={feedback.message}
+          onClose={handleCloseFeedbackDialog}
+        />
 
         <div className={styles.actionButtonsContainer}>
           <button

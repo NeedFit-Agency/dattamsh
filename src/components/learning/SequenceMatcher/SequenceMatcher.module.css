@@ -6,13 +6,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    left: 0;
-    top: 35px;
-    position: absolute;
+    justify-content: flex-start; /* Changed from center to flex-start */
+    width: 100%;
+    min-height: 100dvh;
     padding: 1rem;
     margin: 0;
     font-family: 'Nunito', 'Quicksand', sans-serif;
@@ -22,7 +18,8 @@
     background-repeat: no-repeat;
     color: #5c4b40;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal overflow */
     animation: fadeInBackground 0.5s ease-in;
     /* Ensure congratulations screen appears above everything */
     z-index: 1;
@@ -46,8 +43,8 @@
     padding: clamp(20px, 2.5vw, 35px) clamp(20px, 3vw, 40px);
     width: 95%; /* Use more screen space */
     max-width: 1400px;
-    height: 90vh; /* Use viewport height */
-    max-height: 900px;
+    min-height: 90dvh; /* Use min-height instead of fixed height */
+    max-height: 130dvh; /* Remove max-height constraint */
     text-align: left;
     position: relative;
     margin: 0 auto;
@@ -56,10 +53,12 @@
     box-sizing: border-box;
     backdrop-filter: blur(5px);
     border: 3px solid #bbddff;
-    overflow: hidden;
+    overflow: visible; /* Ensure content is visible */
     display: flex;
     flex-direction: column;
     animation: cardEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 10;
+    /* Remove justify-content to allow natural flow */
 }
 
 @keyframes cardEnter {
@@ -112,13 +111,16 @@
 
 /* --- Title --- */
 .titleContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(8px, 1.5vw, 16px);
+    background-color: #f8f9fa;
+    border: 1px solid #bbddff;
+    border-radius: 12px;
+    padding: 30px;
     margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 12px 15px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(8px, 1.5vw, 16px);
     position: relative;
     z-index: 2;
     flex-shrink: 0;
@@ -148,29 +150,38 @@
 }
 
 .titleHeadphones {
-    background-color: #1db0f6 !important;
-    box-shadow: 0 3px 8px rgba(29, 176, 246, 0.3) !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
-    padding: 8px !important;
-    border-radius: 50% !important;
-    opacity: 0.9;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.8) !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--primary, #1aa2ff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    height: 44px;
+    justify-content: center;
 }
 
 .titleHeadphones:hover {
-    background-color: #0ea5e9 !important;
-    box-shadow: 0 4px 12px rgba(29, 176, 246, 0.4) !important;
-    opacity: 1;
-    transform: scale(1.05);
-    border-color: rgba(255, 255, 255, 1) !important;
+    background-color: var(--primary-dark, #0080e6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.titleHeadphones:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .titleHeadphones svg {
-    width: 20px !important;
-    height: 20px !important;
-    color: white !important;
+    width: 20px;
+    height: 20px;
+    color: white;
 }
 
 /* --- Main Content Container --- */
@@ -182,11 +193,13 @@
     justify-content: center;
     margin-bottom: clamp(20px, 3vh, 30px);
     flex: 1;
-    min-height: 0;
+    min-height: 500px; /* Minimum height for content */
+    max-height: none; /* Remove height constraint */
     width: 100%;
     position: relative;
     padding: 0;
     animation: contentFadeIn 0.8s ease-in-out;
+    overflow: visible; /* Ensure content doesn't get cut off */
 }
 
 @keyframes contentFadeIn {
@@ -207,6 +220,7 @@
     gap: clamp(14px, 2vh, 20px);
     flex: 1 1 50%; /* Adjust flex properties */
     min-width: 300px;
+    min-height: 450px; /* Increased minimum height to ensure proper column size */
     background-color: rgba(240, 248, 255, 0.9);
     border: 2px solid #bbddff;
     border-radius: clamp(20px, 2.5vw, 28px);
@@ -243,7 +257,7 @@
 }
 
 .dropZone {
-    min-height: clamp(160px, 18vh, 200px); /* Responsive height for better content distribution */
+    min-height: clamp(200px, 22vh, 280px); /* Increased height for better visual balance */
     background-color: rgba(255, 255, 255, 0.95);
     border: 3px dashed #bbddff;
     border-radius: clamp(22px, 3vw, 30px);
@@ -274,7 +288,7 @@
 /* Adjust drop zone height based on text length */
 .dropZone[data-text-length="long"],
 .dropZone[data-text-length="very-long"] {
-    min-height: clamp(180px, 20vh, 240px); /* Responsive minimum height */
+    min-height: clamp(220px, 24vh, 300px); /* Increased responsive minimum height */
     /* Allow height to grow based on content */
     height: auto;
     padding-top: clamp(20px, 3vh, 28px); /* Responsive padding for longer text */
@@ -283,12 +297,12 @@
 
 @media (max-width: 768px) {
     .dropZone {
-        min-height: clamp(180px, 16vh, 200px); /* Responsive base height for mobile */
+        min-height: clamp(220px, 18vh, 260px); /* Increased responsive base height for mobile */
     }
     
     .dropZone[data-text-length="long"],
     .dropZone[data-text-length="very-long"] {
-        min-height: clamp(200px, 18vh, 240px); /* Responsive minimum height for mobile */
+        min-height: clamp(240px, 20vh, 300px); /* Increased responsive minimum height for mobile */
         /* Allow height to grow based on content */
         height: auto;
         padding-top: clamp(18px, 2vh, 24px);
@@ -306,12 +320,12 @@
 
 @media (max-width: 480px) {
     .dropZone {
-        min-height: clamp(200px, 14vh, 220px); /* Responsive base height for small mobile */
+        min-height: clamp(240px, 16vh, 280px); /* Increased responsive base height for small mobile */
     }
     
     .dropZone[data-text-length="long"],
     .dropZone[data-text-length="very-long"] {
-        min-height: clamp(220px, 16vh, 260px); /* Responsive minimum height for small mobile */
+        min-height: clamp(260px, 18vh, 320px); /* Increased responsive minimum height for small mobile */
         /* Allow height to grow based on content */
         height: auto;
         padding-top: clamp(16px, 1.8vh, 22px);
@@ -374,6 +388,7 @@
     gap: clamp(12px, 2vh, 18px);
     flex: 1 1 40%; /* Adjust flex properties */
     min-width: 300px;
+    min-height: 450px; /* Increased minimum height to ensure proper column size */
     padding: clamp(18px, 2.5vh, 28px);
     background-color: #f0f8ff;
     background-image: linear-gradient(to bottom, rgba(240, 248, 255, 0.9), rgba(230, 240, 250, 0.8));
@@ -631,7 +646,8 @@
     justify-content: center;
     align-items: center;
     gap: clamp(12px, 2vw, 18px);
-    margin-top: clamp(4px, 0.6vh, 8px);
+    margin-top: clamp(20px, 3vh, 30px); /* Increased margin for better spacing */
+    margin-bottom: clamp(15px, 2vh, 20px); /* Bottom margin */
     padding: 0;
     background-color: transparent;
     border: none;
@@ -642,6 +658,10 @@
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    position: relative; /* Ensure proper positioning */
+    z-index: 100; /* Ensure buttons are above other content */
+    visibility: visible !important; /* Force visibility */
+    opacity: 1 !important; /* Force opacity */
 }
 
 .actionButton {
@@ -831,68 +851,14 @@
     }
 }
 
-.feedbackMessage {
-    min-height: clamp(30px, 4vh, 40px);
-    margin: clamp(10px, 2vh, 15px) auto 0;
-    font-weight: 700;
-    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
-    border-radius: clamp(10px, 1.5vw, 16px);
-    padding: clamp(8px, 1.2vh, 12px);
-    transition: all 0.3s ease;
-    font-family: "Comic Sans MS", "Comic Sans", 'Nunito', sans-serif;
-    position: relative;
-    animation: feedbackEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 80%;
-    flex-shrink: 0;
+/* Feedback Dialog - Clean popup design */
+.feedbackDialog {
+    /* This is now handled by the separate FeedbackDialog component */
 }
 
-@keyframes feedbackEnter {
-    0% {
-        transform: translateY(-10px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.feedbackCorrect {
-    color: #0e9f6e;
-    background-color: #e6f9f3;
-    border: 2px solid #34d399;
-    box-shadow: 0 4px 12px rgba(52, 211, 153, 0.2);
-}
-
-.feedbackCorrect::before {
-    content: '🎉 ';
-    margin-right: 6px;
-    animation: bounce 0.8s infinite alternate;
-    display: inline-block;
-}
-
-@keyframes bounce {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-4px);
-    }
-}
-
-.feedbackIncorrect {
-    color: #cf1f1f;
-    background-color: #fdeeee;
-    border: 2px solid #ef4444;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
-}
-
-.feedbackIncorrect::before {
-    content: '🤔 ';
-    margin-right: 6px;
+/* Feedback Dialog - Clean popup design */
+.feedbackDialog {
+    /* This is now handled by the separate FeedbackDialog component */
 }
 
 .slotCorrect {
@@ -988,7 +954,7 @@
 .centerSparkle {
   position: absolute;
   left: 50%;
-  top: 10px;
+  top: 90px;
   transform: translateX(-50%);
   font-size: 1.5rem;
   opacity: 0.7;
@@ -1042,7 +1008,7 @@
     .titleContainer {
         margin-top: 5px;
         margin-bottom: 12px;
-        padding: 0 15px;
+        padding: 20px;
         gap: clamp(10px, 1.5vw, 16px);
     }
     
@@ -1051,14 +1017,15 @@
     }
     
     .titleHeadphones {
-        min-width: 36px !important;
-        min-height: 36px !important;
-        padding: 6px !important;
+        min-width: 100px;
+        height: 40px;
+        font-size: 14px;
+        padding: 6px 12px;
     }
     
     .titleHeadphones svg {
-        width: 18px !important;
-        height: 18px !important;
+        width: 18px;
+        height: 18px;
     }
 
     .mainContent {
@@ -1101,6 +1068,9 @@
         gap: clamp(8px, 1.2vw, 12px);
         flex-direction: column;
         align-items: center;
+        padding: 16px;
+        margin-top: 6px;
+        margin-bottom: 12px;
     }
     
     .title {
@@ -1109,14 +1079,15 @@
     }
     
     .titleHeadphones {
-        min-width: 32px !important;
-        min-height: 32px !important;
-        padding: 5px !important;
+        min-width: 100px;
+        height: 40px;
+        font-size: 13px;
+        padding: 8px 12px;
     }
     
     .titleHeadphones svg {
-        width: 16px !important;
-        height: 16px !important;
+        width: 16px;
+        height: 16px;
     }
 }
 
@@ -1125,7 +1096,7 @@
         gap: 6px;
         margin-top: 10px;
         margin-bottom: 8px;
-        padding: 0 10px;
+        padding: 12px;
     }
     
     .title {
@@ -1133,14 +1104,15 @@
     }
     
     .titleHeadphones {
-        min-width: 28px !important;
-        min-height: 28px !important;
-        padding: 4px !important;
+        min-width: 90px;
+        height: 36px;
+        font-size: 12px;
+        padding: 6px 10px;
     }
     
     .titleHeadphones svg {
-        width: 14px !important;
-        height: 14px !important;
+        width: 14px;
+        height: 14px;
     }
 }
 
