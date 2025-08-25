@@ -1,5 +1,3 @@
-// ./src/app/components/learn/LessonPathItem/LessonPathItem.tsx
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons'; // Only import check icon
 import Image from 'next/image';
